@@ -25,19 +25,31 @@
         <meta property="og:description" content="">
         <meta property="og:type" content="website">
     </head>
-    <body class="u-body">
-        <header class="u-clearfix u-custom-color-1 u-header u-sticky u-sticky-c79c u-header" id="sec-6b6d"><a href="Home.html" data-page-id="745383" class="u-image u-logo u-image-1" data-image-width="313" data-image-height="95" title="D">
+    <header class="u-clearfix u-custom-color-1 u-header ">
+            <a href="index.jsp" class="u-image u-logo u-image-1" data-image-width="313" data-image-height="95" t>
                 <img src="images/Logo.png" class="u-logo-image u-logo-image-1">
-            </a><nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="XS">
+            </a>
+            <nav class="u-align-right u-menu x u-offcanvas u-menu-1" data-position="" data-responsive-from="MD">
 
-                <div class="u-custom-menu u-nav-container">
-                    <ul class="u-nav u-spacing-30 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90" href="All-skills.html" style="padding: 10px 16px;">All skills</a>
-                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90" href="#" style="padding: 10px 16px;">All mentors</a>
-                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90" href="Sign-up.html" style="padding: 10px 16px;">Sign up</a>
-                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90" href="Sign-in.html" style="padding: 10px 16px;">Sign in</a>
-                        </li></ul>
+                <div class="u-nav-container">
+                    <ul class="u-custom-font u-nav u-spacing-30 u-text-font u-unstyled u-nav-1">
+                        <li class="u-nav-item"><a
+                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
+                                href="" style="padding: 10px 36px;">All mentors</a>
+                        </li>
+                        <li class="u-nav-item"><a
+                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
+                                href="SkillControllerMap?service=allSkill" style="padding: 10px 36px;">All skills</a>
+                        </li>
+                        <li class="u-nav-item"><a
+                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
+                                href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
+                        </li>
+                    </ul>
                 </div>
-            </nav></header>
+
+            </nav>
+        </header>
         <section class="u-clearfix u-grey-10 u-section-1" id="sec-84c8">
             <div class="u-clearfix u-sheet u-sheet-1">
                 <h4 class="u-text u-text-default u-text-font u-text-1">Create Skill</h4>

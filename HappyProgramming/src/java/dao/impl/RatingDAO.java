@@ -16,53 +16,52 @@ import java.util.ArrayList;
  *
  * @author Duong
  */
-public class RatingDAO extends MyDAO implements dao.RatingDAO {
 
+
+public class RatingDAO extends MyDAO implements dao.RatingDAO {
+    
+    UserDAO userDAO = new UserDAO();
+            
     @Override
     public ArrayList<Rating> getRating(User user) {
-        ArrayList<Rating> list = new ArrayList<>();
-        xSql = "WITH t AS (SELECT r.[fromId], r.[toId], u.[fullname] AS [to], r.[comment], r.[ratingAmount], "
-                + "r.[ratingDate] FROM [Rating] r INNER JOIN [User] u ON r.[toId]= u.[uId])\n"
-                + "SELECT t.[fromId], t.[toId], u.[fullname] AS [from], t.[to], t.[comment], t.[ratingAmount],"
-                + " t.[ratingDate] FROM t inner join [User] u ON t.[fromId] = u.[uId] WHERE t.[toId] = " + user.getuId();
+        ArrayList<Rating> listRating = new ArrayList<>();
+        xSql = "SELECT * FROM [Rating] WHERE [toId] = " + user.getuId();
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
-            Rating x;
-            String xComment;
-            String xFrom;
-            String xTo;
-            int xFromId, xToId, xRating;
-            Timestamp xDate;
+            Rating rating;
+            String comment;
+            int fromId;
+            int toId;
+            int rateAmount;
+            Timestamp date;
 
             while (rs.next()) {
-                xFromId = rs.getInt("fromId");
-                xToId = rs.getInt("toId");
-                xFrom = rs.getString("from");
-                xTo = rs.getString("to");
-                xComment = rs.getString("comment");
-                xRating = rs.getInt("ratingAmount");
-                xDate = rs.getTimestamp("ratingDate");
-                x = new Rating(xFromId, xToId, xComment, xRating, xDate, xFrom, xTo);
-                list.add(x);
+                fromId = rs.getInt("fromId");
+                toId = rs.getInt("toId");
+                comment = rs.getString("comment");
+                rateAmount = rs.getInt("ratingAmount");
+                date = rs.getTimestamp("ratingDate");
+                rating = new Rating(userDAO.getUserById(fromId), userDAO.getUserById(toId), comment, rateAmount, date);
+                listRating.add(rating);
             }
             rs.close();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return (list);
+        return (listRating);
     }
 
     @Override
-    public void insert(Rating x) {
-        xSql = "insert into [Rating] values (?,?,?,?,GETDATE())";
+    public void insert(Rating rating) {
+        xSql = "INSERT INTO [Rating] VALUES (?,?,?,?,GETDATE())";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, x.getFromId());
-            ps.setInt(2, x.getToId());
-            ps.setString(3, x.getComment());
-            ps.setInt(4, x.getRating());
+            ps.setInt(1, rating.getFrom().getuId());
+            ps.setInt(2, rating.getTo().getuId());
+            ps.setString(3, rating.getComment());
+            ps.setInt(4, rating.getRateAmount());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {

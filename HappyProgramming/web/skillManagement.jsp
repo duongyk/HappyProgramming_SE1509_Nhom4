@@ -36,11 +36,7 @@
         <meta property="og:description" content="">
         <meta property="og:type" content="website">
     </head> 
-    <%
-        User x = (User) request.getSession().getAttribute("currUser");
-    %>
-    <body class="u-body">
-        <header class="u-clearfix u-custom-color-1 u-header ">
+    <header class="u-clearfix u-custom-color-1 u-header ">
             <a href="index.jsp" class="u-image u-logo u-image-1" data-image-width="313" data-image-height="95" t>
                 <img src="images/Logo.png" class="u-logo-image u-logo-image-1">
             </a>
@@ -50,28 +46,8 @@
                     <ul class="u-custom-font u-nav u-spacing-30 u-text-font u-unstyled u-nav-1">
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="" style="padding: 10px 36px;">All mentors</a>
+                                href="adminDashboard.jsp" style="padding: 10px 36px;">Dashboard</a>
                         </li>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="SkillControllerMap?service=allSkill" style="padding: 10px 36px;">All skills</a>
-                        </li>
-                        <%if (x != null) {%>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="UserControllerMap?service=listRequest" style="padding: 10px 36px;">Request</a>
-                        </li> 
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
-                        </li> 
-                        <%} else {%>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90" href="Sign-up.jsp" style="padding: 10px 16px;">Sign up</a> </li> 
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"  
-                                href="Sign-in.jsp"style="padding: 10px 36px;">Sign-in</a>
-                        </li>
-                        <%}%>
                     </ul>
                 </div>
 

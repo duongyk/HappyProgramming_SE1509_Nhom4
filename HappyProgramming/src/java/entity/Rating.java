@@ -13,56 +13,44 @@ import java.sql.Timestamp;
  */
 public class Rating {
 
-    private int fromId;
-    private int toId;
+    private User from;
+    private User to;
     private String comment;
-    private int rating;
+    private int rateAmount;
     private Timestamp date;
-    private String fromName;
-    private String toName;
 
     public Rating() {
     }
 
-    public Rating(int fromId, int toId, String comment, int rating, Timestamp date, String fromName, String toName) {
-        this.fromId = fromId;
-        this.toId = toId;
+    public Rating(User from, User to, String comment, int rateAmount, Timestamp date) {
+        this.from = from;
+        this.to = to;
         this.comment = comment;
-        this.rating = rating;
-        this.date = date;
-        this.fromName = fromName;
-        this.toName = toName;
-    }
-
-    public Rating(int fromId, int toId, String comment, int rating, Timestamp date) {
-        this.fromId = fromId;
-        this.toId = toId;
-        this.comment = comment;
-        this.rating = rating;
+        this.rateAmount = rateAmount;
         this.date = date;
     }
 
-    public Rating(int fromId, int toId, String comment, int rating) {
-        this.fromId = fromId;
-        this.toId = toId;
+    public Rating(User from, User to, String comment, int rateAmount) {
+        this.from = from;
+        this.to = to;
         this.comment = comment;
-        this.rating = rating;
+        this.rateAmount = rateAmount;
     }
 
-    public int getFromId() {
-        return fromId;
+    public User getFrom() {
+        return from;
     }
 
-    public void setFromId(int fromId) {
-        this.fromId = fromId;
+    public void setFrom(User from) {
+        this.from = from;
     }
 
-    public int getToId() {
-        return toId;
+    public User getTo() {
+        return to;
     }
 
-    public void setToId(int toId) {
-        this.toId = toId;
+    public void setTo(User to) {
+        this.to = to;
     }
 
     public String getComment() {
@@ -73,12 +61,12 @@ public class Rating {
         this.comment = comment;
     }
 
-    public int getRating() {
-        return rating;
+    public int getRateAmount() {
+        return rateAmount;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setRateAmount(int rateAmount) {
+        this.rateAmount = rateAmount;
     }
 
     public Timestamp getDate() {
@@ -88,21 +76,4 @@ public class Rating {
     public void setDate(Timestamp date) {
         this.date = date;
     }
-
-    public String getFromName() {
-        return fromName;
-    }
-
-    public void setFromName(String fromName) {
-        this.fromName = fromName;
-    }
-
-    public String getToName() {
-        return toName;
-    }
-
-    public void setToName(String toName) {
-        this.toName = toName;
-    }
-
 }

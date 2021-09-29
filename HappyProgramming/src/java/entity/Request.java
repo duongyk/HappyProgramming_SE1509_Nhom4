@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class Request {
 
-    private int rId;
+    private int id;
     private String title;
     private String content;
     private int fromId;
@@ -29,8 +29,8 @@ public class Request {
         this.title = title;
     }
 
-    public Request(int rId, String title, String content, int fromId, int toId, Date deadlineDate, String status) {
-        this.rId = rId;
+    public Request(int id, String title, String content, int fromId, int toId, Date deadlineDate, String status) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.fromId = fromId;
@@ -58,12 +58,12 @@ public class Request {
     
     
 
-    public int getrId() {
-        return rId;
+    public int getId() {
+        return id;
     }
 
-    public void setrId(int rId) {
-        this.rId = rId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

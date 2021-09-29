@@ -65,22 +65,14 @@
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
                                 href="SkillControllerMap?service=allSkill" style="padding: 10px 36px;">All skills</a>
                         </li>
-                        <%if (x != null) {%>
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="UserControllerMap?service=listRequest" style="padding: 10px 36px;">Request</a>
-                        </li> 
+                                href="UserControllerMap?service=listRequestByMe" style="padding: 10px 36px;">Request</a>
+                        </li>
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
                                 href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
-                        </li> 
-                        <%} else {%>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90" href="Sign-up.jsp" style="padding: 10px 16px;">Sign up</a> </li> 
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"  
-                                href="Sign-in.jsp"style="padding: 10px 36px;">Sign-in</a>
                         </li>
-                        <%}%>
                     </ul>
                 </div>
 

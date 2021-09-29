@@ -31,9 +31,6 @@
         <meta property="og:type" content="website">
     </head>
     <%-- Copy from here --%>
-    <%
-        User x = (User) request.getSession().getAttribute("currUser");
-    %>
     <body class="u-body">
         <header class="u-clearfix u-custom-color-1 u-header ">
             <a href="index.jsp" class="u-image u-logo u-image-1" data-image-width="313" data-image-height="95" t>
@@ -51,11 +48,6 @@
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
                                 href="SkillControllerMap?service=allSkill" style="padding: 10px 36px;">All skills</a>
                         </li>
-                        <%if (x != null) {%>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="RequestControllerMap?service=loadRequest" style="padding: 10px 36px;">create request</a>
-                        </li>
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
                                 href="RequestControllerMap?service=listRequestByMe" style="padding: 10px 36px;">Request</a>
@@ -63,14 +55,7 @@
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
                                 href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
-                        </li> 
-                        <%} else {%>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90" href="Sign-up.jsp" style="padding: 10px 16px;">Sign up</a> </li> 
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"  
-                                href="Sign-in.jsp"style="padding: 10px 36px;">Sign-in</a>
                         </li>
-                        <%}%>
                     </ul>
                 </div>
 
@@ -83,19 +68,19 @@
                 <a href="#" class="u-border-none u-btn u-button-style u-custom-color-4 u-btn-2">Create request</a>
                 <div class="u-expanded-width u-list u-list-1">
                     <div class="u-repeater u-repeater-1">
-                        
+
                         <c:forEach items="${listRequest}" var="request">
-                        <div class="u-container-style u-list-item u-repeater-item u-video-cover u-white">
-                            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
-                                <h3 class="u-text u-text-default u-text-2">Status: ${request.status}</h3>
-                                <div class="u-border-4 u-border-custom-color-3 u-expanded-width u-line u-line-horizontal u-line-1"></div>
-                                <p class="u-align-left u-text u-text-3">${request.title}</p>
-                                <a href="" class="u-border-none u-btn u-button-style u-custom-color-3 u-btn-3">View Request</a>
+                            <div class="u-container-style u-list-item u-repeater-item u-video-cover u-white">
+                                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
+                                    <h3 class="u-text u-text-default u-text-2">Status: ${request.status}</h3>
+                                    <div class="u-border-4 u-border-custom-color-3 u-expanded-width u-line u-line-horizontal u-line-1"></div>
+                                    <p class="u-align-left u-text u-text-3">${request.title}</p>
+                                    <a href="" class="u-border-none u-btn u-button-style u-custom-color-3 u-btn-3">View Request</a>
+                                </div>
                             </div>
-                        </div>
                         </c:forEach>
-                        
-                        
+
+
                     </div>
                 </div>
             </div>

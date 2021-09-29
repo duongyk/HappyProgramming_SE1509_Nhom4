@@ -70,16 +70,17 @@ public class RatingController extends HttpServlet {
             // Mentee rates Mentor
             if (service.equalsIgnoreCase("rateMentor")) {
                 // get current user/ Mentee who rates the Mentor
-                User x = (User) request.getSession().getAttribute("currUser");
-                // get Mentor's ID
-                //int mId = Integer.parseInt(request.getParameter("mId"));
+                User user = (User) request.getSession().getAttribute("currUser");
+                // get Mentor
+                int mId = Integer.parseInt(request.getParameter("mId"));
                 
-                int mId= 6;
+                //int mId= 6;
+                User mentor = userDAO.getUserById(mId);
                 // get rate and comment
                 int rate = Integer.parseInt(request.getParameter("rate"));
                 String comment = request.getParameter("comment");
                 // create and insert rate
-                Rating rating = new Rating(x.getuId(), mId, comment, rate);
+                Rating rating = new Rating(user, mentor, comment, rate);
                 ratingDAO.insert(rating);
 
                 sendDispatcher(request, response, "RatingControllerMap?service=getRating&uId="+mId);

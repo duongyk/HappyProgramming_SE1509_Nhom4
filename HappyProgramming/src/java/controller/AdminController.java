@@ -39,7 +39,7 @@ public class AdminController extends HttpServlet {
             String service = request.getParameter("service");
             
             if (service == null) {
-                service = "tungdt";
+
             }
             if (service.equalsIgnoreCase("createSkill")) {
                 sendDispatcher(request, response, "createSkill.jsp");

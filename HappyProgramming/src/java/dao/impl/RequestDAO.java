@@ -20,7 +20,7 @@ public class RequestDAO extends MyDAO implements dao.RequestDAO{
     @Override
     public ArrayList<Request> getListByMe(User user) {
         ArrayList<Request> list = new ArrayList<>();
-        xSql = "select * from [Request]";
+        xSql = "SELECT * FROM [Request] WHERE [fromId] = " + user.getuId() + "OR [toId] = " + user.getuId();
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
@@ -28,7 +28,7 @@ public class RequestDAO extends MyDAO implements dao.RequestDAO{
             int xId;
             String xTitle, xContent, xStatus;
             int xMentor;
-            Date dlDate, dlHour;
+            Date dlDate;
 
             while (rs.next()) {
                 xId = rs.getInt("rId");

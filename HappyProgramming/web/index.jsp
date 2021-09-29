@@ -6,6 +6,7 @@
 
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="vi">
     <head>
@@ -31,9 +32,7 @@
         <meta property="og:type" content="website">
     </head>
     <%-- Copy from here --%>
-    <%
-        User x = (User) request.getSession().getAttribute("currUser");
-    %>
+
     <body class="u-body">
         <header class="u-clearfix u-custom-color-1 u-header ">
             <a href="index.jsp" class="u-image u-logo u-image-1" data-image-width="313" data-image-height="95" t>
@@ -51,26 +50,27 @@
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
                                 href="SkillControllerMap?service=allSkill" style="padding: 10px 36px;">All skills</a>
                         </li>
-                        <%if (x != null) {%>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="RequestControllerMap?service=loadRequest" style="padding: 10px 36px;">create request</a>
-                        </li>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="RequestControllerMap?service=listRequestByMe" style="padding: 10px 36px;">Request</a>
-                        </li> 
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
-                        </li> 
-                        <%} else {%>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90" href="Sign-up.jsp" style="padding: 10px 16px;">Sign up</a> </li> 
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"  
-                                href="Sign-in.jsp"style="padding: 10px 36px;">Sign-in</a>
-                        </li>
-                        <%}%>
+                        <c:choose>
+                            <c:when test="${sessionScope.currUser!=null}">
+                                <li class="u-nav-item"><a
+                                        class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
+                                        href="RequestControllerMap?service=listRequestByMe" style="padding: 10px 36px;">Request</a>
+                                </li> 
+                                <li class="u-nav-item"><a
+                                        class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
+                                        href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
+                                </li> 
+                            </c:when>
+                            <c:otherwise>
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base 
+                                                          u-text-grey-90 u-text-hover-grey-90" 
+                                                          href="Sign-up.jsp" style="padding: 10px 16px;">Sign up</a> </li> 
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base 
+                                                          u-text-grey-90 u-text-hover-grey-90"  
+                                                          href="Sign-in.jsp" style="padding: 10px 36px;">Sign-in</a>
+                                </li>
+                            </c:otherwise>                
+                        </c:choose>
                     </ul>
                 </div>
 
