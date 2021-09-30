@@ -16,7 +16,7 @@ public interface CVDAO {
 
     public CV getMentorCV(int uid);
 
-    public void insertCV(String uid, CV newCV);
+    public void insertCV(int uid, CV newCV);
     
     public int updateCV(int uid, CV newCV);
     
