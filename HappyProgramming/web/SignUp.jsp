@@ -91,10 +91,6 @@
                             <label for="text-47b9" class="u-form-control-hidden u-label"></label>
                             <input type="tel" placeholder="phone" id="text-47b9" name="phone" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required="required">
                         </div>
-                        <div class="u-form-group u-form-group-7">
-                            <label for="text-0855" class="u-form-control-hidden u-label"></label>
-                            <input type="text" placeholder="address" id="text-0855" name="address" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
-                        </div>
                         <div class="u-form-group u-form-select u-form-group-8">
                             <label for="select-6004" class="u-label">Sex</label>
                             <div class="u-form-select-wrapper">
@@ -113,8 +109,8 @@
                             <label for="select-8da9" class="u-label">Sign up to</label>
                             <div class="u-form-select-wrapper">
                                 <select id="select-8da9" name="role" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
-                                    <option value="Mentor">Mentor</option>
-                                    <option value="Mentee">Mentee</option>
+                                    <option value="1">Mentor</option>
+                                    <option value="2">Mentee</option>
                                 </select>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
                             </div>
@@ -123,9 +119,7 @@
                             <a href="#" class="u-border-none u-btn u-btn-submit u-button-style u-custom-color-3 u-text-body-alt-color u-btn-1">Submit</a>
                             <input type="submit" value="submit" class="u-form-control-hidden">
                         </div>
-                        <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
-                        <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
-                        <input type="hidden" value="" name="recaptchaResponse">
+                        <input type="hidden" value="signUp" name="service">
                     </form>
                 </div>
             </div>

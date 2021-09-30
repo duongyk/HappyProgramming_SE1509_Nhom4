@@ -10,6 +10,7 @@
 package entity;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -171,4 +172,17 @@ public class Rating {
     public void setDate(Timestamp date) {
         this.date = date;
     }
+
+    /**
+     * Tranform value date attribute of Rating class into String for display. <br>
+     *
+     * @return dateToString it is a <code>java.lang.String</code>
+     */
+    @Override
+    public String toString() {
+        String dateToString = new SimpleDateFormat("MM/dd/yyyy").format(date);
+        return dateToString;
+    }
+    
+    
 }

@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -115,14 +115,24 @@ public class CVController extends HttpServlet {
                 SimpleDateFormat dateFormat = 
                   new SimpleDateFormat("yyyy-MM-dd");
                 
-                Date dob = new Date();
+                //Date dob = new Date();
                 
-                try {
-                    dob = dateFormat.parse(request.getParameter("dob"));
-                    //System.out.println(dateFormat.format(dob));
-                } catch (ParseException ex) {
-                    Logger.getLogger(CVController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//
+//                try {
+//                    dob = dateFormat.parse(request.getParameter("dob"));
+//                    //System.out.println(dateFormat.format(dob));
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(CVController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+
+                //try {
+                    
+                Date dob = Date.valueOf(request.getParameter("dob"));
+                    //System.out.println(request.getParameter("dob"));
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(CVController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+
                 
                 String sex = request.getParameter("sex");
                 //System.out.println("sex "+sex);

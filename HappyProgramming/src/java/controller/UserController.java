@@ -22,6 +22,7 @@ import dao.impl.SkillDAO;
 import dao.impl.UserDAO;
 import dao.impl.RequestDAO;
 import entity.Request;
+import java.sql.Date;
 
 /**
  *
@@ -76,51 +77,48 @@ public class UserController extends HttpServlet {
                 } else {
                     mess = "login failed";
                     request.setAttribute("mess", mess);
-                    sendDispatcher(request, response, "Sign-in.jsp");
+                    sendDispatcher(request, response, "SignIn.jsp");
                 }
 
             }
 
-            if (service.equalsIgnoreCase("sign-up")) {
+            if (service.equalsIgnoreCase("signUp")) {
                 String userName = request.getParameter("username");
                 String password = request.getParameter("password");
                 String mail = request.getParameter("mail");
                 String repass = request.getParameter("confirm");
                 String fname = request.getParameter("fullname");
                 String phone = request.getParameter("phone");
-                String address = request.getParameter("text-1");
                 String sex = request.getParameter("sex");
-                String DOB = request.getParameter("text-4");
+                Date dob = Date.valueOf(request.getParameter("dob"));
                 Integer role = Integer.parseInt(request.getParameter("role"));
+                User user = new User(userName, password, fname, mail, phone, dob, sex, "", 1);
                 if (!password.equals(repass)) {
                     // js: ko trung pass
-                   
-              response.sendRedirect("SignUp.jsp");
-
-                }
-                
-                User a = userDAO.checkAccount(userName);
-                if (a == null) { // check xem ton tai chua, chua thi dc sign up
-                    userDAO.signup(userName, repass, mail, fname, phone, address, sex, DOB, role);
-                    if (role==1) {
-                        response.sendRedirect("SignIn.jsp");
-                    } else {
-                        response.sendRedirect("SignIn.jsp");
-                        //response.sendRedirect("CVControllerMap?service=createCV&uId="+a.getuId());
-                    }
-                    // khi dang ki hoan tat se cha nguoi dung ve page login
-                } else { //neu co roi se day ve trang sighn up
-                    // mess= "user name existed!"
                     response.sendRedirect("SignUp.jsp");
-                }
+                } else {
 
+                    User a = userDAO.checkAccount(userName);
+                    if (a == null) { // check xem ton tai chua, chua thi dc sign up
+                        userDAO.signUp(user);
+                        if (role == 1) {
+                            response.sendRedirect("SignIn.jsp");
+                        } else {
+                            response.sendRedirect("SignIn.jsp");
+                            //response.sendRedirect("CVControllerMap?service=createCV&uId="+a.getuId());
+                        }
+                        // khi dang ki hoan tat se cha nguoi dung ve page login
+                    } else { //neu co roi se day ve trang sighn up
+                        // mess= "user name existed!"
+                        response.sendRedirect("SignUp.jsp");
+                    }
+                }
             }
 
             if (service.equalsIgnoreCase("signOut")) {
                 request.getSession().invalidate();
                 sendDispatcher(request, response, "index.jsp");
             }
-
 
             if (service.equalsIgnoreCase("profile")) {
                 request.setAttribute("user", request.getSession().getAttribute("currUser"));

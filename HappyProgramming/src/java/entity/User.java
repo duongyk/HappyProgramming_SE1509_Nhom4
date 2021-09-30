@@ -5,7 +5,7 @@
  */
 package entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -29,6 +29,18 @@ public class User {
 
     public User(int id) {
         this.id = id;
+    }
+
+    public User(String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar, int role) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.mail = mail;
+        this.phone = phone;
+        this.dob = dob;
+        this.gender = gender;
+        this.avatar = avatar;
+        this.role = role;
     }
 
     public User(String username, String password) {

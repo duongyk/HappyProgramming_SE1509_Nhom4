@@ -5,13 +5,11 @@
  */
 package dao.impl;
 
-import context.DBContext;
 import context.MyDAO;
 import entity.User;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -108,14 +106,20 @@ public class UserDAO extends MyDAO implements dao.UserDAO {
     }
     
     @Override
-    public void signup( String uName ,String uPass, String uMail, String fName, String phone,String uAddress,String sex,String DOB,int  role  ){
-        String xSql=" insert into [User]  value(?,?,?,?,?,?,?,?,?)" ;
+    public void signUp(User user){
+        xSql=" insert into [User]  values (?,?,?,?,?,?,?,?,?)" ;
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
          try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1,uName); ps.setString(2,uPass); ps.setString(3,uMail);ps.setString(4,fName);
-            
-            ps.setString(5,phone);;ps.setString(6,uAddress);ps.setString(7,sex); ps.setString(8,DOB); ps.setInt(9, role);
+            ps.setString(1,user.getUsername()); 
+            ps.setString(2,user.getPassword()); 
+            ps.setString(3,user.getFullname());
+            ps.setString(4,user.getMail());
+            ps.setString(5,user.getPhone());
+            ps.setDate(6,user.getDob());
+            ps.setString(7,user.getGender()); 
+            ps.setString(8,user.getAvatar()); 
+            ps.setInt(9, user.getRole());
             
             ps.executeUpdate();
             ps.close();

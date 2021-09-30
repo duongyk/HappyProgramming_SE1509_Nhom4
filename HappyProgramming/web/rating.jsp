@@ -70,7 +70,7 @@
                         <c:choose>
                             <c:when test="${empty listRating}">
 
-                                <span class="mentee-name">  No comment yet! 
+                                <p class="mentee-name">  No comment yet! 
                                     <br>
                                 </c:when>
                                 <c:otherwise>
@@ -80,7 +80,7 @@
                                             <span class="mentee-cmt">${rating.comment}      
                                             </span>
                                         </span>
-                                        <span class="time-cmt">${rating.date}</span>
+                                        <span class="time-cmt">${rating.toString()}</span>
                                         <span class="mentee-name">| ${rating.rateAmount}/5</span>
                                         <p><p>
                                         </c:forEach>
@@ -92,7 +92,7 @@
                                 <form action="RatingControllerMap" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-5 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;" redirect="true">
                                     <div class="u-form-group u-form-name">
                                         <label for="name-dc8a" class="u-form-control-hidden u-label"></label>
-                                        <input type="text" placeholder="Enter your comment" id="name-dc8a" name="comment" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                                        <input type="text" placeholder="Enter your comment" id="name-dc8a" name="comment" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
                                     </div>
                                     <div class="u-form-group u-form-select u-form-group-2">
                                         <label for="select-d713" class="u-label">Rating for mentor (1-5)</label>

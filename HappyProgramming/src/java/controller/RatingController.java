@@ -90,7 +90,7 @@ public class RatingController extends HttpServlet {
                 User mentor = userDAO.getUserById(mId);
                 // Get rate and comment
                 int rate = Integer.parseInt(request.getParameter("rate"));
-                String comment = request.getParameter("comment");
+                String comment = request.getParameter("comment").trim();
                 // Create and insert rate
                 Rating rating = new Rating(user, mentor, comment, rate);
                 ratingDAO.insert(rating);

@@ -18,6 +18,6 @@ public interface UserDAO {
     public ArrayList<User> getUserByRole(int uRole);
     public User getUserById(int uId);
     public User checkAccount(String xName);
-    public void signup( String uName ,String uPass, String uMail, String fName, String phone,String uAddress,String sex,String DOB,int  role  );
+    public void signUp(User user);
     public int updateUserInfo(int uid, User user);
 }

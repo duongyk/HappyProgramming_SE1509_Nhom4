@@ -14,13 +14,13 @@
     <body>
         <h1>Profile!</h1>
         <p>${user.fullname}
-        <p>${user.uMail}
-        <p>${user.uPhone}
+        <p>${user.mail}
+        <p>${user.phone}
         <p>${user.dob}
         <p>${user.gender}
-        <p>${user.uAvatar}
-        <a href="${"RatingControllerMap?service=getRating&uId=6"}">See rating</a><br>
-        <a href="${"UserControllerMap?service=updateProfile&uId="}${user.uId}">Update Profile</a><br>
+        <p>${user.avatar}
+        <a href="${"RatingControllerMap?service=getRating&uId=8"}">See rating</a><br>
+        <a href="${"UserControllerMap?service=updateProfile&uId="}${user.id}">Update Profile</a><br>
         <a href="UserControllerMap?service=signOut">Sign Out</a>
     </body>
 </html>
