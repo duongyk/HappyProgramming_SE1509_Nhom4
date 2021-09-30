@@ -145,6 +145,7 @@ public class UserDAO extends MyDAO implements dao.UserDAO {
                     +" ,uPhone='"+user.getPhone()+"'"
                     +" ,DOB='"+stringDOB+"'"
                     +" ,gender='"+user.getGender()+"'"
+                    +" ,uAvatar='"+user.getAvatar()+"'"
                 +" where uId='"+uid+"'";
         
         //System.out.println(xSql);
@@ -154,7 +155,6 @@ public class UserDAO extends MyDAO implements dao.UserDAO {
             
             status = ps.executeUpdate();
                  
-            rs.close();
             ps.close();
             
         } catch (Exception e) {

@@ -19,7 +19,8 @@
     <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="js/checkbox.js" defer=""></script>
-        
+    <script class="u-script" type="text/javascript" src="js/changeAvatar.js" defer=""></script>
+    
     <meta name="generator" content="Nicepage 3.25.0, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     
@@ -81,7 +82,7 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <h4 class="u-text u-text-default u-text-1">UPDATE CV</h4>
         <div class="u-form u-form-1">
-          <form action="CVControllerMap?service=submitFormUpdate" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-9 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;" redirect="true">
+          <form id="thisform" action="CVControllerMap?service=submitFormUpdate" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-9 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;" redirect="true">
             <input type="hidden" name="uid" value="<c:out value="${mentorprofile.getId()}"></c:out>" readonly="readonly" />
             <div class="u-form-group u-form-group-1">
               <label for="text-891d" class="u-form-control-hidden u-label"></label>
@@ -168,9 +169,9 @@
             
           </form>
         </div>
-        <img id="avatar" class="u-image u-image-default u-preserve-proportions u-image-1" src="images/79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png" alt="" data-image-width="1280" data-image-height="1280">     
+            <img id="image" class="u-image u-image-default u-preserve-proportions u-image-1" src="images/<c:out value="${mentorprofile.getAvatar()}"></c:out>" alt="" data-image-width="1280" data-image-height="1280">     
         
-        <input type="file" name="avatar" value="" style="width: 162px;" class="u-border-2 u-border-black u-btn u-button-style u-hover-custom-color-3 u-none u-text-black u-text-hover-white u-btn-2 />
+        <input id="avatarURL" form="thisform" onchange="changeImage()" type="file" name="avatar" value="" style="width: 162px;" class="u-border-2 u-border-black u-btn u-button-style u-hover-custom-color-3 u-none u-text-black u-text-hover-white u-btn-2 />
                    
         <p class="u-text u-text-default u-text-2"> </p>
         <p class="u-text u-text-default u-text-2"> </p>    

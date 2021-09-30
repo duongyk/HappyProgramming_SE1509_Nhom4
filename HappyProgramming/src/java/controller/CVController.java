@@ -132,7 +132,12 @@ public class CVController extends HttpServlet {
 //                } catch (ParseException ex) {
 //                    Logger.getLogger(CVController.class.getName()).log(Level.SEVERE, null, ex);
 //                }
-
+                
+                String avatar = request.getParameter("avatar");
+                
+                if(avatar.equals("") || avatar == null ) {
+                    avatar ="79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png";
+                }
                 
                 String sex = request.getParameter("sex");
                 //System.out.println("sex "+sex);
@@ -161,7 +166,7 @@ public class CVController extends HttpServlet {
                 
                 //       update user 
                 
-                User mentorInfo = new User(uid, "", "", fullname, mail, phone, dob, sex, "", 2);
+                User mentorInfo = new User(uid, "", "", fullname, mail, phone, dob, sex, avatar, 2);
                 
                 CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
           
