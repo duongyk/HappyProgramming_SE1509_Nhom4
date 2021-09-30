@@ -42,4 +42,13 @@ public interface RatingDAO {
      * @return a String .It is a <code>java.lang.String</code>
      */
     public String getAvgRate(int mId);
+    
+    /**
+     * Check if Mentee has rated and commented on Mentor or not
+     *
+     * @param fromId is an int number
+     * @param toId is an int number
+     * @return a boolean value
+     */
+    public boolean checkDupRating(int fromId, int toId);
 }

@@ -139,6 +139,12 @@ public class UserController extends HttpServlet {
                 request.setAttribute("rList", rList);
                 sendDispatcher(request, response, "request.jsp");
             }
+            
+            if (service.equalsIgnoreCase("listAllMentor")) {
+                ArrayList<User> mList = userDAO.getUserByRole(2);
+                request.setAttribute("mList", mList);
+                sendDispatcher(request, response, "allMentor.jsp");
+            }
         }
     }
 

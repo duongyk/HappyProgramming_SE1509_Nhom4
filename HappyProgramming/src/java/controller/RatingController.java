@@ -65,13 +65,14 @@ public class RatingController extends HttpServlet {
             // Get a Mentor's ratings
             if (service.equalsIgnoreCase("getRating")) {
                 // get Mentor
-                int mId = Integer.parseInt(request.getParameter("uId"));
+                int mId = Integer.parseInt(request.getParameter("mId"));
                 User mentor = userDAO.getUserById(mId);
                 // get list Rating from Mentor
                 ArrayList<Rating> listRating = ratingDAO.getRating(mentor);
                 // get avarage rating
                 String avg = ratingDAO.getAvgRate(mId);
 
+                request.setAttribute("mId", mId);
                 request.setAttribute("avg", avg);
                 request.setAttribute("mentor", mentor);
                 request.setAttribute("listRating", listRating);
@@ -85,17 +86,23 @@ public class RatingController extends HttpServlet {
                 User user = (User) request.getSession().getAttribute("currUser");
                 // Get Mentor
                 int mId = Integer.parseInt(request.getParameter("mId"));
-
-                //int mId= 6;
                 User mentor = userDAO.getUserById(mId);
-                // Get rate and comment
-                int rate = Integer.parseInt(request.getParameter("rate"));
-                String comment = request.getParameter("comment").trim();
-                // Create and insert rate
-                Rating rating = new Rating(user, mentor, comment, rate);
-                ratingDAO.insert(rating);
+                
+                if (ratingDAO.checkDupRating(user.getId(), mId)) {
+                    String mess = "You have already Rated and commented";
+                    request.setAttribute("mess", mess);
+                    sendDispatcher(request, response, "RatingControllerMap?service=getRating&mId=" + mId);
+                } else {
+                    // Get rate and comment
+                    int rate = Integer.parseInt(request.getParameter("rate"));
+                    String comment = request.getParameter("comment").trim();
+                    // Create and insert rate
+                    Rating rating = new Rating(user, mentor, comment, rate);
+                    ratingDAO.insert(rating);
 
-                sendDispatcher(request, response, "RatingControllerMap?service=getRating&uId=" + mId);
+                    sendDispatcher(request, response, "RatingControllerMap?service=getRating&mId=" + mId);
+                }
+
             }
         }
     }

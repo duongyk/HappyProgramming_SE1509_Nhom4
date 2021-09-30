@@ -65,6 +65,14 @@
     font-size: 0.625rem;
 }
 
+.mess {
+    font-weight: 700;
+    color: red;
+}
+
+.no-cmt {
+    font-size: 40px;
+}
 @media (max-width: 1199px) {
   .u-section-1 .u-text-1 {
     margin-left: calc(((100% - 940px) / 2) + 401px);

@@ -125,4 +125,26 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
 //            System.out.println(rate.getComment());
 //        }
 //    }
+
+    /**
+     * Get average rating of the Mentor
+     *
+     * @return a String .It is a <code>java.lang.String</code> object
+     */
+    @Override
+    public boolean checkDupRating(int fromId, int toId) {
+        xSql = "SELECT * FROM [Rating] WHERE [fromId] = " + fromId + "and [toId] = " + toId;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -50,20 +50,33 @@
                     <ul class="u-custom-font u-nav u-spacing-30 u-text-font u-unstyled u-nav-1">
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="" style="padding: 10px 36px;">All mentors</a>
+                                href="UserControllerMap?service=listAllmentor" style="padding: 10px 36px;">All mentors</a>
                         </li>
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
                                 href="SkillControllerMap?service=allSkill" style="padding: 10px 36px;">All skills</a>
                         </li>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="RequestControllerMap?service=listRequestByMe" style="padding: 10px 36px;">Request</a>
-                        </li> 
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
-                        </li> 
+                        <c:choose>
+                            <c:when test="${sessionScope.currUser!=null}">
+                                <li class="u-nav-item"><a
+                                        class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
+                                        href="RequestControllerMap?service=listRequestByMe" style="padding: 10px 36px;">Request</a>
+                                </li> 
+                                <li class="u-nav-item"><a
+                                        class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
+                                        href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
+                                </li> 
+                            </c:when>
+                            <c:otherwise>
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base 
+                                                          u-text-grey-90 u-text-hover-grey-90" 
+                                                          href="SignUp.jsp" style="padding: 10px 16px;">Sign up</a> </li> 
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base 
+                                                          u-text-grey-90 u-text-hover-grey-90"  
+                                                          href="SignIn.jsp" style="padding: 10px 36px;">Sign-in</a>
+                                </li>
+                            </c:otherwise>                
+                        </c:choose>
 
                     </ul>
                 </div>

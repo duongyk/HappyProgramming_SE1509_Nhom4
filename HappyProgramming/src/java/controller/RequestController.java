@@ -54,8 +54,8 @@ public class RequestController extends HttpServlet {
                 service = "";
             }
             if (service.equalsIgnoreCase("listRequestByMe")) {
-                User x = (User) request.getSession().getAttribute("currUser");
-                ArrayList<Request> listRequest = requestDAO.getListByMe(x);
+                User user = (User) request.getSession().getAttribute("currUser");
+                ArrayList<Request> listRequest = requestDAO.getListByMe(user);
                 request.setAttribute("listRequest", listRequest);
                 sendDispatcher(request, response, "listRequestByMe.jsp");
             }

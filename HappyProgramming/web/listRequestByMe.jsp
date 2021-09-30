@@ -42,7 +42,7 @@
                     <ul class="u-custom-font u-nav u-spacing-30 u-text-font u-unstyled u-nav-1">
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="" style="padding: 10px 36px;">All mentors</a>
+                                href="UserControllerMap?service=listAllmentor" style="padding: 10px 36px;">All mentors</a>
                         </li>
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
@@ -67,19 +67,25 @@
                 <a href="#sec-1114" class="u-border-none u-btn u-button-style u-custom-color-3 u-dialog-link u-btn-1">Statistic</a>
                 <a href="RequestControllerMap?service=loadRequest" class="u-border-none u-btn u-button-style u-custom-color-4 u-btn-2">Create request</a>
                 <div class="u-expanded-width u-list u-list-1">
-                    <div class="u-repeater u-repeater-1">
-
-                        <c:forEach items="${listRequest}" var="request">
-                            <div class="u-container-style u-list-item u-repeater-item u-video-cover u-white">
-                                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
-                                    <h3 class="u-text u-text-default u-text-2">Status: ${request.status}</h3>
-                                    <div class="u-border-4 u-border-custom-color-3 u-expanded-width u-line u-line-horizontal u-line-1"></div>
-                                    <p class="u-align-left u-text u-text-3">${request.title}</p>
-                                    <a href="" class="u-border-none u-btn u-button-style u-custom-color-3 u-btn-3">View Request</a>
+                    <c:choose>
+                            <c:when test="${empty listRequest}">
+                                <h1>  No Request yet! </h1>
+                                </c:when>
+                                <c:otherwise>
+                                <div class="u-repeater u-repeater-1">
+                                    <c:forEach items="${listRequest}" var="request">
+                                        <div class="u-container-style u-list-item u-repeater-item u-video-cover u-white">
+                                            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
+                                                <h3 class="u-text u-text-default u-text-2">Status: ${request.status}</h3>
+                                                <div class="u-border-4 u-border-custom-color-3 u-expanded-width u-line u-line-horizontal u-line-1"></div>
+                                                <p class="u-align-left u-text u-text-3">${request.title}</p>
+                                                <a href="" class="u-border-none u-btn u-button-style u-custom-color-3 u-btn-3">View Request</a>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </div>
-                            </div>
-                        </c:forEach>
-                    </div>
+                                </c:otherwise>                
+                            </c:choose>
                 </div>
             </div>
         </section>

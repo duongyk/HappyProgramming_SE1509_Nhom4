@@ -36,7 +36,6 @@
         <meta property="og:type" content="website">
     </head>
     <%-- Copy from here --%>
-    <body class="u-body">
         <header class="u-clearfix u-custom-color-1 u-header ">
             <a href="index.jsp" class="u-image u-logo u-image-1" data-image-width="313" data-image-height="95" t>
                 <img src="images/Logo.png" class="u-logo-image u-logo-image-1">
@@ -47,7 +46,7 @@
                     <ul class="u-custom-font u-nav u-spacing-30 u-text-font u-unstyled u-nav-1">
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="" style="padding: 10px 36px;">All mentors</a>
+                                href="UserControllerMap?service=listAllmentor" style="padding: 10px 36px;">All mentors</a>
                         </li>
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"

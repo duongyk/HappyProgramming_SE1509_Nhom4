@@ -23,9 +23,6 @@
         <meta name="generator" content="Nicepage 3.25.0, nicepage.com">
         <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
 
-
-
-
         <meta name="theme-color" content="#478ac9">
         <meta property="og:title" content="Home">
         <meta property="og:description" content="">
@@ -44,7 +41,7 @@
                     <ul class="u-custom-font u-nav u-spacing-30 u-text-font u-unstyled u-nav-1">
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="" style="padding: 10px 36px;">All mentors</a>
+                                href="UserControllerMap?service=listAllmentor" style="padding: 10px 36px;">All mentors</a>
                         </li>
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
