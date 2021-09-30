@@ -54,7 +54,7 @@
                         </li>
                         <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base 
                                                   u-text-grey-90 u-text-hover-grey-90" 
-                                                  href="Sign-up.jsp" style="padding: 10px 16px;">Sign up</a> </li> 
+                                                  href="SignUp.jsp" style="padding: 10px 16px;">Sign up</a> </li> 
                     </ul>
                 </div>
 
