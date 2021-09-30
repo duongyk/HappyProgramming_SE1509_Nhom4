@@ -234,7 +234,7 @@ public class CVController extends HttpServlet {
                 
                 smdao.updateMentorSkill(uid, skill_id);
                 
-                response.sendRedirect("demoMentorList.jsp");
+                response.sendRedirect("SignIn.jsp");
                 
             }
             
