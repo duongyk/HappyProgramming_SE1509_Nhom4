@@ -43,17 +43,18 @@ public class CVDAO extends MyDAO implements dao.CVDAO {
     }
 
     @Override
-    public void insertCV(String uid, CV newCV) {
+    public void insertCV(int uid, CV newCV) {
         xSql = "insert into [CV] (uid, profession, professionIntro, serviceDescript, achievement)"
-                + " value (" + uid + ", ?, ?, ?, ?) ";
+                + " value (?, ?, ?, ?, ?) ";
 
         try {
             ps = con.prepareStatement(xSql);
-
-            ps.setString(0, newCV.getProfession());
-            ps.setString(1, newCV.getProfessionIntro());
-            ps.setString(2, newCV.getProfessionIntro());
-            ps.setString(3, newCV.getAchivement());
+            
+            ps.setInt(1, uid);
+            ps.setString(2, newCV.getProfession());
+            ps.setString(3, newCV.getProfessionIntro());
+            ps.setString(4, newCV.getProfessionIntro());
+            ps.setString(5, newCV.getAchivement());
 
             rs = ps.executeQuery();
         } catch (SQLException ex) {
@@ -66,15 +67,21 @@ public class CVDAO extends MyDAO implements dao.CVDAO {
         int status = 0;
         
         xSql = "update [CV]"
-                + " set profession='"+newCV.getProfession()+"'"
-                + " , professionIntro='"+newCV.getProfessionIntro()+"'"
-                + " , serviceDescript='"+newCV.getServiceDescript()+"'"
-                + " , achievement='"+newCV.getAchivement()+"'"
-                + " where uid='"+uid+"'";
+                + " set profession=?"
+                + " , professionIntro=?"
+                + " , serviceDescript=?"
+                + " , achievement=?"
+                + " where uid=?";
 
         try {
             ps = con.prepareStatement(xSql);
-
+            
+            ps.setString(1, newCV.getProfession());
+            ps.setString(2, newCV.getProfessionIntro());
+            ps.setString(3, newCV.getServiceDescript());
+            ps.setString(4, newCV.getAchivement());
+            ps.setInt(5, uid);
+            
             status = ps.executeUpdate();
             
         } catch (SQLException ex) {
