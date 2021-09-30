@@ -46,7 +46,7 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
         ArrayList<Skill> list = new ArrayList<>();
         xSql = "select * from [Skill] where sName like '% " + sName + "%'";
         int id;
-        String name, detail;
+        String name, detail, image;
         Skill s;
         try {
             ps = con.prepareStatement(xSql);
@@ -55,7 +55,8 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
                 id = rs.getInt("sId");
                 name = rs.getString("sName");
                 detail = rs.getString("sDetail");
-                s = new Skill(id, name, detail);
+                image = rs.getString("sImage");
+                s = new Skill(id, name, detail, image);
                 list.add(s);
             }
             rs.close();
@@ -78,9 +79,9 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                skill.setsId(rs.getInt("sId"));
-                skill.setsName(rs.getString("sName"));
-                skill.setsDetail(rs.getString("sDetail"));
+                skill.setId(rs.getInt("sId"));
+                skill.setName(rs.getString("sName"));
+                skill.setDetail(rs.getString("sDetail"));
             }
 
         } catch (Exception e) {
@@ -94,9 +95,9 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
         xSql = "insert into [Skill] values (?,?,?)";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, x.getsName());
-            ps.setString(2, x.getsDetail());
-            ps.setString(3, x.getsImage());
+            ps.setString(1, x.getName());
+            ps.setString(2, x.getDetail());
+            ps.setString(3, x.getImage());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -107,7 +108,7 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
     public boolean findDupSkill(String sName) {
         ArrayList<Skill> sList = getAllSkill();
         for (Skill s : sList) {
-            if (sName.equalsIgnoreCase(s.getsName())) {
+            if (sName.equalsIgnoreCase(s.getName())) {
                 return true;
             }
         }

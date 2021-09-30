@@ -66,7 +66,7 @@ public class UserController extends HttpServlet {
                 User user = userDAO.getUser(userName, password);
                 String mess = "";
                 if (user != null) {
-                    if (user.getuRole() == 3) {
+                    if (user.getRole() == 3) {
                         request.getSession().setAttribute("currUser", user);
                         sendDispatcher(request, response, "adminDashboard.jsp");
                     } else {
