@@ -75,7 +75,7 @@ public class SkillController extends HttpServlet {
                     sendDispatcher(request, response, "createSkill.jsp");
                 } else {
                     skillDAO.insert(new Skill(sName, sDetail, sImage));
-                    sendDispatcher(request, response, "SkillControllerMap?service=allSkill");
+                    sendDispatcher(request, response, "AdminControllerMap?service=skillManage");
                 }
             }
 
