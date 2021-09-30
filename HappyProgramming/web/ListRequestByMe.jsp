@@ -65,7 +65,7 @@
             <div class="u-clearfix u-sheet u-sheet-1">
                 <h2 class="u-custom-font u-text u-text-font u-text-1">List request by me</h2>
                 <a href="#sec-1114" class="u-border-none u-btn u-button-style u-custom-color-3 u-dialog-link u-btn-1">Statistic</a>
-                <a href="#" class="u-border-none u-btn u-button-style u-custom-color-4 u-btn-2">Create request</a>
+                <a href="RequestControllerMap?service=loadRequest" class="u-border-none u-btn u-button-style u-custom-color-4 u-btn-2">Create request</a>
                 <div class="u-expanded-width u-list u-list-1">
                     <div class="u-repeater u-repeater-1">
 

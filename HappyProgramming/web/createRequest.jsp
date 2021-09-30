@@ -97,7 +97,7 @@
               <div class="u-form-select-wrapper">
                 <select id="select-0895" name="toId" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
                     <c:forEach items="${mList}" var="mentor">
-                    <option value="${mentor.getuId()}"> ${mentor.getFullname()} </option>
+                    <option value="${mentor.getId()}"> ${mentor.getFullname()} </option>
                     </c:forEach>>
                 </select>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
@@ -108,8 +108,8 @@
               <label for="select-0895" class="u-label">Skill</label>
               <div class="u-form-checkbox u-form-group u-form-partition-factor-3 u-form-group-5">
                   <c:forEach items="${sList}" var="s">
-                  <input type="checkbox" id="${s.getsId()}" name="skill" value="${s.getsId()}">
-                  <label for="${s.getsId()}" class="u-label"> ${s.getsName()} </label>
+                  <input type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}">
+                  <label for="${s.getId()}" class="u-label"> ${s.getName()} </label>
                   </c:forEach>>
               </div>
             </div>
