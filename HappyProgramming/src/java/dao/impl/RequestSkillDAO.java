@@ -30,25 +30,6 @@ public class RequestSkillDAO extends MyDAO implements dao.RequestSkillDAO{
         return n;
     }
     
-    public ArrayList<Skill> getList() {
-        ArrayList<Skill> sList = new ArrayList<>();
-        xSql = "select * from [Skill]";
-        try {
-            ps = con.prepareStatement(xSql);
-            rs = ps.executeQuery();
-            while(rs.next()) {
-                int id = rs.getInt("sId");
-                Skill s = new Skill(id);
-                sList.add(s);
-            }
-            ps.close();
-            rs.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return sList;
-    }
-    
     @Override
     public int skillRequest(int sId) {
         int n = 0;

@@ -129,8 +129,8 @@ public class UserDAO extends MyDAO implements dao.UserDAO {
         
         xSql = "update [User]"
                 +" set fullname='"+user.getFullname()+"'"
-                    +" ,uMail='"+user.getuMail()+"'"
-                    +" ,uPhone='"+user.getuPhone()+"'"
+                    +" ,uMail='"+user.getMail()+"'"
+                    +" ,uPhone='"+user.getPhone()+"'"
                     +" ,DOB='"+stringDOB+"'"
                     +" ,gender='"+user.getGender()+"'"
                 +" where uId='"+uid+"'";

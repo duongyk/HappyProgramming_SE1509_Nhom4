@@ -16,11 +16,14 @@ import java.util.ArrayList;
  * @author Duong
  */
 public class RequestDAO extends MyDAO implements dao.RequestDAO{
-
+    
+    UserDAO userDAO = new UserDAO();
+    User user  = new User();
+    
     @Override
     public ArrayList<Request> getListByMe(User user) {
         ArrayList<Request> list = new ArrayList<>();
-        xSql = "SELECT * FROM [Request] WHERE [fromId] = " + user.getuId() + "OR [toId] = " + user.getuId();
+        xSql = "SELECT * FROM [Request] WHERE [fromId] = " + user.getId() + "OR [toId] = " + user.getId();
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
@@ -37,7 +40,7 @@ public class RequestDAO extends MyDAO implements dao.RequestDAO{
                 xStatus = rs.getString("rStatus");
                 xMentor = rs.getInt("toId");
                 dlDate = rs.getDate("deadlineDate");
-                x = new Request(xId, xTitle, xContent, user.getuId(), xMentor, dlDate, xStatus);
+                x = new Request(xId, xTitle, xContent, userDAO.getUserById(user.getId()), userDAO.getUserById(xMentor), dlDate, xStatus);
                 list.add(x);
             }
             rs.close();
@@ -56,8 +59,8 @@ public class RequestDAO extends MyDAO implements dao.RequestDAO{
             ps = con.prepareStatement(xSql);
             ps.setString(1, req.getTitle());
             ps.setString(2, req.getContent());
-            ps.setInt(3, req.getFromId());
-            ps.setInt(4, req.getToId());
+            ps.setInt(3, req.getFrom().getId());
+            ps.setInt(4, req.getTo().getId());
             ps.setDate(5, req.getDeadlineDate());
             n = ps.executeUpdate();
             ps.close();
@@ -67,9 +70,4 @@ public class RequestDAO extends MyDAO implements dao.RequestDAO{
         return n;
     }
     
-    public static void main(String[] args) {
-        RequestDAO dao = new RequestDAO();
-        Request req = new Request("HELP", "AAAAAA", 2, 13, Date.valueOf("2021-11-12"));
-        System.out.println(dao.createRequest(req));
-    }
 }

@@ -13,135 +13,134 @@ import java.util.Date;
  */
 public class User {
 
-    private int uId;
+    private int id;
     private String username;
     private String password;
     private String fullname;
-    private String uMail;
-    private String uPhone;
+    private String mail;
+    private String phone;
     private Date dob;
     private String gender;
-    private String uAvatar;
-    private int uRole;
+    private String avatar;
+    private int role;
 
     public User() {
     }
 
-    public User(int uId) {
-        this.uId = uId;
+    public User(int id) {
+        this.id = id;
     }
-    
+
     public User(String username, String password) {
        this.username = username;
         this.password = password;
     }
 
-    public User(int uId, String username, String password, String fullname, String uMail, String uPhone, Date dob, String gender, String uAvatar) {
-        this.uId = uId;
+    public User(int id, String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
-        this.uMail = uMail;
-        this.uPhone = uPhone;
+        this.mail = mail;
+        this.phone = phone;
         this.dob = dob;
         this.gender = gender;
-        this.uAvatar = uAvatar;
+        this.avatar = avatar;
     }
 
-    
-    public User(int uId, String username, String password, String fullname, String uMail, String uPhone, Date dob, String gender, String uAvatar,int uRole) {
-        this.uId = uId;
+    public User(int id, String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar, int role) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
-        this.uMail = uMail;
-        this.uPhone = uPhone;
+        this.mail = mail;
+        this.phone = phone;
         this.dob = dob;
         this.gender = gender;
-        this.uAvatar = uAvatar;
-        this.uRole = uRole;
+        this.avatar = avatar;
+        this.role = role;
     }
 
-    public Date getDob() {
-        return dob;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getPassword() {
-        return password;
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getuAvatar() {
-        return uAvatar;
+    public String getPassword() {
+        return password;
     }
 
-    public String getuMail() {
-        return uMail;
+    public String getFullname() {
+        return fullname;
     }
 
-    public String getuPhone() {
-        return uPhone;
+    public String getMail() {
+        return mail;
     }
 
-    public int getuRole() {
-        return uRole;
+    public String getPhone() {
+        return phone;
     }
 
-    public int getuId() {
-        return uId;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public String getGender() {
+        return gender;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public int getRole() {
+        return role;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setuAvatar(String uAvatar) {
-        this.uAvatar = uAvatar;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setuId(int uId) {
-        this.uId = uId;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public void setuMail(String uMail) {
-        this.uMail = uMail;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
-    public void setuPhone(String uPhone) {
-        this.uPhone = uPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setuRole(int uRole) {
-        this.uRole = uRole;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+    
     @Override
     public String toString() {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.

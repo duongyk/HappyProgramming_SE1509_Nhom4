@@ -11,68 +11,61 @@ package entity;
  */
 public class Skill {
 
-    private int sId;
-    private String sName;
-    private String sDetail;
-    private String sImage;
+    private int id;
+    private String name;
+    private String detail;
+    private String image;
 
     public Skill() {
     }
 
-    public Skill(int sId) {
-        this.sId = sId;
+    public Skill(int id) {
+        this.id = id;
     }
 
-    public Skill(int sId, String sName, String sDetail, String sImage) {
-        this.sId = sId;
-        this.sName = sName;
-        this.sDetail = sDetail;
-        this.sImage = sImage;
+    public Skill(int id, String name, String detail, String image) {
+        this.id = id;
+        this.name = name;
+        this.detail = detail;
+        this.image = image;
     }
 
-    public Skill(String sName, String sDetail, String sImage) {
-        this.sName = sName;
-        this.sDetail = sDetail;
-         this.sImage = sImage;
+    public Skill(String name, String detail, String image) {
+        this.name = name;
+        this.detail = detail;
+        this.image = image;
     }
     
-    public Skill(int sId, String sName, String sDetail) {
-        this.sId = sId;
-        this.sName = sName;
-        this.sDetail = sDetail;
+    public int getId() {
+        return id;
     }
 
-    public int getsId() {
-        return sId;
+    public String getName() {
+        return name;
     }
 
-    public void setsId(int sId) {
-        this.sId = sId;
+    public String getDetail() {
+        return detail;
     }
 
-    public String getsName() {
-        return sName;
+    public String getImage() {
+        return image;
     }
 
-    public void setsName(String sName) {
-        this.sName = sName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getsDetail() {
-        return sDetail;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setsDetail(String sDetail) {
-        this.sDetail = sDetail;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
-    public String getsImage() {
-        return sImage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public void setsImage(String sImage) {
-        this.sImage = sImage;
-    }
-    
-    
 }

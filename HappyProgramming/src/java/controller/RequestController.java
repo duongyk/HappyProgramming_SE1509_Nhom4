@@ -75,14 +75,14 @@ public class RequestController extends HttpServlet {
 
                 String title = request.getParameter("title");
                 String content = request.getParameter("content");
-                int fromId = x.getuId();
                 
-                int toId = Integer.parseInt(request.getParameter("toId"));
-
+                int to = Integer.parseInt(request.getParameter("toId"));
+                User toId = userDao.getUserById(to);
+                
                 String deadline = request.getParameter("deadlineDate");
                 Date deadlineDate = Date.valueOf(deadline); //bug
                 
-                Request req = new Request(title, content, fromId, toId, deadlineDate);
+                Request req = new Request(title, content, x, toId, deadlineDate);
                 requestDAO.createRequest(req);
                 
                 String arr[] = request.getParameterValues("skill");

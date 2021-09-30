@@ -25,7 +25,7 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
     @Override
     public ArrayList<Rating> getRating(User user) {
         ArrayList<Rating> listRating = new ArrayList<>();
-        xSql = "SELECT * FROM [Rating] WHERE [toId] = " + user.getuId();
+        xSql = "SELECT * FROM [Rating] WHERE [toId] = " + user.getId();
         try {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
@@ -58,8 +58,8 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
         xSql = "INSERT INTO [Rating] VALUES (?,?,?,?,GETDATE())";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, rating.getFrom().getuId());
-            ps.setInt(2, rating.getTo().getuId());
+            ps.setInt(1, rating.getFrom().getId());
+            ps.setInt(2, rating.getTo().getId());
             ps.setString(3, rating.getComment());
             ps.setInt(4, rating.getRateAmount());
             ps.executeUpdate();

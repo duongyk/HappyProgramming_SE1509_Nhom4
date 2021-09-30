@@ -10,12 +10,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<!--
-<%
-    User x = (User) request.getSession().getAttribute("currUser");
-//    ArrayList<Skill> sList = (ArrayList<Skill>) request.getAttribute("sList");
-%>
--->
 
 <html style="font-size: 16px;" lang="vi">
     <head>
@@ -85,9 +79,9 @@
                         <c:forEach items="${sList}" var="list">
                             <div class="u-container-style u-list-item u-repeater-item u-video-cover u-white">
                                 <div class="u-container-layout u-similar-container u-container-layout-1">
-                                    <h3 class="u-text u-text-default u-text-2"> <p>${list.getsName()} </h3>
+                                    <h3 class="u-text u-text-default u-text-2"> <p>${list.getName()} </h3>
                                     <div class="u-border-4 u-border-custom-color-3 u-line u-line-horizontal u-line-1"></div>
-                                    <img alt="" class="u-expanded-width-lg u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-image u-image-default u-image-1" data-image-width="2000" data-image-height="1333" src=" ${list.getsImage()} ">
+                                    <img alt="" class="u-expanded-width-lg u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-image u-image-default u-image-1" data-image-width="2000" data-image-height="1333" src=" ${list.getImage()} ">
                                     <a href="#" class="u-border-none u-btn u-button-style u-custom-color-3 u-btn-1"> View skill</a>
                                 </div>
                             </div>
