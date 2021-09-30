@@ -69,7 +69,7 @@
                     <form action="UserControllerMap" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-13 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 5px;" redirect="true">
                         <div class="u-form-group u-form-group-1">
                             <label for="text-891d" class="u-form-control-hidden u-label"></label>
-                            <input type="text" placeholder="User name" id="text-891d" name="username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                            <input type="text" placeholder="User name" id="text-891d" name="username"pattern="^[^\s]+(\s+[^\s]+)*$" title="Must not contain only spaces, must not start or end by a space " class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
                         </div>
                         <div class="u-form-group u-form-group-2">
                             <label for="text-b9a0" class="u-form-control-hidden u-label"></label>
@@ -77,7 +77,7 @@
                         </div>
                         <div class="u-form-group u-form-group-3">
                             <label for="text-1c7c" class="u-form-control-hidden u-label"></label>
-                            <input type="text" placeholder="Password" id="text-1c7c" name="password" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                            <input type="text" placeholder="Password" id="text-1c7c" name="password"pattern="^[^\s]+(\s+[^\s]+)*$" title="Must not contain only spaces, must not start or end by a space " class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
                         </div>
                         <div class="u-form-group u-form-group-4">
                             <label for="text-b048" class="u-form-control-hidden u-label"></label>
@@ -85,11 +85,11 @@
                         </div>
                         <div class="u-form-group u-form-group-5">
                             <label for="text-3911" class="u-form-control-hidden u-label"></label>
-                            <input type="text" placeholder="fullname" id="text-3911" name="fullname" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                            <input type="text" placeholder="fullname" id="text-3911" name="fullname"pattern="^[^\s]+(\s+[^\s]+)*$" title="Must not contain only spaces, must not start or end by a space " class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
                         </div>
                         <div class="u-form-group u-form-phone u-form-group-6">
                             <label for="text-47b9" class="u-form-control-hidden u-label"></label>
-                            <input type="tel" placeholder="phone" id="text-47b9" name="phone" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required="required">
+                            <input type="tel" placeholder="phone" id="text-47b9" name="phone"pattern="^[^\s]+(\s+[^\s]+)*$" title="Must not contain only spaces, must not start or end by a space " class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required="required">
                         </div>
                         <div class="u-form-group u-form-select u-form-group-8">
                             <label for="select-6004" class="u-label">Sex</label>
