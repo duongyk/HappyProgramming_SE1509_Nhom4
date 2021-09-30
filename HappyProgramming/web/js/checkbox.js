@@ -9,10 +9,10 @@ $(document).ready(function () {
       checked = $("input[type=checkbox]:checked").length;
 
       if(checked <= 0) {
-        alert("You must check at least one skill.");
+        alert("You must check at least one checkbox.");
         return false;
       } else if (checked > 3) {
-          alert("You cant choose more than 3 skills.");
+          alert("You cant choose more than 3");
           return false;
       } else {
           
