@@ -95,7 +95,7 @@ public class UserController extends HttpServlet {
                 if (!password.equals(repass)) {
                     // js: ko trung pass
                    
-              response.sendRedirect("Sign-up.jsp");
+              response.sendRedirect("SignUp.jsp");
 
                 }
                 
@@ -103,15 +103,15 @@ public class UserController extends HttpServlet {
                 if (a == null) { // check xem ton tai chua, chua thi dc sign up
                     userDAO.signup(userName, repass, mail, fname, phone, address, sex, DOB, role);
                     if (role==1) {
-                        response.sendRedirect("Sign-in.jsp");
+                        response.sendRedirect("SignIn.jsp");
                     } else {
-                        response.sendRedirect("Sign-in.jsp");
+                        response.sendRedirect("SignIn.jsp");
                         //response.sendRedirect("CVControllerMap?service=createCV&uId="+a.getuId());
                     }
                     // khi dang ki hoan tat se cha nguoi dung ve page login
                 } else { //neu co roi se day ve trang sighn up
                     // mess= "user name existed!"
-                    sendDispatcher(request, response, "Sign-up.jsp");
+                    response.sendRedirect("SignUp.jsp");
                 }
 
             }
