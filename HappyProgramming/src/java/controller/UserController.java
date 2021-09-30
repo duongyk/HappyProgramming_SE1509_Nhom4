@@ -116,8 +116,9 @@ public class UserController extends HttpServlet {
 
             }
 
-            if (service.equalsIgnoreCase("logout")) {
-
+            if (service.equalsIgnoreCase("signOut")) {
+                request.getSession().invalidate();
+                sendDispatcher(request, response, "index.jsp");
             }
 
 

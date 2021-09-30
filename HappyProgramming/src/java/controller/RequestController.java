@@ -51,13 +51,13 @@ public class RequestController extends HttpServlet {
             String service = request.getParameter("service");
             
             if (service == null) {
-                service = "listbyme";
+                service = "";
             }
             if (service.equalsIgnoreCase("listRequestByMe")) {
                 User x = (User) request.getSession().getAttribute("currUser");
                 ArrayList<Request> listRequest = requestDAO.getListByMe(x);
                 request.setAttribute("listRequest", listRequest);
-                sendDispatcher(request, response, "ListRequestByMe.jsp");
+                sendDispatcher(request, response, "listRequestByMe.jsp");
             }
             /* load create request screen */
             if(service.equalsIgnoreCase("loadRequest")) {

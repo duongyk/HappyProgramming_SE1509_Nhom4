@@ -41,6 +41,8 @@ public class UserDAO extends MyDAO implements dao.UserDAO {
         return (t);
     }
 
+    
+    @Override
     public User getUserById(int uId) {
         xSql = "SELECT * FROM [User] WHERE [uId] = " + uId;
         try {
@@ -81,6 +83,9 @@ public class UserDAO extends MyDAO implements dao.UserDAO {
         }
         return null;
     }
+    
+    
+    @Override
     public User checkAccount(String xName) { // check xem tài khoản này đã tồn tại trong db chưa
 
         xSql = "select * from [User] where username=? ";
@@ -101,6 +106,8 @@ public class UserDAO extends MyDAO implements dao.UserDAO {
         }
         return null;
     }
+    
+    @Override
     public void signup( String uName ,String uPass, String uMail, String fName, String phone,String uAddress,String sex,String DOB,int  role  ){
         String xSql=" insert into [User]  value(?,?,?,?,?,?,?,?,?)" ;
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
@@ -119,6 +126,7 @@ public class UserDAO extends MyDAO implements dao.UserDAO {
     }
 
     //viet thang
+    @Override
     public int updateUserInfo(int uid, User user) {
         int status = 0;
         

@@ -1,27 +1,38 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        DuongVV          First Deploy<br>
  */
 package dao.impl;
 
 import context.MyDAO;
 import entity.Rating;
 import entity.User;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
+ * This class implements from class interface RatingDAO. <br>
+ * This class contains method to query select data from the table Rating.<br>
+ * There are Get all Rating of the user in the database, Insert new Rating into 
+ * the database, Get average rating of the Mentor
  *
- * @author Duong
+ * @author duongvvhe150773
  */
-
 
 public class RatingDAO extends MyDAO implements dao.RatingDAO {
     
     UserDAO userDAO = new UserDAO();
-            
+    
+    /**
+     * Get all Rating of the user in the database
+     *
+     * @return a list <code>Rating</code> object
+     */
     @Override
     public ArrayList<Rating> getRating(User user) {
         ArrayList<Rating> listRating = new ArrayList<>();
@@ -53,6 +64,10 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
         return (listRating);
     }
 
+    /**
+     * Insert new Rating into the database
+     *
+     */
     @Override
     public void insert(Rating rating) {
         xSql = "INSERT INTO [Rating] VALUES (?,?,?,?,GETDATE())";
@@ -69,6 +84,12 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
         }
     }
     
+    /**
+     * Get average rating of the Mentor
+     *
+     * @return a String .It is a <code>java.lang.String</code> object
+     */
+    @Override
     public String getAvgRate(int mId) {
         ArrayList<Integer> listRating = new ArrayList();
         xSql = "SELECT * FROM [Rating] WHERE [toId] = "+mId;
