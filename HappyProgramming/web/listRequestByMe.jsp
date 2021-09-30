@@ -1,9 +1,4 @@
-<%-- 
-    Document   : loginJsp
-    Created on : Sep 21, 2021, 8:27:13 PM
-    Author     : QMC
---%>
-
+<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -14,9 +9,9 @@
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="page_type" content="np-template-header-footer-from-plugin">
-        <title>Sign in</title>
+        <title>List request by me</title>
         <link rel="stylesheet" href="css/nicepage.css" media="screen">
-        <link rel="stylesheet" href="css/Sign-in.css" media="screen">
+        <link rel="stylesheet" href="css/List-request-by-me.css" media="screen">
         <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
         <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
         <meta name="generator" content="Nicepage 3.25.0, nicepage.com">
@@ -31,10 +26,11 @@
             "logo": "images/Logo.png"
             }</script>
         <meta name="theme-color" content="#478ac9">
-        <meta property="og:title" content="Sign in">
+        <meta property="og:title" content="List request by me">
         <meta property="og:description" content="">
         <meta property="og:type" content="website">
     </head>
+    <%-- Copy from here --%>
     <body class="u-body">
         <header class="u-clearfix u-custom-color-1 u-header ">
             <a href="index.jsp" class="u-image u-logo u-image-1" data-image-width="313" data-image-height="95" t>
@@ -52,44 +48,39 @@
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
                                 href="SkillControllerMap?service=allSkill" style="padding: 10px 36px;">All skills</a>
                         </li>
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base 
-                                                  u-text-grey-90 u-text-hover-grey-90" 
-                                                  href="Sign-up.jsp" style="padding: 10px 16px;">Sign up</a> </li> 
+                        <li class="u-nav-item"><a
+                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
+                                href="RequestControllerMap?service=listRequestByMe" style="padding: 10px 36px;">Request</a>
+                        </li> 
+                        <li class="u-nav-item"><a
+                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
+                                href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
+                        </li>
                     </ul>
                 </div>
 
             </nav>
         </header>
-        <section class="u-align-center u-clearfix u-custom-color-2 u-section-1" id="sec-eec3">
+        <section class="u-clearfix u-grey-10 u-section-1" id="sec-7dfc">
             <div class="u-clearfix u-sheet u-sheet-1">
-                <div class="u-align-center u-container-style u-group u-radius-50 u-shape-round u-white u-group-1">
-                    <div class="u-container-layout u-container-layout-1">
-                        <h3 class="u-text u-text-1">Sign In</h3>
-                        <div class="u-form u-login-control u-form-1">
-                            <form action="UserControllerMap" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-35 u-form-vertical u-inner-form" source="custom" name="form-2" style="padding: 10px;">
-                                <div class="u-form-group u-form-name">
-                                    <label for="username-708d" class="u-form-control-hidden u-label"></label>
-                                    <input type="text" placeholder="Enter your Username" id="username-708d" name="username" class="u-grey-5 u-input u-input-rectangle" required="">
+                <h2 class="u-custom-font u-text u-text-font u-text-1">List request by me</h2>
+                <a href="#sec-1114" class="u-border-none u-btn u-button-style u-custom-color-3 u-dialog-link u-btn-1">Statistic</a>
+                <a href="RequestControllerMap?service=loadRequest" class="u-border-none u-btn u-button-style u-custom-color-4 u-btn-2">Create request</a>
+                <div class="u-expanded-width u-list u-list-1">
+                    <div class="u-repeater u-repeater-1">
+
+                        <c:forEach items="${listRequest}" var="request">
+                            <div class="u-container-style u-list-item u-repeater-item u-video-cover u-white">
+                                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
+                                    <h3 class="u-text u-text-default u-text-2">Status: ${request.status}</h3>
+                                    <div class="u-border-4 u-border-custom-color-3 u-expanded-width u-line u-line-horizontal u-line-1"></div>
+                                    <p class="u-align-left u-text u-text-3">${request.title}</p>
+                                    <a href="" class="u-border-none u-btn u-button-style u-custom-color-3 u-btn-3">View Request</a>
                                 </div>
-                                <div class="u-form-group u-form-password">
-                                    <label for="password-708d" class="u-form-control-hidden u-label"></label>
-                                    <input type="password" placeholder="Enter your Password" id="password-708d" name="password" class="u-grey-5 u-input u-input-rectangle" required="">
-                                </div>
-                                <div class="u-form-checkbox u-form-group">
-                                    <input type="checkbox" id="checkbox-708d" name="remember" value="On">
-                                    <label for="checkbox-708d" class="u-label">Remember me</label>
-                                </div>
-                                <div class="u-align-center u-form-group u-form-submit">
-                                    <a href="#" class="u-btn u-btn-round u-btn-submit u-button-style u-radius-17 u-text-body-alt-color u-btn-1">Login</a>
-                                    <input type="submit" value="submit" class="u-form-control-hidden">
-                                </div>
-                                <input type="hidden" value="" name="recaptchaResponse">
-                            </form>
-                        </div>
-                        <a href="" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-login-control u-login-forgot-password u-none u-text-palette-1-base u-btn-2">Forgot password?</a>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
-                <img class="u-image u-image-default u-image-1" src="images/login.png" alt="" data-image-width="764" data-image-height="805">
             </div>
         </section>
 
@@ -102,14 +93,55 @@
             </div><img class="u-image u-image-default u-image-2" src="images/contact.png" alt="" data-image-width="177" data-image-height="361"></footer>
         <section class="u-backlink u-clearfix u-grey-80">
             <a class="u-link" href="https://nicepage.com/website-design" target="_blank">
-                <span>Website Design</span>
+                <span>Free Website Design</span>
             </a>
             <p class="u-text">
                 <span>created with</span>
             </p>
-            <a class="u-link" href="https://nicepage.com/static-site-generator" target="_blank">
-                <span>Static Site Generator</span>
+            <a class="u-link" href="https://nicepage.com/" target="_blank">
+                <span>WYSIWYG Web Builder</span>
             </a>. 
         </section>
-    </body>
+        <section class="u-black u-clearfix u-container-style u-dialog-block u-opacity u-opacity-70 u-valign-middle u-section-4" id="sec-1114">
+            <div class="u-align-center u-container-style u-dialog u-white u-dialog-1">
+                <div class="u-container-layout u-container-layout-1">
+                    <h6 class="u-text u-text-font u-text-1">Total of request:<br>Total hours:<br>Total mentors:&nbsp;
+                    </h6>
+                </div><button class="u-dialog-close-button u-icon u-text-grey-40 u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-c278"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-c278"><rect x="7" y="0" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="2" height="16"></rect><rect x="0" y="7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3.3138 8.0002)" width="16" height="2"></rect></svg></button>
+            </div>
+        </section><style>.u-section-4 {
+                min-height: 876px;
+            }
+
+            .u-section-4 .u-dialog-1 {
+                width: 214px;
+                min-height: 167px;
+                margin: 60px auto;
+            }
+
+            .u-section-4 .u-container-layout-1 {
+                padding: 30px;
+            }
+
+            .u-section-4 .u-text-1 {
+                margin: 0 20px 0 0;
+            }
+
+            .u-section-4 .u-icon-1 {
+                width: 20px;
+                height: 20px;
+            }
+
+            @media (max-width: 1199px) {
+                .u-section-4 .u-dialog-1 {
+                    height: auto;
+                }
+            }
+
+            @media (max-width: 767px) {
+                .u-section-4 .u-container-layout-1 {
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+            }</style></body>
 </html>

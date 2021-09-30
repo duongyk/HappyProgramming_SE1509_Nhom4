@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        DuongVV          First Deploy<br>
  */
 package dao.impl;
 
@@ -12,14 +16,24 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
+ * This class implements from class interface RequestDAO. <br>
+ * This class contains method to query select data from the table Request.<br>
+ * There are Get all Request of the user in the database 
  *
- * @author Duong
+ * @author duongvvhe150773
  */
+
 public class RequestDAO extends MyDAO implements dao.RequestDAO{
     
     UserDAO userDAO = new UserDAO();
     User user  = new User();
     
+    
+    /**
+     * Get all Request of the user in the database
+     *
+     * @return a list <code>Request</code> object
+     */
     @Override
     public ArrayList<Request> getListByMe(User user) {
         ArrayList<Request> list = new ArrayList<>();

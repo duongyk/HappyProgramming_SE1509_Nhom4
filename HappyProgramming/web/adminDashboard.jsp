@@ -48,7 +48,10 @@
 
                 <div class="u-nav-container">
                     <ul class="u-custom-font u-nav u-spacing-30 u-text-font u-unstyled u-nav-1">
-                        
+                        <li class="u-nav-item"><a
+                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
+                                href="UserControllerMap?service=signOut" style="padding: 10px 36px;">Sign Out</a>
+                        </li>
                     </ul>
                 </div>
 

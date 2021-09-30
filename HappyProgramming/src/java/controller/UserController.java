@@ -94,7 +94,9 @@ public class UserController extends HttpServlet {
                 Integer role = Integer.parseInt(request.getParameter("role"));
                 if (!password.equals(repass)) {
                     // js: ko trung pass
-                    sendDispatcher(request, response, "Sign-up.jsp");
+                   
+              response.sendRedirect("Sign-up.jsp");
+
                 }
                 
                 User a = userDAO.checkAccount(userName);
@@ -114,8 +116,9 @@ public class UserController extends HttpServlet {
 
             }
 
-            if (service.equalsIgnoreCase("logout")) {
-
+            if (service.equalsIgnoreCase("signOut")) {
+                request.getSession().invalidate();
+                sendDispatcher(request, response, "index.jsp");
             }
 
 
