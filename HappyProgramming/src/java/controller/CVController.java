@@ -119,7 +119,7 @@ public class CVController extends HttpServlet {
                 
                 try {
                     dob = dateFormat.parse(request.getParameter("dob"));
-                    //System.out.println(request.getParameter("dob"));
+                    //System.out.println(dateFormat.format(dob));
                 } catch (ParseException ex) {
                     Logger.getLogger(CVController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -151,7 +151,7 @@ public class CVController extends HttpServlet {
                 
                 //       update user 
                 
-                User mentorInfo = new User(uid, "", "", fullname, mail, phone, dob, phone, "", 2);
+                User mentorInfo = new User(uid, "", "", fullname, mail, phone, dob, sex, "", 2);
                 
                 CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
           
@@ -179,6 +179,50 @@ public class CVController extends HttpServlet {
                 
                 
             }
+            
+            if(service.equals("createCV")) {
+                
+                int uid = Integer.parseInt(request.getParameter("uid"));
+                
+                request.setAttribute("uid", uid);
+                
+                SkillDAO skilldao = new SkillDAO();
+                ArrayList<Skill> allSkill = skilldao.getAllSkill();
+                request.setAttribute("allSkill", allSkill);
+                
+                RequestDispatcher rd = request.getRequestDispatcher("/createCV.jsp");
+                rd.forward(request, response);
+                
+            }
+            
+            if(service.equals("submitCreateForm")) {
+                
+                int uid = Integer.parseInt(request.getParameter("uid"));
+                
+                String achievement = request.getParameter("achievement");
+                //System.out.println("achievement "+achievement);
+                
+                String  profession = request.getParameter("profession");
+                //System.out.println("profession "+profession);
+                
+                String professionIntro = request.getParameter("professionIntro");
+                //System.out.println("professionIntro "+professionIntro);
+                
+                String serviceDescription = request.getParameter("serviceDescription");
+                //System.out.println("serviceDescription "+serviceDescription);
+                
+                String[] skill_id = request.getParameterValues("skills");
+                
+                CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
+                
+                cvdao.insertCV(uid, mentorCV);
+                
+                smdao.updateMentorSkill(uid, skill_id);
+                
+                response.sendRedirect("demoMentorList.jsp");
+                
+            }
+            
         }
     }
     

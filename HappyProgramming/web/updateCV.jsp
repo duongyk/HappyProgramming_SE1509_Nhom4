@@ -18,10 +18,13 @@
 <link rel="stylesheet" href="css/Update-CV.css" media="screen">
     <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="js/checkbox.js" defer=""></script>
+        
     <meta name="generator" content="Nicepage 3.25.0, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     
     
+    </script>
     
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
@@ -82,7 +85,7 @@
             <input type="hidden" name="uid" value="<c:out value="${mentorprofile.getId()}"></c:out>" readonly="readonly" />
             <div class="u-form-group u-form-group-1">
               <label for="text-891d" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="User name" id="text-891d" name="username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${mentorprofile.getUsername()}"></c:out>" required="required">
+              <input type="text" placeholder="User name" id="text-891d" name="username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${mentorprofile.getUsername()}"></c:out>" required="required" readonly="readonly">
             </div>
             <div class="u-form-group u-form-group-2">
               <label for="text-3911" class="u-form-control-hidden u-label"></label>
@@ -135,8 +138,10 @@
                 <label for="textarea-3873" class="u-form-control-hidden u-label"></label>
                 <textarea rows="4" cols="50" id="textarea-3873" name="achievement" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" placeholder="Achievement"><c:out value="${mentorcv.getAchivement()}"></c:out></textarea>
             </div>           
-            
-            <c:set var="count" value="11" scope="page" />
+            <div class="u-form-group u-form-textarea u-form-group-11">
+                <p>Skills:</p>
+            </div>
+            <c:set var="count" value="12" scope="page" />
             <c:forEach items="${allskill}" var="skill">
             <div class="u-form-checkbox u-form-group u-form-partition-factor-2 u-form-group-<c:out value="${count}"></c:out>">
 
@@ -163,8 +168,10 @@
             
           </form>
         </div>
-        <img class="u-image u-image-default u-preserve-proportions u-image-1" src="images/79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png" alt="" data-image-width="1280" data-image-height="1280">
-        <a href="https://nicepage.com/joomla-templates" class="u-border-2 u-border-black u-btn u-button-style u-hover-custom-color-3 u-none u-text-black u-text-hover-white u-btn-2">Change avatar</a>
+        <img id="avatar" class="u-image u-image-default u-preserve-proportions u-image-1" src="images/79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png" alt="" data-image-width="1280" data-image-height="1280">     
+        
+        <input type="file" name="avatar" value="" style="width: 162px;" class="u-border-2 u-border-black u-btn u-button-style u-hover-custom-color-3 u-none u-text-black u-text-hover-white u-btn-2 />
+                   
         <p class="u-text u-text-default u-text-2"> </p>
         <p class="u-text u-text-default u-text-2"> </p>    
       </div>
