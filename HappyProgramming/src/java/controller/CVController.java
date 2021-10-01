@@ -1,8 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
  */
+
 package controller;
 
 import dao.impl.CVDAO;
@@ -82,22 +86,8 @@ public class CVController extends HttpServlet {
                 rd.forward(request, response);
 
             }
-            
-            /*
-            if(service.equals("submitFormUpdate")) {
-                String[] skill_id_list = request.getParameterValues("skills");
-                
-                SkillDAO skilldao = new SkillDAO();
-                
-                for(String id: skill_id_list) {
-                    
-                    Skill skill = skilldao.getSkillById(id);
-                    
-                    out.println("<h3>"+skill.getsName()+"</h3>");
-                }
-            }
-            */
-            
+                   
+            // user press submit, system will update database
             if(service.equals("submitFormUpdate")) {
                 
                 // get information
@@ -179,7 +169,7 @@ public class CVController extends HttpServlet {
                 response.sendRedirect("demoMentorList.jsp");
             }
             
-            
+            // get all CV from database and show on jsp
             if(service.equals("viewCVSkill")) {
                 
                 int uid = Integer.parseInt(request.getParameter("uid"));
@@ -195,6 +185,7 @@ public class CVController extends HttpServlet {
                 
             }
             
+            // when user sign ưp as mentor, redirect to CV form
             if(service.equals("createCV")) {
                 
                 int uid = Integer.parseInt(request.getParameter("uid"));
@@ -210,6 +201,7 @@ public class CVController extends HttpServlet {
                 
             }
             
+            // when you submit create form, update to database
             if(service.equals("submitCreateForm")) {
                 
                 int uid = Integer.parseInt(request.getParameter("uid"));

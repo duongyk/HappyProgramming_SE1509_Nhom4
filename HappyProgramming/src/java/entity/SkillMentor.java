@@ -10,8 +10,15 @@ package entity;
  * @author Duong
  */
 public class SkillMentor {
-
+    
+    /**
+    * Id of (User)
+    */
     private int uId;
+    
+    /**
+    * Id of (Skill)
+    */
     private int sId;
 
     public SkillMentor() {

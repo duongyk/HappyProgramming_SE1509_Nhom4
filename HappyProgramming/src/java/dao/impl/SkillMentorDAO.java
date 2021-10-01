@@ -1,7 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
  */
 package dao.impl;
 
@@ -16,6 +19,12 @@ import java.util.ArrayList;
  */
 public class SkillMentorDAO extends MyDAO implements dao.SkillMentorDAO{
 
+    /**
+    * Get all Skill of the Mentor in the database
+    * 
+    * @param uid of the mentor
+    * @return list of all skills of the mentor
+    */
     @Override
     public ArrayList<Skill> getAll_Skill_Mentor(int uid) {
         ArrayList<Skill> skillList = new ArrayList<>();
@@ -46,7 +55,13 @@ public class SkillMentorDAO extends MyDAO implements dao.SkillMentorDAO{
         
         return skillList;
     }
-
+    
+    /**
+    * Get all ID of Skill of the Mentor in the database
+    * 
+    * @param uId of the mentor
+    * @return list of all id of all skills of the mentor
+    */
     @Override
     public ArrayList<String> getAll_Id_Skill_Mentor(int uId) {
         ArrayList<String> skill_Id_List = new ArrayList<>();
@@ -71,9 +86,16 @@ public class SkillMentorDAO extends MyDAO implements dao.SkillMentorDAO{
         
         return skill_Id_List;
     }
-
+    
+    /**
+    * Update new Skills for the Mentor in the database
+    * 
+    * @param uId of the mentor
+    * @param skill_ids list of id of new skills
+    * @return 1 if update success, 0 if fail
+    */
     @Override
-    public int updateMentorSkill(int uId, String[] skills) {
+    public int updateMentorSkill(int uId, String[] skill_ids) {
         
         int status = 0;
         
@@ -90,13 +112,12 @@ public class SkillMentorDAO extends MyDAO implements dao.SkillMentorDAO{
             String sql_insert = "insert into SkillMentor (uId,sId)"
                     + " values ("+uId+",?)";
             
-            for(String skill_id : skills) {
+            for(String skill_id : skill_ids) {
                 PreparedStatement ps2 = con.prepareStatement(sql_insert);
                 
                 ps2.setString(1, skill_id);
                 status = ps2.executeUpdate();
                 
-  //              System.out.println(skill_id);
             }
             
         } catch (Exception e) {

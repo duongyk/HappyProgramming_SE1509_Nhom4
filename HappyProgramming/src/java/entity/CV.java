@@ -1,39 +1,59 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        DuongVV          First Deploy<br>
  */
 package entity;
 
 /**
  *
- * @author Duong
+ * @author thangtvhe151307
+ * This class represents the CV table in database
  */
 public class CV {
-
-    private int uId;
+    
+    /**
+     * ID from (User)
+     */
+    private int id;
+    /**
+     * CV Profession
+     */
     private String profession;
+    /**
+     * CV professionIntro
+     */
     private String professionIntro;
+    /**
+     * CV serviceDescript
+     */
     private String serviceDescript;
+    /**
+     * CV achievement
+     */
     private String achivement;
 
     public CV() {
     }
 
-    public CV(int uId, String profession, String professionIntro, String serviceDescript, String achivement) {
-        this.uId = uId;
+    public CV(int id, String profession, String professionIntro, String serviceDescript, String achivement) {
+        this.id = id;
         this.profession = profession;
         this.professionIntro = professionIntro;
         this.serviceDescript = serviceDescript;
         this.achivement = achivement;
     }
 
-    public int getuId() {
-        return uId;
+    public int getId() {
+        return id;
     }
 
-    public void setuId(int uId) {
-        this.uId = uId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getProfession() {

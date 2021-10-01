@@ -1,7 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
  */
 package dao.impl;
 
@@ -14,10 +17,17 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Duong
+ * @author thangtvhe151307
+ * This class contains all methods to interact with CV table in the database
  */
 public class CVDAO extends MyDAO implements dao.CVDAO {
     
+    /**
+    * Get a particular CV in the database
+    * 
+    * @param uid of the mentor
+    * @return CV of that mentor
+    */
     @Override
     public CV getMentorCV(int uid) {
 
@@ -41,11 +51,18 @@ public class CVDAO extends MyDAO implements dao.CVDAO {
 
         return cv;
     }
-
+    
+    /**
+    * Create a new CV in the database
+    * 
+    * @param uid of the mentor
+    * @param newCV
+    * 
+    */
     @Override
     public void insertCV(int uid, CV newCV) {
         xSql = "insert into [CV] (uid, profession, professionIntro, serviceDescript, achievement)"
-                + " value (?, ?, ?, ?, ?) ";
+                + " values (?, ?, ?, ?, ?) ";
 
         try {
             ps = con.prepareStatement(xSql);
@@ -56,12 +73,19 @@ public class CVDAO extends MyDAO implements dao.CVDAO {
             ps.setString(4, newCV.getProfessionIntro());
             ps.setString(5, newCV.getAchivement());
 
-            rs = ps.executeQuery();
+            ps.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(CVDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+    * Update a particular CV in the database
+    * 
+    * @param uid of the mentor
+     * @param newCV from post data
+    * @return 1 if update success, 0 if fail
+    */
     @Override
     public int updateCV(int uid, CV newCV) {
         int status = 0;
@@ -90,7 +114,13 @@ public class CVDAO extends MyDAO implements dao.CVDAO {
         
         return status;
     }
-
+    
+    /**
+    * Get all CV in the database
+    * 
+    * 
+    * @return list of all CV
+    */
     @Override
     public ArrayList<CV> getAllMentorCV() {
         ArrayList<CV> cvList = new ArrayList<>();
@@ -104,7 +134,7 @@ public class CVDAO extends MyDAO implements dao.CVDAO {
             rs = ps.executeQuery();
             
             while (rs.next()) {
-                cv.setuId(rs.getInt("uId"));
+                cv.setId(rs.getInt("uId"));
                 cv.setProfession(rs.getString("profession"));
                 cv.setProfessionIntro(rs.getString("professionIntro"));
                 cv.setServiceDescript(rs.getString("serviceDescript"));
