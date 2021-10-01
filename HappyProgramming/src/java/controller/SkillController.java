@@ -53,7 +53,7 @@ public class SkillController extends HttpServlet {
                 User x = (User) request.getSession().getAttribute("currUser");
                 ArrayList<Skill> sList = skillDAO.getAllSkill();
                 request.setAttribute("sList", sList);
-                sendDispatcher(request, response, "All-skills.jsp");
+                sendDispatcher(request, response, "listAllSkills.jsp");
             }
             
             
@@ -61,7 +61,7 @@ public class SkillController extends HttpServlet {
             if (service.equalsIgnoreCase("searchSkill")) {
                 ArrayList<Skill> sList = skillDAO.getAllSkill();
                 request.setAttribute("sList", sList);
-                sendDispatcher(request, response, "All-skills.jsp");
+                sendDispatcher(request, response, "listAllSkills.jsp");
             }
             
             

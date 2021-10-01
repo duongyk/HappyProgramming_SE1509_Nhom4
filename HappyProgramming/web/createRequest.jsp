@@ -14,7 +14,7 @@
     ArrayList<User> mList = (ArrayList<User>) request.getAttribute("mList");
     ArrayList<Skill> sList = (ArrayList<Skill>) request.getAttribute("sList");
 %>
---%>>
+--%>
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="vi">
   <head>
