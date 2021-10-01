@@ -1,7 +1,11 @@
 <%-- 
-    Document   : createSkill
-    Created on : Sep 27, 2021, 9:59:25 AM
-    Author     : solov
+  Copyright (C) 2021, FPT University<br>
+  SWP391 - SE1509 - Group 4<br>
+  Happyprogramming<br>
+ 
+  Record of change:<br>
+  DATE          Version    Author           DESCRIPTION<br>
+
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

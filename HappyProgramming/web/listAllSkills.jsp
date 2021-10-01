@@ -1,7 +1,11 @@
 <%-- 
-    Document   : All-skills
-    Created on : Sep 26, 2021, 11:13:02 PM
-    Author     : Tung
+  Copyright (C) 2021, FPT University<br>
+  SWP391 - SE1509 - Group 4<br>
+  Happyprogramming<br>
+ 
+  Record of change:<br>
+  DATE          Version    Author           DESCRIPTION<br>
+
 --%>
 
 <%@page import="entity.User"%>

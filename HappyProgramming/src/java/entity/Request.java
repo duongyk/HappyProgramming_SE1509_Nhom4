@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ *              1.0                          First Deploy<br>
  */
 package entity;
 
@@ -9,7 +13,9 @@ import java.sql.Date;
 
 /**
  *
- * @author Duong
+ * This class represents the Request table in database
+ *
+ * @author 
  */
 public class Request {
     
@@ -69,9 +75,9 @@ public class Request {
      * @param id it is a int number
      * @param title it is a <code>java.lang.String</code>
      * @param content it is a <code>java.lang.String</code>
-     * @param from it is a <code>User</code>
-     * @param to it is a <code>User</code>
-     * @param date it is a <code>java.sql.Timestamp</code>
+     * @param from it is a <code>User</code> object
+     * @param to it is a <code>User</code> object
+     * @param deadlineDate it is a <code>java.sql.Date</code>
      * @param status it is a <code>java.lang.String</code>
      */
     public Request(int id, String title, String content, User from, User to, Date deadlineDate, String status) {
@@ -88,9 +94,9 @@ public class Request {
      * Constructor.<br>
      *
      * @param title it is a <code>java.lang.String</code>
-     * @param from it is a <code>User</code>
-     * @param to it is a <code>User</code>
-     * @param date it is a <code>java.sql.Timestamp</code>
+     * @param from it is a <code>User</code> object
+     * @param to it is a <code>User</code> object
+     * @param deadlineDate it is a <code>java.sql.Date</code>
      * @param status it is a <code>java.lang.String</code>
      */
     public Request(String title, User from, User to, Date deadlineDate, String status) {
@@ -106,8 +112,8 @@ public class Request {
      *
      * @param title it is a <code>java.lang.String</code>
      * @param content it is a <code>java.lang.String</code>
-     * @param to it is a <code>User</code>
-     * @param status it is a <code>java.lang.String</code>
+     * @param to it is a <code>User</code> object
+     * @param deadlineDate it is a <code>java.sql.Date</code>
      */
     public Request(String title, String content, User to, Date deadlineDate) {
         this.title = title;
@@ -123,7 +129,7 @@ public class Request {
      * @param content it is a <code>java.lang.String</code>
      * @param from it is a <code>User</code>
      * @param to it is a <code>User</code>
-     * @param date it is a <code>java.sql.Timestamp</code>
+     * @param deadlineDate it is a <code>java.sql.Date</code>
      */
     public Request(String title, String content, User from, User to, Date deadlineDate) {
         this.title = title;
@@ -134,7 +140,7 @@ public class Request {
     }
     
     /**
-     * Get value from attribute of Skill class. <br>
+     * Get value from Id attribute of Skill class. <br>
      *
      * @return id it is a int number
      */
@@ -143,7 +149,7 @@ public class Request {
     }
 
     /**
-     * Get value from attribute of Skill class. <br>
+     * Get value from Title attribute of Skill class. <br>
      *
      * @return title it is a <code>java.lang.String</code>
      */
@@ -152,7 +158,7 @@ public class Request {
     }
     
     /**
-     * Get value from attribute of Skill class. <br>
+     * Get value from Content attribute of Skill class. <br>
      *
      * @return content it is a <code>java.lang.String</code>
      */
@@ -161,7 +167,7 @@ public class Request {
     }
 
     /**
-     * Get value from attribute of Rating class. <br>
+     * Get value from From attribute of Rating class. <br>
      *
      * @return from it is a <code>User</code> object
      */
@@ -170,7 +176,7 @@ public class Request {
     }
 
     /**
-     * Get value from attribute of Rating class. <br>
+     * Get value from To attribute of Rating class. <br>
      *
      * @return to it is a <code>User</code> object
      */
@@ -179,16 +185,16 @@ public class Request {
     }
 
     /**
-     * Get value from date attribute of Rating class. <br>
+     * Get value from Date attribute of Rating class. <br>
      *
-     * @return deadlineDate it is a <code>java.sql.Timestamp</code>
+     * @return deadlineDate it is a <code>java.sql.Date</code>
      */
     public Date getDeadlineDate() {
         return deadlineDate;
     }
 
     /**
-     * Get value from attribute of Rating class. <br>
+     * Get value from Status attribute of Rating class. <br>
      *
      * @return status it is a <code>User</code> object
      */
@@ -197,63 +203,63 @@ public class Request {
     }
 
     /**
-     * Set value from attribute of Skill class. <br>
+     * Set value to Id attribute of Skill class. <br>
      *
-     * @return id it is a int number
+     * @param id it is an int number
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * Set value from attribute of Skill class. <br>
+     * Set value to Title attribute of Skill class. <br>
      *
-     * @return title it is a <code>java.lang.String</code>
+     * @param title it is a <code>java.lang.String</code>
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     * Set value from attribute of Skill class. <br>
+     * Set value to Content attribute of Skill class. <br>
      *
-     * @return content it is a <code>java.lang.String</code>
+     * @param content it is a <code>java.lang.String</code>
      */
     public void setContent(String content) {
         this.content = content;
     }
 
     /**
-     * Set value from attribute of Rating class. <br>
+     * Set value to From attribute of Rating class. <br>
      *
-     * @return from it is a <code>User</code> object
+     * @param from it is a <code>User</code> object
      */
     public void setFrom(User from) {
         this.from = from;
     }
 
     /**
-     * Set value from attribute of Rating class. <br>
+     * Set value to To attribute of Rating class. <br>
      *
-     * @return to it is a <code>User</code> object
+     * @param to it is a <code>User</code> object
      */
     public void setTo(User to) {
         this.to = to;
     }
 
     /**
-     * Get value from date attribute of Rating class. <br>
+     * Set value to Date attribute of Rating class. <br>
      *
-     * @return deadlineDate it is a <code>java.sql.Timestamp</code>
+     * @param deadlineDate it is a <code>java.sql.Date</code>
      */
     public void setDeadlineDate(Date deadlineDate) {
         this.deadlineDate = deadlineDate;
     }
 
     /**
-     * Get value from attribute of Rating class. <br>
+     * Set value to Status attribute of Rating class. <br>
      *
-     * @return status it is a <code>User</code> object
+     * @param status it is a <code>java.lang.String</code>
      */
     public void setStatus(String status) {
         this.status = status;

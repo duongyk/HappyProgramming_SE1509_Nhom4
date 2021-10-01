@@ -5,7 +5,7 @@
  *
  * Record of change:<br>
  * DATE          Version    Author           DESCRIPTION<br>
- * 20-09-2021    1.0        DuongVV          First Deploy<br>
+ *               1.0                         First Deploy<br>
  */
 package entity;
 

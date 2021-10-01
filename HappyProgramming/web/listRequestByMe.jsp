@@ -1,3 +1,12 @@
+<%-- 
+  Copyright (C) 2021, FPT University<br>
+  SWP391 - SE1509 - Group 4<br>
+  Happyprogramming<br>
+ 
+  Record of change:<br>
+  DATE          Version    Author           DESCRIPTION<br>
+
+--%>
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -66,10 +75,13 @@
             <a href="RequestControllerMap?service=loadRequest" class="u-border-none u-btn u-button-style u-custom-color-4 u-btn-2">Create request</a>
             <%-- Request display --%>
             <div class="u-expanded-width u-list u-list-1">
+                <%-- Check if user have request or not --%>
                 <c:choose>
+                    <%-- User have no request --%>
                     <c:when test="${empty listRequest}">
                         <h1>  No Request yet! </h1>
                     </c:when>
+                    <%-- User have request --%>
                     <c:otherwise>
                         <div class="u-repeater u-repeater-1">
                             <c:forEach items="${listRequest}" var="request">

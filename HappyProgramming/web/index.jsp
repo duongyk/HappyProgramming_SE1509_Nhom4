@@ -1,4 +1,12 @@
+<%-- 
+  Copyright (C) 2021, FPT University<br>
+  SWP391 - SE1509 - Group 4<br>
+  Happyprogramming<br>
+ 
+  Record of change:<br>
+  DATE          Version    Author           DESCRIPTION<br>
 
+--%>
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>

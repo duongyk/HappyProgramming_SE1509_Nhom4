@@ -1,7 +1,11 @@
 <%-- 
-    Document   : Create-Request
-    Created on : Sep 27, 2021, 10:22:27 AM
-    Author     : Tung
+  Copyright (C) 2021, FPT University<br>
+  SWP391 - SE1509 - Group 4<br>
+  Happyprogramming<br>
+ 
+  Record of change:<br>
+  DATE          Version    Author           DESCRIPTION<br>
+
 --%>
 
 <%@page import="entity.Skill"%>

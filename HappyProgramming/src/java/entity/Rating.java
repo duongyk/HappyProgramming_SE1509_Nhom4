@@ -84,7 +84,7 @@ public class Rating {
     }
 
     /**
-     * Get value from attribute of Rating class. <br>
+     * Get value from From attribute of Rating class. <br>
      *
      * @return from it is a <code>User</code> object
      */
@@ -93,7 +93,7 @@ public class Rating {
     }
 
     /**
-     * Set value from attribute of Rating class. <br>
+     * Set value to From attribute of Rating class. <br>
      *
      * @param from it is a <code>User</code> object
      */
@@ -102,7 +102,7 @@ public class Rating {
     }
 
     /**
-     * Get value from to attribute of Rating class. <br>
+     * Get value from To attribute of Rating class. <br>
      *
      * @return to it is a <code>User</code> object
      */
@@ -111,7 +111,7 @@ public class Rating {
     }
 
     /**
-     * Set value to attribute of Rating class. <br>
+     * Set value to To attribute of Rating class. <br>
      *
      * @param to it is a <code>User</code> object
      */
@@ -120,7 +120,7 @@ public class Rating {
     }
 
     /**
-     * Get value from comment attribute of Rating class. <br>
+     * Get value from Comment attribute of Rating class. <br>
      *
      * @return comment it is a <code>java.lang.String</code>
      */
@@ -129,7 +129,7 @@ public class Rating {
     }
 
     /**
-     * Set value to comment attribute of Rating class. <br>
+     * Set value to Comment attribute of Rating class. <br>
      *
      * @param comment it is a <code>java.lang.String</code>
      */

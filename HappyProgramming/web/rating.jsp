@@ -1,4 +1,12 @@
+<%-- 
+  Copyright (C) 2021, FPT University<br>
+  SWP391 - SE1509 - Group 4<br>
+  Happyprogramming<br>
+ 
+  Record of change:<br>
+  DATE          Version    Author           DESCRIPTION<br>
 
+--%>
 
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -80,11 +88,14 @@
             <%-- Rating&comment display --%>
             <div class="u-container-layout u-container-layout-1">
                 <ol class="u-text u-text-2">
+                    <%-- Check if Mentor have rating or not --%>
                     <c:choose>
+                        <%-- Mentor have no rating --%>
                         <c:when test="${empty listRating}">
                             <p class="no-cmt">  No comment yet! 
                                 <br>
                             </c:when>
+                            <%-- Mentor have ratings --%>
                             <c:otherwise>
                                 <c:forEach items="${listRating}" var="rating">
                                     <span class="mentee-name">${rating.from.fullname}:  
@@ -105,10 +116,7 @@
                 <%-- Check current User to allow create new rating --%>
                 <c:if test=" ${sessionScope.currUser!=null}">
                     <div class="u-expanded-width u-palette-5-base u-shape u-shape-rectangle u-shape-1"></div>
-
                     <div class="u-form u-form-1">
-
-
                         <form action="RatingControllerMap" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-5 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;" redirect="true">
                             <input type="hidden" name="mId" value="${mId}">
                             <div class="u-form-group u-form-name">
