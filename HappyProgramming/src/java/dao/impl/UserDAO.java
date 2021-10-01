@@ -5,6 +5,7 @@
  *
  * Record of change:<br>
  * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0                         First Deploy<br>
  */
 package dao.impl;
 
@@ -15,9 +16,13 @@ import java.util.ArrayList;
 import java.sql.Date;
 
 /**
+ * This class implements from class interface UserDAO. <br>
+ * This class contains method to query select data from the table Rating.<br>
+ * There are 
  *
- * @author Duong
+ * @author 
  */
+
 public class UserDAO extends MyDAO implements dao.UserDAO {
 
     @Override

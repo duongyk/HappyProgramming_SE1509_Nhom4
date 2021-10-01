@@ -1,8 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : Sep 27, 2021, 8:58:39 PM
-    Author     : solov
---%>
 
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

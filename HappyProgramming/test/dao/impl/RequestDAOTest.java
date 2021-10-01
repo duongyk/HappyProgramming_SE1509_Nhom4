@@ -1,17 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * Copyright (C) 2021, FPT University<br>
  * SWP391 - SE1509 - Group 4<br>
  * Happyprogramming<br>
  *
  * Record of change:<br>
  * DATE          Version    Author           DESCRIPTION<br>
- * 01-10-2021    1.0        TungDT          First Deploy<br>
+ * 01-10-2021    1.0                         First Deploy<br>
  */
 package dao.impl;
 
@@ -56,13 +50,11 @@ public class RequestDAOTest {
     @Test
     public void testGetListByMe() {
         System.out.println("getListByMe");
-        User user = null;
+        User user = new User(1);
         RequestDAO instance = new RequestDAO();
-        ArrayList<Request> expResult = null;
+        int expResult = 4;
         ArrayList<Request> result = instance.getListByMe(user);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expResult, result.size());
     }
 
     /**
@@ -76,7 +68,6 @@ public class RequestDAOTest {
         int expResult = 0;
         int result = instance.createRequest(req);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
         
     }
     

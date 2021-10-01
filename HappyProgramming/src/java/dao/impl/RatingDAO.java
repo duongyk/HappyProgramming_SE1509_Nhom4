@@ -19,7 +19,8 @@ import java.util.ArrayList;
  * This class implements from class interface RatingDAO. <br>
  * This class contains method to query select data from the table Rating.<br>
  * There are Get all Rating of the user in the database, Insert new Rating into 
- * the database, Get average rating of the Mentor
+ * the database, Get average rating of the Mentor, Check if Mentee has rated and
+ * commented on Mentor or not
  *
  * @author duongvvhe150773
  */
@@ -114,17 +115,6 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
         String avg = String.format("%.2f", (double)sum/listRating.size());
         return avg;
     }
-//    
-//        public static void main(String[] args) {
-//        RatingDAO r = new RatingDAO();
-//        UserDAO u = new UserDAO();
-//        User x= u.getUserById(7);
-//        ArrayList<Rating> a = r.getRating(x);
-//            System.out.println(x.getFullname());
-//        for (Rating rate: a){
-//            System.out.println(rate.getComment());
-//        }
-//    }
 
     /**
      * Get average rating of the Mentor

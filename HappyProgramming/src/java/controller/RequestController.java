@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0                         First Deploy<br>
  */
 package controller;
 
@@ -53,9 +57,14 @@ public class RequestController extends HttpServlet {
             if (service == null) {
                 service = "";
             }
+            
+            // Get list request of the user (Mentee/mentor)
             if (service.equalsIgnoreCase("listRequestByMe")) {
+                //get current user
                 User user = (User) request.getSession().getAttribute("currUser");
+                //get list request of the user
                 ArrayList<Request> listRequest = requestDAO.getListByMe(user);
+                
                 request.setAttribute("listRequest", listRequest);
                 sendDispatcher(request, response, "listRequestByMe.jsp");
             }

@@ -6,14 +6,12 @@
 package dao.impl;
 
 import context.MyDAO;
-import entity.Skill;
-import java.util.ArrayList;
-
 /**
  *
  * @author Duong
  */
-public class RequestSkillDAO extends MyDAO implements dao.RequestSkillDAO{
+public class RequestSkillDAO extends MyDAO implements dao.RequestSkillDAO {
+
     @Override
     public int getRequestMaxId() {
         int n = 0;
@@ -23,19 +21,19 @@ public class RequestSkillDAO extends MyDAO implements dao.RequestSkillDAO{
             rs = ps.executeQuery();
             rs.next();
             n = rs.getInt(1);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return n;
     }
-    
+
     @Override
     public int skillRequest(int sId) {
         int n = 0;
         RequestSkillDAO dao = new RequestSkillDAO();
         int maxId = dao.getRequestMaxId();
-        xSql = "insert into [RequestSkill](rId,[sId]) values ("+ maxId +" ,"+ sId +")";
+        xSql = "INSERT INTO [RequestSkill](rId,[sId]) VALUES (" + maxId + " ," + sId + ")";
         try {
             ps = con.prepareStatement(xSql);
             n = ps.executeUpdate();
