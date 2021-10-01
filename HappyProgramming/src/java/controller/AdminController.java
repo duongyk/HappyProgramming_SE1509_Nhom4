@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        GiangNVT          First Deploy<br>
  */
 package controller;
 
@@ -18,6 +22,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Process:<br>
+ * - Create new skill (admin)<br>
+ * - Skill Management<br>
+ *
+ * Exception:<br>
+ *
+ *
+ * @author giangnvthe150748
+ */
 
 public class AdminController extends HttpServlet {
 
@@ -25,10 +39,11 @@ public class AdminController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param request it is a object of
+     * <code>javax.servlet.http.HttpServletRequest</code>
+     * @param response it is a object of
+     * <code>javax.servlet.http.HttpServletResponse</code>
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     SkillDAO skillDAO = new SkillDAO();
 
@@ -37,16 +52,17 @@ public class AdminController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String service = request.getParameter("service");
-            
+            // Set default service
             if (service == null) {
 
             }
+            //direct user to create skill page
             if (service.equalsIgnoreCase("createSkill")) {
                 sendDispatcher(request, response, "createSkill.jsp");
             }
-
+             //admin manage skills
             if (service.equalsIgnoreCase("skillManage")) {
-
+                //list all skills that have in database
                 ArrayList<Skill> sList = skillDAO.getAllSkill();
                 request.setAttribute("sList", sList);
                 sendDispatcher(request, response, "skillManagement.jsp");

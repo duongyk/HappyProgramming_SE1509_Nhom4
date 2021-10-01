@@ -13,8 +13,14 @@ import java.util.ArrayList;
  * @author Duong
  */
 public interface SkillDAO {
+
     public ArrayList<Skill> getAllSkill();
+
     public ArrayList<Skill> getSkillByName(String sName);
-    
+
     public Skill getSkillById(String sId);
+
+    public boolean findDupSkill(String sName);
+
+    public void insert(Skill x);
 }

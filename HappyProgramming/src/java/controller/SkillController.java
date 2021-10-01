@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        GiangNVT          First Deploy<br>
  */
 package controller;
 
@@ -21,8 +25,14 @@ import entity.User;
 import java.util.ArrayList;
 
 /**
+ * Process:<br>
+ * - List all skill<br>
+ * - Create skill<br>
+ * - Search for skill by name <br>
+ * Exception:<br>
  *
- * @author Duong
+ *
+ * @author giangnvthe150748
  */
 public class SkillController extends HttpServlet {
 
@@ -36,11 +46,11 @@ public class SkillController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     SkillDAO skillDAO = new SkillDAO();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) { 
+        try (PrintWriter out = response.getWriter()) {
             String service = request.getParameter("service");
             if (service == null) {
                 service = "a";
@@ -48,32 +58,34 @@ public class SkillController extends HttpServlet {
             if (service.equalsIgnoreCase("a")) {
                 sendDispatcher(request, response, "login.jsp");
             }
-             /* view list of all skill */
+            /* view list of all skill */
             if (service.equalsIgnoreCase("allSkill")) {
                 User x = (User) request.getSession().getAttribute("currUser");
                 ArrayList<Skill> sList = skillDAO.getAllSkill();
                 request.setAttribute("sList", sList);
                 sendDispatcher(request, response, "listAllSkills.jsp");
             }
-            
-            
+
             /* search for skill by name */
             if (service.equalsIgnoreCase("searchSkill")) {
                 ArrayList<Skill> sList = skillDAO.getAllSkill();
                 request.setAttribute("sList", sList);
                 sendDispatcher(request, response, "listAllSkills.jsp");
             }
-            
-            
+
+            /* admin create new skill */
             if (service.equalsIgnoreCase("createSkill")) {
+                //get infor of the skill from Input form
                 String sName = request.getParameter("sName");
                 String sDetail = request.getParameter("sDetail");
                 String sImage = request.getParameter("sImage");
+                //check duplicate skill in db
                 if (skillDAO.findDupSkill(sName)) {
                     String mess = "Skill existed!";
                     request.setAttribute("mess", mess);
                     sendDispatcher(request, response, "createSkill.jsp");
                 } else {
+                    //insert new skill into db
                     skillDAO.insert(new Skill(sName, sDetail, sImage));
                     sendDispatcher(request, response, "AdminControllerMap?service=skillManage");
                 }
