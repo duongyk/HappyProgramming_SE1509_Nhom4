@@ -80,13 +80,13 @@ public class RequestController extends HttpServlet {
                 User toId = userDao.getUserById(to);
                 
                 String deadline = request.getParameter("deadlineDate");
-                Date deadlineDate = Date.valueOf(deadline); //bug
+                Date deadlineDate = Date.valueOf(deadline);
                 
                 Request req = new Request(title, content, x, toId, deadlineDate);
                 requestDAO.createRequest(req);
                 
                 String arr[] = request.getParameterValues("skill");
-                for (String str : arr) {
+                for (String str : arr) {  //insert into arr[] checked values
                     requestSkillDAO.skillRequest(Integer.parseInt(str));
                 }
                 

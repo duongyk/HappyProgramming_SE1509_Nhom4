@@ -34,7 +34,9 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
         ArrayList<Skill> list = new ArrayList<>();
         xSql = "select * from [Skill]";
         int id;
-        String name, detail, image;
+        String name;
+        String detail;
+        String image;
         Skill s;
         try {
             ps = con.prepareStatement(xSql);
@@ -60,7 +62,9 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
         ArrayList<Skill> list = new ArrayList<>();
         xSql = "select * from [Skill] where sName like '% " + sName + "%'";
         int id;
-        String name, detail, image;
+        String name;
+        String detail;
+        String image;
         Skill s;
         try {
             ps = con.prepareStatement(xSql);

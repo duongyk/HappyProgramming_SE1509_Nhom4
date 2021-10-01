@@ -43,7 +43,9 @@ public class RequestDAO extends MyDAO implements dao.RequestDAO{
             rs = ps.executeQuery();
             Request x;
             int xId;
-            String xTitle, xContent, xStatus;
+            String xTitle;
+            String xContent;
+            String xStatus;
             int xMentor;
             Date dlDate;
 
