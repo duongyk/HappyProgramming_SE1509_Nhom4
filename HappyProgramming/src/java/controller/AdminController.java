@@ -52,9 +52,10 @@ public class AdminController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String service = request.getParameter("service");
+            
             // Set default service
             if (service == null) {
-
+                service="";
             }
             //direct user to create skill page
             if (service.equalsIgnoreCase("createSkill")) {

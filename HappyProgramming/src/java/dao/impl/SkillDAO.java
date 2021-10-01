@@ -60,7 +60,7 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
     @Override
     public ArrayList<Skill> getSkillByName(String sName) {
         ArrayList<Skill> list = new ArrayList<>();
-        xSql = "select * from [Skill] where sName like '% " + sName + "%'";
+        xSql = "select * from [Skill] where sName like '%" + sName + "%'";
         int id;
         String name;
         String detail;

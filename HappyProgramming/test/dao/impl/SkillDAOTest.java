@@ -59,7 +59,6 @@ public class SkillDAOTest {
         ArrayList<Skill> expResult = instance.getAllSkill();
         ArrayList<Skill> result = instance.getAllSkill();
         assertEquals(expResult.size(), result.size());
-        // TODO review the generated test code and remove the default call to fail.
         
     }
 
@@ -69,13 +68,11 @@ public class SkillDAOTest {
     @Test
     public void testGetSkillByName() {
         System.out.println("getSkillByName");
-        String sName = "";
+        String sName = "c";
         SkillDAO instance = new SkillDAO();
-        ArrayList<Skill> expResult = null;
+        int expResult = 3;
         ArrayList<Skill> result = instance.getSkillByName(sName);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expResult, result.size());
     }
 
     /**
@@ -89,8 +86,6 @@ public class SkillDAOTest {
         Skill expResult = null;
         Skill result = instance.getSkillById(sId);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -112,13 +107,11 @@ public class SkillDAOTest {
     @Test
     public void testFindDupSkill() {
         System.out.println("findDupSkill");
-        String sName = "";
+        String sName = "Java";
         SkillDAO instance = new SkillDAO();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.findDupSkill(sName);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
