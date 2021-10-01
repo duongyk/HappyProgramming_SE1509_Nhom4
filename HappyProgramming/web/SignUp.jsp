@@ -88,7 +88,7 @@
                         </div>
                         <div class="u-form-group u-form-phone u-form-group-6">
                             <label for="text-47b9" class="u-form-control-hidden u-label"></label>
-                            <input type="tel" placeholder="phone" id="text-47b9" name="phone"pattern="^[^\s]+(\s+[^\s]+)*$" title="Must not contain only spaces, must not start or end by a space " class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required="required">
+                            <input type="tel" placeholder="phone" id="text-47b9" name="phone"pattern="^[0-9]{10}$" title="Must not contain only spaces, must not start or end by a space " class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required="required">
                         </div>
                         <div class="u-form-group u-form-select u-form-group-8">
                             <label for="select-6004" class="u-label">Sex</label>
