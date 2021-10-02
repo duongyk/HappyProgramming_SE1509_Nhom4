@@ -5,7 +5,7 @@
  
   Record of change:<br>
   DATE          Version    Author           DESCRIPTION<br>
-
+                           Giang
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
