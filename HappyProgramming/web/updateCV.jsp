@@ -111,7 +111,7 @@
             </div>
             <div class="u-form-group u-form-group-5">
               <label for="text-b9a0" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="Mail" id="text-b9a0" name="mail" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${mentorprofile.getMail()}"></c:out>" required="required">
+              <input type="email" placeholder="Mail" id="text-b9a0" name="mail" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${mentorprofile.getMail()}"></c:out>" required="required">
             </div>
             <div class="u-form-group u-form-group-6">
                 <label for="text-0855" class="u-form-control-hidden u-label"></label>

@@ -48,6 +48,15 @@ public class CV {
         this.achivement = achivement;
     }
 
+    public CV(String profession, String professionIntro, String serviceDescript, String achivement) {
+        this.profession = profession;
+        this.professionIntro = professionIntro;
+        this.serviceDescript = serviceDescript;
+        this.achivement = achivement;
+    }
+
+    
+    
     public int getId() {
         return id;
     }

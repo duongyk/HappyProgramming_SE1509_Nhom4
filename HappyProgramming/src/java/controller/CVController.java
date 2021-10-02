@@ -18,12 +18,9 @@ import entity.Skill;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -166,7 +163,7 @@ public class CVController extends HttpServlet {
                 
                 // ----------------------------------------
                 
-                response.sendRedirect("demoMentorList.jsp");
+                response.sendRedirect("index.jsp");
             }
             
             // get all CV from database and show on jsp

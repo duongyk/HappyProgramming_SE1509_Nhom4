@@ -39,6 +39,7 @@ public class CVDAO extends MyDAO implements dao.CVDAO {
             ps = con.prepareStatement(xSql);
             rs = ps.executeQuery();
             if (rs.next()) {
+                cv.setId(rs.getInt("uId"));
                 cv.setProfession(rs.getString("profession"));
                 cv.setProfessionIntro(rs.getString("professionIntro"));
                 cv.setServiceDescript(rs.getString("serviceDescript"));
@@ -74,6 +75,8 @@ public class CVDAO extends MyDAO implements dao.CVDAO {
             ps.setString(5, newCV.getAchivement());
 
             ps.executeQuery();
+            ps.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(CVDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -88,7 +91,7 @@ public class CVDAO extends MyDAO implements dao.CVDAO {
     */
     @Override
     public int updateCV(int uid, CV newCV) {
-        int status = 0;
+        int status = 0 ;
         
         xSql = "update [CV]"
                 + " set profession=?"
