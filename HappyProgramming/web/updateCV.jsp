@@ -77,25 +77,25 @@
         <h4 class="u-text u-text-default u-text-1">UPDATE CV</h4>
         <div class="u-form u-form-1">
           <form id="thisform" action="CVControllerMap?service=submitFormUpdate" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-9 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;" redirect="true">
-            <input type="hidden" name="uid" value="<c:out value="${mentorprofile.getId()}"></c:out>" readonly="readonly" />
+            <input type="hidden" name="uid" value="<c:out value="${currUser.getId()}"></c:out>" readonly="readonly" />
             <div class="u-form-group u-form-group-1">
               <label for="text-891d" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="User name" id="text-891d" name="username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${mentorprofile.getUsername()}"></c:out>" required="required" readonly="readonly">
+              <input type="text" placeholder="User name" id="text-891d" name="username" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${currUser.getUsername()}"></c:out>" required="required" readonly="readonly">
             </div>
             <div class="u-form-group u-form-group-2">
               <label for="text-3911" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="Fullname" id="text-3911" name="fullname" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${mentorprofile.getFullname()}"></c:out>" required="required">
+              <input type="text" placeholder="Fullname" id="text-3911" name="fullname" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${currUser.getFullname()}"></c:out>" required="required">
             </div>
             <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-3">
               <label for="text-13e0" class="u-label">Date of birth</label>
-              <input type="date" id="text-13e0" name="dob" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${mentorprofile.getDob()}"></c:out>">
+              <input type="date" id="text-13e0" name="dob" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${currUser.getDob()}"></c:out>">
             </div>
             <div class="u-form-group u-form-partition-factor-2 u-form-select u-form-group-4">
               <label for="select-6004" class="u-label">Sex</label>
               <div class="u-form-select-wrapper">
                 <select id="select-6004" name="sex" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                 <c:choose>
-                    <c:when test="${mentorprofile.getGender() eq \"Male\" }" >
+                    <c:when test="${currUser.getGender() eq \"Male\" }" >
                       <option value="Male" selected>Male</option>
                       <option value="Female" >Female</option>
                     </c:when>                    
@@ -111,11 +111,11 @@
             </div>
             <div class="u-form-group u-form-group-5">
               <label for="text-b9a0" class="u-form-control-hidden u-label"></label>
-              <input type="email" placeholder="Mail" id="text-b9a0" name="mail" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${mentorprofile.getMail()}"></c:out>" required="required">
+              <input type="text" placeholder="Mail" id="text-b9a0" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${currUser.getMail()}"></c:out>" required="required">
             </div>
             <div class="u-form-group u-form-group-6">
                 <label for="text-0855" class="u-form-control-hidden u-label"></label>
-                <input type="text" placeholder="Phone" id="text-0855" name="phone" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" value="<c:out value="${mentorprofile.getPhone()}"></c:out>">
+                <input type="tel" placeholder="Phone" pattern="[0-9]{9,11}" title="phone with 9 to 11 number" id="text-0855" name="phone" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" value="<c:out value="${currUser.getPhone()}"></c:out>">
             </div>
             <div class="u-form-group u-form-group-7">
                 <label for="text-1c7c" class="u-form-control-hidden u-label"></label>
@@ -163,7 +163,7 @@
             
           </form>
         </div>
-            <img id="image" class="u-image u-image-default u-preserve-proportions u-image-1" src="images/<c:out value="${mentorprofile.getAvatar()}"></c:out>" alt="" data-image-width="1280" data-image-height="1280">     
+            <img id="image" class="u-image u-image-default u-preserve-proportions u-image-1" src="images/<c:out value="${currUser.getAvatar()}"></c:out>" alt="" data-image-width="1280" data-image-height="1280">     
         
         <input id="avatarURL" form="thisform" onchange="changeImage()" type="file" name="avatar" value="" style="width: 162px;" class="u-border-2 u-border-black u-btn u-button-style u-hover-custom-color-3 u-none u-text-black u-text-hover-white u-btn-2 />
                    

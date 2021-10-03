@@ -4,6 +4,10 @@
     Author     : Duong
 --%>
 
+<%@page import="entity.User"%>
+
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,8 +22,17 @@
         <p>${user.phone}
         <p>${user.dob}
         <p>${user.gender}
-        <p>${user.avatar}
-        <a href="${"UserControllerMap?service=updateProfile&uId="}${user.id}">Update Profile</a><br>
+        
+
+        <c:choose>
+            <c:when test="${user.id==1}">               
+              <a href="${"UserControllerMap?service=updateProfile&uId="}${user.id}">Update Profile</a><br>
+            </c:when>
+              <c:otherwise>            
+              <img src="images/${user.avatar}" style="width: 162px;"/>
+              <a href="${"CVControllerMap?service=updateCV&uid="}${user.id}">Update CV</a><br>
+            </c:otherwise>
+        </c:choose>
         <a href="UserControllerMap?service=signOut">Sign Out</a>
     </body>
 </html>
