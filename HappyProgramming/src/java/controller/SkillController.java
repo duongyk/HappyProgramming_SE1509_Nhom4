@@ -9,6 +9,7 @@
  */
 package controller;
 
+import dao.SkillDAO;
 import entity.Skill;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,15 +45,18 @@ public class SkillController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    SkillDAOImpl skillDAO = new SkillDAOImpl();
+    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String service = request.getParameter("service");
+            
+            SkillDAO skillDAO = new SkillDAOImpl();
+            
             if (service == null) {
-                service = "a";
+                service = "";
             }
             if (service.equalsIgnoreCase("a")) {
                 sendDispatcher(request, response, "login.jsp");

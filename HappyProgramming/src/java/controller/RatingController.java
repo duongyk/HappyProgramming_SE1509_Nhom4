@@ -9,6 +9,9 @@
  */
 package controller;
 
+import dao.RatingDAO;
+import dao.RequestDAO;
+import dao.UserDAO;
 import dao.impl.RatingDAOImpl;
 import dao.impl.RequestDAOImpl;
 import dao.impl.UserDAOImpl;
@@ -48,11 +51,12 @@ public class RatingController extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
+            
             String service = request.getParameter("service");
-            UserDAOImpl userDAO = new UserDAOImpl();
-            RatingDAOImpl ratingDAO = new RatingDAOImpl();
-            RequestDAOImpl requestDAO = new RequestDAOImpl();
+            
+            UserDAO userDAO = new UserDAOImpl();
+            RatingDAO ratingDAO = new RatingDAOImpl();
+            RequestDAO requestDAO = new RequestDAOImpl();
 
             // Set default service
             if (service == null) {

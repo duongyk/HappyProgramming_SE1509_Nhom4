@@ -9,6 +9,9 @@
 
 package controller;
 
+import dao.CVDAO;
+import dao.SkillMentorDAO;
+import dao.UserDAO;
 import dao.impl.CVDAOImpl;
 import dao.impl.SkillDAOImpl;
 import dao.impl.SkillMentorDAOImpl;
@@ -50,12 +53,12 @@ public class CVController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             String service = request.getParameter("service");
             
-            CVDAOImpl cvdao = new CVDAOImpl();
-            UserDAOImpl userdao = new UserDAOImpl();
-            SkillMentorDAOImpl smdao = new SkillMentorDAOImpl();
+            CVDAO cvdao = new CVDAOImpl();
+            UserDAO userdao = new UserDAOImpl();
+            SkillMentorDAO smdao = new SkillMentorDAOImpl();
             
             HttpSession session = request.getSession();
             

@@ -9,6 +9,10 @@
  */
 package controller;
 
+import dao.RequestDAO;
+import dao.RequestSkillDAO;
+import dao.SkillDAO;
+import dao.UserDAO;
 import entity.Request;
 import entity.User;
 import java.io.IOException;
@@ -47,40 +51,41 @@ public class RequestController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    UserDAOImpl userDao = new UserDAOImpl();
-    RequestDAOImpl requestDAO = new RequestDAOImpl();
-    RequestSkillDAOImpl requestSkillDAO = new RequestSkillDAOImpl();
-    SkillDAOImpl skillDAO = new SkillDAOImpl();
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
             String service = request.getParameter("service");
+            
+            UserDAO userDao = new UserDAOImpl();
+            RequestDAO requestDAO = new RequestDAOImpl();
+            RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
+            SkillDAO skillDAO = new SkillDAOImpl();
             
             if (service == null) {
                 service = "";
             }
-            
+
             // Get list request of the user (Mentee/mentor)
             if (service.equalsIgnoreCase("listRequestByMe")) {
                 //get current user
                 User user = (User) request.getSession().getAttribute("currUser");
                 //get list request of the user
                 ArrayList<Request> listRequest = requestDAO.getListByMe(user);
-                
+
                 request.setAttribute("listRequest", listRequest);
                 sendDispatcher(request, response, "listRequestByMe.jsp");
             }
             /* load create request screen */
-            if(service.equalsIgnoreCase("loadRequest")) {
+            if (service.equalsIgnoreCase("loadRequest")) {
                 ArrayList<Skill> sList = skillDAO.getAllSkill();
                 request.setAttribute("sList", sList);
                 ArrayList<User> mentor = userDao.getUserByRole(2);
                 request.setAttribute("mList", mentor);
                 sendDispatcher(request, response, "createRequest.jsp");
             }
-            
+
             /* create a new request */
             if (service.equalsIgnoreCase("createRequest")) {
 
@@ -88,26 +93,26 @@ public class RequestController extends HttpServlet {
 
                 String title = request.getParameter("title");
                 String content = request.getParameter("content");
-                
+
                 int to = Integer.parseInt(request.getParameter("toId"));
                 User toId = userDao.getUserById(to);
-                
+
                 String deadline = request.getParameter("deadlineDate");
                 Date deadlineDate = Date.valueOf(deadline);
-                
+
                 Request req = new Request(title, content, x, toId, deadlineDate);
                 requestDAO.createRequest(req);
-                
+
                 String arr[] = request.getParameterValues("skill");
                 for (String str : arr) {  //insert into arr[] checked values
                     requestSkillDAO.skillRequest(Integer.parseInt(str));
                 }
-                
+
                 sendDispatcher(request, response, "index.jsp");
             }
         }
     }
-    
+
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);

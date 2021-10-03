@@ -5,7 +5,9 @@
  */
 package controller;
 
-import entity.Rating;
+import dao.RatingDAO;
+import dao.RequestDAO;
+import dao.UserDAO;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dao.impl.RatingDAOImpl;
-import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
 import dao.impl.RequestDAOImpl;
 import entity.Request;
@@ -39,10 +40,6 @@ public class UserController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    UserDAOImpl userDAO = new UserDAOImpl();
-    RatingDAOImpl ratingDAO = new RatingDAOImpl();
-    RequestDAOImpl requestDAO = new RequestDAOImpl();
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
@@ -50,6 +47,10 @@ public class UserController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             String service = request.getParameter("service");
+
+            UserDAO userDAO = new UserDAOImpl();
+            RatingDAO ratingDAO = new RatingDAOImpl();
+            RequestDAO requestDAO = new RequestDAOImpl();
 
             if (service == null) {
                 service = "login";
@@ -65,7 +66,7 @@ public class UserController extends HttpServlet {
                 String userName = request.getParameter("username");
                 String password = request.getParameter("password");
                 User user = userDAO.getUser(userName, password);
-                
+
                 if (user != null) {
                     if (user.getRole() == 3) {
                         request.getSession().setAttribute("currUser", user);
@@ -75,8 +76,8 @@ public class UserController extends HttpServlet {
                         sendDispatcher(request, response, "index.jsp");
                     }
                 } else {
-                    
-                    request.setAttribute("mess","login fail pls check your username and password");
+
+                    request.setAttribute("mess", "login fail pls check your username and password");
                     sendDispatcher(request, response, "SignIn.jsp");
                 }
 
@@ -139,7 +140,7 @@ public class UserController extends HttpServlet {
                 request.setAttribute("rList", rList);
                 sendDispatcher(request, response, "request.jsp");
             }
-            
+
             if (service.equalsIgnoreCase("listAllMentor")) {
                 ArrayList<User> mList = userDAO.getUserByRole(2);
                 request.setAttribute("mList", mList);

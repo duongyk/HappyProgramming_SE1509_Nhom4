@@ -9,6 +9,7 @@
  */
 package controller;
 
+import dao.SkillDAO;
 import dao.impl.SkillDAOImpl;
 import entity.Skill;
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class AdminController extends HttpServlet {
      * <code>javax.servlet.http.HttpServletResponse</code>
      * @throws ServletException if a servlet-specific error occurs
      */
-    SkillDAOImpl skillDAO = new SkillDAOImpl();
+    SkillDAO skillDAO = new SkillDAOImpl();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
