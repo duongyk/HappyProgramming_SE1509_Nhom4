@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author Duong
  */
-public class UserDAOTest {
+public class UserDAOImplTest {
     
-    public UserDAOTest() {
+    public UserDAOImplTest() {
     }
     
     @BeforeClass
@@ -40,52 +40,52 @@ public class UserDAOTest {
     }
 
     /**
-     * Test of getUserList method, of class UserDAO.
+     * Test of getUserList method, of class UserDAOImpl.
      */
     @Test
-    public void testGetUserList() {
+    public void testGetUserList() throws Exception {
         System.out.println("getUserList");
-        UserDAO instance = new UserDAO();
+        UserDAOImpl instance = new UserDAOImpl();
         int expResult = 17;
         ArrayList<User> result = instance.getUserList();
         assertEquals(expResult, result.size());
     }
 
     /**
-     * Test of getUserById method, of class UserDAO.
+     * Test of getUserById method, of class UserDAOImpl.
      */
     @Test
-    public void testGetUserById() {
+    public void testGetUserById() throws Exception {
         System.out.println("getUserById");
         int uId = 19;
-        UserDAO instance = new UserDAO();
+        UserDAOImpl instance = new UserDAOImpl();
         String expResult = "duongvv0";
         User result = instance.getUserById(uId);
         assertEquals(expResult, result.getUsername());
     }
 
     /**
-     * Test of getUser method, of class UserDAO.
+     * Test of getUser method, of class UserDAOImpl.
      */
     @Test
-    public void testGetUser() {
+    public void testGetUser() throws Exception {
         System.out.println("getUser");
         String xName = "";
         String xPass = "";
-        UserDAO instance = new UserDAO();
+        UserDAOImpl instance = new UserDAOImpl();
         User expResult = null;
         User result = instance.getUser(xName, xPass);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of checkAccount method, of class UserDAO.
+     * Test of checkAccount method, of class UserDAOImpl.
      */
     @Test
-    public void testCheckAccount() {
+    public void testCheckAccount() throws Exception {
         System.out.println("checkAccount");
         String xName = "";
-        UserDAO instance = new UserDAO();
+        UserDAOImpl instance = new UserDAOImpl();
         User expResult = null;
         User result = instance.checkAccount(xName);
         assertEquals(expResult, result);
@@ -94,27 +94,27 @@ public class UserDAOTest {
     }
 
     /**
-     * Test of signUp method, of class UserDAO.
+     * Test of signUp method, of class UserDAOImpl.
      */
     @Test
-    public void testSignUp() {
+    public void testSignUp() throws Exception {
         System.out.println("signUp");
         User user = null;
-        UserDAO instance = new UserDAO();
+        UserDAOImpl instance = new UserDAOImpl();
         instance.signUp(user);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of updateUserInfo method, of class UserDAO.
+     * Test of updateUserInfo method, of class UserDAOImpl.
      */
     @Test
-    public void testUpdateUserInfo() {
+    public void testUpdateUserInfo() throws Exception {
         System.out.println("updateUserInfo");
         int uid = 0;
         User user = null;
-        UserDAO instance = new UserDAO();
+        UserDAOImpl instance = new UserDAOImpl();
         int expResult = 0;
         int result = instance.updateUserInfo(uid, user);
         assertEquals(expResult, result);
@@ -123,13 +123,13 @@ public class UserDAOTest {
     }
 
     /**
-     * Test of getUserByRole method, of class UserDAO.
+     * Test of getUserByRole method, of class UserDAOImpl.
      */
     @Test
-    public void testGetUserByRole() {
+    public void testGetUserByRole() throws Exception {
         System.out.println("getUserByRole");
         int uRole = 0;
-        UserDAO instance = new UserDAO();
+        UserDAOImpl instance = new UserDAOImpl();
         ArrayList<User> expResult = null;
         ArrayList<User> result = instance.getUserByRole(uRole);
         assertEquals(expResult, result);

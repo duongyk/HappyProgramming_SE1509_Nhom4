@@ -73,6 +73,10 @@
 .no-cmt {
     font-size: 40px;
 }
+
+.mess-Blank{
+    color:red;
+}
 @media (max-width: 1199px) {
   .u-section-1 .u-text-1 {
     margin-left: calc(((100% - 940px) / 2) + 401px);

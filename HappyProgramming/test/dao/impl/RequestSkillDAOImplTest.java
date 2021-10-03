@@ -26,9 +26,9 @@ import static org.junit.Assert.*;
  *
  * @author Tung
  */
-public class RequestSkillDAOTest {
+public class RequestSkillDAOImplTest {
     
-    public RequestSkillDAOTest() {
+    public RequestSkillDAOImplTest() {
     }
     
     @BeforeClass
@@ -48,12 +48,12 @@ public class RequestSkillDAOTest {
     }
 
     /**
-     * Test of getRequestMaxId method, of class RequestSkillDAO.
+     * Test of getRequestMaxId method, of class RequestSkillDAOImpl.
      */
     @Test
-    public void testGetRequestMaxId() {
+    public void testGetRequestMaxId() throws Exception {
         System.out.println("getRequestMaxId");
-        RequestSkillDAO instance = new RequestSkillDAO();
+        RequestSkillDAOImpl instance = new RequestSkillDAOImpl();
         int expResult = 0;
         int result = instance.getRequestMaxId();
         assertEquals(expResult, result);
@@ -62,13 +62,13 @@ public class RequestSkillDAOTest {
     }
 
     /**
-     * Test of skillRequest method, of class RequestSkillDAO.
+     * Test of skillRequest method, of class RequestSkillDAOImpl.
      */
     @Test
-    public void testSkillRequest() {
+    public void testSkillRequest() throws Exception {
         System.out.println("skillRequest");
         int sId = 0;
-        RequestSkillDAO instance = new RequestSkillDAO();
+        RequestSkillDAOImpl instance = new RequestSkillDAOImpl();
         int expResult = 0;
         int result = instance.skillRequest(sId);
         assertEquals(expResult, result);

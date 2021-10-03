@@ -114,37 +114,42 @@
                 </ol>
 
                 <%-- Check current User to allow create new rating --%>
-                <c:if test=" ${sessionScope.currUser!=null}">
-                    <div class="u-expanded-width u-palette-5-base u-shape u-shape-rectangle u-shape-1"></div>
-                    <div class="u-form u-form-1">
-                        <form action="RatingControllerMap" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-5 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;" redirect="true">
-                            <input type="hidden" name="mId" value="${mId}">
-                            <div class="u-form-group u-form-name">
-                                <label for="name-dc8a" class="u-form-control-hidden u-label"></label>
-                                <input type="text" placeholder="Enter your comment" id="name-dc8a" name="comment" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
-                            </div>
-                            <div class="u-form-group u-form-select u-form-group-2">
-                                <label for="select-d713" class="u-label">Rating for mentor (1-5)</label>
-                                <div class="u-form-select-wrapper">
-                                    <select id="select-d713" name="rate" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                <c:choose>
+                    <c:when test="${sessionScope.currUser!=null}">
+                        <div class="u-expanded-width u-palette-5-base u-shape u-shape-rectangle u-shape-1"></div> 
+                        <div class="u-form u-form-1">
+                            <form action="RatingControllerMap" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-5 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;" redirect="true">
+                                <input type="hidden" name="mId" value="${mId}">
+                                <div class="u-form-group u-form-name">
+                                    <label for="name-dc8a" class="u-form-control-hidden u-label"></label>
+                                    <input type="text" placeholder="Enter your comment" id="name-dc8a" name="comment" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
                                 </div>
-                            </div>
-                            <div class="u-align-center u-form-group u-form-submit">
-                                <a href="#" class="u-border-none u-btn u-btn-submit u-button-style u-palette-5-dark-1 u-btn-1">Submit</a>
-                                <input type="submit" value="submit" class="u-form-control-hidden">
-                                <input type="hidden" name="service" value="rateMentor">
-                            </div>
-                        </form>
-                    </c:if>
-
-                </div>
+                                <div class="u-form-group u-form-select u-form-group-2">
+                                    <%-- Display message iif user input blank --%>
+                                    <label for="select-d713" class="u-label mess-Blank">${messBlank}</label><br>
+                                    <label for="select-d713" class="u-label">Rating for mentor (1-5)</label>
+                                    <div class="u-form-select-wrapper">
+                                        <select id="select-d713" name="rate" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                                    </div>
+                                </div>
+                                <div class="u-align-center u-form-group u-form-submit">
+                                    <a href="#" class="u-border-none u-btn u-btn-submit u-button-style u-palette-5-dark-1 u-btn-1">Submit</a>
+                                    <input type="submit" value="submit" class="u-form-control-hidden">
+                                    <input type="hidden" name="service" value="rateMentor">
+                                </div>
+                            </form>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                    </c:otherwise>                
+                </c:choose>
             </div>
         </div>
         <img class="u-image u-image-default u-preserve-proportions u-image-1" src="images/79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png" alt="" data-image-width="1280" data-image-height="1280">

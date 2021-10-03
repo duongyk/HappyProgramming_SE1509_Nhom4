@@ -19,9 +19,9 @@ import static org.junit.Assert.*;
  *
  * @author Duong
  */
-public class RatingDAOTest {
+public class RatingDAOImplTest {
     
-    public RatingDAOTest() {
+    public RatingDAOImplTest() {
     }
     
     @BeforeClass
@@ -41,52 +41,52 @@ public class RatingDAOTest {
     }
 
     /**
-     * Test of getRating method, of class RatingDAO.
+     * Test of getRating method, of class RatingDAOImpl.
      */
     @Test
-    public void testGetRating() {
+    public void testGetRating() throws Exception {
         System.out.println("getRating");
         User user = new User(5);
-        RatingDAO instance = new RatingDAO();
+        RatingDAOImpl instance = new RatingDAOImpl();
         int expResult = 2;
         ArrayList<Rating> result = instance.getRating(user);
         assertEquals(expResult, result.size());
     }
 
     /**
-     * Test of insert method, of class RatingDAO.
+     * Test of insert method, of class RatingDAOImpl.
      */
     @Test
-    public void testInsert() {
+    public void testInsert() throws Exception {
         System.out.println("insert");
         Rating rating = new Rating();
-        RatingDAO instance = new RatingDAO();
+        RatingDAOImpl instance = new RatingDAOImpl();
         instance.insert(rating);
         
     }
 
     /**
-     * Test of getAvgRate method, of class RatingDAO.
+     * Test of getAvgRate method, of class RatingDAOImpl.
      */
     @Test
-    public void testGetAvgRate() {
+    public void testGetAvgRate() throws Exception {
         System.out.println("getAvgRate");
         int mId = 5;
-        RatingDAO instance = new RatingDAO();
+        RatingDAOImpl instance = new RatingDAOImpl();
         String expResult = "3.00";
         String result = instance.getAvgRate(mId);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of checkDupRating method, of class RatingDAO.
+     * Test of checkDupRating method, of class RatingDAOImpl.
      */
     @Test
-    public void testCheckDupRating() {
+    public void testCheckDupRating() throws Exception {
         System.out.println("checkDupRating");
         int fromId = 1;
         int toId = 5;
-        RatingDAO instance = new RatingDAO();
+        RatingDAOImpl instance = new RatingDAOImpl();
         boolean expResult = true;
         boolean result = instance.checkDupRating(fromId, toId);
         assertEquals(expResult, result);

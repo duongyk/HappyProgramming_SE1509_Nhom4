@@ -21,32 +21,34 @@ public interface CVDAO {
     * 
     * @param uid of the mentor
     * @return CV of that mentor
+    * @throws Exception
     */
-    public CV getMentorCV(int uid);
+    public CV getMentorCV(int uid) throws Exception;
 
     /**
     * Create a new CV in the database
     * 
     * @param uid of the mentor
     * @param newCV from post data
-    * 
+    * @throws Exception
     */
-    public void insertCV(int uid, CV newCV);
+    public void insertCV(int uid, CV newCV) throws Exception;
     
     /**
     * Update a particular CV in the database
     * 
     * @param uid of the mentor
-     * @param newCV from post data
+    * @param newCV from post data
     * @return 1 if update success, 0 if fail
+    * @throws Exception
     */
-    public int updateCV(int uid, CV newCV);
+    public int updateCV(int uid, CV newCV) throws Exception ;
     
     /**
     * Get all CV in the database
     * 
-    * 
     * @return list of all CV
+    * @throws Exception
     */
-    public ArrayList<CV> getAllMentorCV();
+    public ArrayList<CV> getAllMentorCV() throws Exception ;
 }

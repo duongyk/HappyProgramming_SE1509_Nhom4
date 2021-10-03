@@ -23,9 +23,9 @@ import static org.junit.Assert.*;
  *
  * @author Tung
  */
-public class RequestDAOTest {
+public class RequestDAOImplTest {
     
-    public RequestDAOTest() {
+    public RequestDAOImplTest() {
     }
     
     @BeforeClass
@@ -45,26 +45,26 @@ public class RequestDAOTest {
     }
 
     /**
-     * Test of getListByMe method, of class RequestDAO.
+     * Test of getListByMe method, of class RequestDAOImpl.
      */
     @Test
-    public void testGetListByMe() {
+    public void testGetListByMe() throws Exception {
         System.out.println("getListByMe");
         User user = new User(1);
-        RequestDAO instance = new RequestDAO();
+        RequestDAOImpl instance = new RequestDAOImpl();
         int expResult = 4;
         ArrayList<Request> result = instance.getListByMe(user);
         assertEquals(expResult, result.size());
     }
 
     /**
-     * Test of createRequest method, of class RequestDAO.
+     * Test of createRequest method, of class RequestDAOImpl.
      */
     @Test
-    public void testCreateRequest() {
+    public void testCreateRequest() throws Exception {
         System.out.println("createRequest");
         Request req = null;
-        RequestDAO instance = new RequestDAO();
+        RequestDAOImpl instance = new RequestDAOImpl();
         int expResult = 0;
         int result = instance.createRequest(req);
         assertEquals(expResult, result);

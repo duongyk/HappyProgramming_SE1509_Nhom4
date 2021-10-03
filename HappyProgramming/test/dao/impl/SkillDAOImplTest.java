@@ -28,9 +28,9 @@ import static org.junit.Assert.*;
  *
  * @author Tung
  */
-public class SkillDAOTest {
+public class SkillDAOImplTest {
     
-    public SkillDAOTest() {
+    public SkillDAOImplTest() {
     }
     
     @BeforeClass
@@ -50,12 +50,12 @@ public class SkillDAOTest {
     }
 
     /**
-     * Test of getAllSkill method, of class SkillDAO.
+     * Test of getAllSkill method, of class SkillDAOImpl.
      */
     @Test
-    public void testGetAllSkill() {
+    public void testGetAllSkill() throws Exception {
         System.out.println("getAllSkill");
-        SkillDAO instance = new SkillDAO();
+        SkillDAOImpl instance = new SkillDAOImpl();
         ArrayList<Skill> expResult = instance.getAllSkill();
         ArrayList<Skill> result = instance.getAllSkill();
         assertEquals(expResult.size(), result.size());
@@ -63,52 +63,52 @@ public class SkillDAOTest {
     }
 
     /**
-     * Test of getSkillByName method, of class SkillDAO.
+     * Test of getSkillByName method, of class SkillDAOImpl.
      */
     @Test
-    public void testGetSkillByName() {
+    public void testGetSkillByName() throws Exception {
         System.out.println("getSkillByName");
         String sName = "c";
-        SkillDAO instance = new SkillDAO();
+        SkillDAOImpl instance = new SkillDAOImpl();
         int expResult = 3;
         ArrayList<Skill> result = instance.getSkillByName(sName);
         assertEquals(expResult, result.size());
     }
 
     /**
-     * Test of getSkillById method, of class SkillDAO.
+     * Test of getSkillById method, of class SkillDAOImpl.
      */
     @Test
-    public void testGetSkillById() {
+    public void testGetSkillById() throws Exception {
         System.out.println("getSkillById");
         String sId = "";
-        SkillDAO instance = new SkillDAO();
+        SkillDAOImpl instance = new SkillDAOImpl();
         Skill expResult = null;
         Skill result = instance.getSkillById(sId);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of insert method, of class SkillDAO.
+     * Test of insert method, of class SkillDAOImpl.
      */
     @Test
-    public void testInsert() {
+    public void testInsert() throws Exception {
         System.out.println("insert");
         Skill x = null;
-        SkillDAO instance = new SkillDAO();
+        SkillDAOImpl instance = new SkillDAOImpl();
         instance.insert(x);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of findDupSkill method, of class SkillDAO.
+     * Test of findDupSkill method, of class SkillDAOImpl.
      */
     @Test
-    public void testFindDupSkill() {
+    public void testFindDupSkill() throws Exception {
         System.out.println("findDupSkill");
         String sName = "Java";
-        SkillDAO instance = new SkillDAO();
+        SkillDAOImpl instance = new SkillDAOImpl();
         boolean expResult = true;
         boolean result = instance.findDupSkill(sName);
         assertEquals(expResult, result);

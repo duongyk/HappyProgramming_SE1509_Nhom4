@@ -9,10 +9,10 @@
 
 package controller;
 
-import dao.impl.CVDAO;
-import dao.impl.SkillDAO;
-import dao.impl.SkillMentorDAO;
-import dao.impl.UserDAO;
+import dao.impl.CVDAOImpl;
+import dao.impl.SkillDAOImpl;
+import dao.impl.SkillMentorDAOImpl;
+import dao.impl.UserDAOImpl;
 import entity.CV;
 import entity.Skill;
 import entity.User;
@@ -21,6 +21,8 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -44,16 +46,16 @@ public class CVController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String service = request.getParameter("service");
             
-            CVDAO cvdao = new CVDAO();
-            UserDAO userdao = new UserDAO();
-            SkillMentorDAO smdao = new SkillMentorDAO();
+            CVDAOImpl cvdao = new CVDAOImpl();
+            UserDAOImpl userdao = new UserDAOImpl();
+            SkillMentorDAOImpl smdao = new SkillMentorDAOImpl();
             
             HttpSession session = request.getSession();
             
@@ -68,7 +70,7 @@ public class CVController extends HttpServlet {
                 ArrayList<String> mentorSkill = smdao.getAll_Id_Skill_Mentor(uid);
                 
                 //get all available skill
-                SkillDAO skilldao = new SkillDAO();
+                SkillDAOImpl skilldao = new SkillDAOImpl();
                 
                 ArrayList<Skill> allSkill = skilldao.getAllSkill();
                 
@@ -189,7 +191,7 @@ public class CVController extends HttpServlet {
                 
                 request.setAttribute("uid", uid);
                 
-                SkillDAO skilldao = new SkillDAO();
+                SkillDAOImpl skilldao = new SkillDAOImpl();
                 ArrayList<Skill> allSkill = skilldao.getAllSkill();
                 request.setAttribute("allSkill", allSkill);
                 
@@ -242,7 +244,11 @@ public class CVController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(CVController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -256,7 +262,11 @@ public class CVController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(CVController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

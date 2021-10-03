@@ -9,14 +9,17 @@
  */
 package dao.impl;
 
-import context.MyDAO;
+import context.DBContext;
 import entity.Rating;
 import entity.User;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
- * This class implements from class interface RatingDAO. <br>
+ * This class implements from class interface RatingDAOImpl. <br>
  * This class contains method to query select data from the table Rating.<br>
  * There are Get all Rating of the user in the database, Insert new Rating into 
  * the database, Get average rating of the Mentor, Check if Mentee has rated and
@@ -25,9 +28,9 @@ import java.util.ArrayList;
  * @author duongvvhe150773
  */
 
-public class RatingDAO extends MyDAO implements dao.RatingDAO {
+public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
     
-    UserDAO userDAO = new UserDAO();
+    
     
     /**
      * Get all Rating of the user in the database
@@ -35,11 +38,17 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
      * @return a list <code>Rating</code> object
      */
     @Override
-    public ArrayList<Rating> getRating(User user) {
+    public ArrayList<Rating> getRating(User user) throws Exception{
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
         ArrayList<Rating> listRating = new ArrayList<>();
-        xSql = "SELECT * FROM [Rating] WHERE [toId] = " + user.getId();
+        UserDAOImpl userDAO = new UserDAOImpl();
+        String sql = "SELECT * FROM [Rating] WHERE [toId] = " + user.getId();
         try {
-            ps = con.prepareStatement(xSql);
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             Rating rating;
             String comment;
@@ -57,10 +66,12 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
                 rating = new Rating(userDAO.getUserById(fromId), userDAO.getUserById(toId), comment, rateAmount, date);
                 listRating.add(rating);
             }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
         }
         return (listRating);
     }
@@ -70,18 +81,25 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
      *
      */
     @Override
-    public void insert(Rating rating) {
-        xSql = "INSERT INTO [Rating] VALUES (?,?,?,?,GETDATE())";
+    public void insert(Rating rating) throws Exception{
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "INSERT INTO [Rating] VALUES (?,?,?,?,GETDATE())";
         try {
-            ps = con.prepareStatement(xSql);
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, rating.getFrom().getId());
             ps.setInt(2, rating.getTo().getId());
             ps.setString(3, rating.getComment());
             ps.setInt(4, rating.getRateAmount());
             ps.executeUpdate();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
         }
     }
     
@@ -91,21 +109,27 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
      * @return a String .It is a <code>java.lang.String</code> object
      */
     @Override
-    public String getAvgRate(int mId) {
+    public String getAvgRate(int mId) throws Exception{
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         ArrayList<Integer> listRating = new ArrayList();
-        xSql = "SELECT * FROM [Rating] WHERE [toId] = "+mId;
+        String sql = "SELECT * FROM [Rating] WHERE [toId] = "+mId;
         try {
-            ps = con.prepareStatement(xSql);
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             int rate;
             while (rs.next()) {
                 rate = rs.getInt("ratingAmount");
                 listRating.add(rate);
             }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
         }
         int sum=0;
         for (int a : listRating) {
@@ -122,18 +146,26 @@ public class RatingDAO extends MyDAO implements dao.RatingDAO {
      * @return a String .It is a <code>java.lang.String</code> object
      */
     @Override
-    public boolean checkDupRating(int fromId, int toId) {
-        xSql = "SELECT * FROM [Rating] WHERE [fromId] = " + fromId + "and [toId] = " + toId;
+    public boolean checkDupRating(int fromId, int toId) throws Exception{
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM [Rating] WHERE [fromId] = " + fromId + "and [toId] = " + toId;
         try {
-            ps = con.prepareStatement(xSql);
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
             }
             rs.close();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
         }
         return false;
     }

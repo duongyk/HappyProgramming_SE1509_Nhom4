@@ -23,16 +23,17 @@ public interface RequestDAO {
     /**
      * Get all Request of the user in the database
      *
-     * @param user it is an object User
+     * @param user it is an <code>User</code> object
      * @return a list <code>Request</code> object
+     * @throws Exception
      */
-    public ArrayList<Request> getListByMe(User user);
+    public ArrayList<Request> getListByMe(User user) throws Exception;
     
     /**
+     * Insert new request into the database
      *
-     *
-     * @param 
-     * @return 
+     * @param req it is an <code>Request</code> object
+     * @throws Exception
      */
-    public int createRequest(Request req);
+    public int createRequest(Request req) throws Exception;
 }

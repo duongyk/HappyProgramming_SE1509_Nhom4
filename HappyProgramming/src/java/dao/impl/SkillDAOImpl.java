@@ -9,19 +9,22 @@
  */
 package dao.impl;
 
-import context.MyDAO;
+import context.DBContext;
 import entity.Skill;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
- * This class implements from class interface SkillDAO. <br>
+ * This class implements from class interface SkillDAOImpl. <br>
  * This class contains method to query select data from the table Skill.<br>
  * There are Get all Skill in the database, , Get skill by name, Get skill by
  * ID, Insert new Skill into the database,Find duplicate skill
  *
  * @author giangnvthe150748
  */
-public class SkillDAO extends MyDAO implements dao.SkillDAO {
+public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
 
     /**
      * Get all Skill of the user in the database
@@ -30,16 +33,21 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
      */
     @Override
 
-    public ArrayList<Skill> getAllSkill() {
+    public ArrayList<Skill> getAllSkill() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
         ArrayList<Skill> list = new ArrayList<>();
-        xSql = "select * from [Skill]";
+        String sql = "select * from [Skill]";
         int id;
         String name;
         String detail;
         String image;
         Skill s;
         try {
-            ps = con.prepareStatement(xSql);
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 id = rs.getInt("sId");
@@ -49,25 +57,31 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
                 s = new Skill(id, name, detail, image);
                 list.add(s);
             }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
         }
         return list;
     }
 
     @Override
-    public ArrayList<Skill> getSkillByName(String sName) {
+    public ArrayList<Skill> getSkillByName(String sName) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         ArrayList<Skill> list = new ArrayList<>();
-        xSql = "select * from [Skill] where sName like '%" + sName + "%'";
+        String sql = "select * from [Skill] where sName like '%" + sName + "%'";
         int id;
         String name;
         String detail;
         String image;
         Skill s;
         try {
-            ps = con.prepareStatement(xSql);
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 id = rs.getInt("sId");
@@ -77,23 +91,29 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
                 s = new Skill(id, name, detail, image);
                 list.add(s);
             }
-            rs.close();
-            ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
         }
         return list;
     }
 
     //viet thang
     @Override
-    public Skill getSkillById(String sId) {
+    public Skill getSkillById(String sId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         Skill skill = new Skill();
 
-        xSql = "select * from [Skill] where sId='" + sId + "'";
+        String sql = "select * from [Skill] where sId='" + sId + "'";
 
         try {
-            ps = con.prepareStatement(xSql);
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -101,11 +121,13 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
                 skill.setName(rs.getString("sName"));
                 skill.setDetail(rs.getString("sDetail"));
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
         }
-
         return skill;
     }
 
@@ -114,17 +136,25 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
      *
      */
     @Override
-    public void insert(Skill x) {
-        xSql = "insert into [Skill] values (?,?,?)";
+    public void insert(Skill x) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "insert into [Skill] values (?,?,?)";
         try {
-            ps = con.prepareStatement(xSql);
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setString(1, x.getName());
             ps.setString(2, x.getDetail());
             ps.setString(3, x.getImage());
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
         }
     }
 
@@ -135,7 +165,7 @@ public class SkillDAO extends MyDAO implements dao.SkillDAO {
      * @return a boolean object
      */
     @Override
-    public boolean findDupSkill(String sName) {
+    public boolean findDupSkill(String sName) throws Exception {
         ArrayList<Skill> sList = getAllSkill();
         for (Skill s : sList) {
             if (sName.equalsIgnoreCase(s.getName())) {

@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author PC
  */
-public class CVDAOTest {
+public class CVDAOImplTest {
     
-    public CVDAOTest() {
+    public CVDAOImplTest() {
     }
     
     @BeforeClass
@@ -40,26 +40,26 @@ public class CVDAOTest {
     }
 
     /**
-     * Test of insertCV method, of class CVDAO.
+     * Test of insertCV method, of class CVDAOImpl.
      */
     @Test
-    public void testInsertCV() {
+    public void testInsertCV() throws Exception {
         System.out.println("insertCV");
         int uid = 22;
         CV newCV = new CV(22,"avenger","earth heroes","shooting web","defeat thanos");
-        CVDAO instance = new CVDAO();
+        CVDAOImpl instance = new CVDAOImpl();
         instance.insertCV(uid, newCV);
                  
     }
     
     /**
-     * Test of getMentorCV method, of class CVDAO.
+     * Test of getMentorCV method, of class CVDAOImpl.
      */
     @Test
-    public void testGetMentorCV() {
+    public void testGetMentorCV() throws Exception {
         System.out.println("getMentorCV");
         int uid = 22;
-        CVDAO instance = new CVDAO();
+        CVDAOImpl instance = new CVDAOImpl();
         int expId = 22;
         String expProfession = "avenger";
         String expProfessionIntro = "earth heroes";
@@ -82,14 +82,14 @@ public class CVDAOTest {
     
 
     /**
-     * Test of updateCV method, of class CVDAO.
+     * Test of updateCV method, of class CVDAOImpl.
      */
     @Test
-    public void testUpdateCV() {
+    public void testUpdateCV() throws Exception {
         System.out.println("updateCV");
         int uid = 22;
         CV newCV = new CV(22,"avenger","earth heroes","shooting web","defeat thanos");
-        CVDAO instance = new CVDAO();
+        CVDAOImpl instance = new CVDAOImpl();
         int expResult = 1;
         int result = instance.updateCV(uid, newCV);
         assertEquals(expResult, result);
@@ -97,12 +97,12 @@ public class CVDAOTest {
     }
 
     /**
-     * Test of getAllMentorCV method, of class CVDAO.
+     * Test of getAllMentorCV method, of class CVDAOImpl.
      */
     @Test
-    public void testGetAllMentorCV() {
+    public void testGetAllMentorCV() throws Exception {
         System.out.println("getAllMentorCV");
-        CVDAO instance = new CVDAO();
+        CVDAOImpl instance = new CVDAOImpl();
         int expResult = 11;
         int result = instance.getAllMentorCV().size();
         assertEquals(expResult, result);

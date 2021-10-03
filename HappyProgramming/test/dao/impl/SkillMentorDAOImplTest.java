@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
  *
  * @author PC
  */
-public class SkillMentorDAOTest {
+public class SkillMentorDAOImplTest {
     
-    public SkillMentorDAOTest() {
+    public SkillMentorDAOImplTest() {
     }
     
     @BeforeClass
@@ -40,13 +40,13 @@ public class SkillMentorDAOTest {
     }
 
     /**
-     * Test of getAll_Skill_Mentor method, of class SkillMentorDAO.
+     * Test of getAll_Skill_Mentor method, of class SkillMentorDAOImpl.
      */
     @Test
-    public void testGetAll_Skill_Mentor() {
+    public void testGetAll_Skill_Mentor() throws Exception {
         System.out.println("getAll_Skill_Mentor");
         int uid = 22;
-        SkillMentorDAO instance = new SkillMentorDAO();
+        SkillMentorDAOImpl instance = new SkillMentorDAOImpl();
         int expResult = 3;
         int result = instance.getAll_Skill_Mentor(uid).size();
         assertEquals(expResult, result);
@@ -54,14 +54,14 @@ public class SkillMentorDAOTest {
     }
 
     /**
-     * Test of getAll_Id_Skill_Mentor method, of class SkillMentorDAO.
+     * Test of getAll_Id_Skill_Mentor method, of class SkillMentorDAOImpl.
      */
     @Test
-    public void testGetAll_Id_Skill_Mentor() {
+    public void testGetAll_Id_Skill_Mentor() throws Exception {
         System.out.println("getAll_Id_Skill_Mentor");
         int uId = 22;
         
-        SkillMentorDAO instance = new SkillMentorDAO();
+        SkillMentorDAOImpl instance = new SkillMentorDAOImpl();
         int expResult = 3;
         int result = instance.getAll_Id_Skill_Mentor(uId).size();
         
@@ -70,14 +70,14 @@ public class SkillMentorDAOTest {
     }
 
     /**
-     * Test of updateMentorSkill method, of class SkillMentorDAO.
+     * Test of updateMentorSkill method, of class SkillMentorDAOImpl.
      */
     @Test
-    public void testUpdateMentorSkill() {
+    public void testUpdateMentorSkill() throws Exception {
         System.out.println("updateMentorSkill");
         int uId = 22;
         String[] skill_ids = {"2","3","4"};
-        SkillMentorDAO instance = new SkillMentorDAO();
+        SkillMentorDAOImpl instance = new SkillMentorDAOImpl();
         int expResult = 1;
         int result = instance.updateMentorSkill(uId, skill_ids);
         

@@ -9,9 +9,9 @@
  */
 package controller;
 
-import dao.impl.RatingDAO;
-import dao.impl.RequestDAO;
-import dao.impl.UserDAO;
+import dao.impl.RatingDAOImpl;
+import dao.impl.RequestDAOImpl;
+import dao.impl.UserDAOImpl;
 import entity.Rating;
 import entity.User;
 import java.io.IOException;
@@ -30,9 +30,6 @@ import javax.servlet.http.HttpServletResponse;
  * - Get Rating and comment of Mentor<br>
  * - Create new Rating and comment<br>
  *
- * Exception:<br>
- * - If output failed, it will return to error page.
- *
  * @author duongvvhe150773
  */
 public class RatingController extends HttpServlet {
@@ -48,14 +45,14 @@ public class RatingController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
             String service = request.getParameter("service");
-            UserDAO userDAO = new UserDAO();
-            RatingDAO ratingDAO = new RatingDAO();
-            RequestDAO requestDAO = new RequestDAO();
+            UserDAOImpl userDAO = new UserDAOImpl();
+            RatingDAOImpl ratingDAO = new RatingDAOImpl();
+            RequestDAOImpl requestDAO = new RequestDAOImpl();
 
             // Set default service
             if (service == null) {
@@ -87,7 +84,7 @@ public class RatingController extends HttpServlet {
                 // Get Mentor
                 int mId = Integer.parseInt(request.getParameter("mId"));
                 User mentor = userDAO.getUserById(mId);
-                
+
                 if (ratingDAO.checkDupRating(user.getId(), mId)) {
                     String mess = "You have already Rated and commented";
                     request.setAttribute("mess", mess);
@@ -96,6 +93,12 @@ public class RatingController extends HttpServlet {
                     // Get rate and comment
                     int rate = Integer.parseInt(request.getParameter("rate"));
                     String comment = request.getParameter("comment").trim();
+                    // Check comment blank
+                    if (comment.equals("")) {
+                        String messBlank = "Comment contains only space, please Re-input";
+                        request.setAttribute("messBlank", messBlank);
+                        sendDispatcher(request, response, "RatingControllerMap?service=getRating&mId=" + mId);
+                    }
                     // Create and insert rate
                     Rating rating = new Rating(user, mentor, comment, rate);
                     ratingDAO.insert(rating);
@@ -128,7 +131,11 @@ public class RatingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(RatingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -142,7 +149,11 @@ public class RatingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(RatingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

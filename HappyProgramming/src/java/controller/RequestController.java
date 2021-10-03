@@ -21,16 +21,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.impl.RequestDAO;
-import dao.impl.RequestSkillDAO;
-import dao.impl.SkillDAO;
-import dao.impl.UserDAO;
+import dao.impl.RequestDAOImpl;
+import dao.impl.RequestSkillDAOImpl;
+import dao.impl.SkillDAOImpl;
+import dao.impl.UserDAOImpl;
 import entity.Skill;
 import java.sql.Date;
 
 /**
+ * Process:<br>
+ * - Get List request by me<br>
+ * - Load request from database<br>
+ * - Create new request and insert into databsae<br>
  *
- * @author Tung
+ * @author
  */
 public class RequestController extends HttpServlet {
 
@@ -43,13 +47,13 @@ public class RequestController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    UserDAO userDao = new UserDAO();
-    RequestDAO requestDAO = new RequestDAO();
-    RequestSkillDAO requestSkillDAO = new RequestSkillDAO();
-    SkillDAO skillDAO = new SkillDAO();
+    UserDAOImpl userDao = new UserDAOImpl();
+    RequestDAOImpl requestDAO = new RequestDAOImpl();
+    RequestSkillDAOImpl requestSkillDAO = new RequestSkillDAOImpl();
+    SkillDAOImpl skillDAO = new SkillDAOImpl();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String service = request.getParameter("service");
@@ -125,7 +129,11 @@ public class RequestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(RequestController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -139,7 +147,11 @@ public class RequestController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(RequestController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

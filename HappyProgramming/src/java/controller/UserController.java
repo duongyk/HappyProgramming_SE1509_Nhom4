@@ -17,10 +17,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.impl.RatingDAO;
-import dao.impl.SkillDAO;
-import dao.impl.UserDAO;
-import dao.impl.RequestDAO;
+import dao.impl.RatingDAOImpl;
+import dao.impl.SkillDAOImpl;
+import dao.impl.UserDAOImpl;
+import dao.impl.RequestDAOImpl;
 import entity.Request;
 import java.sql.Date;
 
@@ -39,12 +39,12 @@ public class UserController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    UserDAO userDAO = new UserDAO();
-    RatingDAO ratingDAO = new RatingDAO();
-    RequestDAO requestDAO = new RequestDAO();
+    UserDAOImpl userDAO = new UserDAOImpl();
+    RatingDAOImpl ratingDAO = new RatingDAOImpl();
+    RequestDAOImpl requestDAO = new RequestDAOImpl();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
@@ -169,7 +169,11 @@ public class UserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -183,7 +187,11 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
