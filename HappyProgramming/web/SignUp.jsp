@@ -76,7 +76,7 @@
                         </div>
                         <div class="u-form-group u-form-group-2">
                             <label for="text-b9a0" class="u-form-control-hidden u-label"></label>
-                            <input type="text" placeholder="Mail" id="text-b9a0" name="mail" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                            <input type="email" placeholder="Mail" id="text-b9a0" name="mail" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
                         </div>
                         <div class="u-form-group u-form-group-3">
                             <label for="text-1c7c" class="u-form-control-hidden u-label"></label>

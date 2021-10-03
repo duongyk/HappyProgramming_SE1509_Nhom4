@@ -65,7 +65,7 @@ public class UserController extends HttpServlet {
                 String userName = request.getParameter("username");
                 String password = request.getParameter("password");
                 User user = userDAO.getUser(userName, password);
-                String mess = "";
+                
                 if (user != null) {
                     if (user.getRole() == 3) {
                         request.getSession().setAttribute("currUser", user);
@@ -75,8 +75,8 @@ public class UserController extends HttpServlet {
                         sendDispatcher(request, response, "index.jsp");
                     }
                 } else {
-                    mess = "login failed";
-                    request.setAttribute("mess", mess);
+                    
+                    request.setAttribute("mess","login fail pls check your username and password");
                     sendDispatcher(request, response, "SignIn.jsp");
                 }
 
