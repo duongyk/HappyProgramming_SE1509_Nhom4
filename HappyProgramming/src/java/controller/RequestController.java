@@ -36,7 +36,7 @@ import java.sql.Date;
  * Process:<br>
  * - Get List request by me<br>
  * - Load request from database<br>
- * - Create new request and insert into databsae<br>
+ * - Create new request and insert into database<br>
  *
  * @author
  */

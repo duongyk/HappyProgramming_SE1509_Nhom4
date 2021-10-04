@@ -52,7 +52,7 @@ public class Request {
     /**
      * Status of (Request)
      */
-    private String status;
+    private int status;
 
     /**
      * Constructor.<br>
@@ -80,7 +80,7 @@ public class Request {
      * @param deadlineDate it is a <code>java.sql.Date</code>
      * @param status it is a <code>java.lang.String</code>
      */
-    public Request(int id, String title, String content, User from, User to, Date deadlineDate, String status) {
+    public Request(int id, String title, String content, User from, User to, Date deadlineDate, int status) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -99,7 +99,7 @@ public class Request {
      * @param deadlineDate it is a <code>java.sql.Date</code>
      * @param status it is a <code>java.lang.String</code>
      */
-    public Request(String title, User from, User to, Date deadlineDate, String status) {
+    public Request(String title, User from, User to, Date deadlineDate, int status) {
         this.title = title;
         this.from = from;
         this.to = to;
@@ -198,7 +198,7 @@ public class Request {
      *
      * @return status it is a <code>User</code> object
      */
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
@@ -261,7 +261,7 @@ public class Request {
      *
      * @param status it is a <code>java.lang.String</code>
      */
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     

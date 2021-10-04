@@ -84,7 +84,7 @@
             <%-- Title --%>
             <div class="u-form-group u-form-group-1">
               <label for="text-b048" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="Title" id="text-b048" name="title" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+              <input type="text" maxlength="10" placeholder="Title" id="text-b048" name="title" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
             </div>
             <%-- Content --%>
             <div class="u-form-group u-form-group-2">

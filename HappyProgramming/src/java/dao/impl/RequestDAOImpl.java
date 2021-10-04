@@ -51,7 +51,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
             int rId;
             String rTitle;
             String rContent;
-            String rStatus;
+            int rStatus;
             int rMentor;
             Date dlDate;
 
@@ -59,7 +59,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
                 rId = rs.getInt("rId");
                 rTitle = rs.getString("title");
                 rContent = rs.getString("content");
-                rStatus = rs.getString("rStatus");
+                rStatus = rs.getInt("rStatus");
                 rMentor = rs.getInt("toId");
                 dlDate = rs.getDate("deadlineDate");
                 r = new Request(rId, rTitle, rContent, userDAO.getUserById(user.getId()), userDAO.getUserById(rMentor), dlDate, rStatus);
@@ -85,7 +85,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         ResultSet rs = null;
         
         int n = 0;
-        String sql = "INSERT INTO [Request](title, content, fromId, toId, deadlineDate, rStatus) VALUES (?, ?, ?, ?, ?, 'pending');";
+        String sql = "INSERT INTO [Request](title, content, fromId, toId, deadlineDate, rStatus) VALUES (?, ?, ?, ?, ?, 1);";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
