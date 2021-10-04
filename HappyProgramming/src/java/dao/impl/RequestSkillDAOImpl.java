@@ -49,6 +49,10 @@ public class RequestSkillDAOImpl extends DBContext implements dao.RequestSkillDA
         return n;
     }
 
+    
+    /**
+     * @return a new list of <code>Skill</code> object
+     */
     @Override
     public int skillRequest(int sId) throws Exception {
         Connection conn = null;

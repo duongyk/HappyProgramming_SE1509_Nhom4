@@ -91,8 +91,8 @@ public class RequestController extends HttpServlet {
 
                 User x = (User) request.getSession().getAttribute("currUser");
 
-                String title = request.getParameter("title");
-                String content = request.getParameter("content");
+                String title = request.getParameter("title").trim();
+                String content = request.getParameter("content").trim();
 
                 int to = Integer.parseInt(request.getParameter("toId"));
                 User toId = userDao.getUserById(to);

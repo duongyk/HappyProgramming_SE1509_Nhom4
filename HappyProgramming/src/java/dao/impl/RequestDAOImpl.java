@@ -75,6 +75,9 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return (list);
     }
 
+    /**
+     * @return a new <code>Request</code> object
+     */
     @Override
     public int createRequest(Request req) throws Exception{
         Connection conn = null;
