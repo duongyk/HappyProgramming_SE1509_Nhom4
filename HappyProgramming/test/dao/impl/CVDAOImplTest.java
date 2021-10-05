@@ -88,7 +88,7 @@ public class CVDAOImplTest {
     public void testUpdateCV() throws Exception {
         System.out.println("updateCV");
         int uid = 22;
-        CV newCV = new CV(22,"avenger","earth heroes","shooting web","defeat thanos");
+        CV newCV = new CV(22,"spider warrior","earth heroes","shooting web and strong","save earth");
         CVDAOImpl instance = new CVDAOImpl();
         int expResult = 1;
         int result = instance.updateCV(uid, newCV);

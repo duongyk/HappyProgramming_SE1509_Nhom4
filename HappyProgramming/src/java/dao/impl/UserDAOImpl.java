@@ -184,19 +184,26 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         String stringDOB = sdf.format(user.getDob());
 
         String sql = "update [User]"
-                + " set fullname='" + user.getFullname() + "'"
-                + " ,uMail='" + user.getMail() + "'"
-                + " ,uPhone='" + user.getPhone() + "'"
-                + " ,DOB='" + stringDOB + "'"
-                + " ,gender='" + user.getGender() + "'"
-                + " ,uAvatar='" + user.getAvatar() + "'"
-                + " where uId='" + uid + "'";
+                + " set fullname=?"
+                + " ,uMail=?"
+                + " ,uPhone=?"
+                + " ,DOB=?"
+                + " ,gender=?"
+                + " ,uAvatar=?"
+                + " where uId=?";
 
-        //System.out.println(xSql);
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
 
+            ps.setString(1,user.getFullname());
+            ps.setString(2,user.getMail());
+            ps.setString(3,user.getPhone());
+            ps.setString(4, stringDOB);
+            ps.setString(5, user.getGender());
+            ps.setString(6, user.getAvatar());
+            ps.setInt(7, uid);
+            
             status = ps.executeUpdate();
 
         } catch (Exception ex) {
