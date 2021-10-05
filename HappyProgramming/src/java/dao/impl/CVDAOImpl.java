@@ -84,7 +84,7 @@ public class CVDAOImpl extends DBContext implements dao.CVDAO {
             ps.setString(4, newCV.getProfessionIntro());
             ps.setString(5, newCV.getAchivement());
 
-            ps.executeQuery();
+            ps.executeUpdate();
         } catch (Exception ex) {
             throw ex;
         } finally {

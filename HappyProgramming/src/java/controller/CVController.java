@@ -10,12 +10,13 @@
 package controller;
 
 import dao.CVDAO;
-import dao.SkillMentorDAO;
+import dao.SkillDAO;
 import dao.UserDAO;
+import dao.UserSkillDAO;
 import dao.impl.CVDAOImpl;
 import dao.impl.SkillDAOImpl;
-import dao.impl.SkillMentorDAOImpl;
 import dao.impl.UserDAOImpl;
+import dao.impl.UserSkillDAOImpl;
 import entity.CV;
 import entity.Skill;
 import entity.User;
@@ -58,7 +59,7 @@ public class CVController extends HttpServlet {
             
             CVDAO cvdao = new CVDAOImpl();
             UserDAO userdao = new UserDAOImpl();
-            SkillMentorDAO smdao = new SkillMentorDAOImpl();
+            UserSkillDAO smdao = new UserSkillDAOImpl();
             
             HttpSession session = request.getSession();
             
@@ -168,7 +169,8 @@ public class CVController extends HttpServlet {
                 
                 // ----------------------------------------
                 
-                response.sendRedirect("index.jsp");
+                //response.sendRedirect("index.jsp");
+                response.sendRedirect("demoMentorCV.jsp?uid="+uid);
             }
             
             // get all CV from database and show on jsp
@@ -194,7 +196,7 @@ public class CVController extends HttpServlet {
                 
                 request.setAttribute("uid", uid);
                 
-                SkillDAOImpl skilldao = new SkillDAOImpl();
+                SkillDAO skilldao = new SkillDAOImpl();
                 ArrayList<Skill> allSkill = skilldao.getAllSkill();
                 request.setAttribute("allSkill", allSkill);
                 
@@ -228,8 +230,8 @@ public class CVController extends HttpServlet {
                 
                 smdao.updateMentorSkill(uid, skill_id);
                 
-                response.sendRedirect("SignIn.jsp");
-                
+                //response.sendRedirect("SignIn.jsp");
+                response.sendRedirect("demoMentorList.jsp");
             }
             
         }

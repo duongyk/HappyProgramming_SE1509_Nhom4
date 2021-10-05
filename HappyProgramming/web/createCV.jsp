@@ -8,7 +8,8 @@
 
 --%>
 
-<%@page import="dao.iplm.SkillDAO"%>
+<%@page import="dao.impl.SkillDAOImpl"%>
+<%@page import="dao.SkillDAO"%>
 <%@page import="entity.Skill"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
@@ -71,7 +72,8 @@
             <div class="u-clearfix u-sheet u-sheet-1">
                 <h4 class="u-text u-text-default u-text-1">CREATE CV</h4>
                 <div class="u-form u-form-1">
-                    <form action="CVController?service=submitCreateForm" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-13 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 5px;" redirect="true">
+                    <form action="CVControllerMap?service=submitCreateForm" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-13 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 5px;" redirect="true">
+                        <input type="hidden" name="uid" value="<c:out value="${uid}" ></c:out>" />
                         <div class="u-form-group u-form-group-1">
                             <label for="text-b048" class="u-form-control-hidden u-label"></label>
                             <input type="text" placeholder="Profession" id="text-b048" name="profession" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
@@ -99,7 +101,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
                                 -->
                                 <%
-                                    SkillDAO skilldao = new SkillDAO();
+                                    SkillDAO skilldao = new SkillDAOImpl();
                                     ArrayList<Skill> allSkill = skilldao.getAllSkill();
                                     request.setAttribute("allSkill", allSkill);
                                 %>
@@ -110,9 +112,9 @@
 
                                     <div class="u-form-checkbox u-form-group u-form-partition-factor-2 u-form-group-<c:out value="${count}"></c:out>">
 
-                                            <input type="checkbox" name="skills" value="<c:out value="${skill.getsId()}"></c:out>">
+                                            <input type="checkbox" name="skills" value="<c:out value="${skill.getId()}"></c:out>">
 
-                                            <label  class="u-label"><c:out value="${skill.getsName()}"></c:out></label>
+                                            <label  class="u-label"><c:out value="${skill.getName()}"></c:out></label>
                                         </div>
 
                                     <c:set var="count" value="${count+1}" scope="page" />
