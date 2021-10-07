@@ -95,14 +95,14 @@ public class CVController extends HttpServlet {
                 
                 // get information
                 
-                int uid = Integer.parseInt(request.getParameter("uid"));
+                int uid = Integer.parseInt(request.getParameter("uid").trim());
                 //System.out.println("uid "+uid);
                 
-                String username = request.getParameter("username");
+                String username = request.getParameter("username").trim();
                 //System.out.println("username "+username);
 
                 
-                String fullname= request.getParameter("fullname");
+                String fullname= request.getParameter("fullname").trim();
                 //System.out.println("fullname "+fullname);
                 
                 SimpleDateFormat dateFormat = 
@@ -126,7 +126,7 @@ public class CVController extends HttpServlet {
 //                    Logger.getLogger(CVController.class.getName()).log(Level.SEVERE, null, ex);
 //                }
                 
-                String avatar = request.getParameter("avatar");
+                String avatar = request.getParameter("avatar").trim();
                 
                 if(avatar.equals("") || avatar == null ) {
                     avatar ="79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png";
@@ -135,22 +135,22 @@ public class CVController extends HttpServlet {
                 String sex = request.getParameter("sex");
                 //System.out.println("sex "+sex);
                 
-                String mail = request.getParameter("mail");
+                String mail = request.getParameter("mail").trim();
                 //System.out.println("mail "+mail);
                 
-                String phone = request.getParameter("phone");
+                String phone = request.getParameter("phone").trim();
                 //System.out.println("phone "+phone);
                 
-                String achievement = request.getParameter("achievement");
+                String achievement = request.getParameter("achievement").trim();
                 //System.out.println("achievement "+achievement);
                 
-                String  profession = request.getParameter("profession");
+                String  profession = request.getParameter("profession").trim();
                 //System.out.println("profession "+profession);
                 
-                String professionIntro = request.getParameter("professionIntro");
+                String professionIntro = request.getParameter("professionIntro").trim();
                 //System.out.println("professionIntro "+professionIntro);
                 
-                String serviceDescription = request.getParameter("serviceDescription");
+                String serviceDescription = request.getParameter("serviceDescription").trim();
                 //System.out.println("serviceDescription "+serviceDescription);
                 
                 String[] skill_id = request.getParameterValues("skills");
@@ -210,17 +210,23 @@ public class CVController extends HttpServlet {
                 
                 int uid = Integer.parseInt(request.getParameter("uid"));
                 
-                String achievement = request.getParameter("achievement");
+                String achievement = request.getParameter("achievement").trim();
                 //System.out.println("achievement "+achievement);
                 
-                String  profession = request.getParameter("profession");
+                String  profession = request.getParameter("profession").trim();
                 //System.out.println("profession "+profession);
                 
-                String professionIntro = request.getParameter("professionIntro");
+                String professionIntro = request.getParameter("professionIntro").trim();
                 //System.out.println("professionIntro "+professionIntro);
                 
-                String serviceDescription = request.getParameter("serviceDescription");
+                String serviceDescription = request.getParameter("serviceDescription").trim();
                 //System.out.println("serviceDescription "+serviceDescription);
+                
+                String avatar = request.getParameter("avatar").trim();
+                
+                if(avatar.equals("") || avatar == null ) {
+                    avatar ="79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png";
+                }              
                 
                 String[] skill_id = request.getParameterValues("skills");
                 
