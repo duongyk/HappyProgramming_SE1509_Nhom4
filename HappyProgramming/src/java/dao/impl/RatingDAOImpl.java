@@ -21,34 +21,32 @@ import java.util.ArrayList;
 /**
  * This class implements from class interface RatingDAOImpl. <br>
  * This class contains method to query select data from the table Rating.<br>
- * There are Get all Rating of the user in the database, Insert new Rating into 
+ * There are Get all Rating of the user in the database, Insert new Rating into
  * the database, Get average rating of the Mentor, Check if Mentee has rated and
  * commented on Mentor or not
  *
  * @author duongvvhe150773
  */
-
 public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
-    
-    
-    
+
     /**
      * Get all Rating of the user in the database
      *
      * @return a list <code>Rating</code> object
      */
     @Override
-    public ArrayList<Rating> getRating(User user) throws Exception{
+    public ArrayList<Rating> getRating(User user) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         ArrayList<Rating> listRating = new ArrayList<>();
         UserDAOImpl userDAO = new UserDAOImpl();
-        String sql = "SELECT * FROM [Rating] WHERE [toId] = " + user.getId();
+        String sql = "SELECT * FROM [Rating] WHERE [toId] = ?";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
+            ps.setInt(1, user.getId());
             rs = ps.executeQuery();
             Rating rating;
             String comment;
@@ -63,7 +61,8 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
                 comment = rs.getString("comment");
                 rateAmount = rs.getInt("ratingAmount");
                 date = rs.getTimestamp("ratingDate");
-                rating = new Rating(userDAO.getUserById(fromId), userDAO.getUserById(toId), comment, rateAmount, date);
+                rating = new Rating(userDAO.getUserById(fromId),
+                        userDAO.getUserById(toId), comment, rateAmount, date);
                 listRating.add(rating);
             }
         } catch (Exception ex) {
@@ -81,7 +80,7 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
      *
      */
     @Override
-    public void insert(Rating rating) throws Exception{
+    public void insert(Rating rating) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -102,26 +101,29 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
             closeConnection(conn);
         }
     }
-    
+
     /**
      * Get average rating of the Mentor
      *
      * @return a String .It is a <code>java.lang.String</code> object
      */
     @Override
-    public String getAvgRate(int mId) throws Exception{
+    public String getAvgRate(int mId) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         ArrayList<Integer> listRating = new ArrayList();
-        String sql = "SELECT * FROM [Rating] WHERE [toId] = "+mId;
+        String sql = "SELECT * FROM [Rating] WHERE [toId] = ?";
+        int sum = 0;
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
+            ps.setInt(1, mId);
             rs = ps.executeQuery();
             int rate;
             while (rs.next()) {
                 rate = rs.getInt("ratingAmount");
+                sum+=rate;
                 listRating.add(rate);
             }
         } catch (Exception ex) {
@@ -131,29 +133,28 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
             closePreparedStatement(ps);
             closeConnection(conn);
         }
-        int sum=0;
-        for (int a : listRating) {
-            sum+=a;
-        }
         
-        String avg = String.format("%.2f", (double)sum/listRating.size());
+        String avg = String.format("%.2f", (double) sum / listRating.size());
         return avg;
     }
 
     /**
-     * Get average rating of the Mentor
+     * Check for duplicate Rating
      *
      * @return a String .It is a <code>java.lang.String</code> object
+     * @throws Exception
      */
     @Override
-    public boolean checkDupRating(int fromId, int toId) throws Exception{
+    public boolean checkDupRating(int fromId, int toId) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM [Rating] WHERE [fromId] = " + fromId + "and [toId] = " + toId;
+        String sql = "SELECT * FROM [Rating] WHERE [fromId] = ? and [toId] = ?";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
+            ps.setInt(1, fromId);
+            ps.setInt(2, toId);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return true;

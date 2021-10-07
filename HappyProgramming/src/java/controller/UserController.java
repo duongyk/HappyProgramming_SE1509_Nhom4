@@ -116,8 +116,8 @@ public class UserController extends HttpServlet {
                 }
             }
 
-            if (service.equalsIgnoreCase("signOut")) {
-                request.getSession().invalidate();
+            if (service.equalsIgnoreCase("logOut")) {
+                request.getSession().removeAttribute("currUser");
                 sendDispatcher(request, response, "index.jsp");
             }
 
@@ -132,13 +132,6 @@ public class UserController extends HttpServlet {
                 request.setAttribute("user", user);
 
                 sendDispatcher(request, response, "profile.jsp");
-            }
-
-            if (service.equalsIgnoreCase("listRequest")) {
-                User x = (User) request.getSession().getAttribute("currUser");
-                ArrayList<Request> rList = requestDAO.getListByMe(x);
-                request.setAttribute("rList", rList);
-                sendDispatcher(request, response, "request.jsp");
             }
 
             if (service.equalsIgnoreCase("listAllMentor")) {

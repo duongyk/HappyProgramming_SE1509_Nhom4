@@ -50,6 +50,11 @@ public class Request {
     private Date deadlineDate;
     
     /**
+     * deadlineDate of (Request)
+     */
+    private int deadlineHour;
+    
+    /**
      * Status of (Request)
      */
     private int status;
@@ -72,7 +77,7 @@ public class Request {
     /**
      * Constructor.<br>
      *
-     * @param id it is a int number
+     * @param id it is a Integer number
      * @param title it is a <code>java.lang.String</code>
      * @param content it is a <code>java.lang.String</code>
      * @param from it is a <code>User</code> object
@@ -87,6 +92,48 @@ public class Request {
         this.from = from;
         this.to = to;
         this.deadlineDate = deadlineDate;
+        this.status = status;
+    }
+    
+    /**
+     * Constructor.<br>
+     *
+     * @param id it is a Integer number
+     * @param title it is a <code>java.lang.String</code>
+     * @param content it is a <code>java.lang.String</code>
+     * @param from it is a <code>User</code> object
+     * @param to it is a <code>User</code> object
+     * @param deadlineDate it is a <code>java.sql.Date</code>
+     * @param deadlineHour it is a Integer number
+     * @param status it is a <code>java.lang.String</code>
+     */
+    public Request(int id, String title, String content, User from, User to, Date deadlineDate, int deadlineHour, int status) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.from = from;
+        this.to = to;
+        this.deadlineDate = deadlineDate;
+        this.deadlineHour = deadlineHour;
+        this.status = status;
+    }
+
+    /**
+     * Constructor.<br>
+     *
+     * @param id it is a Integer number
+     * @param title it is a <code>java.lang.String</code>
+     * @param content it is a <code>java.lang.String</code>
+     * @param deadlineDate it is a <code>java.sql.Date</code>
+     * @param deadlineHour it is a Integer number
+     * @param status it is a <code>java.lang.String</code>
+     */
+    public Request(int id, String title, String content, Date deadlineDate, int deadlineHour, int status) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.deadlineDate = deadlineDate;
+        this.deadlineHour = deadlineHour;
         this.status = status;
     }
 
@@ -142,7 +189,7 @@ public class Request {
     /**
      * Get value from Id attribute of Skill class. <br>
      *
-     * @return id it is a int number
+     * @return id it is a Integer number
      */
     public int getId() {
         return id;
@@ -185,12 +232,30 @@ public class Request {
     }
 
     /**
-     * Get value from Date attribute of Rating class. <br>
+     * Get value from deadlineDate attribute of Rating class. <br>
      *
      * @return deadlineDate it is a <code>java.sql.Date</code>
      */
     public Date getDeadlineDate() {
         return deadlineDate;
+    }
+
+    /**
+     * Get value from deadlineHour attribute of Rating class. <br>
+     *
+     * @return deadlineDate it is an Integer number
+     */
+    public int getDeadlineHour() {
+        return deadlineHour;
+    }
+
+    /**
+     * Set value to deadlineHour attribute of Skill class. <br>
+     *
+     * @param deadlineHour it is an Integer number
+     */
+    public void setDeadlineHour(int deadlineHour) {
+        this.deadlineHour = deadlineHour;
     }
 
     /**
@@ -205,7 +270,7 @@ public class Request {
     /**
      * Set value to Id attribute of Skill class. <br>
      *
-     * @param id it is an int number
+     * @param id it is an Integer number
      */
     public void setId(int id) {
         this.id = id;

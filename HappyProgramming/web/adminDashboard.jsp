@@ -12,186 +12,301 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html style="font-size: 16px;" lang="vi">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="utf-8">
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-        <meta name="page_type" content="np-template-header-footer-from-plugin">
-        <title>Admin dashboard</title>
-        <link rel="stylesheet" href="css/nicepage.css" media="screen">
-        <link rel="stylesheet" href="css/Admin-dashboard.css" media="screen">
-        <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
-        <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
-        <meta name="generator" content="Nicepage 3.25.0, nicepage.com">
-        <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-        <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+<html lang="en">
 
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+  <title>Inner Page - Vesperr Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-        <script type="application/ld+json">{
-            "@context": "http://schema.org",
-            "@type": "Organization",
-            "name": "Happyprogramming",
-            "logo": "images/Logo.png"
-            }</script>
-        <meta name="theme-color" content="#478ac9">
-        <meta property="og:title" content="Admin dashboard">
-        <meta property="og:description" content="">
-        <meta property="og:type" content="website">
-    </head>
-    <%-- Copy from here --%>
-    <body class="u-body">
-        <header class="u-clearfix u-custom-color-1 u-header ">
-            <a href="index.jsp" class="u-image u-logo u-image-1" data-image-width="313" data-image-height="95" t>
-                <img src="images/Logo.png" class="u-logo-image u-logo-image-1">
-            </a>
-            <nav class="u-align-right u-menu x u-offcanvas u-menu-1" data-position="" data-responsive-from="MD">
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-                <div class="u-nav-container">
-                    <ul class="u-custom-font u-nav u-spacing-30 u-text-font u-unstyled u-nav-1">
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="UserControllerMap?service=signOut" style="padding: 10px 36px;">Sign Out</a>
-                        </li>
-                    </ul>
-                </div>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-            </nav>
-        </header>
-        <section class="u-clearfix u-custom-color-1 u-section-1" id="sec-0c40">
-            <div class="u-clearfix u-sheet u-sheet-1">
-                <a href="AdminControllerMap?service=mentorManage" class="u-border-1 u-border-grey-75 u-btn u-button-style u-custom-color-1 u-custom-font u-custom-item u-font-open-sans u-hover-palette-5-dark-1 u-btn-1">Mentor management</a>
-                <a href="AdminControllerMap?service=menteeManage" class="u-border-1 u-border-grey-75 u-btn u-button-style u-custom-color-1 u-custom-font u-custom-item u-font-open-sans u-hover-palette-5-dark-1 u-btn-2">Mentee management</a>
-                <a href="AdminControllerMap?service=skillManage" class="u-border-1 u-border-grey-75 u-btn u-button-style u-custom-color-1 u-custom-font u-custom-item u-font-open-sans u-hover-palette-5-dark-1 u-btn-3">Skill management</a>
-                <a href="AdminControllerMap?service=requestManage" class="u-border-1 u-border-grey-75 u-btn u-button-style u-custom-color-1 u-custom-font u-custom-item u-font-open-sans u-hover-palette-5-dark-1 u-btn-4">Request management</a>
-                <div class="u-shape u-shape-rectangle u-white u-shape-1"></div>
-                <p class="u-text u-text-1">
-                    <span style="font-weight: 700;"> Hi Admin</span>, your analytics are all set
-                </p>
-                <div class="u-list u-list-1">
-                    <div class="u-repeater u-repeater-1">
-                        <div class="u-align-left u-border-2 u-border-grey-75 u-container-style u-list-item u-repeater-item u-white u-list-item-1">
-                            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
-                                <h4 class="u-text u-text-2">Mentor</h4>
-                                <ul class="u-custom-list u-text u-text-3">
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Brand equity audit 
-                                    </li>
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Audience analysis 
-                                    </li>
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Competitive review 
-                                    </li>
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Strategic direction
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="u-align-left u-border-2 u-border-grey-75 u-container-style u-list-item u-repeater-item u-video-cover u-white u-list-item-2">
-                            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-2">
-                                <h4 class="u-text u-text-4">Mentee</h4>
-                                <ul class="u-custom-list u-text u-text-5">
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div> Total<br>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="u-align-left u-border-2 u-border-grey-75 u-container-style u-list-item u-repeater-item u-video-cover u-white u-list-item-3">
-                            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
-                                <h4 class="u-text u-text-6">Request</h4>
-                                <ul class="u-custom-list u-text u-text-7">
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Verbal identity 
-                                    </li>
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Tagline exploration 
-                                    </li>
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Communication style guide
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="u-align-left u-border-2 u-border-grey-75 u-container-style u-list-item u-repeater-item u-video-cover u-white u-list-item-4">
-                            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-4">
-                                <h4 class="u-text u-text-8">Skill</h4>
-                                <ul class="u-custom-list u-text u-text-9">
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Verbal identity 
-                                    </li>
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Tagline exploration 
-                                    </li>
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Communication style guide
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="u-align-left u-border-2 u-border-grey-75 u-container-style u-list-item u-repeater-item u-video-cover u-white u-list-item-5">
-                            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-5">
-                                <h4 class="u-text u-text-10">Total visits</h4>
-                                <ul class="u-custom-list u-text u-text-11">
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Verbal identity 
-                                    </li>
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Tagline exploration 
-                                    </li>
-                                    <li>
-                                        <div class="u-list-icon">
-                                            <div xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content">—</div>
-                                        </div>Communication style guide
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+  <!-- Vendor CSS Files -->
+  <link href="vendor/aos/aos.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/admin.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Vesperr - v4.6.0
+  * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center" style="background-color:#e2f5fde0;">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1><a href="index.html">Vesperr</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar-main" class="navbar-main">
+        <ul>
+          <li><a class="nav-link scrollto" href="#hero">All mentors</a></li>
+          <li><a class="nav-link scrollto" href="#about">All skills</a></li>
+          <li><a class="nav-link scrollto" href="#portfolio">Request</a></li>
+          <li class="dropdown getstarted scrollto "><a href="#" style="color: white; padding: 0;"><span>Sign
+                in</span></a>
+            <ul>
+              <li><a href="signUp.html">Sign up</a></li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li>
+          <li class="dropdown getstarted scrollto "><a href="#"
+              style="color: white; padding: 0;"><span>Profile</span></a>
+            <ul>
+              <li><a href="#">User profile</a></li>
+              <li><a href="#">Log out</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar-main -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <section class="inner-page">
+      <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <div class="container-fluid page-body-wrapper">
+          <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                  <i class="icon-grid menu-icon"></i>
+                  <span class="menu-title">Dashboard</span>
+                </a>
+              </li>
+              <!--SKILL MANAGEMENT-->
+              <li class="nav-item">
+                <a class="nav-link" href="skillManage.html">
+                  <i class="icon-columns menu-icon"></i>
+                  <span class="menu-title">Skill Management</span>
+                </a>
+              </li>
+              <!--Mentor MANAGEMENT-->
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="icon-columns menu-icon"></i>
+                  <span class="menu-title">Mentor Management</span>
+                </a>
+              </li>
+              <!--Mentee MANAGEMENT-->
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="icon-columns menu-icon"></i>
+                  <span class="menu-title">Mentee Management</span>
+                </a>
+              </li>
+              <!--Request MANAGEMENT-->
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="icon-columns menu-icon"></i>
+                  <span class="menu-title">Request Management</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <!-- partial -->
+          <div class="main-panel">
+            <div class="content-wrapper">
+              <div class="row">
+                <div class="col-md-12 grid-margin">
+                  <div class="row">
+                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                      <h3 class="font-weight-bold">Welcome Aamir</h3>
+                      <h6 class="font-weight-normal mb-0">All systems are running smoothly!
                     </div>
+                  </div>
                 </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card tale-bg">
+                    <div class="card-people mt-auto">
+                      <img src="img/people.svg" alt="people">
+                      <div class="weather-info">
+                        <div class="d-flex">
+                          <div>
+                            <h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
+                          </div>
+                          <div class="ml-2">
+                            <h4 class="location font-weight-normal">Bangalore</h4>
+                            <h6 class="font-weight-normal">India</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 grid-margin transparent">
+                  <div class="row">
+                    <div class="col-md-6 mb-4 stretch-card transparent">
+                      <div class="card card-tale">
+                        <div class="card-body">
+                          <p class="mb-4">Today’s Bookings</p>
+                          <p class="fs-30 mb-2">4006</p>
+                          <p>10.00% (30 days)</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4 stretch-card transparent">
+                      <div class="card card-dark-blue">
+                        <div class="card-body">
+                          <p class="mb-4">Total Bookings</p>
+                          <p class="fs-30 mb-2">61344</p>
+                          <p>22.00% (30 days)</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                      <div class="card card-light-blue">
+                        <div class="card-body">
+                          <p class="mb-4">Number of Meetings</p>
+                          <p class="fs-30 mb-2">34040</p>
+                          <p>2.00% (30 days)</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 stretch-card transparent">
+                      <div class="card card-light-danger">
+                        <div class="card-body">
+                          <p class="mb-4">Number of Clients</p>
+                          <p class="fs-30 mb-2">47033</p>
+                          <p>0.22% (30 days)</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <p class="card-title mb-0">Top Products</p>
+                      <div class="table-responsive">
+                        <table class="table table-striped table-borderless">
+                          <thead>
+                            <tr>
+                              <th>Product</th>
+                              <th>Price</th>
+                              <th>Date</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Search Engine Marketing</td>
+                              <td class="font-weight-bold">$362</td>
+                              <td>21 Sep 2018</td>
+                              <td class="font-weight-medium">
+                                <div class="badge badge-success">Completed</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Search Engine Optimization</td>
+                              <td class="font-weight-bold">$116</td>
+                              <td>13 Jun 2018</td>
+                              <td class="font-weight-medium">
+                                <div class="badge badge-success">Completed</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Display Advertising</td>
+                              <td class="font-weight-bold">$551</td>
+                              <td>28 Sep 2018</td>
+                              <td class="font-weight-medium">
+                                <div class="badge badge-warning">Pending</div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </section>
 
+  </main><!-- End #main -->
 
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="row d-flex align-items-center">
+        <div class="col-lg-6 text-lg-left text-center">
+          <div class="copyright">
+            &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
+          </div>
+          <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
+            <a href="#intro" class="scrollto">Home</a>
+            <a href="#about" class="scrollto">About</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
 
-        <footer class="u-align-center u-clearfix u-footer u-white u-footer" id="sec-b0a2"><img class="u-image u-image-1" src="images/logowhite.png" data-image-width="571" data-image-height="388"><a href="https://nicepage.com/wordpress-themes" class="u-active-none u-btn u-btn-rectangle u-button-style u-hover-none u-none u-radius-0 u-text-body-color u-btn-1">0123456789</a><p class="u-text u-text-default u-text-1"> San Jose,Silicon Valley, California</p><p class="u-text u-text-2"> HappyProgramming@gmail.com</p><div class="u-grey-light-2 u-map u-map-1">
-                <div class="embed-responsive">
-                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d287205.9795192053!2d-121.9745609966744!3d37.31390644748984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcae48af93ff5%3A0xb99d8c0aca9f717b!2sSan%20Jose%2C%20California%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1632219783213!5m2!1svi!2s" data-map="JTdCJTIycG9zaXRpb25UeXBlJTIyJTNBJTIybWFwLWVtYmVkJTIyJTJDJTIyYWRkcmVzcyUyMiUzQSUyMk1hbmhhdHRhbiUyQyUyME5ldyUyMFlvcmslMjIlMkMlMjJ6b29tJTIyJTNBMTAlMkMlMjJ0eXBlSWQlMjIlM0ElMjJyb2FkJTIyJTJDJTIybGFuZyUyMiUzQW51bGwlMkMlMjJhcGlLZXklMjIlM0ElMjJkJTIyJTJDJTIybWFya2VycyUyMiUzQSU1QiU1RCUyQyUyMmVtYmVkJTIyJTNBJTIyaHR0cHMlM0ElMkYlMkZ3d3cuZ29vZ2xlLmNvbSUyRm1hcHMlMkZlbWJlZCUzRnBiJTNEITFtMTghMW0xMiExbTMhMWQyODcyMDUuOTc5NTE5MjA1MyEyZC0xMjEuOTc0NTYwOTk2Njc0NCEzZDM3LjMxMzkwNjQ0NzQ4OTg0ITJtMyExZjAhMmYwITNmMCEzbTIhMWkxMDI0ITJpNzY4ITRmMTMuMSEzbTMhMW0yITFzMHg4MDhmY2FlNDhhZjkzZmY1JTI1M0EweGI5OWQ4YzBhY2E5ZjcxN2IhMnNTYW4lMjUyMEpvc2UlMjUyQyUyNTIwQ2FsaWZvcm5pYSUyNTJDJTI1MjBIb2ElMjUyMEslMjVFMSUyNUJCJTI1QjMhNWUwITNtMiExc3ZpITJzITR2MTYzMjIxOTc4MzIxMyE1bTIhMXN2aSEycyUyMiU3RA=="></iframe>
-                </div>
-            </div><img class="u-image u-image-default u-image-2" src="images/contact.png" alt="" data-image-width="177" data-image-height="361"></footer>
-        <section class="u-backlink u-clearfix u-grey-80">
-            <p>Copyright © 2021 HappyProgramming. All rights reserved.</p>
-        </section>
-    </body>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="vendor/aos/aos.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="vendor/php-email-form/validate.js"></script>
+  <script src="vendor/purecounter/purecounter.js"></script>
+  <script src="vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="js/main.js"></script>
+
+</body>
+
 </html>

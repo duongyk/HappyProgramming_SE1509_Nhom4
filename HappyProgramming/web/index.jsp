@@ -11,90 +11,331 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="vi">
+<html lang="en">
+
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
-        <meta name="keywords" content="It's That Design Feeling">
-        <meta name="description" content="">
-        <meta name="page_type" content="np-template-header-footer-from-plugin">
-        <title>Home</title>
-        <link rel="stylesheet" href="css/nicepage.css" media="screen">
-        <link rel="stylesheet" href="css/Home.css" media="screen">
-        <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
-        <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
-        <meta name="generator" content="Nicepage 3.25.0, nicepage.com">
-        <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <meta name="theme-color" content="#478ac9">
-        <meta property="og:title" content="Home">
-        <meta property="og:description" content="">
-        <meta property="og:type" content="website">
+        <title>Vesperr Bootstrap Template - Index</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+
+        <!-- Favicons -->
+        <link href="img/favicon.png" rel="icon">
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="vendor/aos/aos.css" rel="stylesheet">
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="vendor/remixicon/remixicon.css" rel="stylesheet">
+        <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
+        <link href="css/style.css" rel="stylesheet">
+
+
     </head>
-    <%-- Copy from here --%>
 
-    <body class="u-body">
-        <header class="u-clearfix u-custom-color-1 u-header ">
-            <a href="index.jsp" class="u-image u-logo u-image-1" data-image-width="313" data-image-height="95" t>
-                <img src="images/Logo.png" class="u-logo-image u-logo-image-1">
-            </a>
-            <nav class="u-align-right u-menu x u-offcanvas u-menu-1" data-position="" data-responsive-from="MD">
+    <body>
 
-                <div class="u-nav-container">
-                    <ul class="u-custom-font u-nav u-spacing-30 u-text-font u-unstyled u-nav-1">
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="UserControllerMap?service=listAllmentor" style="padding: 10px 36px;">All mentors</a>
-                        </li>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="SkillControllerMap?service=allSkill" style="padding: 10px 36px;">All skills</a>
-                        </li>
-                        <c:choose>
-                            <c:when test="${sessionScope.currUser!=null}">
-                                <li class="u-nav-item"><a
-                                        class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                        href="RequestControllerMap?service=listRequestByMe" style="padding: 10px 36px;">Request</a>
-                                </li> 
-                                <li class="u-nav-item"><a
-                                        class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                        href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
-                                </li> 
+        <!-- ======= Header ======= -->
+        <header id="header" class="fixed-top d-flex align-items-center" style="background-color:#e2f5fde0;">
+            <div class="container d-flex align-items-center justify-content-between">
+
+                <div class="logo">
+                    <h1><a href="index.jsp">Vesperr</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+                </div>
+
+                <nav id="navbar-main" class="navbar-main">
+                    <ul>
+                        <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                            <c:choose>
+                                <c:when test="${sessionScope.currUser!=null}">
+                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
+                                </li>
+                                <li class="dropdown getstarted scrollto ">
+                                    <span style="color: white; padding: 0;">User</span>
+                                    <ul>
+                                        <li><a href="UserControllerMap?service=profile">User profile</a></li>
+                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                    </ul>
+                                </li>
                             </c:when>
                             <c:otherwise>
-                                <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base 
-                                                          u-text-grey-90 u-text-hover-grey-90" 
-                                                          href="SignUp.jsp" style="padding: 10px 16px;">Sign up</a> </li> 
-                                <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base 
-                                                          u-text-grey-90 u-text-hover-grey-90"  
-                                                          href="SignIn.jsp" style="padding: 10px 36px;">Sign-in</a>
+                                <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
+                                        <span>Sign in</span></a>
+                                    <ul>
+                                        <li><a href="SignUp.jsp">Sign up</a>
+                                        </li>
+                                    </ul>
                                 </li>
-                            </c:otherwise>                
+                            </c:otherwise>
                         </c:choose>
                     </ul>
-                </div>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar-main -->
 
-            </nav>
-        </header>
-        <%-- Copy  --%>
-        <section class="u-clearfix u-custom-color-1 u-section-1" id="sec-cd32">
-            <div class="u-clearfix u-sheet u-sheet-1">
-                <img class="u-image u-image-1" src="images/Homepagechalogin.png" data-image-width="1812" data-image-height="917">
             </div>
-        </section>
+        </header><!-- End Header -->
 
+        <!-- ======= Hero Section ======= -->
+        <section id="hero" class="d-flex align-items-center">
 
-
-        <footer class="u-align-center u-clearfix u-footer u-white u-footer" id="sec-b0a2"><img class="u-image u-image-1" src="images/logowhite.png" data-image-width="571" data-image-height="388"><a href="https://nicepage.com/wordpress-themes" class="u-active-none u-btn u-btn-rectangle u-button-style u-hover-none u-none u-radius-0 u-text-body-color u-btn-1">0123456789</a><p class="u-text u-text-default u-text-1"> San Jose,Silicon Valley, California</p><p class="u-text u-text-2"> HappyProgramming@gmail.com</p><div class="u-grey-light-2 u-map u-map-1">
-                <div class="embed-responsive">
-                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d287205.9795192053!2d-121.9745609966744!3d37.31390644748984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcae48af93ff5%3A0xb99d8c0aca9f717b!2sSan%20Jose%2C%20California%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1632219783213!5m2!1svi!2s" data-map="JTdCJTIycG9zaXRpb25UeXBlJTIyJTNBJTIybWFwLWVtYmVkJTIyJTJDJTIyYWRkcmVzcyUyMiUzQSUyMk1hbmhhdHRhbiUyQyUyME5ldyUyMFlvcmslMjIlMkMlMjJ6b29tJTIyJTNBMTAlMkMlMjJ0eXBlSWQlMjIlM0ElMjJyb2FkJTIyJTJDJTIybGFuZyUyMiUzQW51bGwlMkMlMjJhcGlLZXklMjIlM0ElMjJkJTIyJTJDJTIybWFya2VycyUyMiUzQSU1QiU1RCUyQyUyMmVtYmVkJTIyJTNBJTIyaHR0cHMlM0ElMkYlMkZ3d3cuZ29vZ2xlLmNvbSUyRm1hcHMlMkZlbWJlZCUzRnBiJTNEITFtMTghMW0xMiExbTMhMWQyODcyMDUuOTc5NTE5MjA1MyEyZC0xMjEuOTc0NTYwOTk2Njc0NCEzZDM3LjMxMzkwNjQ0NzQ4OTg0ITJtMyExZjAhMmYwITNmMCEzbTIhMWkxMDI0ITJpNzY4ITRmMTMuMSEzbTMhMW0yITFzMHg4MDhmY2FlNDhhZjkzZmY1JTI1M0EweGI5OWQ4YzBhY2E5ZjcxN2IhMnNTYW4lMjUyMEpvc2UlMjUyQyUyNTIwQ2FsaWZvcm5pYSUyNTJDJTI1MjBIb2ElMjUyMEslMjVFMSUyNUJCJTI1QjMhNWUwITNtMiExc3ZpITJzITR2MTYzMjIxOTc4MzIxMyE1bTIhMXN2aSEycyUyMiU3RA=="></iframe>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                        <h1 data-aos="fade-up">Make it work <br>
+                            Make it right<br>
+                            Make it fast.</h1>
+                        <h2 data-aos="fade-up" data-aos-delay="400" style="  margin-top: 40px;  font-size: 18px;">Vesperr is a system
+                            which mainly allows mentors, mentees <br> and other actors to connect online and mentees to learn
+                            programming.
+                        </h2>
+                    </div>
+                    <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
+                        <img src="img/hero-img.png" class="img-fluid animated" alt="">
+                    </div>
                 </div>
-            </div><img class="u-image u-image-default u-image-2" src="images/contact.png" alt="" data-image-width="177" data-image-height="361"></footer>
-            <%-- Copy from here --%>
-        <section class="u-backlink u-clearfix u-grey-80">
-            <p>Copyright © 2021 HappyProgramming. All rights reserved.</p>
-        </section>
-        <%-- Copy  --%>
+            </div>
+
+        </section><!-- End Hero -->
+
+        <main id="main">
+
+            <!-- ======= About Us Section ======= -->
+            <section id="about" class="about" style="padding-top: 0;">
+                <div class="container">
+
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>About Us</h2>
+                    </div>
+
+                    <div class="row content">
+                        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                                dolore
+                                magna aliqua.
+                            </p>
+                            <ul>
+                                <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+                                <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+                                <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
+                            <p>
+                                was founded in 2020 with a vision of providing life-transforming learning experiences to learners around
+                                the world. Today, POTOUB is a global online learning platform that offers anyone, anywhere, access to
+                                online courses and degrees from leading universities and companies. POTOUB received B Corp certification
+                                in February 2021, which means that we have a legal duty not only to our shareholders, but to also make a
+                                positive impact on society more broadly, as we continue our efforts to reduce barriers to world-class
+                                education for all.
+                            </p>
+                            <a href="#" class="btn-learn-more">Learn More</a>
+                        </div>
+                    </div>
+
+                </div>
+            </section><!-- End About Us Section -->
+            <!-- ======= Services Section ======= -->
+            <section id="services" class="services">
+                <div class="container">
+
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>Services</h2>
+                        <p>Magnam dolores commodi suscipit eius consequatur ex aliquid fug</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                                <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                                <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+                                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                                <div class="icon"><i class="bx bx-file"></i></div>
+                                <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+                                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                                <div class="icon"><i class="bx bx-tachometer"></i></div>
+                                <h4 class="title"><a href="">Magni Dolores</a></h4>
+                                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+                                <div class="icon"><i class="bx bx-world"></i></div>
+                                <h4 class="title"><a href="">Nemo Enim</a></h4>
+                                <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section><!-- End Services Section -->
+
+            <!-- ======= F.A.Q Section ======= -->
+            <section id="faq" class="faq">
+                <div class="container">
+
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>Frequently Asked Questions</h2>
+                    </div>
+
+                    <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                        <div class="col-lg-5">
+                            <i class="ri-question-line"></i>
+                            <h4>Non consectetur a erat nam at lectus urna duis?</h4>
+                        </div>
+                        <div class="col-lg-7">
+                            <p>
+                                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida.
+                                Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                            </p>
+                        </div>
+                    </div><!-- End F.A.Q Item-->
+
+                    <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                        <div class="col-lg-5">
+                            <i class="ri-question-line"></i>
+                            <h4>Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?</h4>
+                        </div>
+                        <div class="col-lg-7">
+                            <p>
+                                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec
+                                ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit
+                                ullamcorper dignissim.
+                            </p>
+                        </div>
+                    </div><!-- End F.A.Q Item-->
+
+
+                </div>
+            </section><!-- End F.A.Q Section -->
+
+            <!-- ======= Contact Section ======= -->
+            <section id="contact" class="contact">
+                <div class="container">
+
+                    <div class="section-title" data-aos="fade-up">
+                        <h2>Contact Us</h2>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="contact-about">
+                                <h3>Vesperr</h3>
+                                <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque
+                                    felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+                                <div class="social-links">
+                                    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
+                            <div class="info">
+                                <div>
+                                    <i class="ri-map-pin-line"></i>
+                                    <p>A108 Adam Street<br>New York, NY 535022</p>
+                                </div>
+
+                                <div>
+                                    <i class="ri-mail-send-line"></i>
+                                    <p>info@example.com</p>
+                                </div>
+
+                                <div>
+                                    <i class="ri-phone-line"></i>
+                                    <p>+1 5589 55488 55s</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
+
+
+
+
+
+
+                            <!--MAP-->
+                        </div>
+
+                    </div>
+
+                </div>
+            </section><!-- End Contact Section -->
+
+        </main><!-- End #main -->
+
+        <!-- ======= Footer ======= -->
+        <footer id="footer">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-6 text-lg-left text-center">
+                        <div class="copyright">
+                            &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
+                        </div>
+                        <div class="credits">
+                            <!-- All the links in the footer should remain intact. -->
+                            <!-- You can delete the links only if you purchased the pro version. -->
+                            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
+                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
+                            <a href="#intro" class="scrollto">Home</a>
+                            <a href="#about" class="scrollto">About</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Use</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </footer><!-- End Footer -->
+
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                class="bi bi-arrow-up-short"></i></a>
+
+        <!-- Vendor JS Files -->
+        <script src="vendor/aos/aos.js"></script>
+        <script src="vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="vendor/swiper/swiper-bundle.min.js"></script>
+
+        <!-- Template Main JS File -->
+        <script src="js/main.js"></script>
 
     </body>
+
 </html>

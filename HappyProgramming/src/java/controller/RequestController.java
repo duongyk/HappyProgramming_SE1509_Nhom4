@@ -67,14 +67,17 @@ public class RequestController extends HttpServlet {
                 service = "";
             }
 
-            // Get list request of the user (Mentee/mentor)
+            // Get list request of the user (Mentee/mentor) and Statistic requests
             if (service.equalsIgnoreCase("listRequestByMe")) {
                 //get current user
                 User user = (User) request.getSession().getAttribute("currUser");
                 //get list request of the user
                 ArrayList<Request> listRequest = requestDAO.getListByMe(user);
-
+                // get statistic requests
+                ArrayList<Integer> statistic = requestDAO.getStatistic(user.getId());
+                
                 request.setAttribute("listRequest", listRequest);
+                request.setAttribute("statistic", statistic);
                 sendDispatcher(request, response, "listRequestByMe.jsp");
             }
             /* load create request screen */
@@ -109,6 +112,41 @@ public class RequestController extends HttpServlet {
                 }
 
                 sendDispatcher(request, response, "index.jsp");
+            }
+            
+            /* view detail of a Request */
+            if (service.equalsIgnoreCase("viewRequest")) {
+                // get request
+                int rId = Integer.parseInt(request.getParameter("rId"));
+                Request req = requestDAO.getRequestById(rId);
+                request.setAttribute("req", req);
+                sendDispatcher(request, response, "viewRequest.jsp");
+            }
+            
+            /* Show form to edit detail of a Request */
+            if (service.equalsIgnoreCase("editRequestForm")) {
+                // get request
+                int rId = Integer.parseInt(request.getParameter("rId"));
+                Request req = requestDAO.getRequestById(rId);
+                
+                request.setAttribute("req", req);
+                sendDispatcher(request, response, "editRequest.jsp");
+            }
+            
+            /* Edit detail of a Request */
+            if (service.equalsIgnoreCase("editRequest")) {
+                // get request ID
+                int rId = Integer.parseInt(request.getParameter("rId"));
+                // get new input information
+                String title = request.getParameter("title");
+                String content = request.getParameter("content");
+                Date deadlineDate = Date.valueOf(request.getParameter("deadlineDate"));
+                int deadlineHour = Integer.parseInt(request.getParameter("deadlineHour"));
+                int status = Integer.parseInt(request.getParameter("status"));
+                Request req = new Request(rId, title, content, deadlineDate, deadlineHour, status);
+                requestDAO.updateRequest(req);
+                
+                sendDispatcher(request, response, "RequestControllerMap?service=viewRequest&rId="+rId);
             }
         }
     }
