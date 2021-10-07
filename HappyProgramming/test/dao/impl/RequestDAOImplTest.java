@@ -70,5 +70,24 @@ public class RequestDAOImplTest {
         assertEquals(expResult, result);
         
     }
+
+    /**
+     * Test of getRequestListBy_Id_And_Status method, of class RequestDAOImpl.
+     */
+    @Test
+    public void testGetRequestListBy_Id_And_Status() throws Exception {
+        System.out.println("getRequestListBy_Id_And_Status");
+        int uid = 1;
+        int status = 1;
+        
+        RequestDAOImpl instance = new RequestDAOImpl();
+        int expResult = 1;
+        ArrayList<Request> list = instance.getRequestListBy_Id_And_Status(uid, status);
+        
+        int result = list.size();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
     
 }

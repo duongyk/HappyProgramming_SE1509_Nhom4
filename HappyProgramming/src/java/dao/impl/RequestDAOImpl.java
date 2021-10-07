@@ -10,6 +10,7 @@
 package dao.impl;
 
 import context.DBContext;
+import dao.UserDAO;
 import entity.Request;
 import entity.User;
 import java.sql.Connection;
@@ -103,6 +104,47 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
             closeConnection(conn);
         }
         return n;
+    }
+
+    @Override
+    public ArrayList<Request> getRequestListBy_Id_And_Status(int uid, int status) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        ArrayList<Request> requestList = new ArrayList();
+        UserDAO userdao = new UserDAOImpl();
+        
+        String sql = "select * from Request where (fromId=? or toId=?) and rStatus=? ";
+        
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            
+            ps.setInt(1, uid);
+            ps.setInt(2, uid);
+            ps.setInt(3, status);
+            
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Request req = new Request(rs.getInt("rId"), rs.getString("title"), rs.getString("content"), userdao.getUserById(rs.getInt("fromId")), userdao.getUserById(rs.getInt("toId")), Date.valueOf(rs.getString("deadlineDate")), status);
+            
+                requestList.add(req);
+            }
+            
+            
+            
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        
+        return requestList;
+       
     }
 
 }

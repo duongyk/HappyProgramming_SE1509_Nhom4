@@ -36,4 +36,9 @@ public interface RequestDAO {
      * @throws Exception
      */
     public int createRequest(Request req) throws Exception;
+    
+    public ArrayList<Request> getRequestListBy_Id_And_Status(int uid, int status) throws Exception;
+    
+    
+    
 }
