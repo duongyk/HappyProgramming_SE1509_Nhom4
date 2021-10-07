@@ -74,10 +74,10 @@
                                 </li>
                             </c:when>
                             <c:otherwise>
-                                <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
+                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
-                                        <li><a href="SignUp.jsp">Sign up</a>
+                                        <li><a href="signUp.jsp">Sign up</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -115,6 +115,18 @@ public class UserController extends HttpServlet {
                     }
                 }
             }
+            if (service.equals("changepass")) {
+                String email = request.getParameter("email");
+                String newPass = request.getParameter("passwordr");
+                String rePass = request.getParameter("repass");
+                User user = new User();
+                if (!newPass.equals(rePass)) {
+                    request.setAttribute("error_code", "your input is incorect pls try again");
+                    RequestDispatcher rd = request.getRequestDispatcher("/changPass.jsp");
+                    rd.include(request, response);
+                }
+
+            }
 
             if (service.equalsIgnoreCase("logOut")) {
                 request.getSession().removeAttribute("currUser");
