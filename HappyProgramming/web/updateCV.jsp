@@ -84,7 +84,7 @@
             </div>
             <div class="u-form-group u-form-group-2">
               <label for="text-3911" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="Fullname" id="text-3911" name="fullname" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${mentorprofile.getFullname()}"></c:out>" required="required">
+              <input type="text" placeholder="Fullname" id="text-3911" name="fullname" pattern=".*\S+.*" title="No white space only" maxlength="30" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" value="<c:out value="${mentorprofile.getFullname()}"></c:out>" required="required">
             </div>
             <div class="u-form-date u-form-group u-form-partition-factor-2 u-form-group-3">
               <label for="text-13e0" class="u-label">Date of birth</label>
@@ -119,19 +119,19 @@
             </div>
             <div class="u-form-group u-form-group-7">
                 <label for="text-1c7c" class="u-form-control-hidden u-label"></label>
-                <input type="text" placeholder="Profession" id="text-1c7c" name="profession" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" value="<c:out value="${mentorcv.getProfession()}"></c:out>">
+                <input type="text" placeholder="Profession" id="text-1c7c" name="profession" pattern=".*\S+.*" title="No white space only"  maxlength="20" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" value="<c:out value="${mentorcv.getProfession()}"></c:out>">
             </div>
             <div class="u-form-group u-form-message u-form-group-8">
                 <label for="text-b048" class="u-form-control-hidden u-label"></label>
-                <textarea placeholder="Profession introduction" id="text-b048" name="professionIntro" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" ><c:out value="${mentorcv.getProfessionIntro()}"></c:out></textarea>
+                <textarea placeholder="Profession introduction" id="text-b048" name="professionIntro" pattern=".*\S+.*" title="No white space only" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" ><c:out value="${mentorcv.getProfessionIntro()}"></c:out></textarea>
             </div>
             <div class="u-form-group u-form-message u-form-group-9">
                 <label for="text-47b9" class="u-form-control-hidden u-label"></label>
-                <textarea placeholder="Service description" id="text-47b9" name="serviceDescription" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required="required"><c:out value="${mentorcv.getServiceDescript()}"></c:out></textarea>
+                <textarea placeholder="Service description" id="text-47b9" name="serviceDescription" pattern=".*\S+.*" title="No white space only" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required="required"><c:out value="${mentorcv.getServiceDescript()}"></c:out></textarea>
             </div>
             <div class="u-form-group u-form-textarea u-form-group-10">
                 <label for="textarea-3873" class="u-form-control-hidden u-label"></label>
-                <textarea rows="4" cols="50" id="textarea-3873" name="achievement" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" placeholder="Achievement"><c:out value="${mentorcv.getAchivement()}"></c:out></textarea>
+                <textarea rows="4" cols="50" id="textarea-3873" name="achievement" pattern=".*\S+.*" title="No white space only" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" placeholder="Achievement"><c:out value="${mentorcv.getAchivement()}"></c:out></textarea>
             </div>           
             <div class="u-form-group u-form-textarea u-form-group-11">
                 <p>Skills:</p>

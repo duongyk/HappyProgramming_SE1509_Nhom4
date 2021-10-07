@@ -5,6 +5,7 @@
  */
 package dao.impl;
 
+import dao.UserSkillDAO;
 import entity.Skill;
 import java.util.ArrayList;
 import org.junit.After;
@@ -18,9 +19,9 @@ import static org.junit.Assert.*;
  *
  * @author PC
  */
-public class SkillMentorDAOImplTest {
+public class UserSkillDAOImplTest {
     
-    public SkillMentorDAOImplTest() {
+    public UserSkillDAOImplTest() {
     }
     
     @BeforeClass
@@ -46,7 +47,7 @@ public class SkillMentorDAOImplTest {
     public void testGetAll_Skill_Mentor() throws Exception {
         System.out.println("getAll_Skill_Mentor");
         int uid = 22;
-        SkillMentorDAOImpl instance = new SkillMentorDAOImpl();
+        UserSkillDAO instance = new UserSkillDAOImpl();
         int expResult = 3;
         int result = instance.getAll_Skill_Mentor(uid).size();
         assertEquals(expResult, result);
@@ -61,7 +62,7 @@ public class SkillMentorDAOImplTest {
         System.out.println("getAll_Id_Skill_Mentor");
         int uId = 22;
         
-        SkillMentorDAOImpl instance = new SkillMentorDAOImpl();
+        UserSkillDAO instance = new UserSkillDAOImpl();
         int expResult = 3;
         int result = instance.getAll_Id_Skill_Mentor(uId).size();
         
@@ -77,7 +78,7 @@ public class SkillMentorDAOImplTest {
         System.out.println("updateMentorSkill");
         int uId = 22;
         String[] skill_ids = {"2","3","4"};
-        SkillMentorDAOImpl instance = new SkillMentorDAOImpl();
+        UserSkillDAO instance = new UserSkillDAOImpl();
         int expResult = 1;
         int result = instance.updateMentorSkill(uId, skill_ids);
         

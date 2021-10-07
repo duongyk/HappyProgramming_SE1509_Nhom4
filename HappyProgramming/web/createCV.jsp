@@ -72,23 +72,23 @@
             <div class="u-clearfix u-sheet u-sheet-1">
                 <h4 class="u-text u-text-default u-text-1">CREATE CV</h4>
                 <div class="u-form u-form-1">
-                    <form action="CVControllerMap?service=submitCreateForm" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-13 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 5px;" redirect="true">
+                    <form action="CVControllerMap?service=submitCreateForm" id="thisform" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-13 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 5px;" redirect="true">
                         <input type="hidden" name="uid" value="<c:out value="${uid}" ></c:out>" />
                         <div class="u-form-group u-form-group-1">
                             <label for="text-b048" class="u-form-control-hidden u-label"></label>
-                            <input type="text" placeholder="Profession" id="text-b048" name="profession" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                            <input type="text" placeholder="Profession" id="text-b048" name="profession" pattern=".*\S+.*" title="No white space only" maxlength="20" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
                         </div>
                         <div class="u-form-group u-form-group-2">
                             <label for="text-3911" class="u-form-control-hidden u-label"></label>
-                            <input type="text" id="text-3911" name="professionIntro" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" placeholder="Profession introduction">
+                            <input type="text" id="text-3911" name="professionIntro" pattern=".*\S+.*" title="No white space only" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" placeholder="Profession introduction">
                         </div>
                         <div class="u-form-group u-form-message u-form-group-3">
                             <label for="text-47b9" class="u-form-control-hidden u-label"></label>
-                            <textarea placeholder="Service description" id="text-47b9" name="serviceDescript" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required="required"></textarea>
+                            <textarea placeholder="Service description" id="text-47b9" name="serviceDescription" pattern=".*\S+.*" title="No white space only" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required="required"></textarea>
                         </div>
                         <div class="u-form-group u-form-message u-form-group-4">
                             <label for="text-0855" class="u-form-control-hidden u-label"></label>
-                            <textarea placeholder="Achievement" id="text-0855" name="achievement" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required"></textarea>
+                            <textarea placeholder="Achievement" id="text-0855" name="achievement" pattern=".*\S+.*" title="No white space only" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required"></textarea>
                         </div>
                         <div class="u-form-group u-form-select u-form-group-5">
                             <label for="select-6004" class="u-label">Select skill</label>
@@ -131,8 +131,12 @@
                         <input type="hidden" value="" name="recaptchaResponse">
                     </form>
                 </div>
-                <img class="u-image u-image-default u-preserve-proportions u-image-1" src="images/79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png" alt="" data-image-width="1280" data-image-height="1280">
-                <a href="https://nicepage.com/joomla-templates" class="u-border-2 u-border-black u-btn u-button-style u-hover-custom-color-3 u-none u-text-black u-text-hover-white u-btn-2">Change avatar</a>
+                <img id="image" class="u-image u-image-default u-preserve-proportions u-image-1" src="images/<c:out value="${currUser.getAvatar()}"></c:out>" alt="" data-image-width="1280" data-image-height="1280">     
+        
+                <input id="avatarURL" form="thisform" onchange="changeImage()" type="file" name="avatar" value="" style="width: 162px;" class="u-border-2 u-border-black u-btn u-button-style u-hover-custom-color-3 u-none u-text-black u-text-hover-white u-btn-2 />
+                
+                <p class="u-text u-text-default u-text-2"> </p>
+                <p class="u-text u-text-default u-text-2"> </p>   
             </div>
         </section>
 
