@@ -25,7 +25,7 @@
         
 
         <c:choose>
-            <c:when test="${user.id==1}">               
+            <c:when test="${user.role==1}">               
               <a href="${"UserControllerMap?service=updateProfile&uId="}${user.id}">Update Profile</a><br>
             </c:when>
               <c:otherwise>            
