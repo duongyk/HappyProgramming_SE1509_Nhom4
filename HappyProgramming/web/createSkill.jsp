@@ -39,6 +39,9 @@
   <link href="vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+  <!-- Javascript File -->
+  <script class="u-script" type="text/javascript" src="js/changeAvatar.js" defer=""></script>
+  
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/login.css" rel="stylesheet">
@@ -136,8 +139,17 @@
                   <div class="name">Image</div>
                   <div class="value">
                     <div class="input-group">
-                      <input class="input--style-5" type="text" name="sImage" required="required" pattern="^(https?|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]" title="
+                      <input id="avatarURL" onchange="changeImage()" class="input--style-5" type="file" name="sImage" required="required" pattern="^(https?|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]" title="
                                Please enter a valid photo URL">
+                    </div>
+                  </div>
+                </div>
+                  
+                <div class="form-row">
+                  <div class="name"></div>
+                  <div class="value">
+                    <div class="input-group">
+                        <img id="image" style="height: 162px;" class="" src="img/79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png" alt="" >
                     </div>
                   </div>
                 </div>

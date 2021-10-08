@@ -82,7 +82,7 @@ public class RequestDAOImplTest {
         
         RequestDAOImpl instance = new RequestDAOImpl();
         int expResult = 1;
-        ArrayList<Request> list = instance.getRequestListBy_Id_And_Status(uid, status);
+        ArrayList<Request> list = instance.getRequestListBy_uId_And_Status(uid, status);
         
         int result = list.size();
         assertEquals(expResult, result);

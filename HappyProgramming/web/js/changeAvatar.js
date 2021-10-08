@@ -6,5 +6,5 @@
 
 function changeImage() {
     var path = document.getElementById("avatarURL").value;
-    document.getElementById("image").src = "images//" + path.replace(/^.*\\/, "");
+    document.getElementById("image").src = "img//" + path.replace(/^.*\\/, "");
 }
