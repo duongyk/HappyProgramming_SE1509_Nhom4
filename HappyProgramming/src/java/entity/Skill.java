@@ -38,6 +38,11 @@ public class Skill {
     private String image;
     
     /**
+     * Image link of (Skill)
+     */
+    private int status;
+    
+    /**
      * Constructor.<br>
      */
     public Skill() {
@@ -58,14 +63,16 @@ public class Skill {
      * @param name it is a <code>java.lang.String</code>
      * @param detail it is a <code>java.lang.String</code>
      * @param image <code>java.lang.String</code>
+     * @param status it is a int number
      */
-    public Skill(int id, String name, String detail, String image) {
+    public Skill(int id, String name, String detail, String image, int status) {
         this.id = id;
         this.name = name;
         this.detail = detail;
         this.image = image;
+        this.status = status;
     }
-    
+
     /**
      * Constructor.<br>
      *
@@ -151,4 +158,21 @@ public class Skill {
         this.image = image;
     }
 
+    /**
+     * Get value from attribute of Skill class. <br>
+     *
+     * @return status it is a int number
+     */
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * Set value from attribute of Skill class. <br>
+     *
+     * @return status it is a int number
+     */
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }

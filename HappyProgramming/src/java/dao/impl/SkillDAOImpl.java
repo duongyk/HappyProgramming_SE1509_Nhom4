@@ -41,6 +41,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         ArrayList<Skill> list = new ArrayList<>();
         String sql = "select * from [Skill]";
         int id;
+        int status;
         String name;
         String detail;
         String image;
@@ -54,7 +55,8 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
                 name = rs.getString("sName");
                 detail = rs.getString("sDetail");
                 image = rs.getString("sImage");
-                s = new Skill(id, name, detail, image);
+                status = rs.getInt("sStatus");
+                s = new Skill(id, name, detail, image, status);
                 list.add(s);
             }
         } catch (Exception ex) {
@@ -75,6 +77,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         ArrayList<Skill> list = new ArrayList<>();
         String sql = "select * from [Skill] where sName like '%" + sName + "%'";
         int id;
+        int status;
         String name;
         String detail;
         String image;
@@ -88,7 +91,8 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
                 name = rs.getString("sName");
                 detail = rs.getString("sDetail");
                 image = rs.getString("sImage");
-                s = new Skill(id, name, detail, image);
+                status = rs.getInt("sStatus");
+                s = new Skill(id, name, detail, image, status);
                 list.add(s);
             }
         } catch (Exception ex) {
