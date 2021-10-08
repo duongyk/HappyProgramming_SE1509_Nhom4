@@ -40,7 +40,7 @@
 
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
-
+        <link href="css/login.css" rel="stylesheet">
 
     </head>
 
@@ -108,21 +108,14 @@
 
                             <div class="card-body">
                                 <form action="UserControllerMap" method="POST">
-                                    <<<<<<< HEAD
                                     <input type="hidden" name="service" value="login">
-                                    =======
-                                    >>>>>>> b2c8777f60d12bd5246aa0a85ce9a82973d7d3bb
                                     <div class="form-row m-b-55">
                                         <div class="name">user Name</div>
                                         <div class="value">
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <<<<<<< HEAD
-                                                        <input class="input--style-5" type="text" name="username" required="required">
-                                                        =======
                                                         <input class="input--style-5" type="text" name="username" pattern=".{4,20}" required="required">
-                                                        >>>>>>> b2c8777f60d12bd5246aa0a85ce9a82973d7d3bb
                                                         <!--                          <label class="label--desc">User Name</label>-->
                                                     </div>
                                                 </div>
@@ -133,24 +126,10 @@
                                         <div class="name">password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <<<<<<< HEAD
-                                                <input class="input--style-5" type="password" name="password">
+                                                <input class="input--style-5" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-
-
-
-                                    =======
-                                    <input class="input--style-5" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
-                                    </div>
-                                    </div>
-                                    </div>
-                                    >>>>>>> b2c8777f60d12bd5246aa0a85ce9a82973d7d3bb
                                     <div>
                                         <button class="btn btn--radius-2 btn--red" type="submit">sign in</button>
                                     </div>
