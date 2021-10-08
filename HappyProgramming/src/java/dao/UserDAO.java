@@ -81,5 +81,9 @@ public interface UserDAO {
      * @throws Exception
      */
     public int updateUserInfo(int uId, User user) throws Exception;
-
+    
+    public User getUserByEmail(String email) throws Exception;
+    
+    public User resetPassword(String email) throws Exception;
+    
 }

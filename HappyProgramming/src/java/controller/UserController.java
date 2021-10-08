@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.EmailService;
 import dao.RatingDAO;
 import dao.RequestDAO;
 import dao.UserDAO;
@@ -24,6 +25,7 @@ import dao.impl.UserDAOImpl;
 import dao.impl.RequestDAOImpl;
 import entity.Request;
 import java.sql.Date;
+import util.SendEmail;
 
 /**
  *
@@ -151,6 +153,22 @@ public class UserController extends HttpServlet {
                 request.setAttribute("mList", mList);
                 sendDispatcher(request, response, "allMentor.jsp");
             }
+            
+            if (service.equalsIgnoreCase("resetPassword")) {
+                String email = request.getParameter("email").trim();
+                User u = userDAO.getUserByEmail(email);
+                
+                SendEmail sm = new SendEmail();
+                
+                User user = userDAO.resetPassword(u.getMail());
+                sendDispatcher(request, response, "index.jsp");
+                
+                int test = sm.sendEmail(u);
+                
+//                sendDispatcher(request, response, "index.jsp");
+//                emailServ.sendEmail(getServletContext(), user, "forgot");
+            }
+            
         }
     }
 

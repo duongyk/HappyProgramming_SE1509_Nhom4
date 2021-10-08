@@ -276,4 +276,72 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return list;
     }
 
+    @Override
+    public User getUserByEmail(String email) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "Select * from [User] where uMail = '" + email + "'";
+        String username;
+        String password;
+        String fullname;
+        String mail;
+        String phone;
+        String gender;
+        String avatar;
+        Date dob;
+        User user = null;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                username = rs.getString("username");
+                password = rs.getString("password");
+                fullname = rs.getString("fullname");
+                mail = rs.getString("uMail");
+                phone = rs.getString("uPhone");
+                dob = rs.getDate("DOB");
+                gender = rs.getString("gender");
+                avatar = rs.getString("uAvatar");
+                user = new User(username, password, fullname, mail, phone, dob, gender, avatar);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return user;
+    }
+    
+    @Override
+    public User resetPassword(String email) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String newPass = String.valueOf((int) (Math.random() * ((9999 - 1000) + 1)) - 1000);
+        
+        String sql = "update [User] set [password] = ? where uMail = '"+email+"'";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, newPass);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return null;
+    }
+    
+    public static void main(String[] args) throws Exception {
+        UserDAOImpl dao = new UserDAOImpl();
+        System.out.println(dao.getUserByEmail("hajimenagumo911@gmail.com"));
+    }
 }
