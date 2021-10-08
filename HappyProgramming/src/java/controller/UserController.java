@@ -96,22 +96,22 @@ public class UserController extends HttpServlet {
                 User user = new User(userName, password, fname, mail, phone, dob, sex, "", 1);
                 if (!password.equals(repass)) {
                     // js: ko trung pass
-                    response.sendRedirect("SignUp.jsp");
+                    response.sendRedirect("signUp.jsp");
                 } else {
 
                     User a = userDAO.checkAccount(userName);
                     if (a == null) { // check xem ton tai chua, chua thi dc sign up
                         userDAO.signUp(user);
                         if (role == 1) {
-                            response.sendRedirect("SignIn.jsp");
+                            response.sendRedirect("signIn.jsp");
                         } else {
-                            response.sendRedirect("SignIn.jsp");
+                            response.sendRedirect("signIn.jsp");
                             //response.sendRedirect("CVControllerMap?service=createCV&uId="+a.getuId());
                         }
                         // khi dang ki hoan tat se cha nguoi dung ve page login
                     } else { //neu co roi se day ve trang sighn up
                         // mess= "user name existed!"
-                        response.sendRedirect("SignUp.jsp");
+                        response.sendRedirect("signUp.jsp");
                     }
                 }
             }
