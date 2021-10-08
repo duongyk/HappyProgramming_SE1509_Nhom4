@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * This class implements from class interface UserDAOImpl. <br>
@@ -98,8 +99,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
                         rs.getString("fullname"), rs.getString("uMail"), rs.getString("uPhone"),
                         rs.getDate("dob"), rs.getString("gender"), rs.getString("uAvatar"), rs.getInt("uRole"));
             }
-            rs.close();
-            ps.close();
+
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -170,6 +170,26 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
 
     }
 
+    public void changePass(String uMail, String newPass) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "UPDATE [user] SET password=? WHERE email =?";
+
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, newPass);
+            ps.setString(2, uMail);
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+    }
+
     //viet thang
     @Override
     public int updateUserInfo(int uid, User user) throws Exception {
@@ -196,14 +216,14 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
 
-            ps.setString(1,user.getFullname());
-            ps.setString(2,user.getMail());
-            ps.setString(3,user.getPhone());
+            ps.setString(1, user.getFullname());
+            ps.setString(2, user.getMail());
+            ps.setString(3, user.getPhone());
             ps.setString(4, stringDOB);
             ps.setString(5, user.getGender());
             ps.setString(6, user.getAvatar());
             ps.setInt(7, uid);
-            
+
             status = ps.executeUpdate();
 
         } catch (Exception ex) {

@@ -58,7 +58,7 @@
   <div class="container d-flex align-items-center justify-content-between">
 
     <div class="logo">
-      <h1><a href="index.html">Vesperr</a></h1>
+      <h1><a href="index.jsp">Vesperr</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
     </div>
@@ -140,19 +140,20 @@
                     </div>
                   </div>
                 </div>
-                  <div class="form-row">
-                  <div class="name">Full Name</div>
-                  <div class="value">
-                    <div class="input-group">
-                      <input class="input--style-5" type="text" name="fullname">
-                    </div>
-                  </div>
-                </div>
+                  
                   <div class="form-row">
                   <div class="name">repeat password</div>
                   <div class="value">
                     <div class="input-group">
                       <input class="input--style-5" type="password" name="confirm">
+                    </div>
+                  </div>
+                </div>
+                  <div class="form-row">
+                  <div class="name">Full Name</div>
+                  <div class="value">
+                    <div class="input-group">
+                      <input class="input--style-5" type="text" name="fullname">
                     </div>
                   </div>
                 </div>
@@ -188,8 +189,8 @@
                       <div class="rs-select2 js-select-simple select--no-search">
                         <select name="role">
                           <option disabled="disabled" selected="selected">Choose a role</option>
-                          <option>Mentor</option>
-                          <option>Mentee</option>
+                           <option value="1">Mentor</option>
+                           <option value="2">Mentee</option>
                         </select>
                         <div class="select-dropdown"></div>
                       </div>
