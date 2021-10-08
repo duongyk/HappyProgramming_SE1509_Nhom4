@@ -12,50 +12,6 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-
-    <head>
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-        <title>Inner Page - Vesperr Bootstrap Template</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
-
-        <!-- Favicons -->
-        <link href="img/favicon.png" rel="icon">
-        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-        <!-- Google Fonts -->
-        <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
-
-        <!-- Vendor CSS Files -->
-        <link href="vendor/aos/aos.css" rel="stylesheet">
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-        <link href="vendor/remixicon/remixicon.css" rel="stylesheet">
-        <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-        <!-- Template Main CSS File -->
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/login.css" rel="stylesheet">
-
-        <!-- =======================================================
-        * Template Name: Vesperr - v4.6.0
-        * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
-    </head>
-
-    <body>
-
-       <!DOCTYPE html>
-<html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -95,7 +51,7 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1><a href="index.jsp">Vesperr</a></h1>
+                    <h1><a href="index.html">Vesperr</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
@@ -152,14 +108,21 @@
 
                             <div class="card-body">
                                 <form action="UserControllerMap" method="POST">
+                                    <<<<<<< HEAD
                                     <input type="hidden" name="service" value="login">
+                                    =======
+                                    >>>>>>> b2c8777f60d12bd5246aa0a85ce9a82973d7d3bb
                                     <div class="form-row m-b-55">
                                         <div class="name">user Name</div>
                                         <div class="value">
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
+                                                        <<<<<<< HEAD
                                                         <input class="input--style-5" type="text" name="username" required="required">
+                                                        =======
+                                                        <input class="input--style-5" type="text" name="username" pattern=".{4,20}" required="required">
+                                                        >>>>>>> b2c8777f60d12bd5246aa0a85ce9a82973d7d3bb
                                                         <!--                          <label class="label--desc">User Name</label>-->
                                                     </div>
                                                 </div>
@@ -170,6 +133,7 @@
                                         <div class="name">password</div>
                                         <div class="value">
                                             <div class="input-group">
+                                                <<<<<<< HEAD
                                                 <input class="input--style-5" type="password" name="password">
                                             </div>
                                         </div>
@@ -181,6 +145,12 @@
 
 
 
+                                    =======
+                                    <input class="input--style-5" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
+                                    </div>
+                                    </div>
+                                    </div>
+                                    >>>>>>> b2c8777f60d12bd5246aa0a85ce9a82973d7d3bb
                                     <div>
                                         <button class="btn btn--radius-2 btn--red" type="submit">sign in</button>
                                     </div>

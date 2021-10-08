@@ -63,8 +63,8 @@ public class UserController extends HttpServlet {
             }
 
             if (service.equalsIgnoreCase("login")) {
-                String userName = request.getParameter("username");
-                String password = request.getParameter("password");
+                String userName = request.getParameter("username").trim();
+                String password = request.getParameter("password").trim();
                 User user = userDAO.getUser(userName, password);
 
                 if (user != null) {
@@ -84,12 +84,12 @@ public class UserController extends HttpServlet {
             }
 
             if (service.equalsIgnoreCase("signUp")) {
-                String userName = request.getParameter("username");
-                String password = request.getParameter("password");
-                String mail = request.getParameter("mail");
-                String repass = request.getParameter("confirm");
-                String fname = request.getParameter("fullname");
-                String phone = request.getParameter("phone");
+                String userName = request.getParameter("username").trim();
+                String password = request.getParameter("password").trim();
+                String mail = request.getParameter("mail").trim();
+                String repass = request.getParameter("confirm").trim();
+                String fname = request.getParameter("fullname").trim();
+                String phone = request.getParameter("phone").trim();
                 String sex = request.getParameter("sex");
                 Date dob = Date.valueOf(request.getParameter("dob"));
                 Integer role = Integer.parseInt(request.getParameter("role"));
@@ -117,7 +117,7 @@ public class UserController extends HttpServlet {
             }
             if (service.equals("changepass")) {
                 String email = request.getParameter("email");
-                String newPass = request.getParameter("passwordr");
+                String newPass = request.getParameter("password");
                 String rePass = request.getParameter("repass");
                 User user = new User();
                 if (!newPass.equals(rePass)) {
