@@ -37,12 +37,9 @@ public interface RequestDAO {
      */
     public int createRequest(Request req) throws Exception;
     
-
-    public ArrayList<Request> getRequestListBy_Id_And_Status(int uid, int status) throws Exception;
     
+    public ArrayList<Request> getRequestListBy_uId_And_Status(int uid, int status) throws Exception;
     
-    
-
     /**
      * Get the total number of request of the user
      *

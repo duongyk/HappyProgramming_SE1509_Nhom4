@@ -148,6 +148,34 @@ public class RequestController extends HttpServlet {
                 
                 sendDispatcher(request, response, "RequestControllerMap?service=viewRequest&rId="+rId);
             }
+            
+            /* View Mentor Request */
+            if (service.equalsIgnoreCase("viewMentorRequest")) {
+                
+                int status= Integer.parseInt(request.getParameter("status"));
+                
+                int uid = Integer.parseInt(request.getParameter("uId"));
+                
+                RequestDAO requestdao = new RequestDAOImpl();
+                
+                ArrayList<Request> requestList=  requestdao.getRequestListBy_uId_And_Status(uid, status);
+                
+                request.setAttribute("requestlist", requestList);
+                
+                if(status==1) {
+                    
+                    request.setAttribute("status", "Inviting");
+                    
+                } else if (status == 2) {
+                    
+                    request.setAttribute("status", "Following");
+                } else if (status == 3) {
+                    
+                }
+                
+                //sendDispatcher(request,response, "/demoMentorRequestList.jsp");
+                out.println("<h3>view Mentor Request chưa xong</h3>");
+            }
         }
     }
 

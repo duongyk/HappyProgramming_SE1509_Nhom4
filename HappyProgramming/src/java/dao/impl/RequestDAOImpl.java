@@ -113,7 +113,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
 
     @Override
 
-    public ArrayList<Request> getRequestListBy_Id_And_Status(int uid, int status) throws Exception {
+    public ArrayList<Request> getRequestListBy_uId_And_Status(int uid, int status) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
