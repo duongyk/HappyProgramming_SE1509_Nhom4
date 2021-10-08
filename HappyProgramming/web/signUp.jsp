@@ -40,7 +40,7 @@
 
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
-
+        <link href="css/login.css" rel="stylesheet">
 
     </head>
 
@@ -51,7 +51,7 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1><a href="index.html">Vesperr</a></h1>
+                    <h1><a href="index.jsp">Vesperr</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
