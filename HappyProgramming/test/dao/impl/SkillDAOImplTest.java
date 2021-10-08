@@ -81,7 +81,7 @@ public class SkillDAOImplTest {
     @Test
     public void testGetSkillById() throws Exception {
         System.out.println("getSkillById");
-        String sId = "";
+        int sId =0;
         SkillDAOImpl instance = new SkillDAOImpl();
         Skill expResult = null;
         Skill result = instance.getSkillById(sId);

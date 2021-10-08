@@ -103,7 +103,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
 
     //viet thang
     @Override
-    public Skill getSkillById(String sId) throws Exception {
+    public Skill getSkillById(int sId) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -173,6 +173,30 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
             }
         }
         return false;
+    }
+
+    @Override
+    public void updateSkill(Skill skill) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "UPDATE [Skill] SET [sName] = ? ,[sDetail] = ? ,"
+                + "[sImage] = ? ";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, skill.getName());
+            ps.setString(2, skill.getDetail());
+            ps.setString(3, skill.getImage());
+            
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
     }
 
 }

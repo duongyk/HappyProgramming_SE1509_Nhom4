@@ -26,7 +26,7 @@
                 <h3>Status</h3>
             <c:if test="${req.status==1}">
                 <select name="status" required="required">
-                    <option value="1" checked>Pending</option>
+                    <option value="1" selected>Pending</option>
                     <option value="2">In process</option>
                     <option value="3">Done</option>
                     <option value="4">Cancel</option>
@@ -35,7 +35,7 @@
             <c:if test="${req.status==2}">
                 <select name="status" required="required">
                     <option value="1">Pending</option>
-                    <option value="2" checked>In process</option>
+                    <option value="2" selected>In process</option>
                     <option value="3">Done</option>
                     <option value="4">Cancel</option>
                 </select>
@@ -44,7 +44,7 @@
                 <select name="status" required="required">
                     <option value="1">Pending</option>
                     <option value="2">In process</option>
-                    <option value="3" checked>Done</option>
+                    <option value="3" selected>Done</option>
                     <option value="4">Cancel</option>
                 </select>
             </c:if>
@@ -53,9 +53,31 @@
                     <option value="1">Pending</option>
                     <option value="2">In process</option>
                     <option value="3">Done</option>
-                    <option value="4" checked>Cancel</option>
+                    <option value="4" selected>Cancel</option>
                 </select>
             </c:if>
+            <br>
+            <c:set var="continueBox" scope="session" value="false"/>
+            <c:forEach items="${sListAll}" var="skill">
+                <c:forEach items="${sList}" var="s">
+                    <c:if test="${s.id==skill.id}">
+                        <c:set var="continueBox" scope="session" value="true"/>
+                    </c:if>
+                </c:forEach>
+
+                <c:choose>
+                    <c:when test="${sessionScope.continueBox}">
+                        <input type="checkbox" id="${skill.getId()}" name="skill" value="${skill.getId()}" checked>
+                        <label for="${skill.getId()}" class="u-label"> ${skill.getName()} </label>
+                    </c:when>
+                    <c:otherwise>
+                        <input type="checkbox" id="${skill.getId()}" name="skill" value="${skill.getId()}">
+                        <label for="${skill.getId()}" class="u-label"> ${skill.getName()} </label>
+                    </c:otherwise>
+                </c:choose>
+                        <c:set var="continueBox" scope="session" value="false"/>
+            </c:forEach>
+            <br>
             <input type="submit" value="Submit" />
         </form>
 

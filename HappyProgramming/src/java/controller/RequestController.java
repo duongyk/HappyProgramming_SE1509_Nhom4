@@ -119,6 +119,10 @@ public class RequestController extends HttpServlet {
                 // get request
                 int rId = Integer.parseInt(request.getParameter("rId"));
                 Request req = requestDAO.getRequestById(rId);
+                
+                ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
+                
+                request.setAttribute("sList", sList);
                 request.setAttribute("req", req);
                 sendDispatcher(request, response, "viewRequest.jsp");
             }
@@ -128,7 +132,14 @@ public class RequestController extends HttpServlet {
                 // get request
                 int rId = Integer.parseInt(request.getParameter("rId"));
                 Request req = requestDAO.getRequestById(rId);
+                // get all skill for choosing
+                ArrayList<Skill> sListAll = skillDAO.getAllSkill();
                 
+                // get list chosen skills
+                ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
+                
+                request.setAttribute("sList", sList);
+                request.setAttribute("sListAll", sListAll);
                 request.setAttribute("req", req);
                 sendDispatcher(request, response, "editRequest.jsp");
             }
@@ -143,8 +154,16 @@ public class RequestController extends HttpServlet {
                 Date deadlineDate = Date.valueOf(request.getParameter("deadlineDate"));
                 int deadlineHour = Integer.parseInt(request.getParameter("deadlineHour"));
                 int status = Integer.parseInt(request.getParameter("status"));
+                String skillIds[] = request.getParameterValues("skill");
+                ArrayList<Integer> sIdList = new ArrayList<>();
+                for (String id : skillIds){
+                    int sId = Integer.parseInt(id);
+                    sIdList.add(sId);
+                }
+                
                 Request req = new Request(rId, title, content, deadlineDate, deadlineHour, status);
                 requestDAO.updateRequest(req);
+                requestSkillDAO.updateRequestSkill(rId, sIdList);
                 
                 sendDispatcher(request, response, "RequestControllerMap?service=viewRequest&rId="+rId);
             }

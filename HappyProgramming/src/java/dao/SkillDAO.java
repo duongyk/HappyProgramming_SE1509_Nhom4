@@ -45,7 +45,7 @@ public interface SkillDAO {
      * @return 
      * @throws Exception
      */
-    public Skill getSkillById(String sId) throws Exception;
+    public Skill getSkillById(int sId) throws Exception;
 
     /**
      * Get
@@ -64,4 +64,12 @@ public interface SkillDAO {
      * @throws Exception
      */
     public void insert(Skill x) throws Exception;
+    
+    /**
+     * Update a Skill
+     *
+     * @param skill it is an <code>Skill</code> object
+     * @throws Exception
+     */
+    public void updateSkill(Skill skill) throws Exception;
 }

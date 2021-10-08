@@ -81,5 +81,5 @@ public interface UserDAO {
      * @throws Exception
      */
     public int updateUserInfo(int uId, User user) throws Exception;
-    
+
 }

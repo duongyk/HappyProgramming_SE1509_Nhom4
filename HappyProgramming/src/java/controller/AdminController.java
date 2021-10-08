@@ -9,9 +9,16 @@
  */
 package controller;
 
+import dao.RequestDAO;
+import dao.RequestSkillDAO;
 import dao.SkillDAO;
+import dao.UserDAO;
+import dao.impl.RequestDAOImpl;
+import dao.impl.RequestSkillDAOImpl;
 import dao.impl.SkillDAOImpl;
+import dao.impl.UserDAOImpl;
 import entity.Skill;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -47,7 +54,10 @@ public class AdminController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      */
     SkillDAO skillDAO = new SkillDAOImpl();
-
+    UserDAO userDAO = new UserDAOImpl();
+    RequestDAO requestDAO = new RequestDAOImpl();
+    RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
@@ -62,12 +72,30 @@ public class AdminController extends HttpServlet {
             if (service.equalsIgnoreCase("createSkill")) {
                 sendDispatcher(request, response, "createSkill.jsp");
             }
+            
+            if (service.equalsIgnoreCase("updateSkill")) {
+                
+                
+                sendDispatcher(request, response, "createSkill.jsp");
+            }
              //admin manage skills
             if (service.equalsIgnoreCase("skillManage")) {
                 //list all skills that have in database
                 ArrayList<Skill> sList = skillDAO.getAllSkill();
                 request.setAttribute("sList", sList);
                 sendDispatcher(request, response, "skillManagement.jsp");
+            }
+            
+            if (service.equalsIgnoreCase("menteeManage")) {
+                //list all User that are Mentee have in database
+                ArrayList<User> menteeList = userDAO.getUserByRole(1);
+                int totalHour = requestDAO.getTotalHour();
+                int totalSkill = requestSkillDAO.getTotalRequest();
+                
+                request.setAttribute("totalHour", totalHour);
+                request.setAttribute("totalSkill", totalSkill);
+                request.setAttribute("menteeList", menteeList);
+                sendDispatcher(request, response, "menteeManagement.jsp");
             }
         }
     }

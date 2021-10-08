@@ -204,7 +204,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     @Override
-    public int getTotalHour(int mId) throws Exception {
+    public int getTotalHourById(int mId) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -216,6 +216,31 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, mId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalHour = rs.getInt("totalHour");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return totalHour;
+    }
+
+    @Override
+    public int getTotalHour() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT SUM(deadlineHour) as 'totalHour' FROM [Request] ";
+
+        int totalHour = 0;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 totalHour = rs.getInt("totalHour");
@@ -344,7 +369,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         statistic.add(totalRequest);
         int totalMentor = getTotalMentor(mId);
         statistic.add(totalMentor);
-        int totalHour = getTotalHour(mId);
+        int totalHour = getTotalHourById(mId);
         statistic.add(totalHour);
         int totalPending = getTotalRequestByStatus(mId, 1);
         statistic.add(totalPending);

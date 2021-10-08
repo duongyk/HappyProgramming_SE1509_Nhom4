@@ -1,0 +1,13 @@
+.member {
+    height: 300px;
+}
+
+.title1 {
+    margin-top: 15px;
+}
+
+.img-display {
+  display: block;
+  width: 100%;
+  height: auto;
+}

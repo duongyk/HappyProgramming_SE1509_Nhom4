@@ -48,7 +48,7 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                skill = skilldao.getSkillById(rs.getString("sId"));
+                skill = skilldao.getSkillById(rs.getInt("sId"));
                 skillList.add(skill);
             }
         } catch (Exception ex) {

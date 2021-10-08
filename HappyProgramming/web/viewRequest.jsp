@@ -28,6 +28,11 @@
         <c:if test="${req.status==3}">
             <p>Status: Canceled</p>
         </c:if>
-            <a href="RequestControllerMap?service=editRequestForm&rId=${req.id}">Edit request</a>
+            <h2>Skill:
+        <c:forEach items="${sList}" var="skill">
+            <c:out value="${skill.name} "></c:out>
+        </c:forEach>
+            </h2>
+        <a href="RequestControllerMap?service=editRequestForm&rId=${req.id}">Edit request</a>
     </body>
 </html>

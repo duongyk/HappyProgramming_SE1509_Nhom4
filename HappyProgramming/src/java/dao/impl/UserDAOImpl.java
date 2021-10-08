@@ -243,7 +243,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         ArrayList<User> list = new ArrayList<>();
-        String sql = "select * from [User] where [uRole] = '" + uRole + "'";
+        String sql = "select * from [User] where [uRole] = ?";
         int id;
         String username, password, fullname, mail, phone, gender, avatar;
         Date dob;
@@ -251,6 +251,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
+            ps.setInt(1, uRole);
             rs = ps.executeQuery();
             while (rs.next()) {
                 id = rs.getInt("uId");

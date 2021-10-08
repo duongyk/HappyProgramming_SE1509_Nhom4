@@ -68,7 +68,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile">User profile</a></li>
+                                        <li><a href="UserControllerMap?service=profile">Profile</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>

@@ -79,7 +79,16 @@ public interface RequestDAO {
      * 
      * @throws Exception
      */
-    public int getTotalHour(int mId) throws Exception;
+    public int getTotalHourById(int mId) throws Exception;
+    
+    /**
+     * Get the total hour of request of the user
+     *
+     * @return an Integer number
+     * 
+     * @throws Exception
+     */
+    public int getTotalHour() throws Exception;
     
     /**
      * Update a request
