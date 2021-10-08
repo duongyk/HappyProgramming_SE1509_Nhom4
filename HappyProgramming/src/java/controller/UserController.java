@@ -163,8 +163,9 @@ public class UserController extends HttpServlet {
                 User user = userDAO.resetPassword(u.getMail());
                 sendDispatcher(request, response, "index.jsp");
                 
-                int test = sm.sendEmail(u);
+                User a = userDAO.getUserByEmail(email);
                 
+                int test = sm.sendEmail(a);
 //                sendDispatcher(request, response, "index.jsp");
 //                emailServ.sendEmail(getServletContext(), user, "forgot");
             }

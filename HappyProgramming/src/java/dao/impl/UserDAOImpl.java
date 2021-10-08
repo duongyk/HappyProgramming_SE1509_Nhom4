@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import util.SendEmail;
 
 /**
  * This class implements from class interface UserDAOImpl. <br>
@@ -322,7 +323,8 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        String newPass = String.valueOf((int) (Math.random() * ((9999 - 1000) + 1)) - 1000);
+        SendEmail se = new SendEmail();
+        String newPass = se.generateRandomPassword(8);
         
         String sql = "update [User] set [password] = ? where uMail = '"+email+"'";
         try {
