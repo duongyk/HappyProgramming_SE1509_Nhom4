@@ -84,6 +84,6 @@ public interface UserDAO {
     
     public User getUserByEmail(String email) throws Exception;
     
-    public User resetPassword(String email) throws Exception;
+    public User resetPassword(User user, String password) throws Exception;
     
 }

@@ -94,6 +94,7 @@
                     <div class="u-repeater u-repeater-1">
 
                         <c:forEach items="${sList}" var="list">
+                            <c:if test="${list.getStatus() == 1}">
                             <div class="u-container-style u-list-item u-repeater-item u-video-cover u-white">
                                 <div class="u-container-layout u-similar-container u-container-layout-1">
                                     <h3 class="u-text u-text-default u-text-2"> <p>${list.getName()} </h3>
@@ -102,6 +103,7 @@
                                     <a href="#" class="u-border-none u-btn u-button-style u-custom-color-3 u-btn-1"> View skill</a>
                                 </div>
                             </div>
+                            </c:if>
                         </c:forEach>
 
                         <!--                        <div class="u-container-style u-list-item u-repeater-item u-video-cover u-white u-list-item-2">

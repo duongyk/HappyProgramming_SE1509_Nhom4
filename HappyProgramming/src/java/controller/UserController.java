@@ -154,22 +154,48 @@ public class UserController extends HttpServlet {
                 sendDispatcher(request, response, "allMentor.jsp");
             }
             
-            if (service.equalsIgnoreCase("resetPassword")) {
-                String email = request.getParameter("email").trim();
-                User u = userDAO.getUserByEmail(email);
+            if (service.equalsIgnoreCase("sendEmail")) {
+                SendEmail se = new SendEmail();
+                String code = se.generateVerifyCode();
+                request.getSession().setAttribute("verify", code);
                 
-                SendEmail sm = new SendEmail();
+                String mail = request.getParameter("email").trim();
                 
-                User user = userDAO.resetPassword(u.getMail());
-                sendDispatcher(request, response, "index.jsp");
-                
-                User a = userDAO.getUserByEmail(email);
-                
-                int test = sm.sendEmail(a);
-//                sendDispatcher(request, response, "index.jsp");
-//                emailServ.sendEmail(getServletContext(), user, "forgot");
+                User user = userDAO.getUserByEmail(mail);
+                if(user != null) {
+                    User a = userDAO.getUserByEmail(mail);
+                    a.setVerify(code);
+                    int send = se.sendEmail(a);
+                    request.getSession().setAttribute("currMail", a);
+                    sendDispatcher(request, response, "verifyCode.jsp");
+                }
             }
             
+            if (service.equalsIgnoreCase("verifyCode")) {
+                User x = (User) request.getSession().getAttribute("currMail");
+                String verify = (String) request.getSession().getAttribute("verify");
+                
+                String code = request.getParameter("code").trim();
+                
+                if(verify.equalsIgnoreCase(code)) {
+                    sendDispatcher(request, response, "resetPass.jsp");
+                }
+                if(!verify.equalsIgnoreCase(code)) {
+                    sendDispatcher(request, response, "index.jsp");
+                }
+            }
+            
+            if (service.equalsIgnoreCase("resetPass")) {
+                String password = request.getParameter("password").trim();
+                String confirmPassword = request.getParameter("confirm").trim();
+                
+                User x = (User) request.getSession().getAttribute("currMail");
+                
+                if(password.equalsIgnoreCase(confirmPassword)) {
+                    User user = userDAO.resetPassword(x, password);
+                    sendDispatcher(request, response, "index.jsp");
+                }
+            }
         }
     }
 

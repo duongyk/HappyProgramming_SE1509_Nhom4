@@ -290,6 +290,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         String phone;
         String gender;
         String avatar;
+        String verify;
         Date dob;
         User user = null;
         try {
@@ -318,19 +319,16 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     }
     
     @Override
-    public User resetPassword(String email) throws Exception {
+    public User resetPassword(User user, String password) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        SendEmail se = new SendEmail();
-        String newPass = se.generateRandomPassword(8);
-        
-        String sql = "update [User] set [password] = ? where uMail = '"+email+"'";
+        String sql = "update [User] set [password] = '"+password+"' where uMail = ?";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, newPass);
+            ps.setString(1, user.getMail());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -340,10 +338,5 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closeConnection(conn);
         }
         return null;
-    }
-    
-    public static void main(String[] args) throws Exception {
-        UserDAOImpl dao = new UserDAOImpl();
-        System.out.println(dao.getUserByEmail("hajimenagumo911@gmail.com"));
     }
 }

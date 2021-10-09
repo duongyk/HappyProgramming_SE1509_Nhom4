@@ -17,13 +17,14 @@ import java.util.Random;
  * @author Tung
  */
 public class SendEmail {
+
     public int sendEmail(User user) {
-        
+
         int n = 0;
         String toEmail = user.getMail();
         String fromEmail = "tungduong91101@gmail.com";
         String password = "Tung0911";
-        
+
         try {
 
             // your host email smtp server details
@@ -33,7 +34,7 @@ public class SendEmail {
             pr.put("mail.smtp.port", "587"); //TLS Port
             pr.put("mail.smtp.auth", "true"); //enable authentication
             pr.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
- 
+
             //get session to authenticate the host email address and password
             Session session = Session.getInstance(pr, new Authenticator() {
                 @Override
@@ -44,7 +45,7 @@ public class SendEmail {
 
             //set email message details
             Message msg = new MimeMessage(session);
-            
+
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
             msg.addHeader("format", "flowed");
             msg.addHeader("Content-Transfer-Encoding", "8bit");
@@ -53,30 +54,26 @@ public class SendEmail {
             msg.setReplyTo(InternetAddress.parse(fromEmail, false));
             //set to email address or destination email address
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-            
+
             //set email subject
-            msg.setSubject("Forgot password code");
-            
+            msg.setSubject("Your Verify Code");
+
             //set message text
-            msg.setText("Hello, " + user.getUsername() + ". Please use this code to login and change new pasword: " + user.getPassword());
+            msg.setText("Hello " + user.getUsername() + ", here is your verify code: " + user.getVerify());
             //send the message
             Transport.send(msg);
-            
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return 0;
     }
-    
-    public String generateRandomPassword(int len) {
-        String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk"
-                + "lmnopqrstuvwxyz!@#$%&";
+
+    public String generateVerifyCode() {
         Random rnd = new Random();
-        StringBuilder sb = new StringBuilder(len);
-        for (int i = 0; i < len; i++) {
-            sb.append(chars.charAt(rnd.nextInt(chars.length())));
-        }
-        return sb.toString();
+        int number = rnd.nextInt(9999);
+
+        // this will convert any number sequence into 4 character.
+        return String.format("%04d", number);
     }
 }

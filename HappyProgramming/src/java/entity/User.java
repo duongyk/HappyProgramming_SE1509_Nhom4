@@ -68,6 +68,11 @@ public class User {
      * role of (User)
      */
     private int role;
+    
+    /**
+     * verify code of (User)
+     */
+    private String verify;
 
     /**
      * Constructor.<br>
@@ -380,6 +385,25 @@ public class User {
     public void setRole(int role) {
         this.role = role;
     }
+
+    /**
+     * get value to role attribute of User class. <br>
+     *
+     * @param verify it is a <code>java.lang.String</code>
+     */
+    public String getVerify() {
+        return verify;
+    }
+
+    /**
+     * Set value to role attribute of User class. <br>
+     *
+     * @param verify it is a <code>java.lang.String</code>
+     */
+    public void setVerify(String verify) {
+        this.verify = verify;
+    }
+    
 }
 
     
