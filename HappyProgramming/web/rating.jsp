@@ -143,7 +143,7 @@
                                 <div class="u-form-group u-form-name">
                                     <label for="name-dc8a" class="u-form-control-hidden u-label"></label>
                                     <div>
-                                        <textarea name="comment" rows="5" cols="100" placeholder="Enter your comment" required="required" maxlength="200"></textarea>
+                                        <textarea name="comment" rows="5" cols="100" pattern="^[^\s]+(\s+[^\s]+)*$" placeholder="Enter your comment" required="required" maxlength="200"></textarea>
                                     </div>
                                 </div>
                                 <div class="u-align-center u-form-group u-form-submit">

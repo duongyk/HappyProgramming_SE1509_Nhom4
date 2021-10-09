@@ -169,7 +169,7 @@
                                                             <c:forEach items="${sList}" var="skill">
                                                                 <tr>
                                                                     <td class="py-1">
-                                                                        <img src="../../images/faces/face1.jpg" alt="image" />
+                                                                        <img src="img/${skill.image}" alt="image" />
                                                                     </td>
                                                                     <td>
                                                                         <a href="AdminControllerMap?service=updateSkill&sId=${skill.id}"><c:out value="${skill.id}"></c:out></a>

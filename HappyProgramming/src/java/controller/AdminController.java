@@ -74,9 +74,11 @@ public class AdminController extends HttpServlet {
             }
             
             if (service.equalsIgnoreCase("updateSkill")) {
+                int sId = Integer.parseInt(request.getParameter("sId"));
+                Skill skill = skillDAO.getSkillById(sId);
                 
-                
-                sendDispatcher(request, response, "createSkill.jsp");
+                request.setAttribute("skill", skill);
+                sendDispatcher(request, response, "updateSkill.jsp");
             }
              //admin manage skills
             if (service.equalsIgnoreCase("skillManage")) {

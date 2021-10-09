@@ -113,7 +113,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         ResultSet rs = null;
         Skill skill = new Skill();
 
-        String sql = "select * from [Skill] where sId='" + sId + "'";
+        String sql = "select * from [Skill] where sId=" + sId;
 
         try {
             conn = getConnection();
@@ -124,6 +124,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
                 skill.setId(rs.getInt("sId"));
                 skill.setName(rs.getString("sName"));
                 skill.setDetail(rs.getString("sDetail"));
+                skill.setStatus(rs.getInt("sStatus"));
             }
         } catch (Exception ex) {
             throw ex;
@@ -144,7 +145,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "insert into [Skill] values (?,?,?)";
+        String sql = "insert into [Skill] values (?,?,?,1)";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
@@ -185,13 +186,15 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = "UPDATE [Skill] SET [sName] = ? ,[sDetail] = ? ,"
-                + "[sImage] = ? ";
+                + "[sImage] = ? ,[sStatus] = ? WHERE [sId] = ?";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, skill.getName());
             ps.setString(2, skill.getDetail());
             ps.setString(3, skill.getImage());
+            ps.setInt(4, skill.getStatus());
+            ps.setInt(5, skill.getId());
             
             ps.executeUpdate();
         } catch (Exception ex) {

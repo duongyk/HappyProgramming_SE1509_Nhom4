@@ -82,7 +82,7 @@ public interface RequestDAO {
     public int getTotalHourById(int mId) throws Exception;
     
     /**
-     * Get the total hour of request of the user
+     * Get the total hour of request of all user
      *
      * @return an Integer number
      * 
@@ -101,11 +101,11 @@ public interface RequestDAO {
     /**
      * Update status of a request
      *
-     * @param req it is an <code>Request</code> object
+     * @param rId it is an Integer number
      * @param status it is an Integer number
      * @throws Exception
      */
-    public void updateStatusRequest(Request req, int status) throws Exception;
+    public void updateStatusRequest(int rId, int status) throws Exception;
     
     /**
      * Get request by ID

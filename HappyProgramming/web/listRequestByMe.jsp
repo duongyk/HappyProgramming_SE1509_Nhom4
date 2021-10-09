@@ -64,7 +64,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile">Profile</a></li>
+                                        <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
@@ -107,7 +107,7 @@
                 
                 <div class="container">
                     <div class="section-title" data-aos="fade-up">
-                        <h2 class="title1">List Request by me</h2>
+                        <h2 class="">List Request by me</h2>
                     </div>
                     
                     <div class="row">
@@ -121,19 +121,19 @@
                                 <div class="member box-display" data-aos="fade-up" data-aos-delay="100">
                                     <div class="member-img">
                                         <c:if test="${request.status==1}">
-                                        <div class=""> Status: Pending
+                                        <div class="title1"> Status: Pending
                                         </div>
                                         </c:if>
                                         <c:if test="${request.status==2}">
-                                        <div class=""> Status: In process
+                                        <div class="title1"> Status: In process
                                         </div>
                                         </c:if>
                                         <c:if test="${request.status==3}">
-                                        <div class=""> Status: Done
+                                        <div class="title1"> Status: Done
                                         </div>
                                         </c:if>
                                         <c:if test="${request.status==4}">
-                                        <div class=""> Status: Canceled
+                                        <div class="title1"> Status: Canceled
                                         </div>
                                         </c:if>
                                     </div>

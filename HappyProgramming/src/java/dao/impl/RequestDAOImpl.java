@@ -310,17 +310,17 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     @Override
-    public void updateStatusRequest(Request req, int status) throws
+    public void updateStatusRequest(int rId, int status) throws
             Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "UPDATE [dbo].[Request] SET [rStatus] = ? WHERE [rId] = ?";
+        String sql = "UPDATE [Request] SET [rStatus] = ? WHERE [rId] = ?";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, status);
-            ps.setInt(2, req.getId());
+            ps.setInt(2, rId);
             ps.executeUpdate();
 
         } catch (Exception ex) {

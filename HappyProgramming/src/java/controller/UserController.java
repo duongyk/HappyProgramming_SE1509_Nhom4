@@ -136,7 +136,10 @@ public class UserController extends HttpServlet {
             }
 
             if (service.equalsIgnoreCase("profile")) {
-                request.setAttribute("user", request.getSession().getAttribute("currUser"));
+                int uId = Integer.parseInt(request.getParameter("uId"));
+                User user = userDAO.getUserById(uId);
+                request.setAttribute("user", user);
+                
                 sendDispatcher(request, response, "profile.jsp");
             }
 

@@ -93,6 +93,20 @@ public class SkillController extends HttpServlet {
                     sendDispatcher(request, response, "AdminControllerMap?service=skillManage");
                 }
             }
+            
+            /* admin create new skill */
+            if (service.equalsIgnoreCase("updateSkill")) {
+                //get infor of the skill from Input form
+                int sId = Integer.parseInt(request.getParameter("sId"));
+                String sName = request.getParameter("sName");
+                String sDetail = request.getParameter("sDetail");
+                String sImage = request.getParameter("sImage");
+                int status = Integer.parseInt(request.getParameter("status"));
+                
+                Skill skill = new Skill(sId, sName, sDetail, sImage, status);
+                skillDAO.updateSkill(skill);
+                sendDispatcher(request, response, "AdminControllerMap?service=skillManage");
+            }
 
         }
     }
