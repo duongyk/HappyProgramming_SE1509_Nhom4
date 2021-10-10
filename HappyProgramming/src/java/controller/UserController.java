@@ -25,6 +25,7 @@ import dao.impl.UserDAOImpl;
 import dao.impl.RequestDAOImpl;
 import entity.Request;
 import java.sql.Date;
+import javax.servlet.http.HttpSession;
 import util.SendEmail;
 
 /**
@@ -117,16 +118,31 @@ public class UserController extends HttpServlet {
                     }
                 }
             }
+            
+            
             if (service.equals("changepass")) {
-                String email = request.getParameter("email");
-                String newPass = request.getParameter("password");
-                String rePass = request.getParameter("repass");
-                User user = new User();
-                if (!newPass.equals(rePass)) {
-                    request.setAttribute("error_code", "your input is incorect pls try again");
-                    RequestDispatcher rd = request.getRequestDispatcher("/changPass.jsp");
-                    rd.include(request, response);
-                }
+                HttpSession session =request.getSession();
+//                String oldPass = request.getParameter("old pass");
+                 String newPass = request.getParameter("password");
+                 String rePass = request.getParameter("rePassword");
+                 User u = (User) session.getAttribute("u");
+                 String mail=u.getMail();
+                 if(!u.getPassword().equals(newPass)){
+                     request.setAttribute("mess", "wrong Password");
+                     sendDispatcher(request, response, "changePassword.jsp");
+                     
+                 }else{
+                     if (!newPass.equals(rePass)){
+                      request.setAttribute("mess", "confim password must match the new password");
+                    sendDispatcher(request, response, "changePassword.jsp");
+                     }else {
+                         userDAO.changePass(mail, newPass) ;
+                         sendDispatcher(request, response, "signIn.jsp");
+                     }
+                 }
+               
+                
+                
 
             }
 

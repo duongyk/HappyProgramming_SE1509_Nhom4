@@ -86,4 +86,5 @@ public interface UserDAO {
     
     public User resetPassword(User user, String password) throws Exception;
     
+    public  User changePass (String uMail, String newPass) throws Exception;
 }

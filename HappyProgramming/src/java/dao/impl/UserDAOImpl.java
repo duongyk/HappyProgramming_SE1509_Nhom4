@@ -171,7 +171,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
 
     }
 
-    public void changePass(String uMail, String newPass) throws Exception {
+    public User changePass(String uMail, String newPass) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -189,6 +189,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closePreparedStatement(ps);
             closeConnection(conn);
         }
+        return null;
     }
 
     //viet thang
