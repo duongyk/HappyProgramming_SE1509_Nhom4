@@ -283,7 +283,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "Select * from [User] where uMail = '" + email + "'";
+        String sql = "Select * from [User] where uMail = ?";
         String username;
         String password;
         String fullname;
@@ -297,6 +297,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
             rs = ps.executeQuery();
             while (rs.next()) {
                 username = rs.getString("username");
@@ -325,11 +326,12 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        String sql = "update [User] set [password] = '"+password+"' where uMail = ?";
+        String sql = "update [User] set [password] = ? where uMail = ?";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, user.getMail());
+            ps.setString(1, password);
+            ps.setString(2, user.getMail());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -339,5 +341,10 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closeConnection(conn);
         }
         return null;
+    }
+    
+    public static void main(String[] args) throws Exception {
+        UserDAOImpl dao = new UserDAOImpl();
+        System.out.println(dao.getUserByEmail("hajimenagumo911@gmail.com").getFullname());
     }
 }

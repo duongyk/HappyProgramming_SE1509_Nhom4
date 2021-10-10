@@ -82,11 +82,11 @@ public class RequestController extends HttpServlet {
             }
             /* load create request screen */
             if (service.equalsIgnoreCase("loadRequest")) {
-                ArrayList<Skill> sList = skillDAO.getAllSkill();
+                ArrayList<Skill> sList = skillDAO.getActiveSkill();
                 request.setAttribute("sList", sList);
                 ArrayList<User> mentor = userDao.getUserByRole(2);
                 request.setAttribute("mList", mentor);
-                sendDispatcher(request, response, "createRequest.jsp");
+                sendDispatcher(request, response, "createReq.jsp");
             }
 
             /* create a new request */
@@ -96,14 +96,14 @@ public class RequestController extends HttpServlet {
 
                 String title = request.getParameter("title").trim();
                 String content = request.getParameter("content").trim();
-
+                int deadlineHour = Integer.parseInt(request.getParameter("deadlineHour"));
                 int to = Integer.parseInt(request.getParameter("toId"));
                 User toId = userDao.getUserById(to);
 
-                String deadline = request.getParameter("deadlineDate");
-                Date deadlineDate = Date.valueOf(deadline);
+                String date = request.getParameter("deadlineDate");
+                Date deadlineDate = Date.valueOf(date);
 
-                Request req = new Request(title, content, x, toId, deadlineDate);
+                Request req = new Request(title, content, x, toId, deadlineDate, deadlineHour);
                 requestDAO.createRequest(req);
 
                 String arr[] = request.getParameterValues("skill");

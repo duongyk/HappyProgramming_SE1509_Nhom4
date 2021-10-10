@@ -94,7 +94,7 @@
             </section><!-- End Breadcrumbs Section -->
 
             <section id="team" class="team section-bg">
-                    <div><button class="create" style="min-width: 164px;">Create Request</button> </div> 
+                    <div><a href="RequestControllerMap?service=loadRequest"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
                     <input name="modal" type="checkbox" id="modal">
                     <label for="modal" class="label-show-modal">Statistic Request</label>
                     <div class="modal-show">

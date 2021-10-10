@@ -63,10 +63,12 @@ public class RequestSkillDAOImpl extends DBContext implements dao.RequestSkillDA
 
         int n = 0;
         int maxId = getRequestMaxId();
-        String sql = "INSERT INTO [RequestSkill](rId,[sId]) VALUES (" + maxId + " ," + sId + ")";
+        String sql = "INSERT INTO [RequestSkill](rId,[sId]) VALUES (? ,?)";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
+            ps.setInt(1, maxId);
+            ps.setInt(2, sId);
             n = ps.executeUpdate();
         } catch (Exception ex) {
             throw ex;

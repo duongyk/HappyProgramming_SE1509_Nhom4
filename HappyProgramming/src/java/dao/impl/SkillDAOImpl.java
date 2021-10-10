@@ -68,14 +68,14 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         }
         return list;
     }
-
-    @Override
-    public ArrayList<Skill> getSkillByName(String sName) throws Exception {
+    
+    public ArrayList<Skill> getActiveSkill() throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        
         ArrayList<Skill> list = new ArrayList<>();
-        String sql = "select * from [Skill] where sName like '%" + sName + "%'";
+        String sql = "select * from [Skill] where [sStatus] = 1";
         int id;
         int status;
         String name;
@@ -85,6 +85,43 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("sId");
+                name = rs.getString("sName");
+                detail = rs.getString("sDetail");
+                image = rs.getString("sImage");
+                status = rs.getInt("sStatus");
+                s = new Skill(id, name, detail, image, status);
+                list.add(s);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    @Override
+    public ArrayList<Skill> getSkillByName(String sName) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<Skill> list = new ArrayList<>();
+        String sql = "select * from [Skill] where sName like ?";
+        int id;
+        int status;
+        String name;
+        String detail;
+        String image;
+        Skill s;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%"+sName+"%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 id = rs.getInt("sId");

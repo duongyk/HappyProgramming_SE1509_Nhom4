@@ -90,7 +90,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
 
         int n = 0;
         String sql = "INSERT INTO [Request](title, content, fromId, toId,"
-                + " deadlineDate, rStatus) VALUES (?, ?, ?, ?, ?, 1);";
+                + " deadlineDate, deadlineHour, rStatus) VALUES (?, ?, ?, ?, ?, ?,1);";
 
         try {
             conn = getConnection();
@@ -100,6 +100,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
             ps.setInt(3, req.getFrom().getId());
             ps.setInt(4, req.getTo().getId());
             ps.setDate(5, req.getDeadlineDate());
+            ps.setInt(6, req.getDeadlineHour());
             n = ps.executeUpdate();
         } catch (Exception ex) {
             throw ex;

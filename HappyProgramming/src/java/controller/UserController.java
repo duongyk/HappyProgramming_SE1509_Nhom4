@@ -186,7 +186,7 @@ public class UserController extends HttpServlet {
                     a.setVerify(code);
                     int send = se.sendEmail(a);
                     request.getSession().setAttribute("currMail", a);
-                    sendDispatcher(request, response, "verifyCode.jsp");
+                    sendDispatcher(request, response, "verifyAccount.jsp");
                 }
             }
             
@@ -197,10 +197,10 @@ public class UserController extends HttpServlet {
                 String code = request.getParameter("code").trim();
                 
                 if(verify.equalsIgnoreCase(code)) {
-                    sendDispatcher(request, response, "resetPass.jsp");
+                    sendDispatcher(request, response, "resetPassword.jsp");
                 }
                 if(!verify.equalsIgnoreCase(code)) {
-                    sendDispatcher(request, response, "index.jsp");
+                    sendDispatcher(request, response, "resetPassword.jsp");
                 }
             }
             

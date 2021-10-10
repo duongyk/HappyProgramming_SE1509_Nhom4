@@ -28,7 +28,16 @@ public interface SkillDAO {
      * @throws Exception
      */
     public ArrayList<Skill> getAllSkill() throws Exception;
-
+    
+    /**
+     * Get
+     *
+     * @param 
+     * @return 
+     * @throws Exception
+     */
+    public ArrayList<Skill> getActiveSkill() throws Exception;
+    
     /**
      * Get
      *

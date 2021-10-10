@@ -144,14 +144,16 @@ public class Request {
      * @param from it is a <code>User</code> object
      * @param to it is a <code>User</code> object
      * @param deadlineDate it is a <code>java.sql.Date</code>
+     * @param deadlineHour it is a Integer number
      * @param status it is a <code>java.lang.String</code>
      */
-    public Request(String title, User from, User to, Date deadlineDate, int status) {
+    public Request(String title, String content, User from, User to, Date deadlineDate, int deadlineHour) {    
         this.title = title;
+        this.content = content;
         this.from = from;
         this.to = to;
         this.deadlineDate = deadlineDate;
-        this.status = status;
+        this.deadlineHour = deadlineHour;
     }
 
     /**

@@ -64,9 +64,9 @@ public class SkillController extends HttpServlet {
             /* view list of all skill */
             if (service.equalsIgnoreCase("allSkill")) {
                 User x = (User) request.getSession().getAttribute("currUser");
-                ArrayList<Skill> sList = skillDAO.getAllSkill();
+                ArrayList<Skill> sList = skillDAO.getActiveSkill();
                 request.setAttribute("sList", sList);
-                sendDispatcher(request, response, "listAllSkills.jsp");
+                sendDispatcher(request, response, "listSkill.jsp");
             }
 
             /* search for skill by name */
