@@ -127,7 +127,7 @@
                                         <div class="name">Email</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="email" name="email">
+                                                <input class="input--style-5" type="email" name="mail">
                                             </div>
                                         </div>
                                     </div>
@@ -139,19 +139,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="name">Full Name</div>
-                                        <div class="value">
-                                            <div class="input-group">
-                                                <input class="input--style-5" type="text" name="fullname">
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="form-row">
                                         <div class="name">repeat password</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input--style-5" type="password" name="confirm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                      <div class="form-row">
+                                        <div class="name">Full Name</div>
+                                        <div class="value">
+                                            <div class="input-group">
+                                                <input class="input--style-5" type="text" name="fullname">
                                             </div>
                                         </div>
                                     </div>
