@@ -51,9 +51,9 @@ public class RatingController extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             String service = request.getParameter("service");
-            
+
             UserDAO userDAO = new UserDAOImpl();
             RatingDAO ratingDAO = new RatingDAOImpl();
             RequestDAO requestDAO = new RequestDAOImpl();
@@ -102,12 +102,13 @@ public class RatingController extends HttpServlet {
                         String messBlank = "Comment contains only space, please Re-input";
                         request.setAttribute("messBlank", messBlank);
                         sendDispatcher(request, response, "RatingControllerMap?service=getRating&mId=" + mId);
-                    }
-                    // Create and insert rate
-                    Rating rating = new Rating(user, mentor, comment, rate);
-                    ratingDAO.insert(rating);
+                    } else {
+                        // Create and insert rate
+                        Rating rating = new Rating(user, mentor, comment, rate);
+                        ratingDAO.insert(rating);
 
-                    sendDispatcher(request, response, "RatingControllerMap?service=getRating&mId=" + mId);
+                        sendDispatcher(request, response, "RatingControllerMap?service=getRating&mId=" + mId);
+                    }
                 }
 
             }

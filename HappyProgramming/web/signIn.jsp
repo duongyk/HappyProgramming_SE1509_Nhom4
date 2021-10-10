@@ -110,7 +110,7 @@
                                 <form action="UserControllerMap" method="POST">
                                     <input type="hidden" name="service" value="login">
                                     <div class="form-row m-b-55">
-                                        <div class="name">user Name</div>
+                                        <div class="name">User Name</div>
                                         <div class="value">
                                             <div class="row row-space">
                                                 <div class="col-12">
@@ -123,7 +123,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">password</div>
+                                        <div class="name">Password</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input--style-5" type="password" name="password" pattern="(.{4,20}">
@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button class="btn btn--radius-2 btn--red" type="submit">sign in</button>
+                                        <button class="btn btn--radius-2 btn--red" type="submit">Sign in</button>
                                     </div>
                                 </form>
                             </div>

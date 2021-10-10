@@ -33,6 +33,9 @@
             <c:out value="${skill.name} "></c:out>
         </c:forEach>
             </h2>
-        <a href="RequestControllerMap?service=editRequestForm&rId=${req.id}">Edit request</a>
+        <a href="RequestControllerMap?service=editRequestForm&rId=${req.id}">Update request</a>
+        <c:if test="${mess!=null}">
+            <c:out value="${mess}"></c:out>
+        </c:if>
     </body>
 </html>

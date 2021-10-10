@@ -94,14 +94,23 @@
             </section><!-- End Breadcrumbs Section -->
 
             <section id="team" class="team section-bg">
+
+
+                
                     <div><a href="RequestControllerMap?service=loadRequest"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
                     <input name="modal" type="checkbox" id="modal">
                     <label for="modal" class="label-show-modal">Statistic Request</label>
                     <div class="modal-show">
                         <div class="modal-show-inner">
                             <label for="modal">&#10006;</label>
-                            <h2>Show Modal Content</h2>
-                            <p>Information</p>
+                            <h2 class="text-center">Statistic Request</h2>
+                            <p class="text-left">Total Request: ${statistic[0]}</p>
+                            <p class="text-left">Total Mentor: ${statistic[1]}</p>
+                            <p class="text-left">Total Hour: ${statistic[2]}</p>
+                            <p class="text-left">Total Pending Request: ${statistic[3]}</p>
+                            <p class="text-left">Total In-process Request: ${statistic[4]}</p>
+                            <p class="text-left">Total Done Request: ${statistic[5]}</p>
+                            <p class="text-left">Total Canceled Request: ${statistic[6]}</p>
                         </div>
                     </div>
                 
@@ -109,44 +118,44 @@
                     <div class="section-title" data-aos="fade-up">
                         <h2 class="">List Request by me</h2>
                     </div>
-                    
+
                     <div class="row">
-                    <c:choose>
-                        <c:when test="${empty listRequest}">
-                            <h1>  No Request yet! </h1>
-                        </c:when>
-                        <c:otherwise>
-                            <c:forEach items="${listRequest}" var="request">
-                            <div class="col-lg-3 col-md-6">
-                                <div class="member box-display" data-aos="fade-up" data-aos-delay="100">
-                                    <div class="member-img">
-                                        <c:if test="${request.status==1}">
-                                        <div class="title1"> Status: Pending
+                        <c:choose>
+                            <c:when test="${empty listRequest}">
+                                <h1>  No Request yet! </h1>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach items="${listRequest}" var="request">
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="member box-display" data-aos="fade-up" data-aos-delay="100">
+                                            <div class="member-img">
+                                                <c:if test="${request.status==1}">
+                                                    <div class="title1"> Status: Pending
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${request.status==2}">
+                                                    <div class="title1"> Status: In process
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${request.status==3}">
+                                                    <div class="title1"> Status: Done
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${request.status==4}">
+                                                    <div class="title1"> Status: Canceled
+                                                    </div>
+                                                </c:if>
+                                            </div>
+                                            <img class="img-display" src="img/default-image.jpg">
+                                            <div class="member-info">
+                                                <h4><c:out value="${request.title}"></c:out></h4>
+                                                <a href="RequestControllerMap?service=viewRequest&rId=${request.id}">View detail</a>
+                                            </div>
                                         </div>
-                                        </c:if>
-                                        <c:if test="${request.status==2}">
-                                        <div class="title1"> Status: In process
-                                        </div>
-                                        </c:if>
-                                        <c:if test="${request.status==3}">
-                                        <div class="title1"> Status: Done
-                                        </div>
-                                        </c:if>
-                                        <c:if test="${request.status==4}">
-                                        <div class="title1"> Status: Canceled
-                                        </div>
-                                        </c:if>
                                     </div>
-                                    <img class="img-display" src="img/default-image.jpg">
-                                    <div class="member-info">
-                                        <h4><c:out value="${request.title}"></c:out></h4>
-                                        <a href="RequestControllerMap?service=viewRequest&rId=${request.id}">View detail</a>
-                                    </div>
-                                </div>
-                            </div>
-                            </c:forEach>
-                        </c:otherwise>
-                    </c:choose>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
 
 
                     </div>

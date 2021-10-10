@@ -41,7 +41,7 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
-
+        <link href="css/createRequest.css" rel="stylesheet">
     </head>
 
     <body>
@@ -88,7 +88,7 @@
             <!-- ======= Breadcrumbs Section ======= -->
             <section class="breadcrumbs">
                 <div class="card-heading">
-                    <h2 class="title" style="color: black; font-weight: bold;">Sign up </h2>
+                    <h2 class="title" style="color: black; font-weight: bold;">Create Request </h2>
                 </div>
             </section><!-- End Breadcrumbs Section -->
 
@@ -96,7 +96,6 @@
                 <div class="container">
                     <div class="wrapper wrapper--w790">
                         <div class="card card-5">
-
                             <div class="card-body">
                                 <form action="RequestControllerMap" method="get">
                                     <input type="hidden" name="service" value="createRequest">
@@ -158,77 +157,70 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <%-- Skill --%>
                                     <div class="form-row m-b-55">
                                         <div class="name">Choose Skills</div>
                                         <div class="value">
                                             <div class="row row-refine">
-                                                <div class="col-md-6">
-                                                    <c:forEach items="${sList}" var="s" begin="0" end="${sList.size()/2 - 1}">
-                                                        <%-- <c:if test="${s.getStatus() == 1}"> --%>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}">
-                                                                <label class="form-check-label" for="${s.getId()}">
-                                                                    ${s.getName()}
-                                                                </label>
-                                                            </div>
-                                                        <%-- </c:if> --%>
-                                                    </c:forEach>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <c:forEach items="${sList}" var="s" begin="${sList.size()/2}" end="${sList.size()-1}">
-                                                        <%-- <c:if test="${s.getStatus() == 1}"> --%>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}">
-                                                                <label class="form-check-label" for="${s.getId()}">
-                                                                    ${s.getName()}
-                                                                </label>
-                                                            </div>
-                                                        <%-- </c:if> --%>
-                                                    </c:forEach>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <ul>
+                                                            <c:forEach items="${sList}" var="s">
+                                                                <c:if test="${s.status==1}">
+                                                                    <li>
+                                                                        <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}">
+                                                                        <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
+                                                                    </li>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
 
-                                    <%--
-                                    <div class="form-row">
-                                        <div class="name">Sex</div>
-                                        <select id="select-6004" name="sex" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-row">
-                                        <label for="text-13e0" class="name">Date of birth</label>
-                                        <input  class="input--style-5" type="date"  name="dob" >
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="name">Sign up to </div>
-                                        <div class="value">
-                                            <div class="input-group">
-                                                <div class="rs-select2 js-select-simple select--no-search">
-                                                    <select name="role">
-                                                        <option disabled="disabled" selected="selected">Choose a role</option>
-                                                        <option value="2">Mentor</option>
-                                                        <option value="1">Mentee</option>
-                                                    </select>
-                                                    <div class="select-dropdown"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    --%>
-
-                                    <div>
-                                        <button class="btn btn--radius-2 btn--red" type="submit">Create Request</button>
-
-                                    </div>
-                                </form>
+                            <%--
+                            <div class="form-row">
+                                <div class="name">Sex</div>
+                                <select id="select-6004" name="sex" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                             </div>
+                            <div class="form-row">
+                                <label for="text-13e0" class="name">Date of birth</label>
+                                <input  class="input--style-5" type="date"  name="dob" >
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Sign up to </div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="role">
+                                                <option disabled="disabled" selected="selected">Choose a role</option>
+                                                <option value="2">Mentor</option>
+                                                <option value="1">Mentee</option>
+                                            </select>
+                                            <div class="select-dropdown"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            --%>
+
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-6">
+                                    <button class="btn btn--radius-2 btn--red" type="submit">Create Request</button>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                            </form>
                         </div>
                     </div>
+                </div>
                 </div>
             </section>
 
