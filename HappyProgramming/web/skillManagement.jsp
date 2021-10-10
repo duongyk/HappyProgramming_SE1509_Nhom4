@@ -138,8 +138,11 @@
                             </ul>
                         </nav>
                         <!-- partial -->
+                     
                         <div class="main-panel">
+                             
                             <div class="content-wrapper">
+                                <button> <a href="createSkill.jsp"> Create new skill</a></button>
                                 <div class="row">
                                     <div class="col-lg-12 grid-margin stretch-card">
                                         <div class="card">
@@ -160,9 +163,7 @@
                                                                 <th>
                                                                     Detail
                                                                 </th>
-                                                                <th>
-
-                                                                </th>
+                                                              
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -174,8 +175,7 @@
                                                                     <td>
                                                                         <a href="AdminControllerMap?service=updateSkill&sId=${skill.id}"><c:out value="${skill.id}"></c:out></a>
                                                                     </td>
-                                                                    <td>
-                                                                    </td>
+
                                                                     <td>
                                                                         <c:out value="${skill.name}"></c:out>
                                                                         </td>

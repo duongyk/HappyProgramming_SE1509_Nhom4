@@ -126,7 +126,7 @@
                                         <div class="name">password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
+                                                <input class="input--style-5" type="password" name="password" pattern="(.{4,20}">
                                             </div>
                                         </div>
                                     </div>
