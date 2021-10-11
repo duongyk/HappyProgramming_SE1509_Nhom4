@@ -80,7 +80,7 @@ public class UserController extends HttpServlet {
                     }
                 } else {
 
-                    request.setAttribute("mess", "login fail pls check your username and password");
+                    request.setAttribute("mess", "wrong user name or password");
                     sendDispatcher(request, response, "signIn.jsp");
                 }
 
@@ -123,8 +123,9 @@ public class UserController extends HttpServlet {
             if (service.equals("changepass")) {
                 HttpSession session =request.getSession();
 //                String oldPass = request.getParameter("old pass");
-                 String newPass = request.getParameter("password");
-                 String rePass = request.getParameter("rePassword");
+                   String email = request.getParameter("email").trim();
+                 String newPass = request.getParameter("password").trim();
+                 String rePass = request.getParameter("rePassword").trim();
                  User u = (User) session.getAttribute("u");
                  String mail=u.getMail();
                  if(!u.getPassword().equals(newPass)){

@@ -126,9 +126,11 @@
                                         <div class="name">Password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="password" pattern="(.{4,20}">
+                                                <input class="input--style-5" type="password" name="password" pattern=".{4,20}">
                                             </div>
+                                            
                                         </div>
+                                        <p class="text-danger">${mess}</p>
                                     </div>
                                     <div>
                                         <button class="btn btn--radius-2 btn--red" type="submit">Sign in</button>
