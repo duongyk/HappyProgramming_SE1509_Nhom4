@@ -118,30 +118,28 @@ public class UserController extends HttpServlet {
                     }
                 }
             }
-            
-            
+
             if (service.equals("changepass")) {
-                HttpSession session =request.getSession();
-                
-                 String email = request.getParameter("email").trim();
-                 String oldPass = request.getParameter("password").trim();
-                 String newPass = request.getParameter("newPassword").trim();
-                 String rePass = request.getParameter("rePassword").trim();
-                 User u = (User) session.getAttribute("currUser");
-                 String mail=u.getMail();
-                 if(!u.getPassword().equals(oldPass)){
-                     request.setAttribute("mess", "wrong Password");
-                     sendDispatcher(request, response, "changePassword.jsp");
-                     
-                 }else{
-                     if (!newPass.equals(rePass)){
-                      request.setAttribute("mess", "confim password must match the new password");
+                HttpSession session = request.getSession();
+
+                String email = request.getParameter("email").trim();
+                String oldPass = request.getParameter("password").trim();
+                String newPass = request.getParameter("newPassword").trim();
+                String rePass = request.getParameter("rePassword").trim();
+                User u = (User) session.getAttribute("currUser");
+                String mail = u.getMail();
+                if (!u.getPassword().equals(oldPass)) {
+                    request.setAttribute("mess", "wrong Password");
                     sendDispatcher(request, response, "changePassword.jsp");
-                     }else {
-                         userDAO.changePass(mail, newPass) ;
-                         sendDispatcher(request, response, "signIn.jsp");
-                     }
-                 }
+                } else {
+                    if (!newPass.equals(rePass)) {
+                        request.setAttribute("mess", "confim password must match the new password");
+                        sendDispatcher(request, response, "changePassword.jsp");
+                    } else {
+                        userDAO.changePass(mail, newPass);
+                        sendDispatcher(request, response, "signIn.jsp");
+                    }
+                }
 
             }
 
@@ -154,7 +152,7 @@ public class UserController extends HttpServlet {
                 int uId = Integer.parseInt(request.getParameter("uId"));
                 User user = userDAO.getUserById(uId);
                 request.setAttribute("user", user);
-                
+
                 sendDispatcher(request, response, "profile.jsp");
             }
 
@@ -171,16 +169,16 @@ public class UserController extends HttpServlet {
                 request.setAttribute("mList", mList);
                 sendDispatcher(request, response, "allMentor.jsp");
             }
-            
+
             if (service.equalsIgnoreCase("sendEmail")) {
                 SendEmail se = new SendEmail();
                 String code = se.generateVerifyCode();
                 request.getSession().setAttribute("verify", code);
-                
+
                 String mail = request.getParameter("email").trim();
-                
+
                 User user = userDAO.getUserByEmail(mail);
-                if(user != null) {
+                if (user != null) {
                     User a = userDAO.getUserByEmail(mail);
                     a.setVerify(code);
                     int send = se.sendEmail(a);
@@ -188,28 +186,28 @@ public class UserController extends HttpServlet {
                     sendDispatcher(request, response, "verifyAccount.jsp");
                 }
             }
-            
+
             if (service.equalsIgnoreCase("verifyCode")) {
                 User x = (User) request.getSession().getAttribute("currMail");
                 String verify = (String) request.getSession().getAttribute("verify");
-                
+
                 String code = request.getParameter("code").trim();
-                
-                if(verify.equalsIgnoreCase(code)) {
+
+                if (verify.equalsIgnoreCase(code)) {
                     sendDispatcher(request, response, "resetPassword.jsp");
                 }
-                if(!verify.equalsIgnoreCase(code)) {
+                if (!verify.equalsIgnoreCase(code)) {
                     sendDispatcher(request, response, "resetPassword.jsp");
                 }
             }
-            
+
             if (service.equalsIgnoreCase("resetPass")) {
                 String password = request.getParameter("password").trim();
                 String confirmPassword = request.getParameter("confirm").trim();
-                
+
                 User x = (User) request.getSession().getAttribute("currMail");
-                
-                if(password.equalsIgnoreCase(confirmPassword)) {
+
+                if (password.equalsIgnoreCase(confirmPassword)) {
                     User user = userDAO.resetPassword(x, password);
                     sendDispatcher(request, response, "index.jsp");
                 }
@@ -274,4 +272,3 @@ public class UserController extends HttpServlet {
     }// </editor-fold>
 
 }
-

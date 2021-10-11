@@ -176,13 +176,14 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "UPDATE [user] SET password=? WHERE email =?";
+        String sql = "UPDATE [user] SET password=? WHERE uMail =?";
 
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, newPass);
             ps.setString(2, uMail);
+            ps.executeUpdate();
         } catch (Exception ex) {
             throw ex;
         } finally {
