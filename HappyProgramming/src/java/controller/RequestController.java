@@ -31,6 +31,7 @@ import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
 import entity.Skill;
 import java.sql.Date;
+import javax.servlet.http.HttpSession;
 
 /**
  * Process:<br>
@@ -63,6 +64,8 @@ public class RequestController extends HttpServlet {
             RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
             SkillDAO skillDAO = new SkillDAOImpl();
 
+            HttpSession session = request.getSession();
+            
             if (service == null) {
                 service = "";
             }
@@ -181,7 +184,7 @@ public class RequestController extends HttpServlet {
 
                 int status = Integer.parseInt(request.getParameter("status"));
 
-                int uid = Integer.parseInt(request.getParameter("uId"));
+                int uid = (Integer) session.getAttribute("uId");
 
                 RequestDAO requestdao = new RequestDAOImpl();
 
@@ -197,11 +200,13 @@ public class RequestController extends HttpServlet {
 
                     request.setAttribute("status", "Following");
                 } else if (status == 3) {
-
+                    request.setAttribute("status", "Done");
+                } else if (status == 4) {
+                    request.setAttribute("status", "Canceled");
                 }
 
-                //sendDispatcher(request,response, "/demoMentorRequestList.jsp");
-                out.println("<h3>view Mentor Request chưa xong</h3>");
+                sendDispatcher(request,response, "/mentorRequestList.jsp");
+                //out.println("<h3>view Mentor Request chưa xong</h3>");
             }
         }
     }
