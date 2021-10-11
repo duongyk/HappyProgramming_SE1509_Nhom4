@@ -87,6 +87,21 @@ public class Skill {
     }
     
     /**
+     * Constructor.<br>
+     *
+     * @param id it is a int number
+     * @param name it is a <code>java.lang.String</code>
+     * @param detail it is a <code>java.lang.String</code>
+     * @param image <code>java.lang.String</code>
+     */
+    public Skill(int id, String name, String detail, String image) {
+        this.id = id;
+        this.name = name;
+        this.detail = detail;
+        this.image = image;
+    }
+    
+    /**
      * Get value from attribute of Skill class. <br>
      *
      * @return id it is a int number

@@ -135,7 +135,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Request req = new Request(rs.getInt("rId"), rs.getString("title"), rs.getString("content"), userdao.getUserById(rs.getInt("fromId")), userdao.getUserById(rs.getInt("toId")), Date.valueOf(rs.getString("deadlineDate")), status);
+                Request req = new Request(rs.getInt("rId"), rs.getString("title"), rs.getString("content"), userdao.getUserById(rs.getInt("fromId")), userdao.getUserById(rs.getInt("toId")), Date.valueOf(rs.getString("deadlineDate")), rs.getInt("deadlineHour"), status);
 
                 requestList.add(req);
             }

@@ -54,9 +54,8 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
                 id = rs.getInt("sId");
                 name = rs.getString("sName");
                 detail = rs.getString("sDetail");
-                image = rs.getString("sImage");
-                status = rs.getInt("sStatus");
-                s = new Skill(id, name, detail, image, status);
+                image = rs.getString("sImage");            
+                s = new Skill(id,name, detail, image);                
                 list.add(s);
             }
         } catch (Exception ex) {
