@@ -104,8 +104,8 @@
           
         <div class="row">
 
-        <c:forEach items="${requestlist}" var="skill">
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+        <c:forEach items="${requestlist}" var="request">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
                 <img src="img/team/team-1.jpg" class="img-fluid" alt="">
@@ -113,8 +113,16 @@
                 </div>
               </div>
               <div class="member-info">
-                  <h4><c:out value="${skill.getTitle()}"></c:out></h4>
-                <a href="">View detail</a>
+                  <h4 >Request ID: <c:out value="${request.getId()}"></c:out></h4>
+                  <h4 style="color:green"><c:out value="${request.getTitle()}"></c:out></h4>
+                  <h4 style="color:#0066cc"><c:out value="${request.getContent()}"></c:out></h4>
+                  <h4 style="color:orangered">Mentee: <c:out value="${request.getFrom().getUsername()}"></c:out></h4>
+                  <h4>DeadlineDate: <c:out value="${request.getDeadlineDate()}"></c:out></h4>                
+                  <h4>DeadlineHour: <c:out value="${request.getDeadlineHour()}"></c:out></h4>
+                  <c:if test="${request.getStatus()==1}">
+                      <h4><a href="">Accept</a></h4>
+                      <h4><a style="color:#ff0000" href="">Reject</a></h4>
+                  </c:if>
               </div>
             </div>
           </div>

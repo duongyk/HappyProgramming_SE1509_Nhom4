@@ -180,11 +180,14 @@ public class RequestController extends HttpServlet {
 
             /* View Mentor Request */
             if (service.equalsIgnoreCase("viewMentorRequest")) {
-
+                
+                // get status from URL
                 int status = Integer.parseInt(request.getParameter("status"));
 
+                // get Mentor ID from Sessiom
                 int uid = (Integer) session.getAttribute("uId");
 
+                // Get all Request from database
                 RequestDAO requestdao = new RequestDAOImpl();
 
                 ArrayList<Request> requestList = requestdao.getRequestListBy_uId_And_Status(uid, status);
@@ -192,11 +195,8 @@ public class RequestController extends HttpServlet {
                 request.setAttribute("requestlist", requestList);
 
                 if (status == 1) {
-
                     request.setAttribute("status", "Inviting");
-
                 } else if (status == 2) {
-
                     request.setAttribute("status", "Following");
                 } else if (status == 3) {
                     request.setAttribute("status", "Done");
