@@ -106,7 +106,7 @@
                         <div class="card card-5">
 
                             <div class="card-body">
-                                <form action="UserControllerMap" method="POST">
+                                    <form action="UserControllerMap" method="POST">
                                     <input type="hidden" name="service" value="changepass">
                                     <div class="form-row m-b-55">
                                         <div class="name">Email</div>
@@ -130,6 +130,14 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
+                                        <div class="name">newPassword</div>
+                                        <div class="value">
+                                            <div class="input-group">
+                                                <input class="input--style-5" type="password" name="newpassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
                                         <div class="name">rePassword</div>
                                         <div class="value">
                                             <div class="input-group">
@@ -137,7 +145,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div>
                                         <button class="btn btn--radius-2 btn--red" type="submit">Change</button>
                                     </div>

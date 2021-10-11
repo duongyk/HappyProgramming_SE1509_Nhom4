@@ -122,13 +122,14 @@ public class UserController extends HttpServlet {
             
             if (service.equals("changepass")) {
                 HttpSession session =request.getSession();
-//                String oldPass = request.getParameter("old pass");
-                   String email = request.getParameter("email").trim();
-                 String newPass = request.getParameter("password").trim();
+                
+                 String email = request.getParameter("email").trim();
+                 String oldPass = request.getParameter("password").trim();
+                 String newPass = request.getParameter("newpassword").trim();
                  String rePass = request.getParameter("rePassword").trim();
                  User u = (User) session.getAttribute("u");
                  String mail=u.getMail();
-                 if(!u.getPassword().equals(newPass)){
+                 if(!u.getPassword().equals(oldPass)){
                      request.setAttribute("mess", "wrong Password");
                      sendDispatcher(request, response, "changePassword.jsp");
                      
