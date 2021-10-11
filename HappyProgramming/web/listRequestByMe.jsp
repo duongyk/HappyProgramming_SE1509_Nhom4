@@ -100,7 +100,7 @@
                     <div><a href="RequestControllerMap?service=loadRequest"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
                     <input name="modal" type="checkbox" id="modal">
                     <label for="modal" class="label-show-modal">Statistic Request</label>
-                    <div class="modal-show">
+                    <div class="modal-show" style="z-index: 3;">
                         <div class="modal-show-inner">
                             <label for="modal">&#10006;</label>
                             <h2 class="text-center">Statistic Request</h2>
@@ -149,7 +149,7 @@
                                             <img class="img-display" src="img/default-image.jpg">
                                             <div class="member-info">
                                                 <h4><c:out value="${request.title}"></c:out></h4>
-                                                <a href="RequestControllerMap?service=viewRequest&rId=${request.id}">View detail</a>
+                                                <a class="view-button" href="RequestControllerMap?service=viewRequest&rId=${request.id}">View detail</a>
                                             </div>
                                         </div>
                                     </div>

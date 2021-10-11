@@ -58,7 +58,6 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
@@ -133,7 +132,7 @@
                                         <div class="name">newPassword</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="newpassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}">
+                                                <input class="input--style-5" type="password" name="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}">
                                             </div>
                                         </div>
                                     </div>
@@ -141,7 +140,7 @@
                                         <div class="name">rePassword</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="repassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}">
+                                                <input class="input--style-5" type="password" name="rePassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}">
                                             </div>
                                         </div>
                                     </div>
@@ -149,6 +148,9 @@
                                         <button class="btn btn--radius-2 btn--red" type="submit">Change</button>
                                     </div>
                                 </form>
+                                <c:if test="${mess!=null}">
+                                    <c:out value="${mess}"></c:out>
+                                </c:if>
                             </div>
                         </div>
                     </div>

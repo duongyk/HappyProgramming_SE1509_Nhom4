@@ -5,6 +5,10 @@ ul {
   list-style: none;
 }
 
+.submit-button {
+    margin-bottom: 30px;
+}
+
 /* ADDITIONAL STYLING */
 
 /* The container */

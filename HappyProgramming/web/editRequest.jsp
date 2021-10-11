@@ -108,19 +108,19 @@
                                                     <div class="row row-space">
                                                         <div class="col-12">
                                                             <div class="input-group-desc">
-                                                                <input class="input--style-5" type="text" name="title" placeholder="Your Request Title" maxlength="100" value="${req.getTitle()}" required>
-                                                                </div>
+                                                                <input class="input--style-5" type="text" name="title" placeholder="Your Request Title" pattern=".*\S+.*" title="No white space only" maxlength="100" value="${req.getTitle()}" required>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
                                             <%-- Content --%>
                                             <div class="form-row">
                                                 <div class="name">Content</div>
                                                 <div class="value">
                                                     <div class="input-group">
-                                                        <textarea class="input--style-5" type="text" placeholder="Your Request Content" name="content" maxlength="200" required  rows="3" cols="54"><c:out value="${req.getContent()}"></c:out></textarea>
+                                                        <textarea class="input--style-5" type="text" name="content" placeholder="Your Request Content" pattern=".*\S+.*" title="No white space only" maxlength="200" required  rows="3" cols="54"><c:out value="${req.getContent()}"></c:out></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -217,7 +217,7 @@
                                             <div class="row">
                                                 <div class="col-3"></div>
                                                 <div class="col-6">
-                                                    <button class="btn btn--radius-2 btn--red" type="submit">Create Request</button>
+                                                    <button class="btn btn--radius-2 btn--red" type="submit">Update Request</button>
                                                 </div>
                                                 <div class="col-3"></div>
                                             </div>
@@ -226,108 +226,102 @@
                                     <%-- Request's Status = 2 (Processing) -> Cancel only --%>
                                     <c:otherwise>
                                         <form action="RequestControllerMap?service=editRequest" method="POST">
-                                    <input type="hidden" name="rId" value="${req.id}">
-                                    <%-- Title --%>
-                                    <div class="form-row m-b-55">
-                                        <div class="name">Title</div>
-                                        <div class="value">
-                                            <div class="row row-space">
-                                                <div class="col-12">
-                                                    <div class="input-group-desc">
-                                                        <textarea class="input--style-5" type="text" name="title" value="<c:out value="${req.title}"></c:out>" placeholder="Your Request Title" maxlength="100" readonly></textarea>
+                                            <input type="hidden" name="rId" value="${req.id}">
+                                            <%-- Title --%>
+                                            <div class="form-row m-b-55">
+                                                <div class="name">Title</div>
+                                                <div class="value">
+                                                    <div class="row row-space">
+                                                        <div class="col-12">
+                                                            <div class="input-group-desc">
+                                                                <input class="input--style-5" type="text" name="title" placeholder="Your Request Title" pattern=".*\S+.*" title="No white space only" maxlength="100" value="${req.getTitle()}" readonly>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                    <%-- Content --%>
-                                    <div class="form-row">
-                                        <div class="name">Content</div>
-                                        <div class="value">
-                                            <div class="input-group">
-                                                <textarea class="input--style-5" type="text" value="<c:out value="${req.content}"></c:out>" placeholder="Your Request Content" name="content" maxlength="200" readonly></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    <%-- Deadline Date --%>
-                                    <div class="form-row">
-                                        <div class="name">Deadline Date</div>
-                                        <div class="value">
-                                            <div class="input-group">
-                                                <input class="input--style-5" type="date" value="<c:out value="${req.deadlineDate}"></c:out>" name="deadlineDate" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    <%-- Deadline Hour --%>
-                                    <div class="form-row">
-                                        <div class="name">Deadline Hour</div>
-                                        <div class="value">
-                                            <div class="input-group">
-                                                <input class="input--style-5" type="number" min="1" max="12" value="<c:out value="${req.deadlineHour}"></c:out>" placeholder="The time you want to request" name="deadlineHour" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    <%-- Mentor --%>
-                                    <div class="form-row">
-                                        <div class="name">Choose Mentor</div>
-                                        <div class="value">
-                                            <div class="input-group">
-                                                <input value="<c:out value="${req.getTo.getFullname()}"></c:out>" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- Status --%>
-                                    <div class="form-row">
-                                        <div class="name">Choose Mentor</div>
-                                        <div class="value">
-                                            <select name="status" required="required">
-                                                <option value="1" selected>Processing</option>
-                                                <option value="4">Cancel</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <%-- Skill --%>
-                                    <div class="form-row m-b-55">
-                                        <div class="name">Choose Skills</div>
-                                        <div class="value">
-                                            <div class="row row-refine">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <ul>
-                                                            <c:forEach items="${sList}" var="s">
-                                                                <c:if test="${s.status==1}">
-                                                                    <li>
-                                                                        <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}" checked>
-                                                                        <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
-                                                                    </li>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </ul>
+                                            <%-- Content --%>
+                                            <div class="form-row">
+                                                <div class="name">Content</div>
+                                                <div class="value">
+                                                    <div class="input-group">
+                                                        <textarea class="input--style-5" type="text" name="content" placeholder="Your Request Content" pattern=".*\S+.*" title="No white space only" maxlength="200" readonly  rows="3" cols="54"><c:out value="${req.getContent()}"></c:out></textarea>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
+                                            <%-- Deadline Date --%>
+                                            <div class="form-row">
+                                                <div class="name">Deadline Date</div>
+                                                <div class="value">
+                                                    <div class="input-group">
+                                                        <input class="input--style-5" type="date" value="<c:out value="${req.deadlineDate}"></c:out>" name="deadlineDate" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <%-- Deadline Hour --%>
+                                            <div class="form-row">
+                                                <div class="name">Deadline Hour</div>
+                                                <div class="value">
+                                                    <div class="input-group">
+                                                        <input class="input--style-5" type="number" min="1" max="12" value="<c:out value="${req.deadlineHour}"></c:out>" placeholder="The time you want to request" name="deadlineHour" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <%-- Mentor --%>
+                                            <div class="form-row">
+                                                <div class="name">Choose Mentor</div>
+                                                <div class="value">
+                                                    <div class="input-group">
+                                                        <input value="<c:out value="${req.getTo().getFullname()}"></c:out>" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <%-- Status --%>
+                                            <div class="form-row">
+                                                <div class="name">Status</div>
+                                                <div class="value">
+                                                    <select name="status" required="required">
+                                                        <option value="1" selected>Processing</option>
+                                                        <option value="4">Cancel</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <%-- Skill --%>
+                                            <div class="form-row m-b-55">
+                                                <div class="name"> Skills</div>
+                                                <div class="value">
+                                                    <c:forEach items="${sList}" var="s" begin="0" end="${sList.size()-2}">
+                                                        <c:if test="${s.status==1}">
+                                                            <label class="form-check-label">${s.getName()},</label>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                    <c:forEach items="${sList}" var="s" begin="${sList.size()-1}" end="${sList.size()-1}">
+                                                        <c:if test="${s.status==1}">
+                                                            <label class="form-check-label">${s.getName()}</label>
+                                                        </c:if>
+                                                    </c:forEach>  
+                                                </div>
+                                            </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-3"></div>
-                                        <div class="col-6">
-                                            <button class="btn btn--radius-2 btn--red" type="submit">Update Request</button>
+                                        <div class="col-4"></div>
+                                        <div class="col-5">
+                                            <button class="btn btn--radius-2 btn--red submit-button" type="submit">Update Request</button>
                                         </div>
                                         <div class="col-3"></div>
                                     </div>
-                                </form>
-                                    </c:otherwise>
-                                </c:choose>
+                                    </form>
+                                </c:otherwise>
+                            </c:choose>
 
-                            </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </section>
 

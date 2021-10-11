@@ -171,6 +171,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
 
     }
 
+    @Override
     public User changePass(String uMail, String newPass) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;

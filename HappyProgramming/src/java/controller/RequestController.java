@@ -160,8 +160,8 @@ public class RequestController extends HttpServlet {
                 // get request ID
                 int rId = Integer.parseInt(request.getParameter("rId"));
                 // get new input information
-                String title = request.getParameter("title");
-                String content = request.getParameter("content");
+                String title = request.getParameter("title").trim();
+                String content = request.getParameter("content").trim();
                 Date deadlineDate = Date.valueOf(request.getParameter("deadlineDate"));
                 int deadlineHour = Integer.parseInt(request.getParameter("deadlineHour"));
                 int status = Integer.parseInt(request.getParameter("status"));
@@ -171,7 +171,6 @@ public class RequestController extends HttpServlet {
                     int sId = Integer.parseInt(id);
                     sIdList.add(sId);
                 }
-
                 Request req = new Request(rId, title, content, deadlineDate, deadlineHour, status);
                 requestDAO.updateRequest(req);
                 requestSkillDAO.updateRequestSkill(rId, sIdList);

@@ -125,9 +125,9 @@ public class UserController extends HttpServlet {
                 
                  String email = request.getParameter("email").trim();
                  String oldPass = request.getParameter("password").trim();
-                 String newPass = request.getParameter("newpassword").trim();
+                 String newPass = request.getParameter("newPassword").trim();
                  String rePass = request.getParameter("rePassword").trim();
-                 User u = (User) session.getAttribute("u");
+                 User u = (User) session.getAttribute("currUser");
                  String mail=u.getMail();
                  if(!u.getPassword().equals(oldPass)){
                      request.setAttribute("mess", "wrong Password");
@@ -142,9 +142,6 @@ public class UserController extends HttpServlet {
                          sendDispatcher(request, response, "signIn.jsp");
                      }
                  }
-               
-                
-                
 
             }
 
@@ -277,3 +274,4 @@ public class UserController extends HttpServlet {
     }// </editor-fold>
 
 }
+

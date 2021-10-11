@@ -34,5 +34,6 @@
             </c:otherwise>
         </c:choose>
         <a href="UserControllerMap?service=signOut">Sign Out</a>
+        <a href="changePassword.jsp">Change pass</a>
     </body>
 </html>
