@@ -345,6 +345,39 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return null;
     }
     
+    @Override
+    public void updateUser(User user) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String sql = "update [User] set [fullname] = ?"
+                + ",[uMail] = ?"
+                + ", [uPhone] = ?"
+                + ", [DOB] = ?"
+                + ", [gender] = ?"
+                + ", [uAvatar] = ?"
+                + " where [uId] = ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, user.getFullname());
+            ps.setString(2, user.getMail());
+            ps.setString(3, user.getPhone());
+            ps.setDate(4, user.getDob());
+            ps.setString(5, user.getGender());
+            ps.setString(6, user.getAvatar());
+            ps.setInt(6, user.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+    }
+    
     public static void main(String[] args) throws Exception {
         UserDAOImpl dao = new UserDAOImpl();
         System.out.println(dao.getUserByEmail("hajimenagumo911@gmail.com").getFullname());

@@ -126,8 +126,11 @@
 
                                         <div class="row">
                                             <div class="col-md-12 form-group">
-                                                <input type="text" class="form-control" name="code" id="email" placeholder="Your Verify Code" required>
+                                                <input type="text" class="form-control" maxlength="4" name="code" id="email" placeholder="Your Verify Code" required>
                                             </div>
+                                            <c:if test="${sessionScope.alert != null}">
+                                                <p style="color: red"> <c:out value="${alert}"/>
+                                            </c:if>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">

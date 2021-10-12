@@ -128,7 +128,7 @@
                                             <div class="name">New Password</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <input class="input--style-5" id="password" type="text" placeholder="Password" name="password" required>
+                                                    <input onkeyup='check();' maxlength="20" class="input--style-5" id="password" type="text" placeholder="Password" name="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$" title="8 characters include letters and numbers">
                                                 </div>
                                             </div>
                                         </div>
@@ -136,13 +136,13 @@
                                             <div class="name">Confirm Password</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <input class="input--style-5" id="confirm" type="text" placeholder="Confirm Password" name="confirm" required>
+                                                    <input onkeyup='check();' maxlength="20" class="input--style-5" id="confirm" type="text" placeholder="Confirm Password" name="confirm" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$" title="8 characters include letters and numbers">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary rounded-0 py-2 px-4">Reset Password</button>
+                                                <button id="submit" type="submit" class="btn btn-primary rounded-0 py-2 px-4">Reset Password</button>
                                                 <input type="hidden" name="service" value="resetPass">
                                             </div>
                                         </div>
@@ -160,7 +160,7 @@
                     var check = function () {
                         if (document.getElementById('password').value == document.getElementById('confirm').value) {
                             document.getElementById('message').style.color = 'green';
-                            document.getElementById('message').innerHTML = 'Valid';
+                            document.getElementById('message').innerHTML = '';
                             document.getElementById('submit').disabled = false;
                         } else {
                             document.getElementById('message').style.color = 'red';

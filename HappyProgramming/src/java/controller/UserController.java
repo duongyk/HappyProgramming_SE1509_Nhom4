@@ -170,37 +170,43 @@ public class UserController extends HttpServlet {
                 sendDispatcher(request, response, "allMentor.jsp");
             }
 
+            // send a verify code to user mail
             if (service.equalsIgnoreCase("sendEmail")) {
                 SendEmail se = new SendEmail();
-                String code = se.generateVerifyCode();
-                request.getSession().setAttribute("verify", code);
-
+                String code = se.generateVerifyCode(); // generate a verify code
+                request.getSession().setAttribute("verify", code); // set session for verify code
                 String mail = request.getParameter("email").trim();
 
                 User user = userDAO.getUserByEmail(mail);
-                if (user != null) {
+
+                if (user != null) { // check if user find by mail are null or not
+
                     User a = userDAO.getUserByEmail(mail);
-                    a.setVerify(code);
-                    int send = se.sendEmail(a);
+                    a.setVerify(code); // set verify code for user
+                    int send = se.sendEmail(a); // send email contain verify code to user
                     request.getSession().setAttribute("currMail", a);
                     sendDispatcher(request, response, "verifyAccount.jsp");
                 }
             }
 
+            // check verify code
             if (service.equalsIgnoreCase("verifyCode")) {
                 User x = (User) request.getSession().getAttribute("currMail");
                 String verify = (String) request.getSession().getAttribute("verify");
 
                 String code = request.getParameter("code").trim();
 
-                if (verify.equalsIgnoreCase(code)) {
+                if (verify.equalsIgnoreCase(code)) { // if the verify code you input is similar to the one you recieve
+                    request.getSession().setAttribute("alert", null);
                     sendDispatcher(request, response, "resetPassword.jsp");
                 }
-                if (!verify.equalsIgnoreCase(code)) {
-                    sendDispatcher(request, response, "resetPassword.jsp");
+                if (!verify.equalsIgnoreCase(code)) { // if the verify code you input is not similar to the one you recieve
+                    request.getSession().setAttribute("alert", "Your verify code is not correct");
+                    sendDispatcher(request, response, "verifyAccount.jsp");
                 }
             }
 
+            // reset user new password
             if (service.equalsIgnoreCase("resetPass")) {
                 String password = request.getParameter("password").trim();
                 String confirmPassword = request.getParameter("confirm").trim();
@@ -208,9 +214,30 @@ public class UserController extends HttpServlet {
                 User x = (User) request.getSession().getAttribute("currMail");
 
                 if (password.equalsIgnoreCase(confirmPassword)) {
-                    User user = userDAO.resetPassword(x, password);
-                    sendDispatcher(request, response, "index.jsp");
+
+                    if (password.equalsIgnoreCase(confirmPassword)) { // if password and confirm password is similar
+                        User user = userDAO.resetPassword(x, password);
+                        sendDispatcher(request, response, "index.jsp");
+                    }
                 }
+            }
+            
+            if (service.equalsIgnoreCase("updateProfile")) {
+                int id = Integer.parseInt(request.getParameter("uId"));
+                String fullname = request.getParameter("fullname").trim();
+                String email = request.getParameter("email").trim();
+                String phone = request.getParameter("phone").trim();
+                
+                String date = request.getParameter("dob");
+                Date dob = Date.valueOf(date);
+                
+                String gender = request.getParameter("gender");
+                String avatar = request.getParameter("avatar").trim();
+                
+                User user = new User(id, fullname, email, phone, dob, gender, avatar);
+                userDAO.updateUser(user);
+                
+                sendDispatcher(request, response, "index.jsp");
             }
         }
     }

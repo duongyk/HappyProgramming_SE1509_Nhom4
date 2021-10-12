@@ -26,7 +26,7 @@
 
         <c:choose>
             <c:when test="${user.role==1}">               
-              <a href="${"UserControllerMap?service=updateProfile&uId="}${user.id}">Update Profile</a><br>
+              <a href="updateProfile.jsp">Update Profile</a><br>
             </c:when>
               <c:otherwise>            
               <img src="images/${user.avatar}" style="width: 162px;"/>

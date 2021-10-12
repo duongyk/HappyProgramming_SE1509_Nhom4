@@ -125,7 +125,7 @@
 
                                         <div class="row">
                                             <div class="col-md-12 form-group">
-                                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                                                <input type="email" maxlength="30" class="form-control" name="email" id="email" placeholder="Email" required>
                                             </div>
                                         </div>
                                         <div class="row">

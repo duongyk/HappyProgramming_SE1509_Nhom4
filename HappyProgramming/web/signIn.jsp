@@ -135,6 +135,9 @@
                                     <div>
                                         <button class="btn btn--radius-2 btn--red" type="submit">Sign in</button>
                                     </div>
+                                    <div>
+                                        <a style="color: blue" href="forgetPassword.jsp"> FORGOT PASSWORD </a>
+                                    </div>
                                 </form>
                             </div>
                         </div>

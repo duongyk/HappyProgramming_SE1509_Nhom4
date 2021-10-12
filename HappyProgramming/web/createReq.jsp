@@ -107,7 +107,7 @@
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="text" name="title" placeholder="Your Request Title" required>
+                                                        <input class="input--style-5" maxlength="30" type="text" name="title" placeholder="Your Request Title" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,7 +119,7 @@
                                         <div class="name">Content</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="text" placeholder="Your Request Content" name="content" required>
+                                                <textarea class="input--style-5" rows="3" cols="55" type="text" placeholder="Your Request Content" name="content" required></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -166,12 +166,10 @@
                                                     <div class="col-12">
                                                         <ul>
                                                             <c:forEach items="${sList}" var="s">
-                                                                <c:if test="${s.status==1}">
                                                                     <li>
                                                                         <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}">
                                                                         <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
                                                                     </li>
-                                                                </c:if>
                                                             </c:forEach>
                                                         </ul>
                                                     </div>
@@ -180,35 +178,6 @@
 
                                         </div>
                                     </div>
-
-                            <%--
-                            <div class="form-row">
-                                <div class="name">Sex</div>
-                                <select id="select-6004" name="sex" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-                            <div class="form-row">
-                                <label for="text-13e0" class="name">Date of birth</label>
-                                <input  class="input--style-5" type="date"  name="dob" >
-                            </div>
-                            <div class="form-row">
-                                <div class="name">Sign up to </div>
-                                <div class="value">
-                                    <div class="input-group">
-                                        <div class="rs-select2 js-select-simple select--no-search">
-                                            <select name="role">
-                                                <option disabled="disabled" selected="selected">Choose a role</option>
-                                                <option value="2">Mentor</option>
-                                                <option value="1">Mentee</option>
-                                            </select>
-                                            <div class="select-dropdown"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            --%>
 
                             <div class="row">
                                 <div class="col-3"></div>
