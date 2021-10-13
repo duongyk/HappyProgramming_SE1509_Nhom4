@@ -21,6 +21,7 @@ import dao.impl.UserSkillDAOImpl;
 import entity.CV;
 import entity.Skill;
 import entity.User;
+import entity.UserSkill;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -59,7 +60,7 @@ public class CVController extends HttpServlet {
             String service = request.getParameter("service");
             
             CVDAO cvdao = new CVDAOImpl();
-            UserDAO userdao = new UserDAOImpl();
+            UserDAO userDAO = new UserDAOImpl();
             UserSkillDAO smdao = new UserSkillDAOImpl();
             
             HttpSession session = request.getSession();
@@ -69,7 +70,7 @@ public class CVController extends HttpServlet {
                 
                 CV mentorCV = cvdao.getMentorCV(uid);
                 
-                User mentorProfile = userdao.getUserById(uid);
+                User mentorProfile = userDAO.getUserById(uid);
                 
                 // get all skill id from mentor
                 ArrayList<String> mentorSkill = smdao.getAll_Id_Skill_Mentor(uid);
@@ -165,7 +166,7 @@ public class CVController extends HttpServlet {
                 
                 CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
           
-                userdao.updateUserInfo(uid, mentorInfo);
+                userDAO.updateUserInfo(uid, mentorInfo);
                 cvdao.updateCV(uid, mentorCV);
                 smdao.updateMentorSkill(uid, skill_id);
                 
@@ -242,10 +243,30 @@ public class CVController extends HttpServlet {
                 //response.sendRedirect("SignIn.jsp");
                 response.sendRedirect("demoMentorList.jsp");
             }
-             if(service.equals("viewCV")) {
+             if(service.equals("cvMentor")) {
+                 
+                 int mId=Integer.parseInt(request.getParameter("mId"));
+                 User mentor = userDAO.getUserById(mId);
+                 ArrayList<Skill >sList = smdao.getAll_Skill_Mentor(mId);
+                 
+                 CV cv=cvdao.getMentorCV(mId);
+                 request.setAttribute("cv", cv);
+                 request.setAttribute("sList",sList);
+                 request.setAttribute("mentor", mentor);
+                 sendDispatcher(request, response, "cvMentor.jsp");
+                 
                  
              }
             
+        }
+        
+    }
+     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher(path);
+            rd.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

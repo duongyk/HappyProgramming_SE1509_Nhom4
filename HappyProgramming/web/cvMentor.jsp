@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,12 +102,12 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                      <img src="img/default-avatar.png" alt="Admin" class="rounded-circle" width="150">
                       <div class="mt-3">
-                        <h4 style= "font-weight: bold;">John Doe</h4>
-                        <p class="text-secondary mb-1">Full Stack Developer</p>
-                        <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                   <!--<button class="btn btn-primary">Follow</button>-->     <!--Nút này ?? nguyên nh? mai sau có c?n nút gì thì add thêm-->
+                        <h4 style= "font-weight: bold;"><c:out value="${mentor.fullname}"></c:out></h4>
+                        <p class="text-secondary mb-1"> </p>
+                        
+                   <!--<button class="btn btn-primary">Follow</button>-->     <!--NÃºt nÃ y ?? nguyÃªn nh? mai sau cÃ³ c?n nÃºt gÃ¬ thÃ¬ add thÃªm-->
                       </div>
                     </div>
                   </div>
@@ -115,75 +117,80 @@
               <div class="col-md-8">
                 <div class="card mb-3">
                   <div class="card-body">
-                    <div class="row" style="margin: 10px;">
+                    <div class="row" style="margin: 15px;">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Full Name</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        Kenneth Valdez
+                       <c:out value="${mentor.fullname}"></c:out>
                       </div>
                     </div>
                     <hr>
-                    <div class="row" style="margin: 10px;">
+                    <div class="row" style="margin: 15px;">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Date of birth</h6>
+                        
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        Kenneth Valdez
+                       <c:out value="${mentor.dob}"></c:out>
                       </div>
                     </div>
                     <hr>
-                    <div class="row" style="margin: 10px;">
+                    <div class="row" style="margin: 15px;">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Sex</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        Kenneth Valdez
+                       <c:out value="${mentor.gender}"></c:out>
                       </div>
                     </div>
                     <hr>
-                    <div class="row" style="margin: 10px;">
+                    <div class="row" style="margin: 15px;">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Email</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        Kenneth Valdez
+                        <c:out value="${mentor.mail}"></c:out>
                       </div>
                     </div>
                     <hr>
-                    <div class="row" style="margin: 10px;">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Address</h6>
-                      </div>
-                      <div class="col-sm-9 text-secondary">
-                        Sao ?? - Chí Linh - H?i D??ng
-                      </div>
-                    </div>
+                   
                     <hr>
-                    <div class="row" style="margin: 10px;">
+                    <div class="row" style="margin: 15px;">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Profession</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        Kenneth Valdez
+                         <c:out value="${cv.getProfession()}"></c:out>
                       </div>
                     </div>
                     <hr>
-                    <div class="row" style="margin: 10px;">
+                    <div class="row" style="margin: 15px;">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Skill</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        C, Java, OK
+                      <c:forEach items="${sList}" var="s" varStatus="loop">
+                                        <c:if test="${s.status==1}">
+                                            <c:choose>
+                                                <c:when test="${loop.last}">
+                                                    <label class="form-check-label">${s.getName()}</label>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <label class="form-check-label">${s.getName()},</label>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:if>
+                                    </c:forEach>
                       </div>
                     </div>
                     <hr>
-                    <div class="row" style="margin: 10px;">
+                    <div class="row" style="margin: 15px;">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Service description</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        Kenneth Valdez
+                        <c:out value="${cv.getServiceDescript() }"></c:out>
                       </div>
                     </div>
                     <hr>
@@ -194,8 +201,7 @@
                       </div>
                       <div class="col-sm-9 text-secondary">
                        <ul style="list-style: none;">
-                         <li>Top 1 th?ng ngu nh?t hành tinh</li>
-                         <li>Gi?i bét cu?c thi hack</li>
+                         <c:out value="${cv.getAchivement() }"></c:out>
                        </ul>
 
                       </div>

@@ -96,5 +96,6 @@ public class CV {
     public void setAchivement(String achivement) {
         this.achivement = achivement;
     }
+   
 
 }

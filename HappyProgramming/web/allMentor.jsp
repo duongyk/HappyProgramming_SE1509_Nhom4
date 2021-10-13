@@ -12,6 +12,7 @@
         <c:forEach items="${mList}" var="mentor">
             <p>${mentor.fullname}
             <a href="RatingControllerMap?service=getRating&mId=${mentor.id}">See rating</a>
+             <a href="CVControllerMap?service=cvMentor&mId=${mentor.id}">View CV of mentor</a>
         </c:forEach>
     </body>
 </html>
