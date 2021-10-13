@@ -207,6 +207,21 @@ public class RequestController extends HttpServlet {
                 sendDispatcher(request,response, "/mentorRequestList.jsp");
                 //out.println("<h3>view Mentor Request chưa xong</h3>");
             }
+            
+            /* Mentor Accept / Reject Request */
+            if(service.equalsIgnoreCase("mentorUpdateStatus")) {
+                // get status and request id from URL
+                int status = Integer.parseInt(request.getParameter("status"));
+                
+                int rid = Integer.parseInt(request.getParameter("rid"));
+                
+                // using dao update request
+                RequestDAO requestdao = new RequestDAOImpl();
+                
+                requestdao.updateStatusRequest(rid, status);     
+                
+                sendDispatcher(request,response, "/demoMentorRequestNav.jsp");
+            }
         }
     }
 
