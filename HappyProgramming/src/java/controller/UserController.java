@@ -153,7 +153,7 @@ public class UserController extends HttpServlet {
                 User user = userDAO.getUserById(uId);
                 request.setAttribute("user", user);
 
-                sendDispatcher(request, response, "profile.jsp");
+                sendDispatcher(request, response, "userProfile.jsp");
             }
 
             if (service.equalsIgnoreCase("info")) {
@@ -222,8 +222,11 @@ public class UserController extends HttpServlet {
                 }
             }
             
+            // Update profile of current login user
             if (service.equalsIgnoreCase("updateProfile")) {
+                //get user information by user id
                 int id = Integer.parseInt(request.getParameter("uId"));
+                //user infos
                 String fullname = request.getParameter("fullname").trim();
                 String email = request.getParameter("email").trim();
                 String phone = request.getParameter("phone").trim();
@@ -232,10 +235,10 @@ public class UserController extends HttpServlet {
                 Date dob = Date.valueOf(date);
                 
                 String gender = request.getParameter("gender");
-                String avatar = request.getParameter("avatar").trim();
+//                String avatar = request.getParameter("avatar").trim();
                 
-                User user = new User(id, fullname, email, phone, dob, gender, avatar);
-                userDAO.updateUser(user);
+                User user = new User(id, fullname, email, phone, dob, gender);
+                userDAO.updateUser(user); // update user info into DB
                 
                 sendDispatcher(request, response, "index.jsp");
             }

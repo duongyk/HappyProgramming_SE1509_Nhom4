@@ -218,14 +218,14 @@ public class User {
 //     * @param avatar it is a <code>java.lang.String</code>
      * 
      */
-    public User(int id, String fullname, String mail, String phone, Date dob, String gender, String avatar) {
+    public User(int id, String fullname, String mail, String phone, Date dob, String gender) {
         this.id = id;
         this.fullname = fullname;
         this.mail = mail;
         this.phone = phone;
         this.dob = dob;
         this.gender = gender;
-        this.avatar = avatar;
+//        this.avatar = avatar;
     }
 
     /**
