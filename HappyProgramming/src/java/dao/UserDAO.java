@@ -26,6 +26,13 @@ public interface UserDAO {
      */
     public ArrayList<User> getUserList() throws Exception;
     
+    /**
+     * Get all the Mentee listed by Name
+     *
+     * @return list of <code>User</code> object
+     * @throws Exception
+     */
+    public ArrayList<User> getMenteeListSorted() throws Exception;
     
     /**
      * Get User by username and password

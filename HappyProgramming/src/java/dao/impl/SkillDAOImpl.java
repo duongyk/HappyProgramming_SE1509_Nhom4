@@ -68,6 +68,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return list;
     }
     
+    @Override
     public ArrayList<Skill> getActiveSkill() throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;

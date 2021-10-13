@@ -213,6 +213,7 @@
                                                                 </div>
                                                                 <%-- Message for checkbox --%>
                                                                 <p id="text" style="display:none; color:red">Please choose at least 1 skill and at max 3 skills</p>
+                                                                <p id="text-1" style="color:white;">aaaaa</p>
                                                             </div>
                                                         </div>
 

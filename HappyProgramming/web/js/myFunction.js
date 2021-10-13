@@ -8,15 +8,18 @@ function myFunction() {
     var inputElems = document.getElementsByTagName("input");
     var count = 0;
     var text = document.getElementById("text");
+    var text1 = document.getElementById("text-1");
     for (var i=0; i<inputElems.length; i++) {
     if (inputElems[i].type === "checkbox" && inputElems[i].checked === true){
         count++;
     }}
     if (count===0 || count>3) {
         text.style.display = "block";
+        text1.style.display = "none";
         document.getElementById("button").disabled = true;
     } else {
         text.style.display = "none";
+        text1.style.display = "block";
         document.getElementById("button").disabled = false;
     }
 }

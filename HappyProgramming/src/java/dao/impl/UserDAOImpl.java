@@ -382,4 +382,32 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         UserDAOImpl dao = new UserDAOImpl();
         System.out.println(dao.getUserByEmail("hajimenagumo911@gmail.com").getFullname());
     }
+
+    @Override
+    public ArrayList<User> getMenteeListSorted() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> t = new ArrayList<>();
+        String sql = "select * from [User] where [uRole] = 1 order by [fullname]";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            User x;
+            while (rs.next()) {
+                x = new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"),
+                        rs.getString("fullname"), rs.getString("uMail"), rs.getString("uPhone"),
+                        rs.getDate("dob"), rs.getString("gender"), rs.getString("uAvatar"), rs.getInt("uRole"));
+                t.add(x);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return (t);
+    }
 }

@@ -21,5 +21,6 @@
             <h2>Total mentee: ${menteeList.size()}</h2>
             <h2>Total hour  : ${totalHour}</h2>
             <h2>Total skill : ${totalSkill}</h2>
+            <a href="AdminControllerMap?service=filterName">Filter Name</a>
     </body>
 </html>
