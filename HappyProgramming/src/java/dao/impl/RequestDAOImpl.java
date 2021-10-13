@@ -28,9 +28,6 @@ import java.util.ArrayList;
  */
 public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
 
-    UserDAOImpl userDAO = new UserDAOImpl();
-    User user = new User();
-
     /**
      * Get all Request of the user in the database
      *
@@ -42,6 +39,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
+        UserDAOImpl userDAO = new UserDAOImpl();
         ArrayList<Request> list = new ArrayList<>();
         String sql = "SELECT * FROM [Request] WHERE [fromId] = ?";
         try {
@@ -338,6 +336,8 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+
+        UserDAOImpl userDAO = new UserDAOImpl();
         String sql = "SELECT * FROM [Request] WHERE [rId] = ?";
         Request req = new Request();
         try {

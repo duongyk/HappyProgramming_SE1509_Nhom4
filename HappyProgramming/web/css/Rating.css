@@ -16,17 +16,39 @@
     padding-bottom: 10px;
 }
 
+.input-white{
+    background: white;
+  line-height: 50px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 0 22px;
+  font-size: 16px;
+  color: #555;
+  border: 2px solid black;
+}
+
+.post-btn{
+    text-align: right;
+}
+
 .form-cmt {
     padding-top:20px;
 }
 
-.form-group h4{
-    color:green;
-    padding-top: 10px;
-    text-align: left;
+.cmt{
+    padding-top: 30px;
+    padding-bottom: 10px;
 }
+
+.cmt h4{
+    padding-bottom: 10px;
+}
+
 .mess {
     color:red;
+    font-weight: bold;
+    padding-bottom: 5px;
 }
 
 .rate {

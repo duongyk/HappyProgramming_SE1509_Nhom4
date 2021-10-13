@@ -40,7 +40,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author giangnvthe150748
  */
-
 public class AdminController extends HttpServlet {
 
     /**
@@ -53,47 +52,60 @@ public class AdminController extends HttpServlet {
      * <code>javax.servlet.http.HttpServletResponse</code>
      * @throws ServletException if a servlet-specific error occurs
      */
-    SkillDAO skillDAO = new SkillDAOImpl();
-    UserDAO userDAO = new UserDAOImpl();
-    RequestDAO requestDAO = new RequestDAOImpl();
-    RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+
+            SkillDAO skillDAO = new SkillDAOImpl();
+            UserDAO userDAO = new UserDAOImpl();
+            RequestDAO requestDAO = new RequestDAOImpl();
+            RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
+
             String service = request.getParameter("service");
-            
+
             // Set default service
             if (service == null) {
-                service="";
+                service = "dashboard";
             }
+
+            if (service.equalsIgnoreCase("dashboard")) {
+                ArrayList<User> menteeList = userDAO.getUserByRole(1);
+                ArrayList<User> mentorList = userDAO.getUserByRole(2);
+                ArrayList<Skill> skillList = skillDAO.getAllSkill();
+
+                request.setAttribute("menteeList", menteeList);
+                request.setAttribute("mentorList", mentorList);
+                request.setAttribute("skillList", skillList);
+                sendDispatcher(request, response, "adminDashboard.jsp");
+            }
+
             //direct user to create skill page
             if (service.equalsIgnoreCase("createSkill")) {
                 sendDispatcher(request, response, "createSkill.jsp");
             }
-            
+
             if (service.equalsIgnoreCase("updateSkill")) {
                 int sId = Integer.parseInt(request.getParameter("sId"));
                 Skill skill = skillDAO.getSkillById(sId);
-                
+
                 request.setAttribute("skill", skill);
                 sendDispatcher(request, response, "updateSkill.jsp");
             }
-             //admin manage skills
+            //admin manage skills
             if (service.equalsIgnoreCase("skillManage")) {
                 //list all skills that have in database
                 ArrayList<Skill> sList = skillDAO.getAllSkill();
                 request.setAttribute("sList", sList);
                 sendDispatcher(request, response, "skillManagement.jsp");
             }
-            
+
             if (service.equalsIgnoreCase("menteeManage")) {
                 //list all User that are Mentee have in database
                 ArrayList<User> menteeList = userDAO.getUserByRole(1);
                 int totalHour = requestDAO.getTotalHour();
                 int totalSkill = requestSkillDAO.getTotalRequest();
-                
+
                 request.setAttribute("totalHour", totalHour);
                 request.setAttribute("totalSkill", totalSkill);
                 request.setAttribute("menteeList", menteeList);

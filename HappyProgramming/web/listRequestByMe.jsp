@@ -43,20 +43,19 @@
 
     <body>
 
-        <!-- ======= Header ======= -->
+        <%-- Header --%>
         <header id="header" class="fixed-top d-flex align-items-center" style="background-color:#e2f5fde0;">
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
                     <h1><a href="index.jsp">Vesperr</a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
                         <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                            <%-- Check current User --%>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
@@ -81,50 +80,49 @@
                         </c:choose>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav><!-- .navbar-main -->
-
+                </nav>
             </div>
-        </header><!-- End Header -->
-
+        </header>
+        <%-- End header --%>
+        <%-- Main --%>
         <main id="main">
-            <!-- ======= Breadcrumbs Section ======= -->
             <section class="breadcrumbs">
                 <div class="container">
                 </div>
-            </section><!-- End Breadcrumbs Section -->
-
+            </section>
             <section id="team" class="team section-bg">
-
-
-                
-                    <div><a href="RequestControllerMap?service=loadRequest"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
-                    <input name="modal" type="checkbox" id="modal">
-                    <label for="modal" class="label-show-modal">Statistic Request</label>
-                    <div class="modal-show" style="z-index: 3;">
-                        <div class="modal-show-inner">
-                            <label for="modal">&#10006;</label>
-                            <h2 class="text-center">Statistic Request</h2>
-                            <p class="text-left">Total Request: ${statistic[0]}</p>
-                            <p class="text-left">Total Mentor: ${statistic[1]}</p>
-                            <p class="text-left">Total Hour: ${statistic[2]}</p>
-                            <p class="text-left">Total Pending Request: ${statistic[3]}</p>
-                            <p class="text-left">Total In-process Request: ${statistic[4]}</p>
-                            <p class="text-left">Total Done Request: ${statistic[5]}</p>
-                            <p class="text-left">Total Canceled Request: ${statistic[6]}</p>
-                        </div>
+                <div><a href="RequestControllerMap?service=loadRequest"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
+                <input name="modal" type="checkbox" id="modal">
+                <%-- Statistic reuquest button --%>
+                <label for="modal" class="label-show-modal">Statistic Request</label>
+                <div class="modal-show" style="z-index: 3;">
+                    <div class="modal-show-inner">
+                        <label for="modal">&#10006;</label>
+                        <h2 class="text-center">Statistic Request</h2>
+                        <p class="text-left">Total Request: ${statistic[0]}</p>
+                        <p class="text-left">Total Mentor: ${statistic[1]}</p>
+                        <p class="text-left">Total Hour: ${statistic[2]}</p>
+                        <p class="text-left">Total Pending Request: ${statistic[3]}</p>
+                        <p class="text-left">Total In-process Request: ${statistic[4]}</p>
+                        <p class="text-left">Total Done Request: ${statistic[5]}</p>
+                        <p class="text-left">Total Canceled Request: ${statistic[6]}</p>
                     </div>
-                
+                </div>
+                <%-- Title --%>
                 <div class="container">
-                    <div class="section-title" data-aos="fade-up">
+                    <div class="section-title" >
                         <h2 class="">List Request by me</h2>
                     </div>
-
+                    <%-- List Request--%>
                     <div class="row">
+                        <%-- Check if list Request empty or not --%>
                         <c:choose>
+                            <%-- List Request empty --%>
                             <c:when test="${empty listRequest}">
-                                <h1>  No Request yet! </h1>
+                                <h1 class="no-req">  No Request yet! </h1>
                             </c:when>
                             <c:otherwise>
+                                <%-- List Request not empty --%>
                                 <c:forEach items="${listRequest}" var="request">
                                     <div class="col-lg-3 col-md-6">
                                         <div class="member box-display" data-aos="fade-up" data-aos-delay="100">
@@ -156,16 +154,12 @@
                                 </c:forEach>
                             </c:otherwise>
                         </c:choose>
-
-
                     </div>
-
                 </div>
-            </section><!-- End Team Section -->
-
-        </main><!-- End #main -->
-
-        <!-- ======= Footer ======= -->
+            </section>
+        </main>
+        <%-- End main --%>
+        <%-- Footer --%>
         <footer id="footer">
             <div class="container">
                 <div class="row d-flex align-items-center">
@@ -191,8 +185,8 @@
                     </div>
                 </div>
             </div>
-        </footer><!-- End Footer -->
-
+        </footer>
+        <%-- End Footer --%>
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                 class="bi bi-arrow-up-short"></i></a>
 

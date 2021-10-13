@@ -63,7 +63,9 @@ public class RatingController extends HttpServlet {
                 service = "";
             }
 
-            // Get a Mentor's ratings
+            /**
+             * Service getRating: Get a Mentor's ratings
+             */
             if (service.equalsIgnoreCase("getRating")) {
                 // get Mentor
                 int mId = Integer.parseInt(request.getParameter("mId"));
@@ -81,14 +83,16 @@ public class RatingController extends HttpServlet {
                 sendDispatcher(request, response, "rating.jsp");
             }
 
-            // Mentee rates Mentor
+            /**
+             * Service rateMentor: Mentee rates Mentor
+             */
             if (service.equalsIgnoreCase("rateMentor")) {
-                // Get current user/ Mentee who rates the Mentor
+                // Get current User/ Mentee who rates the Mentor
                 User user = (User) request.getSession().getAttribute("currUser");
                 // Get Mentor
                 int mId = Integer.parseInt(request.getParameter("mId"));
                 User mentor = userDAO.getUserById(mId);
-
+                // Check if the User had rated the Mentor or not
                 if (ratingDAO.checkDupRating(user.getId(), mId)) {
                     String mess = "You have already Rated and commented";
                     request.setAttribute("mess", mess);

@@ -73,7 +73,7 @@ public class UserController extends HttpServlet {
                 if (user != null) {
                     if (user.getRole() == 3) {
                         request.getSession().setAttribute("currUser", user);
-                        sendDispatcher(request, response, "adminDashboard.jsp");
+                        sendDispatcher(request, response, "AdminControllerMap?service=dashboard");
                     } else {
                         request.getSession().setAttribute("currUser", user);
                         sendDispatcher(request, response, "index.jsp");

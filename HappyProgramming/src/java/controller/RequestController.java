@@ -38,6 +38,10 @@ import javax.servlet.http.HttpSession;
  * - Get List request by me<br>
  * - Load request from database<br>
  * - Create new request and insert into database<br>
+ * - View Detail of Request<br>
+ * - Load the Update Request Form<br>
+ * - Update Request
+ *
  *
  * @author
  */
@@ -65,12 +69,14 @@ public class RequestController extends HttpServlet {
             SkillDAO skillDAO = new SkillDAOImpl();
 
             HttpSession session = request.getSession();
-            
+
             if (service == null) {
                 service = "";
             }
 
-            // Get list request of the user (Mentee/mentor) and Statistic requests
+            /**
+             * Service listRequestByMe: Get list request of the user (Mentee/mentor) and Statistic requests
+             */
             if (service.equalsIgnoreCase("listRequestByMe")) {
                 //get current user
                 User user = (User) request.getSession().getAttribute("currUser");
@@ -83,6 +89,7 @@ public class RequestController extends HttpServlet {
                 request.setAttribute("statistic", statistic);
                 sendDispatcher(request, response, "listRequestByMe.jsp");
             }
+            
             /* load create request screen */
             if (service.equalsIgnoreCase("loadRequest")) {
                 ArrayList<Skill> sList = skillDAO.getActiveSkill();
@@ -117,7 +124,9 @@ public class RequestController extends HttpServlet {
                 sendDispatcher(request, response, "index.jsp");
             }
 
-            /* view detail of a Request */
+            /**
+             * Service viewRequest: View detail of a Request
+             */
             if (service.equalsIgnoreCase("viewRequest")) {
                 // get request
                 int rId = Integer.parseInt(request.getParameter("rId"));
@@ -130,14 +139,16 @@ public class RequestController extends HttpServlet {
                 sendDispatcher(request, response, "viewRequest.jsp");
             }
 
-            /* Show form to edit detail of a Request */
-            if (service.equalsIgnoreCase("editRequestForm")) {
+            /**
+             * Service viewRequest: Show form to edit detail of a Request
+             */
+            if (service.equalsIgnoreCase("updateRequestForm")) {
                 // get request
                 int rId = Integer.parseInt(request.getParameter("rId"));
                 Request req = requestDAO.getRequestById(rId);
                 if (req.getStatus() == 3 || req.getStatus() == 4) {
                     request.setAttribute("mess", "You can not update Done or Canceled Request!");
-                    sendDispatcher(request, response, "RequestControllerMap?service=viewRequest&rId="+req.getId());
+                    sendDispatcher(request, response, "RequestControllerMap?service=viewRequest&rId=" + req.getId());
                 } else {
                     // get all skill for choosing
                     ArrayList<Skill> sListAll = skillDAO.getAllSkill();
@@ -150,16 +161,18 @@ public class RequestController extends HttpServlet {
                     request.setAttribute("sListAll", sListAll);
                     request.setAttribute("mList", mList);
                     request.setAttribute("req", req);
-                    sendDispatcher(request, response, "editRequest.jsp");
+                    sendDispatcher(request, response, "updateRequest.jsp");
                 }
 
             }
-
-            /* Edit detail of a Request */
-            if (service.equalsIgnoreCase("editRequest")) {
-                // get request ID
+            
+            /**
+             * Service viewRequest: Edit detail of a Request
+             */
+            if (service.equalsIgnoreCase("updateRequest")) {
+                // Get request ID
                 int rId = Integer.parseInt(request.getParameter("rId"));
-                // get new input information
+                // Get new input information
                 String title = request.getParameter("title").trim();
                 String content = request.getParameter("content").trim();
                 Date deadlineDate = Date.valueOf(request.getParameter("deadlineDate"));
@@ -171,6 +184,7 @@ public class RequestController extends HttpServlet {
                     int sId = Integer.parseInt(id);
                     sIdList.add(sId);
                 }
+                // Update Request
                 Request req = new Request(rId, title, content, deadlineDate, deadlineHour, status);
                 requestDAO.updateRequest(req);
                 requestSkillDAO.updateRequestSkill(rId, sIdList);
@@ -180,7 +194,7 @@ public class RequestController extends HttpServlet {
 
             /* View Mentor Request */
             if (service.equalsIgnoreCase("viewMentorRequest")) {
-                
+
                 // get status from URL
                 int status = Integer.parseInt(request.getParameter("status"));
 
@@ -204,7 +218,7 @@ public class RequestController extends HttpServlet {
                     request.setAttribute("status", "Canceled");
                 }
 
-                sendDispatcher(request,response, "/mentorRequestList.jsp");
+                sendDispatcher(request, response, "/mentorRequestList.jsp");
                 //out.println("<h3>view Mentor Request chưa xong</h3>");
             }
             

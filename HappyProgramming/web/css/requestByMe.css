@@ -14,7 +14,50 @@
 }
 
 .img-display {
-  display: block;
-  width: 100%;
-  height: auto;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.no-req {
+    text-align: center;
+    height: 380px;
+}
+
+.title-1 {
+    margin-top: 20px;
+    padding-bottom: 0;
+}
+
+.content-req {
+    min-height: 200px;
+    background-color: white;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+.mess {
+    color:red;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.content-req p{
+    margin: 5px 5px 5px 5px;
+}
+
+.vl {
+  border-left: 3px solid lightblue;
+}
+
+.displayy {
+    padding-bottom: 20px;
+}
+
+.last {
+    padding-bottom: 50px;
+}
+
+.status {
+    font-weight: bold;
 }

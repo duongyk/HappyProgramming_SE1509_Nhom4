@@ -46,20 +46,19 @@
 
     <body>
 
-        <!-- ======= Header ======= -->
+        <%-- Header --%>
         <header id="header" class="fixed-top d-flex align-items-center" style="background-color:#e2f5fde0;">
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
                     <h1><a href="index.jsp">Vesperr</a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
                         <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                            <%-- Check current User --%>   
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
@@ -84,38 +83,34 @@
                         </c:choose>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav><!-- .navbar-main -->
-
+                </nav>
             </div>
-        </header><!-- End Header -->
-
-        <!-- ======= Hero Section ======= -->
-
-
+        </header>
+        <%-- End header --%>
+        <%-- Main --%>
         <main id="main">
-
-            <!-- ======= Breadcrumbs Section ======= -->
             <section class="breadcrumbs">
                 <div class="card-heading">
-
                 </div>
-            </section><!-- End Breadcrumbs Section -->
-            <!-- Main Body -->
+            </section>
             <section>
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-5 col-md-6 col-12 pb-4">
                             <h1>Comments</h1>
+                            <%-- Check if list Comment empty or not --%>
                             <c:choose>
+                                <%-- List Comment empty --%>
                                 <c:when test="${empty listRating}">
                                     <h2>No comments yet!</h2>
                                 </c:when>
+                                <%-- List Comment not empty --%>
                                 <c:otherwise>
                                     <c:forEach items="${listRating}" var="rating"> 
                                         <div class="comment mt-4 text-justify float-left">
                                             <h4>${rating.from.fullname}</h4> <span>-${rating.toString()} | ${rating.rateAmount}/5</span> <br>
                                             <p style="padding-bottom: 13px;"><c:out value="${rating.comment}"></c:out>
-                                            </p>
+                                                </p>
                                             <c:if test="${(mess!=null)&&(rating.from.id==sessionScope.currUser.id)}">
                                                 <h5 class="mess">${mess}</h5>
                                             </c:if>
@@ -133,44 +128,54 @@
                             </div>
                             <%-- Average rating --%>
                             <c:if test = "${!empty listRating}">
-                                <h6 class="u-text u-text-font u-text-3">Rating: ${avg}/5</h6>
+                                <h2 class="u-text u-text-font u-text-3">Rating: ${avg}/5</h2>
                             </c:if>
                             <c:if test="${sessionScope.currUser!=null}">
-
-                                <div class="form-cmt">
-                                    <form id="algin-form" action="RatingControllerMap" method="POST">
-                                        <input type="hidden" name="mId" value="${mId}">
-                                        <input type="hidden" name="service" value="rateMentor">
+                                <form action="RatingControllerMap" method="POST">
+                                    <input type="hidden" name="mId" value="${mId}">
+                                    <input type="hidden" name="service" value="rateMentor">
+                                    <div>
+                                        <%-- Get Rate by star --%>
                                         <div class="rate">
-                                            <input type="radio" id="star5" name="rate" value="1"/>
+                                            <input type="radio" id="star5" name="rate" value="1" required/>
                                             <label for="star5" title="1 star"></label>
-                                            <input type="radio" id="star4" name="rate" value="2"/>
+                                            <input type="radio" id="star4" name="rate" value="2" required/>
                                             <label for="star4" title="2 star"></label>
-                                            <input type="radio" id="star3" name="rate" value="3"/>
+                                            <input type="radio" id="star3" name="rate" value="3" required/>
                                             <label for="star3" title="3 star"></label>
-                                            <input type="radio" id="star2" name="rate" value="4"/>
+                                            <input type="radio" id="star2" name="rate" value="4" required/>
                                             <label for="star2" title="4 star"></label>
                                             <input type="radio" id="star1" name="rate" value="5" required/>
                                             <label for="star1" title="5 star"></label>
                                         </div><br>
-                                        <label for="select-d713" class="mess">${messBlank}</label><br>
-
-                                        <div class="form-group">
-                                            <h4>Leave a comment</h4> 
-                                            <textarea name="comment" id="" msg cols="30" rows="5" class="form-control " maxlength="200" required></textarea>
+                                    </div>
+                                    <%-- Comment box --%>
+                                    <div class="cmt">
+                                        <h4>Leave a comment</h4> 
+                                        <div class="cmt-box">
+                                            <textarea class="input-white" type="text" name="comment" placeholder="Your Comment" pattern=".*\S+.*" title="No white space only" maxlength="200" required  rows="3" cols="37"></textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <button class="btn btn--radius-2 btn--green" type="submit">Post</button>
+                                    </div>
+                                    <div>
+                                        <%-- Message if input contains only space --%>
+                                        <c:if test="${(messBlank!=null)}">
+                                            <h5 class="mess">${messBlank}</h5>
+                                        </c:if>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7"></div>
+                                        <div class="col-md-4">
+                                            <button class=" btn btn-success" type="submit">Post</button>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+                                </form>
                             </c:if>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ======= Contact Section ======= -->
             <section id="contact" class="contact" style="background-color: white;">
                 <div class="container">
 
@@ -217,56 +222,53 @@
                         <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
 
 
-
-
-
-
                             <!--MAP-->
                         </div>
 
                     </div>
 
                 </div>
-            </section><!-- End Contact Section -->
-
-            <!-- ======= Footer ======= -->
-            <footer id="footer">
-                <div class="container">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-lg-6 text-lg-left text-center">
-                            <div class="copyright">
-                                &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
-                            </div>
-                            <div class="credits">
-                                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                            </div>
+            </section>
+        </main>
+        <%-- End Main --%>
+        <%-- Footer --%>
+        <footer id="footer">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-6 text-lg-left text-center">
+                        <div class="copyright">
+                            &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
                         </div>
-                        <div class="col-lg-6">
-                            <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
-                                <a href="#intro" class="scrollto">Home</a>
-                                <a href="#about" class="scrollto">About</a>
-                                <a href="#">Privacy Policy</a>
-                                <a href="#">Terms of Use</a>
-                            </nav>
+                        <div class="credits">
+                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
+                            <a href="#intro" class="scrollto">Home</a>
+                            <a href="#about" class="scrollto">About</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Use</a>
+                        </nav>
+                    </div>
                 </div>
-            </footer><!-- End Footer -->
+            </div>
+        </footer><!-- End Footer -->
 
-            <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                    class="bi bi-arrow-up-short"></i></a>
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                class="bi bi-arrow-up-short"></i></a>
 
-            <!-- Vendor JS Files -->
-            <script src="vendor/aos/aos.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <script src="vendor/glightbox/js/glightbox.min.js"></script>
-            <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
-            <script src="vendor/php-email-form/validate.js"></script>
-            <script src="vendor/purecounter/purecounter.js"></script>
-            <script src="vendor/swiper/swiper-bundle.min.js"></script>
+        <!-- Vendor JS Files -->
+        <script src="vendor/aos/aos.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="vendor/php-email-form/validate.js"></script>
+        <script src="vendor/purecounter/purecounter.js"></script>
+        <script src="vendor/swiper/swiper-bundle.min.js"></script>
 
-            <!-- Template Main JS File -->
-            <script src="js/main.js"></script>
+        <!-- Template Main JS File -->
+        <script src="js/main.js"></script>
 
 
 

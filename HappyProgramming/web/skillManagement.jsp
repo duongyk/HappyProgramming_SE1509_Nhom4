@@ -57,7 +57,7 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1><a href="index.jsp">Vesperr</a></h1>
+                    <h1><a href="AdminControllerMap?service=dashboard">Vesperr</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
@@ -70,7 +70,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
-                                        <li><a href="adminDashboard.jsp">Dashboard</a></li>
+                                        <li><a href="AdminControllerMap?service=dashboard">Dashboard</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>

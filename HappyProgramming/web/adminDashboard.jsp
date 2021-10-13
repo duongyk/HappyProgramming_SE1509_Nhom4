@@ -57,7 +57,7 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1><a href="adminDashboard.jsp">Vesperr</a></h1>
+                    <h1><a href="AdminControllerMap?service=dashboard">Vesperr</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
@@ -101,7 +101,7 @@
                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="adminDashboard.jsp">
+                                    <a class="nav-link" href="AdminControllerMap?service=dashboard">
                                         <i class="icon-grid menu-icon"></i>
                                         <span class="menu-title">Dashboard</span>
                                     </a>
@@ -173,18 +173,18 @@
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-tale">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Today’s Bookings</p>
-                                                        <p class="fs-30 mb-2">4006</p>
-                                                        <p>10.00% (30 days)</p>
+                                                        <p class="mb-4">Total Mentee </p>
+                                                        <p class="fs-30 mb-2"><c:out value="${menteeList.size()}"></c:out></p>
+                                                        <p></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-dark-blue">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Total Bookings</p>
-                                                        <p class="fs-30 mb-2">61344</p>
-                                                        <p>22.00% (30 days)</p>
+                                                        <p class="mb-4">Total Mentor</p>
+                                                        <p class="fs-30 mb-2"><c:out value="${mentorList.size()}"></c:out></p>
+                                                        <p></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,18 +193,18 @@
                                             <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                                                 <div class="card card-light-blue">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Number of Meetings</p>
-                                                        <p class="fs-30 mb-2">34040</p>
-                                                        <p>2.00% (30 days)</p>
+                                                        <p class="mb-4">Total Skill</p>
+                                                        <p class="fs-30 mb-2"><c:out value="${skillList.size()}"></c:out></p>
+                                                        <p></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 stretch-card transparent">
                                                 <div class="card card-light-danger">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Number of Clients</p>
+                                                        <p class="mb-4">Number of Visit</p>
                                                         <p class="fs-30 mb-2">47033</p>
-                                                        <p>0.22% (30 days)</p>
+                                                        <p></p>
                                                     </div>
                                                 </div>
                                             </div>
