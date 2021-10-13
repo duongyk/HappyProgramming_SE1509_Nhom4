@@ -115,7 +115,7 @@
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="text" name="username" pattern=".{4,20}" required="required">
+                                                        <input class="input--style-5" type="text" name="username" pattern=".*\S+.*" title="No white space only" maxlength="30" required="required">
                                                         <!--                          <label class="label--desc">User Name</label>-->
                                                     </div>
                                                 </div>
@@ -126,7 +126,7 @@
                                         <div class="name">Password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="password" pattern=".{4,20}">
+                                                <input class="input--style-5" type="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number">
                                             </div>
                                             
                                         </div>

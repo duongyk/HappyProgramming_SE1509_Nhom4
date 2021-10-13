@@ -127,7 +127,7 @@
                                         <div class="name">Email</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="email" name="mail">
+                                                <input class="input--style-5" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" name="mail">
                                             </div>
                                         </div>
                                     </div>
@@ -135,7 +135,7 @@
                                         <div class="name">password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="password">
+                                                <input class="input--style-5" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="password">
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
                                         <div class="name">repeat password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="confirm">
+                                                <input class="input--style-5" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="confirm">
                                             </div>
                                         </div>
                                     </div>
@@ -152,7 +152,7 @@
                                         <div class="name">Full Name</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="text" name="fullname">
+                                                <input class="input--style-5" type="text" pattern=".*\S+.*" title="No white space only" maxlength="30" name="fullname">
                                             </div>
                                         </div>
                                     </div>
@@ -163,7 +163,7 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="text" name="phone">
+                                                        <input class="input--style-5" type="text" pattern="[0-9]{9,11}" title="phone with 9 to 11 number" name="phone">
                                                         <label class="label--desc">Phone Number</label>
                                                     </div>
                                                 </div>

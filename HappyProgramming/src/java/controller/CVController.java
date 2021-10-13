@@ -242,6 +242,9 @@ public class CVController extends HttpServlet {
                 //response.sendRedirect("SignIn.jsp");
                 response.sendRedirect("demoMentorList.jsp");
             }
+             if(service.equals("viewCV")) {
+                 
+             }
             
         }
     }

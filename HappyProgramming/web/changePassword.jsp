@@ -113,7 +113,7 @@
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="email" name="email" pattern=".{4,20}" required="required">
+                                                        <input class="input--style-5" type="email" name="email" pattern=".{4,50}" required="required">
                                                         
                                                     </div>
                                                 </div>
@@ -124,7 +124,7 @@
                                         <div class="name">password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}">
+                                                <input class="input--style-5" type="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number"">
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +132,7 @@
                                         <div class="name">newPassword</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}">
+                                                <input class="input--style-5" type="password" name="newPassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number">
                                             </div>
                                         </div>
                                     </div>
@@ -140,7 +140,7 @@
                                         <div class="name">rePassword</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="rePassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}">
+                                                <input class="input--style-5" type="password" name="rePassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number"">
                                             </div>
                                         </div>
                                     </div>
