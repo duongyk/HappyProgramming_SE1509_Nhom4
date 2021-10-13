@@ -201,7 +201,7 @@ public class CVController extends HttpServlet {
                 
                 SkillDAO skilldao = new SkillDAOImpl();
                 ArrayList<Skill> allSkill = skilldao.getAllSkill();
-                request.setAttribute("allSkill", allSkill);
+                request.setAttribute("allskill", allSkill);
                 
                 RequestDispatcher rd = request.getRequestDispatcher("/createCV.jsp");
                 rd.forward(request, response);

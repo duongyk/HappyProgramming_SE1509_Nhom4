@@ -1,3 +1,4 @@
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%-- 
   Copyright (C) 2021, FPT University<br>
   SWP391 - SE1509 - Group 4<br>
@@ -8,155 +9,328 @@
 
 --%>
 
-<%@page import="dao.impl.SkillDAOImpl"%>
-<%@page import="dao.SkillDAO"%>
-<%@page import="entity.Skill"%>
-<%@page import="java.util.ArrayList"%>
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="vi">
+<html lang="en">
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-        <meta name="page_type" content="np-template-header-footer-from-plugin">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
         <title>Create CV</title>
-        <link rel="stylesheet" href="css/nicepage.css" media="screen">
-        <link rel="stylesheet" href="css/Create-CV.css" media="screen">
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+
+        <!-- Favicons -->
+        <link href="img/favicon.png" rel="icon">
+        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="vendor/aos/aos.css" rel="stylesheet">
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="vendor/remixicon/remixicon.css" rel="stylesheet">
+        <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/login.css" rel="stylesheet">
+        
         <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
-        <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script>
-        <meta name="generator" content="Nicepage 3.25.0, nicepage.com">
-        <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-
-
-
-        <script type="application/ld+json">{
-            "@context": "http://schema.org",
-            "@type": "Organization",
-            "name": "Happyprogramming",
-            "logo": "images/Logo.png"
-            }</script>
-        <meta name="theme-color" content="#478ac9">
-        <meta property="og:title" content="Create CV">
-        <meta property="og:description" content="">
-        <meta property="og:type" content="website">
+        <script class="u-script" type="text/javascript" src="js/checkbox.js" defer=""></script>
+        <script class="u-script" type="text/javascript" src="js/changeAvatar.js" defer=""></script>
+        <script class="u-script" type="text/javascript" src="js/checkpattern.js" defer=""></script>
+        
     </head>
-        <header class="u-clearfix u-custom-color-1 u-header ">
-            <a href="index.jsp" class="u-image u-logo u-image-1" data-image-width="313" data-image-height="95" t>
-                <img src="img/Logo.png" class="u-logo-image u-logo-image-1">
-            </a>
-            <nav class="u-align-right u-menu x u-offcanvas u-menu-1" data-position="" data-responsive-from="MD">
 
-                <div class="u-nav-container">
-                    <ul class="u-custom-font u-nav u-spacing-30 u-text-font u-unstyled u-nav-1">
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="UserControllerMap?service=listAllmentor" style="padding: 10px 36px;">All mentors</a>
-                        </li>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="SkillControllerMap?service=allSkill" style="padding: 10px 36px;">All skills</a>
-                        </li>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-grey-90"
-                                href="UserControllerMap?service=profile" style="padding: 10px 36px;">Profile</a>
-                        </li>
-                    </ul>
+    <body>
+
+        <!-- ======= Header ======= -->
+        <header id="header" class="fixed-top d-flex align-items-center" style="background-color:#e2f5fde0;">
+            <div class="container d-flex align-items-center justify-content-between">
+
+                <div class="logo">
+                    <h1><a href="index.jsp">Vesperr</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
-            </nav>
-        </header>
-        <section class="u-clearfix u-custom-color-2 u-section-1" id="sec-ebef">
-            <div class="u-clearfix u-sheet u-sheet-1">
-                <h4 class="u-text u-text-default u-text-1">CREATE CV</h4>
-                <div class="u-form u-form-1">
-                    <form action="CVControllerMap?service=submitCreateForm" id="thisform" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-13 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 5px;" redirect="true">
-                        <input type="hidden" name="uid" value="<c:out value="${uid}" ></c:out>" />
-                        <div class="u-form-group u-form-group-1">
-                            <label for="text-b048" class="u-form-control-hidden u-label"></label>
-                            <input type="text" placeholder="Profession" id="text-b048" name="profession" pattern=".*\S+.*" title="No white space only" maxlength="20" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
-                        </div>
-                        <div class="u-form-group u-form-group-2">
-                            <label for="text-3911" class="u-form-control-hidden u-label"></label>
-                            <input type="text" id="text-3911" name="professionIntro" pattern=".*\S+.*" title="No white space only" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required" placeholder="Profession introduction">
-                        </div>
-                        <div class="u-form-group u-form-message u-form-group-3">
-                            <label for="text-47b9" class="u-form-control-hidden u-label"></label>
-                            <textarea placeholder="Service description" id="text-47b9" name="serviceDescription" pattern=".*\S+.*" title="No white space only" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" pattern="\+?\d{0,2}[\s\(\-]?([0-9]{3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" required="required"></textarea>
-                        </div>
-                        <div class="u-form-group u-form-message u-form-group-4">
-                            <label for="text-0855" class="u-form-control-hidden u-label"></label>
-                            <textarea placeholder="Achievement" id="text-0855" name="achievement" pattern=".*\S+.*" title="No white space only" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required"></textarea>
-                        </div>
-                        <div class="u-form-group u-form-select u-form-group-5">
-                            <label for="select-6004" class="u-label">Select skill</label>
-                            <div class="u-form-select-wrapper">
-                                <!--
-                                <select id="select-6004" name="Select skill" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
-                                  <option value="Java">Java</option>
-                                  <option value="Vân vân">Vân vân</option>
-                                </select>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
-                                -->
-                                <%
-                                    SkillDAO skilldao = new SkillDAOImpl();
-                                    ArrayList<Skill> allSkill = skilldao.getAllSkill();
-                                    request.setAttribute("allSkill", allSkill);
-                                %>
+                <nav id="navbar-main" class="navbar-main">
+                    <ul>
+                        <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                            <c:choose>
+                                <c:when test="${sessionScope.currUser!=null}">
+                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
+                                </li>
+                                <li class="dropdown getstarted scrollto ">
+                                    <span style="color: white; padding: 0;">User</span>
+                                    <ul>
+                                        <li><a href="UserControllerMap?service=profile">Profile</a></li>
+                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                    </ul>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
+                                        <span>Sign in</span></a>
+                                    <ul>
+                                        <li><a href="signUp.jsp">Sign up</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar-main -->
 
-                                <c:set var="count" value="6" scope="page" />
+            </div>
+        </header><!-- End Header -->
 
-                                <c:forEach items="${allSkill}" var="skill">
+        <!-- ======= Hero Section ======= -->
 
-                                    <div class="u-form-checkbox u-form-group u-form-partition-factor-2 u-form-group-<c:out value="${count}"></c:out>">
 
-                                            <input type="checkbox" name="skills" value="<c:out value="${skill.getId()}"></c:out>">
+        <main id="main">
 
-                                            <label  class="u-label"><c:out value="${skill.getName()}"></c:out></label>
+            <!-- ======= Breadcrumbs Section ======= -->
+            <section class="breadcrumbs">
+                <div class="card-heading">
+                    <h2 class="title" style="color: black; font-weight: bold;">Create CV </h2>
+                </div>
+            </section><!-- End Breadcrumbs Section -->
+
+            <section class="inner-page">
+                <div class="container">
+                    <div class="wrapper wrapper--w790">
+                        <div class="card card-5">
+
+                            <div class="card-body">
+                                <form action="CVControllerMap?service=submitCreateForm" method="POST">
+                                    <input type="hidden" name="uid" value="<c:out value="${uid}"></c:out>" readonly="readonly" />
+                                                        
+                                    <div class="form-row m-b-55">
+                                        <div class="name">Profession</div>
+                                        <div class="value">
+                                            <div class="row row-refine">
+
+                                                <div class="col-12">
+                                                    <div class="input-group-desc">
+                                                        <input class="input--style-5" type="text" name="profession" pattern=".*\S+.*" title="No white space only" value="">
+                                                        <h4 id="htitle"></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+                                    
+                                    <div class="form-row m-b-55">
+                                        <div class="name">Profession Intro</div>
+                                        <div class="value">
+                                            <div class="row row-refine">
 
-                                    <c:set var="count" value="${count+1}" scope="page" />
-                                </c:forEach>
+                                                <div class="col-12">
+                                                    <div class="input-group-desc">
+                                                        <!--<input class="input--style-5" type="text" name="phone"> -->
+                                                        <textarea class="input--style-5" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro"></textarea>
+                                                        <h4 id="htitle"></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row m-b-55">
+                                        <div class="name">Service Description</div>
+                                        <div class="value">
+                                            <div class="row row-refine">
+
+                                                <div class="col-12">
+                                                    <div class="input-group-desc">
+                                                        <!--<input class="input--style-5" type="text" name="phone"> -->
+                                                        <textarea class="input--style-5" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="serviceDescription"></textarea>
+                                                        <h4 id="htitle"></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row m-b-55">
+                                        <div class="name">Achievement</div>
+                                        <div class="value">
+                                            <div class="row row-refine">
+
+                                                <div class="col-12">
+                                                    <div class="input-group-desc">
+                                                        <!--<input class="input--style-5" type="text" name="phone"> -->
+                                                        <textarea class="input--style-5" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="achievement"></textarea>
+                                                        <h4 id="htitle"></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row m-b-55">
+                                        <div class="name">Avatar</div>
+                                        <div class="value">
+                                            <div class="row row-refine">
+
+                                                <div class="col-12">
+                                                    <div class="input-group-desc">
+                                                        <input id="avatarURL" class="input--style-5" type="file" onchange="changeImage()" type="file" name="avatar" value="">
+                                                    </div>
+                                                    <div class="input-group-desc">
+                                                        <img id="image" style="width: 162px;" src="img/" alt="" data-image-width="1280" data-image-height="1280">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row m-b-55">
+                                        <div class="name">Choose Skills</div>
+                                        <div class="value">
+                                            <div class="row row-refine">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <ul>
+                                                            <c:forEach items="${allskill}" var="s">
+                                                                    <li style="display: inline-block; margin-right: 15px;margin-bottom: 10px">
+                                                                        <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skills" value="${s.getId()}">
+                                                                        <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
+                                                                    </li>
+                                                            </c:forEach>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h4 id="checkboxtitle"></h4>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <button class="btn btn--radius-2 btn--red" type="submit">Update CV</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main><!-- End #main -->
+
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact" style="background-color: white;">
+            <div class="container">
+
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Contact Us</h2>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="contact-about">
+                            <h3>Vesperr</h3>
+                            <p>Cras fermentum odio eu feugiat. Justo eget magna fermentum iaculis eu non diam phasellus. Scelerisque
+                                felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+                            <div class="social-links">
+                                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
+                        <div class="info">
+                            <div>
+                                <i class="ri-map-pin-line"></i>
+                                <p>A108 Adam Street<br>New York, NY 535022</p>
+                            </div>
+
+                            <div>
+                                <i class="ri-mail-send-line"></i>
+                                <p>info@example.com</p>
+                            </div>
+
+                            <div>
+                                <i class="ri-phone-line"></i>
+                                <p>+1 5589 55488 55s</p>
                             </div>
 
                         </div>
-                        <div class="u-align-center u-form-group u-form-submit">
-                            <a href="#" class="u-border-none u-btn u-btn-submit u-button-style u-custom-color-3 u-text-body-alt-color u-btn-1">Create CV</a>
-                            <input type="submit" value="submit" class="u-form-control-hidden">
-                        </div>
-                        <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
-                        <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
-                        <input type="hidden" value="" name="recaptchaResponse">
-                    </form>
-                </div>
-                <img id="image" class="u-image u-image-default u-preserve-proportions u-image-1" src="images/<c:out value="${currUser.getAvatar()}"></c:out>" alt="" data-image-width="1280" data-image-height="1280">     
-        
-                <input id="avatarURL" form="thisform" onchange="changeImage()" type="file" name="avatar" value="" style="width: 162px;" class="u-border-2 u-border-black u-btn u-button-style u-hover-custom-color-3 u-none u-text-black u-text-hover-white u-btn-2 />
+                    </div
+
+                    <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
+
+
+
+
+
+
+                        <!--MAP-->
+                  </div>
                 
-                <p class="u-text u-text-default u-text-2"> </p>
-                <p class="u-text u-text-default u-text-2"> </p>   
-            </div>
-        </section>
+                    </div>
 
-
-
-        <footer class="u-align-center u-clearfix u-footer u-white u-footer" id="sec-b0a2"><img class="u-image u-image-1" src="img/logowhite.png" data-image-width="571" data-image-height="388"><a href="https://nicepage.com/wordpress-themes" class="u-active-none u-btn u-btn-rectangle u-button-style u-hover-none u-none u-radius-0 u-text-body-color u-btn-1">0123456789</a><p class="u-text u-text-default u-text-1"> San Jose,Silicon Valley, California</p><p class="u-text u-text-2"> HappyProgramming@gmail.com</p><div class="u-grey-light-2 u-map u-map-1">
-                <div class="embed-responsive">
-                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d287205.9795192053!2d-121.9745609966744!3d37.31390644748984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcae48af93ff5%3A0xb99d8c0aca9f717b!2sSan%20Jose%2C%20California%2C%20Hoa%20K%E1%BB%B3!5e0!3m2!1svi!2s!4v1632219783213!5m2!1svi!2s" data-map="JTdCJTIycG9zaXRpb25UeXBlJTIyJTNBJTIybWFwLWVtYmVkJTIyJTJDJTIyYWRkcmVzcyUyMiUzQSUyMk1hbmhhdHRhbiUyQyUyME5ldyUyMFlvcmslMjIlMkMlMjJ6b29tJTIyJTNBMTAlMkMlMjJ0eXBlSWQlMjIlM0ElMjJyb2FkJTIyJTJDJTIybGFuZyUyMiUzQW51bGwlMkMlMjJhcGlLZXklMjIlM0ElMjJkJTIyJTJDJTIybWFya2VycyUyMiUzQSU1QiU1RCUyQyUyMmVtYmVkJTIyJTNBJTIyaHR0cHMlM0ElMkYlMkZ3d3cuZ29vZ2xlLmNvbSUyRm1hcHMlMkZlbWJlZCUzRnBiJTNEITFtMTghMW0xMiExbTMhMWQyODcyMDUuOTc5NTE5MjA1MyEyZC0xMjEuOTc0NTYwOTk2Njc0NCEzZDM3LjMxMzkwNjQ0NzQ4OTg0ITJtMyExZjAhMmYwITNmMCEzbTIhMWkxMDI0ITJpNzY4ITRmMTMuMSEzbTMhMW0yITFzMHg4MDhmY2FlNDhhZjkzZmY1JTI1M0EweGI5OWQ4YzBhY2E5ZjcxN2IhMnNTYW4lMjUyMEpvc2UlMjUyQyUyNTIwQ2FsaWZvcm5pYSUyNTJDJTI1MjBIb2ElMjUyMEslMjVFMSUyNUJCJTI1QjMhNWUwITNtMiExc3ZpITJzITR2MTYzMjIxOTc4MzIxMyE1bTIhMXN2aSEycyUyMiU3RA=="></iframe>
+                
+        </section><!-- End Contact Section -->
+        <!-- ======= Footer ======= -->
+        <footer id="footer">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-6 text-lg-left text-center">
+                        <div class="copyright">
+                            &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
+                        </div>
+                        <div class="credits">
+                            <!-- All the links in the footer should remain intact. -->
+                            <!-- You can delete the links only if you purchased the pro version. -->
+                            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
+                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
+                            <a href="#intro" class="scrollto">Home</a>
+                            <a href="#about" class="scrollto">About</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Use</a>
+                        </nav>
+                    </div>
                 </div>
-            </div><img class="u-image u-image-default u-image-2" src="img/contact.png" alt="" data-image-width="177" data-image-height="361"></footer>
-        <section class="u-backlink u-clearfix u-grey-80">
-            <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-                <span>Free Website Templates</span>
-            </a>
-            <p class="u-text">
-                <span>created with</span>
-            </p>
-            <a class="u-link" href="https://nicepage.com/" target="_blank">
-                <span>WYSIWYG Web Builder</span>
-            </a>. 
-        </section>
+            </div>
+        </footer><!-- End Footer -->
+
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                class="bi bi-arrow-up-short"></i></a>
+
+        <!-- Vendor JS Files -->
+        <script src="vendor/aos/aos.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="vendor/php-email-form/validate.js"></script>
+        <script src="vendor/purecounter/purecounter.js"></script>
+        <script src="vendor/swiper/swiper-bundle.min.js"></script>
+
+        <!-- Template Main JS File -->
+        <script src="js/main.js"></script>
+
     </body>
+
 </html>
