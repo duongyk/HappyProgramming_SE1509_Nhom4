@@ -85,8 +85,8 @@ public class CVController extends HttpServlet {
                 request.setAttribute("mentorcv", mentorCV);
                 request.setAttribute("title","UPDATE CV");
                 
-                //RequestDispatcher rd = request.getRequestDispatcher("/updateCV.jsp");
-                RequestDispatcher rd = request.getRequestDispatcher("/newUpdateCV.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/updateCV.jsp");
+                //RequestDispatcher rd = request.getRequestDispatcher("/newUpdateCV.jsp");
           
                 rd.forward(request, response);
 

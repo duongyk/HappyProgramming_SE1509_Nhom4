@@ -220,7 +220,7 @@ public class RequestController extends HttpServlet {
                 
                 requestdao.updateStatusRequest(rid, status);     
                 
-                sendDispatcher(request,response, "/demoMentorRequestNav.jsp");
+                sendDispatcher(request,response, "/demoMentorList.jsp");
             }
         }
     }

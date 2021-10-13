@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function () {
-    $('input[type="submit"]').click(function() {
+    $('button[type="submit"]').click(function() {
       checked = $("input[type=checkbox]:checked").length;
 
       if(checked <= 0) {
