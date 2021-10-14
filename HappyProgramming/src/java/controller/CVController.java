@@ -70,7 +70,8 @@ public class CVController extends HttpServlet {
                 
                 CV mentorCV = cvdao.getMentorCV(uid);
                 
-                User mentorProfile = userDAO.getUserById(uid);
+                //User mentorProfile = userDAO.getUserById(uid);
+                User mentorProfile = (User) session.getAttribute("currUser");
                 
                 // get all skill id from mentor
                 ArrayList<String> mentorSkill = smdao.getAll_Id_Skill_Mentor(uid);
@@ -156,8 +157,8 @@ public class CVController extends HttpServlet {
                 
                 // ----------------------------------------
                 
-                //response.sendRedirect("index.jsp");
-                response.sendRedirect("demoMentorCV.jsp?uid="+uid);
+                response.sendRedirect("index.jsp");
+                //response.sendRedirect("demoMentorCV.jsp?uid="+uid);
                 
             }
             
@@ -213,7 +214,7 @@ public class CVController extends HttpServlet {
                 String avatar = request.getParameter("avatar").trim();
                 
                 if(avatar.equals("") || avatar == null ) {
-                    avatar ="79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png";
+                    avatar ="default-avatar.png";
                 }              
                 
                 String[] skill_id = request.getParameterValues("skills");
@@ -224,8 +225,8 @@ public class CVController extends HttpServlet {
                 
                 smdao.updateMentorSkill(uid, skill_id);
                 
-                //response.sendRedirect("SignIn.jsp");
-                response.sendRedirect("demoMentorList.jsp");
+                response.sendRedirect("SignIn.jsp");
+                //response.sendRedirect("demoMentorList.jsp");
             }
            //when user sign in ,access the list all mentor and view CV of the mentor
              if(service.equals("cvMentor")) {

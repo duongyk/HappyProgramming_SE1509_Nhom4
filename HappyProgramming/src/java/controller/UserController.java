@@ -108,8 +108,8 @@ public class UserController extends HttpServlet {
                         if (role == 1) {
                             response.sendRedirect("signIn.jsp");
                         } else {
-                            response.sendRedirect("signIn.jsp");
-                            //response.sendRedirect("CVControllerMap?service=createCV&uId="+a.getuId());
+                            //response.sendRedirect("signIn.jsp");
+                            response.sendRedirect("CVControllerMap?service=createCV&uId="+a.getId());
                         }
                         // khi dang ki hoan tat se cha nguoi dung ve page login
                     } else { //neu co roi se day ve trang sighn up
