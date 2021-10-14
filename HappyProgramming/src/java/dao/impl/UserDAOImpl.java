@@ -145,7 +145,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = " insert into [User]  values (?,?,?,?,?,?,?,?,?)";
+        String sql = " insert into [User]  values (?,?,?,?,?,?,?,?,?,?)";
         SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
         try {
             conn = getConnection();
@@ -159,6 +159,8 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             ps.setString(7, user.getGender());
             ps.setString(8, user.getAvatar());
             ps.setInt(9, user.getRole());
+             ps.setInt(10, user.getStatus());
+            
 
             ps.executeUpdate();
         } catch (Exception ex) {

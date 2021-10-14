@@ -78,6 +78,7 @@ public class User {
      * Constructor.<br>
      *
      */
+    private int status;
     public User() {
     }
 
@@ -116,7 +117,7 @@ public class User {
      * @param role it is a int number
      * 
      */
-    public User(String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar, int role) {
+    public User(String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar, int role,int status) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
@@ -126,6 +127,7 @@ public class User {
         this.gender = gender;
         this.avatar = avatar;
         this.role = role;
+        this.status= status;
     }
 
     /**
@@ -317,6 +319,9 @@ public class User {
     public int getRole() {
         return role;
     }
+    public int getStatus() {
+        return status;
+    }
 
     /**
      * Set value to id attribute of User class. <br>
@@ -406,6 +411,9 @@ public class User {
      */
     public void setRole(int role) {
         this.role = role;
+    }
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     /**

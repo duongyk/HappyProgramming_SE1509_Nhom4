@@ -227,6 +227,7 @@ public class CVController extends HttpServlet {
                 //response.sendRedirect("SignIn.jsp");
                 response.sendRedirect("demoMentorList.jsp");
             }
+           //when user sign in ,access the list all mentor and view CV of the mentor
              if(service.equals("cvMentor")) {
                  
                  int mId=Integer.parseInt(request.getParameter("mId"));

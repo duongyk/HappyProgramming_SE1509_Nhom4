@@ -64,7 +64,7 @@ public class UserController extends HttpServlet {
                 request.setAttribute("userlist", userlist);
                 sendDispatcher(request, response, "newjsp.jsp");
             }
-
+            //login
             if (service.equalsIgnoreCase("login")) {
                 String userName = request.getParameter("username").trim();
                 String password = request.getParameter("password").trim();
@@ -85,7 +85,7 @@ public class UserController extends HttpServlet {
                 }
 
             }
-
+            //sign up   
             if (service.equalsIgnoreCase("signUp")) {
                 String userName = request.getParameter("username").trim();
                 String password = request.getParameter("password").trim();
@@ -96,7 +96,7 @@ public class UserController extends HttpServlet {
                 String sex = request.getParameter("sex");
                 Date dob = Date.valueOf(request.getParameter("dob"));
                 Integer role = Integer.parseInt(request.getParameter("role"));
-                User user = new User(userName, password, fname, mail, phone, dob, sex, "", 1);
+                User user = new User(userName, password, fname, mail, phone, dob, sex, "", 1, 1);
                 if (!password.equals(repass)) {
                     // js: ko trung pass
                     response.sendRedirect("signUp.jsp");
@@ -118,7 +118,7 @@ public class UserController extends HttpServlet {
                     }
                 }
             }
-
+            //change password for user
             if (service.equals("changepass")) {
                 HttpSession session = request.getSession();
 
@@ -221,7 +221,7 @@ public class UserController extends HttpServlet {
                     }
                 }
             }
-            
+
             // Update profile of current login user
             if (service.equalsIgnoreCase("updateProfile")) {
                 //get user information by user id
@@ -230,16 +230,16 @@ public class UserController extends HttpServlet {
                 String fullname = request.getParameter("fullname").trim();
                 String email = request.getParameter("email").trim();
                 String phone = request.getParameter("phone").trim();
-                
+
                 String date = request.getParameter("dob");
                 Date dob = Date.valueOf(date);
-                
+
                 String gender = request.getParameter("gender");
 //                String avatar = request.getParameter("avatar").trim();
-                
+
                 User user = new User(id, fullname, email, phone, dob, gender);
                 userDAO.updateUser(user); // update user info into DB
-                
+
                 sendDispatcher(request, response, "index.jsp");
             }
         }
