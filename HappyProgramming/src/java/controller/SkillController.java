@@ -45,16 +45,14 @@ public class SkillController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String service = request.getParameter("service");
-            
+
             SkillDAO skillDAO = new SkillDAOImpl();
-            
+
             if (service == null) {
                 service = "";
             }
@@ -79,8 +77,8 @@ public class SkillController extends HttpServlet {
             /* admin create new skill */
             if (service.equalsIgnoreCase("createSkill")) {
                 //get infor of the skill from Input form
-                String sName = request.getParameter("sName");
-                String sDetail = request.getParameter("sDetail");
+                String sName = request.getParameter("sName").trim();
+                String sDetail = request.getParameter("sDetail").trim();
                 String sImage = request.getParameter("sImage");
                 //check duplicate skill in db
                 if (skillDAO.findDupSkill(sName)) {
@@ -93,20 +91,20 @@ public class SkillController extends HttpServlet {
                     sendDispatcher(request, response, "AdminControllerMap?service=skillManage");
                 }
             }
-            
-            /* admin create new skill */
+
+            /* admin update skill */
             if (service.equalsIgnoreCase("updateSkill")) {
                 //get infor of the skill from Input form
                 int sId = Integer.parseInt(request.getParameter("sId"));
-                String sName = request.getParameter("sName");
-                String sDetail = request.getParameter("sDetail");
+                String sName = request.getParameter("sName").trim();
+                String sDetail = request.getParameter("sDetail").trim();
                 String sImage = request.getParameter("sImage");
                 int status = Integer.parseInt(request.getParameter("status"));
-                
                 Skill skill = new Skill(sId, sName, sDetail, sImage, status);
                 skillDAO.updateSkill(skill);
                 sendDispatcher(request, response, "AdminControllerMap?service=skillManage");
             }
+         
 
         }
     }

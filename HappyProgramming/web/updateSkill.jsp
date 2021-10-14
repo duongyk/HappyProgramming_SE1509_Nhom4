@@ -17,7 +17,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Inner Page - Vesperr Bootstrap Template</title>
+        <title>Update Skill</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -45,6 +45,7 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
+        <link href="css/createRequest.css" rel="stylesheet">
 
         <!-- =======================================================
         * Template Name: Vesperr - v4.6.0
@@ -66,27 +67,24 @@
                     <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
-                <nav id="navbar-main" class="navbar-main">
+                                <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
-                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
-                            <c:choose>
-                                <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
-                                </li>
+                        <c:choose>
+                            <c:when test="${sessionScope.currUser!=null}">
+
                                 <li class="dropdown getstarted scrollto ">
-                                    <span style="color: white; padding: 0;">User</span>
+                                    <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="AdminControllerMap?service=dashboard">Dashboard</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
                             </c:when>
                             <c:otherwise>
-                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
+                                <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
-                                        <li><a href="signUp.jsp">Sign up</a>
+                                        <li><a href="SignUp.jsp">Sign up</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -95,7 +93,6 @@
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar-main -->
-
             </div>
         </header><!-- End Header -->
 
@@ -124,7 +121,7 @@
                                         <div class="name">Skill Name</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="text" name="sName" value="<c:out value="${skill.name}"></c:out>"
+                                                <input class="input-white" type="text" name="sName" value="<c:out value="${skill.name}"></c:out>"
                                                        pattern="^[^\s]+(\s+[^\s]+)*$" title="Must not contain only spaces, must not start or end by a space " required="required">
                                                 </div>
                                             </div>
@@ -133,8 +130,7 @@
                                             <div class="name">Detail</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <input class="input--style-5" type="text" name="sDetail" value="<c:out value="${skill.detail}"></c:out>"
-                                                           pattern="^[^\s]+(\s+[^\s]+)*$" title="Must not contain only spaces, must not start or end by a space " required="required">
+                                                    <textarea class="input-white" placeholder="Detail" name="sDetail"   required="required" rows="3" cols="55" maxlength="100"> <c:out value="${skill.detail}" ></c:out> </textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -171,10 +167,22 @@
                                         <div class="name"></div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <img id="image" style="height: 162px;" class="" src="img/79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png" alt="" >
+                                                <img id="image" style="height: 162px;" src="img/${skill.getImage()}" alt="" >
                                             </div>
                                         </div>
                                     </div>
+                                              <div class="row row-refine">
+
+                                                <div class="col-12">
+                                                    <div class="input-group-desc">
+                                                        <input id="avatarURL" class="input-white" type="file" onchange="changeImage()" type="file" name="sImage" value="">
+                                                    </div>
+                                                    <div class="input-group-desc">
+                                                        <img id="image" style="width: 162px;" src="img/<c:out value="${skill.getImage()}"></c:out>" alt="" data-image-width="1280" data-image-height="1280">
+                                                    </div>
+
+                                                </div>
+                                            </div>
 
                                     <!-- <input id="avatarURL" form="thisform" onchange="changeImage()" type="file" name="avatar" value="" style="width: 162px;" > -->
                                     <div style="margin-left: 230px;">

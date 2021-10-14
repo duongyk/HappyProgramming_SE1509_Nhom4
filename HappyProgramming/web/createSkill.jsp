@@ -45,13 +45,9 @@
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/login.css" rel="stylesheet">
+  <link href="css/createRequest.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Vesperr - v4.6.0
-  * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
 </head>
 
 <body>
@@ -123,7 +119,7 @@
                   <div class="name">Skill Name</div>
                   <div class="value">
                     <div class="input-group">
-                      <input class="input--style-5" type="text" name="sName" pattern="^[^\s]+(\s+[^\s]+)*$" title="Must not contain only spaces, must not start or end by a space " required="required">
+                        <input class="input-white" placeholder="Skill Name" type="text" name="sName" pattern=".*\S+.*" title="Must not contain only spaces " required="required">
                     </div>
                   </div>
                 </div>
@@ -131,7 +127,7 @@
                   <div class="name">Detail</div>
                   <div class="value">
                     <div class="input-group">
-                        <input class="input--style-5" type="text" name="sDetail" pattern="^[^\s]+(\s+[^\s]+)*$" title="Must not contain only spaces, must not start or end by a space " required="required">
+                        <textarea class="input-white" placeholder="Detail" name="sDetail" required="required" rows="3" cols="55" maxlength="200 "></textarea>
                     </div>
                   </div>
                 </div>
@@ -139,7 +135,7 @@
                   <div class="name">Image</div>
                   <div class="value">
                     <div class="input-group">
-                      <input id="avatarURL" onchange="changeImage()" class="input--style-5" type="file" name="sImage" required="required" pattern="^(https?|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]" title="
+                        <input class="input-white" id="avatarURL" onchange="changeImage()" class="input--style-5" type="file" name="sImage" required="required" pattern="^(https?|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]" title="
                                Please enter a valid photo URL">
                     </div>
                   </div>
