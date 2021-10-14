@@ -39,6 +39,7 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
+        <link href="css/createRequest.css" rel="stylesheet">
 
         <!-- =======================================================
         * Template Name: Vesperr - v4.6.0
@@ -128,7 +129,7 @@
                                             <div class="name">New Password</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <input onkeyup='check();' maxlength="20" class="input--style-5" id="password" type="text" placeholder="Password" name="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$" title="8 characters include letters and numbers">
+                                                    <input onkeyup='check();' maxlength="20" class="input-white" id="password" type="text" placeholder="Password" name="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$" title="8 characters include letters and numbers">
                                                 </div>
                                             </div>
                                         </div>
@@ -136,13 +137,13 @@
                                             <div class="name">Confirm Password</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <input onkeyup='check();' maxlength="20" class="input--style-5" id="confirm" type="text" placeholder="Confirm Password" name="confirm" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$" title="8 characters include letters and numbers">
+                                                    <input onkeyup='check();' maxlength="20" class="input-white" id="confirm" type="text" placeholder="Confirm Password" name="confirm" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$" title="8 characters include letters and numbers">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <button id="submit" type="submit" class="btn btn-primary rounded-0 py-2 px-4">Reset Password</button>
+                                                <button id="submit" style="padding-bottom: 0px; padding-top: 0px;" type="submit" class="btn btn-primary rounded-0 py-2 px-4">Reset Password</button>
                                                 <input type="hidden" name="service" value="resetPass">
                                             </div>
                                         </div>

@@ -89,11 +89,32 @@ public interface UserDAO {
      */
     public int updateUserInfo(int uId, User user) throws Exception;
     
+    /**
+     * Update user information
+     *
+     * @param email it is a String
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
     public User getUserByEmail(String email) throws Exception;
     
+    /**
+     * Get user and reset that user password in database
+     *
+     * @param user it is a <code>User</code> object
+     * @param password it is a String
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
     public User resetPassword(User user, String password) throws Exception;
     
     public  User changePass (String uMail, String newPass) throws Exception;
     
+    /**
+     * Update user information into database
+     *
+     * @param user it is a <code>User</code> object
+     * @throws Exception
+     */
     public void updateUser(User user) throws Exception;
 }

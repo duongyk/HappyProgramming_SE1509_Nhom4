@@ -239,8 +239,8 @@ public class UserController extends HttpServlet {
 
                 User user = new User(id, fullname, email, phone, dob, gender);
                 userDAO.updateUser(user); // update user info into DB
-
-                sendDispatcher(request, response, "index.jsp");
+                request.getSession().setAttribute("currUser", user); // set current user with updated info
+                sendDispatcher(request, response, "UserControllerMap?service=profile&uId="+id);
             }
         }
     }

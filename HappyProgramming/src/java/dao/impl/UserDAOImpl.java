@@ -282,6 +282,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return list;
     }
 
+    /**
+     * Update user information
+     *
+     * @param email it is a String
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public User getUserByEmail(String email) throws Exception {
         Connection conn = null;
@@ -324,6 +331,14 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return user;
     }
     
+    /**
+     * Get user and reset that user password in database
+     *
+     * @param user it is a <code>User</code> object
+     * @param password it is a String
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public User resetPassword(User user, String password) throws Exception {
         Connection conn = null;
@@ -347,6 +362,12 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return null;
     }
     
+    /**
+     * Update user information into database
+     *
+     * @param user it is a <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public void updateUser(User user) throws Exception {
         Connection conn = null;
@@ -378,11 +399,6 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closePreparedStatement(ps);
             closeConnection(conn);
         }
-    }
-    
-    public static void main(String[] args) throws Exception {
-        UserDAOImpl dao = new UserDAOImpl();
-        System.out.println(dao.getUserByEmail("hajimenagumo911@gmail.com").getFullname());
     }
 
     @Override

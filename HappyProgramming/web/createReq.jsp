@@ -67,11 +67,20 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile">Profile</a></li>
+                                        <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
                             </c:when>
+                            <c:otherwise>
+                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
+                                        <span>Sign in</span></a>
+                                    <ul>
+                                        <li><a href="signUp.jsp">Sign up</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </c:otherwise>
                         </c:choose>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
@@ -107,7 +116,7 @@
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" maxlength="30" type="text" name="title" placeholder="Your Request Title" required>
+                                                        <input class="input-white" maxlength="30" type="text" name="title" placeholder="Your Request Title" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,7 +128,7 @@
                                         <div class="name">Content</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <textarea class="input--style-5" rows="3" cols="55" type="text" placeholder="Your Request Content" name="content" required></textarea>
+                                                <textarea class="input-white" rows="3" cols="55" type="text" maxlength="200"  placeholder="Your Request Content" name="content" required></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +138,7 @@
                                         <div class="name">Deadline Date</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="date" name="deadlineDate" required>
+                                                <input class="input-white" type="date" name="deadlineDate" required>
                                             </div>
                                         </div>
                                     </div>
@@ -139,7 +148,7 @@
                                         <div class="name">Deadline Hour</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="number" min="1" max="12" placeholder="The time you want to request" name="deadlineHour" required>
+                                                <input class="input-white" type="number" min="1" max="12" placeholder="The time you want to request" name="deadlineHour" required>
                                             </div>
                                         </div>
                                     </div>

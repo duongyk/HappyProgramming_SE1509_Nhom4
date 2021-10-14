@@ -38,6 +38,7 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
+        <link href="css/createRequest.css" rel="stylesheet">
 
         <!-- =======================================================
         * Template Name: Vesperr - v4.6.0
@@ -125,7 +126,7 @@
 
                                         <div class="row">
                                             <div class="col-md-12 form-group">
-                                                <input type="email" maxlength="30" class="form-control" name="email" id="email" placeholder="Email" required>
+                                                <input type="email" maxlength="30" class="input-white" name="email" id="email" placeholder="Email" required>
                                             </div>
                                         </div>
                                         <div class="row">

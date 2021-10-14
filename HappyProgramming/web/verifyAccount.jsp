@@ -39,6 +39,7 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
+        <link href="css/createRequest.css" rel="stylesheet">
 
         <!-- =======================================================
         * Template Name: Vesperr - v4.6.0
@@ -126,7 +127,7 @@
 
                                         <div class="row">
                                             <div class="col-md-12 form-group">
-                                                <input type="text" class="form-control" maxlength="4" name="code" id="email" placeholder="Your Verify Code" required>
+                                                <input type="text" class="input-white" maxlength="4" name="code" id="email" placeholder="Your Verify Code" required>
                                             </div>
                                             <c:if test="${sessionScope.alert != null}">
                                                 <p style="color: red"> <c:out value="${alert}"/>
@@ -134,7 +135,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary rounded-0 py-2 px-4">Check Verify Code</button>
+                                                <button style="padding-bottom: 0px; padding-top: 0px;" type="submit" class="btn btn-primary rounded-0 py-2 px-4">Check Verify Code</button>
                                                 <input type="hidden" name="service" value="verifyCode">
                                             </div>
                                         </div>

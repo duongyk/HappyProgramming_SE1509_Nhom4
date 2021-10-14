@@ -98,7 +98,7 @@
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                         <div class="member" data-aos="fade-up" data-aos-delay="100">
                             <div class="member-img">
-                                <img src="${list.getImage()}" class="img-fluid" alt="">
+                                <img style="width:300px; height:200px" src="img/${list.getImage()}" class="img-fluid" alt="image">
                                 <div class="">
                                 </div>
                             </div>
@@ -110,60 +110,6 @@
                     </div>
                 <%-- </c:if> --%>
             </c:forEach>
-          <%--  
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
-              <div class="member-img">
-                <img src="img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="">
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Java</h4>
-                <a href="">View detail</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
-              <div class="member-img">
-                <img src="img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="">
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Java</h4>
-                <a href="">View detail</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
-              <div class="member-img">
-                <img src="img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="">
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Java</h4>
-                <a href="">View detail</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
-              <div class="member-img">
-                <img src="img/team/team-1.jpg" class="img-fluid" alt="">
-                <div class="">
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Java</h4>
-                <a href="">View detail</a>
-              </div>
-            </div>
-          </div>
-          --%>
 
         </div>
 

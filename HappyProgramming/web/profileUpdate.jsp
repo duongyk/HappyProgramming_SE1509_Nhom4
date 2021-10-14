@@ -163,7 +163,7 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <h6 class="mb-0" style="padding-top: 16px;padding-left: 25px;">DOB</h6>
+                                                    <h6 class="mb-0" style="padding-top: 16px;padding-left: 26px;">DOB</h6>
                                                 </div>
                                                 <div class="col-sm-9 text-secondary">
                                                     <input type="date" name="dob" value="<c:out value="${currUser.getDob()}"></c:out>" required>
@@ -194,11 +194,10 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <button type="submit">Update</button>
+                                                <button class="btn btn-info" type="submit">Update</button>
                                             </div>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
 
