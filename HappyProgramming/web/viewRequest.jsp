@@ -56,7 +56,7 @@
                         <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                             <%-- Check the current User --%>
-                        <c:choose>
+                            <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
                                 </li>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
@@ -115,9 +115,12 @@
                                         <span class="status">Pending</span>
                                     </c:if>
                                     <c:if test="${req.status==2}">
-                                        <span class="status">Accepted</span>
+                                        <span class="status">In-Process</span>
                                     </c:if>
                                     <c:if test="${req.status==3}">
+                                        <span class="status">Done</span>
+                                    </c:if>
+                                    <c:if test="${req.status==4}">
                                         <span class="status">Canceled</span>
                                     </c:if>
                                 </div>

@@ -75,7 +75,8 @@ public class RequestController extends HttpServlet {
             }
 
             /**
-             * Service listRequestByMe: Get list request of the user (Mentee/mentor) and Statistic requests
+             * Service listRequestByMe: Get list request of the user
+             * (Mentee/mentor) and Statistic requests
              */
             if (service.equalsIgnoreCase("listRequestByMe")) {
                 //get current user
@@ -89,7 +90,7 @@ public class RequestController extends HttpServlet {
                 request.setAttribute("statistic", statistic);
                 sendDispatcher(request, response, "listRequestByMe.jsp");
             }
-            
+
             /* load create request screen */
             if (service.equalsIgnoreCase("loadRequest")) {
                 ArrayList<Skill> sList = skillDAO.getActiveSkill();
@@ -165,7 +166,7 @@ public class RequestController extends HttpServlet {
                 }
 
             }
-            
+
             /**
              * Service viewRequest: Edit detail of a Request
              */
@@ -180,10 +181,19 @@ public class RequestController extends HttpServlet {
                 int status = Integer.parseInt(request.getParameter("status"));
                 String skillIds[] = request.getParameterValues("skill");
                 ArrayList<Integer> sIdList = new ArrayList<>();
-                for (String id : skillIds) {
-                    int sId = Integer.parseInt(id);
-                    sIdList.add(sId);
+                
+                if (skillIds != null) {
+                    for (String id : skillIds) {
+                        int sId = Integer.parseInt(id);
+                        sIdList.add(sId);
+                    }
+                } else {
+                    ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
+                    for (Skill s : sList) {
+                        sIdList.add(s.getId());
+                    }
                 }
+
                 // Update Request
                 Request req = new Request(rId, title, content, deadlineDate, deadlineHour, status);
                 requestDAO.updateRequest(req);
@@ -221,20 +231,20 @@ public class RequestController extends HttpServlet {
                 sendDispatcher(request, response, "/mentorRequestList.jsp");
                 //out.println("<h3>view Mentor Request chưa xong</h3>");
             }
-            
+
             /* Mentor Accept / Reject Request */
-            if(service.equalsIgnoreCase("mentorUpdateStatus")) {
+            if (service.equalsIgnoreCase("mentorUpdateStatus")) {
                 // get status and request id from URL
                 int status = Integer.parseInt(request.getParameter("status"));
-                
+
                 int rid = Integer.parseInt(request.getParameter("rid"));
-                
+
                 // using dao update request
                 RequestDAO requestdao = new RequestDAOImpl();
-                
-                requestdao.updateStatusRequest(rid, status);     
-                
-                sendDispatcher(request,response, "/demoMentorList.jsp");
+
+                requestdao.updateStatusRequest(rid, status);
+
+                sendDispatcher(request, response, "/demoMentorList.jsp");
             }
         }
     }

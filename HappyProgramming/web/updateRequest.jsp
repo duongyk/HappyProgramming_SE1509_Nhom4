@@ -39,7 +39,7 @@
         <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
         <script type="text/javascript" src="js/myFunction.js" ></script>
-
+        <script type="text/javascript" src="js/checkSpace.js" ></script>
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
@@ -123,9 +123,14 @@
                                                     <div class="name">Content</div>
                                                     <div class="value">
                                                         <div class="input-group">
-                                                            <textarea class="input-white" type="text" name="content" placeholder="Your Request Content" pattern=".*\S+.*" title="No white space only" maxlength="200" required  rows="3" cols="54"><c:out value="${req.getContent()}"></c:out></textarea>
+                                                            <textarea class="input-white" id="content" type="text" name="content" maxlength="200" required  rows="3" cols="54" onkeyup="checkSpace()"><c:out value="${req.getContent()}"></c:out></textarea>
                                                             </div>
                                                         </div>
+                                                            <div class="input-group">
+                                                                <%-- Message for checkSpace --%>
+                                                                <p id="text-space" style="display:none; color:red">Content contains only space</p>
+                                                                <p id="text-space-1" style="color:white;">aaaaa</p>
+                                                            </div>
                                                     </div>
 
                                                 <%-- Deadline Date --%>
@@ -232,16 +237,19 @@
                                         </c:when>
                                         <%-- Request's Status = 2 (Processing) -> Cancel only --%>
                                         <c:otherwise>
-                                            <form action="RequestControllerMap?service=editRequest" method="POST">
+
+                                            <form action="RequestControllerMap?service=updateRequest" method="POST">
                                                 <input type="hidden" name="rId" value="${req.id}">
+                                                <div class="only"> You can only Cancel In-process Request!</div>
                                                 <%-- Title --%>
                                                 <div class="form-row m-b-55">
+
                                                     <div class="name">Title</div>
                                                     <div class="value">
                                                         <div class="row row-space">
                                                             <div class="col-12">
                                                                 <div class="input-group-desc">
-                                                                    <input class="input-white" type="text" name="title" placeholder="Your Request Title" pattern=".*\S+.*" title="No white space only" maxlength="100" value="${req.getTitle()}" readonly>
+                                                                    <input class="input-readonly" type="text" name="title" placeholder="Your Request Title" pattern=".*\S+.*" title="No white space only" maxlength="100" value="${req.getTitle()}" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -253,7 +261,7 @@
                                                     <div class="name">Content</div>
                                                     <div class="value">
                                                         <div class="input-group">
-                                                            <textarea class="input-white" type="text" name="content" placeholder="Your Request Content" pattern=".*\S+.*" title="No white space only" maxlength="200" readonly  rows="3" cols="54"><c:out value="${req.getContent()}"></c:out></textarea>
+                                                            <textarea class="input-readonly" type="text" name="content" placeholder="Your Request Content" pattern=".*\S+.*" title="No white space only" maxlength="200" readonly  rows="3" cols="54"><c:out value="${req.getContent()}"></c:out></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -263,7 +271,7 @@
                                                     <div class="name">Deadline Date</div>
                                                     <div class="value">
                                                         <div class="input-group">
-                                                            <input class="input-white" type="date" id="date" value="<c:out value="${req.deadlineDate}"></c:out>" name="deadlineDate" readonly>
+                                                            <input class="input-readonly" type="date" id="date" value="<c:out value="${req.deadlineDate}"></c:out>" name="deadlineDate" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -273,17 +281,17 @@
                                                     <div class="name">Deadline Hour</div>
                                                     <div class="value">
                                                         <div class="input-group">
-                                                            <input class="input-white" type="number" min="1" max="12" value="<c:out value="${req.deadlineHour}"></c:out>" placeholder="The time you want to request" name="deadlineHour" readonly>
+                                                            <input class="input-readonly" type="number" min="1" max="12" value="<c:out value="${req.deadlineHour}"></c:out>" placeholder="The time you want to request" name="deadlineHour" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                 <%-- Mentor --%>
                                                 <div class="form-row">
-                                                    <div class="name">Choose Mentor</div>
+                                                    <div class="name">Mentor</div>
                                                     <div class="value">
                                                         <div class="input-group">
-                                                            <input value="<c:out value="${req.getTo().getFullname()}"></c:out>" readonly>
+                                                            <input class="input-readonly" value="<c:out value="${req.getTo().getFullname()}"></c:out>" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -313,16 +321,16 @@
                                                         </c:forEach>  
                                                     </div>
                                                 </div>
-                                        </div>
 
-                                        <div class="row">
-                                            <div class="col-4"></div>
-                                            <div class="col-5">
-                                                <button class="btn btn--radius-2 btn--red submit-button" type="submit">Update Request</button>
-                                            </div>
-                                            <div class="col-3"></div>
+                                                <div class="row">
+                                                    <div class="col-4"></div>
+                                                    <div class="col-5">
+                                                        <button class="btn btn--radius-2 btn--red submit-button" type="submit">Update Request</button>
+                                                    </div>
+                                                    <div class="col-3"></div>
+                                                </div>
+                                            </form>
                                         </div>
-                                        </form>
                                     </c:otherwise>
                                 </c:choose>
 
@@ -436,17 +444,17 @@
     </body>
     <!--Pick Deadline Date from today-->  
     <script>
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth() + 1;
-        if (d < 10) {
-            d = '0' + d;
-        }
-        if (m < 10) {
-            m = '0' + m;
-        }
-        var y = date.getFullYear();
-        var min = y + "-" + m + "-" + d;
-        document.getElementById("date").setAttribute('min', min);
+                                                                                            var date = new Date();
+                                                                                            var d = date.getDate();
+                                                                                            var m = date.getMonth() + 1;
+                                                                                            if (d < 10) {
+                                                                                                d = '0' + d;
+                                                                                            }
+                                                                                            if (m < 10) {
+                                                                                                m = '0' + m;
+                                                                                            }
+                                                                                            var y = date.getFullYear();
+                                                                                            var min = y + "-" + m + "-" + d;
+                                                                                            document.getElementById("date").setAttribute('min', min);
     </script>
 </html>
