@@ -12,7 +12,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Vesperr Bootstrap Template - Index</title>
+        <title>Request Details Page</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -106,7 +106,7 @@
                         <%-- Request Detail --%>
                         <div class="row">
                             <div class="col-md-5">
-                                <h3>To <a href="RatingControllerMap?service=getRating&mId=${req.getTo().getId()}">${req.to.fullname}</a></h3>
+                                <h3>To <a href="CVControllerMap?service=cvMentor&mId=${req.getTo().getId()}">${req.to.fullname}</a></h3>
                                 <br><br>
                                 <p>Deadline Date: ${req.deadlineDate}</p>
                                 <p>Hour: ${req.deadlineHour}</p>
