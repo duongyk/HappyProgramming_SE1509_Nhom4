@@ -41,6 +41,7 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
+        <link href="css/createRequest.css" rel="stylesheet">
 
     </head>
 
@@ -115,7 +116,7 @@
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="text" name="username" required="required">
+                                                        <input class="input-white" type="text" name="username" required="required">
                                                         <!--                          <label class="label--desc">User Name</label>-->
                                                     </div>
                                                 </div>
@@ -127,7 +128,7 @@
                                         <div class="name">Email</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" name="mail">
+                                                <input class="input-white" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" name="mail">
                                             </div>
                                         </div>
                                     </div>
@@ -135,7 +136,7 @@
                                         <div class="name">password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="password">
+                                                <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="password">
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +145,7 @@
                                         <div class="name">repeat password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="confirm">
+                                                <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="confirm">
                                             </div>
                                         </div>
                                     </div>
@@ -152,7 +153,7 @@
                                         <div class="name">Full Name</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="text" pattern=".*\S+.*" title="No white space only" maxlength="30" name="fullname">
+                                                <input class="input-white" type="text" pattern=".*\S+.*" title="No white space only" maxlength="30" name="fullname">
                                             </div>
                                         </div>
                                     </div>
@@ -163,7 +164,7 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="text" pattern="[0-9]{9,11}" title="phone with 9 to 11 number" name="phone">
+                                                        <input class="input-white" type="text" pattern="[0-9]{9,11}" title="phone with 9 to 11 number" name="phone">
                                                         <label class="label--desc">Phone Number</label>
                                                     </div>
                                                 </div>
@@ -179,7 +180,7 @@
                                     </div>
                                     <div class="form-row">
                                         <label for="text-13e0" class="name">Date of birth</label>
-                                        <input  class="input--style-5" type="date"  name="dob" >
+                                        <input  class="input-white" type="date"  name="dob" >
                                     </div>
                                     <div class="form-row">
                                         <div class="name">Sign up to </div>

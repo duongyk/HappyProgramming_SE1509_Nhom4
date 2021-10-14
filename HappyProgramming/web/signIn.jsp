@@ -41,6 +41,8 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
+        <link href="css/createRequest.css" rel="stylesheet">
+        
 
     </head>
 
@@ -115,7 +117,7 @@
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="text" name="username" pattern=".*\S+.*" title="No white space only" maxlength="30" required="required">
+                                                        <input class="input-white" type="text" name="username" pattern=".*\S+.*" title="No white space only" maxlength="30" required="required">
                                                         <!--                          <label class="label--desc">User Name</label>-->
                                                     </div>
                                                 </div>
@@ -126,7 +128,7 @@
                                         <div class="name">Password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="password" name="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number">
+                                                <input class="input-white" type="password" name="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number">
                                             </div>
                                             
                                         </div>
