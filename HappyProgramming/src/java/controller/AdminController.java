@@ -96,7 +96,9 @@ public class AdminController extends HttpServlet {
             if (service.equalsIgnoreCase("skillManage")) {
                 //list all skills that have in database
                 ArrayList<Skill> sList = skillDAO.getAllSkill();
+                ArrayList<User> menteeList = userDAO.getMenteeListSorted();
                 request.setAttribute("sList", sList);
+                request.setAttribute("menteeList", menteeList);
                 sendDispatcher(request, response, "skillManagement.jsp");
             }
 
@@ -104,16 +106,16 @@ public class AdminController extends HttpServlet {
             if (service.equalsIgnoreCase("filterName")) {
                 //list all skills that have in database
                 ArrayList<User> menteeList = userDAO.getMenteeListSorted();
-                
+
                 int totalHour = requestDAO.getTotalHour();
                 int totalSkill = requestSkillDAO.getTotalRequest();
-                
+
                 request.setAttribute("menteeList", menteeList);
                 request.setAttribute("totalHour", totalHour);
                 request.setAttribute("totalSkill", totalSkill);
                 sendDispatcher(request, response, "menteeManagement.jsp");
             }
-            
+
             if (service.equalsIgnoreCase("menteeManage")) {
                 //list all User that are Mentee have in database
                 ArrayList<User> menteeList = userDAO.getUserByRole(1);

@@ -130,7 +130,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary rounded-0 py-2 px-4">Send Verify Code</button>
+                                                <button style="padding-bottom: 0px; padding-top: 0px;" type="submit" class="btn btn-primary rounded-0 ">Send Verify Code</button>
                                                 <input type="hidden" name="service" value="sendEmail">
                                             </div>
                                         </div>
