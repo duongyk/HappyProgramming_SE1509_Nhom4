@@ -18,7 +18,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Inner Page - Vesperr Bootstrap Template</title>
+        <title>Skill management</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -138,11 +138,54 @@
                             </ul>
                         </nav>
                         <!-- partial -->
-                     
+
                         <div class="main-panel">
-                             
+
                             <div class="content-wrapper">
-                                <button> <a href="createSkill.jsp"> Create new skill</a></button>
+                                     <div class="row">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 grid-margin stretch-card">
+                                        <div class="card tale-bg">
+                                            <div class="card-people mt-auto" style="padding: 0">
+                                                <img style="min-width: 300px; min-height:250px " src="img/1.png">
+
+                                                <div class="weather-info">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 grid-margin transparent">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4 stretch-card transparent">
+                                                <div class="card card-tale">
+                                                    <div class="card-body">
+                                                        <p class="mb-4">Total Skill </p>
+                                                        <p class="fs-30 mb-2"><c:out value="${sList.size()}"></c:out></p>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-4 stretch-card transparent">
+                                                    <div class="card card-dark-blue">
+                                                        <div class="card-body">
+                                                            <p class="mb-4">Total Mentee</p>
+                                                            <p class="fs-30 mb-2"><c:out value="${menteeList.size()}"></c:out></p>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                                                        <button class="create"> <a href="createSkill.jsp" style="color: white"> Create new skill</a></button>
+                                                </div>
+                                          
+                                            </div>
+                                        </div>
+
+                         
+                                
                                 <div class="row">
                                     <div class="col-lg-12 grid-margin stretch-card">
                                         <div class="card">
@@ -163,20 +206,20 @@
                                                                 <th>
                                                                     Detail
                                                                 </th>
-                                                              
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <c:forEach items="${sList}" var="skill">
                                                                 <tr>
                                                                     <td class="py-1">
-                                                                        <img src="img/${skill.image}" alt="image" />
+                                                                        <img src="${skill.image}" alt="image" />
                                                                     </td>
                                                                     <td>
                                                                         <a href="AdminControllerMap?service=updateSkill&sId=${skill.id}"><c:out value="${skill.id}"></c:out></a>
-                                                                    </td>
+                                                                        </td>
 
-                                                                    <td>
+                                                                        <td>
                                                                         <c:out value="${skill.name}"></c:out>
                                                                         </td>
                                                                         <td>
@@ -248,7 +291,21 @@
 
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
-
+        <style>.create {
+                height: 50px;
+                width: 180px;
+                background:rgb(84, 142, 228);
+                border-radius: 0;
+                color: #fff;
+                cursor: pointer;
+                display: inline-block;
+                padding:  10px;
+                font-weight: bold;
+                margin-left: 0px;
+                border-radius: 25px;
+                border: none;
+                  
+            }</style>
     </body>
 
 </html>
