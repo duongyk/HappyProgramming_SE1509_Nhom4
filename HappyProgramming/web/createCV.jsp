@@ -42,9 +42,9 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
+        <link href="css/createRequest.css" rel="stylesheet">
         
         <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
-        <script class="u-script" type="text/javascript" src="js/checkbox.js" defer=""></script>
         <script class="u-script" type="text/javascript" src="js/changeAvatar.js" defer=""></script>
         <script class="u-script" type="text/javascript" src="js/checkpattern.js" defer=""></script>
         
@@ -123,8 +123,8 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="text" name="profession" pattern=".*\S+.*" title="No white space only" value="">
-                                                        <h4 id="htitle"></h4>
+                                                        <input class="input-white" type="text" name="profession" pattern=".*\S+.*" title="No white space only" value="">
+                                                        <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,9 +138,9 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <!--<input class="input--style-5" type="text" name="phone"> -->
-                                                        <textarea class="input--style-5" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro"></textarea>
-                                                        <h4 id="htitle"></h4>
+                                                        <!--<input class="input-white" type="text" name="phone"> -->
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro"></textarea>
+                                                        <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,9 +154,9 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <!--<input class="input--style-5" type="text" name="phone"> -->
-                                                        <textarea class="input--style-5" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="serviceDescription"></textarea>
-                                                        <h4 id="htitle"></h4>
+                                                        <!--<input class="input-white" type="text" name="phone"> -->
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="serviceDescription"></textarea>
+                                                        <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -170,9 +170,9 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <!--<input class="input--style-5" type="text" name="phone"> -->
-                                                        <textarea class="input--style-5" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="achievement"></textarea>
-                                                        <h4 id="htitle"></h4>
+                                                        <!--<input class="input-white" type="text" name="phone"> -->
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="achievement"></textarea>
+                                                        <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -186,10 +186,10 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input id="avatarURL" class="input--style-5" type="file" onchange="changeImage()" type="file" name="avatar" value="">
+                                                        <input id="avatarURL" class="input-white" type="file" onchange="changeImage()" type="file" name="avatar" value="">
                                                     </div>
                                                     <div class="input-group-desc">
-                                                        <img id="image" style="width: 162px;" src="img/" alt="" data-image-width="1280" data-image-height="1280">
+                                                        <img id="image" style="width: 162px;" src="img/default-avatar.png" alt="" data-image-width="1280" data-image-height="1280">
                                                     </div>
 
                                                 </div>
@@ -205,8 +205,8 @@
                                                     <div class="col-12">
                                                         <ul>
                                                             <c:forEach items="${allskill}" var="s">
-                                                                    <li style="display: inline-block; margin-right: 15px;margin-bottom: 10px">
-                                                                        <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skills" value="${s.getId()}">
+                                                                    <li style="display: inline-block; margin-right: 30px;margin-bottom: 10px">
+                                                                        <input class="form-check-input" type="checkbox" style="border-color: black;" id="${s.getId()}" name="skills" value="${s.getId()}">
                                                                         <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
                                                                     </li>
                                                             </c:forEach>
@@ -219,7 +219,7 @@
                                     </div>
                                     
                                     <div>
-                                        <button class="btn btn--radius-2 btn--red" type="submit">Update CV</button>
+                                        <button class="btn btn--radius-2 btn--red" type="submit">Create CV</button>
                                     </div>
                                 </form>
                             </div>

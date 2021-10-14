@@ -42,9 +42,9 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
+        <link href="css/createRequest.css" rel="stylesheet">
         
         <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script>
-        <script class="u-script" type="text/javascript" src="js/checkbox.js" defer=""></script>
         <script class="u-script" type="text/javascript" src="js/changeAvatar.js" defer=""></script>
         <script class="u-script" type="text/javascript" src="js/checkpattern.js" defer=""></script>
         
@@ -121,7 +121,7 @@
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="text" name="username" pattern=".*\S+.*" title="No white space only" maxlength="30" value="<c:out value="${mentorprofile.getUsername()}"></c:out>" required="required" readonly>
+                                                        <input class="input-white" type="text" name="username" pattern=".*\S+.*" title="No white space only" maxlength="30" value="<c:out value="${mentorprofile.getUsername()}"></c:out>" required="required" readonly>
                                                         <!--                          <label class="label--desc">User Name</label>-->
                                                     </div>
                                                 </div>
@@ -133,8 +133,8 @@
                                         <div class="name">Email</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" value="<c:out value="${mentorprofile.getMail()}"></c:out>" required>
-                                                <h4 id="htitle"></h4>
+                                                <input class="input-white" type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" value="<c:out value="${mentorprofile.getMail()}"></c:out>" required>
+                                                <h4 id="htitle" style="color:red;"></h4>
                                             </div>
                                         </div>
                                     </div>
@@ -143,8 +143,8 @@
                                         <div class="name">Full Name</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input--style-5" type="text" name="fullname" pattern=".*\S+.*" title="No white space only" maxlength="30" value="<c:out value="${mentorprofile.getFullname()}"></c:out>" required>
-                                                <h4 id="htitle"></h4>
+                                                <input class="input-white" type="text" name="fullname" pattern=".*\S+.*" title="No white space only" maxlength="30" value="<c:out value="${mentorprofile.getFullname()}"></c:out>" required>
+                                                <h4 id="htitle" style="color:red;"></h4>
                                             </div>
                                         </div>
                                     </div>
@@ -156,8 +156,8 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="text" name="phone" pattern="[0-9]{9,11}" title="phone with 9 to 11 number" value="<c:out value="${mentorprofile.getPhone()}"></c:out>" required>
-                                                        <h4 id="htitle"></h4>
+                                                        <input class="input-white" type="text" name="phone" pattern="[0-9]{9,11}" title="phone with 9 to 11 number" value="<c:out value="${mentorprofile.getPhone()}"></c:out>" required>
+                                                        <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -166,7 +166,7 @@
                                                         
                                     <div class="form-row">
                                         <div class="name">Sex</div>
-                                        <select id="select-6004" name="sex" class="input--style-5">
+                                        <select id="select-6004" name="sex" class="input-white">
                                             <c:choose>
                                                 <c:when test="${mentorprofile.getGender() eq \"Male\" }" >
                                                   <option value="Male" selected>Male</option>
@@ -182,7 +182,7 @@
                                     <div class="form-row">
                                         <div class="name">DOB</div>
                                         <div class="value">       
-                                            <input  class="input--style-5" type="date"  name="dob" value="<c:out value="${mentorprofile.getDob()}"></c:out>" >
+                                            <input  class="input-white" type="date"  name="dob" value="<c:out value="${mentorprofile.getDob()}"></c:out>" >
                                         </div>    
                                     </div>
                                                         
@@ -193,8 +193,8 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input--style-5" type="text" name="profession" pattern=".*\S+.*" title="No white space only"  maxlength="20" value="<c:out value="${mentorcv.getProfession()}"></c:out>" required>
-                                                        <h4 id="htitle"></h4>
+                                                        <input class="input-white" type="text" name="profession" pattern=".*\S+.*" title="No white space only"  maxlength="20" value="<c:out value="${mentorcv.getProfession()}"></c:out>" required>
+                                                        <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -208,9 +208,9 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <!--<input class="input--style-5" type="text" name="phone"> -->
-                                                        <textarea class="input--style-5" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro" required><c:out value="${mentorcv.getProfessionIntro()}"></c:out></textarea>
-                                                        <h4 id="htitle"></h4>
+                                                        <!--<input class="input-white" type="text" name="phone"> -->
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro" required><c:out value="${mentorcv.getProfessionIntro()}"></c:out></textarea>
+                                                        <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -224,9 +224,9 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <!--<input class="input--style-5" type="text" name="phone"> -->
-                                                        <textarea class="input--style-5" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="serviceDescription" required><c:out value="${mentorcv.getServiceDescript()}"></c:out></textarea>
-                                                        <h4 id="htitle"></h4>
+                                                        <!--<input class="input-white" type="text" name="phone"> -->
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="serviceDescription" required><c:out value="${mentorcv.getServiceDescript()}"></c:out></textarea>
+                                                        <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,9 +240,9 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <!--<input class="input--style-5" type="text" name="phone"> -->
-                                                        <textarea class="input--style-5" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="achievement" required><c:out value="${mentorcv.getAchivement()}"></c:out></textarea>
-                                                        <h4 id="htitle"></h4>
+                                                        <!--<input class="input-white" type="text" name="phone"> -->
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="achievement" required><c:out value="${mentorcv.getAchivement()}"></c:out></textarea>
+                                                        <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -256,7 +256,7 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input id="avatarURL" class="input--style-5" type="file" onchange="changeImage()" type="file" name="avatar" value="">
+                                                        <input id="avatarURL" class="input-white" type="file" onchange="changeImage()" type="file" name="avatar" value="">
                                                     </div>
                                                     <div class="input-group-desc">
                                                         <img id="image" style="width: 162px;" src="img/<c:out value="${mentorprofile.getAvatar()}"></c:out>" alt="" data-image-width="1280" data-image-height="1280">
@@ -273,16 +273,16 @@
                                             <div class="row row-refine">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <ul style="list-style-type: none;">
+                                                        <ul >
                                                             <c:forEach items="${allskill}" var="s">
-                                                                    <li style="display: inline-block; margin-right: 15px;margin-bottom: 10px">
+                                                                    <li style="display: inline-block; margin-right: 30px;margin-bottom: 10px">
                                                                     <c:choose>
                                                                         <c:when test="${mentorskill.contains(String.valueOf(s.getId()))}">
-                                                                        <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skills" value="${s.getId()}" checked>
+                                                                            <input class="form-check-input" type="checkbox" style="border-color: black;" id="${s.getId()}" name="skills" value="${s.getId()}" checked>
 
                                                                         </c:when>
                                                                         <c:otherwise>
-                                                                        <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skills" value="${s.getId()}" >
+                                                                            <input class="form-check-input" type="checkbox" style="border-color: black;" id="${s.getId()}" name="skills" value="${s.getId()}" >
 
                                                                         </c:otherwise>
                                                                     </c:choose>
@@ -294,7 +294,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h4 id="checkboxtitle"></h4>
+                                            <h4 id="checkboxtitle" style="color:red;"></h4>
                                         </div>
                                     </div> 
                                                     

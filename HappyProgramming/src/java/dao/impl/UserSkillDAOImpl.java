@@ -116,7 +116,7 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
             status = ps.executeUpdate();
             // update with new skill
             String sql_insert = "insert into UserSkill (uId,sId,usStatus)"
-                    + " values (" + uId + ",?,'done')";
+                    + " values (" + uId + ",?,'1')";
 
             for (String skill_id : skill_ids) {
                 PreparedStatement ps2 = conn.prepareStatement(sql_insert);

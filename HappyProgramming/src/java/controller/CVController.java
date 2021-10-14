@@ -78,7 +78,7 @@ public class CVController extends HttpServlet {
                 //get all available skill
                 SkillDAOImpl skilldao = new SkillDAOImpl();
                 
-                ArrayList<Skill> allSkill = skilldao.getAllSkill();
+                ArrayList<Skill> allSkill = skilldao.getActiveSkill();
                 
                 request.setAttribute("allskill", allSkill);
                 request.setAttribute("mentorskill", mentorSkill);
@@ -111,28 +111,12 @@ public class CVController extends HttpServlet {
                 SimpleDateFormat dateFormat = 
                   new SimpleDateFormat("yyyy-MM-dd");
                 
-                //Date dob = new Date();
-                
-//
-//                try {
-//                    dob = dateFormat.parse(request.getParameter("dob"));
-//                    //System.out.println(dateFormat.format(dob));
-//                } catch (ParseException ex) {
-//                    Logger.getLogger(CVController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-
-                //try {
-                    
                 Date dob = Date.valueOf(request.getParameter("dob"));
-                    //System.out.println(request.getParameter("dob"));
-//                } catch (ParseException ex) {
-//                    Logger.getLogger(CVController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-                
+            
                 String avatar = request.getParameter("avatar").trim();
                 
                 if(avatar.equals("") || avatar == null ) {
-                    avatar ="79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png";
+                    avatar ="default-avatar.png";
                 }
                 
                 String sex = request.getParameter("sex");
@@ -201,7 +185,7 @@ public class CVController extends HttpServlet {
                 request.setAttribute("uid", uid);
                 
                 SkillDAO skilldao = new SkillDAOImpl();
-                ArrayList<Skill> allSkill = skilldao.getAllSkill();
+                ArrayList<Skill> allSkill = skilldao.getActiveSkill();
                 request.setAttribute("allskill", allSkill);
                 
                 RequestDispatcher rd = request.getRequestDispatcher("/createCV.jsp");
