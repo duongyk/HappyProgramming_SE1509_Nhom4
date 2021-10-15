@@ -16,7 +16,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Vesperr Bootstrap Template - Index</title>
+        <title>Sign-in</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -136,11 +136,14 @@
                                     </div>
                                     <div>
                                         <button class="btn btn--radius-2 btn--red" type="submit">Sign in</button>
+                                        <a class="btn btn--radius-3 " style="color: blue ;margin-left: 200px;" href="forgetPassword.jsp">FORGOT PASSWORD </a>
+                                        
+<!--                                        <a class="btn btn--radius-2 " style="color: blue" href="forgetPassword.jsp">FORGOT PASSWORD </a>-->
+                                        
                                     </div>
-                                    <div>
-                                        <a style="color: blue" href="forgetPassword.jsp"> FORGOT PASSWORD </a>
-                                    </div>
+                                    
                                 </form>
+                                    
                             </div>
                         </div>
                     </div>

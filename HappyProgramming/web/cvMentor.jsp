@@ -7,7 +7,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Inner Page - Vesperr Bootstrap Template</title>
+        <title>view CV of Mentor Page</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -107,7 +107,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img src="img/default-avatar.png" alt="Admin" class="rounded-circle" width="150">
+                                        <img src="img/${mentor.avatar}" alt="Admin" class="rounded-circle" width="150">
                                         <div class="mt-3">
                                             <h4 style= "font-weight: bold;"><c:out value="${mentor.fullname}"></c:out></h4>
                                                 <p class="text-secondary mb-1"> </p>
