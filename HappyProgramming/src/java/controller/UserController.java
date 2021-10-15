@@ -200,12 +200,16 @@ public class UserController extends HttpServlet {
                 User user = userDAO.getUserByEmail(mail);
 
                 if (user != null) { // check if user find by mail are null or not
-
+                    request.getSession().setAttribute("alert", null);
                     User a = userDAO.getUserByEmail(mail);
                     a.setVerify(code); // set verify code for user
                     int send = se.sendEmail(a); // send email contain verify code to user
                     request.getSession().setAttribute("currMail", a);
                     sendDispatcher(request, response, "verifyAccount.jsp");
+                }
+                if (user == null) {
+                    request.getSession().setAttribute("alert", "Mail is not exist");
+                    sendDispatcher(request, response, "forgetPassword.jsp");
                 }
             }
 
