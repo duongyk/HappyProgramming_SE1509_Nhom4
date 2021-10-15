@@ -117,7 +117,9 @@ public class CVController extends HttpServlet {
                 String avatar = request.getParameter("avatar").trim();
                 
                 if(avatar.equals("") || avatar == null ) {
-                    avatar ="default-avatar.png";
+                    User user = (User) session.getAttribute("currUser");
+                    
+                    avatar = user.getAvatar();
                 }
                 
                 String sex = request.getParameter("sex");
