@@ -235,9 +235,9 @@ public class UserController extends HttpServlet {
                 Date dob = Date.valueOf(date);
 
                 String gender = request.getParameter("gender");
-//                String avatar = request.getParameter("avatar").trim();
+                String avatar = request.getParameter("avatar").trim();
 
-                User user = new User(id, fullname, email, phone, dob, gender);
+                User user = new User(id, fullname, email, phone, dob, gender, avatar);
                 userDAO.updateUser(user); // update user info into DB
                 request.getSession().setAttribute("currUser", user); // set current user with updated info
                 sendDispatcher(request, response, "UserControllerMap?service=profile&uId="+id);

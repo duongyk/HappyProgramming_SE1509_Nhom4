@@ -34,7 +34,7 @@
         <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
         <link href="vendor/remixicon/remixicon.css" rel="stylesheet">
         <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+        <script class="u-script" type="text/javascript" src="js/changeAvatar.js" defer=""></script>
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
@@ -112,21 +112,36 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                        <img id="image" style="width: 162px;" src="img/default-avatar.png" alt="" data-image-width="1280" data-image-height="1280">
                                         <div class="mt-3">
-                                            <h4>John Doe</h4>
-                                            <p class="text-secondary mb-1">Full Stack Developer</p>
-                                            <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                            <c:choose>
-                                                <c:when test="${sessionScope.currUser.getRole()==2}">
-                                                    <button class="btn btn-primary">Follow</button>
-                                                </c:when>
-                                            </c:choose>
+                                            <div class="input-group-desc">
+                                                <input id="avatarURL" class="input-white" type="file" onchange="changeImage()" type="file" name="avatar" value="">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <%--
+                        <div class="form-row m-b-55">
+                                        <div class="name">Avatar</div>
+                                        <div class="value">
+                                            <div class="row row-refine">
+
+                                                <div class="col-12">
+                                                    <div class="input-group-desc">
+                                                        <input id="avatarURL" class="input-white" type="file" onchange="changeImage()" type="file" name="avatar" value="">
+                                                    </div>
+                                                    <div class="input-group-desc">
+                                                        <img id="image" style="width: 162px;" src="img/default-avatar.png" alt="" data-image-width="1280" data-image-height="1280">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> --%>
+
+
                         <div class="col-md-8">
                             <div class="card mb-3">
 

@@ -379,7 +379,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
                 + ", [uPhone] = ?"
                 + ", [DOB] = ?"
                 + ", [gender] = ?"
-//                + ", [uAvatar] = ?"
+                + ", [uAvatar] = ?"
                 + " where [uId] = ?";
         try {
             conn = getConnection();
@@ -389,8 +389,8 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             ps.setString(3, user.getPhone());
             ps.setDate(4, user.getDob());
             ps.setString(5, user.getGender());
-//            ps.setString(6, user.getAvatar());
-            ps.setInt(6, user.getId());
+            ps.setString(6, user.getAvatar());
+            ps.setInt(7, user.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
