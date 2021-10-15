@@ -112,10 +112,10 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img id="image" style="width: 162px;" src="img/default-avatar.png" alt="" data-image-width="1280" data-image-height="1280">
+                                        <img id="image" style="width: 162px;" src="img/${sessionScope.currUser.getAvatar()}" alt="" data-image-width="1280" data-image-height="1280">
                                         <div class="mt-3">
                                             <div class="input-group-desc">
-                                                <input id="avatarURL" form="thisform" class="input-white" type="file" onchange="changeImage()" type="file" name="avatar" value="">
+                                                <input id="avatarURL" form="thisform" class="input-white" type="file" onchange="changeImage()" type="file" name="avatar">
                                             </div>
                                         </div>
                                     </div>

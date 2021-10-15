@@ -256,6 +256,11 @@ public class UserController extends HttpServlet {
 
                 String gender = request.getParameter("gender");
                 String avatar = request.getParameter("avatar").trim();
+                User s;
+                if (avatar.isEmpty()) {
+                    s =(User) request.getSession().getAttribute("currUser");
+                    avatar = s.getAvatar();
+                }
 
                 User user = new User(id, fullname, email, phone, dob, gender, avatar);
                 userDAO.updateUser(user); // update user info into DB
