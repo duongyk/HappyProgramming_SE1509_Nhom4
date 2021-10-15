@@ -129,7 +129,7 @@
                                             <div class="name">New Password</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <input onkeyup='check();' maxlength="20" class="input-white" id="password" type="text" placeholder="Password" name="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$" title="8 characters include letters and numbers">
+                                                    <input onkeyup='check();' maxlength="20" class="input-white" id="password" type="text" placeholder="Password" name="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="8 characters include capitalized, normal letters and numbers">
                                                 </div>
                                             </div>
                                         </div>
@@ -137,13 +137,13 @@
                                             <div class="name">Confirm Password</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <input onkeyup='check();' maxlength="20" class="input-white" id="confirm" type="text" placeholder="Confirm Password" name="confirm" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$" title="8 characters include letters and numbers">
+                                                    <input onkeyup='check();' maxlength="20" class="input-white" id="confirm" type="text" placeholder="Confirm Password" name="confirm" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" title="8 characters include capitalized, normal letters and numbers">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <button id="submit" style="padding-bottom: 0px; padding-top: 0px;" type="submit" class="btn btn-primary rounded-0 py-2 px-4">Reset Password</button>
+                                                <button id="submit" style="padding-bottom: 0px; padding-top: 0px;" type="submit" class="btn btn-primary rounded-0 ">Reset Password</button>
                                                 <input type="hidden" name="service" value="resetPass">
                                             </div>
                                         </div>
