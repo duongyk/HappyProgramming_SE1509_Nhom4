@@ -116,10 +116,14 @@ public class CVController extends HttpServlet {
             
                 String avatar = request.getParameter("avatar").trim();
                 
-                if(avatar.equals("") || avatar == null ) {
-                    User user = (User) session.getAttribute("currUser");
+                User user = (User) session.getAttribute("currUser");
+                
+                // if user not choose avatar
+                if(avatar.equals("") || avatar == null ) { 
                     
                     avatar = user.getAvatar();
+                } else  { // set new avatar in session
+                    user.setAvatar(avatar);
                 }
                 
                 String sex = request.getParameter("sex");
@@ -153,6 +157,8 @@ public class CVController extends HttpServlet {
                 
                 CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
           
+                request.getSession().setAttribute("currUser", mentorInfo); // set current user with updated info
+                
                 userDAO.updateUserInfo(uid, mentorInfo);
                 cvdao.updateCV(uid, mentorCV);
                 smdao.updateMentorSkill(uid, skill_id);
