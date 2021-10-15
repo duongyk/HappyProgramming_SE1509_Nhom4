@@ -163,7 +163,7 @@
                                                     <h6 class="mb-0">Email</h6>
                                                 </div>
                                                 <div class="col-sm-9 text-secondary">
-                                                    <input type="email" name="email" value="<c:out value="${currUser.getMail()}"></c:out>" required>
+                                                    <input type="email" name="email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" value="<c:out value="${currUser.getMail()}"></c:out>" required>
                                                 </div>
                                             </div>
                                             <hr>

@@ -126,7 +126,7 @@
 
                                         <div class="row">
                                             <div class="col-md-12 form-group">
-                                                <input type="email" maxlength="30" class="input-white" name="email" id="email" placeholder="Email" required>
+                                                <input type="email" maxlength="30" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" class="input-white" name="email" id="email" placeholder="Email" required>
                                             </div>
                                         </div>
                                         <div class="row">
