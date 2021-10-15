@@ -68,6 +68,7 @@
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
                                         <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="UserControllerMap?service=formChangePass">Change pass</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>

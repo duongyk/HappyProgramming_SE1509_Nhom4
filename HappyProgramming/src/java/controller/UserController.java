@@ -109,7 +109,7 @@ public class UserController extends HttpServlet {
                             response.sendRedirect("signIn.jsp");
                         } else {
                             //response.sendRedirect("signIn.jsp");
-                            response.sendRedirect("CVControllerMap?service=createCV&uId="+a.getId());
+                            response.sendRedirect("CVControllerMap?service=createCV&uId="+userDAO.checkAccount(userName).getId());
                         }
                         // khi dang ki hoan tat se cha nguoi dung ve page login
                     } else { //neu co roi se day ve trang sighn up
@@ -118,6 +118,13 @@ public class UserController extends HttpServlet {
                     }
                 }
             }
+            
+            if(service.equals("formChangePass")) {
+                
+                sendDispatcher(request, response, "changePassword.jsp");
+                
+            }
+            
             //change password for user
             if (service.equals("changepass")) {
                 HttpSession session = request.getSession();
@@ -136,6 +143,7 @@ public class UserController extends HttpServlet {
                         request.setAttribute("mess", "confim password must match the new password");
                         sendDispatcher(request, response, "changePassword.jsp");
                     } else {
+                        
                         userDAO.changePass(mail, newPass);
                         sendDispatcher(request, response, "signIn.jsp");
                     }
