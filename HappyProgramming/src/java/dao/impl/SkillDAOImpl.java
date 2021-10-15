@@ -30,6 +30,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
      * Get all Skill of the user in the database
      *
      * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
      */
     @Override
 
@@ -37,7 +38,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+        //get informations from database
         ArrayList<Skill> list = new ArrayList<>();
         String sql = "select * from [Skill]";
         int id;
@@ -54,8 +55,8 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
                 id = rs.getInt("sId");
                 name = rs.getString("sName");
                 detail = rs.getString("sDetail");
-                image = rs.getString("sImage");            
-                s = new Skill(id,name, detail, image);                
+                image = rs.getString("sImage");
+                s = new Skill(id, name, detail, image);
                 list.add(s);
             }
         } catch (Exception ex) {
@@ -67,13 +68,80 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         }
         return list;
     }
-    
+
+    /**
+     * Get all Skill of the user in the database
+     *
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
+     */
+    @Override
+    public int getTotalSkill() {
+        String sql = "select COUNT (*) from dbo.Skill";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        //get informations from database
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+
+        return 0;
+    }
+
+    /**
+     * Get all Skill of the user in the database
+     *
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
+     */
+    @Override
+    public ArrayList<Skill> pagingSkill(int index) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Skill> list = new ArrayList<>();
+        String sql = "select * from \n"
+                + "(select ROW_NUMBER() over (order by sId asc) as r, * from dbo.Skill) \n"
+                + "as x\n"
+                + "where r between ? and ?";
+        //get informations from database
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, index * 8 - 7);
+            ps.setInt(2, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Skill(rs.getInt("sId"), rs.getString("sName"), rs.getString("sDetail"), rs.getString("sImage"), rs.getInt("sStatus")));
+
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+
+    }
+
+    /**
+     * Get all Active Skill of the user in the database
+     *
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
+     */
     @Override
     public ArrayList<Skill> getActiveSkill() throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         ArrayList<Skill> list = new ArrayList<>();
         String sql = "select * from [Skill] where [sStatus] = 1";
         int id;
@@ -83,6 +151,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         String image;
         Skill s;
         try {
+            //get informations from database
             conn = getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -105,6 +174,13 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return list;
     }
 
+    /**
+     * Get all Skill of the user in the database
+     *
+     * @param sName
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
+     */
     @Override
     public ArrayList<Skill> getSkillByName(String sName) throws Exception {
         Connection conn = null;
@@ -119,9 +195,10 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         String image;
         Skill s;
         try {
+            //get informations from database
             conn = getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, "%"+sName+"%");
+            ps.setString(1, "%" + sName + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 id = rs.getInt("sId");
@@ -162,6 +239,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
                 skill.setName(rs.getString("sName"));
                 skill.setDetail(rs.getString("sDetail"));
                 skill.setStatus(rs.getInt("sStatus"));
+                skill.setImage(rs.getString("sImage"));
             }
         } catch (Exception ex) {
             throw ex;
@@ -184,6 +262,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         ResultSet rs = null;
         String sql = "insert into [Skill] values (?,?,?,1)";
         try {
+            //get informations from database
             conn = getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, x.getName());
@@ -200,10 +279,9 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         }
     }
 
-   
     /**
      * find duplicate skill in database
-     * 
+     *
      * @return a boolean object
      */
     @Override
@@ -217,6 +295,12 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return false;
     }
 
+    /**
+     * Update Skill in the database
+     *
+     * @return null
+     * @throws java.lang.Exception
+     */
     @Override
     public void updateSkill(Skill skill) throws Exception {
         Connection conn = null;
@@ -225,6 +309,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         String sql = "UPDATE [Skill] SET [sName] = ? ,[sDetail] = ? ,"
                 + "[sImage] = ? ,[sStatus] = ? WHERE [sId] = ?";
         try {
+            //get informations from database
             conn = getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, skill.getName());
@@ -232,7 +317,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
             ps.setString(3, skill.getImage());
             ps.setInt(4, skill.getStatus());
             ps.setInt(5, skill.getId());
-            
+
             ps.executeUpdate();
         } catch (Exception ex) {
             throw ex;
@@ -243,4 +328,12 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         }
     }
 
+    public static void main(String[] args) {
+        SkillDAOImpl dao = new SkillDAOImpl();
+        ArrayList<Skill> list = dao.pagingSkill(2);
+        for (Skill skill : list) {
+            System.out.println(skill);
+        }
+
+    }
 }

@@ -34,7 +34,8 @@ import javax.servlet.http.HttpServletResponse;
  * Process:<br>
  * - Create new skill (admin)<br>
  * - Skill Management<br>
- *
+ * - Mentee Management<br>
+ * - Mentor Management<br>
  * Exception:<br>
  *
  *
@@ -69,9 +70,13 @@ public class AdminController extends HttpServlet {
                 service = "dashboard";
             }
 
+            //admin dashboard
             if (service.equalsIgnoreCase("dashboard")) {
+                //get total mentee
                 ArrayList<User> menteeList = userDAO.getUserByRole(1);
+                //get total mentor
                 ArrayList<User> mentorList = userDAO.getUserByRole(2);
+                //get total skill
                 ArrayList<Skill> skillList = skillDAO.getAllSkill();
 
                 request.setAttribute("menteeList", menteeList);
@@ -84,7 +89,7 @@ public class AdminController extends HttpServlet {
             if (service.equalsIgnoreCase("createSkill")) {
                 sendDispatcher(request, response, "createSkill.jsp");
             }
-
+            //direct user to update skill page
             if (service.equalsIgnoreCase("updateSkill")) {
                 int sId = Integer.parseInt(request.getParameter("sId"));
                 Skill skill = skillDAO.getSkillById(sId);
@@ -94,34 +99,55 @@ public class AdminController extends HttpServlet {
             }
             //admin manage skills
             if (service.equalsIgnoreCase("skillManage")) {
-                //list all skills that have in database
-                ArrayList<Skill> sList = skillDAO.getAllSkill();
+                //get index page 
+                String indexPage = request.getParameter("index");
+                // index page always start at 1
+                if (indexPage == null) {
+                    indexPage = "1";
+                }
+                int index = Integer.parseInt(indexPage);
+                int count = skillDAO.getTotalSkill();
+                //calculate total page for paging
+                int endPage = count / 8;
+                if (count % 8 != 0) {
+                    endPage++;
+                }
+                ArrayList<Skill> list = skillDAO.pagingSkill(index);
                 ArrayList<User> menteeList = userDAO.getMenteeListSorted();
-                request.setAttribute("sList", sList);
+                ArrayList<Skill> sList = skillDAO.getAllSkill();
+                //send informations to skillManagement.jsp
+                request.setAttribute("sList", list);
+                request.setAttribute("sList2", sList);
+                request.setAttribute("endPage", endPage);
+                request.setAttribute("tag", index);
                 request.setAttribute("menteeList", menteeList);
-                sendDispatcher(request, response, "skillManagement.jsp");
+                request.getRequestDispatcher("skillManagement.jsp").forward(request, response);
+
             }
 
-            //admin manage skills
+            //admin manage mentee (sorted by name)
             if (service.equalsIgnoreCase("filterName")) {
                 //list all skills that have in database
                 ArrayList<User> menteeList = userDAO.getMenteeListSorted();
-
+                //get total study hours from db
                 int totalHour = requestDAO.getTotalHour();
+                //get total skill from db
                 int totalSkill = requestSkillDAO.getTotalRequest();
-
+                //send informations to menteeManagement.jsp
                 request.setAttribute("menteeList", menteeList);
                 request.setAttribute("totalHour", totalHour);
                 request.setAttribute("totalSkill", totalSkill);
                 sendDispatcher(request, response, "menteeManagement.jsp");
             }
-
+            //admin manage mentee  
             if (service.equalsIgnoreCase("menteeManage")) {
                 //list all User that are Mentee have in database
                 ArrayList<User> menteeList = userDAO.getUserByRole(1);
+                //get total study hours from db
                 int totalHour = requestDAO.getTotalHour();
+                //get total skill from db
                 int totalSkill = requestSkillDAO.getTotalRequest();
-
+                //send informations to menteeManagement.jsp
                 request.setAttribute("totalHour", totalHour);
                 request.setAttribute("totalSkill", totalSkill);
                 request.setAttribute("menteeList", menteeList);

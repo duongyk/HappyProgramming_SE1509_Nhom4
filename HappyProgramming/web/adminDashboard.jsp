@@ -42,12 +42,7 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: Vesperr - v4.6.0
-        * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
+ 
     </head>
 
     <body>
@@ -58,8 +53,7 @@
 
                 <div class="logo">
                     <h1><a href="AdminControllerMap?service=dashboard">Vesperr</a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+                    
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
@@ -207,40 +201,37 @@
                                     <div class="col-md-12 grid-margin stretch-card">
                                         <div class="card">
                                             <div class="card-body">
-                                                <p class="card-title mb-0">Top Products</p>
+                                                <p class="card-title mb-0">Top Mentee</p>
                                                 <div class="table-responsive">
                                                     <table class="table table-striped table-borderless">
                                                         <thead>
                                                             <tr>
-                                                                <th>Product</th>
-                                                                <th>Price</th>
-                                                                <th>Date</th>
-                                                                <th>Status</th>
+                                                                <th>Full Name</th>
+                                                                <th>User Name</th>
+                                                                <th>Study Hours</th>
+                                                              
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Search Engine Marketing</td>
-                                                                <td class="font-weight-bold">$362</td>
-                                                                <td>21 Sep 2018</td>
+                                                                <td>GiangNVT</td>
+                                                                <td class="font-weight-bold">mentee03</td>
                                                                 <td class="font-weight-medium">
-                                                                    <div class="badge badge-success">Completed</div>
+                                                                    <div class="badge badge-success">167</div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Search Engine Optimization</td>
-                                                                <td class="font-weight-bold">$116</td>
-                                                                <td>13 Jun 2018</td>
+                                                                <td>DuongVV</td>
+                                                                <td class="font-weight-bold">mentee02</td>
                                                                 <td class="font-weight-medium">
-                                                                    <div class="badge badge-success">Completed</div>
+                                                                    <div class="badge badge-primary">80</div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Display Advertising</td>
-                                                                <td class="font-weight-bold">$551</td>
-                                                                <td>28 Sep 2018</td>
+                                                                <td>ToanPK</td>
+                                                                <td class="font-weight-bold">mentee04</td>
                                                                 <td class="font-weight-medium">
-                                                                    <div class="badge badge-warning">Pending</div>
+                                                                    <div class="badge badge-warning">67</div>
                                                                 </td>
                                                             </tr>
                                                         </tbody>

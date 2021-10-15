@@ -23,26 +23,26 @@ public interface SkillDAO {
     /**
      * Get
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      * @throws Exception
      */
     public ArrayList<Skill> getAllSkill() throws Exception;
-    
+
     /**
      * Get
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      * @throws Exception
      */
     public ArrayList<Skill> getActiveSkill() throws Exception;
-    
+
     /**
      * Get
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      * @throws Exception
      */
     public ArrayList<Skill> getSkillByName(String sName) throws Exception;
@@ -50,8 +50,8 @@ public interface SkillDAO {
     /**
      * Get
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      * @throws Exception
      */
     public Skill getSkillById(int sId) throws Exception;
@@ -59,8 +59,8 @@ public interface SkillDAO {
     /**
      * Get
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      * @throws Exception
      */
     public boolean findDupSkill(String sName) throws Exception;
@@ -68,12 +68,12 @@ public interface SkillDAO {
     /**
      * Get
      *
-     * @param 
-     * @return 
+     * @param
+     * @return
      * @throws Exception
      */
     public void insert(Skill x) throws Exception;
-    
+
     /**
      * Update a Skill
      *
@@ -81,4 +81,8 @@ public interface SkillDAO {
      * @throws Exception
      */
     public void updateSkill(Skill skill) throws Exception;
+
+    public int getTotalSkill();
+
+    public ArrayList<Skill> pagingSkill(int index);
 }

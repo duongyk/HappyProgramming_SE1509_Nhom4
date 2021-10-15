@@ -20,16 +20,13 @@
         <meta content="" name="description">
         <meta content="" name="keywords">
 
-        <!-- Favicons -->
         <link href="img/favicon.png" rel="icon">
         <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-        <!-- Google Fonts -->
+
         <link
             href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
             rel="stylesheet">
-
-        <!-- Vendor CSS Files -->
         <link href="vendor/aos/aos.css" rel="stylesheet">
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -52,8 +49,7 @@
 
                 <div class="logo">
                     <h1><a href="index.jsp">Vesperr</a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
@@ -62,8 +58,8 @@
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <c:choose>
-                                    <c:when test="${sessionScope.currUser.getRole()==2}">
+                                    <c:choose>
+                                        <c:when test="${sessionScope.currUser.getRole()==2}">
                                         <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=1">Inviting Request</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=2">Following Request</a>
@@ -109,9 +105,7 @@
                         <h1 data-aos="fade-up">Make it work <br>
                             Make it right<br>
                             Make it fast.</h1>
-                        <h2 data-aos="fade-up" data-aos-delay="400" style="  margin-top: 40px;  font-size: 18px;">Vesperr is a system
-                            which mainly allows mentors, mentees <br> and other actors to connect online and mentees to learn
-                            programming.
+                        <h2 data-aos="fade-up" data-aos-delay="400" style="  margin-top: 40px;  font-size: 18px;">
                         </h2>
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
@@ -135,21 +129,21 @@
                     <div class="row content">
                         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore
-                                magna aliqua.
+                                Vesperr is a system which mainly allows mentors, mentees
+                                and other actors to connect online and mentees to learn programming.
+
                             </p>
                             <ul>
-                                <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-                                <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-                                <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
+                                <li><i class="ri-check-double-line"></i> All free</li>
+                                <li><i class="ri-check-double-line"></i> Easy to use and manipulate</li>
+                                <li><i class="ri-check-double-line"></i>Provide quality courses</li>
                             </ul>
                         </div>
                         <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-up" data-aos-delay="300">
                             <p>
-                                was founded in 2020 with a vision of providing life-transforming learning experiences to learners around
-                                the world. Today, POTOUB is a global online learning platform that offers anyone, anywhere, access to
-                                online courses and degrees from leading universities and companies. POTOUB received B Corp certification
+                                We was founded in 2020 with a vision of providing life-transforming learning experiences to learners around
+                                the world. Today, Vespper is a global online learning platform that offers anyone, anywhere, access to
+                                online courses and degrees from leading universities and companies. Vespper received B Corp certification
                                 in February 2021, which means that we have a legal duty not only to our shareholders, but to also make a
                                 positive impact on society more broadly, as we continue our efforts to reduce barriers to world-class
                                 education for all.
@@ -166,14 +160,15 @@
 
                     <div class="section-title" data-aos="fade-up">
                         <h2>Services</h2>
-                        <p>Magnam dolores commodi suscipit eius consequatur ex aliquid fug</p>
+
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
                                 <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                                <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+                                <h4 class="title"><a href="">
+                                        Study</a></h4>
                                 <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                             </div>
                         </div>
@@ -181,7 +176,7 @@
                         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                             <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
                                 <div class="icon"><i class="bx bx-file"></i></div>
-                                <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+                                <h4 class="title"><a href="">Study</a></h4>
                                 <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
                             </div>
                         </div>
@@ -189,7 +184,7 @@
                         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                             <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
                                 <div class="icon"><i class="bx bx-tachometer"></i></div>
-                                <h4 class="title"><a href="">Magni Dolores</a></h4>
+                                <h4 class="title"><a href="">Study</a></h4>
                                 <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
                             </div>
                         </div>
@@ -197,7 +192,7 @@
                         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                             <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
                                 <div class="icon"><i class="bx bx-world"></i></div>
-                                <h4 class="title"><a href="">Nemo Enim</a></h4>
+                                <h4 class="title"><a href="">Study</a></h4>
                                 <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
                             </div>
                         </div>
@@ -218,12 +213,11 @@
                     <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                         <div class="col-lg-5">
                             <i class="ri-question-line"></i>
-                            <h4>Non consectetur a erat nam at lectus urna duis?</h4>
+                            <h4>Why i cant login into my account?</h4>
                         </div>
                         <div class="col-lg-7">
                             <p>
-                                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida.
-                                Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                                Check your username and password
                             </p>
                         </div>
                     </div><!-- End F.A.Q Item-->
@@ -231,13 +225,11 @@
                     <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
                         <div class="col-lg-5">
                             <i class="ri-question-line"></i>
-                            <h4>Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?</h4>
+                            <h4>How can I view all my request?</h4>
                         </div>
                         <div class="col-lg-7">
                             <p>
-                                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec
-                                ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit
-                                ullamcorper dignissim.
+                                Click into "Request"
                             </p>
                         </div>
                     </div><!-- End F.A.Q Item-->
@@ -316,11 +308,7 @@
                             &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
                         </div>
                         <div class="credits">
-                            <!-- All the links in the footer should remain intact. -->
-                            <!-- You can delete the links only if you purchased the pro version. -->
-                            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
-                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                          
                         </div>
                     </div>
                     <div class="col-lg-6">

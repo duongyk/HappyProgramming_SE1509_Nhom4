@@ -47,12 +47,7 @@
         <link href="css/login.css" rel="stylesheet">
         <link href="css/createRequest.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: Vesperr - v4.6.0
-        * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
+       
     </head>
 
     <body>
@@ -122,7 +117,7 @@
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="text" name="sName" value="<c:out value="${skill.name}"></c:out>"
-                                                       pattern="^[^\s]+(\s+[^\s]+)*$" title="Must not contain only spaces, must not start or end by a space " required="required">
+                                                       pattern=".*\S+.*" title="Must not contain only space " required="required">
                                                 </div>
                                             </div>
                                         </div>
@@ -130,7 +125,7 @@
                                             <div class="name">Detail</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <textarea class="input-white" placeholder="Detail" name="sDetail"   required="required" rows="3" cols="55" maxlength="100"> <c:out value="${skill.detail}" ></c:out> </textarea>
+                                                    <textarea class="input-white" placeholder="Detail" name="sDetail"   required="required" rows="3" cols="55" maxlength="150"> <c:out value="${skill.detail}" ></c:out> </textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,8 +134,7 @@
                                             <div class="value">
                                                 <div class="input-group">
                                                     <input id="avatarURL" onchange="changeImage()" class="input--style-5" value="<c:out value="${skill.image}"></c:out>"
-                                                           type="file" name="sImage" required="required" pattern="^(https?|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]" title="
-                                                           Please enter a valid photo URL">
+                                                           type="file" name="sImage"  >
                                                 </div>
                                             </div>
                                         </div>
@@ -171,19 +165,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                              <div class="row row-refine">
-
-                                                <div class="col-12">
-                                                    <div class="input-group-desc">
-                                                        <input id="avatarURL" class="input-white" type="file" onchange="changeImage()" type="file" name="sImage" value="">
-                                                    </div>
-                                                    <div class="input-group-desc">
-                                                        <img id="image" style="width: 162px;" src="img/<c:out value="${skill.getImage()}"></c:out>" alt="" data-image-width="1280" data-image-height="1280">
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
                                     <!-- <input id="avatarURL" form="thisform" onchange="changeImage()" type="file" name="avatar" value="" style="width: 162px;" > -->
                                     <div style="margin-left: 230px;">
                                         <button class="btn btn--radius-2 btn--red" type="submit">Update</button>

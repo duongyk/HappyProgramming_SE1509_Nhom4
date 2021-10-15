@@ -199,7 +199,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>ID</th>
-                                                                    <th>Full Name</th>
+                                                                    <th><a style="color: black" href="AdminControllerMap?service=filterName"> Full Name </a></th>
                                                                     <th>Username</th>
                                                                 </tr>
                                                             </thead>
