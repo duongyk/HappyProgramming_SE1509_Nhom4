@@ -192,6 +192,7 @@
                                             </div>
                                         </div>
                                         <hr>
+                                        
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <button class="btn btn-info" type="submit">Update</button>

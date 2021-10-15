@@ -172,14 +172,54 @@
                                             </div>
                                             <div class="col-sm-9 text-secondary">
                                             <c:out value="${user.gender}"></c:out>
+                                            </div>
+                                        </div>                                       
+                                        <hr>
+                                    <c:choose>
+                                        <c:when test="${currUser.getRole()==2}">
+                                        <div class="row" style="margin: 15px;">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Profession</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                            <c:out value="${cv.getProfession()}"></c:out>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <a class="btn btn-info " href="profileUpdate.jsp">Edit</a>
+                                        <hr>
+                                        <div class="row" style="margin: 15px;">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Profession Intro</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                            <c:out value="${cv.getProfessionIntro()}"></c:out>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <hr>
+                                        <div class="row" style="margin: 15px;">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Achievement</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                            <c:out value="${cv.getAchivement()}"></c:out>
+                                            </div>
+                                        </div>
+                                        <hr>  
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <a class="btn btn-info " href="CVControllerMap?service=updateCV&uid=${currUser.getId()}">Edit</a>
+                                            </div>
+                                        </div>
+                                        
+                                        </c:when>
+                                        
+                                        <c:otherwise>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <a class="btn btn-info " href="profileUpdate.jsp">Edit</a>
+                                            </div>
+                                        </div>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
 

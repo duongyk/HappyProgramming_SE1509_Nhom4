@@ -5,10 +5,12 @@
  */
 package controller;
 
+import dao.CVDAO;
 import dao.EmailService;
 import dao.RatingDAO;
 import dao.RequestDAO;
 import dao.UserDAO;
+import dao.impl.CVDAOImpl;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.impl.RatingDAOImpl;
 import dao.impl.UserDAOImpl;
 import dao.impl.RequestDAOImpl;
+import entity.CV;
 import entity.Request;
 import java.sql.Date;
 import javax.servlet.http.HttpSession;
@@ -160,7 +163,16 @@ public class UserController extends HttpServlet {
                 int uId = Integer.parseInt(request.getParameter("uId"));
                 User user = userDAO.getUserById(uId);
                 request.setAttribute("user", user);
-
+                
+                // GET CV INFORMATION IF USER IS MENTOR
+                if(user.getRole()==2) {
+                    CVDAO cvdao = new CVDAOImpl();
+                    
+                    CV cv  = cvdao.getMentorCV(uId);
+                    
+                    request.setAttribute("cv", cv);
+                }
+                
                 sendDispatcher(request, response, "userProfile.jsp");
             }
 
