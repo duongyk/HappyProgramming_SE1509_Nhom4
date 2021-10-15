@@ -65,12 +65,23 @@
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
-                                </li>
+                                <c:choose>
+                                    <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=1">Inviting Request</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=2">Following Request</a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
                                         <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="UserControllerMap?service=formChangePass">Change pass</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
@@ -111,19 +122,26 @@
                         <div class="col-md-4 mb-3">
                             <div class="card">
                                 <div class="card-body">
+                                <c:choose>
+                                        <c:when test="${sessionScope.currUser.getRole()==2}">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                                         <div class="mt-3">
-                                            <h4> <c:out value="${user.fullname}"></c:out> </h4>
-                                            <c:choose>
-                                                <c:when test="${sessionScope.currUser.getRole()==2}">
-                                                    <p class="text-secondary mb-1">Full Stack Developer</p>
-                                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                                    <a><button class="btn btn-primary">Create</button></a>
-                                                </c:when>
-                                            </c:choose>
+                                            <h4> <c:out value="${user.fullname}"></c:out> </h4>                                        
+                                            <p class="text-secondary mb-1"><c:out value="${cv.getProfession()}"></c:out></p>
+                                            <!--<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>-->
                                         </div>
                                     </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                        <div class="mt-3">
+                                            <h4> <c:out value="${user.fullname}"></c:out> </h4>                                                               
+                                        </div>
+                                    </div>   
+                                        </c:otherwise>
+                                </c:choose>
                                 </div>
                             </div>
                         </div>
@@ -172,14 +190,54 @@
                                             </div>
                                             <div class="col-sm-9 text-secondary">
                                             <c:out value="${user.gender}"></c:out>
+                                            </div>
+                                        </div>                                       
+                                        <hr>
+                                    <c:choose>
+                                        <c:when test="${currUser.getRole()==2}">
+                                        <div class="row" style="margin: 15px;">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Profession</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                            <c:out value="${cv.getProfession()}"></c:out>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <a class="btn btn-info " href="profileUpdate.jsp">Edit</a>
+                                        <hr>
+                                        <div class="row" style="margin: 15px;">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Profession Intro</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                            <c:out value="${cv.getProfessionIntro()}"></c:out>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <hr>
+                                        <div class="row" style="margin: 15px;">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Achievement</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                            <c:out value="${cv.getAchivement()}"></c:out>
+                                            </div>
+                                        </div>
+                                        <hr>  
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <a class="btn btn-info " href="CVControllerMap?service=updateCV&uid=${currUser.getId()}">Edit</a>
+                                            </div>
+                                        </div>
+                                        
+                                        </c:when>
+                                        
+                                        <c:otherwise>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <a class="btn btn-info " href="profileUpdate.jsp">Edit</a>
+                                            </div>
+                                        </div>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
 

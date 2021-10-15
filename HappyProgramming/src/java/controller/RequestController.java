@@ -208,9 +208,15 @@ public class RequestController extends HttpServlet {
                 // get status from URL
                 int status = Integer.parseInt(request.getParameter("status"));
 
-                // get Mentor ID from Sessiom
-                int uid = (Integer) session.getAttribute("uId");
-
+                // get Mentor ID from Session
+                User user = (User) session.getAttribute("currUser");
+                int uid = 0;
+                if(user==null)  { // return to sign in page
+                    response.sendRedirect("signIn.jsp");
+                } else { 
+                    uid = user.getId();
+                }
+                
                 // Get all Request from database
                 RequestDAO requestdao = new RequestDAOImpl();
 

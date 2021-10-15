@@ -157,7 +157,7 @@ public class CVController extends HttpServlet {
                 
                 // ----------------------------------------
                 
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("UserControllerMap?service=profile&uId="+uid);
                 //response.sendRedirect("demoMentorCV.jsp?uid="+uid);
                 
             }

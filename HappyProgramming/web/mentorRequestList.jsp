@@ -33,48 +33,58 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
+        <header id="header" class="fixed-top d-flex align-items-center" style="background-color:#e2f5fde0;">
+            <div class="container d-flex align-items-center justify-content-between">
 
-      <div class="logo">
-        <h1><a href="index.html">Vesperr</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
-      </div>
+                <div class="logo">
+                    <h1><a href="index.jsp">Vesperr</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+                </div>
 
-      <nav id="navbar-main" class="navbar-main">
-        <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar-main -->
+                <nav id="navbar-main" class="navbar-main">
+                    <ul>
+                        <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                            <c:choose>
+                                <c:when test="${sessionScope.currUser!=null}">
+                                <c:choose>
+                                    <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=1">Inviting Request</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=2">Following Request</a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+                                <li class="dropdown getstarted scrollto ">
+                                    <span style="color: white; padding: 0;">User</span>
+                                    <ul>
+                                        <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="UserControllerMap?service=formChangePass">Change pass</a></li>
+                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                    </ul>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
+                                        <span>Sign in</span></a>
+                                    <ul>
+                                        <li><a href="signUp.jsp">Sign up</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar-main -->
 
-    </div>
-  </header><!-- End Header -->
+            </div>
+        </header><!-- End Header -->
 
   <main id="main">
     <!-- ======= Breadcrumbs Section ======= -->

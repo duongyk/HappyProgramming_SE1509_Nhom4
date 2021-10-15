@@ -5,10 +5,12 @@
  */
 package controller;
 
+import dao.CVDAO;
 import dao.EmailService;
 import dao.RatingDAO;
 import dao.RequestDAO;
 import dao.UserDAO;
+import dao.impl.CVDAOImpl;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.impl.RatingDAOImpl;
 import dao.impl.UserDAOImpl;
 import dao.impl.RequestDAOImpl;
+import entity.CV;
 import entity.Request;
 import java.sql.Date;
 import javax.servlet.http.HttpSession;
@@ -109,7 +112,7 @@ public class UserController extends HttpServlet {
                             response.sendRedirect("signIn.jsp");
                         } else {
                             //response.sendRedirect("signIn.jsp");
-                            response.sendRedirect("CVControllerMap?service=createCV&uId="+a.getId());
+                            response.sendRedirect("CVControllerMap?service=createCV&uId="+userDAO.checkAccount(userName).getId());
                         }
                         // khi dang ki hoan tat se cha nguoi dung ve page login
                     } else { //neu co roi se day ve trang sighn up
@@ -118,6 +121,13 @@ public class UserController extends HttpServlet {
                     }
                 }
             }
+            
+            if(service.equals("formChangePass")) {
+                
+                sendDispatcher(request, response, "changePassword.jsp");
+                
+            }
+            
             //change password for user
             if (service.equals("changepass")) {
                 HttpSession session = request.getSession();
@@ -136,6 +146,7 @@ public class UserController extends HttpServlet {
                         request.setAttribute("mess", "confim password must match the new password");
                         sendDispatcher(request, response, "changePassword.jsp");
                     } else {
+                        
                         userDAO.changePass(mail, newPass);
                         sendDispatcher(request, response, "signIn.jsp");
                     }
@@ -152,7 +163,16 @@ public class UserController extends HttpServlet {
                 int uId = Integer.parseInt(request.getParameter("uId"));
                 User user = userDAO.getUserById(uId);
                 request.setAttribute("user", user);
-
+                
+                // GET CV INFORMATION IF USER IS MENTOR
+                if(user.getRole()==2) {
+                    CVDAO cvdao = new CVDAOImpl();
+                    
+                    CV cv  = cvdao.getMentorCV(uId);
+                    
+                    request.setAttribute("cv", cv);
+                }
+                
                 sendDispatcher(request, response, "userProfile.jsp");
             }
 
