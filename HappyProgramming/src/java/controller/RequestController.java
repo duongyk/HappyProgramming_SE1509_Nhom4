@@ -250,7 +250,31 @@ public class RequestController extends HttpServlet {
 
                 requestdao.updateStatusRequest(rid, status);
 
-                sendDispatcher(request, response, "/demoMentorList.jsp");
+                //sendDispatcher(request, response, "/demoMentorList.jsp");
+                if(status==2){ 
+                    // if accept run to following request
+                    response.sendRedirect("RequestControllerMap?service=viewMentorRequest&status=2");
+                } else if (status==4) {
+                    // if reject run to inviting request
+                    response.sendRedirect("RequestControllerMap?service=viewMentorRequest&status=1");
+                }
+            }
+            
+            
+            /**
+             * Service viewRequestMentor: View detail of a Request for Mentor
+             */
+            if (service.equalsIgnoreCase("viewRequestMentor")) {
+                // get request
+                int rId = Integer.parseInt(request.getParameter("rId"));
+                Request req = requestDAO.getRequestById(rId);
+
+                // get request skill
+                ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
+
+                request.setAttribute("sList", sList);
+                request.setAttribute("req", req);
+                sendDispatcher(request, response, "viewRequestMentor.jsp");
             }
         }
     }

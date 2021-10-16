@@ -178,7 +178,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    <!--
                                     <div class="form-row m-b-55">
                                         <div class="name">Avatar</div>
                                         <div class="value">
@@ -196,7 +196,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    -->
                                     <div class="form-row m-b-55">
                                         <div class="name">Choose Skills</div>
                                         <div class="value">
@@ -214,7 +214,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h4 id="checkboxtitle"></h4>
+                                            <h4 id="checkboxtitle" style="color:red;"></h4>
                                         </div>
                                     </div>
                                     

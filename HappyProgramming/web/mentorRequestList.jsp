@@ -129,10 +129,17 @@
                   <h4 style="">Mentee: <c:out value="${request.getFrom().getUsername()}"></c:out></h4>
                   <h4>DeadlineDate: <c:out value="${request.getDeadlineDate()}"></c:out></h4>                
                   <!--<h4>DeadlineHour: <c:out value="${request.getDeadlineHour()}"></c:out></h4>-->
-                  <c:if test="${request.getStatus()==1}">
-                      <h4><a class="btn btn-primary" style="background-color: #009900;" href="RequestControllerMap?service=mentorUpdateStatus&rid=<c:out value="${request.getId()}"></c:out>&status=2">Accept</a>
+                  <c:choose>
+                      <c:when test="${request.getStatus()==1}">
+                          <h4><a class="btn btn-primary" style="background-color: #009900;" href="RequestControllerMap?service=mentorUpdateStatus&rid=<c:out value="${request.getId()}"></c:out>&status=2">Accept</a>
                       <a class="btn btn-primary" style="background-color: #ff0000;" href="RequestControllerMap?service=mentorUpdateStatus&rid=<c:out value="${request.getId()}"></c:out>&status=4">Reject</a></h4>
-                  </c:if>
+                      <h4><a class="btn btn-primary" style="background-color: #3498db;" href="RequestControllerMap?service=viewRequestMentor&rId=<c:out value="${request.getId()}"></c:out>">Request Detail</a></h4>
+                      </c:when>
+                      <c:otherwise>
+                          <h4><a class="btn btn-primary" style="background-color: #3498db;" href="RequestControllerMap?service=viewRequestMentor&rId=<c:out value="${request.getId()}"></c:out>">Request Detail</a></h4>
+                      </c:otherwise>
+                  </c:choose>           
+                  
               </div>
             </div>
           </div>

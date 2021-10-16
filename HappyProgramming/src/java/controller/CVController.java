@@ -189,7 +189,7 @@ public class CVController extends HttpServlet {
             // when user sign ưp as mentor, redirect to CV form
             if(service.equals("createCV")) {
                 
-                int uid = Integer.parseInt(request.getParameter("uid"));
+                int uid = Integer.parseInt(request.getParameter("uId"));
                 
                 request.setAttribute("uid", uid);
                 
@@ -230,10 +230,10 @@ public class CVController extends HttpServlet {
                 CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
                 
                 cvdao.insertCV(uid, mentorCV);
-                
+  
                 smdao.updateMentorSkill(uid, skill_id);
                 
-                response.sendRedirect("SignIn.jsp");
+                response.sendRedirect("signIn.jsp");
                 //response.sendRedirect("demoMentorList.jsp");
             }
            //when user sign in ,access the list all mentor and view CV of the mentor
