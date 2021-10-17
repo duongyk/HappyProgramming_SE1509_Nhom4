@@ -9,11 +9,13 @@
  */
 package controller;
 
+import dao.RatingDAO;
 import dao.RequestDAO;
 import dao.RequestSkillDAO;
 import dao.SkillDAO;
 import dao.UserDAO;
 import dao.UserSkillDAO;
+import dao.impl.RatingDAOImpl;
 import entity.Request;
 import entity.User;
 import java.io.IOException;
@@ -366,16 +368,51 @@ public class RequestController extends HttpServlet {
 
                 ArrayList<Request> requestList = requestdao.getRequestListBy_uId_And_Status(uid, status);
 
+                // get request statistic
+            
+                int invited = requestdao.get_Mentor_TotalRequestByStatus(uid, 1);
+                int following = requestdao.get_Mentor_TotalRequestByStatus(uid, 2);
+                int completed = requestdao.get_Mentor_TotalRequestByStatus(uid, 3);
+                int canceled = requestdao.get_Mentor_TotalRequestByStatus(uid, 4);
+                
+                int total = invited+following+completed+canceled;
+                
+                double canceledpercentage = (double) (canceled/total);
+                double completedpercentage = (double) (completed/total);
+                
+                // get mentor average rating
+                RatingDAO ratingdao = new RatingDAOImpl();
+                String rating = ratingdao.getAvgRate(uid);
+                
+                //set attributes
                 request.setAttribute("requestlist", requestList);
 
-                if (status == 1) {
-                    request.setAttribute("status", "Inviting");
-                } else if (status == 2) {
-                    request.setAttribute("status", "Following");
-                } else if (status == 3) {
-                    request.setAttribute("status", "Done");
-                } else if (status == 4) {
-                    request.setAttribute("status", "Canceled");
+                request.setAttribute("invited", invited);
+                request.setAttribute("following", following);
+                request.setAttribute("completed", completed);
+                request.setAttribute("canceled", canceled);
+                
+                request.setAttribute("canceledpercentage", canceledpercentage);
+                request.setAttribute("completedpercentage", completedpercentage);
+                
+                request.setAttribute("rating", rating);
+                
+                
+                switch (status) {
+                    case 1:
+                        request.setAttribute("status", "Inviting");
+                        break;
+                    case 2:
+                        request.setAttribute("status", "Following");
+                        break;
+                    case 3:
+                        request.setAttribute("status", "Done");
+                        break;
+                    case 4:
+                        request.setAttribute("status", "Canceled");
+                        break;
+                    default:
+                        break;
                 }
 
                 sendDispatcher(request, response, "/mentorRequestList.jsp");

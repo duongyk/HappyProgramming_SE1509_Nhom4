@@ -727,4 +727,38 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return total;
     }
 
+    /**
+     * Get Total Request of the Mentor by the status
+     *
+     * @return a Integer number
+     * @throws Exception
+     */
+    @Override
+    public int get_Mentor_TotalRequestByStatus(int mentorId, int status) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT COUNT([toId]) as 'totalRequest' FROM [Request] "
+                + "WHERE [toId] = ? and [rStatus] = ?";
+
+        int totalRequest = 0;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mentorId);
+            ps.setInt(2, status);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalRequest = rs.getInt("totalRequest");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return totalRequest;
+    }
+
 }

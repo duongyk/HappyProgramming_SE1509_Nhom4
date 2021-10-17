@@ -27,7 +27,7 @@
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/popup.css" rel="stylesheet">
-
+  <link href="css/requestByMe.css" rel="stylesheet">
 </head>
 
 <body>
@@ -107,6 +107,30 @@
         </div>
       </div>
         -->
+        <div class="row">
+            <div class="col-md-2">
+                <%--<div></div> 
+                <input class="popup" name="modal" type="checkbox" id="modal">
+                <%-- Statistic reuquest button --%>
+                <label for="modal" class="label-show-modal">Statistic Mentor Request</label>
+                <div class="modal-show" style="z-index: 3;">
+                    <div class="modal-show-inner">
+                        <label for="modal">&#10006;</label>
+                        <h2 class="text-center">Statistic Mentor Request</h2>
+                        <p class="text-left">Invited Request      : ${invited}</p>
+                        <p class="text-left">Following Request    : ${following}</p>
+                        <p class="text-left">Canceled Request     : ${canceled}</p>
+                        <p class="text-left">Canceled Percentage  : ${canceledpercentage} %</p>
+                        <p class="text-left">Completed Request    : ${completed}</p>
+                        <p class="text-left">Completed Percentage : ${completedpercentage} %</p>
+                        <p class="text-left">Rating               : ${rating}</p> 
+                    </div>
+                </div>
+            </div>
+    
+        </div>        
+        
+        
       <div class="container">
         <div class="section-title" data-aos="fade-up">
             <h2>All <c:out value="${status}" ></c:out> request</h2>

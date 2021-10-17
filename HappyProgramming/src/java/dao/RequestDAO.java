@@ -199,4 +199,15 @@ public interface RequestDAO {
      * @throws Exception
      */
     public int getTotalFilter(int mId,int sId, int status) throws Exception;
+    
+    /**
+     * Get the number of request with the same status of the user
+     *
+     * @param mentorId it is an Integer number
+     * @param status it is an Integer number
+     * @return an Integer number
+     * 
+     * @throws Exception
+     */
+    public int get_Mentor_TotalRequestByStatus(int mentorId, int status) throws Exception;
 }
