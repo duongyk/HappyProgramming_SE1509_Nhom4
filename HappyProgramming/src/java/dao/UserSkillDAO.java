@@ -42,10 +42,25 @@ public interface UserSkillDAO {
     /**
      * Update new Skills for the Mentor in the database
      *
-     * @param uId it is an int number
+     * @param uId it is an an Integer number
      * @param skill_ids list of id of new skills
      * @return 1 if update success, 0 if fail
      */
     public int updateMentorSkill(int uId, String[] skill_ids) throws Exception;
     
+    /**
+     * Get all Skill of the User(Mentee/Mentor) in the database
+     *
+     * @param uId is an Integer number
+     * @return list of all skills of the mentor
+     */
+    public ArrayList<Skill> getAllSkillUser(int uId) throws Exception;
+    
+    /**
+     * Update new Skills of the User in the database
+     *
+     * @param uId it is an an Integer number
+     * @param sIdList is a list of Integer number
+     */
+    public void updateUserSkill(int uId, ArrayList<Integer> sIdList) throws Exception;
 }

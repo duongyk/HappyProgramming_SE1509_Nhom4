@@ -5,7 +5,7 @@
  
   Record of change:<br>
   DATE          Version    Author           DESCRIPTION<br>
-
+  06-10-2021    1.0        DuongVV          First Deploy<br>
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -54,8 +54,6 @@
 
                 <div class="logo">
                     <h1><a href="index.jsp">Vesperr</a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
@@ -82,10 +80,9 @@
 
             </div>
         </header>
-
         <%-- End Header --%>
+        
         <%-- Main --%>
-
         <main id="main">
 
             <section class="breadcrumbs">
@@ -129,7 +126,7 @@
                                                             <div class="input-group">
                                                                 <%-- Message for checkSpace --%>
                                                                 <p id="text-space" style="display:none; color:red">Content contains only space</p>
-                                                                <p id="text-space-1" style="color:white;">aaaaa</p>
+                                                                <p id="text-space-1" style="color:white;">Valid input</p>
                                                             </div>
                                                     </div>
 
@@ -218,7 +215,7 @@
                                                                 </div>
                                                                 <%-- Message for checkbox --%>
                                                                 <p id="text" style="display:none; color:red">Please choose at least 1 skill and at max 3 skills</p>
-                                                                <p id="text-1" style="color:white;">aaaaa</p>
+                                                                <p id="text-1" style="color:white;">Valid input</p>
                                                             </div>
                                                         </div>
 

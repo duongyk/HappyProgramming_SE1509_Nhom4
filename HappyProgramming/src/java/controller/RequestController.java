@@ -13,6 +13,7 @@ import dao.RequestDAO;
 import dao.RequestSkillDAO;
 import dao.SkillDAO;
 import dao.UserDAO;
+import dao.UserSkillDAO;
 import entity.Request;
 import entity.User;
 import java.io.IOException;
@@ -29,6 +30,7 @@ import dao.impl.RequestDAOImpl;
 import dao.impl.RequestSkillDAOImpl;
 import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
+import dao.impl.UserSkillDAOImpl;
 import entity.Skill;
 import java.sql.Date;
 import javax.servlet.http.HttpSession;
@@ -67,7 +69,7 @@ public class RequestController extends HttpServlet {
             RequestDAO requestDAO = new RequestDAOImpl();
             RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
             SkillDAO skillDAO = new SkillDAOImpl();
-
+            UserSkillDAO usDAO = new UserSkillDAOImpl();
             HttpSession session = request.getSession();
 
             if (service == null) {
@@ -79,16 +81,156 @@ public class RequestController extends HttpServlet {
              * (Mentee/mentor) and Statistic requests
              */
             if (service.equalsIgnoreCase("listRequestByMe")) {
-                //get current user
+                // Get current user
                 User user = (User) request.getSession().getAttribute("currUser");
-                //get list request of the user
+                // Get index page 
+                String indexPage = request.getParameter("index");
+                if (indexPage == null) {
+                    indexPage = "1";
+                }
+                int index = Integer.parseInt(indexPage);
+                // Get list all Request of the user
                 ArrayList<Request> listRequest = requestDAO.getListByMe(user);
-                // get statistic requests
+                int count = listRequest.size();
+                // Calculate total page for paging
+                int endPage = count / 8;
+                if (count % 8 != 0) {
+                    endPage++;
+                }
+                // Get list Request by page
+                ArrayList<Request> rList = requestDAO.listByMePaging(index, user.getId());
+                // Get statistic requests
                 ArrayList<Integer> statistic = requestDAO.getStatistic(user.getId());
+                // Get all Skill for Filter
+                ArrayList<Skill> sList = skillDAO.getActiveSkill();
 
-                request.setAttribute("listRequest", listRequest);
+                request.setAttribute("sList", sList);
+                request.setAttribute("rList", rList);
+                request.setAttribute("endPage", endPage);
+                request.setAttribute("index", index);
                 request.setAttribute("statistic", statistic);
                 sendDispatcher(request, response, "listRequestByMe.jsp");
+            }
+
+            /**
+             * Service filerListByMe: Get list request of the user using Filter
+             */
+            if (service.equalsIgnoreCase("filerListByMe")) {
+                // Get current user
+                User user = (User) request.getSession().getAttribute("currUser");
+                // Get skill ID for Filter
+                int sId = Integer.parseInt(request.getParameter("sId"));
+                // Get Status for Filter
+                int status = Integer.parseInt(request.getParameter("status"));
+                
+                // Filter by Skill
+                if (sId != 0 && status == 0) {
+                    // Get index page 
+                    String indexPage = request.getParameter("index");
+                    if (indexPage == null) {
+                        indexPage = "1";
+                    }
+                    int index = Integer.parseInt(indexPage);
+                    // Get list Request after Filter 
+                    ArrayList<Request> rList = requestDAO.listByMeFilterSkillPaging(index, user.getId(), sId);
+
+                    // Calculate total page for paginig
+                    int count = requestDAO.getTotalFilterSkill(user.getId(), sId);
+                    int endPage = count / 8;
+                    if (count % 8 != 0) {
+                        endPage++;
+                    }
+                    // Get all Skill for Filter
+                    ArrayList<Skill> sList = skillDAO.getActiveSkill();
+
+                    request.setAttribute("sList", sList);
+                    request.setAttribute("endPage", endPage);
+                    request.setAttribute("index", index);
+                    request.setAttribute("rList", rList);
+                    sendDispatcher(request, response, "listRequestByMe.jsp");
+
+                    // Filter by Status
+                } else if (sId == 0 && status !=0) {
+                    // Get index page 
+                    String indexPage = request.getParameter("index");
+                    if (indexPage == null) {
+                        indexPage = "1";
+                    }
+                    int index = Integer.parseInt(indexPage);
+                    // Get list Request after Filter 
+                    ArrayList<Request> rList = requestDAO.listByMeFilterStatusPaging(index, user.getId(), status);
+
+                    // Calculate total page for paginig
+                    int count = requestDAO.getTotalFilterStatus(user.getId(), status);
+                    int endPage = count / 8;
+                    if (count % 8 != 0) {
+                        endPage++;
+                    }
+                    // Get all Skill for Filter
+                    ArrayList<Skill> sList = skillDAO.getActiveSkill();
+
+                    request.setAttribute("rList", sList);
+                    request.setAttribute("endPage", endPage);
+                    request.setAttribute("index", index);
+                    request.setAttribute("rList", rList);
+                    sendDispatcher(request, response, "listRequestByMe.jsp");
+
+                    //Filter by both Skill and Status
+                } else if (sId != 0 && status != 0) {
+                    // Get index page 
+                    String indexPage = request.getParameter("index");
+                    if (indexPage == null) {
+                        indexPage = "1";
+                    }
+                    int index = Integer.parseInt(indexPage);
+                    // Get list Request after Filter 
+                    ArrayList<Request> rList = requestDAO.listByMeFilterPaging(index, user.getId(), sId, status);
+
+                    // Calculate total page for paginig
+                    int count = requestDAO.getTotalFilter(user.getId(), sId, status);
+                    int endPage = count / 8;
+                    if (count % 8 != 0) {
+                        endPage++;
+                    }
+                    // Get all Skill for Filter
+                    ArrayList<Skill> sList = skillDAO.getActiveSkill();
+
+                    request.setAttribute("sList", sList);
+                    request.setAttribute("endPage", endPage);
+                    request.setAttribute("index", index);
+                    request.setAttribute("rList", rList);
+                    sendDispatcher(request, response, "listRequestByMe.jsp");
+
+                    // No Filter
+                } else {
+                    // Get index page 
+                    String indexPage = request.getParameter("index");
+                    if (indexPage == null) {
+                        indexPage = "1";
+                    }
+                    int index = Integer.parseInt(indexPage);
+                    // Get list all Request of the user
+                    ArrayList<Request> listRequest = requestDAO.getListByMe(user);
+                    int count = listRequest.size();
+                    // Calculate total page for paging
+                    int endPage = count / 8;
+                    if (count % 8 != 0) {
+                        endPage++;
+                    }
+                    // Get list Request by page
+                    ArrayList<Request> rList = requestDAO.listByMePaging(index, user.getId());
+                    // Get statistic requests
+                    ArrayList<Integer> statistic = requestDAO.getStatistic(user.getId());
+                    // Get all Skill for Filter
+                    ArrayList<Skill> sList = skillDAO.getActiveSkill();
+
+                    request.setAttribute("sList", sList);
+                    request.setAttribute("rList", rList);
+                    request.setAttribute("endPage", endPage);
+                    request.setAttribute("index", index);
+                    request.setAttribute("statistic", statistic);
+                    sendDispatcher(request, response, "listRequestByMe.jsp");
+                }
             }
 
             /* load create request screen */
@@ -141,7 +283,8 @@ public class RequestController extends HttpServlet {
             }
 
             /**
-             * Service viewRequest: Show form to edit detail of a Request
+             * Service updateRequestForm: Show form to update detail of a
+             * Request
              */
             if (service.equalsIgnoreCase("updateRequestForm")) {
                 // get request
@@ -168,7 +311,7 @@ public class RequestController extends HttpServlet {
             }
 
             /**
-             * Service viewRequest: Edit detail of a Request
+             * Service updateRequest: Update detail of a Request
              */
             if (service.equalsIgnoreCase("updateRequest")) {
                 // Get request ID
@@ -181,7 +324,7 @@ public class RequestController extends HttpServlet {
                 int status = Integer.parseInt(request.getParameter("status"));
                 String skillIds[] = request.getParameterValues("skill");
                 ArrayList<Integer> sIdList = new ArrayList<>();
-                
+
                 if (skillIds != null) {
                     for (String id : skillIds) {
                         int sId = Integer.parseInt(id);
@@ -197,8 +340,9 @@ public class RequestController extends HttpServlet {
                 // Update Request
                 Request req = new Request(rId, title, content, deadlineDate, deadlineHour, status);
                 requestDAO.updateRequest(req);
+                // Update RequestSkill
                 requestSkillDAO.updateRequestSkill(rId, sIdList);
-
+                request.setAttribute("messSucc", "Update successful!");
                 sendDispatcher(request, response, "RequestControllerMap?service=viewRequest&rId=" + rId);
             }
 
@@ -211,12 +355,12 @@ public class RequestController extends HttpServlet {
                 // get Mentor ID from Session
                 User user = (User) session.getAttribute("currUser");
                 int uid = 0;
-                if(user==null)  { // return to sign in page
+                if (user == null) { // return to sign in page
                     response.sendRedirect("signIn.jsp");
-                } else { 
+                } else {
                     uid = user.getId();
                 }
-                
+
                 // Get all Request from database
                 RequestDAO requestdao = new RequestDAOImpl();
 
@@ -251,16 +395,15 @@ public class RequestController extends HttpServlet {
                 requestdao.updateStatusRequest(rid, status);
 
                 //sendDispatcher(request, response, "/demoMentorList.jsp");
-                if(status==2){ 
+                if (status == 2) {
                     // if accept run to following request
                     response.sendRedirect("RequestControllerMap?service=viewMentorRequest&status=2");
-                } else if (status==4) {
+                } else if (status == 4) {
                     // if reject run to inviting request
                     response.sendRedirect("RequestControllerMap?service=viewMentorRequest&status=1");
                 }
             }
-            
-            
+
             /**
              * Service viewRequestMentor: View detail of a Request for Mentor
              */

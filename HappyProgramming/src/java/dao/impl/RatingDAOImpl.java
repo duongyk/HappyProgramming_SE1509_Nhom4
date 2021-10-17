@@ -37,12 +37,12 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
     @Override
     public ArrayList<Rating> getRating(User user) throws Exception {
         Connection conn = null;
-        PreparedStatement ps = null; /* Prepared statement for executing sql queries */
-        ResultSet rs = null;/* Result set returned by the sqlserver */
+        PreparedStatement ps = null; 
+        ResultSet rs = null;
 
         ArrayList<Rating> listRating = new ArrayList<>();
         UserDAOImpl userDAO = new UserDAOImpl();
-        String sql = "SELECT * FROM [Rating] WHERE [toId] = ?"; /* Sql query */
+        String sql = "SELECT * FROM [Rating] WHERE [toId] = ?";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
@@ -106,6 +106,7 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
      * Get average rating of the Mentor
      *
      * @return a String .It is a <code>java.lang.String</code> object
+     * @throws java.lang.Exception
      */
     @Override
     public String getAvgRate(int mId) throws Exception {

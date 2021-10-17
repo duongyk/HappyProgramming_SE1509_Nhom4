@@ -134,4 +134,75 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
         return status;
     }
     
+    /**
+     * Get all Skill of the Mentor in the database
+     *
+     * @param uId of the mentor
+     * @return list of all skills of the mentor
+     */
+    @Override
+    public ArrayList<Skill> getAllSkillUser(int uId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<Skill> sList = new ArrayList<>();
+        SkillDAOImpl skillDAO = new SkillDAOImpl();
+
+        Skill skill = new Skill();
+        String sql = "SELECT * FROM UserSkill where [uId] = ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, uId);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                skill = skillDAO.getSkillById(rs.getInt("sId"));
+                sList.add(skill);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return sList;
+    }
+
+    /**
+     * Get all Skill of the Mentor in the database
+     *
+     * @param uId of the mentor
+     * @return list of all skills of the mentor
+     */
+    @Override
+    public void updateUserSkill(int uId, ArrayList<Integer> sIdList) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String sqlDelete = "DELETE FROM [UserSkill] where [uId] = ?";
+        String sqlInsert = "INSERT INTO [UserSkill] ([uId],[sId],[usStatus])"
+                    + " VALUES (?,?,1)";
+        try {
+            conn = getConnection();
+            // Delete
+            ps = conn.prepareStatement(sqlDelete);
+            ps.executeUpdate();
+            // Insert new
+            ps = conn.prepareStatement(sqlInsert);
+            ps.setInt(1, uId);
+            for (int sId : sIdList) {
+                ps.setInt(2, sId);
+                ps.executeUpdate();
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+    } 
 }

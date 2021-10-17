@@ -9,7 +9,7 @@ body{
     position: fixed;
 }
 
-input{
+.popup{
     visibility: hidden;
 }
 .label-show-modal {
@@ -39,7 +39,6 @@ input{
     margin-left: 17px;
     border: solid black;
     border-width: 2px 2px 2px 2px;
-
 }
 .modal-show {
     background: rgba(0,0,0,0.7);

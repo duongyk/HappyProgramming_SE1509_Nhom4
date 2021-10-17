@@ -5,9 +5,8 @@
  
   Record of change:<br>
   DATE          Version    Author           DESCRIPTION<br>
-
+  20-09-2021    1.0        DuongVV          First Deploy<br>
 --%>
-<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -91,39 +90,79 @@
                 </div>
             </section>
             <section id="team" class="team section-bg">
-                <div><a href="RequestControllerMap?service=loadRequest"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
-                <input name="modal" type="checkbox" id="modal">
-                <%-- Statistic reuquest button --%>
-                <label for="modal" class="label-show-modal">Statistic Request</label>
-                <div class="modal-show" style="z-index: 3;">
-                    <div class="modal-show-inner">
-                        <label for="modal">&#10006;</label>
-                        <h2 class="text-center">Statistic Request</h2>
-                        <p class="text-left">Total Request: ${statistic[0]}</p>
-                        <p class="text-left">Total Mentor: ${statistic[1]}</p>
-                        <p class="text-left">Total Hour: ${statistic[2]}</p>
-                        <p class="text-left">Total Pending Request: ${statistic[3]}</p>
-                        <p class="text-left">Total In-process Request: ${statistic[4]}</p>
-                        <p class="text-left">Total Done Request: ${statistic[5]}</p>
-                        <p class="text-left">Total Canceled Request: ${statistic[6]}</p>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div><a href="RequestControllerMap?service=loadRequest"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
+                        <input class="popup" name="modal" type="checkbox" id="modal">
+                        <%-- Statistic reuquest button --%>
+                        <label for="modal" class="label-show-modal">Statistic Request</label>
+                        <div class="modal-show" style="z-index: 3;">
+                            <div class="modal-show-inner">
+                                <label for="modal">&#10006;</label>
+                                <h2 class="text-center">Statistic Request</h2>
+                                <p class="text-left">Total Request: ${statistic[0]}</p>
+                                <p class="text-left">Total Mentor: ${statistic[1]}</p>
+                                <p class="text-left">Total Hour: ${statistic[2]}</p>
+                                <p class="text-left">Total Pending Request: ${statistic[3]}</p>
+                                <p class="text-left">Total In-process Request: ${statistic[4]}</p>
+                                <p class="text-left">Total Done Request: ${statistic[5]}</p>
+                                <p class="text-left">Total Canceled Request: ${statistic[6]}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <%-- Title --%>
-                <div class="container">
-                    <div class="section-title" >
+                    <%-- Title  --%>
+                    <div class="col-md-8 section-title">
                         <h2 class="">List Request by me</h2>
                     </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <form class="form" action="RequestControllerMap?service=filerListByMe" method="POST">
+                    <input type="hidden" name="filter" value="1">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <input type="hidden" value="">
+                        <div class="col-md-3"></div>
+                        <%-- Dropdown for Skill Filter  --%>
+                        <div class="col-md-2">
+                            <label class="label" for="skill">Skill   </label>
+                            <select name="sId">
+                                <option id="skill" value="0" selected>Choose..</option>
+                                <c:forEach items="${sList}" var="skill">
+                                    <option id="skill" value="${skill.getId()}"><c:out value="${skill.getName()}"></c:out></option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <%-- Seacrh Name box  --%>
+                        <div class="col-md-2">
+                            <label class="label" for="skill">Status   </label>
+                            <select name="status">
+                                <option id="skill" value="0" selected>Choose..</option>
+                                <option id="skill" value="1">Pending</option>
+                                <option id="skill" value="2">Processing</option>
+                                <option id="skill" value="3">Done</option>
+                                <option id="skill" value="4">Canceled</option>
+                            </select>
+                        </div>
+                        <%-- Search button --%>
+                        <div class="col-md-1">
+                            <input class="search" type="submit" value="Search">
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                </form>            
+                <div class="container">
                     <%-- List Request--%>
                     <div class="row">
                         <%-- Check if list Request empty or not --%>
                         <c:choose>
                             <%-- List Request empty --%>
-                            <c:when test="${empty listRequest}">
+                            <c:when test="${empty rList}">
                                 <h1 class="no-req">  No Request yet! </h1>
                             </c:when>
                             <c:otherwise>
                                 <%-- List Request not empty --%>
-                                <c:forEach items="${listRequest}" var="request">
+                                <c:forEach items="${rList}" var="request">
                                     <div class="col-lg-3 col-md-6">
                                         <div class="member box-display" data-aos="fade-up" data-aos-delay="100">
                                             <div class="member-img">
@@ -155,6 +194,42 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
+                    <%-- Paging --%>
+                    <c:if test="${!empty rList}">
+                        <div class="row">  
+                            <div class="paging">
+                                <%-- Previous --%>
+                                <c:choose>
+                                    <c:when test="${index>1}">
+                                        <a class="previous" href="RequestControllerMap?service=listRequestByMe&index=${index-1}"><  </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="previous disabled" href="RequestControllerMap?service=listRequestByMe&index=${index-1}"><</a>
+                                    </c:otherwise>
+                                </c:choose>
+                                <%-- Page index --%>
+                                <c:forEach begin="1" end="${endPage}" var="page">
+                                    <c:choose>
+                                        <c:when test="${index==page}">
+                                            <a class="choose disabled" href="RequestControllerMap?service=listRequestByMe&index=${page}"> ${page}</a> 
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="RequestControllerMap?service=listRequestByMe&index=${page}"> ${page}</a> 
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <%-- Next --%>
+                                <c:choose>
+                                    <c:when test="${index!=endPage}">
+                                        <a class="next" href="RequestControllerMap?service=listRequestByMe&index=${index+1}">  ></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="next disabled" href="RequestControllerMap?service=listRequestByMe&index=${index+1}">></a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div> 
+                        </div>
+                    </c:if>
                 </div>
             </section>
         </main>

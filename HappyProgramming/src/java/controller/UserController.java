@@ -9,6 +9,7 @@ import dao.CVDAO;
 import dao.EmailService;
 import dao.RatingDAO;
 import dao.RequestDAO;
+import dao.SkillDAO;
 import dao.UserDAO;
 import dao.impl.CVDAOImpl;
 import entity.User;
@@ -25,8 +26,10 @@ import javax.servlet.http.HttpServletResponse;
 import dao.impl.RatingDAOImpl;
 import dao.impl.UserDAOImpl;
 import dao.impl.RequestDAOImpl;
+import dao.impl.SkillDAOImpl;
 import entity.CV;
 import entity.Request;
+import entity.Skill;
 import java.sql.Date;
 import javax.servlet.http.HttpSession;
 import util.SendEmail;
@@ -57,6 +60,7 @@ public class UserController extends HttpServlet {
             UserDAO userDAO = new UserDAOImpl();
             RatingDAO ratingDAO = new RatingDAOImpl();
             RequestDAO requestDAO = new RequestDAOImpl();
+            SkillDAO skillDAO = new SkillDAOImpl();
 
             if (service == null) {
                 service = "login";
@@ -112,7 +116,7 @@ public class UserController extends HttpServlet {
                             response.sendRedirect("signIn.jsp");
                         } else {
                             //response.sendRedirect("signIn.jsp");
-                            response.sendRedirect("CVControllerMap?service=createCV&uId="+userDAO.checkAccount(userName).getId());
+                            response.sendRedirect("CVControllerMap?service=createCV&uId=" + userDAO.checkAccount(userName).getId());
                         }
                         // khi dang ki hoan tat se cha nguoi dung ve page login
                     } else { //neu co roi se day ve trang sighn up
@@ -121,13 +125,13 @@ public class UserController extends HttpServlet {
                     }
                 }
             }
-            
-            if(service.equals("formChangePass")) {
-                
+
+            if (service.equals("formChangePass")) {
+
                 sendDispatcher(request, response, "changePassword.jsp");
-                
+
             }
-            
+
             //change password for user
             if (service.equals("changepass")) {
                 HttpSession session = request.getSession();
@@ -146,7 +150,7 @@ public class UserController extends HttpServlet {
                         request.setAttribute("mess", "confim password must match the new password");
                         sendDispatcher(request, response, "changePassword.jsp");
                     } else {
-                        
+
                         userDAO.changePass(mail, newPass);
                         sendDispatcher(request, response, "signIn.jsp");
                     }
@@ -163,16 +167,16 @@ public class UserController extends HttpServlet {
                 int uId = Integer.parseInt(request.getParameter("uId"));
                 User user = userDAO.getUserById(uId);
                 request.setAttribute("user", user);
-                
+
                 // GET CV INFORMATION IF USER IS MENTOR
-                if(user.getRole()==2) {
+                if (user.getRole() == 2) {
                     CVDAO cvdao = new CVDAOImpl();
-                    
-                    CV cv  = cvdao.getMentorCV(uId);
-                    
+
+                    CV cv = cvdao.getMentorCV(uId);
+
                     request.setAttribute("cv", cv);
                 }
-                
+
                 sendDispatcher(request, response, "userProfile.jsp");
             }
 
@@ -184,10 +188,149 @@ public class UserController extends HttpServlet {
                 sendDispatcher(request, response, "profile.jsp");
             }
 
+            /**
+             * Service listAllMentor: View all Mentor
+             */
             if (service.equalsIgnoreCase("listAllMentor")) {
-                ArrayList<User> mList = userDAO.getUserByRole(2);
+                // Get all Mentor
+                ArrayList<User> mListAll = userDAO.getUserByRole(2);
+                // Get index page 
+                String indexPage = request.getParameter("index");
+                if (indexPage == null) {
+                    indexPage = "1";
+                }
+                int index = Integer.parseInt(indexPage);
+                // Get list request of the user
+                ArrayList<User> mList = userDAO.getUserByRolePaging(index, 2);
+                int count = mListAll.size();
+                // Calculate total page for paging
+                int endPage = count / 8;
+                if (count % 8 != 0) {
+                    endPage++;
+                }
+                // Get all Skill for Filter
+                ArrayList<Skill> sList = skillDAO.getActiveSkill();
+
+                request.setAttribute("sList", sList);
+                request.setAttribute("endPage", endPage);
+                request.setAttribute("index", index);
                 request.setAttribute("mList", mList);
                 sendDispatcher(request, response, "allMentor.jsp");
+            }
+
+            /**
+             * Service filterAllMentor: View all Mentor by filter
+             */
+            if (service.equalsIgnoreCase("filterAllMentor")) {
+                // Get skill ID for Filter
+                int sId = Integer.parseInt(request.getParameter("sId"));
+                // Get name for Search
+                String name = request.getParameter("name");
+                // Filter by Skill
+                if (sId != 0 && name.equalsIgnoreCase("")) {
+                    // Get index page 
+                    String indexPage = request.getParameter("index");
+                    if (indexPage == null) {
+                        indexPage = "1";
+                    }
+                    int index = Integer.parseInt(indexPage);
+                    // Get list Mentor after Filter 
+                    ArrayList<User> mList = userDAO.getUserByRoleFilterPaging(index, index, sId);
+
+                    // Calculate total page for paginig
+                    int count = userDAO.getTotalFilterSkill(index, sId);
+                    int endPage = count / 8;
+                    if (count % 8 != 0) {
+                        endPage++;
+                    }
+                    // Get all Skill for Filter
+                    ArrayList<Skill> sList = skillDAO.getActiveSkill();
+
+                    request.setAttribute("sList", sList);
+                    request.setAttribute("endPage", endPage);
+                    request.setAttribute("index", index);
+                    request.setAttribute("mList", mList);
+                    sendDispatcher(request, response, "allMentor.jsp");
+
+                    // Filter by Name
+                } else if (sId == 0 && !name.equalsIgnoreCase("")) {
+                    // Get index page 
+                    String indexPage = request.getParameter("index");
+                    if (indexPage == null) {
+                        indexPage = "1";
+                    }
+                    int index = Integer.parseInt(indexPage);
+                    // Get list Mentor after Filter 
+                    ArrayList<User> mList = userDAO.getUserByRoleFilterPaging(index, 2, name);
+
+                    // Calculate total page for paginig
+                    int count = userDAO.getTotalFilterName(2, name);
+                    int endPage = count / 8;
+                    if (count % 8 != 0) {
+                        endPage++;
+                    }
+                    // Get all Skill for Filter
+                    ArrayList<Skill> sList = skillDAO.getActiveSkill();
+
+                    request.setAttribute("sList", sList);
+                    request.setAttribute("endPage", endPage);
+                    request.setAttribute("index", index);
+                    request.setAttribute("mList", mList);
+                    sendDispatcher(request, response, "allMentor.jsp");
+
+                    //Filter by both Name and Skill
+                } else if (sId != 0 && !name.equalsIgnoreCase("")) {
+                    // Get index page 
+                    String indexPage = request.getParameter("index");
+                    if (indexPage == null) {
+                        indexPage = "1";
+                    }
+                    int index = Integer.parseInt(indexPage);
+                    // Get list Mentor after Filter 
+                    ArrayList<User> mList = userDAO.getUserByRoleFilterPaging(index, index, sId, name);
+
+                    // Calculate total page for paginig
+                    int count = userDAO.getTotalFilterNameSkill(index, sId, name);
+                    int endPage = count / 8;
+                    if (count % 8 != 0) {
+                        endPage++;
+                    }
+                    // Get all Skill for Filter
+                    ArrayList<Skill> sList = skillDAO.getActiveSkill();
+                    
+                    request.setAttribute("sList", sList);
+                    request.setAttribute("endPage", endPage);
+                    request.setAttribute("index", index);
+                    request.setAttribute("mList", mList);
+                    sendDispatcher(request, response, "allMentor.jsp");
+
+                    // No Filter
+                } else {
+                    // Get all Mentor
+                    ArrayList<User> mListAll = userDAO.getUserByRole(2);
+                    // Get index page 
+                    String indexPage = request.getParameter("index");
+                    if (indexPage == null) {
+                        indexPage = "1";
+                    }
+                    int index = Integer.parseInt(indexPage);
+                    // Get list request of the user
+                    ArrayList<User> mList = userDAO.getUserByRolePaging(index, 2);
+                    // Calculate total page for paging
+                    int count = mListAll.size();
+                    int endPage = count / 8;
+                    if (count % 8 != 0) {
+                        endPage++;
+                    }
+                    // Get all Skill for Filter
+                    ArrayList<Skill> sList = skillDAO.getActiveSkill();
+
+                    request.setAttribute("sList", sList);
+                    request.setAttribute("endPage", endPage);
+                    request.setAttribute("index", index);
+                    request.setAttribute("mList", mList);
+                    sendDispatcher(request, response, "allMentor.jsp");
+                }
             }
 
             // send a verify code to user mail
@@ -262,14 +405,14 @@ public class UserController extends HttpServlet {
                 String avatar = request.getParameter("avatar").trim();
                 User s;
                 if (avatar.isEmpty()) {
-                    s =(User) request.getSession().getAttribute("currUser");
+                    s = (User) request.getSession().getAttribute("currUser");
                     avatar = s.getAvatar();
                 }
 
                 User user = new User(id, fullname, email, phone, dob, gender, avatar);
                 userDAO.updateUser(user); // update user info into DB
                 request.getSession().setAttribute("currUser", user); // set current user with updated info
-                sendDispatcher(request, response, "UserControllerMap?service=profile&uId="+id);
+                sendDispatcher(request, response, "UserControllerMap?service=profile&uId=" + id);
             }
         }
     }

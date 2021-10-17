@@ -147,6 +147,12 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return requestList;
     }
 
+    /**
+     * Get Total Request of the Mentee
+     *
+     * @return a Integer number
+     * @throws Exception
+     */
     @Override
     public int getTotalRequest(int mId) throws Exception {
         Connection conn = null;
@@ -174,6 +180,12 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return totalRequest;
     }
 
+    /**
+     * Get Total Request of the Mentee by the status
+     *
+     * @return a Integer number
+     * @throws Exception
+     */
     @Override
     public int getTotalRequestByStatus(int mId, int status) throws Exception {
         Connection conn = null;
@@ -202,6 +214,12 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return totalRequest;
     }
 
+    /**
+     * Get Total Hour of the Mentee
+     *
+     * @return a Integer number
+     * @throws Exception
+     */
     @Override
     public int getTotalHourById(int mId) throws Exception {
         Connection conn = null;
@@ -229,6 +247,12 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return totalHour;
     }
 
+    /**
+     * Get Total Request of all the Mentee
+     *
+     * @return a Integer number
+     * @throws Exception
+     */
     @Override
     public int getTotalHour() throws Exception {
         Connection conn = null;
@@ -254,6 +278,12 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return totalHour;
     }
 
+    /**
+     * Get Total number of the Mentor
+     *
+     * @return a Integer number
+     * @throws Exception
+     */
     @Override
     public int getTotalMentor(int mId) throws Exception {
         Connection conn = null;
@@ -281,6 +311,11 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return totalMentor;
     }
 
+    /**
+     * Update the Request
+     *
+     * @throws Exception
+     */
     @Override
     public void updateRequest(Request req) throws Exception {
         Connection conn = null;
@@ -308,6 +343,11 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         }
     }
 
+    /**
+     * Update Request 's status
+     *
+     * @throws Exception
+     */
     @Override
     public void updateStatusRequest(int rId, int status) throws
             Exception {
@@ -331,6 +371,12 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         }
     }
 
+    /**
+     * Get a Request by ID
+     *
+     * @return a <code>Request</code> object
+     * @throws Exception
+     */
     @Override
     public Request getRequestById(int rId) throws Exception {
         Connection conn = null;
@@ -363,9 +409,16 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return null;
     }
 
+    /**
+     * Get statistic Request of a Mentee
+     *
+     * @return a list of Integer number
+     * @throws Exception
+     */
     @Override
     public ArrayList<Integer> getStatistic(int mId) throws Exception {
         ArrayList<Integer> statistic = new ArrayList<>();
+
         int totalRequest = getTotalRequest(mId);
         statistic.add(totalRequest);
         int totalMentor = getTotalMentor(mId);
@@ -381,6 +434,297 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         int totalCanceled = getTotalRequestByStatus(mId, 4);
         statistic.add(totalCanceled);
         return statistic;
+    }
+
+    /**
+     * Get Request of a Mentee by page
+     *
+     * @return a list of <code>Request</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<Request> listByMePaging(int index, int mId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        UserDAO userDAO = new UserDAOImpl();
+        ArrayList<Request> list = new ArrayList<>();
+        Request req = null;
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY [rId])"
+                + " AS [RowNum], * FROM [Request] WHERE [fromId] = ?) a WHERE "
+                + "RowNum BETWEEN ? and ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mId);
+            ps.setInt(2, index * 8 - 7);
+            ps.setInt(3, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                req = new Request(rs.getInt("rId"),
+                        rs.getString("title"), rs.getString("content"),
+                        userDAO.getUserById(rs.getInt("fromId")),
+                        userDAO.getUserById(rs.getInt("toId")),
+                        rs.getDate("deadlineDate"), rs.getInt("deadlineHour"),
+                        rs.getInt("rStatus"));
+                list.add(req);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
+     * Get Request of a Mentee by page after Filter by Skill
+     *
+     * @return a list of <code>Request</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<Request> listByMeFilterSkillPaging(int index, int mId, int sId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        UserDAO userDAO = new UserDAOImpl();
+        ArrayList<Request> list = new ArrayList<>();
+        Request req = null;
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY  "
+                + "r.[rId]) AS [RowNum], r.[rId], r.[title], r.[content],"
+                + " r.[fromId], r.[toId], r.[deadlineDate], r.[deadlineHour],"
+                + " r.[rStatus]  FROM [Request] r INNER JOIN [RequestSkill] rs"
+                + " ON r.[rId] = rs.[rId] WHERE r.[fromId] =? and rs.[sId] = ?)"
+                + " a WHERE RowNum BETWEEN ? and ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mId);
+            ps.setInt(2, sId);
+            ps.setInt(3, index * 8 - 7);
+            ps.setInt(4, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                req = new Request(rs.getInt("rId"),
+                        rs.getString("title"), rs.getString("content"),
+                        userDAO.getUserById(rs.getInt("fromId")),
+                        userDAO.getUserById(rs.getInt("toId")),
+                        rs.getDate("deadlineDate"), rs.getInt("deadlineHour"),
+                        rs.getInt("rStatus"));
+                list.add(req);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
+     * Get total number of Request of a Mentee by page after Filter by Skill
+     *
+     * @return an Integer number
+     * @throws Exception
+     */
+    @Override
+    public int getTotalFilterSkill(int mId, int sId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        int total = 0;
+        String sql = "SELECT COUNT(r.[rId]) as 'total' FROM [Request] r "
+                + "INNER JOIN [RequestSkill] rs ON r.[rId] = rs.[rId] "
+                + "WHERE r.[fromId] = ? and rs.[sId] = ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mId);
+            ps.setInt(2, sId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return total;
+    }
+
+    /**
+     * Get Request of a Mentee by page after Filter by Status
+     *
+     * @return a list of <code>Request</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<Request> listByMeFilterStatusPaging(int index, int mId, int status) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        UserDAO userDAO = new UserDAOImpl();
+        ArrayList<Request> list = new ArrayList<>();
+        Request req = null;
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY [rId])"
+                + " AS [RowNum], * FROM [Request] WHERE [fromId] = ? and"
+                + " [rStatus] = ?) a WHERE RowNum BETWEEN ? and ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mId);
+            ps.setInt(2, status);
+            ps.setInt(3, index * 8 - 7);
+            ps.setInt(4, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                req = new Request(rs.getInt("rId"),
+                        rs.getString("title"), rs.getString("content"),
+                        userDAO.getUserById(rs.getInt("fromId")),
+                        userDAO.getUserById(rs.getInt("toId")),
+                        rs.getDate("deadlineDate"), rs.getInt("deadlineHour"),
+                        rs.getInt("rStatus"));
+                list.add(req);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
+     * Get total number of Request of a Mentee by page after Filter by Status
+     * 
+     * @return an Integer number
+     * @throws Exception
+     */
+    @Override
+    public int getTotalFilterStatus(int mId, int status) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        int total = 0;
+        String sql = "SELECT COUNT([rId]) as 'total' FROM [Request] WHERE "
+                + "[fromId] = ? AND [rStatus] = ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mId);
+            ps.setInt(2, status);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return total;
+    }
+
+    /**
+     * Get Request of a Mentee by page after Filter by Skill and Status
+     *
+     * @return a list of <code>Request</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<Request> listByMeFilterPaging(int index, int mId, int sId, int status) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        UserDAO userDAO = new UserDAOImpl();
+        ArrayList<Request> list = new ArrayList<>();
+        Request req = null;
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY "
+                + "r.[rId]) AS [RowNum], r.[rId], r.[title], r.[content], "
+                + "r.[fromId], r.[toId], r.[deadlineDate], r.[deadlineHour],"
+                + " r.[rStatus] FROM [Request] r INNER JOIN [RequestSkill] rs"
+                + " ON r.[rId] = rs.[rId] WHERE r.[fromId] = ? and rs.[sId] = ?"
+                + " and r.[rStatus] = ?) a WHERE RowNum BETWEEN ? and ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mId);
+            ps.setInt(2, sId);
+            ps.setInt(3, status);
+            ps.setInt(4, index * 8 - 7);
+            ps.setInt(5, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                req = new Request(rs.getInt("rId"),
+                        rs.getString("title"), rs.getString("content"),
+                        userDAO.getUserById(rs.getInt("fromId")),
+                        userDAO.getUserById(rs.getInt("toId")),
+                        rs.getDate("deadlineDate"), rs.getInt("deadlineHour"),
+                        rs.getInt("rStatus"));
+                list.add(req);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
+     * Get total number of Request of a Mentee by page after Filter by Skill and Status
+     *
+     * @return an Integer number
+     * @throws Exception
+     */
+    @Override
+    public int getTotalFilter(int mId, int sId, int status) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        int total = 0;
+        String sql = "SELECT COUNT(r.[rId]) as 'total' FROM [Request] r "
+                + "INNER JOIN [RequestSkill] rs ON r.[rId] = rs.[rId] "
+                + "WHERE r.[fromId] = ? and rs.[sId] = ? and r.[rStatus] = ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mId);
+            ps.setInt(2, sId);
+            ps.setInt(3, status);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return total;
     }
 
 }

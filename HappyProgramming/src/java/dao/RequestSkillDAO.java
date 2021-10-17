@@ -9,6 +9,7 @@
  */
 package dao;
 
+import entity.Request;
 import entity.Skill;
 import java.util.ArrayList;
 

@@ -124,4 +124,79 @@ public interface RequestDAO {
      * @throws Exception
      */
     public ArrayList<Integer> getStatistic(int mId) throws Exception;
+    
+    /**
+     * Get Request of a Mentee by page
+     *
+     * @param index it is an Integer number
+     * @param mId it is an Integer number
+     * @return a list of <code>Request</code> object
+     * @throws Exception
+     */
+    public ArrayList<Request> listByMePaging(int index, int mId) throws Exception;
+    
+    /**
+     * Get Request of a Mentee by page after Filter by Skill
+     *
+     * @param index it is an Integer number
+     * @param mId it is an Integer number
+     * @param sId it is an Integer number
+     * @return a list of <code>Request</code> object
+     * @throws Exception
+     */
+    public ArrayList<Request> listByMeFilterSkillPaging(int index, int mId, int sId) throws Exception;
+    
+    /**
+     * Get total number of Request of a Mentee by page after Filter by Skill
+     *
+     * @param mId it is an Integer number
+     * @param sId it is an Integer number
+     * @return a Integer number
+     * @throws Exception
+     */
+    public int getTotalFilterSkill(int mId, int sId) throws Exception;
+    
+    /**
+     * Get Request of a Mentee by page after Filter by Status
+     *
+     * @param index it is an Integer number
+     * @param mId it is an Integer number
+     * @param status it is an Integer number
+     * @return a list of <code>Request</code> object
+     * @throws Exception
+     */
+    public ArrayList<Request> listByMeFilterStatusPaging(int index, int mId, int status) throws Exception;
+    
+    /**
+     * Get total number of Request of a Mentee by page after Filter by Status
+     *
+     * @param mId it is an Integer number
+     * @param status it is an Integer number
+     * @return a Integer number
+     * @throws Exception
+     */
+    public int getTotalFilterStatus(int mId, int status) throws Exception;
+    
+    /**
+     * Get Request of a Mentee by page after Filter by Skill and Status
+     *
+     * @param index it is an Integer number
+     * @param mId it is an Integer number
+     * @param sId it is an Integer number
+     * @param status it is an Integer number
+     * @return a list of <code>Request</code> object
+     * @throws Exception
+     */
+    public ArrayList<Request> listByMeFilterPaging(int index, int mId, int sId, int status) throws Exception;
+    
+    /**
+     * Get total number of Request of a Mentee by page after Filter by Skill and Status
+     *
+     * @param mId it is an Integer number
+     * @param sId it is an Integer number
+     * @param status it is an Integer number
+     * @return a Integer number
+     * @throws Exception
+     */
+    public int getTotalFilter(int mId,int sId, int status) throws Exception;
 }

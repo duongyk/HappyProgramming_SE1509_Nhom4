@@ -42,6 +42,8 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
         <link href="css/rating.css" rel="stylesheet">
+        
+        <script type="text/javascript" src="js/checkSpace.js" ></script>
     </head>
 
     <body>
@@ -137,26 +139,31 @@
                                     <div>
                                         <%-- Get Rate by star --%>
                                         <div class="rate">
-                                            <input type="radio" id="star5" name="rate" value="1" required/>
-                                            <label for="star5" title="1 star"></label>
-                                            <input type="radio" id="star4" name="rate" value="2" required/>
-                                            <label for="star4" title="2 star"></label>
+                                            <input type="radio" id="star5" name="rate" value="5" required/>
+                                            <label for="star5" title="5 star"></label>
+                                            <input type="radio" id="star4" name="rate" value="4" required/>
+                                            <label for="star4" title="4 star"></label>
                                             <input type="radio" id="star3" name="rate" value="3" required/>
                                             <label for="star3" title="3 star"></label>
-                                            <input type="radio" id="star2" name="rate" value="4" required/>
-                                            <label for="star2" title="4 star"></label>
-                                            <input type="radio" id="star1" name="rate" value="5" required/>
-                                            <label for="star1" title="5 star"></label>
+                                            <input type="radio" id="star2" name="rate" value="2" required/>
+                                            <label for="star2" title="2 star"></label>
+                                            <input type="radio" id="star1" name="rate" value="1" required/>
+                                            <label for="star1" title="1 star"></label>
                                         </div><br>
                                     </div>
                                     <%-- Comment box --%>
                                     <div class="cmt">
                                         <h4>Leave a comment</h4> 
                                         <div class="cmt-box">
-                                            <textarea class="input-white" type="text" name="comment" placeholder="Your Comment" pattern=".*\S+.*" title="No white space only" maxlength="200" required  rows="3" cols="37"></textarea>
+                                            <textarea class="input-white" id="content" type="text" name="comment" placeholder="Your Comment" onkeyup="checkSpace()" maxlength="200" required  rows="3" cols="37"></textarea>
                                         </div>
                                     </div>
                                     <div>
+                                        <div class="input-group">
+                                            <%-- Message for checkSpace --%>
+                                            <p id="text-space" style="display:none; color:red;font-weight: bold;">Comment contains only space</p>
+                                            <p id="text-space-1" style="color:aliceblue;">Valid input</p>
+                                        </div>
                                         <%-- Message if input contains only space --%>
                                         <c:if test="${(messBlank!=null)}">
                                             <h5 class="mess">${messBlank}</h5>
@@ -165,7 +172,7 @@
                                     <div class="row">
                                         <div class="col-md-7"></div>
                                         <div class="col-md-4">
-                                            <button class=" btn btn-success" type="submit">Post</button>
+                                            <button class="btn btn-success" id="button" type="submit">Post</button>
                                         </div>
                                         <div class="col-md-1"></div>
                                     </div>

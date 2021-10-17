@@ -1,7 +1,11 @@
 <%-- 
-    Document   : viewRequest
-    Created on : Oct 5, 2021, 8:34:18 PM
-    Author     : Duong
+  Copyright (C) 2021, FPT University<br>
+  SWP391 - SE1509 - Group 4<br>
+  Happyprogramming<br>
+ 
+  Record of change:<br>
+  DATE          Version    Author           DESCRIPTION<br>
+  06-10-2021    1.0        DuongVV          First Deploy<br>
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -95,6 +99,9 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8 section-title title-1">
                     <h2>Request Details</h2>
+                    <c:if test="${messSucc!=null}">
+                        <h3 style="color:#29cc49;font-weight: bold;"><c:out value="${messSucc}"></c:out></h3>
+                    </c:if>
                 </div>
                 <div class="col-md-2"></div>
             </div>

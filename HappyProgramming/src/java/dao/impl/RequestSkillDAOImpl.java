@@ -11,6 +11,7 @@ package dao.impl;
 
 import context.DBContext;
 import dao.SkillDAO;
+import entity.Request;
 import entity.Skill;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -116,9 +117,11 @@ public class RequestSkillDAOImpl extends DBContext implements dao.RequestSkillDA
                 + "(?,?)";
         try {
             conn = getConnection();
+            // Delete
             ps = conn.prepareStatement(sqlDelete);
             ps.setInt(1, rId);
             ps.executeUpdate();
+            // Insert new
             ps = conn.prepareStatement(sqlInsert);
             ps.setInt(1, rId);
             for (int id : skillIds) {
@@ -149,7 +152,7 @@ public class RequestSkillDAOImpl extends DBContext implements dao.RequestSkillDA
             ps = conn.prepareStatement(sql);
             ps.setInt(1, rId);
             rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 int sId = rs.getInt("sId");
                 skill = skillDAO.getSkillById(sId);

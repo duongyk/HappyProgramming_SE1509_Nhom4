@@ -159,8 +159,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             ps.setString(7, user.getGender());
             ps.setString(8, user.getAvatar());
             ps.setInt(9, user.getRole());
-             ps.setInt(10, user.getStatus());
-            
+            ps.setInt(10, user.getStatus());
 
             ps.executeUpdate();
         } catch (Exception ex) {
@@ -330,7 +329,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
         return user;
     }
-    
+
     /**
      * Get user and reset that user password in database
      *
@@ -344,7 +343,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         String sql = "update [User] set [password] = ? where uMail = ?";
         try {
             conn = getConnection();
@@ -361,7 +360,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
         return null;
     }
-    
+
     /**
      * Update user information into database
      *
@@ -373,7 +372,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         String sql = "update [User] set [fullname] = ?"
                 + ",[uMail] = ?"
                 + ", [uPhone] = ?"
@@ -427,5 +426,282 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closeConnection(conn);
         }
         return (t);
+    }
+
+    /**
+     * Get all the User by Role by page
+     *
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<User> getUserByRolePaging(int index, int uRole) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY [uId]) "
+                + "AS RowNum, * FROM [User] WHERE [uRole] = ?) a WHERE "
+                + "RowNum between ? and ?";
+        User user;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, uRole);
+            ps.setInt(2, index * 8 - 7);
+            ps.setInt(3, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user = new User(rs.getInt("uId"), rs.getString("username"),
+                        rs.getString("password"), rs.getString("fullname"),
+                        rs.getString("uMail"), rs.getString("uPhone"),
+                        rs.getDate("dob"), rs.getString("gender"),
+                        rs.getString("uAvatar"), rs.getInt("uRole"));
+                list.add(user);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
+     * Get all the User by Role by page Filter by Name
+     *
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<User> getUserByRoleFilterPaging(int index, int uRole, String name) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY [uId])"
+                + "AS RowNum, * FROM [User] WHERE [uRole] = ? AND [fullname] "
+                + "like ?) a WHERE RowNum between ? and ?";
+        User user;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, uRole);
+            ps.setString(2, "%" + name + "%");
+            ps.setInt(3, index * 8 - 7);
+            ps.setInt(4, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user = new User(rs.getInt("uId"), rs.getString("username"),
+                        rs.getString("password"), rs.getString("fullname"),
+                        rs.getString("uMail"), rs.getString("uPhone"),
+                        rs.getDate("dob"), rs.getString("gender"),
+                        rs.getString("uAvatar"), rs.getInt("uRole"));
+                list.add(user);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
+     * Get total number of User with the same role Filter by name
+     *
+     * @return a Integer number
+     * @throws Exception
+     */
+    @Override
+    public int getTotalFilterName(int uRole, String name) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int total = 0;
+        String sql = "SELECT COUNT([uId]) as 'total' FROM [User] "
+                + "WHERE [uRole] = ? AND [fullname] like ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, uRole);
+            ps.setString(2, "%" + name + "%");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return total;
+    }
+
+    /**
+     * Get all the User by Role by page Filter by Skill
+     *
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<User> getUserByRoleFilterPaging(int index, int uRole, int sId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY "
+                + "us.[uId]) AS RowNum, us.[uId],us.[sId], u.[username], "
+                + "u.[fullname], u.[password], u.[uMail],u.[uPhone], u.[dob],"
+                + " u.[gender], u.[uAvatar], u.[uRole], u.[uStatus] "
+                + "FROM [UserSkill] us  INNER JOIN [USER] u "
+                + "ON us.[uId] = u.[uId] WHERE u.[uRole] = ? "
+                + "and us.[sId] = ?) a  WHERE RowNum between ? and ?";
+        User user;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, uRole);
+            ps.setInt(2, sId);
+            ps.setInt(3, index * 8 - 7);
+            ps.setInt(4, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user = new User(rs.getInt("uId"), rs.getString("username"),
+                        rs.getString("password"), rs.getString("fullname"),
+                        rs.getString("uMail"), rs.getString("uPhone"),
+                        rs.getDate("dob"), rs.getString("gender"),
+                        rs.getString("uAvatar"), rs.getInt("uRole"));
+                list.add(user);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
+     * Get total number of User with the same role Filter by Skill
+     *
+     * @return a Integer number
+     * @throws Exception
+     */
+    @Override
+    public int getTotalFilterSkill(int uRole, int sId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int total = 0;
+        String sql = "SELECT COUNT(u.[uId]) as 'total' FROM [User] u "
+                + "INNER JOIN [UserSkill] us ON u.[uId] = us.[uId] "
+                + "WHERE u.[uRole] = ? and us.[sId] = ? ";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, uRole);
+            ps.setInt(2, sId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return total;
+    }
+
+    /**
+     * Get all the User by Role by page Filter by Name and Skill
+     *
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<User> getUserByRoleFilterPaging(int index, int uRole, int sId, String name) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY "
+                + "us.[uId]) AS RowNum,us.[uId],us.[sId], u.[username], "
+                + "u.[fullname], u.[password], u.[uMail],u.[uPhone], u.[dob],"
+                + " u.[gender], u.[uAvatar], u.[uRole], u.[uStatus] "
+                + "FROM [UserSkill] us INNER JOIN [USER] u "
+                + "ON us.[uId] = u.[uId] WHERE u.[uRole] = ? AND us.[sId] = ?"
+                + "AND u.[fullname] like ? ]) a WHERE RowNum between ? and ?";
+        User user;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, uRole);
+            ps.setInt(2, sId);
+            ps.setString(3, "%" + name + "%");
+            ps.setInt(4, index * 8 - 7);
+            ps.setInt(5, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user = new User(rs.getInt("uId"), rs.getString("username"),
+                        rs.getString("password"), rs.getString("fullname"),
+                        rs.getString("uMail"), rs.getString("uPhone"),
+                        rs.getDate("dob"), rs.getString("gender"),
+                        rs.getString("uAvatar"), rs.getInt("uRole"));
+                list.add(user);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
+     * Get total number of User with the same role Filter by Skill and Name
+     *
+     * @return a Integer number
+     * @throws Exception
+     */
+    @Override
+    public int getTotalFilterNameSkill(int uRole, int sId, String name) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int total = 0;
+        String sql = "SELECT COUNT(u.[uId]) as 'total' FROM [User] u "
+                + "INNER JOIN [UserSkill] us ON u.[uId] = us.[uId] "
+                + "WHERE u.[uRole] = ? AND us.[sId] = ? AND u.[fullname] like ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, uRole);
+            ps.setInt(2, sId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return total;
     }
 }
