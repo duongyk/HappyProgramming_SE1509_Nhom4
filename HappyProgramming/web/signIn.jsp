@@ -128,7 +128,7 @@
                                         <div class="name">Password</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input-white" type="password" name="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number">
+                                                <input class="input-white" type="password" name="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters,at least one lowercase letter, and one number">
                                             </div>
                                             
                                         </div>
@@ -136,7 +136,7 @@
                                     </div>
                                     <div>
                                         <button class="btn btn--radius-2 btn--red" type="submit">Sign in</button>
-                                        <a class="btn btn--radius-3 " style="color: blue ;margin-left: 200px;" href="forgetPassword.jsp">FORGOT PASSWORD </a>
+                                        <a class="btn btn--radius-2 " style="color: blue ;margin-left: 200px;" href="forgetPassword.jsp">FORGOT PASSWORD </a>
                                         
 <!--                                        <a class="btn btn--radius-2 " style="color: blue" href="forgetPassword.jsp">FORGOT PASSWORD </a>-->
                                         

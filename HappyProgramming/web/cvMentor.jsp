@@ -111,8 +111,12 @@
                                         <div class="mt-3">
                                             <h4 style= "font-weight: bold;"><c:out value="${mentor.fullname}"></c:out></h4>
                                                 <p class="text-secondary mb-1"> </p>
-
-                                                <!--<button class="btn btn-primary">Follow</button>-->     <!--Nút này ?? nguyên nh? mai sau có c?n nút gì thì add thêm-->
+                                                 <a  style="color: blue ;" href="createReq.jsp">create request </a>
+                                                        <br/> 
+                                                 <a  style="color: blue ;" href="rating.jsp">view rating/coment </a>
+                                                 
+                                                  
+                                                  
                                             </div>
                                         </div>
                                     </div>

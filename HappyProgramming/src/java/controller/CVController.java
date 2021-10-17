@@ -186,7 +186,7 @@ public class CVController extends HttpServlet {
                 
             }
             
-            // when user sign ưp as mentor, redirect to CV form
+            // when user sign in, redirect to CV form
             if(service.equals("createCV")) {
                 
                 int uid = Integer.parseInt(request.getParameter("uId"));

@@ -139,6 +139,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
         return null;
     }
+    /**
+     * sign up
+     *
+     * @param User 
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
 
     @Override
     public void signUp(User user) throws Exception {
@@ -171,7 +178,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
 
     }
-
+/**
+     * change password
+     *
+     * @param uMail, newPass
+     * @return null
+     * @throws Exception
+     */
     @Override
     public User changePass(String uMail, String newPass) throws Exception {
         Connection conn = null;

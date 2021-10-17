@@ -103,7 +103,7 @@ public class UserController extends HttpServlet {
                 String sex = request.getParameter("sex");
                 Date dob = Date.valueOf(request.getParameter("dob"));
                 Integer role = Integer.parseInt(request.getParameter("role"));
-                User user = new User(userName, password, fname, mail, phone, dob, sex, "", 1, 1);
+                User user = new User(userName, password, fname, mail, phone, dob, sex, "default-avatar.png", 1, 1);
                 if (!password.equals(repass)) {
                     // js: ko trung pass
                     response.sendRedirect("signUp.jsp");
