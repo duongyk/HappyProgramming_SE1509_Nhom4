@@ -24,6 +24,10 @@
         <servlet-name>UserController</servlet-name>
         <servlet-class>controller.UserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MessageController</servlet-name>
+        <servlet-class>controller.MessageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminControllerMap</url-pattern>
@@ -48,31 +52,30 @@
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserControllerMap</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MessageController</servlet-name>
+        <url-pattern>/MessageControllerMap</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
     <!-- SMTP settings -->
     <context-param>
         <param-name>host</param-name>
         <param-value>smtp.gmail.com</param-value>
     </context-param>
- 
     <context-param>
         <param-name>port</param-name>
         <param-value>587</param-value>
     </context-param>
- 
     <context-param>
         <param-name>user</param-name>
         <param-value>tungduong91101@gmail.com</param-value>
     </context-param>
- 
     <context-param>
         <param-name>pass</param-name>
         <param-value>Tung0911</param-value>
     </context-param>
-
 </web-app>

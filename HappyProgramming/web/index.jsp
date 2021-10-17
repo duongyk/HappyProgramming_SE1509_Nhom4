@@ -284,7 +284,19 @@
 
                         <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
 
-
+                            <form action="MessageControllerMap?service=sendMessage" method="post" role="form" class="php-email-form">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="title" id="subject" placeholder="Title" required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="content" rows="5" placeholder="Message" required></textarea>
+                                </div>
+                            
+                                <div class="text-center"><button type="submit">Send Message</button></div>
+                            </form>
 
 
 
@@ -308,7 +320,7 @@
                             &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
                         </div>
                         <div class="credits">
-                          
+
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -331,7 +343,7 @@
         <script src="vendor/glightbox/js/glightbox.min.js"></script>
         <script src="vendor/swiper/swiper-bundle.min.js"></script>
 
-        <!-- Template Main JS File -->
+
         <script src="js/main.js"></script>
 
     </body>
