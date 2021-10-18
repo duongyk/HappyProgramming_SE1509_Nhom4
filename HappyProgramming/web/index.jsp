@@ -55,7 +55,7 @@
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
                         <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
-                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                        <li><a class="nav-link scrollto" href="ListAllSkill">All skills</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                     <c:choose>
@@ -73,7 +73,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
                                         <li><a href="UserControllerMap?service=formChangePass">Change pass</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>

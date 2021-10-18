@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="col-md-6">
 
-                                    <form class="mb-5" action="UserControllerMap" method="post" id="contactForm" name="contactForm">
+                                    <form class="mb-5" action="ForgetPassword" method="post" id="contactForm" name="contactForm">
 
                                         <div class="row">
                                             <div class="col-md-12 form-group">
@@ -135,7 +135,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <button style="padding-bottom: 0px; padding-top: 0px;" type="submit" class="btn btn-primary rounded-0 ">Send Verify Code</button>
-                                                <input type="hidden" name="service" value="sendEmail">
+                                                <!--<input type="hidden" name="service" value="sendEmail">-->
                                             </div>
                                         </div>
                                     </form>

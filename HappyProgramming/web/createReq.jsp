@@ -106,10 +106,10 @@
                     <div class="wrapper wrapper--w790">
                         <div class="card card-5">
                             <div class="card-body">
-                                <form action="RequestControllerMap" method="get">
-                                    <input type="hidden" name="service" value="createRequest">
+                                <form action="CreateRequest" method="POST">
+                                    <!--<input type="hidden" name="service" value="createRequest">-->
                                     <%-- Title --%>
-                                    <input type="hidden" name="service" value="loadRequest">
+                                    <!--<input type="hidden" name="service" value="loadRequest">-->
                                     <div class="form-row m-b-55">
                                         <div class="name">Title</div>
                                         <div class="value">

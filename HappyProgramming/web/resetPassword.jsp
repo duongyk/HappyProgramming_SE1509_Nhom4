@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="col-md-6">
 
-                                    <form class="mb-5" action="UserControllerMap" method="post" id="contactForm" name="contactForm">
+                                    <form class="mb-5" action="ResetPassword" method="post" id="contactForm" name="contactForm">
 
                                         <div class="form-row">
                                             <div class="name">New Password</div>
@@ -144,7 +144,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <button id="submit" style="padding-bottom: 0px; padding-top: 0px;" type="submit" class="btn btn-primary rounded-0 ">Reset Password</button>
-                                                <input type="hidden" name="service" value="resetPass">
+                                                <!--<input type="hidden" name="service" value="resetPass">-->
                                             </div>
                                         </div>
                                     </form>

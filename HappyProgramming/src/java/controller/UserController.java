@@ -338,12 +338,12 @@ public class UserController extends HttpServlet {
                 SendEmail se = new SendEmail();
                 String code = se.generateVerifyCode(); // generate a verify code
                 request.getSession().setAttribute("verify", code); // set session for verify code
-                String mail = request.getParameter("email").trim();
+                String mail = request.getParameter("email").trim(); // get email of user want to reset password
 
                 User user = userDAO.getUserByEmail(mail);
 
                 if (user != null) { // check if user find by mail are null or not
-                    request.getSession().setAttribute("alert", null);
+                    request.getSession().setAttribute("alert", null); // set alert to null if user is in DB
                     User a = userDAO.getUserByEmail(mail);
                     a.setVerify(code); // set verify code for user
                     int send = se.sendEmail(a); // send email contain verify code to user
@@ -351,68 +351,63 @@ public class UserController extends HttpServlet {
                     sendDispatcher(request, response, "verifyAccount.jsp");
                 }
                 if (user == null) {
-                    request.getSession().setAttribute("alert", "Mail is not exist");
+                    request.getSession().setAttribute("alert", "Mail is not exist"); // send alert user does not exist in database
                     sendDispatcher(request, response, "forgetPassword.jsp");
                 }
             }
 
             // check verify code
             if (service.equalsIgnoreCase("verifyCode")) {
-                User x = (User) request.getSession().getAttribute("currMail");
-                String verify = (String) request.getSession().getAttribute("verify");
+                User x = (User) request.getSession().getAttribute("currMail"); //get user by email
+                String verify = (String) request.getSession().getAttribute("verify"); // get verify code generated
 
-                String code = request.getParameter("code").trim();
+                String code = request.getParameter("code").trim(); // get code user input into
 
                 if (verify.equalsIgnoreCase(code)) { // if the verify code you input is similar to the one you recieve
-                    request.getSession().setAttribute("alert", null);
+                    request.getSession().setAttribute("alert", null); // set alert to null if there is no false
                     sendDispatcher(request, response, "resetPassword.jsp");
                 }
                 if (!verify.equalsIgnoreCase(code)) { // if the verify code you input is not similar to the one you recieve
-                    request.getSession().setAttribute("alert", "Your verify code is not correct");
+                    request.getSession().setAttribute("alert", "Your verify code is not correct"); // set alert to notify user
                     sendDispatcher(request, response, "verifyAccount.jsp");
                 }
             }
 
             // reset user new password
             if (service.equalsIgnoreCase("resetPass")) {
-                String password = request.getParameter("password").trim();
-                String confirmPassword = request.getParameter("confirm").trim();
+                String password = request.getParameter("password").trim(); // get password user input
+                String confirmPassword = request.getParameter("confirm").trim(); // get confirm password user input
 
-                User x = (User) request.getSession().getAttribute("currMail");
+                User x = (User) request.getSession().getAttribute("currMail"); // get current user you want to reset password
 
-                if (password.equalsIgnoreCase(confirmPassword)) {
-
-                    if (password.equalsIgnoreCase(confirmPassword)) { // if password and confirm password is similar
-                        User user = userDAO.resetPassword(x, password);
-                        sendDispatcher(request, response, "index.jsp");
-                    }
+                if (password.equalsIgnoreCase(confirmPassword)) { // if password and confirm password is similar
+                    User user = userDAO.resetPassword(x, password); // update user password into database
+                    sendDispatcher(request, response, "index.jsp");
                 }
             }
 
             // Update profile of current login user
             if (service.equalsIgnoreCase("updateProfile")) {
-                //get user information by user id
-                int id = Integer.parseInt(request.getParameter("uId"));
-                //user infos
-                String fullname = request.getParameter("fullname").trim();
-                String email = request.getParameter("email").trim();
-                String phone = request.getParameter("phone").trim();
+                int id = Integer.parseInt(request.getParameter("uId")); //get user information by user id
+                
+                String fullname = request.getParameter("fullname").trim(); // get user fullname input from web
+                String email = request.getParameter("email").trim(); // get user email input from web
+                String phone = request.getParameter("phone").trim();// get user phone input from web
+                
+                String date = request.getParameter("dob"); // get user dob input from web
+                Date dob = Date.valueOf(date); // get values of user dob
 
-                String date = request.getParameter("dob");
-                Date dob = Date.valueOf(date);
-
-                String gender = request.getParameter("gender");
-                String avatar = request.getParameter("avatar").trim();
-                User s;
-                if (avatar.isEmpty()) {
-                    s = (User) request.getSession().getAttribute("currUser");
-                    avatar = s.getAvatar();
+                String gender = request.getParameter("gender"); // // get user gender input from web
+                String avatar = request.getParameter("avatar").trim(); // get user avatar input from web
+                if (avatar.isEmpty()) { // check if user dont chose any new picture file
+                    User s = (User) request.getSession().getAttribute("currUser"); // get current user
+                    avatar = s.getAvatar(); // then set old avatar as updated avatar 
                 }
 
                 User user = new User(id, fullname, email, phone, dob, gender, avatar);
                 userDAO.updateUser(user); // update user info into DB
                 request.getSession().setAttribute("currUser", user); // set current user with updated info
-                sendDispatcher(request, response, "UserControllerMap?service=profile&uId=" + id);
+                sendDispatcher(request, response, "UserControllerMap?service=profile&uId=" + id); // return to user profile page
             }
         }
     }

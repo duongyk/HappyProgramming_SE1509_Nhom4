@@ -145,8 +145,8 @@
                         <div class="col-md-8">
                             <div class="card mb-3">
 
-                                <form id="thisform" action="UserControllerMap" method="POST">
-                                    <input type="hidden" name="service" value="updateProfile">
+                                <form id="thisform" action="UpdateMenteeProfile" method="POST">
+                                    <!--<input type="hidden" name="service" value="updateProfile">-->
                                     <input type="hidden" name="uId" value="${currUser.getId()}">
                                     <div class="card-body">
                                         <div class="row" style="margin: 10px 15px 15px 15px;">
