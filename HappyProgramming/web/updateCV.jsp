@@ -64,16 +64,16 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
-                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                        <li><a class="nav-link scrollto" href="listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="listAllSkill">All skills</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
+                                <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
                                 </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile">Profile</a></li>
+                                        <li><a href="UserProfile">Profile</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
@@ -104,6 +104,12 @@
             <section class="breadcrumbs">
                 <div class="card-heading">
                     <h2 class="title" style="color: black; font-weight: bold;">Update CV </h2>
+                    <c:if test="${success!=null}">
+                        <h3 style="color:#29cc49;font-weight: bold;text-align: center"><c:out value="${success}"></c:out></h3>
+                    </c:if>
+                    <c:if test="${error!=null}">
+                        <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${error}"></c:out></h3>
+                    </c:if>
                 </div>
             </section><!-- End Breadcrumbs Section -->
 

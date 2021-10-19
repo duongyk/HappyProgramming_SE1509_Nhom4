@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -68,13 +69,26 @@ public class SubmitCreateCV extends HttpServlet {
             CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
 
             cvdao.insertCV(uid, mentorCV);
-
+               
             smdao.updateMentorSkill(uid, skill_id);
-
-            response.sendRedirect("signIn.jsp");
+                
+            request.setAttribute("success", "Create Mentor Successfuly");
+            sendDispatcher(request, response, "/signIn.jsp");
+            
+        } catch (Exception e) {
+            request.setAttribute("errorMessage", e.getMessage());
+            sendDispatcher(request, response, "/error.jsp");
         }
     }
-
+    
+    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher(path);
+            rd.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(SubmitCreateCV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

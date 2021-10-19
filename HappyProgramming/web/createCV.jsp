@@ -63,17 +63,17 @@
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
-                    <ul>
-                        <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
-                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                    <!--<ul>
+                        <li><a class="nav-link scrollto" href="listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="listAllSkill">All skills</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
+                                <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
                                 </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile">Profile</a></li>
+                                        <li><a href="UserProfile">Profile</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
@@ -88,7 +88,7 @@
                                 </li>
                             </c:otherwise>
                         </c:choose>
-                    </ul>
+                    </ul>-->
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar-main -->
 
@@ -103,7 +103,7 @@
             <!-- ======= Breadcrumbs Section ======= -->
             <section class="breadcrumbs">
                 <div class="card-heading">
-                    <h2 class="title" style="color: black; font-weight: bold;">Create CV </h2>
+                    <h2 class="title" style="color: black; font-weight: bold;">Create CV</h2>
                 </div>
             </section><!-- End Breadcrumbs Section -->
 
