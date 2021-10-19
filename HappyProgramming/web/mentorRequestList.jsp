@@ -50,9 +50,9 @@
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
-                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=1">Inviting Request</a>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>
-                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=2">Following Request</a>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
                                         </li>
                                     </c:when>
                                     <c:otherwise>
@@ -94,42 +94,8 @@
     </section><!-- End Breadcrumbs Section -->
    
     <section id="team" class="team section-bg">
-        <!--
-      <div class="wrapper" style="z-index: 3;">
-        <input name="modal" type="checkbox" id="modal">
-        <label for="modal" class="label-show-modal">Statistic Request</label>
-        <div class="modal-show">
-          <div class="modal-show-inner">
-            <label for="modal">&#10006;</label>
-            <h2>Show Modal Content</h2>
-            <p>Nhét cái th?ng kê vào ?ây</p>
-          </div>
-        </div>
-      </div>
-        -->
-        <div class="row">
-            <div class="col-md-2">
-                <%--<div></div> 
-                <input class="popup" name="modal" type="checkbox" id="modal">
-                <%-- Statistic reuquest button --%>
-                <label for="modal" class="label-show-modal">Statistic Mentor Request</label>
-                <div class="modal-show" style="z-index: 3;">
-                    <div class="modal-show-inner">
-                        <label for="modal">&#10006;</label>
-                        <h2 class="text-center">Statistic Mentor Request</h2>
-                        <p class="text-left">Invited Request      : ${invited}</p>
-                        <p class="text-left">Following Request    : ${following}</p>
-                        <p class="text-left">Canceled Request     : ${canceled}</p>
-                        <p class="text-left">Canceled Percentage  : ${canceledpercentage} %</p>
-                        <p class="text-left">Completed Request    : ${completed}</p>
-                        <p class="text-left">Completed Percentage : ${completedpercentage} %</p>
-                        <p class="text-left">Rating               : ${rating}</p> 
-                    </div>
-                </div>
-            </div>
-    
-        </div>        
         
+      
         
       <div class="container">
         <div class="section-title" data-aos="fade-up">
@@ -155,12 +121,12 @@
                   <!--<h4>DeadlineHour: <c:out value="${request.getDeadlineHour()}"></c:out></h4>-->
                   <c:choose>
                       <c:when test="${request.getStatus()==1}">
-                          <h4><a class="btn btn-primary" style="background-color: #009900;" href="RequestControllerMap?service=mentorUpdateStatus&rid=<c:out value="${request.getId()}"></c:out>&status=2">Accept</a>
-                      <a class="btn btn-primary" style="background-color: #ff0000;" href="RequestControllerMap?service=mentorUpdateStatus&rid=<c:out value="${request.getId()}"></c:out>&status=4">Reject</a></h4>
-                      <h4><a class="btn btn-primary" style="background-color: #3498db;" href="RequestControllerMap?service=viewRequestMentor&rId=<c:out value="${request.getId()}"></c:out>">Request Detail</a></h4>
+                          <h4><a class="btn btn-primary" style="background-color: #009900;" href="updateMentorRequestStatus?rid=<c:out value="${request.getId()}"></c:out>&status=2">Accept</a>
+                      <a class="btn btn-primary" style="background-color: #ff0000;" href="updateMentorRequestStatus?rid=<c:out value="${request.getId()}"></c:out>&status=4">Reject</a></h4>
+                      <h4><a class="btn btn-primary" style="background-color: #3498db;" href="viewMentorRequestDetail?rId=<c:out value="${request.getId()}"></c:out>">Request Detail</a></h4>
                       </c:when>
                       <c:otherwise>
-                          <h4><a class="btn btn-primary" style="background-color: #3498db;" href="RequestControllerMap?service=viewRequestMentor&rId=<c:out value="${request.getId()}"></c:out>">Request Detail</a></h4>
+                          <h4><a class="btn btn-primary" style="background-color: #3498db;" href="viewMentorRequestDetail?rId=<c:out value="${request.getId()}"></c:out>">Request Detail</a></h4>
                       </c:otherwise>
                   </c:choose>           
                   

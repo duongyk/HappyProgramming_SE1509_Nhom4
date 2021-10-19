@@ -113,7 +113,7 @@
                         <div class="card card-5">
 
                             <div class="card-body">
-                                <form action="CVControllerMap?service=submitCreateForm" method="POST">
+                                <form action="submitCreateCV" method="POST">
                                     <input type="hidden" name="uid" value="<c:out value="${uid}"></c:out>" readonly="readonly" />
                                                         
                                     <div class="form-row m-b-55">

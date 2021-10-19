@@ -113,8 +113,9 @@
                         <div class="card card-5">
 
                             <div class="card-body">
-                                <form action="CVControllerMap?service=submitFormUpdate" method="POST">
+                                <form action="submitUpdateCV" method="POST">
                                     <input type="hidden" name="uid" value="<c:out value="${mentorprofile.getId()}"></c:out>" readonly="readonly" />
+                                    <!--
                                     <div class="form-row m-b-55">
                                         <div class="name">Username</div>
                                         <div class="value">
@@ -122,23 +123,13 @@
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
                                                         <input class="input-white" type="text" name="username" pattern=".*\S+.*" title="No white space only" maxlength="30" value="<c:out value="${mentorprofile.getUsername()}"></c:out>" required="required" readonly>
-                                                        <!--                          <label class="label--desc">User Name</label>-->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="form-row">
-                                        <div class="name">Email</div>
-                                        <div class="value">
-                                            <div class="input-group">
-                                                <input class="input-white" type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" value="<c:out value="${mentorprofile.getMail()}"></c:out>" required>
-                                                <h4 id="htitle" style="color:red;"></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                 
+                                    -->
+                                    
                                     <div class="form-row">
                                         <div class="name">Full Name</div>
                                         <div class="value">
@@ -149,6 +140,17 @@
                                         </div>
                                     </div>
                                     
+                                    <div class="form-row">
+                                        <div class="name">Email</div>
+                                        <div class="value">
+                                            <div class="input-group">
+                                                <input class="input-white" type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" value="<c:out value="${mentorprofile.getMail()}"></c:out>" required>
+                                                <h4 id="htitle" style="color:red;"></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 
+                                                                
                                     <div class="form-row m-b-55">
                                         <div class="name">Phone</div>
                                         <div class="value">

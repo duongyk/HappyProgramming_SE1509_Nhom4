@@ -28,6 +28,7 @@ public interface UserSkillDAO {
      *
      * @param uId of the mentor
      * @return list of all skills of the mentor
+     * @throws java.lang.Exception
      */
     public ArrayList<Skill> getAll_Skill_Mentor(int uId) throws Exception;
 
@@ -36,6 +37,7 @@ public interface UserSkillDAO {
      *
      * @param uId of the mentor
      * @return list of all id of all skills of the mentor
+     * @throws java.lang.Exception
      */
     public ArrayList<String> getAll_Id_Skill_Mentor(int uId) throws Exception;
 
@@ -45,6 +47,7 @@ public interface UserSkillDAO {
      * @param uId it is an an Integer number
      * @param skill_ids list of id of new skills
      * @return 1 if update success, 0 if fail
+     * @throws java.lang.Exception
      */
     public int updateMentorSkill(int uId, String[] skill_ids) throws Exception;
     
@@ -53,6 +56,7 @@ public interface UserSkillDAO {
      *
      * @param uId is an Integer number
      * @return list of all skills of the mentor
+     * @throws java.lang.Exception
      */
     public ArrayList<Skill> getAllSkillUser(int uId) throws Exception;
     
@@ -61,6 +65,7 @@ public interface UserSkillDAO {
      *
      * @param uId it is an an Integer number
      * @param sIdList is a list of Integer number
+     * @throws java.lang.Exception
      */
     public void updateUserSkill(int uId, ArrayList<Integer> sIdList) throws Exception;
 }

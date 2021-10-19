@@ -61,9 +61,9 @@
                                 <c:when test="${sessionScope.currUser!=null}">
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">
-                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=1">Inviting Request</a>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>
-                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=2">Following Request</a>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
                                         </li>
                                     </c:when>
                                     <c:otherwise>

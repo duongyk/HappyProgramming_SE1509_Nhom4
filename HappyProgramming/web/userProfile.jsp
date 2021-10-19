@@ -67,9 +67,9 @@
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
-                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=1">Inviting Request</a>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>
-                                        <li><a class="nav-link scrollto" href="RequestControllerMap?service=viewMentorRequest&status=2">Following Request</a>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
                                         </li>
                                     </c:when>
                                     <c:otherwise>
@@ -112,7 +112,14 @@
             <section class="breadcrumbs">
                 <div class="card-heading">
                     <h2 class="title" style="color: black; font-weight: bold;">User Profile</h2>
+                    <c:if test="${success!=null}">
+                        <h3 style="color:#29cc49;font-weight: bold;text-align: center"><c:out value="${success}"></c:out></h3>
+                    </c:if>
+                    <c:if test="${error!=null}">
+                        <h3 style="color:#009900;font-weight: bold;text-align: center"><c:out value="${error}"></c:out></h3>
+                    </c:if>
                 </div>
+                
             </section><!-- End Breadcrumbs Section -->
 
             <div class="container">
@@ -215,6 +222,15 @@
                                         <hr>
                                         <div class="row" style="margin: 15px;">
                                             <div class="col-sm-3">
+                                                <h6 class="mb-0">Service Description</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                            <c:out value="${cv.getServiceDescript()}"></c:out>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row" style="margin: 15px;">
+                                            <div class="col-sm-3">
                                                 <h6 class="mb-0">Achievement</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
@@ -224,7 +240,7 @@
                                         <hr>  
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <a class="btn btn-info " href="CVControllerMap?service=updateCV&uid=${currUser.getId()}">Edit</a>
+                                                <a class="btn btn-info " href="updateCV?uid=${currUser.getId()}">Edit</a>
                                             </div>
                                         </div>
                                         
