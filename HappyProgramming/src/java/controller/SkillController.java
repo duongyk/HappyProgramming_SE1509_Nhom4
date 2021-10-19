@@ -133,7 +133,7 @@ public class SkillController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(SkillController.class.getName()).log(Level.SEVERE, null, ex);
+                                           
         }
     }
 

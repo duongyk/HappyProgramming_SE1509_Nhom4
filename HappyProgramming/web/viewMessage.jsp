@@ -146,15 +146,16 @@
                                 <div class="row">
                                 </div>
                                 <div class="row">
-                                    
+
                                     <div class="col-md-6 grid-margin transparent">
                                         <div class="row">
-                                        
-                                              
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                                                    <button class="create"> <a href="createSkill.jsp" style="color: white"> Delete </a></button>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                                                <c:forEach items="${listMess}" var="message">
+                                                    <button class="create"> <a href="MessageControllerMap?service=deleteMessage&mId=${message.mId}" style="color: white"> Delete </a></button>
                                                 </div>
 
                                             </div>
@@ -166,23 +167,52 @@
                                             <div class="col-lg-12 grid-margin stretch-card">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <div class="table-responsive">
-
-                                                        <c:forEach items="${listMess}" var="message">
-                                                            <div>
+                                                        <div class="row" style="margin: 10px 15px 15px 15px;">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0">ID</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary" style="color: black">
                                                                 ${message.mId}
                                                             </div>
-
-                                                            <div>${message.title} </div>
-                                                            <div>    ${message.email}</div>
-                                                            <div>    ${message.content}</div>
-
-                                                        </c:forEach>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="row" style="margin: 15px;" >
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0">Title</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                <c:out value="${message.title}"></c:out>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row" style="margin: 15px;">
+                                                                <div class="col-sm-3">
+                                                                    <h6 class="mb-0">Email</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                <c:out value="${message.email}"></c:out>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row" style="margin: 15px;">
+                                                                <div class="col-sm-3">
+                                                                    <h6 class="mb-0" >Content</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                <c:out value=" ${message.content}"></c:out>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                          
+                                        </c:forEach>
+
+
+
+
 
                                 </div>
 

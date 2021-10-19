@@ -29,7 +29,6 @@
         <servlet-class>controller.MessageController</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>ListAllSkill</servlet-name>
         <servlet-class>controller.ListAllSkill</servlet-class>
     </servlet>
@@ -56,7 +55,8 @@
     <servlet>
         <servlet-name>UserProfile</servlet-name>
         <servlet-class>controller.UserProfile</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
@@ -71,7 +71,30 @@
     <servlet>
         <servlet-name>CVProfileController</servlet-name>
         <servlet-class>controller.CVProfileController</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <servlet-class>controller.AdminDashboardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateSkillController</servlet-name>
+        <servlet-class>controller.CreateSkillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SkillManagementController</servlet-name>
+        <servlet-class>controller.SkillManagementController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSkillController</servlet-name>
+        <servlet-class>controller.UpdateSkillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetUpdateSkillController</servlet-name>
+        <servlet-class>controller.GetUpdateSkillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MenteeManagementController</servlet-name>
+        <servlet-class>controller.MenteeManagementController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
@@ -102,7 +125,6 @@
         <url-pattern>/MessageControllerMap</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ListAllSkill</servlet-name>
         <url-pattern>/ListAllSkill</url-pattern>
     </servlet-mapping>
@@ -128,8 +150,9 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserProfile</servlet-name>
-        <url-pattern>/UserProfile</url-pattern>
-
+        <url-pattern>/UserProfile</url-pattern> 
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
@@ -144,7 +167,30 @@
     <servlet-mapping>
         <servlet-name>CVProfileController</servlet-name>
         <url-pattern>/CVProfile</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <url-pattern>/adminDashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateSkillController</servlet-name>
+        <url-pattern>/createSkill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SkillManagementController</servlet-name>
+        <url-pattern>/skillManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSkillController</servlet-name>
+        <url-pattern>/updateSkill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUpdateSkillController</servlet-name>
+        <url-pattern>/getUpdateSkill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MenteeManagementController</servlet-name>
+        <url-pattern>/menteeManagement</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -37,7 +37,8 @@
 
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
-
+        <link href="css/popup.css" rel="stylesheet">
+        <link href="css/requestByMe.css" rel="stylesheet">
 
     </head>
 
@@ -286,16 +287,17 @@
 
                             <form action="MessageControllerMap?service=sendMessage" method="post" role="form" class="php-email-form">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                                    <input type="email" class="form-control" name="email" id="email"   pattern=".*\S+.*" title="No white space only" maxlength="30" placeholder="Your Email*" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="title" id="subject" placeholder="Title" required>
+                                    <input type="text" class="form-control" name="title" id="subject"  pattern=".*\S+.*" title="No white space only" maxlength="30" placeholder="Title*" required>
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control" name="content" rows="5" placeholder="Message" required></textarea>
+                                    <textarea class="form-control" name="content" rows="5" placeholder="Message* " maxlength="100" required></textarea>
                                 </div>
-                            
+
                                 <div class="text-center"><button type="submit">Send Message</button></div>
+                            <p class="text-success">${mess}</p>  
                             </form>
 
 
@@ -303,6 +305,7 @@
 
                             <!--MAP-->
                         </div>
+                       
 
                     </div>
 

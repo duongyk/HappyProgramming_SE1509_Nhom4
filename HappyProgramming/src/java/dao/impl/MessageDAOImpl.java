@@ -48,6 +48,33 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
 
     }
 
+    public ArrayList<Message> getUnReadMessage() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        /* Prepared statement for executing sql queries */
+        ResultSet rs = null;/* Result set returned by the sqlserver */
+
+        ArrayList<Message> listMessages = new ArrayList<>();
+        String sql = "SELECT  * FROM [PRJ_SWP].[dbo].[Message] where [isRead] = '0'";
+
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listMessages.add(new Message(rs.getInt("mId"), rs.getString("title"), rs.getString("email"), rs.getString("content"), rs.getString("isRead")));
+            }
+        } catch (SQLException e) {
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+
+        return (listMessages);
+
+    }
+
     @Override
     public void insert(Message message) throws Exception {
         Connection conn = null;
@@ -99,6 +126,7 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
         return message;
     }
 
+    @Override
     public void updateRead(String id) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -120,17 +148,33 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
         }
     }
 
+    @Override
+    public void delete(String id) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "DELETE FROM [Message]\n"
+                + " WHERE mId = ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         MessageDAOImpl dao = new MessageDAOImpl();
         ArrayList<Message> list = new ArrayList<>();
-        dao.insert(new Message("JOJO", "GNV@gmail.com", "PumaNi"));
-        list = dao.getMessage();
+        list = dao.getUnReadMessage();
         for (Message message : list) {
             System.out.println(message);
         }
-        Message mess = dao.getMessageById("3");
-        dao.updateRead("3");
-        System.out.println(mess.toString());
     }
 
 }

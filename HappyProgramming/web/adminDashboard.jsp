@@ -102,7 +102,7 @@
                                 </li>
                                 <!--SKILL MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=skillManage">
+                                    <a class="nav-link" href="skillManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Skill Management</span>
                                     </a>
@@ -116,7 +116,7 @@
                                 </li>
                                 <!--Mentee MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=menteeManage">
+                                    <a class="nav-link" href="menteeManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Mentee Management</span>
                                     </a>

@@ -8,7 +8,6 @@
 
 --%>
 
-<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -42,12 +41,7 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: Vesperr - v4.6.0
-        * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
+
     </head>
 
     <body>
@@ -135,6 +129,13 @@
                                         <span class="menu-title">Request Management</span>
                                     </a>
                                 </li>
+                                <!--Message MANAGEMENT-->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="MessageControllerMap?service=getMessage">
+                                        <i class="icon-columns menu-icon"></i>
+                                        <span class="menu-title">Message Management</span>
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
                         <!-- partial -->
@@ -148,7 +149,7 @@
                                     <div class="col-md-6 grid-margin stretch-card">
                                         <div class="card tale-bg">
                                             <div class="card-people mt-auto" style="padding: 0">
-                                                <img style="min-width: 300px; min-height:250px " src="img/1.png">
+                                                <img style="min-width: 300px; min-height:250px " src="img/Message.png">
 
                                                 <div class="weather-info">
                                                 </div>
@@ -160,27 +161,22 @@
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-tale">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Total Skill </p>
-                                                        <p class="fs-30 mb-2"><c:out value="${sList2.size()}"></c:out></p>
-                                                            <p></p>
+                                                      
+                                                        <a href="MessageControllerMap?service=getMessage" style="color: white; text-decoration: none"><p class="mb-4">Total Messages </p>
+                                                            <p class="fs-30 mb-2"><c:out value="${listMess.size()}"></c:out></p>
+                                                            </a> 
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-4 stretch-card transparent">
                                                     <div class="card card-dark-blue">
                                                         <div class="card-body">
-                                                            <p class="mb-4">Total Mentee</p>
-                                                            <p class="fs-30 mb-2"><c:out value="${menteeList.size()}"></c:out></p>
-                                                            <p></p>
+                                                            <a href="MessageControllerMap?service=getUnReadMessage" style="color: white; text-decoration: none"><p class="mb-4">Unread Messages</p>
+                                                                <p class="fs-30 mb-2"><c:out value="${listUnReadMess.size()}"></c:out></p>
+                                                            </a> 
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                                                    <button class="create"> <a href="createSkill.jsp" style="color: white"> Create new skill</a></button>
-                                                </div>
-
+                                                </div> 
                                             </div>
                                         </div>
 
@@ -195,37 +191,39 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th>
-                                                                            Image
-                                                                        </th>
-                                                                        <th>
                                                                             ID
                                                                         </th>
                                                                         <th>
-                                                                            Name
+                                                                            Title
                                                                         </th>
                                                                         <th>
-                                                                            Detail
+                                                                            Email
+                                                                        </th>
+
+                                                                        <th>
+                                                                            Is read
                                                                         </th>
 
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <c:forEach items="${sList}" var="skill">
+                                                                <c:forEach items="${listUnReadMess}" var="message">
                                                                     <tr>
-                                                                        <td class="py-1">
-                                                                            <img src="img/${skill.image}" alt="image" />
+                                                                        <td>
+                                                                            ${message.mId}
                                                                         </td>
                                                                         <td>
-                                                                            <a href="getUpdateSkill?sId=${skill.id}"><c:out value="${skill.id}"></c:out></a>
-                                                                            </td>
+                                                                            <a href="MessageControllerMap?service=viewMessage&mId=${message.mId}">   ${message.title}</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <c:out value="${message.email}"></c:out>
 
-                                                                            <td>
-                                                                            <c:out value="${skill.name}"></c:out>
                                                                             </td>
                                                                             <td>
-                                                                            <c:out value="${skill.detail}"></c:out>
-                                                                            </td>
-                                                                        </tr>
+                                                                            ${message.isRead}
+                                                                        </td>
+
+                                                                    </tr>
                                                                 </c:forEach>
 
                                                             </tbody>
@@ -238,11 +236,7 @@
                                     </div>
 
                                 </div>
-                                                         <div style="padding-left: 650px">
-                                    <c:forEach begin="1" end="${endPage}" var="i">
-                                        <a class="${tag == i?"active":""}" href="AdminControllerMap?service=skillManage&index=${i}"> ${i}</a> 
-                                    </c:forEach>
-                                </div> 
+
                                 <!-- content-wrapper ends -->
                                 <!-- partial:../../partials/_footer.html -->
 
@@ -265,7 +259,7 @@
                                             &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
                                         </div>
                                         <div class="credits">
-                                       
+
                                             Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                                         </div>
                                     </div>
@@ -309,13 +303,13 @@
                                 border: none;
 
                             }
-                        
+
                             a.active {
                                 background-color: #8dc2fe ;
                                 color: #026adf;
                                 font-weight: bold;
                             }
-                        
+
                         </style>
                         </body>
 

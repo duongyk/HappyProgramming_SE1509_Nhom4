@@ -161,21 +161,21 @@
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-tale">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Total Messages </p>
-                                                        <p class="fs-30 mb-2"><c:out value="${sList2.size()}"></c:out></p>
-                                                            <p></p>
+                                                        <a href="MessageControllerMap?service=getMessage" style="color: white; text-decoration: none"><p class="mb-4">Total Messages </p>
+                                                            <p class="fs-30 mb-2"><c:out value="${listMess.size()}"></c:out></p>
+                                                            </a> 
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-4 stretch-card transparent">
                                                     <div class="card card-dark-blue">
                                                         <div class="card-body">
-                                                            <p class="mb-4">Unread Messages</p>
-                                                            <p class="fs-30 mb-2"><c:out value="${menteeList.size()}"></c:out></p>
-                                                            <p></p>
+                                                            <a href="MessageControllerMap?service=getUnReadMessage" style="color: white; text-decoration: none"><p class="mb-4">Unread Messages</p>
+                                                                <p class="fs-30 mb-2"><c:out value="${listUnReadMess.size()}"></c:out></p>
+                                                            </a> 
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> 
                                             </div>
                                         </div>
 
@@ -200,7 +200,7 @@
                                                                         </th>
 
                                                                         <th>
-                                                                            Is read
+                                                                        
                                                                         </th>
 
                                                                     </tr>
@@ -218,9 +218,19 @@
                                                                             <c:out value="${message.email}"></c:out>
 
                                                                             </td>
+
+                                                                        <c:if test="${message.isRead == '1'}">
                                                                             <td>
-                                                                            ${message.isRead}
-                                                                        </td>
+                                                                                <img style="    width: 26px;
+                                                                                     height: 20px; " src="img/iconmonstr-eye-9.svg">
+                                                                            </td>
+                                                                        </c:if>
+                                                                        <c:if test="${message.isRead == '0'}">
+                                                                            <td>
+                                                                                
+                                                                            </td>
+                                                                        </c:if>
+
 
                                                                     </tr>
                                                                 </c:forEach>

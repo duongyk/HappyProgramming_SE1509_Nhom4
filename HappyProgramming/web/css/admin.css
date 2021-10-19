@@ -18785,9 +18785,7 @@ a.text-primary:hover, .list-wrapper .completed a.remove:hover, a.text-primary:fo
   color: #343276 !important;
 }
 
-.text-secondary, .list-wrapper .remove {
-  color: #a3a4a5 !important;
-}
+
 
 a.text-secondary:hover, .list-wrapper a.remove:hover, a.text-secondary:focus, .list-wrapper a.remove:focus {
   color: #7c7e7f !important;

@@ -10,7 +10,6 @@
 package dao;
 
 import entity.Message;
-import entity.Rating;
 import java.util.ArrayList;
 
 /**
@@ -30,14 +29,37 @@ public interface MessageDAO {
     public ArrayList<Message> getMessage() throws Exception;
 
     /**
-     * Insert new Rating into the database
+     * Insert new Message into the database
      *
      * @param message
      * @throws Exception
      */
     public void insert(Message message) throws Exception;
+     /**
+     * Update new Message into the database
+     *
+     * @param id
+     * @throws Exception
+     */
 
     public void updateRead(String id) throws Exception;
-
+ /**
+     * get  Message from the database
+     *
+     * @param Id
+     * @return 
+     * @throws Exception
+     */
     public Message getMessageById(String Id) throws Exception;
+ /**
+     * Delete  Message from the database
+     *
+     * @param id
+     * @throws Exception
+     */
+    public void delete(String id) throws Exception;
+    
+    
+    
+    public ArrayList<Message> getUnReadMessage() throws Exception;
 }
