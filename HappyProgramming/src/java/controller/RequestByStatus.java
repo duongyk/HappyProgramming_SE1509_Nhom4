@@ -1,20 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        DuongVV          First Deploy<br>
+ * 18-10-2021    2.0        DuongVV          Update<br>
  */
 package controller;
 
 import dao.RequestDAO;
-import dao.RequestSkillDAO;
 import dao.SkillDAO;
-import dao.UserDAO;
-import dao.UserSkillDAO;
 import dao.impl.RequestDAOImpl;
-import dao.impl.RequestSkillDAOImpl;
 import dao.impl.SkillDAOImpl;
-import dao.impl.UserDAOImpl;
-import dao.impl.UserSkillDAOImpl;
 import entity.Request;
 import entity.User;
 import entity.Skill;
@@ -30,8 +29,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class has the process request of Filter Request by Status
  *
- * @author Duong
+ * @author DuongVV
  */
 public class RequestByStatus extends HttpServlet {
 
@@ -61,19 +61,26 @@ public class RequestByStatus extends HttpServlet {
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RequestByStatus.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
+     * Get the Request list oh the Mentee after Filter by Status
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -83,11 +90,9 @@ public class RequestByStatus extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            UserDAO userDao = new UserDAOImpl();
+            // initiate DAO
             RequestDAO requestDAO = new RequestDAOImpl();
-            RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
             SkillDAO skillDAO = new SkillDAOImpl();
-            UserSkillDAO usDAO = new UserSkillDAOImpl();
             // Get current user
             User user = (User) request.getSession().getAttribute("currUser");
             // Get Status for Filter
@@ -110,11 +115,15 @@ public class RequestByStatus extends HttpServlet {
             // Get all Skill for Filter
             ArrayList<Skill> sList = skillDAO.getActiveSkill();
 
-            request.setAttribute("status", status);
-            request.setAttribute("sList", sList);
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("index", index);
-            request.setAttribute("rList", rList);
+            // Set href
+            String href = "requestByStatus?status="+String.valueOf(status)+"&";
+            
+            request.setAttribute("href", href);/*href paging*/
+            request.setAttribute("status", status);/*Status of all Skill after Filter*/
+            request.setAttribute("sList", sList);/*List Skill of the Request*/
+            request.setAttribute("endPage", endPage);/*end page of paging*/
+            request.setAttribute("index", index);/*index/current page*/
+            request.setAttribute("rList", rList);/*Request list*/
             sendDispatcher(request, response, "listRequestByMe.jsp");
         } catch (Exception e) {
             Logger.getLogger(RequestByStatus.class.getName()).log(Level.SEVERE, null, e);
