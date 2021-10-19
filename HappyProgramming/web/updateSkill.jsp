@@ -132,8 +132,8 @@
                                             <div class="name">Image*</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <input id="avatarURL" onchange="changeImage()" class="input--style-5" value="<c:out value="${skill.image}"></c:out>"
-                                                           type="file" name="sImage"  >
+                                                    <input id="avatarURL" onchange="changeImage()" class="input--style-5" value="${skill.getImage()}"
+                                                           type="file" name="sImage" >
                                                 </div>
                                             </div>
                                         </div>
@@ -166,7 +166,7 @@
                                     </div>
                                     <!-- <input id="avatarURL" form="thisform" onchange="changeImage()" type="file" name="avatar" value="" style="width: 162px;" > -->
                                     <div style="margin-left: 230px;">
-                                        <button class="btn btn--radius-2 btn--red" type="submit">Update</button>
+                                        <button class="btn btn--radius-2 btn--blue" type="submit">Update</button>
                                     </div>
                                 </form>
                             </div>

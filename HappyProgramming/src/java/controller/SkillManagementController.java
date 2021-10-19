@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        GiangNVT          First Deploy<br>
  */
 package controller;
 
@@ -21,8 +25,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Process:<br>
+ * - Create new skill (admin)<br>
+ * - List all skill<br>
+ * - Paging<br>
+ * Exception:<br>
  *
- * @author solov
+ *
+ * @author giangnvthe150748
  */
 public class SkillManagementController extends HttpServlet {
 
@@ -51,8 +61,8 @@ public class SkillManagementController extends HttpServlet {
             int index = Integer.parseInt(indexPage);
             int count = skillDAO.getTotalSkill();
             //calculate total page for paging
-            int endPage = count / 8;
-            if (count % 8 != 0) {
+            int endPage = count / 8; // a page will have at most 8 skills
+            if (count % 8 != 0) { //if the total of skills is not divisible by 8, the last page will be added to show the remaining skills
                 endPage++;
             }
             ArrayList<Skill> list = skillDAO.pagingSkill(index);

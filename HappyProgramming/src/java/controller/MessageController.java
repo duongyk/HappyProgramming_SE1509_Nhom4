@@ -91,7 +91,9 @@ public class MessageController extends HttpServlet {
             // Delete message
             if (service.equalsIgnoreCase("deleteMessage")) {
                 String mId = request.getParameter("mId");
+                String mess = "Delete Message Successfully!";
                 messageDAO.delete(mId);
+                request.setAttribute("mess", mess);
                 sendDispatcher(request, response, "MessageControllerMap?service=getMessage");
             }
             if (service.equalsIgnoreCase("getUnReadMessage")) {

@@ -103,13 +103,15 @@
             <!-- ======= Breadcrumbs Section ======= -->
             <section class="breadcrumbs">
                 <div class="card-heading">
-                    <h2 class="title" style="color: black; font-weight: bold;">Create Skill </h2>
+                    <h2 class="title" style="color: black; font-weight: bold;">Create Skill  </h2>
+                                               
                 </div>
             </section><!-- End Breadcrumbs Section -->
 
             <section class="inner-page">
                 <div class="container">
                     <div class="wrapper wrapper--w790">
+                        
                         <div class="card card-5">
 
                             <div class="card-body">
@@ -144,14 +146,15 @@
                                         <div class="name"></div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <img id="image" style="height: 162px;" class="" src="img/79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png" alt="" >
+                                                <img id="image" style="height: 162px; padding-left: 102px;" class="" src="img/79506d11e688f731ccd8668ea9a270a8f1c3bbe48deaaa39778eb19163c1b45a18be6e4c3e8f265299f9a3284a2e8cc04605fdfc7290b9d7c20251_1280.png" alt="" >
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- <input id="avatarURL" form="thisform" onchange="changeImage()" type="file" name="avatar" value="" style="width: 162px;" > -->
                                     <div style="margin-left: 230px;">
-                                        <button class="btn btn--radius-2 btn--red" type="submit">Create</button>
+                                        <button class="btn btn--radius-2 btn--blue" type="submit">Create</button>
+                                        <p class="text-danger" style="padding-left: 30px;">${mess}</p>  
                                     </div>
                                 </form>
                             </div>

@@ -21,56 +21,53 @@ import java.util.ArrayList;
 public interface SkillDAO {
 
     /**
-     * Get
+     * Get all Skill in the database
      *
-     * @param
-     * @return
-     * @throws Exception
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
      */
     public ArrayList<Skill> getAllSkill() throws Exception;
 
     /**
-     * Get
+     * Get all Active Skill of the user in the database
      *
-     * @param
-     * @return
-     * @throws Exception
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
      */
     public ArrayList<Skill> getActiveSkill() throws Exception;
 
     /**
-     * Get
+     * Find Skill in the database
      *
-     * @param
-     * @return
-     * @throws Exception
+     * @param sName. It is a <code>java.lang.String</code>
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
      */
     public ArrayList<Skill> getSkillByName(String sName) throws Exception;
 
     /**
-     * Get
+     * Find skill by Id in db
      *
-     * @param
-     * @return
+     * @param sId .It is an int number
+     * @return a list <code>Skill</code> object
      * @throws Exception
      */
     public Skill getSkillById(int sId) throws Exception;
 
     /**
-     * Get
+     * check the skill has existed in db or not
      *
-     * @param
-     * @return
+     * @param sName .It is a <code>java.lang.String</code>
+     * @return boolean value
      * @throws Exception
      */
     public boolean findDupSkill(String sName) throws Exception;
 
     /**
-     * Get
+     * Insert new Rating into the database
      *
-     * @param
-     * @return
-     * @throws Exception
+     * @param x is a <code>Skill</code> object
+     * @throws java.lang.Exception
      */
     public void insert(Skill x) throws Exception;
 
@@ -82,7 +79,19 @@ public interface SkillDAO {
      */
     public void updateSkill(Skill skill) throws Exception;
 
+    /**
+     * Get number of all Skill of all user in the database
+     *
+     * @return an int number
+     */
     public int getTotalSkill();
 
+    /**
+     * Paging skill
+     *
+     * @param index is an int number
+     * @return a list <code>Skill</code> object
+     */
     public ArrayList<Skill> pagingSkill(int index);
+
 }

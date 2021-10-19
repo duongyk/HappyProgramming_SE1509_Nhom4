@@ -179,33 +179,33 @@
                                             </div>
                                         </div>
 
+                                        <p class="text-success">${mess}</p>  
 
+                                    <div class="row">
+                                        <div class="col-lg-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>
+                                                                        ID
+                                                                    </th>
+                                                                    <th>
+                                                                        Title
+                                                                    </th>
+                                                                    <th>
+                                                                        Email
+                                                                    </th>
 
-                                        <div class="row">
-                                            <div class="col-lg-12 grid-margin stretch-card">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>
-                                                                            ID
-                                                                        </th>
-                                                                        <th>
-                                                                            Title
-                                                                        </th>
-                                                                        <th>
-                                                                            Email
-                                                                        </th>
+                                                                    <th>
 
-                                                                        <th>
-                                                                        
-                                                                        </th>
+                                                                    </th>
 
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
                                                                 <c:forEach items="${listMess}" var="message">
                                                                     <tr>
                                                                         <td>
@@ -227,7 +227,7 @@
                                                                         </c:if>
                                                                         <c:if test="${message.isRead == '0'}">
                                                                             <td>
-                                                                                
+
                                                                             </td>
                                                                         </c:if>
 

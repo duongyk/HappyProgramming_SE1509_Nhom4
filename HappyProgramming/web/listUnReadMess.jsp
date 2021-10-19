@@ -200,9 +200,7 @@
                                                                             Email
                                                                         </th>
 
-                                                                        <th>
-                                                                            Is read
-                                                                        </th>
+                                                                       
 
                                                                     </tr>
                                                                 </thead>
@@ -219,9 +217,7 @@
                                                                             <c:out value="${message.email}"></c:out>
 
                                                                             </td>
-                                                                            <td>
-                                                                            ${message.isRead}
-                                                                        </td>
+                                                                            
 
                                                                     </tr>
                                                                 </c:forEach>

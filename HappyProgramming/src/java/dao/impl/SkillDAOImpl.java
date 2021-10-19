@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
 
     /**
-     * Get all Skill of the user in the database
+     * Get all Skill in the database
      *
      * @return a list <code>Skill</code> object
      * @throws java.lang.Exception
@@ -96,10 +96,10 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
     }
 
     /**
-     * Get all Skill of the user in the database
+     * Paging skill
      *
+     * @param index is an int number
      * @return a list <code>Skill</code> object
-     * @throws java.lang.Exception
      */
     @Override
     public ArrayList<Skill> pagingSkill(int index) {
@@ -174,10 +174,10 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return list;
     }
 
-    /**
-     * Get all Skill of the user in the database
+     /**
+     * Find Skill in the database
      *
-     * @param sName
+     * @param sName. It is a <code>java.lang.String</code>
      * @return a list <code>Skill</code> object
      * @throws java.lang.Exception
      */
@@ -219,7 +219,13 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return list;
     }
 
-    //viet thang
+   /**
+     * Find skill by Id in db
+     *
+     * @param sId .It is an int number
+     * @return a list <code>Skill</code> object
+     * @throws Exception
+     */
     @Override
     public Skill getSkillById(int sId) throws Exception {
         Connection conn = null;
@@ -251,9 +257,11 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return skill;
     }
 
-    /**
+     /**
      * Insert new Rating into the database
      *
+     * @param x is a <code>Skill</code> object
+     * @throws java.lang.Exception
      */
     @Override
     public void insert(Skill x) throws Exception {
@@ -280,15 +288,17 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
     }
 
     /**
-     * find duplicate skill in database
+     * check the skill has existed in db or not
      *
-     * @return a boolean object
+     * @param sName .It is a <code>java.lang.String</code>
+     * @return boolean value
+     * @throws Exception
      */
     @Override
     public boolean findDupSkill(String sName) throws Exception {
         ArrayList<Skill> sList = getAllSkill();
         for (Skill s : sList) {
-            if (sName.equalsIgnoreCase(s.getName())) {
+            if (sName.equalsIgnoreCase(s.getName())) { //check name of new skill has existed in db or not
                 return true;
             }
         }
@@ -296,10 +306,10 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
     }
 
     /**
-     * Update Skill in the database
+     * Update a Skill
      *
-     * @return null
-     * @throws java.lang.Exception
+     * @param skill it is an <code>Skill</code> object
+     * @throws Exception
      */
     @Override
     public void updateSkill(Skill skill) throws Exception {
@@ -327,13 +337,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
             closeConnection(conn);
         }
     }
-//
-//    public static void main(String[] args) {
-//        SkillDAOImpl dao = new SkillDAOImpl();
-//        ArrayList<Skill> list = dao.pagingSkill(2);
-//        for (Skill skill : list) {
-//            System.out.println(skill);
-//        }
-//
-//    }
+
+
+
 }

@@ -13,15 +13,15 @@ import entity.Message;
 import java.util.ArrayList;
 
 /**
- * This class contains methods to help us manipulate Rating objects in the
+ * This class contains methods to help us manipulate Messaging objects in the
  * database.
  *
- * @author duongvvhe150773
+ * @author giangnvthe150748
  */
 public interface MessageDAO {
 
     /**
-     * Get all Rating of the user in the database
+     * Get all Message of all user in the database
      *
      * @return a list <code>Rating</code> object
      * @throws Exception
@@ -35,7 +35,8 @@ public interface MessageDAO {
      * @throws Exception
      */
     public void insert(Message message) throws Exception;
-     /**
+
+    /**
      * Update new Message into the database
      *
      * @param id
@@ -43,23 +44,30 @@ public interface MessageDAO {
      */
 
     public void updateRead(String id) throws Exception;
- /**
-     * get  Message from the database
+
+    /**
+     * get Message from the database
      *
      * @param Id
-     * @return 
+     * @return Message
      * @throws Exception
      */
     public Message getMessageById(String Id) throws Exception;
- /**
-     * Delete  Message from the database
+
+    /**
+     * Delete Message from the database
      *
      * @param id
      * @throws Exception
      */
     public void delete(String id) throws Exception;
-    
-    
-    
+
+    /**
+     * Get Unread Message from the database
+     *
+     * @return 
+     * @throws Exception
+     */
+
     public ArrayList<Message> getUnReadMessage() throws Exception;
 }

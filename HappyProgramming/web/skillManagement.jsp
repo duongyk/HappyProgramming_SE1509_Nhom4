@@ -185,31 +185,31 @@
                                         </div>
 
 
+                                        <p class="text-success">${mess}</p>  
+                                    <div class="row">
+                                        <div class="col-lg-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>
+                                                                        Image
+                                                                    </th>
+                                                                    <th>
+                                                                        ID
+                                                                    </th>
+                                                                    <th>
+                                                                        Name
+                                                                    </th>
+                                                                    <th>
+                                                                        Detail
+                                                                    </th>
 
-                                        <div class="row">
-                                            <div class="col-lg-12 grid-margin stretch-card">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>
-                                                                            Image
-                                                                        </th>
-                                                                        <th>
-                                                                            ID
-                                                                        </th>
-                                                                        <th>
-                                                                            Name
-                                                                        </th>
-                                                                        <th>
-                                                                            Detail
-                                                                        </th>
-
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
                                                                 <c:forEach items="${sList}" var="skill">
                                                                     <tr>
                                                                         <td class="py-1">
@@ -238,7 +238,7 @@
                                     </div>
 
                                 </div>
-                                                         <div style="padding-left: 650px">
+                                <div style="padding-left: 650px">
                                     <c:forEach begin="1" end="${endPage}" var="i">
                                         <a class="${tag == i?"active":""}" href="AdminControllerMap?service=skillManage&index=${i}"> ${i}</a> 
                                     </c:forEach>
@@ -265,7 +265,7 @@
                                             &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
                                         </div>
                                         <div class="credits">
-                                       
+
                                             Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                                         </div>
                                     </div>
@@ -309,13 +309,13 @@
                                 border: none;
 
                             }
-                        
+
                             a.active {
                                 background-color: #8dc2fe ;
                                 color: #026adf;
                                 font-weight: bold;
                             }
-                        
+
                         </style>
                         </body>
 
