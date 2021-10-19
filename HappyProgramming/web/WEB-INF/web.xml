@@ -96,6 +96,34 @@
         <servlet-name>MenteeManagementController</servlet-name>
         <servlet-class>controller.MenteeManagementController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>listRequestByMe</servlet-name>
+        <servlet-class>controller.ListRequestByMe</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewRequest</servlet-name>
+        <servlet-class>controller.ViewRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateRequest</servlet-name>
+        <servlet-class>controller.UpdateRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RateComment</servlet-name>
+        <servlet-class>controller.RateComment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RequestByStatus</servlet-name>
+        <servlet-class>controller.RequestByStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListAllMentor</servlet-name>
+        <servlet-class>controller.ListAllMentor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchMentorPublic</servlet-name>
+        <servlet-class>controller.SearchMentorPublic</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminControllerMap</url-pattern>
@@ -191,6 +219,34 @@
     <servlet-mapping>
         <servlet-name>MenteeManagementController</servlet-name>
         <url-pattern>/menteeManagement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>listRequestByMe</servlet-name>
+        <url-pattern>/listRequestByMe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewRequest</servlet-name>
+        <url-pattern>/viewRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateRequest</servlet-name>
+        <url-pattern>/updateRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RateComment</servlet-name>
+        <url-pattern>/rateComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestByStatus</servlet-name>
+        <url-pattern>/requestByStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListAllMentor</servlet-name>
+        <url-pattern>/listAllMentor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchMentorPublic</servlet-name>
+        <url-pattern>/searchMentorPublic</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

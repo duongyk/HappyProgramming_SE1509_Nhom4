@@ -327,13 +327,13 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
             closeConnection(conn);
         }
     }
-
-    public static void main(String[] args) {
-        SkillDAOImpl dao = new SkillDAOImpl();
-        ArrayList<Skill> list = dao.pagingSkill(2);
-        for (Skill skill : list) {
-            System.out.println(skill);
-        }
-
-    }
+//
+//    public static void main(String[] args) {
+//        SkillDAOImpl dao = new SkillDAOImpl();
+//        ArrayList<Skill> list = dao.pagingSkill(2);
+//        for (Skill skill : list) {
+//            System.out.println(skill);
+//        }
+//
+//    }
 }

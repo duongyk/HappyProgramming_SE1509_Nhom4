@@ -63,7 +63,7 @@
                             <%-- Check the current User --%>    
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
+                                <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
                                 </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
@@ -99,7 +99,7 @@
                                     <c:choose>
                                         <%-- Status = 1 --%>
                                         <c:when test="${req.getStatus()==1}">
-                                            <form action="RequestControllerMap?service=updateRequest" method="POST">
+                                            <form action="updateRequest" method="POST">
                                                 <input type="hidden" name="rId" value="${req.id}">
                                                 <%-- Title --%>
                                                 <div class="form-row m-b-55">
@@ -235,7 +235,7 @@
                                         <%-- Request's Status = 2 (Processing) -> Cancel only --%>
                                         <c:otherwise>
 
-                                            <form action="RequestControllerMap?service=updateRequest" method="POST">
+                                            <form action="updateRequest" method="POST">
                                                 <input type="hidden" name="rId" value="${req.id}">
                                                 <div class="only"> You can only Cancel In-process Request!</div>
                                                 <%-- Title --%>

@@ -225,7 +225,7 @@ public class UserController extends HttpServlet {
                 // Get skill ID for Filter
                 int sId = Integer.parseInt(request.getParameter("sId"));
                 // Get name for Search
-                String name = request.getParameter("name");
+                String name = request.getParameter("name").trim();
                 // Filter by Skill
                 if (sId != 0 && name.equalsIgnoreCase("")) {
                     // Get index page 

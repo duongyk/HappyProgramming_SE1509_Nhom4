@@ -63,7 +63,7 @@
                             <%-- Check current User --%>   
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
+                                <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
                                 </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
@@ -133,9 +133,8 @@
                                 <h2 class="u-text u-text-font u-text-3">Rating: ${avg}/5</h2>
                             </c:if>
                             <c:if test="${sessionScope.currUser!=null}">
-                                <form action="RatingControllerMap" method="POST">
+                                <form action="rateComment" method="POST">
                                     <input type="hidden" name="mId" value="${mId}">
-                                    <input type="hidden" name="service" value="rateMentor">
                                     <div>
                                         <%-- Get Rate by star --%>
                                         <div class="rate">

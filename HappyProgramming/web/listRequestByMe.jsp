@@ -57,7 +57,7 @@
                             <%-- Check current User --%>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
+                                <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
                                 </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
@@ -111,46 +111,59 @@
                         </div>
                     </div>
                     <%-- Title  --%>
-                    <div class="col-md-8 section-title">
+                    <div class="col-md-8 section-title padding-bottom">
                         <h2 class="">List Request by me</h2>
                     </div>
-                    <div class="col-md-2"></div>
+                    <div class="col-md-2 filter-box"  style="padding-bottom: 20px;">
+                        <h2>Filter by Status</h2><hr>
+                        <%-- Status filter  --%>
+                        <div class="">
+                            <label class="label">Status</label>
+                            <c:choose>
+                                <c:when test="${status==1}">
+                                    <a class="status-filter1" href="listRequestByMe">All</a><br>
+                                    <a class="status-filter underline" href="requestByStatus?status=1">Pending</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=2">Processing</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=3">Done</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=4">Canceled</a>
+                                </c:when>
+
+                                <c:when test="${status==2}">
+                                    <a class="status-filter1" href="listRequestByMe">All</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=1">Pending</a><br>
+                                    <a class="status-filter underline" href="requestByStatus?status=2">Processing</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=3">Done</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=4">Canceled</a>
+                                </c:when>
+                                <c:when test="${status==3}">
+                                    <a class="status-filter1" href="listRequestByMe">All</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=1">Pending</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=2">Processing</a><br>
+                                    <a class="status-filter underline" href="requestByStatus?status=3">Done</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=4">Canceled</a>
+                                </c:when>
+                                <c:when test="${status==4}">
+                                    <a class="status-filter1" href="listRequestByMe">All</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=1">Pending</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=2">Processing</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=3">Done</a><br>
+                                    <a class="status-filter underline" href="requestByStatus?status=4">Canceled</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="status-filter1 underline" href="listRequestByMe">All</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=1">Pending</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=2">Processing</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=3">Done</a><br>
+                                    <a class="status-filter" href="requestByStatus?status=4">Canceled</a>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div> 
                 </div>
 
-                <form class="form" action="RequestControllerMap?service=filerListByMe" method="POST">
-                    <input type="hidden" name="filter" value="1">
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <input type="hidden" value="">
-                        <div class="col-md-3"></div>
-                        <%-- Dropdown for Skill Filter  --%>
-                        <div class="col-md-2">
-                            <label class="label" for="skill">Skill   </label>
-                            <select name="sId">
-                                <option id="skill" value="0" selected>Choose..</option>
-                                <c:forEach items="${sList}" var="skill">
-                                    <option id="skill" value="${skill.getId()}"><c:out value="${skill.getName()}"></c:out></option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <%-- Seacrh Name box  --%>
-                        <div class="col-md-2">
-                            <label class="label" for="skill">Status   </label>
-                            <select name="status">
-                                <option id="skill" value="0" selected>Choose..</option>
-                                <option id="skill" value="1">Pending</option>
-                                <option id="skill" value="2">Processing</option>
-                                <option id="skill" value="3">Done</option>
-                                <option id="skill" value="4">Canceled</option>
-                            </select>
-                        </div>
-                        <%-- Search button --%>
-                        <div class="col-md-1">
-                            <input class="search" type="submit" value="Search">
-                        </div>
-                        <div class="col-md-2"></div>
-                    </div>
-                </form>            
+                </div>
+
+
                 <div class="container">
                     <%-- List Request--%>
                     <div class="row">
@@ -186,7 +199,7 @@
                                             <img class="img-display" src="img/default-image.jpg">
                                             <div class="member-info">
                                                 <h4><c:out value="${request.title}"></c:out></h4>
-                                                <a class="view-button" href="RequestControllerMap?service=viewRequest&rId=${request.id}">View detail</a>
+                                                <a class="view-button" href="viewRequest?rId=${request.id}">View detail</a>
                                             </div>
                                         </div>
                                     </div>
@@ -201,30 +214,30 @@
                                 <%-- Previous --%>
                                 <c:choose>
                                     <c:when test="${index>1}">
-                                        <a class="previous" href="RequestControllerMap?service=listRequestByMe&index=${index-1}"><  </a>
+                                        <a class="previous" href="listRequestByMe&index=${index-1}"><  </a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a class="previous disabled" href="RequestControllerMap?service=listRequestByMe&index=${index-1}"><</a>
+                                        <a class="previous disabled" href="listRequestByMe&index=${index-1}"><</a>
                                     </c:otherwise>
                                 </c:choose>
                                 <%-- Page index --%>
                                 <c:forEach begin="1" end="${endPage}" var="page">
                                     <c:choose>
                                         <c:when test="${index==page}">
-                                            <a class="choose disabled" href="RequestControllerMap?service=listRequestByMe&index=${page}"> ${page}</a> 
+                                            <a class="choose disabled" href="listRequestByMe&index=${page}"> ${page}</a> 
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="RequestControllerMap?service=listRequestByMe&index=${page}"> ${page}</a> 
+                                            <a href="listRequestByMe&index=${page}"> ${page}</a> 
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
                                 <%-- Next --%>
                                 <c:choose>
                                     <c:when test="${index!=endPage}">
-                                        <a class="next" href="RequestControllerMap?service=listRequestByMe&index=${index+1}">  ></a>
+                                        <a class="next" href="listRequestByMe&index=${index+1}">  ></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a class="next disabled" href="RequestControllerMap?service=listRequestByMe&index=${index+1}">></a>
+                                        <a class="next disabled" href="listRequestByMe&index=${index+1}">></a>
                                     </c:otherwise>
                                 </c:choose>
                             </div> 

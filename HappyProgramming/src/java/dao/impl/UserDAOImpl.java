@@ -654,8 +654,8 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
                 + "u.[fullname], u.[password], u.[uMail],u.[uPhone], u.[dob],"
                 + " u.[gender], u.[uAvatar], u.[uRole], u.[uStatus] "
                 + "FROM [UserSkill] us INNER JOIN [USER] u "
-                + "ON us.[uId] = u.[uId] WHERE u.[uRole] = ? AND us.[sId] = ?"
-                + "AND u.[fullname] like ? ]) a WHERE RowNum between ? and ?";
+                + "ON us.[uId] = u.[uId] WHERE u.[uRole] = ? AND us.[sId] = ? "
+                + "AND u.[fullname] like ? ) a WHERE RowNum between ? and ?";
         User user;
         try {
             conn = getConnection();
@@ -704,6 +704,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, uRole);
             ps.setInt(2, sId);
+            ps.setString(3, "%"+name+"%");
             rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getInt("total");

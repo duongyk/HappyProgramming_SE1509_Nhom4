@@ -14,8 +14,8 @@
 }
 
 a.disabled {
-  pointer-events: none;
-  cursor: default;
+    pointer-events: none;
+    cursor: default;
 }
 
 .previous {
@@ -73,7 +73,7 @@ a.disabled {
 }
 
 .vl {
-  border-left: 3px solid lightblue;
+    border-left: 3px solid lightblue;
 }
 
 .displayy {
@@ -92,6 +92,7 @@ a.disabled {
 .search {
     height: 31px;
     width: 100px;
+    margin-top: 20px;
     background:rgb(84, 142, 228);
     border-radius: 0;
     color: #fff;
@@ -103,12 +104,29 @@ a.disabled {
 }
 
 .form {
-    padding-bottom: 30px;
+    padding-bottom: 50px;
+    border: 2px solid black;
+    padding: 10px 10px 10px 10px;
 }
 
 label.label {
     padding-right: 10px;
     font-weight: 600;
-  font-size: 18px;
-  color: #222222;
+    font-size: 18px;
+    color: #222222;
+}
+
+.status-filter1 {
+    font-weight: bold;
+    text-align: right;
+}
+
+.status-filter {
+    margin-left: 69px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.underline {
+    color: red;
 }

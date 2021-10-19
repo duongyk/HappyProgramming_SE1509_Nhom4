@@ -171,7 +171,7 @@ public class RequestController extends HttpServlet {
                     // Get all Skill for Filter
                     ArrayList<Skill> sList = skillDAO.getActiveSkill();
 
-                    request.setAttribute("rList", sList);
+                    request.setAttribute("sList", sList);
                     request.setAttribute("endPage", endPage);
                     request.setAttribute("index", index);
                     request.setAttribute("rList", rList);
@@ -273,10 +273,10 @@ public class RequestController extends HttpServlet {
              * Service viewRequest: View detail of a Request
              */
             if (service.equalsIgnoreCase("viewRequest")) {
-                // get request
+                // get Request
                 int rId = Integer.parseInt(request.getParameter("rId"));
                 Request req = requestDAO.getRequestById(rId);
-
+                // get Skills in Request
                 ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
 
                 request.setAttribute("sList", sList);
@@ -289,9 +289,10 @@ public class RequestController extends HttpServlet {
              * Request
              */
             if (service.equalsIgnoreCase("updateRequestForm")) {
-                // get request
+                // get Request
                 int rId = Integer.parseInt(request.getParameter("rId"));
                 Request req = requestDAO.getRequestById(rId);
+                // Check Sstatus of Request
                 if (req.getStatus() == 3 || req.getStatus() == 4) {
                     request.setAttribute("mess", "You can not update Done or Canceled Request!");
                     sendDispatcher(request, response, "RequestControllerMap?service=viewRequest&rId=" + req.getId());
@@ -325,13 +326,14 @@ public class RequestController extends HttpServlet {
                 int deadlineHour = Integer.parseInt(request.getParameter("deadlineHour"));
                 int status = Integer.parseInt(request.getParameter("status"));
                 String skillIds[] = request.getParameterValues("skill");
+                // get new chosen Skills
                 ArrayList<Integer> sIdList = new ArrayList<>();
-
                 if (skillIds != null) {
                     for (String id : skillIds) {
                         int sId = Integer.parseInt(id);
                         sIdList.add(sId);
                     }
+                // get old Skills
                 } else {
                     ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
                     for (Skill s : sList) {

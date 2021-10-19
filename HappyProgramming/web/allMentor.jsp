@@ -52,12 +52,12 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllMentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                             <%-- Check current User --%>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
+                                <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
                                 </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
@@ -101,32 +101,31 @@
                     </div>
                     <div class="col-md-2"></div>
                 </div>
-                <form class="form" action="UserControllerMap?service=filterAllMentor" method="POST">
-                    <input type="hidden" name="filter" value="1">
+                <form class="form" action="searchMentorPublic" method="GET">
                     <div class="row">
                         <div class="col-md-2"></div>
-                        <input type="hidden" value="">
-                        <div class="col-md-3"></div>
-                        <%-- Dropdown for Skill Filter  --%>
-                        <div class="col-md-2">
-                            <label class="label" for="skill">Skill   </label>
-                            <select name="sId">
-                                <option id="skill" value="0" selected>Choose..</option>
-                                <c:forEach items="${sList}" var="skill">
-                                    <option id="skill" value="${skill.getId()}"><c:out value="${skill.getName()}"></c:out></option>
-                                </c:forEach>
-                            </select>
-                        </div>
+                        <div class="col-md-6"></div>
+
                         <%-- Seacrh Name box  --%>
-                        <div class="col-md-2">
-                            <label class="label" for="name">Name </label>
-                            <input type="text" id="name" name="name" value=""  maxlength="10">
-                        </div>
+                        <c:choose>
+                            <c:when test="${name!=null}">
+                                <div class="col-md-2">
+                                    <label class="label" for="name">Name </label>
+                                    <input type="text" id="name" name="name" value="${name}"  maxlength="10">
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="col-md-2">
+                                    <label class="label" for="name">Name </label>
+                                    <input type="text" id="name" name="name" value=""  maxlength="10">
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                         <%-- Search button --%>
                         <div class="col-md-1">
                             <input class="search" type="submit" value="Search">
                         </div>
-                        <div class="col-md-2"></div>
+                        <div class="col-md-1"></div>
                     </div>
                 </form>            
                 <div class="container">
@@ -156,40 +155,41 @@
                     </div>
                     <%-- Paging --%>
                     <c:if test="${!empty mList}">
-                    <div class="row">  
-                        <div class="paging">
-                            <%-- Previous --%>
-                            <c:choose>
-                                <c:when test="${index>1}">
-                                    <a class="previous" href="UserControllerMap?service=listAllMentor&index=${index-1}"><  </a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="previous disabled" href="UserControllerMap?service=listAllMentor&index=${index-1}"><</a>
-                                </c:otherwise>
-                            </c:choose>
-                            <%-- Page index --%>
-                            <c:forEach begin="1" end="${endPage}" var="page">
+                        <div class="row">  
+                            <div class="paging">
+                                <%-- Previous --%>
                                 <c:choose>
-                                    <c:when test="${index==page}">
-                                        <a class="choose disabled" href="UserControllerMap?service=listAllMentor&index=${page}"> ${page}</a> 
+                                    <c:when test="${index>1}">
+                                        <a class="previous" href="${href}index=${index-1}"><</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="UserControllerMap?service=listAllMentor&index=${page}"> ${page}</a> 
+                                        <a class="previous disabled" href="${href}index=${index-1}"><</a>
                                     </c:otherwise>
                                 </c:choose>
-                            </c:forEach>
-                            <%-- Next --%>
-                            <c:choose>
-                                <c:when test="${index!=endPage}">
-                                    <a class="next" href="UserControllerMap?service=listAllMentor&index=${index+1}">  ></a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="next disabled" href="UserControllerMap?service=listAllMentor&index=${index+1}">></a>
-                                </c:otherwise>
-                            </c:choose>
-                        </div> 
-                    </div>
-                            </c:if>
+                                <%-- Page index --%>
+                                <c:forEach begin="1" end="${endPage}" var="page">
+                                    <c:choose>
+                                        <c:when test="${index==page}">
+                                            <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="${href}index=${page}"> ${page}</a> 
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <%-- Next --%>
+                                <c:choose>
+                                    <c:when test="${index!=endPage}">
+                                        <a class="next" href="${href}index=${index+1}">  ></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="next disabled" href="${href}index=${index+1}">></a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div> 
+                        </div>
+
+                    </c:if>
                 </div>
             </section>
         </main>

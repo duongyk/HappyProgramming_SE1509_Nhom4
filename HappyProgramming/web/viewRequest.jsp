@@ -174,7 +174,7 @@
                         </c:if>
                     </div>
                 </div>
-                <div class="col-md-2"><a href="RequestControllerMap?service=updateRequestForm&rId=${req.id}"><button class="create" style="min-width: 164px;">Update request</button></a> </div> 
+                <div class="col-md-2"><a href="updateRequest?rId=${req.id}"><button class="create" style="min-width: 164px;">Update request</button></a> </div> 
                 <div class="col-md-2"></div>
             </div>
 
