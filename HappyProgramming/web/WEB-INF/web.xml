@@ -29,6 +29,7 @@
         <servlet-class>controller.MessageController</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>ListAllSkill</servlet-name>
         <servlet-class>controller.ListAllSkill</servlet-class>
     </servlet>
@@ -55,6 +56,22 @@
     <servlet>
         <servlet-name>UserProfile</servlet-name>
         <servlet-class>controller.UserProfile</servlet-class>
+
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SignupController</servlet-name>
+        <servlet-class>controller.SignupController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CVProfileController</servlet-name>
+        <servlet-class>controller.CVProfileController</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
@@ -85,6 +102,7 @@
         <url-pattern>/MessageControllerMap</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>ListAllSkill</servlet-name>
         <url-pattern>/ListAllSkill</url-pattern>
     </servlet-mapping>
@@ -111,6 +129,22 @@
     <servlet-mapping>
         <servlet-name>UserProfile</servlet-name>
         <url-pattern>/UserProfile</url-pattern>
+
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignupController</servlet-name>
+        <url-pattern>/Signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CVProfileController</servlet-name>
+        <url-pattern>/CVProfile</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

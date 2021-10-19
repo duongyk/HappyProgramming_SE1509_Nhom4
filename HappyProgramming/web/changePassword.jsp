@@ -115,15 +115,14 @@
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input-white" type="email" name="email" pattern=".{4,50}" required="required">
-                                                        
+                                                        <input class="input-white" type="email" name="email" pattern=".{4,50}" required="required">                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">password</div>
+                                        <div class="name">old password</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" name="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number"">
@@ -131,7 +130,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">newPassword</div>
+                                        <div class="name">new Password</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" name="newPassword" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number">
@@ -139,7 +138,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">rePassword</div>
+                                        <div class="name">re-enter new Password</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" name="rePassword" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number"">
@@ -147,7 +146,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button class="btn btn--radius-2 btn--red" type="submit">Change</button>
+                                        <button class="btn btn--radius-2 btn--blue" type="submit" style=" margin-left: 230px; ">Change</button>
                                     </div>
                                 </form>
                                 <div class ="text-danger">
