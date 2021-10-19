@@ -31,7 +31,9 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     /**
      * Get all Request of the user in the database
      *
+     * @param user it is an <code>User</code> object
      * @return a list <code>Request</code> object
+     * @throws Exception
      */
     @Override
     public ArrayList<Request> getListByMe(User user) throws Exception {
@@ -78,7 +80,10 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * @return a new <code>Request</code> object
+     * Insert new request into the database
+     *
+     * @param req it is a <code>Request</code> object
+     * @throws Exception
      */
     @Override
     public int createRequest(Request req) throws Exception {
@@ -148,9 +153,11 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Get Total Request of the Mentee
+     * Get the total number of request of the user
      *
-     * @return a Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
+     * 
      * @throws Exception
      */
     @Override
@@ -181,9 +188,12 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Get Total Request of the Mentee by the status
+     * Get the number of request with the same status of the user
      *
-     * @return a Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @param status it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
+     * 
      * @throws Exception
      */
     @Override
@@ -215,9 +225,11 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Get Total Hour of the Mentee
+     * Get the total hour of request of the user
      *
-     * @return a Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
+     * 
      * @throws Exception
      */
     @Override
@@ -248,9 +260,10 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Get Total Request of all the Mentee
+     * Get the total hour of request of all user
      *
-     * @return a Integer number
+     * @return an <code>java.lang.Integer</code>
+     * 
      * @throws Exception
      */
     @Override
@@ -279,9 +292,11 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Get Total number of the Mentor
+     * Get the number of mentors of the user
      *
-     * @return a Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
+     * 
      * @throws Exception
      */
     @Override
@@ -312,8 +327,9 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Update the Request
+     * Update a request
      *
+     * @param req it is a <code>Request</code> object
      * @throws Exception
      */
     @Override
@@ -344,8 +360,10 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Update Request 's status
+     * Update status of a request
      *
+     * @param rId it is a <code>java.lang.Integer</code>
+     * @param status it is a <code>java.lang.Integer</code>
      * @throws Exception
      */
     @Override
@@ -372,8 +390,9 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Get a Request by ID
+     * Get request by ID
      *
+     * @param rId it is a <code>java.lang.Integer</code>
      * @return a <code>Request</code> object
      * @throws Exception
      */
@@ -410,9 +429,10 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Get statistic Request of a Mentee
+     * Get request statistic
      *
-     * @return a list of Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a list of <code>java.lang.Integer</code>
      * @throws Exception
      */
     @Override
@@ -439,6 +459,8 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     /**
      * Get Request of a Mentee by page
      *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param mId it is a <code>java.lang.Integer</code>
      * @return a list of <code>Request</code> object
      * @throws Exception
      */
@@ -481,91 +503,11 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Get Request of a Mentee by page after Filter by Skill
-     *
-     * @return a list of <code>Request</code> object
-     * @throws Exception
-     */
-    @Override
-    public ArrayList<Request> listByMeFilterSkillPaging(int index, int mId, int sId) throws Exception {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        UserDAO userDAO = new UserDAOImpl();
-        ArrayList<Request> list = new ArrayList<>();
-        Request req = null;
-        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY  "
-                + "r.[rId]) AS [RowNum], r.[rId], r.[title], r.[content],"
-                + " r.[fromId], r.[toId], r.[deadlineDate], r.[deadlineHour],"
-                + " r.[rStatus]  FROM [Request] r INNER JOIN [RequestSkill] rs"
-                + " ON r.[rId] = rs.[rId] WHERE r.[fromId] =? and rs.[sId] = ?)"
-                + " a WHERE RowNum BETWEEN ? and ?";
-        try {
-            conn = getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, mId);
-            ps.setInt(2, sId);
-            ps.setInt(3, index * 8 - 7);
-            ps.setInt(4, index * 8);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                req = new Request(rs.getInt("rId"),
-                        rs.getString("title"), rs.getString("content"),
-                        userDAO.getUserById(rs.getInt("fromId")),
-                        userDAO.getUserById(rs.getInt("toId")),
-                        rs.getDate("deadlineDate"), rs.getInt("deadlineHour"),
-                        rs.getInt("rStatus"));
-                list.add(req);
-            }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(ps);
-            closeConnection(conn);
-        }
-        return list;
-    }
-
-    /**
-     * Get total number of Request of a Mentee by page after Filter by Skill
-     *
-     * @return an Integer number
-     * @throws Exception
-     */
-    @Override
-    public int getTotalFilterSkill(int mId, int sId) throws Exception {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        int total = 0;
-        String sql = "SELECT COUNT(r.[rId]) as 'total' FROM [Request] r "
-                + "INNER JOIN [RequestSkill] rs ON r.[rId] = rs.[rId] "
-                + "WHERE r.[fromId] = ? and rs.[sId] = ?";
-        try {
-            conn = getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, mId);
-            ps.setInt(2, sId);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                total = rs.getInt("total");
-            }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(ps);
-            closeConnection(conn);
-        }
-        return total;
-    }
-
-    /**
      * Get Request of a Mentee by page after Filter by Status
      *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @param status it is a <code>java.lang.Integer</code>
      * @return a list of <code>Request</code> object
      * @throws Exception
      */
@@ -610,8 +552,10 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
 
     /**
      * Get total number of Request of a Mentee by page after Filter by Status
-     * 
-     * @return an Integer number
+     *
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @param status it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
     @Override
@@ -628,91 +572,6 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, mId);
             ps.setInt(2, status);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                total = rs.getInt("total");
-            }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(ps);
-            closeConnection(conn);
-        }
-        return total;
-    }
-
-    /**
-     * Get Request of a Mentee by page after Filter by Skill and Status
-     *
-     * @return a list of <code>Request</code> object
-     * @throws Exception
-     */
-    @Override
-    public ArrayList<Request> listByMeFilterPaging(int index, int mId, int sId, int status) throws Exception {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        UserDAO userDAO = new UserDAOImpl();
-        ArrayList<Request> list = new ArrayList<>();
-        Request req = null;
-        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY "
-                + "r.[rId]) AS [RowNum], r.[rId], r.[title], r.[content], "
-                + "r.[fromId], r.[toId], r.[deadlineDate], r.[deadlineHour],"
-                + " r.[rStatus] FROM [Request] r INNER JOIN [RequestSkill] rs"
-                + " ON r.[rId] = rs.[rId] WHERE r.[fromId] = ? and rs.[sId] = ?"
-                + " and r.[rStatus] = ?) a WHERE RowNum BETWEEN ? and ?";
-        try {
-            conn = getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, mId);
-            ps.setInt(2, sId);
-            ps.setInt(3, status);
-            ps.setInt(4, index * 8 - 7);
-            ps.setInt(5, index * 8);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                req = new Request(rs.getInt("rId"),
-                        rs.getString("title"), rs.getString("content"),
-                        userDAO.getUserById(rs.getInt("fromId")),
-                        userDAO.getUserById(rs.getInt("toId")),
-                        rs.getDate("deadlineDate"), rs.getInt("deadlineHour"),
-                        rs.getInt("rStatus"));
-                list.add(req);
-            }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(ps);
-            closeConnection(conn);
-        }
-        return list;
-    }
-
-    /**
-     * Get total number of Request of a Mentee by page after Filter by Skill and Status
-     *
-     * @return an Integer number
-     * @throws Exception
-     */
-    @Override
-    public int getTotalFilter(int mId, int sId, int status) throws Exception {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        int total = 0;
-        String sql = "SELECT COUNT(r.[rId]) as 'total' FROM [Request] r "
-                + "INNER JOIN [RequestSkill] rs ON r.[rId] = rs.[rId] "
-                + "WHERE r.[fromId] = ? and rs.[sId] = ? and r.[rStatus] = ?";
-        try {
-            conn = getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, mId);
-            ps.setInt(2, sId);
-            ps.setInt(3, status);
             rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getInt("total");

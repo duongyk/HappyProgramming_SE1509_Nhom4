@@ -9,7 +9,6 @@
  */
 package dao;
 
-import entity.Request;
 import entity.Skill;
 import java.util.ArrayList;
 
@@ -41,14 +40,14 @@ public interface RequestSkillDAO {
     /**
      * Get total number skill of all request
      *
-     * @return an Integer number
+     * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
     public int getTotalRequest() throws Exception;
     
     /**
      * Get all the Skills by the Request ID
-     * @param rId is an Integer number
+     * @param rId is a <code>java.lang.Integer</code>
      * @return a list <code>Skill</code> object 
      *@throws Exception
      */
@@ -56,8 +55,8 @@ public interface RequestSkillDAO {
     
     /**
      * Update RequestSkill table
-     * @param rId is an Integer number
-     * @param skillIds is a list of Skill ID
+     * @param rId is a <code>java.lang.Integer</code>
+     * @param skillIds is a list of a <code>java.lang.Integer</code>
      *@throws Exception
      */
     public void updateRequestSkill(int rId, ArrayList<Integer> skillIds) throws Exception;

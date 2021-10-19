@@ -135,10 +135,11 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
     }
     
     /**
-     * Get all Skill of the Mentor in the database
+     * Get all Skill of the User(Mentee/Mentor) in the database
      *
-     * @param uId of the mentor
+     * @param uId is a <code>java.lang.Integer</code>
      * @return list of all skills of the mentor
+     * @throws java.lang.Exception
      */
     @Override
     public ArrayList<Skill> getAllSkillUser(int uId) throws Exception {
@@ -171,10 +172,11 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
     }
 
     /**
-     * Get all Skill of the Mentor in the database
+     * Update new Skills of the User in the database
      *
-     * @param uId of the mentor
-     * @return list of all skills of the mentor
+     * @param uId it is <code>java.lang.Integer</code>
+     * @param sIdList is a list of <code>java.lang.Integer</code>
+     * @throws java.lang.Exception
      */
     @Override
     public void updateUserSkill(int uId, ArrayList<Integer> sIdList) throws Exception {

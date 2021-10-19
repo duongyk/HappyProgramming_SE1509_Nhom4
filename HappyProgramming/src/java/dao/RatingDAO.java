@@ -40,7 +40,7 @@ public interface RatingDAO {
     /**
      * Get average rating of the Mentor
      *
-     * @param mId it is an int number
+     * @param mId it is an <code>java.lang.Integer</code>
      * @return a String .It is a <code>java.lang.String</code>
      * @throws Exception
      */
@@ -49,8 +49,8 @@ public interface RatingDAO {
     /**
      * Check if Mentee has rated and commented on Mentor or not
      *
-     * @param fromId is an int number
-     * @param toId is an int number
+     * @param fromId it is an <code>java.lang.Integer</code>
+     * @param toId it is an <code>java.lang.Integer</code>
      * @return a boolean value
      * @throws Exception
      */

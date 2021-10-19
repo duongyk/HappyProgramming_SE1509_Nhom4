@@ -1,9 +1,6 @@
 /*
  * Copyright (C) 2021, FPT University<br>
  * SWP391 - SE1509 - Group 4<br>
-/*
- * Copyright (C) 2021, FPT University<br>
- * SWP391 - SE1509 - Group 4<br>
  * Happyprogramming<br>
  *
  * Record of change:<br>
@@ -54,7 +51,7 @@ public interface UserSkillDAO {
     /**
      * Get all Skill of the User(Mentee/Mentor) in the database
      *
-     * @param uId is an Integer number
+     * @param uId is a <code>java.lang.Integer</code>
      * @return list of all skills of the mentor
      * @throws java.lang.Exception
      */
@@ -63,8 +60,8 @@ public interface UserSkillDAO {
     /**
      * Update new Skills of the User in the database
      *
-     * @param uId it is an an Integer number
-     * @param sIdList is a list of Integer number
+     * @param uId it is <code>java.lang.Integer</code>
+     * @param sIdList is a list of <code>java.lang.Integer</code>
      * @throws java.lang.Exception
      */
     public void updateUserSkill(int uId, ArrayList<Integer> sIdList) throws Exception;

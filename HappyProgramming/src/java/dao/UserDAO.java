@@ -38,8 +38,8 @@ public interface UserDAO {
     /**
      * Get User by username and password
      *
-     * @param xName it is a String
-     * @param xPass it is a String
+     * @param xName it is a <code>java.lang.String</code>
+     * @param xPass it is a <code>java.lang.String</code>
      * @return a User it is a <code>User</code> object
      * @throws Exception
      */
@@ -48,7 +48,7 @@ public interface UserDAO {
     /**
      * Get list of User with the same role
      *
-     * @param uRole it is an int number
+     * @param uRole it is a <code>java.lang.Integer</code>
      * @return a list of <code>User</code> object
      * @throws Exception
      */
@@ -57,7 +57,7 @@ public interface UserDAO {
     /**
      * Get a user by his/ger ID
      *
-     * @param uId it is an int number
+     * @param uId it is a <code>java.lang.Integer</code>
      * @return a <code>User</code> object
      * @throws Exception
      */
@@ -66,7 +66,7 @@ public interface UserDAO {
     /**
      * Check if the account existed or not
      *
-     * @param xName is a String
+     * @param xName is a <code>java.lang.String</code>
      * @return a <code>User</code> object
      * @throws Exception
      */
@@ -83,9 +83,9 @@ public interface UserDAO {
     /**
      * Update user information
      *
-     * @param uId it is an int number
+     * @param uId it is a <code>java.lang.Integer</code>
      * @param user it is a <code>User</code> object
-     * @return an int number
+     * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
     public int updateUserInfo(int uId, User user) throws Exception;
@@ -93,7 +93,7 @@ public interface UserDAO {
     /**
      * Update user information
      *
-     * @param email it is a String
+     * @param email it is a <code>java.lang.String</code>
      * @return a <code>User</code> object
      * @throws Exception
      */
@@ -103,7 +103,7 @@ public interface UserDAO {
      * Get user and reset that user password in database
      *
      * @param user it is a <code>User</code> object
-     * @param password it is a String
+     * @param password it is a <code>java.lang.String</code>
      * @return a <code>User</code> object
      * @throws Exception
      */
@@ -122,8 +122,8 @@ public interface UserDAO {
     /**
      * Get list of User with the same role by page
      *
-     * @param index it is an Integer number
-     * @param uRole it is an Integer number
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param uRole it is a <code>java.lang.Integer</code>
      * @return a list of <code>User</code> object
      * @throws Exception
      */
@@ -132,9 +132,9 @@ public interface UserDAO {
     /**
      * Get list of User with the same role by page after Filter by name
      *
-     * @param index it is an Integer number
-     * @param uRole it is an Integer number
-     * @param name it is an String
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param uRole it is a <code>java.lang.Integer</code>
+     * @param name it is a <code>java.lang.String</code>
      * @return a list of <code>User</code> object
      * @throws Exception
      */
@@ -143,55 +143,20 @@ public interface UserDAO {
     /**
      * Get total number of User with the same role Filter by name
      *
-     * @param uRole it is an Integer number
-     * @param name it is an String
-     * @return a Integer number
+     * @param uRole it is a <code>java.lang.Integer</code>
+     * @param name it is a <code>java.lang.String</code>
+     * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
     public int getTotalFilterName(int uRole, String name) throws Exception;
 
     /**
-     * Get list of User with the same role by page after Filter by Skill
-     *
-     * @param index it is an Integer number
-     * @param uRole it is an Integer number
-     * @param sId it is an Integer number
-     * @return a list of <code>User</code> object
-     * @throws Exception
-     */
-    public ArrayList<User> getUserByRoleFilterPaging(int index, int uRole, int sId) throws Exception;
-
-    /**
      * Get total number of User with the same role Filter by name
      *
-     * @param uRole it is an Integer number
-     * @param sId it is an Integer number
-     * @return a Integer number
+     * @param uRole it is a <code>java.lang.Integer</code>
+     * @param sId it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
     public int getTotalFilterSkill(int uRole, int sId) throws Exception;
-
-    /**
-     * Get list of User with the same role by page after Filter by Skill and
-     * Name
-     *
-     * @param index it is an Integer number
-     * @param uRole it is an Integer number
-     * @param sId it is an Integer number
-     * @param name it is an String
-     * @return a list of <code>User</code> object
-     * @throws Exception
-     */
-    public ArrayList<User> getUserByRoleFilterPaging(int index, int uRole, int sId, String name) throws Exception;
-
-    /**
-     * Get total number of User with the same role Filter by Name and Skill
-     *
-     * @param uRole it is an Integer number
-     * @param sId it its an Integer number
-     * @param name it is an String
-     * @return a Integer number
-     * @throws Exception
-     */
-    public int getTotalFilterNameSkill(int uRole, int sId, String name) throws Exception;
 }

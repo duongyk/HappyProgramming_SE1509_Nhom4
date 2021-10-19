@@ -115,7 +115,7 @@ public class RequestByStatus extends HttpServlet {
             // Get all Skill for Filter
             ArrayList<Skill> sList = skillDAO.getActiveSkill();
 
-            // Set href
+            // Set href of paging
             String href = "requestByStatus?status="+String.valueOf(status)+"&";
             
             request.setAttribute("href", href);/*href paging*/

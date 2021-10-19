@@ -29,6 +29,12 @@ import util.SendEmail;
  */
 public class UserDAOImpl extends DBContext implements dao.UserDAO {
 
+    /**
+     * Get all the User
+     *
+     * @return list of <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public ArrayList<User> getUserList() throws Exception {
         Connection conn = null;
@@ -57,6 +63,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return (t);
     }
 
+    /**
+     * Get a user by his/ger ID
+     *
+     * @param uId it is a <code>java.lang.Integer</code>
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public User getUserById(int uId) throws Exception {
         Connection conn = null;
@@ -82,6 +95,14 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return null;
     }
 
+    /**
+     * Get User by username and password
+     *
+     * @param xName it is a <code>java.lang.String</code>
+     * @param xPass it is a <code>java.lang.String</code>
+     * @return a User it is a <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public User getUser(String xName, String xPass) throws Exception {
         Connection conn = null;
@@ -111,6 +132,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return null;
     }
 
+    /**
+     * Check if the account existed or not
+     *
+     * @param xName is a <code>java.lang.String</code>
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public User checkAccount(String xName) throws Exception { // check xem tài khoản này đã tồn tại trong db chưa
         Connection conn = null;
@@ -139,14 +167,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
         return null;
     }
+    
     /**
-     * sign up
+     * Create and insert new User account into the database
      *
-     * @param User 
-     * @return a <code>User</code> object
+     * @param user it is a <code>User</code> object
      * @throws Exception
      */
-
     @Override
     public void signUp(User user) throws Exception {
         Connection conn = null;
@@ -208,7 +235,14 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return null;
     }
 
-    //viet thang
+    /**
+     * Update user information
+     *
+     * @param uId it is a <code>java.lang.Integer</code>
+     * @param user it is a <code>User</code> object
+     * @return a <code>java.lang.Integer</code>
+     * @throws Exception
+     */
     @Override
     public int updateUserInfo(int uid, User user) throws Exception {
         Connection conn = null;
@@ -255,6 +289,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return status;
     }
 
+    /**
+     * Get list of User with the same role
+     *
+     * @param uRole it is a <code>java.lang.Integer</code>
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public ArrayList<User> getUserByRole(int uRole) throws Exception {
         Connection conn = null;
@@ -297,7 +338,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     /**
      * Update user information
      *
-     * @param email it is a String
+     * @param email it is a <code>java.lang.String</code>
      * @return a <code>User</code> object
      * @throws Exception
      */
@@ -413,6 +454,12 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
     }
 
+    /**
+     * Get all the Mentee listed by Name
+     *
+     * @return list of <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public ArrayList<User> getMenteeListSorted() throws Exception {
         Connection conn = null;
@@ -442,8 +489,10 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     }
 
     /**
-     * Get all the User by Role by page
+     * Get list of User with the same role by page
      *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param uRole it is a <code>java.lang.Integer</code>
      * @return a list of <code>User</code> object
      * @throws Exception
      */
@@ -483,8 +532,11 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     }
 
     /**
-     * Get all the User by Role by page Filter by Name
+     * Get list of User with the same role by page after Filter by name
      *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param uRole it is a <code>java.lang.Integer</code>
+     * @param name it is a <code>java.lang.String</code>
      * @return a list of <code>User</code> object
      * @throws Exception
      */
@@ -527,7 +579,9 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     /**
      * Get total number of User with the same role Filter by name
      *
-     * @return a Integer number
+     * @param uRole it is a <code>java.lang.Integer</code>
+     * @param name it is a <code>java.lang.String</code>
+     * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
     @Override
@@ -558,55 +612,11 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     }
 
     /**
-     * Get all the User by Role by page Filter by Skill
+     * Get total number of User with the same role Filter by name
      *
-     * @return a list of <code>User</code> object
-     * @throws Exception
-     */
-    @Override
-    public ArrayList<User> getUserByRoleFilterPaging(int index, int uRole, int sId) throws Exception {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        ArrayList<User> list = new ArrayList<>();
-        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY "
-                + "us.[uId]) AS RowNum, us.[uId],us.[sId], u.[username], "
-                + "u.[fullname], u.[password], u.[uMail],u.[uPhone], u.[dob],"
-                + " u.[gender], u.[uAvatar], u.[uRole], u.[uStatus] "
-                + "FROM [UserSkill] us  INNER JOIN [USER] u "
-                + "ON us.[uId] = u.[uId] WHERE u.[uRole] = ? "
-                + "and us.[sId] = ?) a  WHERE RowNum between ? and ?";
-        User user;
-        try {
-            conn = getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, uRole);
-            ps.setInt(2, sId);
-            ps.setInt(3, index * 8 - 7);
-            ps.setInt(4, index * 8);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                user = new User(rs.getInt("uId"), rs.getString("username"),
-                        rs.getString("password"), rs.getString("fullname"),
-                        rs.getString("uMail"), rs.getString("uPhone"),
-                        rs.getDate("dob"), rs.getString("gender"),
-                        rs.getString("uAvatar"), rs.getInt("uRole"));
-                list.add(user);
-            }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(ps);
-            closeConnection(conn);
-        }
-        return list;
-    }
-
-    /**
-     * Get total number of User with the same role Filter by Skill
-     *
-     * @return a Integer number
+     * @param uRole it is a <code>java.lang.Integer</code>
+     * @param sId it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
     @Override
@@ -623,88 +633,6 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, uRole);
             ps.setInt(2, sId);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                total = rs.getInt("total");
-            }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(ps);
-            closeConnection(conn);
-        }
-        return total;
-    }
-
-    /**
-     * Get all the User by Role by page Filter by Name and Skill
-     *
-     * @return a list of <code>User</code> object
-     * @throws Exception
-     */
-    @Override
-    public ArrayList<User> getUserByRoleFilterPaging(int index, int uRole, int sId, String name) throws Exception {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        ArrayList<User> list = new ArrayList<>();
-        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY "
-                + "us.[uId]) AS RowNum,us.[uId],us.[sId], u.[username], "
-                + "u.[fullname], u.[password], u.[uMail],u.[uPhone], u.[dob],"
-                + " u.[gender], u.[uAvatar], u.[uRole], u.[uStatus] "
-                + "FROM [UserSkill] us INNER JOIN [USER] u "
-                + "ON us.[uId] = u.[uId] WHERE u.[uRole] = ? AND us.[sId] = ? "
-                + "AND u.[fullname] like ? ) a WHERE RowNum between ? and ?";
-        User user;
-        try {
-            conn = getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, uRole);
-            ps.setInt(2, sId);
-            ps.setString(3, "%" + name + "%");
-            ps.setInt(4, index * 8 - 7);
-            ps.setInt(5, index * 8);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                user = new User(rs.getInt("uId"), rs.getString("username"),
-                        rs.getString("password"), rs.getString("fullname"),
-                        rs.getString("uMail"), rs.getString("uPhone"),
-                        rs.getDate("dob"), rs.getString("gender"),
-                        rs.getString("uAvatar"), rs.getInt("uRole"));
-                list.add(user);
-            }
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            closeResultSet(rs);
-            closePreparedStatement(ps);
-            closeConnection(conn);
-        }
-        return list;
-    }
-
-    /**
-     * Get total number of User with the same role Filter by Skill and Name
-     *
-     * @return a Integer number
-     * @throws Exception
-     */
-    @Override
-    public int getTotalFilterNameSkill(int uRole, int sId, String name) throws Exception {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        int total = 0;
-        String sql = "SELECT COUNT(u.[uId]) as 'total' FROM [User] u "
-                + "INNER JOIN [UserSkill] us ON u.[uId] = us.[uId] "
-                + "WHERE u.[uRole] = ? AND us.[sId] = ? AND u.[fullname] like ?";
-        try {
-            conn = getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, uRole);
-            ps.setInt(2, sId);
-            ps.setString(3, "%"+name+"%");
             rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getInt("total");

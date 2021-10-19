@@ -11,7 +11,6 @@ package dao.impl;
 
 import context.DBContext;
 import dao.SkillDAO;
-import entity.Request;
 import entity.Skill;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -81,6 +80,12 @@ public class RequestSkillDAOImpl extends DBContext implements dao.RequestSkillDA
         return n;
     }
 
+    /**
+     * Get total number skill of all request
+     *
+     * @return a <code>java.lang.Integer</code>
+     * @throws Exception
+     */
     @Override
     public int getTotalRequest() throws Exception {
         Connection conn = null;
@@ -106,6 +111,12 @@ public class RequestSkillDAOImpl extends DBContext implements dao.RequestSkillDA
         return total;
     }
 
+    /**
+     * Update RequestSkill table
+     * @param rId is a <code>java.lang.Integer</code>
+     * @param skillIds is a list of a <code>java.lang.Integer</code>
+     *@throws Exception
+     */
     @Override
     public void updateRequestSkill(int rId, ArrayList<Integer> skillIds) throws Exception {
         Connection conn = null;
@@ -137,6 +148,12 @@ public class RequestSkillDAOImpl extends DBContext implements dao.RequestSkillDA
         }
     }
 
+    /**
+     * Get all the Skills by the Request ID
+     * @param rId is a <code>java.lang.Integer</code>
+     * @return a list <code>Skill</code> object 
+     *@throws Exception
+     */
     @Override
     public ArrayList<Skill> getSkill(int rId) throws Exception {
         Connection conn = null;

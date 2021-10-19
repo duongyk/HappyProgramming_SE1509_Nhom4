@@ -1,22 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        DuongVV          First Deploy<br>
+ * 18-10-2021    2.0        DuongVV          Update<br>
  */
 package controller;
 
 import dao.RatingDAO;
-import dao.RequestDAO;
-import dao.RequestSkillDAO;
-import dao.SkillDAO;
 import dao.UserDAO;
-import dao.UserSkillDAO;
 import dao.impl.RatingDAOImpl;
-import dao.impl.RequestDAOImpl;
-import dao.impl.RequestSkillDAOImpl;
-import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
-import dao.impl.UserSkillDAOImpl;
 import entity.Rating;
 import entity.User;
 import java.io.IOException;
@@ -31,8 +28,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class has the process request of Rate and Comment
  *
- * @author Duong
+ * @author DuongVV
  */
 public class RateComment extends HttpServlet {
 
@@ -62,18 +60,26 @@ public class RateComment extends HttpServlet {
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RateComment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method. Get all the Rate and Comment of
+     * the Mentor
      *
      * @param request servlet request
      * @param response servlet response
@@ -84,6 +90,7 @@ public class RateComment extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // initiate DAO
             UserDAO userDAO = new UserDAOImpl();
             RatingDAO ratingDAO = new RatingDAOImpl();
             // get Mentor
@@ -94,9 +101,10 @@ public class RateComment extends HttpServlet {
             // get avarage rating
             String avg = ratingDAO.getAvgRate(mId);
 
-            request.setAttribute("mId", mId);
             request.setAttribute("avg", avg);
+            /*Avarage rating*/
             request.setAttribute("mentor", mentor);
+            /*Mentor*/
             request.setAttribute("listRating", listRating);
 
             sendDispatcher(request, response, "rateComment.jsp");
@@ -108,7 +116,8 @@ public class RateComment extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method. Create new Rate and Comment
+     * and insert it into the Database
      *
      * @param request servlet request
      * @param response servlet response
@@ -119,6 +128,7 @@ public class RateComment extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // initiate DAO
             UserDAO userDAO = new UserDAOImpl();
             RatingDAO ratingDAO = new RatingDAOImpl();
             // Get current User/ Mentee who rates the Mentor
@@ -135,49 +145,30 @@ public class RateComment extends HttpServlet {
                 // get avarage rating
                 String avg = ratingDAO.getAvgRate(mId);
 
-                request.setAttribute("mId", mId);
-                request.setAttribute("avg", avg);
-                request.setAttribute("mentor", mentor);
-                request.setAttribute("listRating", listRating);
+                request.setAttribute("avg", avg);/*Avarage rating*/
+                request.setAttribute("mentor", mentor);/*Mentor*/
+                request.setAttribute("listRating", listRating);/*List rating*/
 
                 sendDispatcher(request, response, "rateComment.jsp");
             } else {
                 // Get rate and comment
                 int rate = Integer.parseInt(request.getParameter("rate"));
                 String comment = request.getParameter("comment").trim();
-                // Check comment blank
-                if (comment.equals("")) {
-                    String messBlank = "Comment contains only space, please Re-input";
-                    request.setAttribute("messBlank", messBlank);
 
-                    // get list Rating from Mentor
-                    ArrayList<Rating> listRating = ratingDAO.getRating(mentor);
-                    // get avarage rating
-                    String avg = ratingDAO.getAvgRate(mId);
+                // Create and insert rate
+                Rating rating = new Rating(user, mentor, comment, rate);
+                ratingDAO.insert(rating);
 
-                    request.setAttribute("mId", mId);
-                    request.setAttribute("avg", avg);
-                    request.setAttribute("mentor", mentor);
-                    request.setAttribute("listRating", listRating);
+                // get list Rating from Mentor
+                ArrayList<Rating> listRating = ratingDAO.getRating(mentor);
+                // get avarage rating
+                String avg = ratingDAO.getAvgRate(mId);
 
-                    sendDispatcher(request, response, "rateComment.jsp");
-                } else {
-                    // Create and insert rate
-                    Rating rating = new Rating(user, mentor, comment, rate);
-                    ratingDAO.insert(rating);
+                request.setAttribute("avg", avg);/*Avarage rating*/
+                request.setAttribute("mentor", mentor);/*Mentor*/
+                request.setAttribute("listRating", listRating);/*List rating*/
 
-                    // get list Rating from Mentor
-                    ArrayList<Rating> listRating = ratingDAO.getRating(mentor);
-                    // get avarage rating
-                    String avg = ratingDAO.getAvgRate(mId);
-
-                    request.setAttribute("mId", mId);
-                    request.setAttribute("avg", avg);
-                    request.setAttribute("mentor", mentor);
-                    request.setAttribute("listRating", listRating);
-
-                    sendDispatcher(request, response, "rateComment.jsp");
-                }
+                sendDispatcher(request, response, "rateComment.jsp");
             }
         } catch (Exception e) {
             Logger.getLogger(RateComment.class.getName()).log(Level.SEVERE, null, e);

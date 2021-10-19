@@ -32,7 +32,9 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
     /**
      * Get all Rating of the user in the database
      *
+     * @param user it is an object User
      * @return a list <code>Rating</code> object
+     * @throws Exception
      */
     @Override
     public ArrayList<Rating> getRating(User user) throws Exception {
@@ -105,8 +107,9 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
     /**
      * Get average rating of the Mentor
      *
-     * @return a String .It is a <code>java.lang.String</code> object
-     * @throws java.lang.Exception
+     * @param mId it is an <code>java.lang.Integer</code>
+     * @return a String .It is a <code>java.lang.String</code>
+     * @throws Exception
      */
     @Override
     public String getAvgRate(int mId) throws Exception {
@@ -140,9 +143,11 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
     }
 
     /**
-     * Check for duplicate Rating
+     * Check if Mentee has rated and commented on Mentor or not
      *
-     * @return a String .It is a <code>java.lang.String</code> object
+     * @param fromId it is an <code>java.lang.Integer</code>
+     * @param toId it is an <code>java.lang.Integer</code>
+     * @return a boolean value
      * @throws Exception
      */
     @Override

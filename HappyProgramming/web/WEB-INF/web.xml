@@ -178,7 +178,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserProfile</servlet-name>
-        <url-pattern>/UserProfile</url-pattern> 
+        <url-pattern>/UserProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>

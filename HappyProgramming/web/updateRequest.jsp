@@ -58,7 +58,7 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="listAllmentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                             <%-- Check the current User --%>    
                             <c:choose>
@@ -108,7 +108,10 @@
                                                         <div class="row row-space">
                                                             <div class="col-12">
                                                                 <div class="input-group-desc">
-                                                                    <input class="input-white" type="text" name="title" placeholder="Your Request Title" pattern=".*\S+.*" title="No white space only" maxlength="100" value="${req.getTitle()}" required>
+                                                                    <input class="input-white" id="title" type="text" name="title" placeholder="Your Request Title" maxlength="100" onkeyup="checkSpace1()" value="${req.getTitle()}" required>
+                                                                <%-- Message for checkSpace --%>
+                                                                <p id="title-space" style="display:none; color:red">Title contains only space</p>
+                                                                <p id="title-space-1" style="color:white;">Valid input</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -122,12 +125,10 @@
                                                         <div class="input-group">
                                                             <textarea class="input-white" id="content" type="text" name="content" maxlength="200" required  rows="3" cols="54" onkeyup="checkSpace()"><c:out value="${req.getContent()}"></c:out></textarea>
                                                             </div>
-                                                        </div>
-                                                            <div class="input-group">
-                                                                <%-- Message for checkSpace --%>
+                                                            <%-- Message for checkSpace --%>
                                                                 <p id="text-space" style="display:none; color:red">Content contains only space</p>
                                                                 <p id="text-space-1" style="color:white;">Valid input</p>
-                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                 <%-- Deadline Date --%>

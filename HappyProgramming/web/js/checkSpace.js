@@ -18,3 +18,18 @@ function checkSpace() {
         document.getElementById("button").disabled = false;
     }
 }
+
+function checkSpace1() {
+    var string = document.getElementById("title").value;
+    var text = document.getElementById("title-space");
+    var text1 = document.getElementById("title-space-1");
+    if (!string.trim()) {
+        text.style.display = "block";
+        text1.style.display = "none";
+        document.getElementById("button").disabled = true;
+    } else {
+        text.style.display = "none";
+        text1.style.display = "block";
+        document.getElementById("button").disabled = false;
+    }
+}

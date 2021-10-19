@@ -1,23 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        DuongVV          First Deploy<br>
+ * 18-10-2021    2.0        DuongVV          Update<br>
  */
 package controller;
 
-import dao.RatingDAO;
-import dao.RequestDAO;
-import dao.RequestSkillDAO;
-import dao.SkillDAO;
 import dao.UserDAO;
-import dao.UserSkillDAO;
-import dao.impl.RatingDAOImpl;
-import dao.impl.RequestDAOImpl;
-import dao.impl.RequestSkillDAOImpl;
-import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
-import dao.impl.UserSkillDAOImpl;
-import entity.Skill;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,8 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Duong
+ *  This class has the process request of List All Mentor
+ * @author DuongVV
  */
 public class ListAllMentor extends HttpServlet {
 
@@ -53,15 +47,21 @@ public class ListAllMentor extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListAllMentor</title>");
+            out.println("<title>Servlet listAllMentor</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListAllMentor at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet listAllMentor at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions and log it
+     * @param request   Request of the servlet
+     * @param response  Response of the servlet
+     * @param path      Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -73,7 +73,7 @@ public class ListAllMentor extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
+     * Get all the Mentor
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -83,12 +83,8 @@ public class ListAllMentor extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // initiate DAO
             UserDAO userDAO = new UserDAOImpl();
-            RequestDAO requestDAO = new RequestDAOImpl();
-            RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
-            SkillDAO skillDAO = new SkillDAOImpl();
-            UserSkillDAO usDAO = new UserSkillDAOImpl();
-
             // Get all Mentor
             ArrayList<User> mListAll = userDAO.getUserByRole(2);
             // Get index page 
@@ -99,22 +95,20 @@ public class ListAllMentor extends HttpServlet {
             int index = Integer.parseInt(indexPage);
             // Get list request of the user
             ArrayList<User> mList = userDAO.getUserByRolePaging(index, 2);
+            // Total Mentor for paging
             int count = mListAll.size();
             // Calculate total page for paging
             int endPage = count / 8;
             if (count % 8 != 0) {
                 endPage++;
             }
-            // Get all Skill for Filter
-            ArrayList<Skill> sList = skillDAO.getActiveSkill();
             // Set href of paging
             String href = "listAllMentor?";
-            request.setAttribute("href", href);
-
-            request.setAttribute("sList", sList);
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("index", index);
-            request.setAttribute("mList", mList);
+            // Set attribute to request
+            request.setAttribute("href", href);/*href paging*/
+            request.setAttribute("endPage", endPage);/*end page of paging*/
+            request.setAttribute("index", index);/*index/current page*/
+            request.setAttribute("mList", mList);/*Mentor list*/
             sendDispatcher(request, response, "allMentor.jsp");
         } catch (Exception e) {
             Logger.getLogger(ListAllMentor.class.getName()).log(Level.SEVERE, null, e);

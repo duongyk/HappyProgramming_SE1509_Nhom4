@@ -1,7 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        DuongVV          First Deploy<br>
+ * 18-10-2021    2.0        DuongVV          Update<br>
  */
 package controller;
 
@@ -23,8 +28,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class has the process request of View Request detail
  *
- * @author Duong
+ * @author DuongVV
  */
 public class ViewRequest extends HttpServlet {
 
@@ -54,19 +60,26 @@ public class ViewRequest extends HttpServlet {
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
+     * Get the Request Details
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -76,6 +89,7 @@ public class ViewRequest extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // initiate DAO
             RequestDAO requestDAO = new RequestDAOImpl();
             RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
             // get Request
@@ -84,8 +98,8 @@ public class ViewRequest extends HttpServlet {
             // get Skills in Request
             ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
 
-            request.setAttribute("sList", sList);
-            request.setAttribute("req", req);
+            request.setAttribute("sList", sList);/*Skills of Request*/
+            request.setAttribute("req", req);/*Request*/
             sendDispatcher(request, response, "viewRequest.jsp");
         } catch (Exception e) {
             Logger.getLogger(ViewRequest.class.getName()).log(Level.SEVERE, null, e);

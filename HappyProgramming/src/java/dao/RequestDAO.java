@@ -32,7 +32,7 @@ public interface RequestDAO {
     /**
      * Insert new request into the database
      *
-     * @param req it is an <code>Request</code> object
+     * @param req it is a <code>Request</code> object
      * @throws Exception
      */
     public int createRequest(Request req) throws Exception;
@@ -43,8 +43,8 @@ public interface RequestDAO {
     /**
      * Get the total number of request of the user
      *
-     * @param mId it is an Integer number
-     * @return an Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
      * 
      * @throws Exception
      */
@@ -53,8 +53,8 @@ public interface RequestDAO {
     /**
      * Get the number of mentors of the user
      *
-     * @param mId it is an Integer number
-     * @return an Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
      * 
      * @throws Exception
      */
@@ -63,9 +63,9 @@ public interface RequestDAO {
     /**
      * Get the number of request with the same status of the user
      *
-     * @param mId it is an Integer number
-     * @param status it is an Integer number
-     * @return an Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @param status it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
      * 
      * @throws Exception
      */
@@ -74,8 +74,8 @@ public interface RequestDAO {
     /**
      * Get the total hour of request of the user
      *
-     * @param mId it is an Integer number
-     * @return an Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
      * 
      * @throws Exception
      */
@@ -84,7 +84,7 @@ public interface RequestDAO {
     /**
      * Get the total hour of request of all user
      *
-     * @return an Integer number
+     * @return an <code>java.lang.Integer</code>
      * 
      * @throws Exception
      */
@@ -93,7 +93,7 @@ public interface RequestDAO {
     /**
      * Update a request
      *
-     * @param req it is an <code>Request</code> object
+     * @param req it is a <code>Request</code> object
      * @throws Exception
      */
     public void updateRequest(Request req) throws Exception;
@@ -101,8 +101,8 @@ public interface RequestDAO {
     /**
      * Update status of a request
      *
-     * @param rId it is an Integer number
-     * @param status it is an Integer number
+     * @param rId it is a <code>java.lang.Integer</code>
+     * @param status it is a <code>java.lang.Integer</code>
      * @throws Exception
      */
     public void updateStatusRequest(int rId, int status) throws Exception;
@@ -110,7 +110,7 @@ public interface RequestDAO {
     /**
      * Get request by ID
      *
-     * @param rId it is an <code>Request</code> object
+     * @param rId it is a <code>java.lang.Integer</code>
      * @return a <code>Request</code> object
      * @throws Exception
      */
@@ -119,8 +119,8 @@ public interface RequestDAO {
     /**
      * Get request statistic
      *
-     * @param mId it is an Integer number
-     * @return a list of Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a list of <code>java.lang.Integer</code>
      * @throws Exception
      */
     public ArrayList<Integer> getStatistic(int mId) throws Exception;
@@ -128,40 +128,19 @@ public interface RequestDAO {
     /**
      * Get Request of a Mentee by page
      *
-     * @param index it is an Integer number
-     * @param mId it is an Integer number
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param mId it is a <code>java.lang.Integer</code>
      * @return a list of <code>Request</code> object
      * @throws Exception
      */
     public ArrayList<Request> listByMePaging(int index, int mId) throws Exception;
-    
-    /**
-     * Get Request of a Mentee by page after Filter by Skill
-     *
-     * @param index it is an Integer number
-     * @param mId it is an Integer number
-     * @param sId it is an Integer number
-     * @return a list of <code>Request</code> object
-     * @throws Exception
-     */
-    public ArrayList<Request> listByMeFilterSkillPaging(int index, int mId, int sId) throws Exception;
-    
-    /**
-     * Get total number of Request of a Mentee by page after Filter by Skill
-     *
-     * @param mId it is an Integer number
-     * @param sId it is an Integer number
-     * @return a Integer number
-     * @throws Exception
-     */
-    public int getTotalFilterSkill(int mId, int sId) throws Exception;
-    
+   
     /**
      * Get Request of a Mentee by page after Filter by Status
      *
-     * @param index it is an Integer number
-     * @param mId it is an Integer number
-     * @param status it is an Integer number
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @param status it is a <code>java.lang.Integer</code>
      * @return a list of <code>Request</code> object
      * @throws Exception
      */
@@ -170,35 +149,12 @@ public interface RequestDAO {
     /**
      * Get total number of Request of a Mentee by page after Filter by Status
      *
-     * @param mId it is an Integer number
-     * @param status it is an Integer number
-     * @return a Integer number
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @param status it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
     public int getTotalFilterStatus(int mId, int status) throws Exception;
-    
-    /**
-     * Get Request of a Mentee by page after Filter by Skill and Status
-     *
-     * @param index it is an Integer number
-     * @param mId it is an Integer number
-     * @param sId it is an Integer number
-     * @param status it is an Integer number
-     * @return a list of <code>Request</code> object
-     * @throws Exception
-     */
-    public ArrayList<Request> listByMeFilterPaging(int index, int mId, int sId, int status) throws Exception;
-    
-    /**
-     * Get total number of Request of a Mentee by page after Filter by Skill and Status
-     *
-     * @param mId it is an Integer number
-     * @param sId it is an Integer number
-     * @param status it is an Integer number
-     * @return a Integer number
-     * @throws Exception
-     */
-    public int getTotalFilter(int mId,int sId, int status) throws Exception;
     
     /**
      * Get the number of request with the same status of the user

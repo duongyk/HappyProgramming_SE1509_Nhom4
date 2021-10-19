@@ -1,7 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        DuongVV          First Deploy<br>
+ * 18-10-2021    2.0        DuongVV          Update<br>
  */
 package controller;
 
@@ -9,12 +14,10 @@ import dao.RequestDAO;
 import dao.RequestSkillDAO;
 import dao.SkillDAO;
 import dao.UserDAO;
-import dao.UserSkillDAO;
 import dao.impl.RequestDAOImpl;
 import dao.impl.RequestSkillDAOImpl;
 import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
-import dao.impl.UserSkillDAOImpl;
 import entity.Request;
 import entity.Skill;
 import entity.User;
@@ -31,8 +34,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class has the process request of Update Request
  *
- * @author Duong
+ * @author DuongVV
  */
 public class UpdateRequest extends HttpServlet {
 
@@ -62,19 +66,26 @@ public class UpdateRequest extends HttpServlet {
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
+     * Display update Request Form
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -84,11 +95,11 @@ public class UpdateRequest extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // initiate DAO
             UserDAO userDao = new UserDAOImpl();
             RequestDAO requestDAO = new RequestDAOImpl();
             RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
             SkillDAO skillDAO = new SkillDAOImpl();
-            UserSkillDAO usDAO = new UserSkillDAOImpl();
             // get Request
             int rId = Integer.parseInt(request.getParameter("rId"));
             Request req = requestDAO.getRequestById(rId);
@@ -104,10 +115,10 @@ public class UpdateRequest extends HttpServlet {
                 // get list chosen skills
                 ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
 
-                request.setAttribute("sList", sList);
-                request.setAttribute("sListAll", sListAll);
-                request.setAttribute("mList", mList);
-                request.setAttribute("req", req);
+                request.setAttribute("sList", sList);/*List skill of request*/
+                request.setAttribute("sListAll", sListAll);/*List all Skill for choosing*/
+                request.setAttribute("mList", mList);/*List Mentor for choosing*/
+                request.setAttribute("req", req);/*Request*/
                 sendDispatcher(request, response, "updateRequest.jsp");
             }
         } catch (Exception e) {
@@ -119,7 +130,7 @@ public class UpdateRequest extends HttpServlet {
 
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
+     * Get new information and Update the Request
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -129,11 +140,9 @@ public class UpdateRequest extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            UserDAO userDao = new UserDAOImpl();
+            // initiate DAO
             RequestDAO requestDAO = new RequestDAOImpl();
             RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
-            SkillDAO skillDAO = new SkillDAOImpl();
-            UserSkillDAO usDAO = new UserSkillDAOImpl();
 
             // Get request ID
             int rId = Integer.parseInt(request.getParameter("rId"));
@@ -167,9 +176,10 @@ public class UpdateRequest extends HttpServlet {
             
             // get Skills in Request
             ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
+            // get new Request
             Request reqUpdated = requestDAO.getRequestById(rId);
-            request.setAttribute("sList", sList);
-            request.setAttribute("req", reqUpdated);
+            request.setAttribute("sList", sList);/*Skill list of Request*/
+            request.setAttribute("req", reqUpdated);/*Request*/
             sendDispatcher(request, response, "viewRequest.jsp");
         } catch (Exception e) {
             Logger.getLogger(UpdateRequest.class.getName()).log(Level.SEVERE, null, e);

@@ -111,13 +111,13 @@
                             <c:when test="${name!=null}">
                                 <div class="col-md-2">
                                     <label class="label" for="name">Name </label>
-                                    <input type="text" id="name" name="name" value="${name}"  maxlength="10">
+                                    <input type="text" id="name" name="name" value="${name}" pattern=".*\S+.*" title="No white space only"  maxlength="20">
                                 </div>
                             </c:when>
                             <c:otherwise>
                                 <div class="col-md-2">
                                     <label class="label" for="name">Name </label>
-                                    <input type="text" id="name" name="name" value=""  maxlength="10">
+                                    <input type="text" id="name" name="name" pattern=".*\S+.*" title="No white space only" value=""  maxlength="20">
                                 </div>
                             </c:otherwise>
                         </c:choose>
