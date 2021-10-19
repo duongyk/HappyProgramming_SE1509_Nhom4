@@ -99,6 +99,9 @@
             <section class="breadcrumbs">
                 <div class="card-heading">
                     <h2 class="title" style="color: black; font-weight: bold;">Change password </h2>
+                    <c:if test="${mess!=null}">
+                        <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${mess}"></c:out></h3>
+                    </c:if>
                 </div>
             </section><!-- End Breadcrumbs Section -->
 
@@ -109,7 +112,6 @@
 
                             <div class="card-body">
                                     <form action="ChangePassword" method="POST">
-                                    <input type="hidden" name="service" value="changepass">
                                     <div class="form-row m-b-55">
                                         <div class="name">Email</div>
                                         <div class="value">

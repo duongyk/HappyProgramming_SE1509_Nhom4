@@ -144,7 +144,7 @@
                                         <div class="name">Email</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input-white" type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" value="<c:out value="${mentorprofile.getMail()}"></c:out>" required>
+                                                <input class="input-white" type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" maxlength="35" value="<c:out value="${mentorprofile.getMail()}"></c:out>" required>
                                                 <h4 id="htitle" style="color:red;"></h4>
                                             </div>
                                         </div>
@@ -211,7 +211,7 @@
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
                                                         <!--<input class="input-white" type="text" name="phone"> -->
-                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro" required><c:out value="${mentorcv.getProfessionIntro()}"></c:out></textarea>
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro" maxlength="200" required><c:out value="${mentorcv.getProfessionIntro()}"></c:out></textarea>
                                                         <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
@@ -227,7 +227,7 @@
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
                                                         <!--<input class="input-white" type="text" name="phone"> -->
-                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="serviceDescription" required><c:out value="${mentorcv.getServiceDescript()}"></c:out></textarea>
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="serviceDescription" maxlength="200" required><c:out value="${mentorcv.getServiceDescript()}"></c:out></textarea>
                                                         <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
@@ -243,7 +243,7 @@
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
                                                         <!--<input class="input-white" type="text" name="phone"> -->
-                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="achievement" required><c:out value="${mentorcv.getAchivement()}"></c:out></textarea>
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="achievement" maxlength="200" required><c:out value="${mentorcv.getAchivement()}"></c:out></textarea>
                                                         <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>

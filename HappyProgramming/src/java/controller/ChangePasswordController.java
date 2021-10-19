@@ -61,6 +61,7 @@ public class ChangePasswordController extends HttpServlet {
                     } else {
 
                         userDAO.changePass(mail, newPass);
+                        request.setAttribute("success", "change password successfully");
                         sendDispatcher(request, response, "signIn.jsp");
                     }
                 }

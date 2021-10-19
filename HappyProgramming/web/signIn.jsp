@@ -100,6 +100,12 @@
             <section class="breadcrumbs">
                 <div class="card-heading">
                     <h2 class="title" style="color: black; font-weight: bold;">Sign in </h2>
+                    <c:if test="${success!=null}">
+                        <h3 style="color:#29cc49;font-weight: bold;text-align: center"><c:out value="${success}"></c:out></h3>
+                    </c:if>
+                    <c:if test="${error!=null}">
+                        <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${error}"></c:out></h3>
+                    </c:if>
                 </div>
             </section><!-- End Breadcrumbs Section -->
 
