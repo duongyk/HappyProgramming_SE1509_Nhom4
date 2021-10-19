@@ -47,6 +47,11 @@ public class UserProfile extends HttpServlet {
             request.setAttribute("user", user);
             sendDispatcher(request, response, "userProfile.jsp");
         }
+        catch (Exception e) {
+            Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {

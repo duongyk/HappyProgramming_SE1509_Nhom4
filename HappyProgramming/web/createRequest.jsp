@@ -38,6 +38,8 @@
         <link href="vendor/remixicon/remixicon.css" rel="stylesheet">
         <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+        <script type="text/javascript" src="js/myFunction.js" ></script>
+        <script type="text/javascript" src="js/checkSpace.js" ></script>
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
@@ -107,16 +109,14 @@
                         <div class="card card-5">
                             <div class="card-body">
                                 <form action="CreateRequest" method="POST">
-                                    <!--<input type="hidden" name="service" value="createRequest">-->
                                     <%-- Title --%>
-                                    <!--<input type="hidden" name="service" value="loadRequest">-->
                                     <div class="form-row m-b-55">
                                         <div class="name">Title</div>
                                         <div class="value">
                                             <div class="row row-space">
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input-white" maxlength="30" type="text" name="title" placeholder="Your Request Title" required>
+                                                        <input class="input-white" maxlength="30" type="text" name="title" pattern=".*\S+.*" title="No white space only" placeholder="Your Request Title" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,7 +128,12 @@
                                         <div class="name">Content</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <textarea class="input-white" rows="3" cols="55" type="text" maxlength="200"  placeholder="Your Request Content" name="content" required></textarea>
+                                                <textarea class="input-white" rows="3" cols="55" type="text" maxlength="200"  placeholder="Your Request Content" name="content" onkeyup="checkSpace()" required></textarea>
+                                            </div>
+                                            <div class="input-group">
+                                                <%-- Message for checkSpace --%>
+                                                <p id="text-space" style="display:none; color:red">Content contains only space</p>
+                                                <p id="text-space-1" style="color:white;">Valid input</p>
                                             </div>
                                         </div>
                                     </div>
@@ -138,7 +143,7 @@
                                         <div class="name">Deadline Date</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input-white" type="date" name="deadlineDate" required>
+                                                <input class="input-white" type="date" id="date" name="deadlineDate" required>
                                             </div>
                                         </div>
                                     </div>
@@ -176,12 +181,15 @@
                                                         <ul>
                                                             <c:forEach items="${sList}" var="s">
                                                                     <li>
-                                                                        <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}">
+                                                                        <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}" onchange="myFunction()">
                                                                         <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
                                                                     </li>
                                                             </c:forEach>
                                                         </ul>
                                                     </div>
+                                                    <%-- Message for checkbox --%>
+                                                    <p id="text" style="display:none; color:red">Please choose at least 1 skill and at max 3 skills</p>
+                                                    <p id="text-1" style="color:white;">Valid input</p>
                                                 </div>
                                             </div>
 
@@ -191,7 +199,7 @@
                             <div class="row">
                                 <div class="col-3"></div>
                                 <div class="col-6">
-                                    <button class="btn btn--radius-2 btn--red" type="submit">Create Request</button>
+                                    <button id="button" class="btn btn--radius-2 btn--red" type="submit">Create Request</button>
                                 </div>
                                 <div class="col-3"></div>
                             </div>
@@ -306,5 +314,19 @@
         <script src="js/main.js"></script>
 
     </body>
-
+    <!--Pick Deadline Date from today-->  
+    <script>
+                                                                                            var date = new Date();
+                                                                                            var d = date.getDate();
+                                                                                            var m = date.getMonth() + 1;
+                                                                                            if (d < 10) {
+                                                                                                d = '0' + d;
+                                                                                            }
+                                                                                            if (m < 10) {
+                                                                                                m = '0' + m;
+                                                                                            }
+                                                                                            var y = date.getFullYear();
+                                                                                            var min = y + "-" + m + "-" + d;
+                                                                                            document.getElementById("date").setAttribute('min', min);
+    </script>
 </html>

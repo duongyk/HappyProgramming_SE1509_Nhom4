@@ -60,7 +60,13 @@ public class UpdateMenteeProfile extends HttpServlet {
             User user = new User(id, fullname, email, phone, dob, gender, avatar);
             userDAO.updateUser(user); // update user info into DB
             request.getSession().setAttribute("currUser", user); // set current user with updated info
+            request.setAttribute("success", "Update Success");
             sendDispatcher(request, response, "UserProfile?uId=" + id); // return to user profile page
+        }
+        catch (Exception e) {
+            Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
