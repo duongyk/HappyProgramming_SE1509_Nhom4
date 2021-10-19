@@ -81,9 +81,22 @@ public class UpdateCV extends HttpServlet {
             //RequestDispatcher rd = request.getRequestDispatcher("/newUpdateCV.jsp");
 
             rd.forward(request, response);
+        } catch (Exception ex) {
+            
+            request.setAttribute("errorMessage", ex.getMessage());
+            sendDispatcher(request, response, "/error.jsp");
         }
     }
-
+    
+    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher(path);
+            rd.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(UpdateCV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

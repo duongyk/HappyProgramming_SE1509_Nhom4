@@ -58,12 +58,23 @@
                             <%-- Check the current User --%>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="RequestControllerMap?service=listRequestByMe">Request</a>
-                                </li>
+                                <c:choose>
+                                    <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="changePassword.jsp">Change pass</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>

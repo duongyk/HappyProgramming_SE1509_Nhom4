@@ -116,42 +116,23 @@ public class SubmitUpdateCV extends HttpServlet {
             CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
             
             // variable to check if dao update successs
-            int success = 1;
-            
-            success = userDAO.updateUserInfo(uid, mentorInfo);
-            
-            if (success == 0)
-            {
-                request.setAttribute("error","Update failed. Check UserDAO");
-                sendDispatcher(request, response, "/UserControllerMap?service=profile&uId="+uid);
-                return;
-            }
-            
-            success = cvdao.updateCV(uid, mentorCV);
-            
-            if (success == 0)
-            {
-                request.setAttribute("error","Update failed. Check CVDAO");
-                sendDispatcher(request, response, "/UserControllerMap?service=profile&uId="+uid);
-                return;
-            }
-            
+            userDAO.updateUserInfo(uid, mentorInfo);
+                        
+            cvdao.updateCV(uid, mentorCV);
+                      
             smdao.updateMentorSkill(uid, skill_id);
-            
-            if (success == 0)
-            {
-                request.setAttribute("error","Update failed. Check Skill Mentor DAO");
-                sendDispatcher(request, response, "/UserControllerMap?service=profile&uId="+uid);
-                return;
-            }
-            
+                       
             // ----------------------------------------
-            if (success == 1)
-            {
-                request.getSession().setAttribute("currUser", mentorInfo); // set current user with updated info
-                request.setAttribute("success", "Update CV success");
-                sendDispatcher(request, response, "/UserControllerMap?service=profile&uId="+uid);
-            }
+ 
+            request.getSession().setAttribute("currUser", mentorInfo); // set current user with updated info
+            request.setAttribute("success", "Update CV success");
+            sendDispatcher(request, response, "/UserControllerMap?service=profile&uId="+uid);
+            
+            
+            
+        } catch (Exception e) {
+            request.setAttribute("errorMessage", e.getMessage());
+            sendDispatcher(request, response, "/error.jsp");
         }
     }
     
@@ -160,7 +141,7 @@ public class SubmitUpdateCV extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SubmitUpdateCV.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
