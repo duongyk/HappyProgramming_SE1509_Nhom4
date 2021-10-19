@@ -212,32 +212,33 @@
                         <div class="row">  
                             <div class="paging">
                                 <%-- Previous --%>
+                                <%-- Previous --%>
                                 <c:choose>
                                     <c:when test="${index>1}">
-                                        <a class="previous" href="listRequestByMe&index=${index-1}"><  </a>
+                                        <a class="previous" href="${href}index=${index-1}"><</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a class="previous disabled" href="listRequestByMe&index=${index-1}"><</a>
+                                        <a class="previous disabled" href="${href}index=${index-1}"><</a>
                                     </c:otherwise>
                                 </c:choose>
                                 <%-- Page index --%>
                                 <c:forEach begin="1" end="${endPage}" var="page">
                                     <c:choose>
                                         <c:when test="${index==page}">
-                                            <a class="choose disabled" href="listRequestByMe&index=${page}"> ${page}</a> 
+                                            <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="listRequestByMe&index=${page}"> ${page}</a> 
+                                            <a href="${href}index=${page}"> ${page}</a> 
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
                                 <%-- Next --%>
                                 <c:choose>
                                     <c:when test="${index!=endPage}">
-                                        <a class="next" href="listRequestByMe&index=${index+1}">  ></a>
+                                        <a class="next" href="${href}index=${index+1}">  ></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a class="next disabled" href="listRequestByMe&index=${index+1}">></a>
+                                        <a class="next disabled" href="${href}index=${index+1}">></a>
                                     </c:otherwise>
                                 </c:choose>
                             </div> 

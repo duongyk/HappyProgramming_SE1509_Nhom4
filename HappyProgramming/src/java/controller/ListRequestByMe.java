@@ -1,22 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2021, FPT University<br>
+ * SWP391 - SE1509 - Group 4<br>
+ * Happyprogramming<br>
+ *
+ * Record of change:<br>
+ * DATE          Version    Author           DESCRIPTION<br>
+ * 20-09-2021    1.0        DuongVV          First Deploy<br>
+ * 18-10-2021    2.0        DuongVV          Update<br>
  */
 package controller;
 
 import dao.RequestDAO;
-import dao.RequestSkillDAO;
-import dao.SkillDAO;
-import dao.UserDAO;
-import dao.UserSkillDAO;
 import dao.impl.RequestDAOImpl;
-import dao.impl.RequestSkillDAOImpl;
-import dao.impl.SkillDAOImpl;
-import dao.impl.UserDAOImpl;
-import dao.impl.UserSkillDAOImpl;
 import entity.Request;
-import entity.Skill;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,8 +26,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class has the process request of List Request by me
  *
- * @author Duong
+ * @author DuongVV
  */
 public class ListRequestByMe extends HttpServlet {
 
@@ -61,17 +58,26 @@ public class ListRequestByMe extends HttpServlet {
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method. Get all the Request of the
+     * Mentee
      *
      * @param request servlet request
      * @param response servlet response
@@ -82,11 +88,8 @@ public class ListRequestByMe extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            UserDAO userDAO = new UserDAOImpl();
+            // initiate DAO
             RequestDAO requestDAO = new RequestDAOImpl();
-            RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
-            SkillDAO skillDAO = new SkillDAOImpl();
-            UserSkillDAO usDAO = new UserSkillDAOImpl();
             // Get current user
             User user = (User) request.getSession().getAttribute("currUser");
             // Get index page 
@@ -97,24 +100,25 @@ public class ListRequestByMe extends HttpServlet {
             int index = Integer.parseInt(indexPage);
             // Get list all Request of the user
             ArrayList<Request> listRequest = requestDAO.getListByMe(user);
+            // Total request for paging
             int count = listRequest.size();
             // Calculate total page for paging
             int endPage = count / 8;
             if (count % 8 != 0) {
                 endPage++;
             }
+            // Set href of paging
+            String href = "listRequestByMe?";
             // Get list Request by page
             ArrayList<Request> rList = requestDAO.listByMePaging(index, user.getId());
             // Get statistic requests
             ArrayList<Integer> statistic = requestDAO.getStatistic(user.getId());
-            // Get all Skill for Filter
-            ArrayList<Skill> sList = skillDAO.getActiveSkill();
-
-            request.setAttribute("sList", sList);
-            request.setAttribute("rList", rList);
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("index", index);
-            request.setAttribute("statistic", statistic);
+            // Set attribute to request
+            request.setAttribute("href", href);/*href paging*/
+            request.setAttribute("rList", rList);/*Request List*/
+            request.setAttribute("endPage", endPage);/*end page of paging*/
+            request.setAttribute("index", index);/*index/current page*/
+            request.setAttribute("statistic", statistic);/*Statistic request*/
             sendDispatcher(request, response, "listRequestByMe.jsp");
         } catch (Exception e) {
             Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, e);
