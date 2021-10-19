@@ -18,8 +18,10 @@ import java.util.ArrayList;
 
 /**
  *
- * @author thangtvhe151307 This class contains all methods to interact with CV
+ *  This class contains all methods to interact with CV
  * table in the database
+ * 
+ * @author thangtvhe151307
  */
 public class CVDAOImpl extends DBContext implements dao.CVDAO {
 

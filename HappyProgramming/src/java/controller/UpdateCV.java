@@ -30,7 +30,7 @@ import javax.servlet.http.HttpSession;
  * The class contain the method insert, update to process data from Create CV form
  * Data will be trimmed before processed
  * Redirect to signIn jsp if success
- * The method will throw Exception if any error occur
+ * The method will throw Exception and run to error jsp if any error occur
  * 
  * @author Trinh Viet Thang
  */

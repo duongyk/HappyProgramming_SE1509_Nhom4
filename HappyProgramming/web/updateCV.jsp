@@ -64,16 +64,28 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="listAllmentor">All mentors</a></li>
-                        <li><a class="nav-link scrollto" href="listAllSkill">All skills</a></li>
+                        <li><a class="nav-link scrollto" href="UserControllerMap?service=listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                            <%-- Check the current User --%>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
-                                </li>
+                                <c:choose>
+                                    <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserProfile">Profile</a></li>
+                                        <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="changePassword.jsp">Change pass</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
@@ -90,7 +102,7 @@
                         </c:choose>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav><!-- .navbar-main -->
+                </nav>
 
             </div>
         </header><!-- End Header -->
@@ -307,7 +319,7 @@
                                     </div> 
                                                     
                                     <div>
-                                        <button class="btn btn--radius-2 btn--red" type="submit">Update CV</button>
+                                        <button class="btn btn--radius-2 btn--blue" type="submit">Update CV</button>
                                     </div>
                                 </form>
                             </div>
@@ -363,11 +375,6 @@
                     </div
 
                     <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
-
-
-
-
-
 
                         <!--MAP-->
                   </div>

@@ -45,6 +45,16 @@ public class UserProfile extends HttpServlet {
             int uId = Integer.parseInt(request.getParameter("uId"));
             User user = userDAO.getUserById(uId);
             request.setAttribute("user", user);
+            
+            // GET CV INFORMATION IF USER IS MENTOR
+            if (user.getRole() == 2) {
+                CVDAO cvdao = new CVDAOImpl();
+
+                CV cv = cvdao.getMentorCV(uId);
+
+                request.setAttribute("cv", cv);
+            }
+            
             sendDispatcher(request, response, "userProfile.jsp");
         }
         catch (Exception e) {

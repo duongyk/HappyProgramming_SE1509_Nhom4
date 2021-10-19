@@ -21,10 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * The class contain method get to redirect user to Create CV page
- * Get all data necessary to provide user and run to createCV jsp
- * Will throw Exception if any error occur
- * 
+ * The class contain method get to redirect user to Create CV page Get all data
+ * necessary to provide user and run to createCV jsp 
+ * Will throw Exception and run to error jsp if any error occur
+ *
  * @author Trinh Viet Thang
  */
 @WebServlet(name = "CreateCV", urlPatterns = {"/createCV"})
@@ -43,7 +43,7 @@ public class CreateCV extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
             int uid = Integer.parseInt(request.getParameter("uId"));
 
             request.setAttribute("uid", uid);
@@ -53,15 +53,15 @@ public class CreateCV extends HttpServlet {
             request.setAttribute("allskill", allSkill);
 
             RequestDispatcher rd = request.getRequestDispatcher("/createCV.jsp");
-            rd.forward(request, response);  
-            
+            rd.forward(request, response);
+
         } catch (Exception ex) {
-            
+
             request.setAttribute("errorMessage", ex.getMessage());
             sendDispatcher(request, response, "/error.jsp");
         }
     }
-    
+
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -70,7 +70,7 @@ public class CreateCV extends HttpServlet {
             Logger.getLogger(CreateCV.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

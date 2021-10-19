@@ -84,7 +84,8 @@ public class ViewMentorRequest extends HttpServlet {
             default:
                 break;
         }
-
+        
+        request.setAttribute("requestlist", requestList);
         sendDispatcher(request, response, "/mentorRequestList.jsp");
         
         }
