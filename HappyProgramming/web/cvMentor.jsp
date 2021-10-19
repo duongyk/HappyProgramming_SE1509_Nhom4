@@ -33,12 +33,7 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: Vesperr - v4.6.0
-        * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
+       
     </head>
 
     <body>

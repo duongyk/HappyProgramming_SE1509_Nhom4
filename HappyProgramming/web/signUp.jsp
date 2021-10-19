@@ -108,8 +108,8 @@
                         <div class="card card-5">
 
                             <div class="card-body">
-                                <form action="UserControllerMap" method="POST">
-                                    <input type="hidden" name="service" value="signUp">
+                                <form action="Signup" method="POST">
+                                   
                                     <div class="form-row m-b-55">
                                         <div class="name">Name</div>
                                         <div class="value">

@@ -67,6 +67,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
+                                         <a  style="color: blue ;" href="ChangePassword">change password </a>
                                         <li><a href="UserControllerMap?service=profile">Profile</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
@@ -107,7 +108,7 @@
                         <div class="card card-5">
 
                             <div class="card-body">
-                                    <form action="UserControllerMap" method="POST">
+                                    <form action="ChangePassword" method="POST">
                                     <input type="hidden" name="service" value="changepass">
                                     <div class="form-row m-b-55">
                                         <div class="name">Email</div>
