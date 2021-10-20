@@ -5,17 +5,19 @@
  */
 package controller;
 
-import dao.SkillDAO;
-import dao.impl.SkillDAOImpl;
-import entity.Skill;
+import dao.CVDAO;
+import dao.UserDAO;
+import dao.impl.CVDAOImpl;
+import dao.impl.UserDAOImpl;
+import entity.CV;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tung
  */
-public class ListAllSkill extends HttpServlet {
+@WebServlet(name = "UserProfileController", urlPatterns = {"/UserProfileController"})
+public class UserProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,12 +42,14 @@ public class ListAllSkill extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            SkillDAO skillDAO = new SkillDAOImpl();
-            User x = (User) request.getSession().getAttribute("currUser"); // get current sign in user
+            /* TODO output your page here. You may use following sample code. */
             
-            ArrayList<Skill> sList = skillDAO.getActiveSkill(); // get list of current active status skill
-            request.setAttribute("sList", sList); // set list of active skill
-            sendDispatcher(request, response, "listSkill.jsp");
+        }
+        catch (Exception e) {
+            Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+            doGet(request, response);
         }
     }
 
@@ -70,9 +75,27 @@ public class ListAllSkill extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            UserDAO userDAO = new UserDAOImpl();
+            int uId = Integer.parseInt(request.getParameter("uId"));
+            User user = userDAO.getUserById(uId);
+            
+            request.setAttribute("user", user);
+            
+            // GET CV INFORMATION IF USER IS MENTOR
+            if (user.getRole() == 2) {
+                CVDAO cvdao = new CVDAOImpl();
+
+                CV cv = cvdao.getMentorCV(uId);
+
+                request.setAttribute("cv", cv);
+            }
+            
+            sendDispatcher(request, response, "userProfile.jsp");
+        }
+        catch (Exception e) {
+            Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
@@ -86,10 +109,11 @@ public class ListAllSkill extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

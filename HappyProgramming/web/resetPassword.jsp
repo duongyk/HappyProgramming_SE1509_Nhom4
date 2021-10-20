@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="col-md-6">
 
-                                    <form class="mb-5" action="ResetPassword" method="post" id="contactForm" name="contactForm">
+                                    <form class="mb-5" action="ResetPasswordController" method="post" id="contactForm" name="contactForm">
 
                                         <div class="form-row">
                                             <div class="name">New Password</div>

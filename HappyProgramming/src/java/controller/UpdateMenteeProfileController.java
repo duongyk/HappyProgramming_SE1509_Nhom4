@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tung
  */
-public class UpdateMenteeProfile extends HttpServlet {
+@WebServlet(name = "UpdateMenteeProfileController", urlPatterns = {"/UpdateMenteeProfileController"})
+public class UpdateMenteeProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,34 +36,33 @@ public class UpdateMenteeProfile extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            UserDAO userDAO = new UserDAOImpl();
-            int id = Integer.parseInt(request.getParameter("uId")); //get user information by user id
-
-            String fullname = request.getParameter("fullname").trim(); // get user fullname input from web
-            String email = request.getParameter("email").trim(); // get user email input from web
-            String phone = request.getParameter("phone").trim();// get user phone input from web
-
-            String date = request.getParameter("dob"); // get user dob input from web
-            Date dob = Date.valueOf(date); // get values of user dob
-
-            String gender = request.getParameter("gender"); // // get user gender input from web
-            String avatar = request.getParameter("avatar").trim(); // get user avatar input from web
-            if (avatar.isEmpty()) { // check if user dont chose any new picture file
-                User s = (User) request.getSession().getAttribute("currUser"); // get current user
-                avatar = s.getAvatar(); // then set old avatar as updated avatar 
-            }
-
-            User user = new User(id, fullname, email, phone, dob, gender, avatar);
-            userDAO.updateUser(user); // update user info into DB
-            request.getSession().setAttribute("currUser", user); // set current user with updated info
-            request.setAttribute("success", "Update Success");
-            sendDispatcher(request, response, "UserProfile?uId=" + id); // return to user profile page
+//            UserDAO userDAO = new UserDAOImpl();
+//            int id = Integer.parseInt(request.getParameter("uId")); //get user information by user id
+//
+//            String fullname = request.getParameter("fullname").trim(); // get user fullname input from web
+//            String email = request.getParameter("email").trim(); // get user email input from web
+//            String phone = request.getParameter("phone").trim();// get user phone input from web
+//
+//            String date = request.getParameter("dob"); // get user dob input from web
+//            Date dob = Date.valueOf(date); // get values of user dob
+//
+//            String gender = request.getParameter("gender"); // // get user gender input from web
+//            String avatar = request.getParameter("avatar").trim(); // get user avatar input from web
+//            if (avatar.isEmpty()) { // check if user dont chose any new picture file
+//                User s = (User) request.getSession().getAttribute("currUser"); // get current user
+//                avatar = s.getAvatar(); // then set old avatar as updated avatar 
+//            }
+//
+//            User user = new User(id, fullname, email, phone, dob, gender, avatar);
+//            userDAO.updateUser(user); // update user info into DB
+//            request.getSession().setAttribute("currUser", user); // set current user with updated info
+//            request.setAttribute("success", "Update Success");
+//            sendDispatcher(request, response, "UserProfileController?uId="+id); // return to user profile page
         }
         catch (Exception e) {
             Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, e);
@@ -92,7 +93,11 @@ public class UpdateMenteeProfile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            UserDAO userDAO = new UserDAOImpl();
+            int uId = Integer.parseInt(request.getParameter("uId"));
+            User user = userDAO.getUserById(uId);
+            request.setAttribute("currUser", user);
+            sendDispatcher(request, response, "profileUpdate.jsp");
         } catch (Exception ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -110,7 +115,27 @@ public class UpdateMenteeProfile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            UserDAO userDAO = new UserDAOImpl();
+            int id = Integer.parseInt(request.getParameter("uId")); //get user information by user id
+
+            String fullname = request.getParameter("fullname").trim(); // get user fullname input from web
+            String email = request.getParameter("email").trim(); // get user email input from web
+            String phone = request.getParameter("phone").trim();// get user phone input from web
+
+            String date = request.getParameter("dob"); // get user dob input from web
+            Date dob = Date.valueOf(date); // get values of user dob
+
+            String gender = request.getParameter("gender"); // // get user gender input from web
+            String avatar = request.getParameter("avatar").trim(); // get user avatar input from web
+            if (avatar.isEmpty()) { // check if user dont chose any new picture file
+                User s = (User) request.getSession().getAttribute("currUser"); // get current user
+                avatar = s.getAvatar(); // then set old avatar as updated avatar 
+            }
+
+            User user = new User(id, fullname, email, phone, dob, gender, avatar);
+            userDAO.updateUser(user); // update user info into DB
+            request.getSession().setAttribute("currUser", user); // set current user with updated info
+            sendDispatcher(request, response, "UserProfileController?uId="+id); // return to user profile page
         } catch (Exception ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }

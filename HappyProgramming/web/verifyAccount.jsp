@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="col-md-6">
 
-                                    <form class="mb-5" action="VerifyCode" method="post" id="contactForm" name="contactForm">
+                                    <form class="mb-5" action="VerifyAccountController" method="post" id="contactForm" name="contactForm">
 
                                         <div class="row">
                                             <div class="col-md-12 form-group">

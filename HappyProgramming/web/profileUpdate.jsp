@@ -145,7 +145,7 @@
                         <div class="col-md-8">
                             <div class="card mb-3">
 
-                                <form id="thisform" action="UpdateMenteeProfile" method="POST">
+                                <form id="thisform" action="UpdateMenteeProfileController" method="POST">
                                     <!--<input type="hidden" name="service" value="updateProfile">-->
                                     <input type="hidden" name="uId" value="${currUser.getId()}">
                                     <div class="card-body">

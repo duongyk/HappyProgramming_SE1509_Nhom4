@@ -14,16 +14,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import util.SendEmail;
 
 /**
  *
  * @author Tung
  */
-public class ForgetPassword extends HttpServlet {
+@WebServlet(name = "VerifyAccountController", urlPatterns = {"/VerifyAccountController"})
+public class VerifyAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,28 +40,10 @@ public class ForgetPassword extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            UserDAO userDAO = new UserDAOImpl();
-            SendEmail se = new SendEmail();
-            String code = se.generateVerifyCode(); // generate a verify code
-            request.getSession().setAttribute("verify", code); // set session for verify code
-            String mail = request.getParameter("email").trim(); // get email of user want to reset password
-
-            User user = userDAO.getUserByEmail(mail);
-
-            if (user != null) { // check if user find by mail are null or not
-                request.getSession().setAttribute("alert", null); // set alert to null if user is in DB
-                User a = userDAO.getUserByEmail(mail);
-                a.setVerify(code); // set verify code for user
-                int send = se.sendEmail(a); // send email contain verify code to user
-                request.getSession().setAttribute("currMail", a);
-                sendDispatcher(request, response, "verifyAccount.jsp");
-            }
-            if (user == null) {
-                request.getSession().setAttribute("alert", "Mail is not exist"); // send alert user does not exist in database
-                sendDispatcher(request, response, "forgetPassword.jsp");
-            }
+            
         }
     }
+    
 
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
@@ -102,7 +85,20 @@ public class ForgetPassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            UserDAO userDAO = new UserDAOImpl();
+            User x = (User) request.getSession().getAttribute("currMail"); //get user by email
+            String verify = (String) request.getSession().getAttribute("verify"); // get verify code generated
+
+            String code = request.getParameter("code").trim(); // get code user input into
+
+            if (verify.equalsIgnoreCase(code)) { // if the verify code you input is similar to the one you recieve
+                request.getSession().setAttribute("alert", null); // set alert to null if there is no false
+                sendDispatcher(request, response, "resetPassword.jsp");
+            }
+            if (!verify.equalsIgnoreCase(code)) { // if the verify code you input is not similar to the one you recieve
+                request.getSession().setAttribute("alert", "Your verify code is not correct"); // set alert to notify user
+                sendDispatcher(request, response, "verifyAccount.jsp");
+            }
         } catch (Exception ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }

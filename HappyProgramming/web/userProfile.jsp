@@ -249,7 +249,7 @@
                                         <c:otherwise>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <a class="btn btn-info " href="profileUpdate.jsp">Edit</a>
+                                                <a class="btn btn-info " href="UpdateMenteeProfileController?uId=${currUser.getId()}">Edit</a>
                                             </div>
                                         </div>
                                         </c:otherwise>
