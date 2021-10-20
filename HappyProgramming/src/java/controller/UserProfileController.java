@@ -43,7 +43,7 @@ public class UserProfileController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+            doGet(request, response);
         }
         catch (Exception e) {
             Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, e);
@@ -89,7 +89,7 @@ public class UserProfileController extends HttpServlet {
 
                 request.setAttribute("cv", cv);
             }
-            
+            request.setAttribute("success", null);
             sendDispatcher(request, response, "userProfile.jsp");
         }
         catch (Exception e) {

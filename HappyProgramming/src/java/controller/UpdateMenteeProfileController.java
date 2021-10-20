@@ -41,33 +41,13 @@ public class UpdateMenteeProfileController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-//            UserDAO userDAO = new UserDAOImpl();
-//            int id = Integer.parseInt(request.getParameter("uId")); //get user information by user id
-//
-//            String fullname = request.getParameter("fullname").trim(); // get user fullname input from web
-//            String email = request.getParameter("email").trim(); // get user email input from web
-//            String phone = request.getParameter("phone").trim();// get user phone input from web
-//
-//            String date = request.getParameter("dob"); // get user dob input from web
-//            Date dob = Date.valueOf(date); // get values of user dob
-//
-//            String gender = request.getParameter("gender"); // // get user gender input from web
-//            String avatar = request.getParameter("avatar").trim(); // get user avatar input from web
-//            if (avatar.isEmpty()) { // check if user dont chose any new picture file
-//                User s = (User) request.getSession().getAttribute("currUser"); // get current user
-//                avatar = s.getAvatar(); // then set old avatar as updated avatar 
-//            }
-//
-//            User user = new User(id, fullname, email, phone, dob, gender, avatar);
-//            userDAO.updateUser(user); // update user info into DB
-//            request.getSession().setAttribute("currUser", user); // set current user with updated info
-//            request.setAttribute("success", "Update Success");
-//            sendDispatcher(request, response, "UserProfileController?uId="+id); // return to user profile page
+            
         }
         catch (Exception e) {
             Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
+            doGet(request, response);
         }
     }
 
@@ -98,7 +78,8 @@ public class UpdateMenteeProfileController extends HttpServlet {
             User user = userDAO.getUserById(uId);
             request.setAttribute("currUser", user);
             sendDispatcher(request, response, "profileUpdate.jsp");
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

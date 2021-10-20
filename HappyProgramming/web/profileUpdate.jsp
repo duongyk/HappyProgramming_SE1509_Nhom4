@@ -122,25 +122,6 @@
                                 </div>
                             </div>
                         </div>
-                        <%--
-                        <div class="form-row m-b-55">
-                                        <div class="name">Avatar</div>
-                                        <div class="value">
-                                            <div class="row row-refine">
-
-                                                <div class="col-12">
-                                                    <div class="input-group-desc">
-                                                        <input id="avatarURL" class="input-white" type="file" onchange="changeImage()" type="file" name="avatar" value="">
-                                                    </div>
-                                                    <div class="input-group-desc">
-                                                        <img id="image" style="width: 162px;" src="img/default-avatar.png" alt="" data-image-width="1280" data-image-height="1280">
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --%>
-
 
                         <div class="col-md-8">
                             <div class="card mb-3">
