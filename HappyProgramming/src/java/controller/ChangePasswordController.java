@@ -20,11 +20,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author QMC
+/*
+ * Process:<br>
+ * - genarate new password<br>
+ *   
+ * @author ToanPKHE151393
  */
-
 public class ChangePasswordController extends HttpServlet {
 
     /**
@@ -55,10 +56,10 @@ public class ChangePasswordController extends HttpServlet {
                     request.setAttribute("mess", "wrong Password");
                     sendDispatcher(request, response, "changePassword.jsp");
                 } else {
-                    if (!newPass.equals(rePass)) {
+                    if (!newPass.equals(rePass)) {//if the confim password not match the new password send erro mesage
                         request.setAttribute("mess", "confim password must match the new password");
                         sendDispatcher(request, response, "changePassword.jsp");
-                    } else {
+                    } else {// if all corect send messgae and head to signIn.jsp
 
                         userDAO.changePass(mail, newPass);
                         request.setAttribute("success", "change password successfully");
