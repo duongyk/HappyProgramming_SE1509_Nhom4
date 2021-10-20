@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  * Run to viewRequestMentor jsp if success 
  * Will throw Exception if any error occur
  * 
- * @author Trinh Viet Thang
+ * @author thangtvhe151307
  */
 @WebServlet(name = "ViewMentorRequestDetail", urlPatterns = {"/viewMentorRequestDetail"})
 public class ViewMentorRequestDetail extends HttpServlet {
@@ -61,6 +61,10 @@ public class ViewMentorRequestDetail extends HttpServlet {
         request.setAttribute("sList", sList);
         request.setAttribute("req", req);
         sendDispatcher(request, response, "viewRequestMentor.jsp");
+        } catch (Exception e) {
+            Logger.getLogger(ViewMentorRequestDetail.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.getMessage());
+            sendDispatcher(request, response, "/error.jsp");
         }
     }
 
@@ -69,7 +73,7 @@ public class ViewMentorRequestDetail extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewMentorRequestDetail.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

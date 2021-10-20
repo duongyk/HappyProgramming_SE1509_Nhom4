@@ -230,8 +230,8 @@
                                         </div>
                                     </div>
                                     
-                                    <div>
-                                        <button class="btn btn--radius-2 btn--red" type="submit">Create CV</button>
+                                    <div style="padding-left: 200px;">
+                                        <button class="btn btn--radius-2 btn--blue" type="submit">Create CV</button>
                                     </div>
                                 </form>
                             </div>

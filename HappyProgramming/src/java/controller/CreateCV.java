@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * necessary to provide user and run to createCV jsp 
  * Will throw Exception and run to error jsp if any error occur
  *
- * @author Trinh Viet Thang
+ * @author thangtvhe1513077
  */
 @WebServlet(name = "CreateCV", urlPatterns = {"/createCV"})
 public class CreateCV extends HttpServlet {
@@ -56,7 +56,7 @@ public class CreateCV extends HttpServlet {
             rd.forward(request, response);
 
         } catch (Exception ex) {
-
+            Logger.getLogger(CreateCV.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("errorMessage", ex.getMessage());
             sendDispatcher(request, response, "/error.jsp");
         }

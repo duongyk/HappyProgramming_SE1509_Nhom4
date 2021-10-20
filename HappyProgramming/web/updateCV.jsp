@@ -318,7 +318,7 @@
                                         </div>
                                     </div> 
                                                     
-                                    <div>
+                                    <div style="padding-left: 200px;">
                                         <button class="btn btn--radius-2 btn--blue" type="submit">Update CV</button>
                                     </div>
                                 </form>

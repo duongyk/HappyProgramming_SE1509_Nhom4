@@ -34,7 +34,7 @@ import javax.servlet.http.HttpSession;
  * Redirect to profile jsp with error message if failure
  * The method will throw Exception if any error occur
  * 
- * @author Trinh Viet Thang
+ * @author thangtvhe151307
  */
 @WebServlet(name = "SubmitUpdateCV", urlPatterns = {"/submitUpdateCV"})
 public class SubmitUpdateCV extends HttpServlet {
@@ -131,6 +131,7 @@ public class SubmitUpdateCV extends HttpServlet {
             
             
         } catch (Exception e) {
+            Logger.getLogger(SubmitUpdateCV.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.getMessage());
             sendDispatcher(request, response, "/error.jsp");
         }

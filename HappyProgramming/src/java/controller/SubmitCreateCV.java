@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  * Redirect to signIn jsp if success
  * The method will throw Exception if any error occur
  * 
- * @author Trinh Viet Thang
+ * @author thangtvhe151307
  */
 @WebServlet(name = "SubmitCreateCV", urlPatterns = {"/submitCreateCV"})
 public class SubmitCreateCV extends HttpServlet {
@@ -76,6 +76,7 @@ public class SubmitCreateCV extends HttpServlet {
             sendDispatcher(request, response, "/signIn.jsp");
             
         } catch (Exception e) {
+            Logger.getLogger(SubmitCreateCV.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.getMessage());
             sendDispatcher(request, response, "/error.jsp");
         }

@@ -32,7 +32,7 @@ import javax.servlet.http.HttpSession;
  * Redirect to signIn jsp if success
  * The method will throw Exception and run to error jsp if any error occur
  * 
- * @author Trinh Viet Thang
+ * @author thangtvhe151307
  */
 @WebServlet(name = "UpdateCV", urlPatterns = {"/updateCV"})
 public class UpdateCV extends HttpServlet {
@@ -82,7 +82,7 @@ public class UpdateCV extends HttpServlet {
 
             rd.forward(request, response);
         } catch (Exception ex) {
-            
+            Logger.getLogger(UpdateCV.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("errorMessage", ex.getMessage());
             sendDispatcher(request, response, "/error.jsp");
         }
