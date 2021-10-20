@@ -24,8 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class has the process request of checking user and sign in
  *
- * @author QMC
+ * @author ToanPKhe151393
  */
 public class LoginController extends HttpServlet {
 

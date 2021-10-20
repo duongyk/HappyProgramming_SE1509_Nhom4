@@ -26,8 +26,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Process:<br>
+ * - get skill <br>
+ * - get mentor's ìnfomation<br>
+ * Exception:<br>
  *
- * @author QMC
+ *
+ * @author ToanPKHE151393
  */
 public class CVProfileController extends HttpServlet {
 
@@ -46,12 +51,15 @@ public class CVProfileController extends HttpServlet {
         try {
             CVDAO cvdao = new CVDAOImpl();
             UserDAO userDAO = new UserDAOImpl();
+            // get information
             UserSkillDAO smdao = new UserSkillDAOImpl();
             int mId = Integer.parseInt(request.getParameter("mId"));
             User mentor = userDAO.getUserById(mId);
             ArrayList<Skill> sList = smdao.getAll_Skill_Mentor(mId);
+            // get information of user mentor
             CV cv = cvdao.getMentorCV(mId);
             request.setAttribute("cv", cv);
+             // get information of user mentor's skill
             request.setAttribute("sList", sList);
             request.setAttribute("mentor", mentor);
             sendDispatcher(request, response, "cvMentor.jsp");

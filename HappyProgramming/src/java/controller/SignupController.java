@@ -27,8 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class has the process request of create new use
  *
- * @author QMC
+ * @author ToanPKhe151393
  */
 @WebServlet(name = "SignupController", urlPatterns = {"/Signup"})
 public class SignupController extends HttpServlet {
@@ -47,6 +48,7 @@ public class SignupController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             UserDAO userDAO = new UserDAOImpl();
+            //take infomation in signUp.jsp then trim
             String userName = request.getParameter("username").trim();
             String password = request.getParameter("password").trim();
             String mail = request.getParameter("mail").trim();
@@ -54,16 +56,20 @@ public class SignupController extends HttpServlet {
             String fname = request.getParameter("fullname").trim();
             String phone = request.getParameter("phone").trim();
             String sex = request.getParameter("sex");
+            //check date
             Date dob = Date.valueOf(request.getParameter("dob"));
             Integer role = Integer.parseInt(request.getParameter("role"));
+            // create a new user with default avata
             User user = new User(userName, password, fname, mail, phone, dob, sex, "default-avatar.png", 1, 1);
+            // ìf the password not match the confirm password stay at the signUp.jsp
             if (!password.equals(repass)) {
-                // ko trung pass
+                
                 response.sendRedirect("signUp.jsp");
             } else {
 
                 User a = userDAO.checkAccount(userName);
-                if (a == null) { // check xem ton tai chua, chua thi dc sign up
+                //checking if the user are alredy exist
+                if (a == null) { 
                     userDAO.signUp(user);
                     if (role == 1) {
                         response.sendRedirect("signIn.jsp");
@@ -72,7 +78,7 @@ public class SignupController extends HttpServlet {
                         response.sendRedirect("CVControllerMap?service=createCV&uId=" + userDAO.checkAccount(userName).getId());
                     }
                     // khi dang ki hoan tat se cha nguoi dung ve page login
-                } else { //neu co roi se day ve trang sighn up
+                } else { 
                     // mess= "user name existed!"
                     response.sendRedirect("signUp.jsp");
                 }
