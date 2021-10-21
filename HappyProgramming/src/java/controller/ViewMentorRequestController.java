@@ -57,16 +57,14 @@ public class ViewMentorRequestController extends HttpServlet {
 
         // get Mentor ID from Session
         User user = (User) session.getAttribute("currUser");
-        int uid = 0;
         if (user == null) { // return to sign in page
             response.sendRedirect("signIn.jsp");
-        } else {
-            uid = user.getId();
+            return;
         }
 
         // Get all Request from database
 
-        ArrayList<Request> requestList = requestdao.getRequestListBy_uId_And_Status(uid, status);
+        ArrayList<Request> requestList = requestdao.getRequestListBy_uId_And_Status(user.getId(), status);
 
         switch (status) {
             case 1:

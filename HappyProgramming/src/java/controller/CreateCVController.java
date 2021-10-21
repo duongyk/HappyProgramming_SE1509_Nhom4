@@ -73,12 +73,12 @@ public class CreateCVController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            int uid = Integer.parseInt(request.getParameter("uId"));
-
-            request.setAttribute("uid", uid);
+            String uid = request.getParameter("uId");
 
             SkillDAO skilldao = new SkillDAOImpl();
             ArrayList<Skill> allSkill = skilldao.getActiveSkill();
+            
+            request.setAttribute("uid", uid);
             request.setAttribute("allskill", allSkill);
 
             RequestDispatcher rd = request.getRequestDispatcher("/createCV.jsp");
@@ -123,13 +123,13 @@ public class CreateCVController extends HttpServlet {
             String serviceDescription = request.getParameter("serviceDescription").trim();
             //System.out.println("serviceDescription "+serviceDescription);
 
-            String[] skill_id = request.getParameterValues("skills");
+            String[] skill_ids = request.getParameterValues("skills");
 
             CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
 
             cvdao.insertCV(uid, mentorCV);
                
-            smdao.updateMentorSkill(uid, skill_id);
+            smdao.updateMentorSkill(uid, skill_ids);
                 
             request.setAttribute("success", "Create Mentor Successfuly");
             sendDispatcher(request, response, "/signIn.jsp");
