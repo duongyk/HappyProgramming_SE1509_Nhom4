@@ -154,12 +154,14 @@ public class MessageController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
+    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException | IOException e) {
+            Logger.getLogger(MessageController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

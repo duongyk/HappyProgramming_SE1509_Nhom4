@@ -44,9 +44,6 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             UserDAO userDAO = new UserDAOImpl();
-            RatingDAO ratingDAO = new RatingDAOImpl();
-            RequestDAO requestDAO = new RequestDAOImpl();
-            SkillDAO skillDAO = new SkillDAOImpl();
             String userName = request.getParameter("username").trim();
             String password = request.getParameter("password").trim();
             User user = userDAO.getUser(userName, password);
@@ -54,7 +51,7 @@ public class LoginController extends HttpServlet {
             if (user != null) {
                 if (user.getRole() == 3) {
                     request.getSession().setAttribute("currUser", user);
-                    sendDispatcher(request, response, "AdminControllerMap?service=dashboard");
+                    sendDispatcher(request, response, "index.jsp");
                 } else {
                     request.getSession().setAttribute("currUser", user);
                     sendDispatcher(request, response, "index.jsp");

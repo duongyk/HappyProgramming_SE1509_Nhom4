@@ -1,70 +1,73 @@
 /*
- * Copyright (C) 2021, FPT University<br>
- * SWP391 - SE1509 - Group 4<br>
- * Happyprogramming<br>
- *
- * Record of change:<br>
- * DATE          Version    Author           DESCRIPTION<br>
- * 20-09-2021    1.0        GiangNVT          First Deploy<br>
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
 import dao.SkillDAO;
+import dao.UserDAO;
 import dao.impl.SkillDAOImpl;
+import dao.impl.UserDAOImpl;
 import entity.Skill;
+import entity.User;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Process:<br>
- * - Create new skill<br>
  *
- * @author giangnvthe150748
+ * @author solov
  */
-public class CreateSkillController extends HttpServlet {
+@WebServlet(name = "SortSkillByNameController", urlPatterns = {"/sortSkillByName"})
+public class SortSkillByName extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request it is a object of
-     * <code>javax.servlet.http.HttpServletRequest</code>
-     * @param response it is a object of
-     * <code>javax.servlet.http.HttpServletResponse</code>
+     * @param request servlet request
+     * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws java.io.IOException
+     * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         SkillDAO skillDAO = new SkillDAOImpl();
+        UserDAO userDAO = new UserDAOImpl();
         try {
-            //get infor of the skill from Input form
-            String sName = request.getParameter("sName").trim();
-            String sDetail = request.getParameter("sDetail").trim();
-            String sImage = request.getParameter("sImage");
-            //check duplicate skill in db
-            if (skillDAO.findDupSkill(sName)) {
-                String mess = "Skill existed!";
-                request.setAttribute("mess", mess);
-                sendDispatcher(request, response, "createSkill.jsp");
-            } else {
-                //insert new skill into db
-                skillDAO.insert(new Skill(sName, sDetail, sImage));
-                sendDispatcher(request, response, "skillManagement");
+            //get index page 
+            String indexPage = request.getParameter("index");
+            // index page always start at 1
+            if (indexPage == null) {
+                indexPage = "1";
             }
+            int index = Integer.parseInt(indexPage);
+            int count = skillDAO.getAllSkillSorted().size();
+            //calculate total page for paging
+            int endPage = count / 8; // a page will have at most 8 skills
+            if (count % 8 != 0) { //if the total of skills is not divisible by 8, the last page will be added to show the remaining skills
+                endPage++;
+            }
+            ArrayList<Skill> list = skillDAO.pagingSkillSorted(index);
+            ArrayList<User> menteeList = userDAO.getMenteeListSorted();
+            ArrayList<Skill> sList = skillDAO.getAllSkillSorted();
+            
+            //send informations to skillManagement.jsp
+            request.setAttribute("sList", list);
+            request.setAttribute("sList2", sList);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("tag", index);
+            request.setAttribute("menteeList", menteeList);
+            request.getRequestDispatcher("sortedSkillManagement.jsp").forward(request, response);
 
         } catch (Exception e) {
-            Logger.getLogger(CreateSkillController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.toString());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
@@ -106,14 +109,5 @@ public class CreateSkillController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
-        try {
-            RequestDispatcher rd = request.getRequestDispatcher(path);
-            rd.forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
 }

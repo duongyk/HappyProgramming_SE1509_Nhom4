@@ -51,7 +51,7 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1><a href="AdminControllerMap?service=dashboard">Vesperr</a></h1>
+                    <h1><a href="index.jsp">Vesperr</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
@@ -92,17 +92,17 @@
                 <div class="container-scroller">
                     <!-- partial:partials/_navbar.html -->
                     <div class="container-fluid page-body-wrapper">
-                        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=dashboard">
+                                    <a class="nav-link" href="adminDashboard">
                                         <i class="icon-grid menu-icon"></i>
                                         <span class="menu-title">Dashboard</span>
                                     </a>
                                 </li>
                                 <!--SKILL MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=skillManage">
+                                    <a class="nav-link" href="skillManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Skill Management</span>
                                     </a>
@@ -116,7 +116,7 @@
                                 </li>
                                 <!--Mentee MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=menteeManage">
+                                    <a class="nav-link" href="menteeManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Mentee Management</span>
                                     </a>
@@ -137,6 +137,7 @@
                                 </li>
                             </ul>
                         </nav>
+
                         <!-- partial -->
                         <div class="main-panel">
                             <div class="content-wrapper">

@@ -8,11 +8,8 @@
  * 20-09-2021    1.0        GiangNVT          First Deploy<br>
  */
 package controller;
-
-import dao.RequestDAO;
 import dao.SkillDAO;
 import dao.UserDAO;
-import dao.impl.RequestDAOImpl;
 import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
 import entity.Skill;
@@ -50,7 +47,6 @@ public class SkillManagementController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         SkillDAO skillDAO = new SkillDAOImpl();
         UserDAO userDAO = new UserDAOImpl();
-        RequestDAO requestDAO = new RequestDAOImpl();
         try {
             //get index page 
             String indexPage = request.getParameter("index");
@@ -67,11 +63,10 @@ public class SkillManagementController extends HttpServlet {
             }
             ArrayList<Skill> list = skillDAO.pagingSkill(index);
             ArrayList<User> menteeList = userDAO.getMenteeListSorted();
-            ArrayList<Skill> sList = skillDAO.getAllSkill();
             //send informations to skillManagement.jsp
             request.setAttribute("sList", list);
-            request.setAttribute("sList2", sList);
             request.setAttribute("endPage", endPage);
+              request.setAttribute("count", count);
             request.setAttribute("tag", index);
             request.setAttribute("menteeList", menteeList);
             request.getRequestDispatcher("skillManagement.jsp").forward(request, response);

@@ -8,6 +8,7 @@
 
 --%>
 
+<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -17,7 +18,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>List unread management</title>
+        <title>Skill management</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -41,7 +42,12 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
 
-
+        <!-- =======================================================
+        * Template Name: Vesperr - v4.6.0
+        * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
+        * Author: BootstrapMade.com
+        * License: https://bootstrapmade.com/license/
+        ======================================================== -->
     </head>
 
     <body>
@@ -93,7 +99,7 @@
                     <div class="container-fluid page-body-wrapper" style="padding-top: 20px;">
                         <!-- partial -->
                         <!-- partial:../../partials/_sidebar.html -->
-                        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="adminDashboard">
@@ -150,7 +156,7 @@
                                     <div class="col-md-6 grid-margin stretch-card">
                                         <div class="card tale-bg">
                                             <div class="card-people mt-auto" style="padding: 0">
-                                                <img style="min-width: 300px; min-height:250px " src="img/Message.png">
+                                                <img style="min-width: 300px; min-height:250px " src="img/1.png">
 
                                                 <div class="weather-info">
                                                 </div>
@@ -162,65 +168,75 @@
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-tale">
                                                     <div class="card-body">
-                                                      
-                                                        <a href="MessageControllerMap?service=getMessage" style="color: white; text-decoration: none"><p class="mb-4">Total Messages </p>
-                                                            <p class="fs-30 mb-2"><c:out value="${listMess.size()}"></c:out></p>
+                                                        <a href="skillManagement" style="color: white; text-decoration: none">
+                                                            <p class="mb-4">Total Skill </p>
+                                                            <p class="fs-30 mb-2"><c:out value="${sList2.size()}"></c:out></p>
+                                                                <p></p>
                                                             </a> 
+
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-4 stretch-card transparent">
                                                     <div class="card card-dark-blue">
                                                         <div class="card-body">
-                                                            <a href="MessageControllerMap?service=getUnReadMessage" style="color: white; text-decoration: none"><p class="mb-4">Unread Messages</p>
-                                                                <p class="fs-30 mb-2"><c:out value="${listUnReadMess.size()}"></c:out></p>
-                                                            </a> 
+                                                            <p class="mb-4">Total Mentee</p>
+                                                            <p class="fs-30 mb-2"><c:out value="${menteeList.size()}"></c:out></p>
+                                                            <p></p>
                                                         </div>
                                                     </div>
-                                                </div> 
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                                                    <button class="create"> <a href="createSkill.jsp" style="color: white"> Create new skill</a></button>
+                                                </div>
+
                                             </div>
                                         </div>
 
 
+                                        <p class="text-success">${mess}</p>  
+                                    <div class="row">
+                                        <div class="col-lg-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>
+                                                                        Image
+                                                                    </th>
+                                                                    <th>
+                                                                        ID
+                                                                    </th>
+                                                                    <th>
+                                                                        <a style="color: black" href="sortSkillByName"> Skill Name </a>
+                                                                    </th>
+                                                                    <th>
+                                                                        Detail
+                                                                    </th>
 
-                                        <div class="row">
-                                            <div class="col-lg-12 grid-margin stretch-card">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped">
-                                                                <thead>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <c:forEach items="${sList}" var="skill">
                                                                     <tr>
-                                                                        <th>
-                                                                            ID
-                                                                        </th>
-                                                                        <th>
-                                                                            Title
-                                                                        </th>
-                                                                        <th>
-                                                                            Email
-                                                                        </th>
-
-                                                                       
-
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <c:forEach items="${listUnReadMess}" var="message">
-                                                                    <tr>
-                                                                        <td>
-                                                                            ${message.mId}
+                                                                        <td class="py-1">
+                                                                            <img src="img/${skill.image}" alt="image" />
                                                                         </td>
                                                                         <td>
-                                                                            <a href="MessageControllerMap?service=viewMessage&mId=${message.mId}">   ${message.title}</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <c:out value="${message.email}"></c:out>
-
+                                                                            <a href="getUpdateSkill?sId=${skill.id}"><c:out value="${skill.id}"></c:out></a>
                                                                             </td>
-                                                                            
 
-                                                                    </tr>
+                                                                            <td>
+                                                                            <c:out value="${skill.name}"></c:out>
+                                                                            </td>
+                                                                            <td>
+                                                                            <c:out value="${skill.detail}"></c:out>
+                                                                            </td>
+                                                                        </tr>
                                                                 </c:forEach>
 
                                                             </tbody>
@@ -233,7 +249,11 @@
                                     </div>
 
                                 </div>
-
+                                <div style="padding-left: 650px">
+                                    <c:forEach begin="1" end="${endPage}" var="i">
+                                        <a class="${tag == i?"active":""}" href="sortSkillByName?index=${i}"> ${i}</a> 
+                                    </c:forEach>
+                                </div> 
                                 <!-- content-wrapper ends -->
                                 <!-- partial:../../partials/_footer.html -->
 

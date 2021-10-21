@@ -17,7 +17,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Skill management</title>
+        <title>Message management</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -93,17 +93,17 @@
                     <div class="container-fluid page-body-wrapper" style="padding-top: 20px;">
                         <!-- partial -->
                         <!-- partial:../../partials/_sidebar.html -->
-                        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="adminDashboard.jsp">
+                                    <a class="nav-link" href="adminDashboard">
                                         <i class="icon-grid menu-icon"></i>
                                         <span class="menu-title">Dashboard</span>
                                     </a>
                                 </li>
                                 <!--SKILL MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=skillManage">
+                                    <a class="nav-link" href="skillManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Skill Management</span>
                                     </a>
@@ -117,7 +117,7 @@
                                 </li>
                                 <!--Mentee MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=menteeManage">
+                                    <a class="nav-link" href="menteeManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Mentee Management</span>
                                     </a>

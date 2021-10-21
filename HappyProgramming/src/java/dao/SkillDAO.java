@@ -94,4 +94,19 @@ public interface SkillDAO {
      */
     public ArrayList<Skill> pagingSkill(int index);
 
+    /**
+     * Get all Skill and sorted by name in the database
+     *
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
+     */
+    public ArrayList<Skill> getAllSkillSorted() throws Exception;
+
+    /**
+     * Paging skill
+     *
+     * @param index is an int number
+     * @return a list <code>Skill</code> object
+     */
+    public ArrayList<Skill> pagingSkillSorted(int index);
 }

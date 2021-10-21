@@ -55,6 +55,9 @@ public class GetUpdateSkillController extends HttpServlet {
             session.setAttribute("image", skill.getImage());
             sendDispatcher(request, response, "updateSkill.jsp");
         } catch (Exception e) {
+            Logger.getLogger(GetUpdateSkillController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

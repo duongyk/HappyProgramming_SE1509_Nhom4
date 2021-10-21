@@ -58,13 +58,14 @@ public class AdminDashboardController extends HttpServlet {
             ArrayList<User> mentorList = userDAO.getUserByRole(2);
             //get total skill
             ArrayList<Skill> skillList = skillDAO.getAllSkill();
-
             request.setAttribute("menteeList", menteeList);
             request.setAttribute("mentorList", mentorList);
             request.setAttribute("skillList", skillList);
             sendDispatcher(request, response, "adminDashboard.jsp");
         } catch (Exception e) {
-
+            Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

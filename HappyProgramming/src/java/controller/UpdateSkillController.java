@@ -55,8 +55,8 @@ public class UpdateSkillController extends HttpServlet {
             String sImage = request.getParameter("sImage");
             String mess = "Update Skill Successfully!";
             int status = Integer.parseInt(request.getParameter("status"));
-             if (sImage.isEmpty()) { // check if user dont chose any new picture file
-                 sImage = session.getAttribute("image").toString();
+            if (sImage.isEmpty()) { // check if user dont chose any new picture file
+                sImage = session.getAttribute("image").toString();
             }
             //create a new skill with all infor got in updateSkill.jsp
             Skill skill = new Skill(sId, sName, sDetail, sImage, status);
@@ -66,6 +66,9 @@ public class UpdateSkillController extends HttpServlet {
             sendDispatcher(request, response, "skillManagement");
 
         } catch (Exception e) {
+            Logger.getLogger(UpdateSkillController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

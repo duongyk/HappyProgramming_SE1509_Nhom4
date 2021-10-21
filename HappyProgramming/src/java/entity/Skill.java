@@ -140,7 +140,7 @@ public class Skill {
     /**
      * Set value from attribute of Skill class. <br>
      *
-     * @return id it is a int number
+     * @param id
      */
     public void setId(int id) {
         this.id = id;
@@ -149,7 +149,7 @@ public class Skill {
     /**
      * Set value from attribute of Skill class. <br>
      *
-     * @return name it is a <code>java.lang.String</code>
+     * @param name
      */
     public void setName(String name) {
         this.name = name;
@@ -158,7 +158,7 @@ public class Skill {
     /**
      * Set value from attribute of Skill class. <br>
      *
-     * @return detail it is a <code>java.lang.String</code>
+     * @param detail
      */
     public void setDetail(String detail) {
         this.detail = detail;
@@ -167,7 +167,7 @@ public class Skill {
     /**
      * Set value from attribute of Skill class. <br>
      *
-     * @return image it is a <code>java.lang.String</code>
+     * @param image
      */
     public void setImage(String image) {
         this.image = image;
@@ -185,9 +185,16 @@ public class Skill {
     /**
      * Set value from attribute of Skill class. <br>
      *
-     * @return status it is a int number
+     * @param status
      */
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+   
+    
 }

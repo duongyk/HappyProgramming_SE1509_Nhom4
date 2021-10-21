@@ -14,6 +14,7 @@ import entity.Skill;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -73,7 +74,6 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
      * Get all Skill of the user in the database
      *
      * @return a list <code>Skill</code> object
-     * @throws java.lang.Exception
      */
     @Override
     public int getTotalSkill() {
@@ -112,6 +112,41 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
                 + "(select ROW_NUMBER() over (order by sId asc) as r, * from dbo.Skill) \n"
                 + "as x\n"
                 + "where r between ? and ?";
+        //get informations from database
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, index * 8 - 7);
+            ps.setInt(2, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Skill(rs.getInt("sId"), rs.getString("sName"), rs.getString("sDetail"), rs.getString("sImage"), rs.getInt("sStatus")));
+
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+
+    }
+
+    /**
+     * Paging skill
+     *
+     * @param index is an int number
+     * @return a list <code>Skill</code> object
+     */
+    @Override
+    public ArrayList<Skill> pagingSkillSorted(int index) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Skill> list = new ArrayList<>();
+        String sql = "select * from \n"
+                + "             (select ROW_NUMBER() over (order by sName asc) as r, * from dbo.Skill)\n"
+                + "               as x\n"
+                + "              where r between ? and ?";
         //get informations from database
         try {
             conn = getConnection();
@@ -174,7 +209,49 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return list;
     }
 
-     /**
+    /**
+     * Get all Skill and sorted by name in the database
+     *
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
+     */
+    @Override
+    public ArrayList<Skill> getAllSkillSorted() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        //get informations from database
+        ArrayList<Skill> list = new ArrayList<>();
+        String sql = "SELECT  * FROM [PRJ_SWP].[dbo].[Skill] Order By sName";
+        int id;
+        int status;
+        String name;
+        String detail;
+        String image;
+        Skill s;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("sId");
+                name = rs.getString("sName");
+                detail = rs.getString("sDetail");
+                image = rs.getString("sImage");
+                s = new Skill(id, name, detail, image);
+                list.add(s);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
      * Find Skill in the database
      *
      * @param sName. It is a <code>java.lang.String</code>
@@ -219,7 +296,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return list;
     }
 
-   /**
+    /**
      * Find skill by Id in db
      *
      * @param sId .It is an int number
@@ -257,7 +334,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return skill;
     }
 
-     /**
+    /**
      * Insert new Rating into the database
      *
      * @param x is a <code>Skill</code> object
@@ -338,6 +415,12 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         }
     }
 
-
+    public static void main(String[] args) throws Exception {
+        SkillDAOImpl dao = new SkillDAOImpl();
+        ArrayList<Skill> list = dao.pagingSkillSorted(1);
+        for (Skill skill : list) {
+            System.out.println(skill);
+        }
+    }
 
 }

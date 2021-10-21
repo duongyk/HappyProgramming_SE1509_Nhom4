@@ -67,6 +67,11 @@
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
                                         </li>
                                     </c:when>
+                                         <c:when test="${sessionScope.currUser.getRole()==3}">
+                                        <li><a class="nav-link scrollto" href="adminDashboard">Admin Dashboard</a>
+                                        </li>
+                                      
+                                    </c:when>
                                     <c:otherwise>
                                         <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
                                         </li>

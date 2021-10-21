@@ -58,6 +58,9 @@ public class MenteeManagementController extends HttpServlet {
             request.setAttribute("menteeList", menteeList);
             sendDispatcher(request, response, "menteeManagement.jsp");
         } catch (Exception e) {
+            Logger.getLogger(MenteeManagementController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
      public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
