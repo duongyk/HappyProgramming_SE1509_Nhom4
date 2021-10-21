@@ -75,7 +75,7 @@ public class SignupController extends HttpServlet {
                         response.sendRedirect("signIn.jsp");
                     } else {
                         //response.sendRedirect("signIn.jsp");
-                        response.sendRedirect("CVControllerMap?service=createCV&uId=" + userDAO.checkAccount(userName).getId());
+                        response.sendRedirect("createCV?uId=" + userDAO.checkAccount(userName).getId());
                     }
                     // khi dang ki hoan tat se cha nguoi dung ve page login
                 } else { 

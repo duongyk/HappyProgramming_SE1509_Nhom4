@@ -9,14 +9,17 @@ import dao.CVDAO;
 import dao.UserDAO;
 import dao.UserSkillDAO;
 import dao.impl.CVDAOImpl;
+import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
 import dao.impl.UserSkillDAOImpl;
 import entity.CV;
+import entity.Skill;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -28,16 +31,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * The class contain the method update to process data from Create CV form
+ * The class contain the method insert, update to process data from Create CV form
  * Data will be trimmed before processed
- * Redirect to profile jsp with success message if success
- * Redirect to profile jsp with error message if failure
- * The method will throw Exception if any error occur
+ * Redirect to signIn jsp if success
+ * The method will throw Exception and run to error jsp if any error occur
  * 
  * @author thangtvhe151307
  */
-@WebServlet(name = "SubmitUpdateCV", urlPatterns = {"/submitUpdateCV"})
-public class SubmitUpdateCV extends HttpServlet {
+@WebServlet(name = "UpdateCV", urlPatterns = {"/updateCV"})
+public class UpdateCVController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,6 +52,81 @@ public class SubmitUpdateCV extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
+        
+    }
+    
+    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
+        try {
+            RequestDispatcher rd = request.getRequestDispatcher(path);
+            rd.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(UpdateCVController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            
+            CVDAO cvdao = new CVDAOImpl();
+            UserSkillDAO smdao = new UserSkillDAOImpl();
+
+            HttpSession session = request.getSession();
+            
+            int uid = Integer.parseInt(request.getParameter("uid"));
+                
+            CV mentorCV = cvdao.getMentorCV(uid);
+
+            //User mentorProfile = userDAO.getUserById(uid);
+            User mentorProfile = (User) session.getAttribute("currUser");
+
+            // get all skill id from mentor
+            ArrayList<String> mentorSkill = smdao.getAll_Id_Skill_Mentor(uid);
+
+            //get all available skill
+            SkillDAOImpl skilldao = new SkillDAOImpl();
+
+            ArrayList<Skill> allSkill = skilldao.getActiveSkill();
+
+            request.setAttribute("allskill", allSkill);
+            request.setAttribute("mentorskill", mentorSkill);
+            session.setAttribute("mentorprofile", mentorProfile);
+            request.setAttribute("mentorcv", mentorCV);
+            request.setAttribute("title","UPDATE CV");
+
+            RequestDispatcher rd = request.getRequestDispatcher("/updateCV.jsp");
+            //RequestDispatcher rd = request.getRequestDispatcher("/newUpdateCV.jsp");
+
+            rd.forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UpdateCVController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", ex.getMessage());
+            sendDispatcher(request, response, "/error.jsp");
+        }
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
@@ -131,55 +208,9 @@ public class SubmitUpdateCV extends HttpServlet {
             
             
         } catch (Exception e) {
-            Logger.getLogger(SubmitUpdateCV.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UpdateCVController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.getMessage());
             sendDispatcher(request, response, "/error.jsp");
-        }
-    }
-    
-    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
-        try {
-            RequestDispatcher rd = request.getRequestDispatcher(path);
-            rd.forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(SubmitUpdateCV.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(SubmitUpdateCV.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(SubmitUpdateCV.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

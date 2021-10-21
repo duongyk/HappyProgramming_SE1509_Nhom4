@@ -5,13 +5,15 @@
  */
 package controller;
 
-import dao.CVDAO;
-import dao.UserSkillDAO;
-import dao.impl.CVDAOImpl;
-import dao.impl.UserSkillDAOImpl;
-import entity.CV;
+import dao.RatingDAO;
+import dao.RequestDAO;
+import dao.impl.RatingDAOImpl;
+import dao.impl.RequestDAOImpl;
+import entity.Request;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -20,17 +22,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * The class contain the method insert, update to process data from Create CV form
- * Data will be trimmed before processed
- * Redirect to signIn jsp if success
- * The method will throw Exception if any error occur
+ * The class contains method get data from Request table
+ * Request List is get through status from URL and mentor id from session
+ * Run to mentorRequestList jsp if success
+ * Will throw Exception if any error occur
  * 
  * @author thangtvhe151307
  */
-@WebServlet(name = "SubmitCreateCV", urlPatterns = {"/submitCreateCV"})
-public class SubmitCreateCV extends HttpServlet {
+@WebServlet(name = "ViewMentorRequest", urlPatterns = {"/viewMentorRequest"})
+public class ViewMentorRequestController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,38 +48,48 @@ public class SubmitCreateCV extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            CVDAO cvdao = new CVDAOImpl();
-            UserSkillDAO smdao = new UserSkillDAOImpl();
+        
+        HttpSession session = request.getSession();
+        RequestDAO requestdao = new RequestDAOImpl();
+    
+        // get status from URL
+        int status = Integer.parseInt(request.getParameter("status"));
 
-            
-            int uid = Integer.parseInt(request.getParameter("uid"));
-                
-            String achievement = request.getParameter("achievement").trim();
-            //System.out.println("achievement "+achievement);
+        // get Mentor ID from Session
+        User user = (User) session.getAttribute("currUser");
+        int uid = 0;
+        if (user == null) { // return to sign in page
+            response.sendRedirect("signIn.jsp");
+        } else {
+            uid = user.getId();
+        }
 
-            String  profession = request.getParameter("profession").trim();
-            //System.out.println("profession "+profession);
+        // Get all Request from database
 
-            String professionIntro = request.getParameter("professionIntro").trim();
-            //System.out.println("professionIntro "+professionIntro);
+        ArrayList<Request> requestList = requestdao.getRequestListBy_uId_And_Status(uid, status);
 
-            String serviceDescription = request.getParameter("serviceDescription").trim();
-            //System.out.println("serviceDescription "+serviceDescription);
-
-            String[] skill_id = request.getParameterValues("skills");
-
-            CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
-
-            cvdao.insertCV(uid, mentorCV);
-               
-            smdao.updateMentorSkill(uid, skill_id);
-                
-            request.setAttribute("success", "Create Mentor Successfuly");
-            sendDispatcher(request, response, "/signIn.jsp");
-            
+        switch (status) {
+            case 1:
+                request.setAttribute("status", "Inviting");
+                break;
+            case 2:
+                request.setAttribute("status", "Following");
+                break;
+            case 3:
+                request.setAttribute("status", "Done");
+                break;
+            case 4:
+                request.setAttribute("status", "Canceled");
+                break;
+            default:
+                break;
+        }
+        
+        request.setAttribute("requestlist", requestList);
+        sendDispatcher(request, response, "/mentorRequestList.jsp");
+        
         } catch (Exception e) {
-            Logger.getLogger(SubmitCreateCV.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ViewMentorRequestController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.getMessage());
             sendDispatcher(request, response, "/error.jsp");
         }
@@ -87,9 +100,10 @@ public class SubmitCreateCV extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(SubmitCreateCV.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewMentorRequestController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -105,7 +119,7 @@ public class SubmitCreateCV extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(SubmitCreateCV.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewMentorRequestController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -123,7 +137,7 @@ public class SubmitCreateCV extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(SubmitCreateCV.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewMentorRequestController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -131,7 +131,7 @@
                         <div class="card card-5">
 
                             <div class="card-body">
-                                <form action="submitUpdateCV" method="POST">
+                                <form action="updateCV" method="POST">
                                     <input type="hidden" name="uid" value="<c:out value="${mentorprofile.getId()}"></c:out>" readonly="readonly" />
                                     <!--
                                     <div class="form-row m-b-55">
@@ -425,7 +425,22 @@
 
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
-
+        
+        <script>
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth();
+                if (d < 10) {
+                    d = '0' + d;
+                }
+                if (m < 10) {
+                    m = '0' + m;
+                }
+                var y = date.getFullYear()-18;
+                var max = y + "-" + m + "-" + d;
+                document.getElementById("date").setAttribute('max', max);
+    </script>
+        
     </body>
-
+    
 </html>

@@ -5,8 +5,13 @@
  */
 package controller;
 
+import dao.CVDAO;
 import dao.SkillDAO;
+import dao.UserSkillDAO;
+import dao.impl.CVDAOImpl;
 import dao.impl.SkillDAOImpl;
+import dao.impl.UserSkillDAOImpl;
+import entity.CV;
 import entity.Skill;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author thangtvhe1513077
  */
 @WebServlet(name = "CreateCV", urlPatterns = {"/createCV"})
-public class CreateCV extends HttpServlet {
+public class CreateCVController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,25 +46,7 @@ public class CreateCV extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-
-            int uid = Integer.parseInt(request.getParameter("uId"));
-
-            request.setAttribute("uid", uid);
-
-            SkillDAO skilldao = new SkillDAOImpl();
-            ArrayList<Skill> allSkill = skilldao.getActiveSkill();
-            request.setAttribute("allskill", allSkill);
-
-            RequestDispatcher rd = request.getRequestDispatcher("/createCV.jsp");
-            rd.forward(request, response);
-
-        } catch (Exception ex) {
-            Logger.getLogger(CreateCV.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage", ex.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
-        }
+        
     }
 
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
@@ -67,7 +54,7 @@ public class CreateCV extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(CreateCV.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,10 +70,24 @@ public class CreateCV extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+
+            int uid = Integer.parseInt(request.getParameter("uId"));
+
+            request.setAttribute("uid", uid);
+
+            SkillDAO skilldao = new SkillDAOImpl();
+            ArrayList<Skill> allSkill = skilldao.getActiveSkill();
+            request.setAttribute("allskill", allSkill);
+
+            RequestDispatcher rd = request.getRequestDispatcher("/createCV.jsp");
+            rd.forward(request, response);
+
         } catch (Exception ex) {
-            Logger.getLogger(CreateCV.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", ex.getMessage());
+            sendDispatcher(request, response, "/error.jsp");
         }
     }
 
@@ -101,10 +102,42 @@ public class CreateCV extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(CreateCV.class.getName()).log(Level.SEVERE, null, ex);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            
+            CVDAO cvdao = new CVDAOImpl();
+            UserSkillDAO smdao = new UserSkillDAOImpl();
+
+            
+            int uid = Integer.parseInt(request.getParameter("uid"));
+                
+            String achievement = request.getParameter("achievement").trim();
+            //System.out.println("achievement "+achievement);
+
+            String  profession = request.getParameter("profession").trim();
+            //System.out.println("profession "+profession);
+
+            String professionIntro = request.getParameter("professionIntro").trim();
+            //System.out.println("professionIntro "+professionIntro);
+
+            String serviceDescription = request.getParameter("serviceDescription").trim();
+            //System.out.println("serviceDescription "+serviceDescription);
+
+            String[] skill_id = request.getParameterValues("skills");
+
+            CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
+
+            cvdao.insertCV(uid, mentorCV);
+               
+            smdao.updateMentorSkill(uid, skill_id);
+                
+            request.setAttribute("success", "Create Mentor Successfuly");
+            sendDispatcher(request, response, "/signIn.jsp");
+            
+        } catch (Exception e) {
+            Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.getMessage());
+            sendDispatcher(request, response, "/error.jsp");
         }
     }
 

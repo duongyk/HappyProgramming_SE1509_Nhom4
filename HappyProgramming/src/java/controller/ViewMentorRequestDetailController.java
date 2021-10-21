@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author thangtvhe151307
  */
 @WebServlet(name = "ViewMentorRequestDetail", urlPatterns = {"/viewMentorRequestDetail"})
-public class ViewMentorRequestDetail extends HttpServlet {
+public class ViewMentorRequestDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -62,7 +62,7 @@ public class ViewMentorRequestDetail extends HttpServlet {
         request.setAttribute("req", req);
         sendDispatcher(request, response, "viewRequestMentor.jsp");
         } catch (Exception e) {
-            Logger.getLogger(ViewMentorRequestDetail.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ViewMentorRequestDetailController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.getMessage());
             sendDispatcher(request, response, "/error.jsp");
         }
@@ -73,7 +73,7 @@ public class ViewMentorRequestDetail extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(ViewMentorRequestDetail.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewMentorRequestDetailController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -92,7 +92,7 @@ public class ViewMentorRequestDetail extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(ViewMentorRequestDetail.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewMentorRequestDetailController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -110,7 +110,7 @@ public class ViewMentorRequestDetail extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(ViewMentorRequestDetail.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewMentorRequestDetailController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
