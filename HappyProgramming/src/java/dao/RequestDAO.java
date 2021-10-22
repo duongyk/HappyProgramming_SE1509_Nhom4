@@ -37,7 +37,15 @@ public interface RequestDAO {
      */
     public int createRequest(Request req) throws Exception;
     
-    
+    /**
+     * Get the total number of request of the user
+     *
+     * @param uid (id of user )
+     * @param status (status of request)
+     * @return ArrayList of Request
+     * 
+     * @throws Exception
+     */
     public ArrayList<Request> getRequestListBy_uId_And_Status(int uid, int status) throws Exception;
     
     /**
@@ -157,7 +165,7 @@ public interface RequestDAO {
     public int getTotalFilterStatus(int mId, int status) throws Exception;
     
     /**
-     * Get the number of request with the same status of the user
+     * Get the number of request with the same status of the mentor
      *
      * @param mentorId it is an Integer number
      * @param status it is an Integer number

@@ -115,8 +115,16 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return n;
     }
 
+    /**
+     * Get the total number of request of the user
+     *
+     * @param uid (id of user )
+     * @param status (status of request)
+     * @return ArrayList of Request
+     * 
+     * @throws Exception
+     */  
     @Override
-
     public ArrayList<Request> getRequestListBy_uId_And_Status(int uid, int status) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
