@@ -109,4 +109,6 @@ public interface SkillDAO {
      * @return a list <code>Skill</code> object
      */
     public ArrayList<Skill> pagingSkillSorted(int index);
+
+    public ArrayList<Skill> searchSkill(String txtSearch) throws Exception;
 }

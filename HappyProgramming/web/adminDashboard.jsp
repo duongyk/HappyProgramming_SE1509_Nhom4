@@ -67,9 +67,26 @@
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
+                                <li> Seach</li>
 
                             </c:when>
                             <c:otherwise>
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <select data-trigger="" name="category">
+                                                <option>Category</option>
+                                                <option>Skill</option>
+                                                <option>Mentee</option>
+                                                <option>Mentor</option>
+                                                <option>Message</option>
+                                                <option>Request</option>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}">
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
                                 <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
@@ -77,11 +94,13 @@
                                         </li>
                                     </ul>
                                 </li>
+
                             </c:otherwise>
                         </c:choose>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar-main -->
+
 
             </div>
         </header><!-- End Header -->
@@ -297,7 +316,12 @@
 
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
-
+        <style>
+            .searchButton {
+                background-color: #e2f5fde0;
+                border: none;
+            }
+        </style>
     </body>
 
 </html>

@@ -415,9 +415,45 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         }
     }
 
+    public ArrayList<Skill> searchSkill(String txtSearch) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        //get informations from database
+        ArrayList<Skill> list = new ArrayList<>();
+        String sql = "select * from [Skill] where sName like ?";
+        int id;
+        int status;
+        String name;
+        String detail;
+        String image;
+        Skill s;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + txtSearch + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("sId");
+                name = rs.getString("sName");
+                detail = rs.getString("sDetail");
+                image = rs.getString("sImage");
+                s = new Skill(id, name, detail, image);
+                list.add(s);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
     public static void main(String[] args) throws Exception {
         SkillDAOImpl dao = new SkillDAOImpl();
-        ArrayList<Skill> list = dao.pagingSkillSorted(1);
+        ArrayList<Skill> list = dao.searchSkill("Java");
         for (Skill skill : list) {
             System.out.println(skill);
         }
