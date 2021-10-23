@@ -202,7 +202,7 @@
                                     <div class="form-row">
                                         <div class="name">DOB</div>
                                         <div class="value">       
-                                            <input  class="input-white" type="date"  name="dob" value="<c:out value="${mentorprofile.getDob()}"></c:out>" >
+                                            <input  class="input-white" type="date" id="mentordob"  name="dob" value="<c:out value="${mentorprofile.getDob()}"></c:out>" >
                                         </div>    
                                     </div>
                                                         
@@ -429,7 +429,7 @@
         <script>
                 var date = new Date();
                 var d = date.getDate();
-                var m = date.getMonth();
+                var m = date.getMonth()+1;
                 if (d < 10) {
                     d = '0' + d;
                 }
@@ -438,7 +438,7 @@
                 }
                 var y = date.getFullYear()-18;
                 var max = y + "-" + m + "-" + d;
-                document.getElementById("date").setAttribute('max', max);
+                document.getElementById("mentordob").setAttribute('max', max);
     </script>
         
     </body>
