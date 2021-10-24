@@ -112,13 +112,14 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
      * @throws Exception
      */
     @Override
-    public String getAvgRate(int mId) throws Exception {
+    public double getAvgRate(int mId) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         ArrayList<Integer> listRating = new ArrayList();
         String sql = "SELECT * FROM [Rating] WHERE [toId] = ?";
         int sum = 0;
+        double avg = 0;
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
@@ -137,8 +138,9 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
             closePreparedStatement(ps);
             closeConnection(conn);
         }
-        
-        String avg = String.format("%.2f", (double) sum / listRating.size());
+        if (!listRating.isEmpty()) {
+            avg = (double) sum / listRating.size();
+        }
         return avg;
     }
 

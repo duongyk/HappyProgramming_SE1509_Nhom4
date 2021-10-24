@@ -10,7 +10,10 @@
 package dao.impl;
 
 import context.DBContext;
+import dao.RequestDAO;
 import dao.SkillDAO;
+import dao.UserDAO;
+import entity.Request;
 import entity.Skill;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -113,9 +116,10 @@ public class RequestSkillDAOImpl extends DBContext implements dao.RequestSkillDA
 
     /**
      * Update RequestSkill table
+     *
      * @param rId is a <code>java.lang.Integer</code>
      * @param skillIds is a list of a <code>java.lang.Integer</code>
-     *@throws Exception
+     * @throws Exception
      */
     @Override
     public void updateRequestSkill(int rId, ArrayList<Integer> skillIds) throws Exception {
@@ -150,9 +154,10 @@ public class RequestSkillDAOImpl extends DBContext implements dao.RequestSkillDA
 
     /**
      * Get all the Skills by the Request ID
+     *
      * @param rId is a <code>java.lang.Integer</code>
-     * @return a list <code>Skill</code> object 
-     *@throws Exception
+     * @return a list <code>Skill</code> object
+     * @throws Exception
      */
     @Override
     public ArrayList<Skill> getSkill(int rId) throws Exception {
@@ -183,5 +188,37 @@ public class RequestSkillDAOImpl extends DBContext implements dao.RequestSkillDA
             closeConnection(conn);
         }
         return (listSkill);
+    }
+
+    /**
+     * Get all the Skills that the Mentee had Requested
+     *
+     * @param mId is a <code>java.lang.Integer</code>
+     * @return a list <code>Skill</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<Skill> getSkillByMentee(int mId) throws Exception {
+        UserDAO userDAO = new UserDAOImpl();
+        RequestDAO requestDAO = new RequestDAOImpl();
+        SkillDAO skillDAO = new SkillDAOImpl();
+        //get Request List by Mentee
+        ArrayList<Request> requestList = requestDAO.getListByMe(userDAO.getUserById(mId));
+        ArrayList<Skill> skillList = new ArrayList<>();
+        ArrayList<Integer> skillID = new ArrayList<>();
+        // Add Skill ID to list ID
+        for (Request r : requestList) {
+            ArrayList<Skill> list = getSkill(r.getId());
+            for (Skill s : list) {
+                if (!skillID.contains(s.getId())) {
+                    skillID.add(s.getId());
+                }
+            }
+        }
+        // Add Skill to list Skill
+        for (int id : skillID) {
+            skillList.add(skillDAO.getSkillById(id));
+        }
+        return skillList;
     }
 }

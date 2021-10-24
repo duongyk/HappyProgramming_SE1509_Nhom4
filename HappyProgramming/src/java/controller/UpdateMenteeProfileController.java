@@ -44,7 +44,7 @@ public class UpdateMenteeProfileController extends HttpServlet {
             
         }
         catch (Exception e) {
-            Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UpdateMenteeProfile.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
             doGet(request, response);

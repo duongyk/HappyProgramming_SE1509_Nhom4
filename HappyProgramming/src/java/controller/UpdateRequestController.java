@@ -38,7 +38,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DuongVV
  */
-public class UpdateRequest extends HttpServlet {
+public class UpdateRequestController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -79,7 +79,7 @@ public class UpdateRequest extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UpdateRequest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateRequestController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -96,7 +96,7 @@ public class UpdateRequest extends HttpServlet {
             throws ServletException, IOException {
         try {
             // initiate DAO
-            UserDAO userDao = new UserDAOImpl();
+            UserDAO userDAO = new UserDAOImpl();
             RequestDAO requestDAO = new RequestDAOImpl();
             RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
             SkillDAO skillDAO = new SkillDAOImpl();
@@ -111,7 +111,7 @@ public class UpdateRequest extends HttpServlet {
                 // get all skill for choosing
                 ArrayList<Skill> sListAll = skillDAO.getAllSkill();
                 // get all Mentor for choosing
-                ArrayList<User> mList = userDao.getUserByRole(2);
+                ArrayList<User> mList = userDAO.getUserByRole(2);
                 // get list chosen skills
                 ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
 
@@ -122,7 +122,7 @@ public class UpdateRequest extends HttpServlet {
                 sendDispatcher(request, response, "updateRequest.jsp");
             }
         } catch (Exception e) {
-            Logger.getLogger(UpdateRequest.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UpdateRequestController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
@@ -174,15 +174,16 @@ public class UpdateRequest extends HttpServlet {
             requestSkillDAO.updateRequestSkill(rId, sIdList);
             request.setAttribute("messSucc", "Update successful!");
             
-            // get Skills in Request
-            ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
-            // get new Request
-            Request reqUpdated = requestDAO.getRequestById(rId);
-            request.setAttribute("sList", sList);/*Skill list of Request*/
-            request.setAttribute("req", reqUpdated);/*Request*/
-            sendDispatcher(request, response, "viewRequest.jsp");
+//            // get Skills in Request
+//            ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
+//            // get new Request
+//            Request reqUpdated = requestDAO.getRequestById(rId);
+//            request.setAttribute("sList", sList);/*Skill list of Request*/
+//            request.setAttribute("req", reqUpdated);/*Request*/
+//            sendDispatcher(request, response, "viewRequest.jsp");
+            sendDispatcher(request, response, "viewRequest");
         } catch (Exception e) {
-            Logger.getLogger(UpdateRequest.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UpdateRequestController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

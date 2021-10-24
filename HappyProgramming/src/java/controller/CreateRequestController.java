@@ -70,7 +70,7 @@ public class CreateRequestController extends HttpServlet {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -92,7 +92,7 @@ public class CreateRequestController extends HttpServlet {
             request.setAttribute("mList", mentor); // set list of mentor
             sendDispatcher(request, response, "createRequest.jsp");
         } catch (Exception e) {
-            Logger.getLogger(UpdateRequest.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UpdateRequestController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

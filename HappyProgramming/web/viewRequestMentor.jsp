@@ -53,7 +53,7 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                             <%-- Check the current User --%>
                             <c:choose>

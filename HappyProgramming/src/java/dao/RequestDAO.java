@@ -174,4 +174,12 @@ public interface RequestDAO {
      * @throws Exception
      */
     public int get_Mentor_TotalRequestByStatus(int mentorId, int status) throws Exception;
+    
+    /**
+     * Get Requested Mentor sorted by number of Request
+     *
+     * @return a list of <code>java.lang.Integer</code>
+     * @throws Exception
+     */
+    public ArrayList<User> getHotMentor() throws Exception;
 }

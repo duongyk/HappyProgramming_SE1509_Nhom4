@@ -58,7 +58,7 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="service=listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="service=listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                             <%-- Check current User --%>   
                             <c:choose>
@@ -134,7 +134,7 @@
                             </c:if>
                             <c:if test="${sessionScope.currUser!=null}">
                                 <form action="rateComment" method="POST">
-                                    <input type="hidden" name="mId" value="${mId}">
+                                    <input type="hidden" name="mId" value="${mentor.getId()}">
                                     <div>
                                         <%-- Get Rate by star --%>
                                         <div class="rate">
@@ -171,7 +171,7 @@
                                     <div class="row">
                                         <div class="col-md-7"></div>
                                         <div class="col-md-4">
-                                            <button class="btn btn-success" id="button" type="submit">Post</button>
+                                            <button class="create" id="button" type="submit">Post</button>
                                         </div>
                                         <div class="col-md-1"></div>
                                     </div>

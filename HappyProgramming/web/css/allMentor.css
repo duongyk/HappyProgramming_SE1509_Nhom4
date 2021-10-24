@@ -2,6 +2,29 @@
     height: 330px;
 }
 
+.status-filter1 {
+    font-weight: bold;
+    text-align: right;
+}
+
+.status-filter {
+    margin-left: 69px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.red-text {
+    color: red;
+}
+
+.member-1 {
+    height: 360px;
+}
+
+.member-2 {
+    height: 300px;
+}
+
 .choose {
     text-decoration: underline;
     color:green;
@@ -39,6 +62,11 @@ a.disabled {
     left:120px;
 }
 
+.view-button-2{
+    position: absolute;
+    bottom:0px;
+    left:120px;
+}
 .img-display {
     display: block;
     width: 100%;

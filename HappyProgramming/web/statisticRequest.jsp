@@ -5,7 +5,7 @@
  
   Record of change:<br>
   DATE          Version    Author           DESCRIPTION<br>
-  06-10-2021    1.0        DuongVV          First Deploy<br>
+  20-10-2021    1.0        DuongVV          First Deploy<br>
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,7 +16,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Request Details Page</title>
+        <title>Statistic Request Page</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -98,83 +98,64 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8 section-title title-1">
-                    <h2>Request Details</h2>
-                    <c:if test="${messSucc!=null}">
-                        <h3 style="color:#29cc49;font-weight: bold;"><c:out value="${messSucc}"></c:out></h3>
-                    </c:if>
+                    <h2>Statistic Request</h2>
                 </div>
                 <div class="col-md-2"></div>
             </div>
 
             <div class="row">
                 <div class="col-md-2"></div>
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <section id="team" class="team displayy">
                         <%-- Request Detail --%>
                         <div class="row">
-                            <div class="col-md-5">
-                                <h1>To <a href="CVControllerMap?service=cvMentor&mId=${req.getTo().getId()}">${req.to.fullname}</a></h1>
-                                <br><br>
-                                <h2>Deadline Date: ${req.deadlineDate}</h2>
-                                <h2>Hour: ${req.deadlineHour}</h2>
-                                <h2> Status:
-                                    <c:if test="${req.status==1}">
-                                        <span class="status">Pending</span>
-                                    </c:if>
-                                    <c:if test="${req.status==2}">
-                                        <span class="status">In-Process</span>
-                                    </c:if>
-                                    <c:if test="${req.status==3}">
-                                        <span class="status">Done</span>
-                                    </c:if>
-                                    <c:if test="${req.status==4}">
-                                        <span class="status">Canceled</span>
-                                    </c:if>
-                                </h2>
-                                <br><br>
-                                <div><h1>Skill:</h1>
-                                    <c:forEach items="${sList}" var="s" varStatus="loop">
-                                        <c:if test="${s.status==1}">
-                                            <c:choose>
-                                                <c:when test="${loop.last}">
-                                                    <label class="skill">${s.getName()}</label>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <label class="skill">${s.getName()},</label>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:if>
-                                    </c:forEach>
-                                </div>
 
-                            </div>
-                            <div class="col-md-1"></div>
-                            <div class="col-md-6 vl">
+                            <c:choose>
+                                <c:when test="${statistic[0]>0}">
+                                    <div class="col-md-8">
+                                        <h1>Hello <c:out value="${user.getFullname()}"></c:out> 
+                                            </h1>
+                                            <br><br>
+                                        <h2>Here are your Statistic Request: </h2>
+                                        <h5>(Click the number for detail)</h5><br>
+                                        <h4>Total Request:<a class="" href="listRequestByMe"> ${statistic[0]}</a></h4>
+                                        <h4>Total Mentor: ${statistic[1]}</h4>
+                                        <h4>Total Hour: ${statistic[2]}</h4>
+                                        <h4>Total Pending Request:<a class="" href="requestByStatus?status=1"> ${statistic[3]}</a></h4>
+                                        <h4>Total In-process Request:<a class="" href="requestByStatus?status=2"> ${statistic[4]}</a></h4>
+                                        <h4>Total Done Request:<a class="" href="requestByStatus?status=3"> ${statistic[5]}</a></h4>
+                                        <h4>Total Canceled Request:<a class="" href="requestByStatus?status=4"> ${statistic[6]}</a></h4>
 
-                                <h1>Title: ${req.title}</h1><br>
-                                <h1>Content:</h1>
-                                <div class="content-req">
-                                    <h3>${req.content}</h3>
-                                </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div> 
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="col-md-8">
+                                        <h1>Hello <c:out value="${user.getFullname()}"></c:out> </h1>
+                                            <br><br>
+                                            <h2>Looks like you have not had any Request yet! </h2>
+                                        </div>
+                                        <div class="col-md-4"></div> 
+                                </c:otherwise>
+                            </c:choose>
 
-                            </div>
+
+
                         </div>
-
                     </section>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-3">
+                    <div class="statistic">
+                        <img  src="img/statistic.png">
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
             </div>
             <div class="row last">
                 <div class="col-md-2"></div>
-                <div class="col-md-6">
-                    <%-- Message --%>
-                    <div class="mess">
-                        <c:if test="${mess!=null}">
-                            <c:out value="${mess}"></c:out>
-                        </c:if>
-                    </div>
-                </div>
-                <div class="col-md-2"><a href="updateRequest?rId=${req.id}"><button class="create" style="min-width: 164px;">Update request</button></a> </div> 
+                <div class="col-md-6"></div>
+                <div class="col-md-2"></div> 
                 <div class="col-md-2"></div>
             </div>
 

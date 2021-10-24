@@ -52,7 +52,7 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                             <%-- Check current User --%>
                             <c:choose>
@@ -92,23 +92,8 @@
             <section id="team" class="team section-bg">
                 <div class="row">
                     <div class="col-md-2">
-                        <div><a href="CreateRequestController"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
-                        <input class="popup" name="modal" type="checkbox" id="modal">
-                        <%-- Statistic reuquest button --%>
-                        <label for="modal" class="label-show-modal">Statistic Request</label>
-                        <div class="modal-show" style="z-index: 3;">
-                            <div class="modal-show-inner">
-                                <label for="modal">&#10006;</label>
-                                <h2 class="text-center">Statistic Request</h2>
-                                <p class="text-left">Total Request: ${statistic[0]}</p>
-                                <p class="text-left">Total Mentor: ${statistic[1]}</p>
-                                <p class="text-left">Total Hour: ${statistic[2]}</p>
-                                <p class="text-left">Total Pending Request: ${statistic[3]}</p>
-                                <p class="text-left">Total In-process Request: ${statistic[4]}</p>
-                                <p class="text-left">Total Done Request: ${statistic[5]}</p>
-                                <p class="text-left">Total Canceled Request: ${statistic[6]}</p>
-                            </div>
-                        </div>
+                        <div><a href="CreateRequest"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
+                        <div><a href="statisticRequest"><button class="create" style="min-width: 164px;">Statistic Request</button></a> </div> 
                     </div>
                     <%-- Title  --%>
                     <div class="col-md-8 section-title padding-bottom">
@@ -122,7 +107,7 @@
                             <c:choose>
                                 <c:when test="${status==1}">
                                     <a class="status-filter1" href="listRequestByMe">All</a><br>
-                                    <a class="status-filter underline" href="requestByStatus?status=1">Pending</a><br>
+                                    <a class="status-filter red-text" href="requestByStatus?status=1">Pending</a><br>
                                     <a class="status-filter" href="requestByStatus?status=2">Processing</a><br>
                                     <a class="status-filter" href="requestByStatus?status=3">Done</a><br>
                                     <a class="status-filter" href="requestByStatus?status=4">Canceled</a>
@@ -131,7 +116,7 @@
                                 <c:when test="${status==2}">
                                     <a class="status-filter1" href="listRequestByMe">All</a><br>
                                     <a class="status-filter" href="requestByStatus?status=1">Pending</a><br>
-                                    <a class="status-filter underline" href="requestByStatus?status=2">Processing</a><br>
+                                    <a class="status-filter red-text" href="requestByStatus?status=2">Processing</a><br>
                                     <a class="status-filter" href="requestByStatus?status=3">Done</a><br>
                                     <a class="status-filter" href="requestByStatus?status=4">Canceled</a>
                                 </c:when>
@@ -139,7 +124,7 @@
                                     <a class="status-filter1" href="listRequestByMe">All</a><br>
                                     <a class="status-filter" href="requestByStatus?status=1">Pending</a><br>
                                     <a class="status-filter" href="requestByStatus?status=2">Processing</a><br>
-                                    <a class="status-filter underline" href="requestByStatus?status=3">Done</a><br>
+                                    <a class="status-filter red-text" href="requestByStatus?status=3">Done</a><br>
                                     <a class="status-filter" href="requestByStatus?status=4">Canceled</a>
                                 </c:when>
                                 <c:when test="${status==4}">
@@ -147,10 +132,10 @@
                                     <a class="status-filter" href="requestByStatus?status=1">Pending</a><br>
                                     <a class="status-filter" href="requestByStatus?status=2">Processing</a><br>
                                     <a class="status-filter" href="requestByStatus?status=3">Done</a><br>
-                                    <a class="status-filter underline" href="requestByStatus?status=4">Canceled</a>
+                                    <a class="status-filter red-text" href="requestByStatus?status=4">Canceled</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a class="status-filter1 underline" href="listRequestByMe">All</a><br>
+                                    <a class="status-filter1 red-text" href="listRequestByMe">All</a><br>
                                     <a class="status-filter" href="requestByStatus?status=1">Pending</a><br>
                                     <a class="status-filter" href="requestByStatus?status=2">Processing</a><br>
                                     <a class="status-filter" href="requestByStatus?status=3">Done</a><br>

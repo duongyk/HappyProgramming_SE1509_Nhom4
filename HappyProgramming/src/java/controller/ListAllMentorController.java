@@ -25,11 +25,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of Search Mentor
- *
+ *  This class has the process request of List All Mentor and Filter
  * @author DuongVV
  */
-public class SearchMentorPublic extends HttpServlet {
+public class ListAllMentorController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,35 +47,33 @@ public class SearchMentorPublic extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchMentorPublic</title>");
+            out.println("<title>Servlet listAllMentor</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SearchMentorPublic at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet listAllMentor at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
     /**
-     * Forward the request to the destination, catch any unexpected exceptions
-     * and log it
-     *
-     * @param request Request of the servlet
-     * @param response Response of the servlet
-     * @param path Forward address
+     * Forward the request to the destination, catch any unexpected exceptions and log it
+     * @param request   Request of the servlet
+     * @param response  Response of the servlet
+     * @param path      Forward address
      */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(SearchMentorPublic.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListAllMentorController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
      * Handles the HTTP <code>GET</code> method.
-     * Get list Mentor that match the keyword after search
+     * Get all the Mentor
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -88,35 +85,33 @@ public class SearchMentorPublic extends HttpServlet {
         try {
             // initiate DAO
             UserDAO userDAO = new UserDAOImpl();
-            // Get name for Search
-            String name = request.getParameter("name").trim();
-
+            // Get all Mentor
+            ArrayList<User> mListAll = userDAO.getUserByRole(2);
             // Get index page 
             String indexPage = request.getParameter("index");
             if (indexPage == null) {
                 indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
-            // Get list Mentor after Filter 
-            ArrayList<User> mList = userDAO.getUserByRoleFilterPaging(index, 2, name);
-
-            // Calculate total page for paginig
-            int count = userDAO.getTotalFilterName(2, name);
+            // Get list request of the user
+            ArrayList<User> mList = userDAO.getUserByRolePaging(index, 2);
+            // Total Mentor for paging
+            int count = mListAll.size();
+            // Calculate total page for paging
             int endPage = count / 8;
             if (count % 8 != 0) {
                 endPage++;
             }
             // Set href of paging
-            String href = "searchAllMentor?";
-
-            request.setAttribute("name", name);/*keyword search*/
+            String href = "listAllMentor?";
+            // Set attribute to request
             request.setAttribute("href", href);/*href paging*/
             request.setAttribute("endPage", endPage);/*end page of paging*/
             request.setAttribute("index", index);/*index/current page*/
             request.setAttribute("mList", mList);/*Mentor list*/
             sendDispatcher(request, response, "allMentor.jsp");
         } catch (Exception e) {
-            Logger.getLogger(SearchMentorPublic.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ListAllMentorController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

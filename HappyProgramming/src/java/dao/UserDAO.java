@@ -149,14 +149,37 @@ public interface UserDAO {
      * @throws Exception
      */
     public int getTotalFilterName(int uRole, String name) throws Exception;
-
+        
     /**
-     * Get total number of User with the same role Filter by name
+     * Get list Mentor sorted by total number of Skill
+     * 
+     * @return list of <code>User</code> object
+     * @throws java.lang.Exception
+     */
+    public ArrayList<User> getTopMentorByTotalSkill()throws Exception;
+    
+    /**
+     * Get top Mentor by their Rating
      *
-     * @param uRole it is a <code>java.lang.Integer</code>
-     * @param sId it is a <code>java.lang.Integer</code>
+     * @return list of <code>User</code> object
+     * @throws java.lang.Exception
+     */
+    public ArrayList<User> getTopMentorByRate() throws Exception;
+    
+    /**
+     * Get all Mentor that teach Skill which User have in Request
+     *
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return list of <code>User</code> object
+     * @throws java.lang.Exception
+     */
+    public ArrayList<User> getSuggestedMentor(int mId) throws Exception;
+    
+    /**
+     * Get total number of User
+     *
      * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
-    public int getTotalFilterSkill(int uRole, int sId) throws Exception;
+    public int getMaxUser() throws Exception;
 }

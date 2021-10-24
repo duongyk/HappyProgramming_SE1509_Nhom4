@@ -41,10 +41,10 @@ public interface RatingDAO {
      * Get average rating of the Mentor
      *
      * @param mId it is an <code>java.lang.Integer</code>
-     * @return a String .It is a <code>java.lang.String</code>
+     * @return a Double .It is a <code>java.lang.Double</code>
      * @throws Exception
      */
-    public String getAvgRate(int mId) throws Exception;
+    public double getAvgRate(int mId) throws Exception;
     
     /**
      * Check if Mentee has rated and commented on Mentor or not

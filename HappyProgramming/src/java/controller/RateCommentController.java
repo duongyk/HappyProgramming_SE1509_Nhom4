@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DuongVV
  */
-public class RateComment extends HttpServlet {
+public class RateCommentController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -73,7 +73,7 @@ public class RateComment extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(RateComment.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RateCommentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -99,17 +99,14 @@ public class RateComment extends HttpServlet {
             // get list Rating from Mentor
             ArrayList<Rating> listRating = ratingDAO.getRating(mentor);
             // get avarage rating
-            String avg = ratingDAO.getAvgRate(mId);
-
-            request.setAttribute("avg", avg);
-            /*Avarage rating*/
-            request.setAttribute("mentor", mentor);
-            /*Mentor*/
-            request.setAttribute("listRating", listRating);
+            double avg = ratingDAO.getAvgRate(mId);
+            request.setAttribute("avg", String.format("%.2f", avg));/*Avarage rating*/
+            request.setAttribute("mentor", mentor);/*Mentor*/
+            request.setAttribute("listRating", listRating);/*List Rate and Comment*/
 
             sendDispatcher(request, response, "rateComment.jsp");
         } catch (Exception e) {
-            Logger.getLogger(RateComment.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(RateCommentController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
@@ -143,9 +140,9 @@ public class RateComment extends HttpServlet {
                 // get list Rating from Mentor
                 ArrayList<Rating> listRating = ratingDAO.getRating(mentor);
                 // get avarage rating
-                String avg = ratingDAO.getAvgRate(mId);
+                double avg = ratingDAO.getAvgRate(mId);
 
-                request.setAttribute("avg", avg);/*Avarage rating*/
+                request.setAttribute("avg", String.format("%.2f", avg));/*Avarage rating*/
                 request.setAttribute("mentor", mentor);/*Mentor*/
                 request.setAttribute("listRating", listRating);/*List rating*/
 
@@ -162,16 +159,16 @@ public class RateComment extends HttpServlet {
                 // get list Rating from Mentor
                 ArrayList<Rating> listRating = ratingDAO.getRating(mentor);
                 // get avarage rating
-                String avg = ratingDAO.getAvgRate(mId);
+                double avg = ratingDAO.getAvgRate(mId);
 
-                request.setAttribute("avg", avg);/*Avarage rating*/
+                request.setAttribute("avg", String.format("%.2f", avg));/*Avarage rating*/
                 request.setAttribute("mentor", mentor);/*Mentor*/
                 request.setAttribute("listRating", listRating);/*List rating*/
 
                 sendDispatcher(request, response, "rateComment.jsp");
             }
         } catch (Exception e) {
-            Logger.getLogger(RateComment.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(RateCommentController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

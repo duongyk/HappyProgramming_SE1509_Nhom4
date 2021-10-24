@@ -98,31 +98,39 @@
     </servlet>
     <servlet>
         <servlet-name>listRequestByMe</servlet-name>
-        <servlet-class>controller.ListRequestByMe</servlet-class>
+        <servlet-class>controller.ListRequestByMeController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>viewRequest</servlet-name>
-        <servlet-class>controller.ViewRequest</servlet-class>
+        <servlet-class>controller.ViewRequestController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>updateRequest</servlet-name>
-        <servlet-class>controller.UpdateRequest</servlet-class>
+        <servlet-class>controller.UpdateRequestController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RateComment</servlet-name>
-        <servlet-class>controller.RateComment</servlet-class>
+        <servlet-class>controller.RateCommentController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RequestByStatus</servlet-name>
-        <servlet-class>controller.RequestByStatus</servlet-class>
+        <servlet-class>controller.RequestByStatusController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListAllMentor</servlet-name>
-        <servlet-class>controller.ListAllMentor</servlet-class>
+        <servlet-class>controller.ListAllMentorController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchMentorPublic</servlet-name>
-        <servlet-class>controller.SearchMentorPublic</servlet-class>
+        <servlet-class>controller.SearchMentorPublicController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListSuggestedMentorController</servlet-name>
+        <servlet-class>controller.ListSuggestedMentorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StatisticRequest</servlet-name>
+        <servlet-class>controller.StatisticRequest</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
@@ -247,6 +255,14 @@
     <servlet-mapping>
         <servlet-name>SearchMentorPublic</servlet-name>
         <url-pattern>/searchMentorPublic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListSuggestedMentorController</servlet-name>
+        <url-pattern>/listSuggestedMentor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StatisticRequest</servlet-name>
+        <url-pattern>/statisticRequest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

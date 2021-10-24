@@ -92,8 +92,9 @@
             <section id="team" class="team section-bg">
                 <div class="row">
                     <div class="col-md-2">
-                        <a href=""><button class="create" style="min-width: 164px;">Suggestion List</button></a>
-
+                        <c:if test="${sessionScope.currUser!=null}">
+                            <a href="listSuggestedMentor?filter=1"><button class="create" style="min-width: 164px;">Suggestion List</button></a>
+                        </c:if>
                     </div>
                     <%-- Title  --%>
                     <div class="col-md-8 section-title">

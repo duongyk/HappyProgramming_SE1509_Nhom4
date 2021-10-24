@@ -11,11 +11,10 @@
 package controller;
 
 import dao.RequestDAO;
-import dao.SkillDAO;
+import dao.RequestSkillDAO;
 import dao.impl.RequestDAOImpl;
-import dao.impl.SkillDAOImpl;
+import dao.impl.RequestSkillDAOImpl;
 import entity.Request;
-import entity.User;
 import entity.Skill;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,11 +28,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of Filter Request by Status
+ * This class has the process request of View Request detail
  *
  * @author DuongVV
  */
-public class RequestByStatus extends HttpServlet {
+public class ViewRequestController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,15 +48,7 @@ public class RequestByStatus extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RequestByStatus</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RequestByStatus at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            doGet(request, response);
         }
     }
 
@@ -74,13 +65,13 @@ public class RequestByStatus extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(RequestByStatus.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewRequestController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method.
-     * Get the Request list oh the Mentee after Filter by Status
+     * Handles the HTTP <code>GET</code> method. Get the Request Details
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -92,41 +83,18 @@ public class RequestByStatus extends HttpServlet {
         try {
             // initiate DAO
             RequestDAO requestDAO = new RequestDAOImpl();
-            SkillDAO skillDAO = new SkillDAOImpl();
-            // Get current user
-            User user = (User) request.getSession().getAttribute("currUser");
-            // Get Status for Filter
-            int status = Integer.parseInt(request.getParameter("status"));
-            // Get index page 
-            String indexPage = request.getParameter("index");
-            if (indexPage == null) {
-                indexPage = "1";
-            }
-            int index = Integer.parseInt(indexPage);
-            // Get list Request after Filter 
-            ArrayList<Request> rList = requestDAO.listByMeFilterStatusPaging(index, user.getId(), status);
+            RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
+            // get Request
+            int rId = Integer.parseInt(request.getParameter("rId"));
+            Request req = requestDAO.getRequestById(rId);
+            // get Skills in Request
+            ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
 
-            // Calculate total page for paginig
-            int count = requestDAO.getTotalFilterStatus(user.getId(), status);
-            int endPage = count / 8;
-            if (count % 8 != 0) {
-                endPage++;
-            }
-            // Get all Skill for Filter
-            ArrayList<Skill> sList = skillDAO.getActiveSkill();
-
-            // Set href of paging
-            String href = "requestByStatus?status="+String.valueOf(status)+"&";
-            
-            request.setAttribute("href", href);/*href paging*/
-            request.setAttribute("status", status);/*Status of all Skill after Filter*/
-            request.setAttribute("sList", sList);/*List Skill of the Request*/
-            request.setAttribute("endPage", endPage);/*end page of paging*/
-            request.setAttribute("index", index);/*index/current page*/
-            request.setAttribute("rList", rList);/*Request list*/
-            sendDispatcher(request, response, "listRequestByMe.jsp");
+            request.setAttribute("sList", sList);/*Skills of Request*/
+            request.setAttribute("req", req);/*Request*/
+            sendDispatcher(request, response, "viewRequest.jsp");
         } catch (Exception e) {
-            Logger.getLogger(RequestByStatus.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ViewRequestController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

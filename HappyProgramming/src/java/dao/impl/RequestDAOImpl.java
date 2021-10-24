@@ -161,7 +161,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
-     * Get the total number of request of the user
+     * Get the total number of request of the Mentee
      *
      * @param mId it is a <code>java.lang.Integer</code>
      * @return a <code>java.lang.Integer</code>
@@ -174,13 +174,14 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = "SELECT COUNT([toId]) as 'totalRequest' FROM [Request] "
-                + "WHERE [fromId] = ?";
+                + "WHERE [fromId] = ? OR [toId] = ?";
 
         int totalRequest = 0;
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, mId);
+            ps.setInt(2, mId);
             rs = ps.executeQuery();
             if (rs.next()) {
                 totalRequest = rs.getInt("totalRequest");
@@ -628,4 +629,37 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return totalRequest;
     }
 
+    /**
+     * Get Requested Mentor sorted by number of Request
+     *
+     * @return a list of <code>java.lang.Integer</code>
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<User> getHotMentor() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        UserDAO userDAO = new UserDAOImpl();
+        ArrayList<User> list = new ArrayList<>();
+        String sql = "SELECT DISTINCT([toId]),(SELECT COUNT([toId]) "
+                + "FROM [Request] WHERE [toId] = a.[toId]) as 'total' "
+                + "FROM [Request] a ORDER BY [total] DESC";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(userDAO.getUserById(rs.getInt("toId")));
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
 }

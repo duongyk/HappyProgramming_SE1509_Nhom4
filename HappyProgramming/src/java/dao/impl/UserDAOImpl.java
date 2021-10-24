@@ -10,7 +10,14 @@
 package dao.impl;
 
 import context.DBContext;
+import dao.RatingDAO;
+import dao.RequestDAO;
+import dao.RequestSkillDAO;
+import dao.UserDAO;
+import dao.UserSkillDAO;
+import entity.Skill;
 import entity.User;
+import entity.UserSkill;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +25,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import util.SendEmail;
 
 /**
@@ -167,7 +178,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
         return null;
     }
-    
+
     /**
      * Create and insert new User account into the database
      *
@@ -205,7 +216,8 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
 
     }
-/**
+
+    /**
      * change password
      *
      * @param uMail, newPass
@@ -612,30 +624,127 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     }
 
     /**
-     * Get total number of User with the same role Filter by name
+     * Get top Mentor by their Rating
      *
-     * @param uRole it is a <code>java.lang.Integer</code>
-     * @param sId it is a <code>java.lang.Integer</code>
+     * @return list of <code>User</code> object
+     * @throws java.lang.Exception
+     */
+    @Override
+    public ArrayList<User> getTopMentorByRate() throws Exception {
+        UserDAO userDAO = new UserDAOImpl();
+        RatingDAO ratingDAO = new RatingDAOImpl();
+        ArrayList<User> list = new ArrayList<>();
+        ArrayList<User> mentorList = userDAO.getUserByRole(2);
+        // HashMap contain rating of Mentor ((K,V)-(Mentor ID, avarage rating))
+        HashMap<Integer, Double> avg = new HashMap<>();
+        for (User mentor : mentorList) {
+            if (ratingDAO.getAvgRate(mentor.getId()) != 0) {
+                avg.put(mentor.getId(), ratingDAO.getAvgRate(mentor.getId()));
+            }
+        }
+        // Create a list from elements of HashMap
+        List<HashMap.Entry<Integer, Double>> listEntry
+                = new LinkedList<>(avg.entrySet());
+        // Sort the list
+        Collections.sort(listEntry, (HashMap.Entry<Integer, Double> o1,
+                HashMap.Entry<Integer, Double> o2)
+                -> (o2.getValue()).compareTo(o1.getValue()));
+        // Get list Mentor
+        for (HashMap.Entry<Integer, Double> entry : listEntry) {
+            list.add(userDAO.getUserById(entry.getKey()));
+        }
+        return list;
+    }
+
+    /**
+     * Get list Mentor sorted by total number of Skill
+     *
+     * @return list of <code>Skill</code> object of the mentor
+     * @throws java.lang.Exception
+     */
+    @Override
+    public ArrayList<User> getTopMentorByTotalSkill() throws Exception {
+        UserSkillDAO usDAO = new UserSkillDAOImpl();
+        ArrayList<User> list = new ArrayList<>();
+        ArrayList<UserSkill> usList = usDAO.getMentorSkill();
+        // HashMap cout skill of Mentor ((K,V)-(Mentor ID, number of Skill))
+        HashMap<Integer, Integer> countSkill = new HashMap<>();
+        for (UserSkill us : usList) {
+            if (!countSkill.containsKey(us.getuId())) {
+                countSkill.put(us.getuId(), 1);
+            } else {
+                countSkill.put(us.getuId(), countSkill.get(us.getuId()) + 1);
+            }
+        }
+        // Create a list from elements of HashMap
+        List<HashMap.Entry<Integer, Integer>> listEntry
+                = new LinkedList<>(countSkill.entrySet());
+        // Sort the list
+        Collections.sort(listEntry, (HashMap.Entry<Integer, Integer> o1,
+                HashMap.Entry<Integer, Integer> o2)
+                -> (o2.getValue()).compareTo(o1.getValue()));
+        // Get list Mentor
+        for (HashMap.Entry<Integer, Integer> entry : listEntry) {
+            list.add(getUserById(entry.getKey()));
+        }
+        return list;
+    }
+
+    /**
+     * Get all Mentor that teach Skill which User have in Request
+     *
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return list of <code>User</code> object
+     * @throws java.lang.Exception
+     */
+    @Override
+    public ArrayList<User> getSuggestedMentor(int mId) throws Exception {
+        UserSkillDAO usDAO = new UserSkillDAOImpl();
+        RequestSkillDAO rsDAO = new RequestSkillDAOImpl();
+        ArrayList<User> list = new ArrayList<>();
+        ArrayList<Integer> listId = new ArrayList<>();
+        // get Skill of the Mentee have in all Requests
+        ArrayList<Skill> skillList = rsDAO.getSkillByMentee(mId);
+        // get all Mentor-Skill
+        ArrayList<UserSkill> mentorSkillList = usDAO.getMentorSkill();
+        // Add Skill ID to ID list
+        for (UserSkill us : mentorSkillList) {
+            for (Skill s : skillList) {
+                if (!listId.contains(us.getuId())) {
+                    if (us.getsId() == s.getId()) {
+                        listId.add(us.getuId());
+                    }
+                }
+            }
+        }
+        // Add Skill to Skill list
+        for (int id : listId) {
+            list.add(getUserById(id));
+        }
+        return list;
+    }
+
+    /**
+     * Get total number of User
+     *
      * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
     @Override
-    public int getTotalFilterSkill(int uRole, int sId) throws Exception {
+    public int getMaxUser() throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        
         int total = 0;
-        String sql = "SELECT COUNT(u.[uId]) as 'total' FROM [User] u "
-                + "INNER JOIN [UserSkill] us ON u.[uId] = us.[uId] "
-                + "WHERE u.[uRole] = ? and us.[sId] = ? ";
+        String sql = "SELECT COUNT([uId]) as 'total' FROM [User]";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, uRole);
-            ps.setInt(2, sId);
             rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getInt("total");
+                return total;
             }
         } catch (Exception ex) {
             throw ex;
@@ -645,5 +754,28 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closeConnection(conn);
         }
         return total;
+    }
+    
+    
+    public static void main(String[] args) throws Exception {
+        UserDAO userDAO = new UserDAOImpl();
+            RequestDAO requestDAO = new RequestDAOImpl();
+            RatingDAO ratingDAO = new RatingDAOImpl();
+            UserSkillDAO usDAO = new UserSkillDAOImpl();
+            int total = userDAO.getMaxUser();
+            ArrayList<User> mList = userDAO.getTopMentorByRate();
+                    ArrayList<String> ratingList = new ArrayList<>(Collections.nCopies(total, "a"));
+//                    ratingList.set(5,"ccc");
+//                    for (String s:ratingList){
+//                        System.out.println(s);
+                    for (User mentor : mList) {
+                        ratingList.set(mentor.getId(), String.format("%.2f", ratingDAO.getAvgRate(mentor.getId())));
+                    }
+            for (User mentor : mList) {
+                        System.out.println(ratingList.get(mentor.getId()));
+                    }       
+//        for (int i=0;i<total;i++){
+//            System.out.println(mList.get(i).getFullname()+" - "+ ratingList.get(i));
+//        }
     }
 }

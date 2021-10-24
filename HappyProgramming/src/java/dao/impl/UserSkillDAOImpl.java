@@ -7,11 +7,12 @@
  * DATE          Version    Author           DESCRIPTION<br>
  * 20-09-2021    1.0                         First Deploy<br>
  */
-
 package dao.impl;
 
 import context.DBContext;
+import dao.UserDAO;
 import entity.Skill;
+import entity.UserSkill;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,8 +25,8 @@ import java.util.ArrayList;
  *
  * @author
  */
-public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
-    
+public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO {
+
     /**
      * Get all Skill of the Mentor in the database
      *
@@ -134,7 +135,7 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
         }
         return status;
     }
-    
+
     /**
      * Get all Skill of the User(Mentee/Mentor) in the database
      *
@@ -149,9 +150,7 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
         ResultSet rs = null;
         ArrayList<Skill> sList = new ArrayList<>();
         SkillDAOImpl skillDAO = new SkillDAOImpl();
-
-        Skill skill = new Skill();
-        String sql = "SELECT * FROM UserSkill where [uId] = ?";
+        String sql = "SELECT * FROM [UserSkill] where [uId] = ?";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
@@ -159,8 +158,7 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                skill = skillDAO.getSkillById(rs.getInt("sId"));
-                sList.add(skill);
+                sList.add(skillDAO.getSkillById(rs.getInt("sId")));
             }
         } catch (Exception ex) {
             throw ex;
@@ -184,10 +182,10 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         String sqlDelete = "DELETE FROM [UserSkill] where [uId] = ?";
         String sqlInsert = "INSERT INTO [UserSkill] ([uId],[sId],[usStatus])"
-                    + " VALUES (?,?,1)";
+                + " VALUES (?,?,1)";
         try {
             conn = getConnection();
             // Delete
@@ -207,5 +205,76 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO{
             closePreparedStatement(ps);
             closeConnection(conn);
         }
-    } 
+    }
+
+    /**
+     * Get all User and Skill that User is Mentor in the database
+     *
+     * @return list of <code>UserSkill</code> object
+     * @throws java.lang.Exception
+     */
+    @Override
+    public ArrayList<UserSkill> getMentorSkill() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<UserSkill> usList = new ArrayList<>();
+        UserDAO userDAO = new UserDAOImpl();
+        String sql = "SELECT * FROM [UserSkill]";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                // Check if User role is Mentor (uRole==2) or not
+                if (userDAO.getUserById(rs.getInt("uId")).getRole() == 2) {
+                    usList.add(new UserSkill(rs.getInt("uId"), rs.getInt("sId"),
+                            rs.getString("uId")));
+                }
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return usList;
+    }
+
+    /**
+     * Get total number of Skill that User have
+     *
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
+     * @throws java.lang.Exception
+     */
+    @Override
+    public int getTotalSkill(int mId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        int total = 0;
+        String sql = "SELECT COUNT([sId]) as 'totalSkill' FROM [UserSkill] "
+                + "WHERE [uId] = ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("totalSkill");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return total;
+    }
 }

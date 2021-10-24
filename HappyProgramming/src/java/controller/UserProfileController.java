@@ -46,7 +46,7 @@ public class UserProfileController extends HttpServlet {
             doGet(request, response);
         }
         catch (Exception e) {
-            Logger.getLogger(ListRequestByMe.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ListRequestByMeController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
             doGet(request, response);

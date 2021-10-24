@@ -60,4 +60,12 @@ public interface RequestSkillDAO {
      *@throws Exception
      */
     public void updateRequestSkill(int rId, ArrayList<Integer> skillIds) throws Exception;
+    
+    /**
+     * Get all the Skills that the Mentee had Requested
+     * @param mId is a <code>java.lang.Integer</code>
+     * @return a list <code>Skill</code> object 
+     *@throws Exception
+     */
+    public ArrayList<Skill> getSkillByMentee(int mId) throws Exception;
 }

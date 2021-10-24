@@ -10,6 +10,7 @@
 package dao;
 
 import entity.Skill;
+import entity.UserSkill;
 import java.util.ArrayList;
 
 /**
@@ -60,9 +61,26 @@ public interface UserSkillDAO {
     /**
      * Update new Skills of the User in the database
      *
-     * @param uId it is <code>java.lang.Integer</code>
+     * @param uId it is a <code>java.lang.Integer</code>
      * @param sIdList is a list of <code>java.lang.Integer</code>
      * @throws java.lang.Exception
      */
     public void updateUserSkill(int uId, ArrayList<Integer> sIdList) throws Exception;
+    
+    /**
+     * Get all User and Skill that User is Mentor in the database
+     *
+     * @return list of <code>UserSkill</code> object
+     * @throws java.lang.Exception
+     */
+    public ArrayList<UserSkill> getMentorSkill() throws Exception;
+    
+    /**
+     * Get total number of Skill that User have
+     *
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
+     * @throws java.lang.Exception
+     */
+    public int getTotalSkill(int mId) throws Exception;
 }

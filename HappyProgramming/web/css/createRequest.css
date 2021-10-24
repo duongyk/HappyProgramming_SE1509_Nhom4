@@ -16,6 +16,12 @@ ul {
     font-weight: bold;
 }
 
+.require {
+    text-align: center;
+    padding-bottom: 30px;
+    font-weight: bold;
+}
+
 .input-white{
     background: white;
   line-height: 50px;

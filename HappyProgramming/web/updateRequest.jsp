@@ -58,7 +58,7 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="listAllmentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                             <%-- Check the current User --%>    
                             <c:choose>
@@ -101,9 +101,10 @@
                                         <c:when test="${req.getStatus()==1}">
                                             <form action="updateRequest" method="POST">
                                                 <input type="hidden" name="rId" value="${req.id}">
+                                                <div class="require">(*): Required</div>
                                                 <%-- Title --%>
                                                 <div class="form-row m-b-55">
-                                                    <div class="name">Title</div>
+                                                    <div class="name">Title(*)</div>
                                                     <div class="value">
                                                         <div class="row row-space">
                                                             <div class="col-12">
@@ -120,7 +121,7 @@
 
                                                 <%-- Content --%>
                                                 <div class="form-row">
-                                                    <div class="name">Content</div>
+                                                    <div class="name">Content(*)</div>
                                                     <div class="value">
                                                         <div class="input-group">
                                                             <textarea class="input-white" id="content" type="text" name="content" maxlength="200" required  rows="3" cols="54" onkeyup="checkSpace()"><c:out value="${req.getContent()}"></c:out></textarea>
@@ -133,7 +134,7 @@
 
                                                 <%-- Deadline Date --%>
                                                 <div class="form-row">
-                                                    <div class="name">Deadline Date</div>
+                                                    <div class="name">Deadline Date(*)</div>
                                                     <div class="value">
                                                         <div class="input-group">
                                                             <input class="input-white" type="date" id="date" value="<c:out value="${req.deadlineDate}"></c:out>" name="deadlineDate" required>
@@ -143,7 +144,7 @@
 
                                                 <%-- Deadline Hour --%>
                                                 <div class="form-row">
-                                                    <div class="name">Deadline Hour</div>
+                                                    <div class="name">Deadline Hour(*)</div>
                                                     <div class="value">
                                                         <div class="input-group">
                                                             <input class="input-white" type="number" min="1" max="12" value="<c:out value="${req.deadlineHour}"></c:out>" placeholder="The time you want to request" name="deadlineHour" required>
@@ -153,7 +154,7 @@
 
                                                 <%-- Mentor --%>
                                                 <div class="form-row">
-                                                    <div class="name">Choose Mentor</div>
+                                                    <div class="name">Choose Mentor(*)</div>
                                                     <div class="value">
                                                         <div class="input-group">
                                                             <select id="select-6004" name="toId" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
@@ -173,7 +174,7 @@
                                                 </div>
                                                 <%-- Status --%>
                                                 <div class="form-row">
-                                                    <div class="name">Status</div>
+                                                    <div class="name">Status(*)</div>
                                                     <div class="value">
                                                         <select name="status" required="required">
                                                             <option value="1" selected>Pending</option>
@@ -183,7 +184,7 @@
                                                 </div>
                                                 <%-- Skill --%>
                                                 <div class="form-row m-b-55">
-                                                    <div class="name">Choose Skills</div>
+                                                    <div class="name">Choose Skills(*)</div>
                                                     <div class="value">
                                                         <div class="row row-refine">
                                                             <div class="row">
@@ -295,7 +296,7 @@
                                                     </div>
                                                 <%-- Status --%>
                                                 <div class="form-row">
-                                                    <div class="name">Status</div>
+                                                    <div class="name">Status(*)</div>
                                                     <div class="value">
                                                         <select name="status" required="required">
                                                             <option value="1" selected>Processing</option>
