@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import util.SendEmail;
 
 /**
@@ -119,7 +120,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "select * from [User] where username=? and password=?";
+        String sql = "select*from [User] where username COLLATE Latin1_General_CS_AS = ?  and password  COLLATE Latin1_General_CS_AS = ? ";
 
         try {
             conn = getConnection();
