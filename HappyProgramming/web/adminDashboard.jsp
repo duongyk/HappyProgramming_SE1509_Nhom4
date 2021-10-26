@@ -41,6 +41,7 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
+        <link href="css/search.css" rel="stylesheet">
 
 
     </head>
@@ -57,32 +58,47 @@
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
-                    <ul>
+                     <ul>
                         <c:choose>
                             <c:when test="${sessionScope.currUser!=null}">
-
-                                <li class="dropdown getstarted scrollto ">
-                                    <span style="color: white; padding: 0;">Admin </span>
-                                    <ul>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
-                                    </ul>
-                                </li>
-                                <li> Seach</li>
-
-                            </c:when>
-                            <c:otherwise>
                                 <li> 
                                     <div>
                                         <form action="search" method="POST" style="margin-left: 10px">
-                                            <select data-trigger="" name="category">
-                                                <option>Category</option>
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
                                                 <option>Skill</option>
                                                 <option>Mentee</option>
                                                 <option>Mentor</option>
                                                 <option>Message</option>
                                                 <option>Request</option>
                                             </select>
-                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}">
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
+                                <li class="dropdown getstarted scrollto ">
+                                    <span style="color: white; padding: 0;">Admin </span>
+                                    <ul>
+                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                    </ul>
+                                </li>
+
+
+                            </c:when>
+                            <c:otherwise>
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <option>Skill</option>
+                                                <option>Mentee</option>
+                                                <option>Mentor</option>
+                                                <option>Message</option>
+                                                <option>Request</option>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
                                             <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
                                         </form>
                                     </div>
@@ -110,11 +126,11 @@
             <section class="inner-page">
                 <div class="container-scroller">
                     <!-- partial:partials/_navbar.html -->
-                    <div class="container-fluid page-body-wrapper">
+                    <div class="container-fluid page-body-wrapper"  style="padding-top: 20px;">
                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=dashboard">
+                                    <a class="nav-link" href="adminDashboard">
                                         <i class="icon-grid menu-icon"></i>
                                         <span class="menu-title">Dashboard</span>
                                     </a>
@@ -316,12 +332,8 @@
 
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
-        <style>
-            .searchButton {
-                background-color: #e2f5fde0;
-                border: none;
-            }
-        </style>
+
+
     </body>
 
 </html>

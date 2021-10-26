@@ -41,13 +41,11 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
+        <link href="css/requestByMe.css" rel="stylesheet">
+        <link href="css/search.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: Vesperr - v4.6.0
-        * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
+
+
     </head>
 
     <body>
@@ -63,19 +61,51 @@
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
-                    <ul>
+                     <ul>
                         <c:choose>
                             <c:when test="${sessionScope.currUser!=null}">
-
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <option>Skill</option>
+                                                <option>Mentee</option>
+                                                <option>Mentor</option>
+                                                <option>Message</option>
+                                                <option>Request</option>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
-                                        <li><a href="AdminControllerMap?service=dashboard">Dashboard</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
+
+
                             </c:when>
                             <c:otherwise>
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <option>Skill</option>
+                                                <option>Mentee</option>
+                                                <option>Mentor</option>
+                                                <option>Message</option>
+                                                <option>Request</option>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
                                 <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
@@ -83,6 +113,7 @@
                                         </li>
                                     </ul>
                                 </li>
+
                             </c:otherwise>
                         </c:choose>
                     </ul>
@@ -99,7 +130,7 @@
                     <div class="container-fluid page-body-wrapper" style="padding-top: 20px;">
                         <!-- partial -->
                         <!-- partial:../../partials/_sidebar.html -->
-                     <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                        <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="adminDashboard">
@@ -246,11 +277,43 @@
                                     </div>
 
                                 </div>
-                                <div style="padding-left: 650px">
-                                    <c:forEach begin="1" end="${endPage}" var="i">
-                                        <a class="${tag == i?"active":""}" href="skillManagement?index=${i}"> ${i}</a> 
-                                    </c:forEach>
-                                </div> 
+                                <%-- Paging --%>
+                                <c:if test="${!empty sList}">
+                                    <div class="row">  
+                                        <div class="paging">
+                                            <%-- Previous --%>
+                                            <%-- Previous --%>
+                                            <c:choose>
+                                                <c:when test="${index>1}">
+                                                    <a class="previous" href="${href}index=${index-1}"><</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a class="previous disabled" href="${href}index=${index-1}"><</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <%-- Page index --%>
+                                            <c:forEach begin="1" end="${endPage}" var="page">
+                                                <c:choose>
+                                                    <c:when test="${index==page}">
+                                                        <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="${href}index=${page}"> ${page}</a> 
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                            <%-- Next --%>
+                                            <c:choose>
+                                                <c:when test="${index!=endPage}">
+                                                    <a class="next" href="${href}index=${index+1}">  ></a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a class="next disabled" href="${href}index=${index+1}">></a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div> 
+                                    </div>
+                                </c:if>
                                 <!-- content-wrapper ends -->
                                 <!-- partial:../../partials/_footer.html -->
 

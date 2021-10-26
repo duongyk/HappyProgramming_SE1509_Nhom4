@@ -212,7 +212,7 @@
                                                                         ID
                                                                     </th>
                                                                     <th>
-                                                                        <a style="color: black" href="sortSkillByName"> Skill Name </a>
+                                                                        <a style="color: black" href="skillManagement"> Skill Name </a>
                                                                     </th>
                                                                     <th>
                                                                         Detail

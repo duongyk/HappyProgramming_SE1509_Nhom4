@@ -42,7 +42,6 @@ public interface MessageDAO {
      * @param id
      * @throws Exception
      */
-
     public void updateRead(String id) throws Exception;
 
     /**
@@ -65,9 +64,17 @@ public interface MessageDAO {
     /**
      * Get Unread Message from the database
      *
-     * @return 
+     * @return a list <code>Rating</code> object
      * @throws Exception
      */
-
     public ArrayList<Message> getUnReadMessage() throws Exception;
+
+      /**
+     * Get Messages have email like txtSearch from the database
+     *
+     * @param txtSearch
+     * @return a list <code>Rating</code> object
+     * @throws Exception
+     */
+    public ArrayList<Message> searchMessage(String txtSearch) throws Exception;
 }

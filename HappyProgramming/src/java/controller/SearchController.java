@@ -5,9 +5,15 @@
  */
 package controller;
 
+import dao.MessageDAO;
 import dao.SkillDAO;
+import dao.UserDAO;
+import dao.impl.MessageDAOImpl;
 import dao.impl.SkillDAOImpl;
+import dao.impl.UserDAOImpl;
+import entity.Message;
 import entity.Skill;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -40,6 +46,8 @@ public class SearchController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         SkillDAO skillDAO = new SkillDAOImpl();
+        UserDAO userDAO = new UserDAOImpl();
+        MessageDAO messDAO = new MessageDAOImpl();
         try {
             String category = request.getParameter("category");
             String txtSearch = request.getParameter("txtSearch");
@@ -48,7 +56,18 @@ public class SearchController extends HttpServlet {
                 request.setAttribute("sList", list);
                 request.setAttribute("txt", txtSearch);
                 sendDispatcher(request, response, "searchSkill.jsp");
-
+            }
+            if (category.equalsIgnoreCase("Mentee")) {
+                ArrayList<User> mList = userDAO.searchMentee(txtSearch);
+                request.setAttribute("mList", mList);
+                request.setAttribute("txt", txtSearch);
+                sendDispatcher(request, response, "searchMentee.jsp");
+            }
+            if (category.equalsIgnoreCase("Message")) {
+                ArrayList<Message> mList = messDAO.searchMessage(txtSearch);
+                request.setAttribute("mList", mList);
+                request.setAttribute("txt", txtSearch);
+                sendDispatcher(request, response, "searchMessage.jsp");
             }
 
         } catch (Exception e) {

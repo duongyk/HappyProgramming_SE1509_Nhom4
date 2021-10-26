@@ -182,4 +182,14 @@ public interface UserDAO {
      * @throws Exception
      */
     public int getMaxUser() throws Exception;
+    public int getTotalFilterSkill(int uRole, int sId) throws Exception;
+
+    /**
+     * Get list of Mentee with the username like txtSearch
+     *
+     * @param txtSearch
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    public ArrayList<User> searchMentee(String txtSearch) throws Exception;
 }

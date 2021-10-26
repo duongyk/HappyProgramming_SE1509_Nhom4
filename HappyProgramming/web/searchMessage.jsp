@@ -42,6 +42,7 @@
         <link href="css/admin.css" rel="stylesheet">
         <link href="css/search.css" rel="stylesheet">
 
+
     </head>
 
     <body>
@@ -214,68 +215,75 @@
 
                                         <p class="text-success">${mess}</p>  
 
-                                    <div class="row">
-                                        <div class="col-lg-12 grid-margin stretch-card">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-striped">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>
-                                                                        ID
-                                                                    </th>
-                                                                    <th>
-                                                                        Title
-                                                                    </th>
-                                                                    <th>
-                                                                        Email
-                                                                    </th>
+                                    <c:choose>  
+                                        <c:when test="${empty mList}">
+                                            <h3 class="no-req">  Dont have any Message has email like " ${txt} "</h3>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="row">
+                                                <div class="col-lg-12 grid-margin stretch-card">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                ID
+                                                                            </th>
+                                                                            <th>
+                                                                                Title
+                                                                            </th>
+                                                                            <th>
+                                                                                Email
+                                                                            </th>
 
-                                                                    <th>
+                                                                            <th>
 
-                                                                    </th>
+                                                                            </th>
 
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <c:forEach items="${listMess}" var="message">
-                                                                    <tr>
-                                                                        <td>
-                                                                            ${message.mId}
-                                                                        </td>
-                                                                        <td>
-                                                                            <a href="MessageControllerMap?service=viewMessage&mId=${message.mId}">   ${message.title}</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <c:out value="${message.email}"></c:out>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <c:forEach items="${mList}" var="message">
+                                                                            <tr>
+                                                                                <td>
+                                                                                    ${message.mId}
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a href="MessageControllerMap?service=viewMessage&mId=${message.mId}">   ${message.title}</a>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <c:out value="${message.email}"></c:out>
 
-                                                                            </td>
+                                                                                    </td>
 
-                                                                        <c:if test="${message.isRead == '1'}">
-                                                                            <td>
-                                                                                <img style="    width: 26px;
-                                                                                     height: 20px; " src="img/iconmonstr-eye-9.svg">
-                                                                            </td>
-                                                                        </c:if>
-                                                                        <c:if test="${message.isRead == '0'}">
-                                                                            <td>
+                                                                                <c:if test="${message.isRead == '1'}">
+                                                                                    <td>
+                                                                                        <img style="    width: 26px;
+                                                                                             height: 20px; " src="img/iconmonstr-eye-9.svg">
+                                                                                    </td>
+                                                                                </c:if>
+                                                                                <c:if test="${message.isRead == '0'}">
+                                                                                    <td>
 
-                                                                            </td>
-                                                                        </c:if>
+                                                                                    </td>
+                                                                                </c:if>
 
 
-                                                                    </tr>
-                                                                </c:forEach>
+                                                                            </tr>
+                                                                        </c:forEach>
 
-                                                            </tbody>
-                                                        </table>
+                                                                    </tbody>
+                                                                </table>
 
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </c:otherwise>
+                                    </c:choose>    
 
                                 </div>
 

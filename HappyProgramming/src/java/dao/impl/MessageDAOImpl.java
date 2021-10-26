@@ -50,6 +50,41 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
 
     }
 
+    /**
+     * Get Messages have email like txtSearch from the database
+     *
+     * @param txtSearch
+     * @return a list <code>Rating</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<Message> searchMessage(String txtSearch) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        //get informations from database
+        ArrayList<Message> listMessages = new ArrayList<>();
+        String sql = "select * from [Message] where email like ?";
+
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + txtSearch + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listMessages.add(new Message(rs.getInt("mId"), rs.getString("title"), rs.getString("email"), rs.getString("content"), rs.getString("isRead")));
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return listMessages;
+    }
+
+    @Override
     public ArrayList<Message> getUnReadMessage() throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;

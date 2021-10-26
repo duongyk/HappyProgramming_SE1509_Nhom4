@@ -45,14 +45,31 @@ public class MenteeManagementController extends HttpServlet {
         RequestDAO requestDAO = new RequestDAOImpl();
         RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
         try {
-
+            //get index page 
+            String indexPage = request.getParameter("index");
+            // index page always start at 1
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            int count = userDAO.getUserByRole(1).size();
+            int endPage = count / 8;
+            if (count % 8 != 0) {
+                endPage++;
+            }
+            // Set href of paging
+            String href = "menteeManagement?";
             //list all User that are Mentee have in database
-            ArrayList<User> menteeList = userDAO.getUserByRole(1);
+            ArrayList<User> menteeList = userDAO.getUserByRolePaging(index, 1);
             //get total study hours from db
             int totalHour = requestDAO.getTotalHour();
             //get total skill from db
             int totalSkill = requestSkillDAO.getTotalRequest();
             //send informations to menteeManagement.jsp
+            request.setAttribute("href", href);/*href paging*/
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("count", count);
+            request.setAttribute("tag", index);
             request.setAttribute("totalHour", totalHour);
             request.setAttribute("totalSkill", totalSkill);
             request.setAttribute("menteeList", menteeList);
@@ -63,7 +80,8 @@ public class MenteeManagementController extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
-     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
+
+    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);

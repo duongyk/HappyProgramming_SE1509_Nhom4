@@ -41,6 +41,9 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
+        <link href="css/requestByMe.css" rel="stylesheet">
+        <link href="css/search.css" rel="stylesheet">
+
 
     </head>
 
@@ -60,7 +63,22 @@
                     <ul>
                         <c:choose>
                             <c:when test="${sessionScope.currUser!=null}">
-
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <option>Skill</option>
+                                                <option>Mentee</option>
+                                                <option>Mentor</option>
+                                                <option>Message</option>
+                                                <option>Request</option>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
@@ -68,8 +86,25 @@
                                     </ul>
                                 </li>
 
+
                             </c:when>
                             <c:otherwise>
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <option>Skill</option>
+                                                <option>Mentee</option>
+                                                <option>Mentor</option>
+                                                <option>Message</option>
+                                                <option>Request</option>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
                                 <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
@@ -77,9 +112,11 @@
                                         </li>
                                     </ul>
                                 </li>
+
                             </c:otherwise>
                         </c:choose>
                     </ul>
+
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar-main -->
 
@@ -91,8 +128,8 @@
             <section class="inner-page">
                 <div class="container-scroller">
                     <!-- partial:partials/_navbar.html -->
-                    <div class="container-fluid page-body-wrapper">
-                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                    <div class="container-fluid page-body-wrapper"  style="padding-top: 20px;">
+                        <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="adminDashboard">
@@ -232,6 +269,43 @@
                                         </div>
                                     </div>
                                 </div>
+                                <%-- Paging --%>
+                                <c:if test="${!empty menteeList}">
+                                    <div class="row">  
+                                        <div class="paging">
+                                            <%-- Previous --%>
+                                            <%-- Previous --%>
+                                            <c:choose>
+                                                <c:when test="${index>1}">
+                                                    <a class="previous" href="${href}index=${index-1}"><</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a class="previous disabled" href="${href}index=${index-1}"><</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <%-- Page index --%>
+                                            <c:forEach begin="1" end="${endPage}" var="page">
+                                                <c:choose>
+                                                    <c:when test="${index==page}">
+                                                        <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="${href}index=${page}"> ${page}</a> 
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                            <%-- Next --%>
+                                            <c:choose>
+                                                <c:when test="${index!=endPage}">
+                                                    <a class="next" href="${href}index=${index+1}">  ></a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a class="next disabled" href="${href}index=${index+1}">></a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div> 
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                     </div>

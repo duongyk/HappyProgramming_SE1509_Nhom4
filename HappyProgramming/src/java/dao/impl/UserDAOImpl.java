@@ -348,6 +348,51 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     }
 
     /**
+     * Get list of Mentee with the username like txtSearch
+     *
+     * @param txtSearch
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    public ArrayList<User> searchMentee(String txtSearch) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM [PRJ_SWP].[dbo].[User] where uRole = '1' and username like ?";
+        int id;
+        String username, password, fullname, mail, phone, gender, avatar;
+        Date dob;
+        User u;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + txtSearch + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("uId");
+                username = rs.getString("username");
+                password = rs.getString("password");
+                fullname = rs.getString("fullname");
+                mail = rs.getString("uMail");
+                phone = rs.getString("uPhone");
+                dob = rs.getDate("DOB");
+                gender = rs.getString("gender");
+                avatar = rs.getString("uAvatar");
+                u = new User(id, username, password, fullname, mail, phone, dob, gender, avatar);
+                list.add(u);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
      * Update user information
      *
      * @param email it is a <code>java.lang.String</code>
@@ -777,5 +822,10 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
 //        for (int i=0;i<total;i++){
 //            System.out.println(mList.get(i).getFullname()+" - "+ ratingList.get(i));
 //        }
+    }
+
+    @Override
+    public int getTotalFilterSkill(int uRole, int sId) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

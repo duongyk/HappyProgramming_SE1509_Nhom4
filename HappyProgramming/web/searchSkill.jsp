@@ -40,6 +40,7 @@
 
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
+        <link href="css/search.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
 
         <!-- =======================================================
@@ -66,16 +67,48 @@
                     <ul>
                         <c:choose>
                             <c:when test="${sessionScope.currUser!=null}">
-
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <option>Skill</option>
+                                                <option>Mentee</option>
+                                                <option>Mentor</option>
+                                                <option>Message</option>
+                                                <option>Request</option>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
-                                        <li><a href="AdminControllerMap?service=dashboard">Dashboard</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
+
+
                             </c:when>
                             <c:otherwise>
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <option>Skill</option>
+                                                <option>Mentee</option>
+                                                <option>Mentor</option>
+                                                <option>Message</option>
+                                                <option>Request</option>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
                                 <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
@@ -83,6 +116,7 @@
                                         </li>
                                     </ul>
                                 </li>
+
                             </c:otherwise>
                         </c:choose>
                     </ul>
@@ -96,7 +130,7 @@
 
             <section class="inner-page">
                 <div class="container-scroller">
-                    <div class="container-fluid page-body-wrapper" style="padding-top: 20px;">
+                    <div class="container-fluid page-body-wrapper" style="padding-top: 10px;">
                         <!-- partial -->
                         <!-- partial:../../partials/_sidebar.html -->
                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -190,146 +224,146 @@
                                                 </div>
 
                                             </div>
-
                                         </div>
-                                    <c:choose>  
-                                        <c:when test="${empty sList}">
-                                            <h3 class="no-req">  Dont have any Skill like " ${txt} "</h3>
-                                        </c:when>
-                                        <c:otherwise>
+                                    </div>
+                                <c:choose>  
+                                    <c:when test="${empty sList}">
+                                        <h3 class="no-req">  Dont have any Skill like " ${txt} "</h3>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h3 class="no-req"> 
+                                            Showing results for " ${txt} "</h3>
+                                        <div class="row">
+                                            <div class="col-lg-12 grid-margin stretch-card">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            Image
+                                                                        </th>
+                                                                        <th>
+                                                                            ID
+                                                                        </th>
+                                                                        <th>
+                                                                            <a style="color: black" href="sortSkillByName"> Skill Name </a>
+                                                                        </th>
+                                                                        <th>
+                                                                            Detail
+                                                                        </th>
 
-                                            <h3 class="no-req"> 
-                                                Showing results for " ${txt} "</h3>
-                                            <div class="row">
-                                                <div class="col-lg-12 grid-margin stretch-card">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="table-responsive">
-                                                                <table class="table table-striped">
-                                                                    <thead>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <c:forEach items="${sList}" var="skill">
                                                                         <tr>
-                                                                            <th>
-                                                                                Image
-                                                                            </th>
-                                                                            <th>
-                                                                                ID
-                                                                            </th>
-                                                                            <th>
-                                                                                <a style="color: black" href="sortSkillByName"> Skill Name </a>
-                                                                            </th>
-                                                                            <th>
-                                                                                Detail
-                                                                            </th>
+                                                                            <td class="py-1">
+                                                                                <img src="img/${skill.image}" alt="image" />
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="getUpdateSkill?sId=${skill.id}"><c:out value="${skill.id}"></c:out></a>
+                                                                                </td>
 
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <c:forEach items="${sList}" var="skill">
-                                                                            <tr>
-                                                                                <td class="py-1">
-                                                                                    <img src="img/${skill.image}" alt="image" />
+                                                                                <td>
+                                                                                <c:out value="${skill.name}"></c:out>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <a href="getUpdateSkill?sId=${skill.id}"><c:out value="${skill.id}"></c:out></a>
-                                                                                    </td>
+                                                                                <c:out value="${skill.detail}"></c:out>
+                                                                                </td>
+                                                                            </tr>
+                                                                    </c:forEach>
 
-                                                                                    <td>
-                                                                                    <c:out value="${skill.name}"></c:out>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                    <c:out value="${skill.detail}"></c:out>
-                                                                                    </td>
-                                                                                </tr>
-                                                                        </c:forEach>
+                                                                </tbody>
+                                                            </table>
 
-                                                                    </tbody>
-                                                                </table>
-
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </c:otherwise>
-                                    </c:choose>                       
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>                       
 
 
-                                </div>
-
-                                <!-- content-wrapper ends -->
-                                <!-- partial:../../partials/_footer.html -->
-
-                                <!-- partial -->
-
-                                <!-- main-panel ends -->
                             </div>
-                            <!-- page-body-wrapper ends -->
+
+                            <!-- content-wrapper ends -->
+                            <!-- partial:../../partials/_footer.html -->
+
+                            <!-- partial -->
+
+                            <!-- main-panel ends -->
                         </div>
-                        </section>
+                        <!-- page-body-wrapper ends -->
+                    </div>
+            </section>
 
-                        </main><!-- End #main -->
+        </main><!-- End #main -->
 
-                        <!-- ======= Footer ======= -->
-                        <footer id="footer">
-                            <div class="container">
-                                <div class="row d-flex align-items-center">
-                                    <div class="col-lg-6 text-lg-left text-center">
-                                        <div class="copyright">
-                                            &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
-                                        </div>
-                                        <div class="credits">
+        <!-- ======= Footer ======= -->
+        <footer id="footer">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-6 text-lg-left text-center">
+                        <div class="copyright">
+                            &copy; Copyright <strong>Vesperr</strong>. All Rights Reserved
+                        </div>
+                        <div class="credits">
 
-                                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
-                                            <a href="#intro" class="scrollto">Home</a>
-                                            <a href="#about" class="scrollto">About</a>
-                                            <a href="#">Privacy Policy</a>
-                                            <a href="#">Terms of Use</a>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
-                        </footer><!-- End Footer -->
+                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
+                            <a href="#intro" class="scrollto">Home</a>
+                            <a href="#about" class="scrollto">About</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Use</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </footer><!-- End Footer -->
 
-                        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-                        <!-- Vendor JS Files -->
-                        <script src="vendor/aos/aos.js"></script>
-                        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                        <script src="vendor/glightbox/js/glightbox.min.js"></script>
-                        <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
-                        <script src="vendor/php-email-form/validate.js"></script>
-                        <script src="vendor/purecounter/purecounter.js"></script>
-                        <script src="vendor/swiper/swiper-bundle.min.js"></script>
+        <!-- Vendor JS Files -->
+        <script src="vendor/aos/aos.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="vendor/php-email-form/validate.js"></script>
+        <script src="vendor/purecounter/purecounter.js"></script>
+        <script src="vendor/swiper/swiper-bundle.min.js"></script>
 
-                        <!-- Template Main JS File -->
-                        <script src="js/main.js"></script>
-                        <style>.create {
-                                height: 50px;
-                                width: 180px;
-                                background:rgb(84, 142, 228);
-                                border-radius: 0;
-                                color: #fff;
-                                cursor: pointer;
-                                display: inline-block;
-                                padding:  10px;
-                                font-weight: bold;
-                                margin-left: 0px;
-                                border-radius: 25px;
-                                border: none;
+        <!-- Template Main JS File -->
+        <script src="js/main.js"></script>
+        <script src="js/form.js"></script>
+        <style>.create {
+                height: 50px;
+                width: 180px;
+                background:rgb(84, 142, 228);
+                border-radius: 0;
+                color: #fff;
+                cursor: pointer;
+                display: inline-block;
+                padding:  10px;
+                font-weight: bold;
+                margin-left: 0px;
+                border-radius: 25px;
+                border: none;
 
-                            }
+            }
 
-                            a.active {
-                                background-color: #8dc2fe ;
-                                color: #026adf;
-                                font-weight: bold;
-                            }
+            a.active {
+                background-color: #8dc2fe ;
+                color: #026adf;
+                font-weight: bold;
+            }
 
-                        </style>
-                        </body>
+        </style>
+    </body>
 
-                        </html>
+</html>

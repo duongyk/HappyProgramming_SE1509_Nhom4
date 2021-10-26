@@ -8,6 +8,7 @@
  * 20-09-2021    1.0        GiangNVT          First Deploy<br>
  */
 package controller;
+
 import dao.SkillDAO;
 import dao.UserDAO;
 import dao.impl.SkillDAOImpl;
@@ -61,12 +62,15 @@ public class SkillManagementController extends HttpServlet {
             if (count % 8 != 0) { //if the total of skills is not divisible by 8, the last page will be added to show the remaining skills
                 endPage++;
             }
+            // Set href of paging
+            String href = "skillManagement?";
             ArrayList<Skill> list = skillDAO.pagingSkill(index);
             ArrayList<User> menteeList = userDAO.getMenteeListSorted();
             //send informations to skillManagement.jsp
+            request.setAttribute("href", href);/*href paging*/
             request.setAttribute("sList", list);
             request.setAttribute("endPage", endPage);
-              request.setAttribute("count", count);
+            request.setAttribute("count", count);
             request.setAttribute("tag", index);
             request.setAttribute("menteeList", menteeList);
             request.getRequestDispatcher("skillManagement.jsp").forward(request, response);
