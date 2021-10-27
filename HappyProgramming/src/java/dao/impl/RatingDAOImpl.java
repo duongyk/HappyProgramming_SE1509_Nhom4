@@ -178,4 +178,43 @@ public class RatingDAOImpl extends DBContext implements dao.RatingDAO {
         }
         return false;
     }
+    
+    /**
+     * Get for a mentor number of rating base on star
+     *
+     * @param mentorId (id of mentor who receive rating)
+     * @param starNumber (rating number from 1 to 5)
+     * @return int (number of rating base on star number)
+     * @throws Exception
+     */
+    @Override
+    public int getMentorNumberRating(int mentorId, int ratingNumber) throws Exception {
+        int number = 0;
+        
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String sql = "SELECT COUNT(*) as number FROM [Rating] WHERE [toId] = ? and [ratingAmount] = ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mentorId);
+            ps.setInt(2, ratingNumber);
+            rs = ps.executeQuery();
+           
+            if (rs.next()) {
+                number = rs.getInt("number");
+            }
+
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        
+        return number;
+    }
 }

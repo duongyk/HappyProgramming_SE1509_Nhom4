@@ -55,4 +55,14 @@ public interface RatingDAO {
      * @throws Exception
      */
     public boolean checkDupRating(int fromId, int toId) throws Exception;
+    
+    /**
+     * Get for a mentor number of rating base on star
+     *
+     * @param mentorId (id of mentor who receive rating)
+     * @param ratingNumber (rating number from 1 to 5)
+     * @return int (number of rating base on star number)
+     * @throws Exception
+     */
+    public int getMentorNumberRating(int mentorId, int ratingNumber) throws Exception;
 }
