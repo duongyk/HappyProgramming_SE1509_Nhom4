@@ -68,7 +68,9 @@ public class ChangePasswordController extends HttpServlet {
                 }
 
         } catch (Exception e) {
-
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.getMessage());
+            sendDispatcher(request, response, "/error.jsp");
         }
     }
         public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {

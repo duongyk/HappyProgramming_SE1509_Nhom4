@@ -47,7 +47,9 @@
     </head>
 
     <body>
-
+<script type="text/javascript">    
+    
+</script> 
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top d-flex align-items-center" style="background-color:#e2f5fde0;">
             <div class="container d-flex align-items-center justify-content-between">
@@ -75,11 +77,10 @@
                                 </li>
                             </c:when>
                             <c:otherwise>
-                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
-                                        <span>Sign in</span></a>
+                                <li class="getstarted scrollto "><a href="signUp.jsp" style="color: white; padding: 0;">
+                                        <span>Sign up</span></a>
                                     <ul>
-                                        <li><a href="signUp.jsp">Sign up</a>
-                                        </li>
+                                       
                                     </ul>
                                 </li>
                             </c:otherwise>

@@ -42,6 +42,7 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+      
         try {
             UserDAO userDAO = new UserDAOImpl();
             String userName = request.getParameter("username").trim();
@@ -51,7 +52,7 @@ public class LoginController extends HttpServlet {
             if (user != null) {
                 if (user.getRole() == 3) {
                     request.getSession().setAttribute("currUser", user);
-                    sendDispatcher(request, response, "index.jsp");
+                    sendDispatcher(request, response, "adminDashboard.jsp");
                 } else {
                     request.getSession().setAttribute("currUser", user);
                     sendDispatcher(request, response, "index.jsp");

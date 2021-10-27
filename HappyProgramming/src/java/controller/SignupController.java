@@ -84,8 +84,10 @@ public class SignupController extends HttpServlet {
                 }
             }
 
-        } catch (Exception e) {
-
+        }catch (Exception e) {
+            Logger.getLogger(ViewMentorRequestController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.getMessage());
+            sendDispatcher(request, response, "/error.jsp");
         }
     }
 
