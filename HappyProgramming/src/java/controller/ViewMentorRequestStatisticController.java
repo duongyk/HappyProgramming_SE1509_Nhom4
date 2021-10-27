@@ -35,7 +35,7 @@ import javax.servlet.http.HttpSession;
  * 
  * @author thangtvhe151307
  */
-@WebServlet(name = "ViewMentorRequestStatisticController", urlPatterns = {"/viewMentorRequestStatisticController"})
+@WebServlet(name = "ViewMentorRequestStatisticController", urlPatterns = {"/viewMentorRequestStatistic"})
 public class ViewMentorRequestStatisticController extends HttpServlet {
 
     /**
@@ -72,9 +72,6 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             double canceledpercentage = (double) (canceled/total);
             double completedpercentage = (double) (completed/total);
             
-            // get mentor average rating
-            RatingDAO ratingdao = new RatingDAOImpl();
-            String rating = ratingdao.getAvgRate(user.getId());
             
             //set attributes
 
@@ -86,9 +83,12 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             request.setAttribute("canceledpercentage", canceledpercentage);
             request.setAttribute("completedpercentage", completedpercentage);
 
-            request.setAttribute("rating", rating);
             
             sendDispatcher(request, response, "/mentorRequestStatistic.jsp");
+        } catch (Exception e) {
+            Logger.getLogger(ViewMentorRequestStatisticController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.getMessage());
+            sendDispatcher(request, response, "/error.jsp");
         }
     }
     

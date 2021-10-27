@@ -51,7 +51,7 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            RequestDAO requestdao = new RequestDAOImpl();
+            RatingDAO ratingdao = new RatingDAOImpl();
             HttpSession session = request.getSession();
             
             // check if mentor login
@@ -62,11 +62,21 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             } 
             
             // get rating statistic
-            
-            
+            int five = ratingdao.getMentorNumberRating(user.getId(), 5);
+            int four = ratingdao.getMentorNumberRating(user.getId(), 4); 
+            int three = ratingdao.getMentorNumberRating(user.getId(), 3);
+            int two = ratingdao.getMentorNumberRating(user.getId(), 2);
+            int one = ratingdao.getMentorNumberRating(user.getId(), 1);
+                        
             //set attributes
       
-            sendDispatcher(request, response, "/mentorRequestStatistic.jsp");
+            request.setAttribute("five", five);
+            request.setAttribute("four", four);
+            request.setAttribute("three", three);
+            request.setAttribute("two", two);
+            request.setAttribute("one", one);
+            
+            sendDispatcher(request, response, "/mentorRatingStatistic.jsp");
         } catch (Exception e) {
             Logger.getLogger(ViewMentorRatingStatisticController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.getMessage());

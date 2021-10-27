@@ -9,12 +9,6 @@
  */
 package entity;
 
-import dao.RatingDAO;
-import dao.RequestDAO;
-import dao.UserSkillDAO;
-import dao.impl.RatingDAOImpl;
-import dao.impl.RequestDAOImpl;
-import dao.impl.UserSkillDAOImpl;
 import java.sql.Date;
 
 /**
@@ -400,7 +394,7 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
+ 
     /**
      * Set value to avatar attribute of User class. <br>
      *

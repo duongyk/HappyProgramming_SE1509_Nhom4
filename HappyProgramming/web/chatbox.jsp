@@ -79,6 +79,7 @@
                 document.getElementById("friendId").innerHTML = friendId;
                 
                 loadMessage();
+                inputbox.style.display='block';
             }
 
             function postMessage() {
@@ -219,9 +220,9 @@
                                     <c:choose>
                                         <c:when test="${friend.getId()==selectedId}">
                                     <div class="chat_list active_chat">
-                                        <a href="#">
+                                        <a href="#" onclick="loadNewFriendMessage(${friend.getId()}); return false;">
                                             <div class="chat_people">
-                                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                                <div class="chat_img"> <img src="img/<c:out value="${friend.getAvatar()}" ></c:out>" alt="sunil">
                                                 </div>
                                                 <div class="chat_ib">
                                                     <h5><c:out value="${friend.getUsername()}"></c:out></h5>
@@ -234,6 +235,7 @@
                                         </c:when>
                                         <c:otherwise>
                                     <div class="chat_list">
+                                        <a href="#" onclick="loadNewFriendMessage(${friend.getId()}); return false;">
                                         <div class="chat_people">
                                             <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
                                             </div>
@@ -243,6 +245,7 @@
                                                     astrology under one roof.</p>
                                             </div>
                                         </div>
+                                        </a>
                                     </div>
                                         </c:otherwise>
                                     </c:choose>
@@ -270,7 +273,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="msg_history" style="padding-top:25px" id="messagebox">
+                                <div class="msg_history" id="messagebox">
                                     <div class="incoming_msg">
                                         <div class="received_msg">
                                             <div class="received_withd_msg">
