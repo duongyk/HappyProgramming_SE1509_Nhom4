@@ -5,30 +5,22 @@
  */
 package controller;
 
-import dao.RatingDAO;
 import dao.RequestDAO;
-import dao.SkillDAO;
-import dao.UserDAO;
-import dao.impl.RatingDAOImpl;
 import dao.impl.RequestDAOImpl;
-import dao.impl.SkillDAOImpl;
-import dao.impl.UserDAOImpl;
-import entity.User;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of checking user and sign in
  *
- * @author ToanPKhe151393
+ * @author solov
  */
-public class LoginController extends HttpServlet {
+@WebServlet(name = "RequestSearchController", urlPatterns = {"/requestSearch"})
+public class RequestSearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,42 +33,14 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
-      
+        RequestDAO requestDAO = new RequestDAOImpl();
         try {
-            UserDAO userDAO = new UserDAOImpl();
-            String userName = request.getParameter("username").trim();
-            String password = request.getParameter("password").trim();
-            User user = userDAO.getUser(userName, password);
 
-            if (user != null) {
-                if (user.getRole() == 3) {
-                    request.getSession().setAttribute("currUser", user);
-                    sendDispatcher(request, response, "index.jsp");
-                } else {
-                    request.getSession().setAttribute("currUser", user);
-                    sendDispatcher(request, response, "index.jsp");
-                }
-            } else {
-
-                request.setAttribute("mess", "wrong user name or password");
-                sendDispatcher(request, response, "signIn.jsp");
-            }
-
-        } catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage", ex.toString());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } catch (Exception e) {
         }
-    }
 
-    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
-        try {
-            RequestDispatcher rd = request.getRequestDispatcher(path);
-            rd.forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

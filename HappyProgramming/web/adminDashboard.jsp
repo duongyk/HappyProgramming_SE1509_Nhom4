@@ -158,7 +158,7 @@
                                 </li>
                                 <!--Request MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=requestManage">
+                                    <a class="nav-link" href="requestManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Request Management</span>
                                     </a>

@@ -5,30 +5,30 @@
  */
 package controller;
 
-import dao.RatingDAO;
 import dao.RequestDAO;
-import dao.SkillDAO;
-import dao.UserDAO;
-import dao.impl.RatingDAOImpl;
+import dao.RequestSkillDAO;
 import dao.impl.RequestDAOImpl;
-import dao.impl.SkillDAOImpl;
-import dao.impl.UserDAOImpl;
-import entity.User;
+import dao.impl.RequestSkillDAOImpl;
+import entity.Request;
+import entity.Skill;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of checking user and sign in
  *
- * @author ToanPKhe151393
+ * @author solov
  */
-public class LoginController extends HttpServlet {
+@WebServlet(name = "AdminViewRequestDetail", urlPatterns = {"/adminViewRequestDetail"})
+public class AdminViewRequestDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,46 +42,31 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      
-        try {
-            UserDAO userDAO = new UserDAOImpl();
-            String userName = request.getParameter("username").trim();
-            String password = request.getParameter("password").trim();
-            User user = userDAO.getUser(userName, password);
-
-            if (user != null) {
-                if (user.getRole() == 3) {
-                    request.getSession().setAttribute("currUser", user);
-                    sendDispatcher(request, response, "index.jsp");
-                } else {
-                    request.getSession().setAttribute("currUser", user);
-                    sendDispatcher(request, response, "index.jsp");
-                }
-            } else {
-
-                request.setAttribute("mess", "wrong user name or password");
-                sendDispatcher(request, response, "signIn.jsp");
-            }
-
-        } catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage", ex.toString());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            doGet(request, response);
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminViewRequestDetail.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method. Get the Request Details
      *
      * @param request servlet request
      * @param response servlet response
@@ -91,7 +76,24 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            // initiate DAO
+            RequestDAO requestDAO = new RequestDAOImpl();
+            RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
+            // get Request
+            int rId = Integer.parseInt(request.getParameter("rId"));
+            Request req = requestDAO.getRequestById(rId);
+            // get Skills in Request
+            ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
+
+            request.setAttribute("sList", sList);/*Skills of Request*/
+            request.setAttribute("req", req);/*Request*/
+            sendDispatcher(request, response, "adminViewRequest.jsp");
+        } catch (Exception e) {
+            Logger.getLogger(AdminViewRequestDetail.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
     /**

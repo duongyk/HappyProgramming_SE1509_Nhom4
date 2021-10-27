@@ -20,6 +20,7 @@ import java.util.ArrayList;
  * @author duongvvhe150773
  */
 public interface RequestDAO {
+
     /**
      * Get all Request of the user in the database
      *
@@ -28,76 +29,77 @@ public interface RequestDAO {
      * @throws Exception
      */
     public ArrayList<Request> getListByMe(User user) throws Exception;
-    
+
     /**
      * Insert new request into the database
      *
      * @param req it is a <code>Request</code> object
+     * @return
      * @throws Exception
      */
     public int createRequest(Request req) throws Exception;
-    
+
     /**
      * Get the total number of request of the user
      *
      * @param uid (id of user )
      * @param status (status of request)
      * @return ArrayList of Request
-     * 
+     *
      * @throws Exception
      */
     public ArrayList<Request> getRequestListBy_uId_And_Status(int uid, int status) throws Exception;
-    
+
     /**
      * Get the total number of request of the user
      *
      * @param mId it is a <code>java.lang.Integer</code>
      * @return a <code>java.lang.Integer</code>
-     * 
+     *
      * @throws Exception
      */
     public int getTotalRequest(int mId) throws Exception;
-    
+
     /**
      * Get the number of mentors of the user
      *
      * @param mId it is a <code>java.lang.Integer</code>
      * @return a <code>java.lang.Integer</code>
-     * 
+     *
      * @throws Exception
      */
     public int getTotalMentor(int mId) throws Exception;
-    
+
     /**
      * Get the number of request with the same status of the user
      *
      * @param mId it is a <code>java.lang.Integer</code>
      * @param status it is a <code>java.lang.Integer</code>
      * @return a <code>java.lang.Integer</code>
-     * 
+     *
      * @throws Exception
      */
     public int getTotalRequestByStatus(int mId, int status) throws Exception;
-    
+
     /**
      * Get the total hour of request of the user
      *
      * @param mId it is a <code>java.lang.Integer</code>
      * @return a <code>java.lang.Integer</code>
-     * 
+     *
      * @throws Exception
      */
     public int getTotalHourById(int mId) throws Exception;
-    
+
     /**
      * Get the total hour of request of all user
      *
      * @return an <code>java.lang.Integer</code>
-     * 
+     *
      * @throws Exception
      */
     public int getTotalHour() throws Exception;
-    
+
     /**
      * Update a request
      *
@@ -105,7 +107,7 @@ public interface RequestDAO {
      * @throws Exception
      */
     public void updateRequest(Request req) throws Exception;
-    
+
     /**
      * Update status of a request
      *
@@ -114,7 +116,7 @@ public interface RequestDAO {
      * @throws Exception
      */
     public void updateStatusRequest(int rId, int status) throws Exception;
-    
+
     /**
      * Get request by ID
      *
@@ -132,7 +134,7 @@ public interface RequestDAO {
      * @throws Exception
      */
     public ArrayList<Integer> getStatistic(int mId) throws Exception;
-    
+
     /**
      * Get Request of a Mentee by page
      *
@@ -142,7 +144,7 @@ public interface RequestDAO {
      * @throws Exception
      */
     public ArrayList<Request> listByMePaging(int index, int mId) throws Exception;
-   
+
     /**
      * Get Request of a Mentee by page after Filter by Status
      *
@@ -153,7 +155,7 @@ public interface RequestDAO {
      * @throws Exception
      */
     public ArrayList<Request> listByMeFilterStatusPaging(int index, int mId, int status) throws Exception;
-    
+
     /**
      * Get total number of Request of a Mentee by page after Filter by Status
      *
@@ -163,18 +165,18 @@ public interface RequestDAO {
      * @throws Exception
      */
     public int getTotalFilterStatus(int mId, int status) throws Exception;
-    
+
     /**
      * Get the number of request with the same status of the mentor
      *
      * @param mentorId it is an Integer number
      * @param status it is an Integer number
      * @return an Integer number
-     * 
+     *
      * @throws Exception
      */
     public int get_Mentor_TotalRequestByStatus(int mentorId, int status) throws Exception;
-    
+
     /**
      * Get Requested Mentor sorted by number of Request
      *
@@ -182,6 +184,33 @@ public interface RequestDAO {
      * @throws Exception
      */
     public ArrayList<User> getHotMentor() throws Exception;
-    
+
     public int getNumberOfRequest() throws Exception;
+
+    /**
+     * Get all Request of all user in the database
+     *
+     * @return a list <code>Request</code> object
+     * @throws Exception
+     */
+    public ArrayList<Request> getAllRequest() throws Exception;
+
+    /**
+     * Get Request of all Mentee by page
+     *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @return a list of <code>Request</code> object
+     * @throws Exception
+     */
+    public ArrayList<Request> requestPaging(int index) throws Exception;
+
+    /**
+     * Get the number of request with the same status of all user
+     *
+     * @param status it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
+     *
+     * @throws Exception
+     */
+    public int getRequestByStatus(int status) throws Exception;
 }

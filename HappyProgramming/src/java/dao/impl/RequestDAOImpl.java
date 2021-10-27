@@ -80,6 +80,102 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
+     * Get all Request of all user in the database
+     *
+     * @return a list <code>Request</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<Request> getAllRequest() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        UserDAOImpl userDAO = new UserDAOImpl();
+        ArrayList<Request> list = new ArrayList<>();
+        String sql = "SELECT * FROM [Request] ";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            Request r;
+            int rId;
+            String rTitle;
+            String rContent;
+            int rStatus;
+            int rMentor;
+            Date dlDate;
+            int rMentee;
+
+            while (rs.next()) {
+                rId = rs.getInt("rId");
+                rTitle = rs.getString("title");
+                rContent = rs.getString("content");
+                rStatus = rs.getInt("rStatus");
+                rMentor = rs.getInt("toId");
+                rMentee = rs.getInt("fromId");
+                dlDate = rs.getDate("deadlineDate");
+                r = new Request(rId, rTitle, rContent,
+                        userDAO.getUserById(rMentee),
+                        userDAO.getUserById(rMentor), dlDate, rStatus);
+                list.add(r);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return (list);
+    }
+
+    /**
+     * Get Request of all Mentee by page
+     *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param mId it is a <code>java.lang.Integer</code>
+     * @return a list of <code>Request</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<Request> requestPaging(int index) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        UserDAO userDAO = new UserDAOImpl();
+        ArrayList<Request> list = new ArrayList<>();
+        Request req = null;
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY [rId])"
+                + " AS [RowNum], * FROM [Request]) a WHERE "
+                + "RowNum BETWEEN ? and ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, index * 8 - 7);
+            ps.setInt(2, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                req = new Request(rs.getInt("rId"),
+                        rs.getString("title"), rs.getString("content"),
+                        userDAO.getUserById(rs.getInt("fromId")),
+                        userDAO.getUserById(rs.getInt("toId")),
+                        rs.getDate("deadlineDate"), rs.getInt("deadlineHour"),
+                        rs.getInt("rStatus"));
+                list.add(req);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
      * Insert new request into the database
      *
      * @param req it is a <code>Request</code> object
@@ -121,9 +217,9 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
      * @param uid (id of user )
      * @param status (status of request)
      * @return ArrayList of Request
-     * 
+     *
      * @throws Exception
-     */  
+     */
     @Override
     public ArrayList<Request> getRequestListBy_uId_And_Status(int uid, int status) throws Exception {
         Connection conn = null;
@@ -165,7 +261,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
      *
      * @param mId it is a <code>java.lang.Integer</code>
      * @return a <code>java.lang.Integer</code>
-     * 
+     *
      * @throws Exception
      */
     @Override
@@ -202,7 +298,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
      * @param mId it is a <code>java.lang.Integer</code>
      * @param status it is a <code>java.lang.Integer</code>
      * @return a <code>java.lang.Integer</code>
-     * 
+     *
      * @throws Exception
      */
     @Override
@@ -233,12 +329,47 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return totalRequest;
     }
 
+  /**
+     * Get the number of request with the same status of all user
+     *
+     * @param status it is a <code>java.lang.Integer</code>
+     * @return a <code>java.lang.Integer</code>
+     *
+     * @throws Exception
+     */
+    @Override
+    public int getRequestByStatus(int status) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT COUNT([toId]) as 'totalRequest' FROM [Request] "
+                + "WHERE [rStatus] = ?";
+
+        int totalRequest = 0;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, status);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                totalRequest = rs.getInt("totalRequest");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return totalRequest;
+    }
+
     /**
      * Get the total hour of request of the user
      *
      * @param mId it is a <code>java.lang.Integer</code>
      * @return a <code>java.lang.Integer</code>
-     * 
+     *
      * @throws Exception
      */
     @Override
@@ -272,7 +403,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
      * Get the total hour of request of all user
      *
      * @return an <code>java.lang.Integer</code>
-     * 
+     *
      * @throws Exception
      */
     @Override
@@ -305,7 +436,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
      *
      * @param mId it is a <code>java.lang.Integer</code>
      * @return a <code>java.lang.Integer</code>
-     * 
+     *
      * @throws Exception
      */
     @Override
@@ -640,7 +771,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         UserDAO userDAO = new UserDAOImpl();
         ArrayList<User> list = new ArrayList<>();
         String sql = "SELECT DISTINCT([toId]),(SELECT COUNT([toId]) "

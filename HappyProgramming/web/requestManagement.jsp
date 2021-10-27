@@ -18,7 +18,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Mentee Management</title>
+        <title>Request Management</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -44,6 +44,7 @@
         <link href="css/requestByMe.css" rel="stylesheet">
         <link href="css/search.css" rel="stylesheet">
 
+
     </head>
 
     <body>
@@ -67,44 +68,11 @@
                                         <form action="search" method="POST" style="margin-left: 10px">
                                             <label for="category">Category :</label>
                                             <select data-trigger="" name="category" class="search-btn" id="category">
-                                                <c:choose>
-                                                    <c:when test="${category==null}">
-                                                        <option>Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option>Message</option>
-                                                        <option>Request</option></c:when>
-                                                    <c:when test="${category == 'Mentee'}">
-                                                        <option>Skill</option>
-                                                        <option selected="selected">Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option>Message</option>
-                                                        <option>Request</option></c:when>
-                                                    <c:when test="${category == 'Skill'}">
-                                                        <option  selected="selected">Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option>Message</option>
-                                                        <option>Request</option></c:when>
-                                                    <c:when test="${category == 'Mentor'}">
-                                                        <option>Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option  selected="selected">Mentor</option>
-                                                        <option>Message</option>
-                                                        <option>Request</option></c:when>
-                                                    <c:when test="${category == 'Request'}">
-                                                        <option>Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option>Message</option>
-                                                        <option selected="selected">Request</option></c:when>
-                                                    <c:when test="${category == 'Message'}">
-                                                        <option>Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option selected="selected">Message</option>
-                                                        <option>Request</option></c:when>
-                                                </c:choose>
+                                                <option>Skill</option>
+                                                <option>Mentee</option>
+                                                <option>Mentor</option>
+                                                <option>Message</option>
+                                                <option>Request</option>
                                             </select>
                                             <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
                                             <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
@@ -126,44 +94,11 @@
                                         <form action="search" method="POST" style="margin-left: 10px">
                                             <label for="category">Category :</label>
                                             <select data-trigger="" name="category" class="search-btn" id="category">
-                                                <c:choose>
-                                                    <c:when test="${category==null}">
-                                                        <option>Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option>Message</option>
-                                                        <option>Request</option></c:when>
-                                                    <c:when test="${category == 'Mentee'}">
-                                                        <option>Skill</option>
-                                                        <option selected="selected">Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option>Message</option>
-                                                        <option>Request</option></c:when>
-                                                    <c:when test="${category == 'Skill'}">
-                                                        <option  selected="selected">Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option>Message</option>
-                                                        <option>Request</option></c:when>
-                                                    <c:when test="${category == 'Mentor'}">
-                                                        <option>Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option  selected="selected">Mentor</option>
-                                                        <option>Message</option>
-                                                        <option>Request</option></c:when>
-                                                    <c:when test="${category == 'Request'}">
-                                                        <option>Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option>Message</option>
-                                                        <option selected="selected">Request</option></c:when>
-                                                    <c:when test="${category == 'Message'}">
-                                                        <option>Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option selected="selected">Message</option>
-                                                        <option>Request</option></c:when>
-                                                </c:choose>
+                                                <option>Skill</option>
+                                                <option>Mentee</option>
+                                                <option>Mentor</option>
+                                                <option>Message</option>
+                                                <option>Request</option>
                                             </select>
                                             <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
                                             <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
@@ -181,6 +116,7 @@
                             </c:otherwise>
                         </c:choose>
                     </ul>
+
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar-main -->
 
@@ -192,7 +128,7 @@
             <section class="inner-page">
                 <div class="container-scroller">
                     <!-- partial:partials/_navbar.html -->
-                    <div class="container-fluid page-body-wrapper" style="padding-top: 20px;">
+                    <div class="container-fluid page-body-wrapper"  style="padding-top: 20px;">
                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
@@ -243,6 +179,7 @@
                         <div class="main-panel">
                             <div class="content-wrapper">
                                 <div class="row">
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 grid-margin stretch-card">
@@ -260,62 +197,113 @@
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-tale">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Total Searched Mentee </p>
-                                                        <p class="fs-30 mb-2"><c:out value="${mList.size()}"></c:out></p>
+                                                        <p class="mb-4">Total Request </p>
+                                                        <p class="fs-30 mb-2"><c:out value="${list.size()}"></c:out></p>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-4 stretch-card transparent">
+                                                    <div class="card card-dark-blue">
+                                                        <div class="card-body">
+                                                            <p class="mb-4">Total In Process Request</p>
+                                                            <p class="fs-30 mb-2"><c:out value=" ${process}"></c:out></p>
                                                             <p></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                        </div>
-                                    </div>
-                                <c:choose>  
-                                    <c:when test="${empty mList}">
-                                        <h3 style=" margin-left: 0 px;  width: 600px;">  
-                                            Dont have any Mentee have username like " ${txt} "</h3>
-                                        </c:when>
-                                        <c:otherwise>
-                                        <h3  style="margin-left: 0 px; width: 600px;"> 
-                                            Showing results for " ${txt} "</h3>
-                                        <div class="row">
-                                            <div class="col-md-12 grid-margin stretch-card">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped table-borderless">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>ID</th>
-                                                                        <th><a style="color: black" href="AdminControllerMap?service=filterName"> Full Name </a></th>
-                                                                        <th>Username</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <c:forEach items="${mList}" var="mentee">
-                                                                        <tr>
-                                                                            <td>
-                                                                                <c:out value="${mentee.id}"></c:out>
-                                                                                </td>
-                                                                                <td>
-                                                                                <c:out value=" ${mentee.fullname}"></c:out>
-                                                                                </td>
-                                                                                <td>
-                                                                                <c:out value="${mentee.username}"></c:out>
-                                                                                </td>
-                                                                            </tr>
-                                                                    </c:forEach>
-                                                                </tbody>
-                                                            </table>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                                                    <div class="card card-light-blue">
+                                                        <div class="card-body">
+                                                            <p class="mb-4">Total Done Request </p>
+                                                            <p class="fs-30 mb-2"><c:out value=" ${done}"></c:out></p>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 stretch-card transparent">
+                                                    <div class="card card-light-danger">
+                                                        <div class="card-body">
+                                                            <p class="mb-4">Total Canceled Request</p>
+                                                            <p class="fs-30 mb-2"><c:out value=" ${canceled}"></c:out></p>
+                                                            <p></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </c:otherwise>
-                                </c:choose>   
+                                    </div>
+                                    <form action="search?category=${category}&txtSearch=" method="POST" style="margin-left: 10px">
+                                        <label for="category">Category :</label>
+                                        <select data-trigger="" name="category"  id="category">
+                                            <option>All</option>
+                                            <option>Pending</option>
+                                            <option>In process</option>
+                                            <option>Done</option>
+                                            <option>Canceled</option>
+                                        </select>
+                                        <label for="txtSearch">Title :</label>
+                                        <input type="text" class="searchTerm" name="txtSearch" value="${txt}" >
+                                    <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                </form>
+                                <div class="row">
+                                    <div class="col-md-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-borderless">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>From</th>
+                                                                <th>To</th>
+                                                                <th>Title</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <c:forEach items="${rList}" var="request">
+                                                                <tr>
+                                                                    <td>
+                                                                        <a  href="adminViewRequestDetail?rId=${request.id}"> <c:out value="${request.id}"></c:out></a>  
+                                                                        </td>
+                                                                        <td>
+                                                                        <c:out value=" ${request.from.username}"></c:out>
+                                                                        </td>
+                                                                        <td>
+                                                                        <c:out value="${request.to.username}"></c:out>
+                                                                        </td>
+                                                                        <td>
+                                                                        <c:out value="${request.title}"></c:out>
+                                                                        </td>
+
+                                                                    <c:if test="${request.status==1}">
+                                                                        <td>Pending</td>
+                                                                    </c:if>
+                                                                    <c:if test="${request.status==2}">
+                                                                        <td>In process</td>
+                                                                    </c:if>
+                                                                    <c:if test="${request.status==3}">
+                                                                        <td>Done</td>
+                                                                    </c:if>
+                                                                    <c:if test="${request.status==4}">
+                                                                        <td>Canceled</td>
+                                                                    </c:if>
+
+
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <%-- Paging --%>
-                                <c:if test="${!empty menteeList}">
+                                <c:if test="${!empty rList}">
                                     <div class="row">  
                                         <div class="paging">
                                             <%-- Previous --%>

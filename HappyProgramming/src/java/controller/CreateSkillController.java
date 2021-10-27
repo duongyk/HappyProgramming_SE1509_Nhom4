@@ -54,6 +54,9 @@ public class CreateSkillController extends HttpServlet {
             if (skillDAO.findDupSkill(sName)) {
                 String mess = "Skill existed!";
                 request.setAttribute("mess", mess);
+                request.setAttribute("sName", sName);
+                request.setAttribute("sDetail", sDetail);
+                request.setAttribute("sImage", sImage);
                 sendDispatcher(request, response, "createSkill.jsp");
             } else {
                 //insert new skill into db

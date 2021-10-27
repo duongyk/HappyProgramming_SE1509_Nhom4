@@ -5,30 +5,26 @@
  */
 package controller;
 
-import dao.RatingDAO;
 import dao.RequestDAO;
-import dao.SkillDAO;
-import dao.UserDAO;
-import dao.impl.RatingDAOImpl;
 import dao.impl.RequestDAOImpl;
-import dao.impl.SkillDAOImpl;
-import dao.impl.UserDAOImpl;
-import entity.User;
+import entity.Request;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of checking user and sign in
  *
- * @author ToanPKhe151393
+ * @author solov
  */
-public class LoginController extends HttpServlet {
+@WebServlet(name = "RequestManagementController", urlPatterns = {"/requestManagement"})
+public class RequestManagementController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,31 +38,45 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      
+        RequestDAO requestDAO = new RequestDAOImpl();
         try {
-            UserDAO userDAO = new UserDAOImpl();
-            String userName = request.getParameter("username").trim();
-            String password = request.getParameter("password").trim();
-            User user = userDAO.getUser(userName, password);
-
-            if (user != null) {
-                if (user.getRole() == 3) {
-                    request.getSession().setAttribute("currUser", user);
-                    sendDispatcher(request, response, "index.jsp");
-                } else {
-                    request.getSession().setAttribute("currUser", user);
-                    sendDispatcher(request, response, "index.jsp");
-                }
-            } else {
-
-                request.setAttribute("mess", "wrong user name or password");
-                sendDispatcher(request, response, "signIn.jsp");
+            ArrayList<Request> list = new ArrayList<Request>();
+            list = requestDAO.getAllRequest();
+            //get index page 
+            String indexPage = request.getParameter("index");
+            // index page always start at 1
+            if (indexPage == null) {
+                indexPage = "1";
             }
+            int index = Integer.parseInt(indexPage);
+            int count = list.size();
+            //calculate total page for paging
+            int endPage = count / 8; // a page will have at most 8 skills
+            if (count % 8 != 0) { //if the total of skills is not divisible by 8, the last page will be added to show the remaining skills
+                endPage++;
+            }
+            ArrayList<Request> rList = requestDAO.requestPaging(index);
+            int process = requestDAO.getRequestByStatus(2);
+            int done = requestDAO.getRequestByStatus(3);
+            int canceled = requestDAO.getRequestByStatus(4);
+            // Set href of paging
+            String href = "requestManagement?";
+            request.setAttribute("rList", rList);
+            request.setAttribute("list", list);
+            request.setAttribute("process", process);
+            request.setAttribute("done", done);
+            request.setAttribute("canceled", canceled);
+            request.setAttribute("href", href);/*href paging*/
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("count", count);
+            request.setAttribute("tag", index);
+            sendDispatcher(request, response, "requestManagement.jsp");
 
-        } catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage", ex.toString());
+        } catch (Exception e) {
+            Logger.getLogger(RequestManagementController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
+
         }
     }
 

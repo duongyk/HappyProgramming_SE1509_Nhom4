@@ -55,18 +55,22 @@ public class SearchController extends HttpServlet {
                 ArrayList<Skill> list = skillDAO.searchSkill(txtSearch);
                 request.setAttribute("sList", list);
                 request.setAttribute("txt", txtSearch);
+                request.setAttribute("category", category);
                 sendDispatcher(request, response, "searchSkill.jsp");
             }
             if (category.equalsIgnoreCase("Mentee")) {
                 ArrayList<User> mList = userDAO.searchMentee(txtSearch);
                 request.setAttribute("mList", mList);
+                request.setAttribute("category", category);
                 request.setAttribute("txt", txtSearch);
+                System.out.println(category);
                 sendDispatcher(request, response, "searchMentee.jsp");
             }
             if (category.equalsIgnoreCase("Message")) {
                 ArrayList<Message> mList = messDAO.searchMessage(txtSearch);
                 request.setAttribute("mList", mList);
                 request.setAttribute("txt", txtSearch);
+                request.setAttribute("category", category);
                 sendDispatcher(request, response, "searchMessage.jsp");
             }
 

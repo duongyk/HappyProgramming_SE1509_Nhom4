@@ -104,23 +104,23 @@
             <section class="breadcrumbs">
                 <div class="card-heading">
                     <h2 class="title" style="color: black; font-weight: bold;">Create Skill  </h2>
-                                               
+
                 </div>
             </section><!-- End Breadcrumbs Section -->
 
             <section class="inner-page">
                 <div class="container">
                     <div class="wrapper wrapper--w790">
-                        
+
                         <div class="card card-5">
 
                             <div class="card-body">
-                                <form action="createSkill" method="POST">
+                                <form  action="createSkill" method="POST">
                                     <div class="form-row">
                                         <div class="name">Skill Name</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input-white" placeholder="Skill Name" type="text" name="sName" pattern=".*\S+.*" title="Must not contain only spaces " required="required">
+                                                <input class="input-white" placeholder="Skill Name" type="text" name="sName" pattern=".*\S+.*" title="Must not contain only spaces " required="required" value="${sName}">
                                             </div>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
                                         <div class="name">Detail</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <textarea class="input-white" placeholder="Detail" name="sDetail" required="required" rows="3" cols="55" maxlength="200 "></textarea>
+                                                <textarea class="input-white" placeholder="Detail" name="sDetail" required="required" rows="3" cols="55" maxlength="200 " >${sDetail}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -136,8 +136,7 @@
                                         <div class="name">Image</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input-white" id="avatarURL" onchange="changeImage()" class="input--style-5" type="file" name="sImage" required="required" pattern="^(https?|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]" title="
-                                                       Please enter a valid photo URL">
+                                                <input class="input-white" id="avatarURL" onchange="changeImage()" class="input--style-5" type="file" name="sImage" required="required" src="img/css.jpg">
                                             </div>
                                         </div>
                                     </div>
@@ -267,6 +266,7 @@
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="js/form.js"></script>
         <script>
                                                     function chooseFile(fileInput) {
                                                         if (fileInput.files && fileInput.files[0]) {

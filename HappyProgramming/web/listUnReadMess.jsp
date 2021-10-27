@@ -40,6 +40,8 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
+        <link href="css/search.css" rel="stylesheet">
+
 
 
     </head>
@@ -60,16 +62,114 @@
                     <ul>
                         <c:choose>
                             <c:when test="${sessionScope.currUser!=null}">
-
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <c:choose>
+                                                    <c:when test="${category==null}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Mentee'}">
+                                                        <option>Skill</option>
+                                                        <option selected="selected">Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Skill'}">
+                                                        <option  selected="selected">Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Mentor'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option  selected="selected">Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Request'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option selected="selected">Request</option></c:when>
+                                                    <c:when test="${category == 'Message'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option selected="selected">Message</option>
+                                                        <option>Request</option></c:when>
+                                                </c:choose>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
-                                        <li><a href="AdminControllerMap?service=dashboard">Dashboard</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
+
+
                             </c:when>
                             <c:otherwise>
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <c:choose>
+                                                    <c:when test="${category==null}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Mentee'}">
+                                                        <option>Skill</option>
+                                                        <option selected="selected">Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Skill'}">
+                                                        <option  selected="selected">Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Mentor'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option  selected="selected">Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Request'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option selected="selected">Request</option></c:when>
+                                                    <c:when test="${category == 'Message'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option selected="selected">Message</option>
+                                                        <option>Request</option></c:when>
+                                                </c:choose>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
                                 <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
@@ -77,6 +177,7 @@
                                         </li>
                                     </ul>
                                 </li>
+
                             </c:otherwise>
                         </c:choose>
                     </ul>
@@ -162,7 +263,7 @@
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-tale">
                                                     <div class="card-body">
-                                                      
+
                                                         <a href="MessageControllerMap?service=getMessage" style="color: white; text-decoration: none"><p class="mb-4">Total Messages </p>
                                                             <p class="fs-30 mb-2"><c:out value="${listMess.size()}"></c:out></p>
                                                             </a> 
@@ -201,7 +302,7 @@
                                                                             Email
                                                                         </th>
 
-                                                                       
+
 
                                                                     </tr>
                                                                 </thead>
@@ -218,9 +319,9 @@
                                                                             <c:out value="${message.email}"></c:out>
 
                                                                             </td>
-                                                                            
 
-                                                                    </tr>
+
+                                                                        </tr>
                                                                 </c:forEach>
 
                                                             </tbody>
