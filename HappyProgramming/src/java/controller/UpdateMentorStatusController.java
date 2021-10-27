@@ -5,13 +5,11 @@
  */
 package controller;
 
-import dao.SkillDAO;
-import dao.impl.SkillDAOImpl;
-import entity.Skill;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -25,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tung
  */
-@WebServlet(name = "ListAllSkillController", urlPatterns = {"/ListAllSkillController"})
-public class ListAllSkillController extends HttpServlet {
+@WebServlet(name = "UpdateMentorStatusController", urlPatterns = {"/UpdateMentorStatusController"})
+public class UpdateMentorStatusController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,7 +39,20 @@ public class ListAllSkillController extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            UserDAO userDAO = new UserDAOImpl();
+            int id = Integer.parseInt(request.getParameter("uId"));
+            int status = Integer.parseInt(request.getParameter("status"));
+            User user = userDAO.getUserById(id);
             
+            if(status==1) {
+                userDAO.updateUserStatusById(user, 0);
+                sendDispatcher(request, response, "MentorManagementController");
+            }
+            if(status==0) {
+                userDAO.updateUserStatusById(user, 1);
+                sendDispatcher(request, response, "MentorManagementController");
+            }
         }
     }
 
@@ -53,7 +64,6 @@ public class ListAllSkillController extends HttpServlet {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -67,13 +77,9 @@ public class ListAllSkillController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            SkillDAO skillDAO = new SkillDAOImpl();
-            User x = (User) request.getSession().getAttribute("currUser"); // get current sign in user
-            
-            ArrayList<Skill> sList = skillDAO.getActiveSkill(); // get list of current active status skill
-            request.setAttribute("sList", sList); // set list of active skill
-            sendDispatcher(request, response, "listSkill.jsp");
-        } catch (Exception e) {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UpdateMentorStatusController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -87,11 +93,11 @@ public class ListAllSkillController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateMentorStatusController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

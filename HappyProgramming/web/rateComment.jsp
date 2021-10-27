@@ -132,7 +132,7 @@
                             <c:if test = "${!empty listRating}">
                                 <h2 class="u-text u-text-font u-text-3">Rating: ${avg}/5</h2>
                             </c:if>
-                            <c:if test="${sessionScope.currUser!=null}">
+                            <c:if test="${sessionScope.currUser!=null && sessionScope.currUser.getRole()!=3}">
                                 <form action="rateComment" method="POST">
                                     <input type="hidden" name="mId" value="${mentor.getId()}">
                                     <div>

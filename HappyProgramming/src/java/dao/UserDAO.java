@@ -182,6 +182,7 @@ public interface UserDAO {
      * @throws Exception
      */
     public int getMaxUser() throws Exception;
+
     public int getTotalFilterSkill(int uRole, int sId) throws Exception;
 
     /**
@@ -192,4 +193,15 @@ public interface UserDAO {
      * @throws Exception
      */
     public ArrayList<User> searchMentee(String txtSearch) throws Exception;
+
+    
+    /**
+     * Update user's Status by user's id
+     *
+     * @param user it is a <code>User</code> object
+     * @param status it is a <code>java.lang.Integer</code>
+     * @throws Exception
+     */
+    public void updateUserStatusById(User user, int status) throws Exception;
+
 }

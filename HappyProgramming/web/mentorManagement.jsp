@@ -18,7 +18,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Mentee Management</title>
+        <title>Mentor Management</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -41,9 +41,6 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
-        <link href="css/requestByMe.css" rel="stylesheet">
-        <link href="css/search.css" rel="stylesheet">
-
 
     </head>
 
@@ -63,22 +60,7 @@
                     <ul>
                         <c:choose>
                             <c:when test="${sessionScope.currUser!=null}">
-                                <li> 
-                                    <div>
-                                        <form action="search" method="POST" style="margin-left: 10px">
-                                            <label for="category">Category :</label>
-                                            <select data-trigger="" name="category" class="search-btn" id="category">
-                                                <option>Skill</option>
-                                                <option>Mentee</option>
-                                                <option>Mentor</option>
-                                                <option>Message</option>
-                                                <option>Request</option>
-                                            </select>
-                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
-                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
-                                        </form>
-                                    </div>
-                                </li>
+
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
@@ -86,25 +68,8 @@
                                     </ul>
                                 </li>
 
-
                             </c:when>
                             <c:otherwise>
-                                <li> 
-                                    <div>
-                                        <form action="search" method="POST" style="margin-left: 10px">
-                                            <label for="category">Category :</label>
-                                            <select data-trigger="" name="category" class="search-btn" id="category">
-                                                <option>Skill</option>
-                                                <option>Mentee</option>
-                                                <option>Mentor</option>
-                                                <option>Message</option>
-                                                <option>Request</option>
-                                            </select>
-                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
-                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
-                                        </form>
-                                    </div>
-                                </li>
                                 <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
@@ -112,11 +77,9 @@
                                         </li>
                                     </ul>
                                 </li>
-
                             </c:otherwise>
                         </c:choose>
                     </ul>
-
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar-main -->
 
@@ -128,8 +91,8 @@
             <section class="inner-page">
                 <div class="container-scroller">
                     <!-- partial:partials/_navbar.html -->
-                    <div class="container-fluid page-body-wrapper"  style="padding-top: 20px;">
-                        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                    <div class="container-fluid page-body-wrapper">
+                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="adminDashboard">
@@ -196,8 +159,8 @@
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-tale">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Total Mentee </p>
-                                                        <p class="fs-30 mb-2"><c:out value="${menteeList.size()}"></c:out></p>
+                                                        <p class="mb-4">Total Mentor </p>
+                                                        <p class="fs-30 mb-2"><c:out value="${mentorList.size()}"></c:out></p>
                                                             <p></p>
                                                         </div>
                                                     </div>
@@ -205,8 +168,8 @@
                                                 <div class="col-md-6 mb-4 stretch-card transparent">
                                                     <div class="card card-dark-blue">
                                                         <div class="card-body">
-                                                            <p class="mb-4">Total Study Hours Of All Mentee</p>
-                                                            <p class="fs-30 mb-2"><c:out value=" ${totalHour}"></c:out></p>
+                                                            <p class="mb-4">Total Requested Hours To All Mentor</p>
+                                                            <p class="fs-30 mb-2"><c:out value=" ${totalRequestedHour}"></c:out></p>
                                                             <p></p>
                                                         </div>
                                                     </div>
@@ -216,8 +179,8 @@
                                                 <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                                                     <div class="card card-light-blue">
                                                         <div class="card-body">
-                                                            <p class="mb-4">Total Skills Of All Mentee </p>
-                                                            <p class="fs-30 mb-2"><c:out value=" ${totalSkill}"></c:out></p>
+                                                            <p class="mb-4">Total Requests To All Mentor </p>
+                                                            <p class="fs-30 mb-2"><c:out value=" ${numberOfRequest}"></c:out></p>
                                                             <p></p>
                                                         </div>
                                                     </div>
@@ -239,73 +202,50 @@
                                         <div class="col-md-12 grid-margin stretch-card">
                                             <div class="card">
                                                 <div class="card-body">
+                                                    
                                                     <div class="table-responsive">
                                                         <table class="table table-striped table-borderless">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>ID</th>
-                                                                    <th><a style="color: black" href="AdminControllerMap?service=filterName"> Full Name </a></th>
+                                                                    <th>Fullname</th>
                                                                     <th>Username</th>
+                                                                    <th>Email</th>
+                                                                    <th>Status</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <c:forEach items="${menteeList}" var="mentee">
+                                                            <c:forEach items="${mentorList}" var="mentor">
                                                                 <tr>
                                                                     <td>
-                                                                        <c:out value="${mentee.id}"></c:out>
+                                                                        <a href="UserProfileController?uId=${mentor.id}"><c:out value="${mentor.fullname}"></c:out></a>
                                                                         </td>
                                                                         <td>
-                                                                        <c:out value=" ${mentee.fullname}"></c:out>
+                                                                        <c:out value=" ${mentor.username}"></c:out>
                                                                         </td>
                                                                         <td>
-                                                                        <c:out value="${mentee.username}"></c:out>
+                                                                        <c:out value="${mentor.mail}"></c:out>
                                                                         </td>
-                                                                    </tr>
+
+                                                                        <td>
+                                                                        <c:if test="${mentor.status==1}">
+                                                                            <a href="UpdateMentorStatusController?uId=${mentor.id}&&status=1" class="btn btn-success" > Activate </a>
+
+                                                                        </c:if>
+                                                                        <c:if test="${mentor.status==0}">
+                                                                            <a href="UpdateMentorStatusController?uId=${mentor.id}&&status=0" class="btn btn-danger" > Deactivate </a>
+                                                                        </c:if>
+                                                                    </td>
+
+                                                                </tr>
                                                             </c:forEach>
                                                         </tbody>
                                                     </table>
                                                 </div>
+                                                    
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <%-- Paging --%>
-                                <c:if test="${!empty menteeList}">
-                                    <div class="row">  
-                                        <div class="paging">
-                                            <%-- Previous --%>
-                                            <%-- Previous --%>
-                                            <c:choose>
-                                                <c:when test="${index>1}">
-                                                    <a class="previous" href="${href}index=${index-1}"><</a>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <a class="previous disabled" href="${href}index=${index-1}"><</a>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <%-- Page index --%>
-                                            <c:forEach begin="1" end="${endPage}" var="page">
-                                                <c:choose>
-                                                    <c:when test="${index==page}">
-                                                        <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <a href="${href}index=${page}"> ${page}</a> 
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:forEach>
-                                            <%-- Next --%>
-                                            <c:choose>
-                                                <c:when test="${index!=endPage}">
-                                                    <a class="next" href="${href}index=${index+1}">  ></a>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <a class="next disabled" href="${href}index=${index+1}">></a>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div> 
-                                    </div>
-                                </c:if>
                             </div>
                         </div>
                     </div>

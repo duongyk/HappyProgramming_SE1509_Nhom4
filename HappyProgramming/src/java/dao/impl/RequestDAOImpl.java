@@ -662,4 +662,28 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         }
         return list;
     }
+    
+    @Override
+    public int getNumberOfRequest() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int total = 0;
+        String sql = "SELECT COUNT([rId]) as 'totalRequest' FROM [Request]";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                total = rs.getInt("totalRequest");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return total;
+    }
 }

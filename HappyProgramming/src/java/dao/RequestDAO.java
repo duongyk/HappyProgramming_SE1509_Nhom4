@@ -182,4 +182,6 @@ public interface RequestDAO {
      * @throws Exception
      */
     public ArrayList<User> getHotMentor() throws Exception;
+    
+    public int getNumberOfRequest() throws Exception;
 }

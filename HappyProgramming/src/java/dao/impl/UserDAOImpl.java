@@ -317,7 +317,15 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         ArrayList<User> list = new ArrayList<>();
         String sql = "select * from [User] where [uRole] = ?";
         int id;
-        String username, password, fullname, mail, phone, gender, avatar;
+        String username;
+        String password;
+        String fullname;
+        String mail;
+        String phone;
+        String gender;
+        String avatar;
+        int role;
+        int status;
         Date dob;
         User u;
         try {
@@ -335,7 +343,9 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
                 dob = rs.getDate("DOB");
                 gender = rs.getString("gender");
                 avatar = rs.getString("uAvatar");
-                u = new User(id, username, password, fullname, mail, phone, dob, gender, avatar);
+                status = rs.getInt("uStatus");
+                role = rs.getInt("uRole");
+                u = new User(id, username, password, fullname, mail, phone, dob, gender, avatar, role ,status);
                 list.add(u);
             }
         } catch (Exception ex) {
@@ -802,31 +812,36 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return total;
     }
     
-    
-    public static void main(String[] args) throws Exception {
-        UserDAO userDAO = new UserDAOImpl();
-            RequestDAO requestDAO = new RequestDAOImpl();
-            RatingDAO ratingDAO = new RatingDAOImpl();
-            UserSkillDAO usDAO = new UserSkillDAOImpl();
-            int total = userDAO.getMaxUser();
-            ArrayList<User> mList = userDAO.getTopMentorByRate();
-                    ArrayList<String> ratingList = new ArrayList<>(Collections.nCopies(total, "a"));
-//                    ratingList.set(5,"ccc");
-//                    for (String s:ratingList){
-//                        System.out.println(s);
-                    for (User mentor : mList) {
-                        ratingList.set(mentor.getId(), String.format("%.2f", ratingDAO.getAvgRate(mentor.getId())));
-                    }
-            for (User mentor : mList) {
-                        System.out.println(ratingList.get(mentor.getId()));
-                    }       
-//        for (int i=0;i<total;i++){
-//            System.out.println(mList.get(i).getFullname()+" - "+ ratingList.get(i));
-//        }
+    @Override
+    public void updateUserStatusById(User user, int status) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int n = 0;
+        String sql = "update [User] set [uStatus] = ? where [uId] = ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, status);
+            ps.setInt(2, user.getId());
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
     }
 
     @Override
     public int getTotalFilterSkill(int uRole, int sId) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+//    public static void main(String[] args) throws Exception {
+//        UserDAO userDAO = new UserDAOImpl();
+//        User user = userDAO.getUserById(6);
+//        System.out.println(userDAO.updateUserStatusById(user, 1));
+//    }
 }

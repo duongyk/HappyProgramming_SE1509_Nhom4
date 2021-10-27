@@ -103,9 +103,9 @@
                                 </li>
                                 <!--SKILL MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=skillManage">
+                                    <a class="nav-link" href="MentorManagementController">
                                         <i class="icon-columns menu-icon"></i>
-                                        <span class="menu-title">Skill Management</span>
+                                        <span class="menu-title">Mentor Management</span>
                                     </a>
                                 </li>
                                 <!--Mentor MANAGEMENT-->

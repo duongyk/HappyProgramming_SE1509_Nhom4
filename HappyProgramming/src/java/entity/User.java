@@ -231,6 +231,36 @@ public class User {
     }
 
     /**
+     * Constructor.<br>
+     *
+     * @param id it is a int number
+     * @param username it is a <code>java.lang.String</code>
+     * @param password it is a <code>java.lang.String</code>
+     * @param fullname it is a <code>java.lang.String</code>
+     * @param mail it is a <code>java.lang.String</code>
+     * @param phone it is a <code>java.lang.String</code>
+     * @param dob it is a <code>java.sql.Date</code>
+     * @param gender it is a <code>java.lang.String</code>
+     * @param avatar it is a <code>java.lang.String</code>
+     * @param role it is a int number
+     * @param status it is a int number
+     * 
+     */
+    public User(int id, String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar, int role, int status) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.mail = mail;
+        this.phone = phone;
+        this.dob = dob;
+        this.gender = gender;
+        this.avatar = avatar;
+        this.role = role;
+        this.status = status;
+    }
+    
+    /**
      * Get value from Id attribute of User class. <br>
      *
      * @return id it is an int number
