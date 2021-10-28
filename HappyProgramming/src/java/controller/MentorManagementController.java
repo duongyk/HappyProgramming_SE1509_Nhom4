@@ -84,17 +84,18 @@ public class MentorManagementController extends HttpServlet {
             if (count % 8 != 0) {
                 endPage++;
             }
-            // Set href of paging
-            String href = "MentorManagementController?";
             
-            ArrayList<User> mentorList = userDAO.getUserByRolePaging(index ,2);
-            int totalRequest = requestDAO.getNumberOfRequest();
-            int totalHour = requestDAO.getTotalHour();
+            String href = "MentorManagementController?"; // Set href of paging
             
-            request.setAttribute("mentorList", mentorList);
-            request.setAttribute("totalRequestedHour", totalHour);
-            request.setAttribute("numberOfRequest", totalRequest);
-            //send informations to menteeManagement.jsp
+            ArrayList<User> mentorList = userDAO.getUserByRolePaging(index ,2); // get list of user whose role = 2/Mentor
+            int totalRequest = requestDAO.getNumberOfRequest(); // get total number of request sent to user
+            int totalHour = requestDAO.getTotalHour(); // get total number of hour requested to user
+            
+            request.setAttribute("mentorList", mentorList); // set mentor list to display
+            request.setAttribute("totalRequestedHour", totalHour); // set mentor list to display
+            request.setAttribute("numberOfRequest", totalRequest); // set mentor list to display
+            
+//send informations to menteeManagement.jsp
             request.setAttribute("href", href);/*href paging*/
             request.setAttribute("endPage", endPage);
             request.setAttribute("count", count);

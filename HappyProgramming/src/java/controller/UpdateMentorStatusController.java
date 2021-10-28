@@ -41,16 +41,16 @@ public class UpdateMentorStatusController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             UserDAO userDAO = new UserDAOImpl();
-            int id = Integer.parseInt(request.getParameter("uId"));
-            int status = Integer.parseInt(request.getParameter("status"));
-            User user = userDAO.getUserById(id);
+            int id = Integer.parseInt(request.getParameter("uId")); //get the id of user you want to change status
+            int status = Integer.parseInt(request.getParameter("status")); // get status of user
+            User user = userDAO.getUserById(id); // get user by id
             
-            if(status==1) {
-                userDAO.updateUserStatusById(user, 0);
+            if(status==1) { // if user status = 1/active
+                userDAO.updateUserStatusById(user, 0); // change user status to 0/deactive
                 sendDispatcher(request, response, "MentorManagementController");
             }
-            if(status==0) {
-                userDAO.updateUserStatusById(user, 1);
+            if(status==0) { // if user status = 0/deactive
+                userDAO.updateUserStatusById(user, 1); // change user status to 1/active
                 sendDispatcher(request, response, "MentorManagementController");
             }
         }

@@ -139,7 +139,9 @@
                                                     <h4> <c:out value="${user.fullname}"></c:out> </h4>                                        
                                                     <p class="text-secondary mb-1"><c:out value="${cv.getProfession()}"></c:out></p>
                                                     <c:if test="${currUser.getRole()==3}">
-                                                        <a  style="color: blue ;" href="rateComment?mId=${user.getId()}">view rating/comment </a>
+                                                        <a  style="color: blue ;" href="rateComment?mId=${user.getId()}">View Rating/Comments </a>
+                                                        <br>
+                                                        <a  style="color: blue ;" href="viewMentorRequestStatistic?uId=${user.getId()}">View Statistic </a>
                                                     </c:if>
                                                         
                                                     <!--<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>-->

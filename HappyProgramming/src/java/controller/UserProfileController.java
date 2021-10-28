@@ -76,10 +76,10 @@ public class UserProfileController extends HttpServlet {
             throws ServletException, IOException {
         try {
             UserDAO userDAO = new UserDAOImpl();
-            int uId = Integer.parseInt(request.getParameter("uId"));
-            User user = userDAO.getUserById(uId);
+            int uId = Integer.parseInt(request.getParameter("uId")); // get id of user
+            User user = userDAO.getUserById(uId); // get user by id
             
-            request.setAttribute("user", user);
+            request.setAttribute("user", user); // set attribute
             
             // GET CV INFORMATION IF USER IS MENTOR
             if (user.getRole() == 2) {
