@@ -5,30 +5,36 @@
  */
 package filter;
 
-import controller.UserController;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+ @WebFilter(
+        filterName = "adminFilter", 
+        urlPatterns = {"/adminDashboard","/adminViewRequest.jsp","/mentorPage.jsp",
+                        "/createSkill.jsp","/mentorManagement.jsp","/menteeManagement.jsp",
+                        "/updateSkill.jsp"}
+        )
 /**
  *
  * @author QMC
  */
-public class userAuthorizationFilter implements Filter {
+
+public class adminFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -37,13 +43,13 @@ public class userAuthorizationFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public userAuthorizationFilter() {
+    public adminFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("userAuthorizationFilter:DoBeforeProcessing");
+            log("adminFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -71,7 +77,7 @@ public class userAuthorizationFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("userAuthorizationFilter:DoAfterProcessing");
+            log("adminFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -107,40 +113,27 @@ public class userAuthorizationFilter implements Filter {
             throws IOException, ServletException {
         
         if (debug) {
-            log("userAuthorizationFilter:doFilter()");
+            log("adminFilter:doFilter()");
         }
         
         doBeforeProcessing(request, response);
-      
-        HttpServletRequest httpRequest = (HttpServletRequest) request ;
-        HttpSession session = httpRequest.getSession();
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        /*can't use request.getSession because the request above is ServletRequest, 
+        but I need to use HttpServletRequest => Must use this to call Session => Must declare one more */
+
+        //Response does the same thing
         HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+        //Use this to call Session
+        HttpSession session = httpRequest.getSession();
+        User user = (User) session.getAttribute("currUser");
         
-        String url = httpRequest.getServletPath();
-           User x = (User) session.getAttribute("currUser");
-        if (x != null) {// có trong session
-            if (url.contains("adminDashboard.jsp"))
-                 if (x.getStatus() == 0) { // user bị block
-                     httpResponse.sendRedirect("login");
-               
-                
-            }
-               else if (x.getRole() == 3) {//admin
-                    
-                   
-                } else if(x.getRole() ==2 ){//mentee
-                    
-                   
-                }else {//mentor
-                    
-                }
-                 
-            } else {// nếu use chưa có tài khoản chuyển về loginpage
-
-                httpResponse.sendRedirect("Login");
-                
-            }
-
+         
+         
+        if (user == null || user.getRole()!=3) {
+            ////If it's not the admin or null -> Redirect to the home page => can't go through doFilter
+            httpResponse.sendRedirect("errorfilterjsp.jsp");//home sau
+        }
         
         Throwable problem = null;
         try {
@@ -197,7 +190,7 @@ public class userAuthorizationFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("userAuthorizationFilter:Initializing filter");
+                log("adminFilter:Initializing filter");
             }
         }
     }
@@ -208,9 +201,9 @@ public class userAuthorizationFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("userAuthorizationFilter()");
+            return ("adminFilter()");
         }
-        StringBuffer sb = new StringBuffer("userAuthorizationFilter(");
+        StringBuffer sb = new StringBuffer("adminFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
@@ -262,14 +255,6 @@ public class userAuthorizationFilter implements Filter {
     
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);        
-    }
-     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
-        try {
-            RequestDispatcher rd = request.getRequestDispatcher(path);
-            rd.forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
 }
