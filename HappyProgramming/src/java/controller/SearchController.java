@@ -73,6 +73,14 @@ public class SearchController extends HttpServlet {
                 request.setAttribute("category", category);
                 sendDispatcher(request, response, "searchMessage.jsp");
             }
+            if (category.equalsIgnoreCase("Mentor")) {
+                ArrayList<User> mentorList = userDAO.searchMentor(txtSearch);
+                request.setAttribute("mentorList", mentorList);
+                request.setAttribute("category", category);
+                request.setAttribute("txt", txtSearch);
+                System.out.println(category);
+                sendDispatcher(request, response, "searchMentor.jsp");
+            }
 
         } catch (Exception e) {
             Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, e);

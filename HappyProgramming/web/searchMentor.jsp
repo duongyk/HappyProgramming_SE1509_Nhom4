@@ -1,11 +1,7 @@
 <%-- 
-  Copyright (C) 2021, FPT University<br>
-  SWP391 - SE1509 - Group 4<br>
-  Happyprogramming<br>
- 
-  Record of change:<br>
-  DATE          Version    Author           DESCRIPTION<br>
-
+    Document   : searchMentor
+    Created on : Oct 28, 2021, 10:27:28 PM
+    Author     : Tung
 --%>
 
 <%@page import="entity.User"%>
@@ -18,7 +14,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Mentor Management</title>
+        <title>Mentee Management</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -156,7 +152,8 @@
                                                         <option>Mentee</option>
                                                         <option>Mentor</option>
                                                         <option>Message</option>
-                                                        <option selected="selected">Request</option></c:when>
+                                                        <option selected="selected">Request</option>
+                                                    </c:when>
                                                     <c:when test="${category == 'Message'}">
                                                         <option>Skill</option>
                                                         <option>Mentee</option>
@@ -192,7 +189,7 @@
             <section class="inner-page">
                 <div class="container-scroller">
                     <!-- partial:partials/_navbar.html -->
-                    <div class="container-fluid page-body-wrapper">
+                    <div class="container-fluid page-body-wrapper" style="padding-top: 20px;">
                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
@@ -260,124 +257,61 @@
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-tale">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Total Mentor </p>
+                                                        <p class="mb-4">Total Searched Mentor </p>
                                                         <p class="fs-30 mb-2"><c:out value="${mentorList.size()}"></c:out></p>
                                                             <p></p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 mb-4 stretch-card transparent">
-                                                    <div class="card card-dark-blue">
-                                                        <div class="card-body">
-                                                            <p class="mb-4">Total Requested Hours To All Mentor</p>
-                                                            <p class="fs-30 mb-2"><c:out value=" ${totalRequestedHour}"></c:out></p>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                                                    <div class="card card-light-blue">
-                                                        <div class="card-body">
-                                                            <p class="mb-4">Total Requests To All Mentor </p>
-                                                            <p class="fs-30 mb-2"><c:out value=" ${numberOfRequest}"></c:out></p>
-                                                            <p></p>
+
+                                        </div>
+                                    </div>
+                                <c:choose>  
+                                    <c:when test="${empty mentorList}">
+                                        <h3 style=" margin-left: 0 px;  width: 600px;">  
+                                            Dont have any Mentee have username like " ${txt} "</h3>
+                                        </c:when>
+                                        <c:otherwise>
+                                        <h3  style="margin-left: 0 px; width: 600px;"> 
+                                            Showing results for " ${txt} "</h3>
+                                        <div class="row">
+                                            <div class="col-md-12 grid-margin stretch-card">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-borderless">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>ID</th>
+                                                                        <th><a style="color: black" href="AdminControllerMap?service=filterName"> Full Name </a></th>
+                                                                        <th>Username</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <c:forEach items="${mentorList}" var="mentor">
+                                                                        <tr>
+                                                                            <td>
+                                                                                <c:out value="${mentor.id}"></c:out>
+                                                                                </td>
+                                                                                <td>
+                                                                                <c:out value=" ${mentor.fullname}"></c:out>
+                                                                                </td>
+                                                                                <td>
+                                                                                <c:out value="${mentor.username}"></c:out>
+                                                                                </td>
+                                                                            </tr>
+                                                                    </c:forEach>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12 grid-margin stretch-card">
-                                            <div class="card">
-                                                <div class="card-body">
-
-                                                    <div class="table-responsive">
-                                                        <table class="table table-striped table-borderless">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>ID</th>
-                                                                    <th>Fullname</th>
-                                                                    <th>Username</th>
-                                                                    <th>Email</th>
-                                                                    <th style="padding-left: 50px;">Status</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <c:forEach items="${mentorList}" var="mentor">
-                                                                <tr>
-                                                                    <td>
-                                                                        <c:out value="${mentor.id}"></c:out>
-                                                                        </td>    
-                                                                        <td>
-                                                                            <a href="UserProfileController?uId=${mentor.id}"><c:out value="${mentor.fullname}"></c:out></a>
-                                                                        </td>
-                                                                        <td>
-                                                                        <c:out value=" ${mentor.username}"></c:out>
-                                                                        </td>
-                                                                        <td>
-                                                                        <c:out value="${mentor.mail}"></c:out>
-                                                                        </td>
-
-                                                                        <td>
-                                                                        <c:if test="${mentor.status==1}">
-                                                                            <a href="UpdateMentorStatusController?uId=${mentor.id}&&status=1" class="btn btn-success" > Activate </a>
-
-                                                                        </c:if>
-                                                                        <c:if test="${mentor.status==0}">
-                                                                            <a href="UpdateMentorStatusController?uId=${mentor.id}&&status=0" class="btn btn-danger" > Deactivate </a>
-                                                                        </c:if>
-                                                                    </td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <%-- Paging --%>
-                                <c:if test="${!empty mentorList}">
-                                    <div class="row">  
-                                        <div class="paging">
-                                            <%-- Previous --%>
-                                            <%-- Previous --%>
-                                            <c:choose>
-                                                <c:when test="${index>1}">
-                                                    <a class="previous" href="${href}index=${index-1}"><</a>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <a class="previous disabled" href="${href}index=${index-1}"><</a>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <%-- Page index --%>
-                                            <c:forEach begin="1" end="${endPage}" var="page">
-                                                <c:choose>
-                                                    <c:when test="${index==page}">
-                                                        <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <a href="${href}index=${page}"> ${page}</a> 
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </c:forEach>
-                                            <%-- Next --%>
-                                            <c:choose>
-                                                <c:when test="${index!=endPage}">
-                                                    <a class="next" href="${href}index=${index+1}">  ></a>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <a class="next disabled" href="${href}index=${index+1}">></a>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div> 
-                                    </div>
-                                </c:if>
-                                <%-- End Paging --%>                            
+                                    </c:otherwise>
+                                </c:choose>   
+                                
                             </div>
                         </div>
                     </div>

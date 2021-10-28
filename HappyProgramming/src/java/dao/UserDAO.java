@@ -214,5 +214,8 @@ public interface UserDAO {
      */
     public ArrayList<User> getSortedUserByRolePaging(int index, int uRole) throws Exception;
  
+    public void getRecommendMentorBySkill(int sId) throws Exception;
+    
+    public ArrayList<User> searchMentor(String txtSearch) throws Exception;
 }
 

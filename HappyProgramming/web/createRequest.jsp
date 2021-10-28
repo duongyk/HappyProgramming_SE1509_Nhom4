@@ -61,7 +61,7 @@
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
                         <li><a class="nav-link scrollto" href="listAllmentor">All mentors</a></li>
-                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                        <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
@@ -109,7 +109,7 @@
                     <div class="wrapper wrapper--w790">
                         <div class="card card-5">
                             <div class="card-body">
-                                <form action="CreateRequest" method="POST">
+                                <form action="CreateRequestController" method="POST">
                                     <%-- Title --%>
                                     <div class="form-row m-b-55">
                                         <div class="name">Title</div>
@@ -166,7 +166,15 @@
                                             <div class="input-group">
                                                 <select id="select-6004" name="toId" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                                                     <c:forEach items="${mList}" var="mentor">
-                                                        <option value="${mentor.getId()}"> ${mentor.getFullname()} </option>
+                                                        <c:choose>
+                                                            <c:when test="${mentor.getId()==reqMentor.getId()}">
+                                                                <option value="${mentor.getId()}" selected> ${mentor.getFullname()} </option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="${mentor.getId()}"> ${mentor.getFullname()} </option>
+                                                            </c:otherwise>    
+                                                        </c:choose>
+                                                        
                                                     </c:forEach>>
                                                 </select>
                                             </div>

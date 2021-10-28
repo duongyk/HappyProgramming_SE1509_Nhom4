@@ -107,7 +107,7 @@
                                         <div class="mt-3">
                                             <h4 style= "font-weight: bold;"><c:out value="${mentor.fullname}"></c:out></h4>
                                                 <p class="text-secondary mb-1"> </p>
-                                                 <a  style="color: blue ;" href="createReq.jsp">create request </a>
+                                                 <a  style="color: blue ;" href="CreateRequestController?mId=${mentor.getId()}">create request </a>
                                                         <br/> 
                                                  <a  style="color: blue ;" href="rateComment?mId=${mentor.getId()}">view rating/coment </a>
                                                  

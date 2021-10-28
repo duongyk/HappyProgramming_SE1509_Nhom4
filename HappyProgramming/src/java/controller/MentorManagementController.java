@@ -72,13 +72,33 @@ public class MentorManagementController extends HttpServlet {
             UserDAO userDAO = new UserDAOImpl();
             RequestDAO requestDAO = new RequestDAOImpl();
             
-            ArrayList<User> mentorList = userDAO.getUserByRole(2);
+            //get index page 
+            String indexPage = request.getParameter("index");
+            // index page always start at 1
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            int count = userDAO.getUserByRole(2).size();
+            int endPage = count / 8;
+            if (count % 8 != 0) {
+                endPage++;
+            }
+            // Set href of paging
+            String href = "MentorManagementController?";
+            
+            ArrayList<User> mentorList = userDAO.getUserByRolePaging(index ,2);
             int totalRequest = requestDAO.getNumberOfRequest();
             int totalHour = requestDAO.getTotalHour();
             
             request.setAttribute("mentorList", mentorList);
             request.setAttribute("totalRequestedHour", totalHour);
             request.setAttribute("numberOfRequest", totalRequest);
+            //send informations to menteeManagement.jsp
+            request.setAttribute("href", href);/*href paging*/
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("count", count);
+            request.setAttribute("tag", index);
             
             sendDispatcher(request, response, "mentorManagement.jsp");
         }

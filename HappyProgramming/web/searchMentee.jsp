@@ -208,7 +208,7 @@
                                 </li>
                                 <!--Mentor MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=mentorManage">
+                                    <a class="nav-link" href="MentorManagementController">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Mentor Management</span>
                                     </a>

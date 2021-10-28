@@ -368,7 +368,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         ArrayList<User> list = new ArrayList<>();
-        String sql = "SELECT * FROM [PRJ_SWP].[dbo].[User] where uRole = '1' and username like ?";
+        String sql = "SELECT * FROM [PRJ_SWP].[dbo].[User] where uRole = '1' and fullname like ?";
         int id;
         String username, password, fullname, mail, phone, gender, avatar;
         Date dob;
@@ -858,7 +858,6 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        int n = 0;
         String sql = "update [User] set [uStatus] = ? where [uId] = ?";
         try {
             conn = getConnection();
@@ -873,5 +872,77 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closePreparedStatement(ps);
             closeConnection(conn);
         }
+    }
+    
+    @Override
+    public void getRecommendMentorBySkill(int sId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "select top 3 * FROM [User] inner join [UserSkill] on [User].[uId] = [UserSkill].[uId] "
+                + "where [UserSkill].[sId] = ? and [User].[uStatus] = 1 and [User].[uRole] = 2";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, sId);
+            ps.executeQuery();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+    }
+    
+    @Override
+    public ArrayList<User> searchMentor(String txtSearch) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM [User] where uRole = '2' and fullname like ?";
+        int id;
+        String username, password, fullname, mail, phone, gender, avatar;
+        Date dob;
+        User u;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + txtSearch + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("uId");
+                username = rs.getString("username");
+                password = rs.getString("password");
+                fullname = rs.getString("fullname");
+                mail = rs.getString("uMail");
+                phone = rs.getString("uPhone");
+                dob = rs.getDate("DOB");
+                gender = rs.getString("gender");
+                avatar = rs.getString("uAvatar");
+                u = new User(id, username, password, fullname, mail, phone, dob, gender, avatar);
+                list.add(u);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    public int getTotalFilterSkill(int uRole, int sId) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public static void main(String[] args) throws Exception {
+        UserDAO userDAO = new UserDAOImpl();
+        ArrayList<User> user = new ArrayList<>();
+        user = userDAO.getUserByRole(2);
+        int n = user.size();
+        System.out.println(n);
     }
 }
