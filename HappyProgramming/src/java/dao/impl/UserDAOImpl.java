@@ -347,7 +347,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
                 avatar = rs.getString("uAvatar");
                 status = rs.getInt("uStatus");
                 role = rs.getInt("uRole");
-                u = new User(id, username, password, fullname, mail, phone, dob, gender, avatar, role ,status);
+                u = new User(id, username, password, fullname, mail, phone, dob, gender, avatar, role, status);
                 list.add(u);
             }
         } catch (Exception ex) {
@@ -545,7 +545,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             while (rs.next()) {
                 x = new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"),
                         rs.getString("fullname"), rs.getString("uMail"), rs.getString("uPhone"),
-                        rs.getDate("dob"), rs.getString("gender"), rs.getString("uAvatar"), rs.getInt("uRole"));
+                        rs.getDate("dob"), rs.getString("gender"), rs.getString("uAvatar"), rs.getInt("uRole"), rs.getInt("uStatus"));
                 t.add(x);
             }
         } catch (Exception ex) {
@@ -588,7 +588,50 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
                         rs.getString("password"), rs.getString("fullname"),
                         rs.getString("uMail"), rs.getString("uPhone"),
                         rs.getDate("dob"), rs.getString("gender"),
-                        rs.getString("uAvatar"), rs.getInt("uRole"));
+                        rs.getString("uAvatar"), rs.getInt("uRole"), rs.getInt("uStatus"));
+                list.add(user);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
+     * Get list of User with the same role by page and sorted by fullname
+     *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param uRole it is a <code>java.lang.Integer</code>
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<User> getSortedUserByRolePaging(int index, int uRole) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY [fullname] ASC) "
+                + "AS RowNum, * FROM [User] WHERE [uRole] = ?) a WHERE "
+                + "RowNum between ? and ? ";
+        User user;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, uRole);
+            ps.setInt(2, index * 8 - 7);
+            ps.setInt(3, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user = new User(rs.getInt("uId"), rs.getString("username"),
+                        rs.getString("password"), rs.getString("fullname"),
+                        rs.getString("uMail"), rs.getString("uPhone"),
+                        rs.getDate("dob"), rs.getString("gender"),
+                        rs.getString("uAvatar"), rs.getInt("uRole"), rs.getInt("uStatus"));
                 list.add(user);
             }
         } catch (Exception ex) {
@@ -793,7 +836,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         int total = 0;
         String sql = "SELECT COUNT([uId]) as 'total' FROM [User]";
         try {
@@ -813,7 +856,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
         return total;
     }
-    
+
     @Override
     public void updateUserStatusById(User user, int status) throws Exception {
         Connection conn = null;
@@ -840,7 +883,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     public int getTotalFilterSkill(int uRole, int sId) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 //    public static void main(String[] args) throws Exception {
 //        UserDAO userDAO = new UserDAOImpl();
 //        User user = userDAO.getUserById(6);

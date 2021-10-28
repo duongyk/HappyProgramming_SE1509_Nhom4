@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Process:<br>
@@ -43,7 +44,7 @@ public class CreateSkillController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+         HttpSession session = request.getSession();
         SkillDAO skillDAO = new SkillDAOImpl();
         try {
             //get infor of the skill from Input form
@@ -56,7 +57,8 @@ public class CreateSkillController extends HttpServlet {
                 request.setAttribute("mess", mess);
                 request.setAttribute("sName", sName);
                 request.setAttribute("sDetail", sDetail);
-                request.setAttribute("sImage", sImage);
+                session.setAttribute("sImage", sImage);
+                System.out.println(sImage);
                 sendDispatcher(request, response, "createSkill.jsp");
             } else {
                 //insert new skill into db

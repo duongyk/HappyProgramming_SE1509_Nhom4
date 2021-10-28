@@ -12,7 +12,6 @@ import dao.impl.UserDAOImpl;
 import entity.Skill;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author solov
  */
 @WebServlet(name = "SortSkillByNameController", urlPatterns = {"/sortSkillByName"})
-public class SortSkillByName extends HttpServlet {
+public class SortSkillByNameController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -25,8 +25,6 @@
         <link href="img/favicon.png" rel="icon">
         <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
         <link href="vendor/aos/aos.css" rel="stylesheet">
@@ -121,7 +119,7 @@
                             </c:when>
                             <c:otherwise>
                                 <li> 
-                                    <div>
+                                    <div> 
                                         <form action="search" method="POST" style="margin-left: 10px">
                                             <label for="category">Category :</label>
                                             <select data-trigger="" name="category" class="search-btn" id="category">

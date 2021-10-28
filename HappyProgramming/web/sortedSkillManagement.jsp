@@ -130,7 +130,7 @@
                                 </li>
                                 <!--Request MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=requestManage">
+                                    <a class="nav-link" href="requestManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Request Management</span>
                                     </a>
@@ -212,7 +212,7 @@
                                                                         ID
                                                                     </th>
                                                                     <th>
-                                                                        <a style="color: black" href="skillManagement"> Skill Name </a>
+                                                                        <a style="color: #0099ff" href="skillManagement"> Skill Name </a>
                                                                     </th>
                                                                     <th>
                                                                         Detail

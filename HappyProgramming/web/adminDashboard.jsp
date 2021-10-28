@@ -58,7 +58,7 @@
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
-                     <ul>
+                    <ul>
                         <c:choose>
                             <c:when test="${sessionScope.currUser!=null}">
                                 <li> 
@@ -222,60 +222,93 @@
                                                         <div class="card-body">
                                                             <p class="mb-4">Total Skill</p>
                                                             <p class="fs-30 mb-2"><c:out value="${skillList.size()}"></c:out></p>
-                                                        <p></p>
+                                                            <p></p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 stretch-card transparent">
-                                                <div class="card card-light-danger">
-                                                    <div class="card-body">
-                                                        <p class="mb-4">Number of Visit</p>
-                                                        <p class="fs-30 mb-2">47033</p>
-                                                        <p></p>
+                                                <div class="col-md-6 stretch-card transparent">
+                                                    <div class="card card-light-danger">
+                                                        <div class="card-body">
+                                                            <p class="mb-4">Number of Visit</p>
+                                                            <p class="fs-30 mb-2">47033</p>
+                                                            <p></p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <p class="card-title mb-0">Top Mentee</p>
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped table-borderless">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Full Name</th>
-                                                                <th>User Name</th>
-                                                                <th>Study Hours</th>
+                                    <div class="row">
+                                        <div class="col-md-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <p class="card-title mb-0">Top Mentee</p>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-borderless">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Full Name</th>
+                                                                    <th>User Name</th>
+                                                                    <th>Study Hours</th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>GiangNVT</td>
-                                                                <td class="font-weight-bold">mentee03</td>
-                                                                <td class="font-weight-medium">
-                                                                    <div class="badge badge-success">167</div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>DuongVV</td>
-                                                                <td class="font-weight-bold">mentee02</td>
-                                                                <td class="font-weight-medium">
-                                                                    <div class="badge badge-primary">80</div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>ToanPK</td>
-                                                                <td class="font-weight-bold">mentee04</td>
-                                                                <td class="font-weight-medium">
-                                                                    <div class="badge badge-warning">67</div>
-                                                                </td>
-                                                            </tr>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>GiangNVT</td>
+                                                                    <td class="font-weight-bold">mentee03</td>
+                                                                    <td class="font-weight-medium">
+                                                                        <div class="badge badge-success">167</div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>DuongVV</td>
+                                                                    <td class="font-weight-bold">mentee02</td>
+                                                                    <td class="font-weight-medium">
+                                                                        <div class="badge badge-primary">80</div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>ToanPK</td>
+                                                                    <td class="font-weight-bold">mentee04</td>
+                                                                    <td class="font-weight-medium">
+                                                                        <div class="badge badge-warning">67</div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <p class="card-title mb-0">Trending Skill</p>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-borderless">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Skill ID</th>
+                                                                    <th>Skill Name</th>
+                                                                    <th>Total number of requests</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <c:forEach items="${trendingSkillList}" var="skill">
+                                                                <tr>
+                                                                    <td style=""><c:out value="${skill.id}"></c:out></td>
+                                                                    <td class="font-weight-bold">${skill.name}</td>
+                                                                    <td class="font-weight-medium" style="padding-left: 90px;">
+                                                                        <div class="badge badge-success" >${skill.total}</div>
+                                                                    </td>
+                                                                </tr>
+                                                            </c:forEach>
                                                         </tbody>
                                                     </table>
                                                 </div>

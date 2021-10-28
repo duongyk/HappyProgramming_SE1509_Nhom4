@@ -131,6 +131,88 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
 
     /**
+     * Get the number of request with the same status of all user
+     *
+     * @param status
+     * @param txtSearch
+     * @return a <code>java.lang.Integer</code>
+     *
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<Request> searchAllRequestByStatus(int status, String txtSearch) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Request> requestList = new ArrayList();
+        UserDAO userdao = new UserDAOImpl();
+
+        String sql = "select * from Request where rStatus=? and title like ? ";
+
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, status);
+            ps.setString(2, "%" + txtSearch + "%");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Request req = new Request(rs.getInt("rId"), rs.getString("title"), rs.getString("content"), userdao.getUserById(rs.getInt("fromId")), userdao.getUserById(rs.getInt("toId")), Date.valueOf(rs.getString("deadlineDate")), rs.getInt("deadlineHour"), status);
+
+                requestList.add(req);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return requestList;
+    }
+
+    /**
+     * Get the number of request with the same status of all user
+     *
+     * @param txtSearch
+     * @return a <code>java.lang.Integer</code>
+     *
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<Request> searchAllRequest(String txtSearch) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Request> requestList = new ArrayList();
+        UserDAO userdao = new UserDAOImpl();
+
+        String sql = "select * from Request where title like ? ";
+
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + txtSearch + "%");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Request req = new Request(rs.getInt("rId"), rs.getString("title"), rs.getString("content"), userdao.getUserById(rs.getInt("fromId")), userdao.getUserById(rs.getInt("toId")), Date.valueOf(rs.getString("deadlineDate")), rs.getInt("deadlineHour"), rs.getInt("rStatus"));
+
+                requestList.add(req);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return requestList;
+    }
+
+    /**
      * Get Request of all Mentee by page
      *
      * @param index it is a <code>java.lang.Integer</code>
@@ -329,7 +411,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         return totalRequest;
     }
 
-  /**
+    /**
      * Get the number of request with the same status of all user
      *
      * @param status it is a <code>java.lang.Integer</code>
@@ -338,7 +420,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
      * @throws Exception
      */
     @Override
-    public int getRequestByStatus(int status) throws Exception {
+    public int getTotalRequestByStatus(int status) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -793,7 +875,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
         }
         return list;
     }
-    
+
     @Override
     public int getNumberOfRequest() throws Exception {
         Connection conn = null;
@@ -805,7 +887,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 total = rs.getInt("totalRequest");
             }
         } catch (Exception ex) {

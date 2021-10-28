@@ -212,5 +212,26 @@ public interface RequestDAO {
      *
      * @throws Exception
      */
-    public int getRequestByStatus(int status) throws Exception;
+    public int getTotalRequestByStatus(int status) throws Exception;
+
+    /**
+     * Get the number of request with the same status of all user
+     *
+     * @param status
+     * @param txtSearch
+     * @return a <code>java.lang.Integer</code>
+     *
+     * @throws Exception
+     */
+    public ArrayList<Request> searchAllRequestByStatus(int status, String txtSearch) throws Exception;
+
+    /**
+     * Get the number of request with the same status of all user
+     *
+     * @param txtSearch
+     * @return a <code>java.lang.Integer</code>
+     *
+     * @throws Exception
+     */
+    public ArrayList<Request> searchAllRequest(String txtSearch) throws Exception;
 }

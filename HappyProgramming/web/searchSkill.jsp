@@ -26,8 +26,6 @@
         <link href="img/favicon.png" rel="icon">
         <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
         <link href="vendor/aos/aos.css" rel="stylesheet">
@@ -43,12 +41,7 @@
         <link href="css/search.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
 
-        <!-- =======================================================
-        * Template Name: Vesperr - v4.6.0
-        * Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
-        * Author: BootstrapMade.com
-        * License: https://bootstrapmade.com/license/
-        ======================================================== -->
+
     </head>
 
     <body>
@@ -64,7 +57,7 @@
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
-                     <ul>
+                    <ul>
                         <c:choose>
                             <c:when test="${sessionScope.currUser!=null}">
                                 <li> 
@@ -274,7 +267,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                              
+
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
@@ -284,13 +277,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                   
                                 <c:choose>  
                                     <c:when test="${empty sList}">
-                                        <h3 class="no-req">  Dont have any Skill like " ${txt} "</h3>
+                                        <div class="no-req">  Dont have any Skill like " ${txt} "</div>
                                     </c:when>
                                     <c:otherwise>
-                                        <h3 class="no-req"> 
-                                            Showing results for " ${txt} "</h3>
+                                        <div class="no-req"> 
+                                             <a href="skillManagement"> < Back</a> &emsp; Showing results for " ${txt} "</div>
                                         <div class="row">
                                             <div class="col-lg-12 grid-margin stretch-card">
                                                 <div class="card">

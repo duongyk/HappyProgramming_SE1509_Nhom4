@@ -26,6 +26,8 @@
         <link href="img/favicon.png" rel="icon">
         <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
         <link href="vendor/aos/aos.css" rel="stylesheet">
@@ -41,6 +43,7 @@
         <link href="css/admin.css" rel="stylesheet">
         <link href="css/requestByMe.css" rel="stylesheet">
         <link href="css/search.css" rel="stylesheet">
+
 
     </head>
 
@@ -179,6 +182,7 @@
                             </c:otherwise>
                         </c:choose>
                     </ul>
+
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar-main -->
 
@@ -190,7 +194,7 @@
             <section class="inner-page">
                 <div class="container-scroller">
                     <!-- partial:partials/_navbar.html -->
-                    <div class="container-fluid page-body-wrapper" style="padding-top: 20px;">
+                    <div class="container-fluid page-body-wrapper"  style="padding-top: 20px;">
                         <nav class="sidebar sidebar-offcanvas" id="sidebar">
                             <ul class="nav">
                                 <li class="nav-item">
@@ -208,7 +212,7 @@
                                 </li>
                                 <!--Mentor MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=mentorManage">
+                                    <a class="nav-link" href="MentorManagementController">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Mentor Management</span>
                                     </a>
@@ -222,7 +226,7 @@
                                 </li>
                                 <!--Request MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=requestManage">
+                                    <a class="nav-link" href="requestManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Request Management</span>
                                     </a>
@@ -258,60 +262,83 @@
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-tale">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Total Searched Mentee </p>
-                                                        <p class="fs-30 mb-2"><c:out value="${mList.size()}"></c:out></p>
+                                                        <p class="mb-4">Total Mentee </p>
+                                                        <p class="fs-30 mb-2"><c:out value="${menteeList.size()}"></c:out></p>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-4 stretch-card transparent">
+                                                    <div class="card card-dark-blue">
+                                                        <div class="card-body">
+                                                            <p class="mb-4">Total Study Hours Of All Mentee</p>
+                                                            <p class="fs-30 mb-2"><c:out value=" ${totalHour}"></c:out></p>
                                                             <p></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                        </div>
-                                    </div>
-                                <c:choose>  
-                                    <c:when test="${empty mList}">
-                                        <h3 style=" margin-left: 0 px;  width: 600px;">  
-                                            Dont have any Mentee have username like " ${txt} "</h3>
-                                        </c:when>
-                                        <c:otherwise>
-                                        <h3  style="margin-left: 0 px; width: 600px;"> 
-                                            Showing results for " ${txt} "</h3>
-                                        <div class="row">
-                                            <div class="col-md-12 grid-margin stretch-card">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped table-borderless">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>ID</th>
-                                                                        <th><a style="color: black" href="AdminControllerMap?service=filterName"> Full Name </a></th>
-                                                                        <th>Username</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <c:forEach items="${mList}" var="mentee">
-                                                                        <tr>
-                                                                            <td>
-                                                                                <c:out value="${mentee.id}"></c:out>
-                                                                                </td>
-                                                                                <td>
-                                                                                <c:out value=" ${mentee.fullname}"></c:out>
-                                                                                </td>
-                                                                                <td>
-                                                                                <c:out value="${mentee.username}"></c:out>
-                                                                                </td>
-                                                                            </tr>
-                                                                    </c:forEach>
-                                                                </tbody>
-                                                            </table>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                                                    <div class="card card-light-blue">
+                                                        <div class="card-body">
+                                                            <p class="mb-4">Total Skills Of All Mentee </p>
+                                                            <p class="fs-30 mb-2"><c:out value=" ${totalSkill}"></c:out></p>
+                                                            <p></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </c:otherwise>
-                                </c:choose>   
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-borderless">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>ID</th>
+                                                                    <th><a style="color: #0099ff" href="menteeManagement"> Full Name </a></th>
+                                                                    <th>Username</th>
+                                                                    <th>Email</th>
+                                                                    <th style="padding-left: 50px;">Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <c:forEach items="${menteeList}" var="mentee">
+                                                                <tr>
+                                                                    <td>
+                                                                        <c:out value="${mentee.id}"></c:out>
+                                                                        </td>
+                                                                        <td>
+                                                                        <c:out value=" ${mentee.fullname}"></c:out>
+                                                                        </td>
+                                                                        <td>
+                                                                        <c:out value="${mentee.username}"></c:out>
+                                                                        </td>
+                                                                        <td>
+                                                                        <c:out value="${mentee.mail}"></c:out>
+                                                                        </td>
+                                                                        <td>
+                                                                        <c:if test="${mentee.status ==1}">
+                                                                            <a href="updateMenteeStatus?uId=${mentee.id}&&status=1" class="btn btn-success" style="width: 116.156px" > Activate </a>
+                                                                        </c:if>
+                                                                        <c:if test="${mentee.status==0}">
+                                                                            <a href="updateMenteeStatus?uId=${mentee.id}&&status=0" class="btn btn-danger" > Deactivate </a>
+                                                                        </c:if>
+                                                                    </td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <%-- Paging --%>
                                 <c:if test="${!empty menteeList}">
                                     <div class="row">  

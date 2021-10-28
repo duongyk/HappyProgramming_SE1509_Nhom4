@@ -13,49 +13,52 @@ package entity;
  *
  * This class represents the Skill table in database
  *
- * @author 
+ * @author
  */
 public class Skill {
-    
+
     /**
      * Id of (Skill)
      */
     private int id;
-    
+
     /**
      * Name from (Skill)
      */
     private String name;
-    
+
     /**
      * Detail of (Skill)
      */
     private String detail;
-    
+
     /**
      * Image link of (Skill)
      */
     private String image;
-    
+
     /**
      * Image link of (Skill)
      */
     private int status;
-    
+
+    private int total;
+
     /**
      * Constructor.<br>
      */
     public Skill() {
     }
-    
+
     /**
      * Constructor.<br>
+     *
      * @param id it is an int number
      */
     public Skill(int id) {
         this.id = id;
     }
-    
+
     /**
      * Constructor.<br>
      *
@@ -85,7 +88,25 @@ public class Skill {
         this.detail = detail;
         this.image = image;
     }
-    
+
+    /**
+     * Constructor.<br>
+     *
+     * @param id it is a int number
+     * @param name it is a <code>java.lang.String</code>
+     * @param detail it is a <code>java.lang.String</code>
+     * @param image <code>java.lang.String</code>
+     * @param status it is a int number
+     */
+    public Skill(int id, String name, String detail, String image, int status, int total) {
+        this.id = id;
+        this.name = name;
+        this.detail = detail;
+        this.image = image;
+        this.status = status;
+        this.total = total;
+    }
+
     /**
      * Constructor.<br>
      *
@@ -100,7 +121,7 @@ public class Skill {
         this.detail = detail;
         this.image = image;
     }
-    
+
     /**
      * Get value from attribute of Skill class. <br>
      *
@@ -109,7 +130,7 @@ public class Skill {
     public int getId() {
         return id;
     }
-    
+
     /**
      * Get value from attribute of Skill class. <br>
      *
@@ -118,7 +139,7 @@ public class Skill {
     public String getName() {
         return name;
     }
-    
+
     /**
      * Get value from attribute of Skill class. <br>
      *
@@ -127,7 +148,7 @@ public class Skill {
     public String getDetail() {
         return detail;
     }
-    
+
     /**
      * Get value from attribute of Skill class. <br>
      *
@@ -136,7 +157,7 @@ public class Skill {
     public String getImage() {
         return image;
     }
-    
+
     /**
      * Set value from attribute of Skill class. <br>
      *
@@ -145,7 +166,7 @@ public class Skill {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     /**
      * Set value from attribute of Skill class. <br>
      *
@@ -154,7 +175,7 @@ public class Skill {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     /**
      * Set value from attribute of Skill class. <br>
      *
@@ -163,7 +184,7 @@ public class Skill {
     public void setDetail(String detail) {
         this.detail = detail;
     }
-    
+
     /**
      * Set value from attribute of Skill class. <br>
      *
@@ -191,10 +212,17 @@ public class Skill {
         this.status = status;
     }
 
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
     @Override
     public String toString() {
-        return this.name;
+        return this.name + this.total;
     }
-   
-    
+
 }

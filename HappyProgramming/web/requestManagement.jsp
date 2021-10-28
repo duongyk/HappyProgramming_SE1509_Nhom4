@@ -235,7 +235,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form action="search?category=${category}&txtSearch=" method="POST" style="margin-left: 10px">
+                                    <form action="requestSearch" method="POST" style="margin-left: 10px">
                                         <label for="category">Category :</label>
                                         <select data-trigger="" name="category"  id="category">
                                             <option>All</option>

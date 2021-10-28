@@ -70,6 +70,47 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return list;
     }
 
+    public ArrayList<Skill> getTrendingSkill() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        //get informations from database
+        ArrayList<Skill> list = new ArrayList<>();
+        String sql = "SELECT Top 5 Skill.sId,Skill.sName,Skill.sImage,Skill.sStatus, COUNT(Skill.sId) AS \"Total\"\n"
+                + "                 FROM [PRJ_SWP].[dbo].[RequestSkill] as Trend,Skill\n"
+                + "                  Where Trend.sId = Skill.sId\n"
+                + "                  GROUP BY Skill.sId, Skill.sName, Skill.sImage,Skill.sStatus\n"
+                + "                  Order by total DESC";
+        int id;
+        String name;
+        String detail = null;
+        String image;
+        int total;
+        int status;
+        Skill s;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("sId");
+                name = rs.getString("sName");
+                image = rs.getString("sImage");
+                total = rs.getInt("Total");
+                status = rs.getInt("sStatus");
+                s = new Skill(id, name, detail, image, status, total);
+                list.add(s);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
     /**
      * Get all Skill of the user in the database
      *
@@ -454,7 +495,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
 
     public static void main(String[] args) throws Exception {
         SkillDAOImpl dao = new SkillDAOImpl();
-        ArrayList<Skill> list = dao.searchSkill("Java");
+        ArrayList<Skill> list = dao.getTrendingSkill();
         for (Skill skill : list) {
             System.out.println(skill);
         }

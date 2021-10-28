@@ -5,11 +5,11 @@
  */
 package controller;
 
-import dao.RequestDAO;
-import dao.impl.RequestDAOImpl;
-import entity.Request;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
+import entity.User;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -19,12 +19,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author solov
- */
-@WebServlet(name = "RequestManagementController", urlPatterns = {"/requestManagement"})
-public class RequestManagementController extends HttpServlet {
+@WebServlet(name = "UpdateMenteeStatusController", urlPatterns = {"/updateMenteeStatus"})
+
+public class UpdateMenteeStatusController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,47 +33,23 @@ public class RequestManagementController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        RequestDAO requestDAO = new RequestDAOImpl();
-        try {
-            ArrayList<Request> list = new ArrayList<Request>();
-            list = requestDAO.getAllRequest();
-            //get index page 
-            String indexPage = request.getParameter("index");
-            // index page always start at 1
-            if (indexPage == null) {
-                indexPage = "1";
-            }
-            int index = Integer.parseInt(indexPage);
-            int count = list.size();
-            //calculate total page for paging
-            int endPage = count / 8; // a page will have at most 8 skills
-            if (count % 8 != 0) { //if the total of skills is not divisible by 8, the last page will be added to show the remaining skills
-                endPage++;
-            }
-            ArrayList<Request> rList = requestDAO.requestPaging(index);
-            int process = requestDAO.getTotalRequestByStatus(2);
-            int done = requestDAO.getTotalRequestByStatus(3);
-            int canceled = requestDAO.getTotalRequestByStatus(4);
-            // Set href of paging
-            String href = "requestManagement?";
-            request.setAttribute("rList", rList);
-            request.setAttribute("list", list);
-            request.setAttribute("process", process);
-            request.setAttribute("done", done);
-            request.setAttribute("canceled", canceled);
-            request.setAttribute("href", href);/*href paging*/
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("count", count);
-            request.setAttribute("tag", index);
-            sendDispatcher(request, response, "requestManagement.jsp");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            UserDAO userDAO = new UserDAOImpl();
+            int id = Integer.parseInt(request.getParameter("uId"));
+            int status = Integer.parseInt(request.getParameter("status"));
+            User user = userDAO.getUserById(id);
 
-        } catch (Exception e) {
-            Logger.getLogger(RequestManagementController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.toString());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-
+            if (status == 1) {
+                userDAO.updateUserStatusById(user, 0);
+                sendDispatcher(request, response, "menteeManagement");
+            }
+            if (status == 0) {
+                userDAO.updateUserStatusById(user, 1);
+                sendDispatcher(request, response, "menteeManagement");
+            }
         }
     }
 
@@ -101,7 +74,11 @@ public class RequestManagementController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UpdateMenteeStatusController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -115,7 +92,11 @@ public class RequestManagementController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UpdateMenteeStatusController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

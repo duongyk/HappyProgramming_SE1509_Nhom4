@@ -110,5 +110,20 @@ public interface SkillDAO {
      */
     public ArrayList<Skill> pagingSkillSorted(int index);
 
+    /**
+     * Find Skill in the database
+     *
+     * @param txtSearch. It is a <code>java.lang.String</code>
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
+     */
     public ArrayList<Skill> searchSkill(String txtSearch) throws Exception;
+
+    /**
+     * Get Trending skill in database
+     *
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
+     */
+    public ArrayList<Skill> getTrendingSkill() throws Exception;
 }

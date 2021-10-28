@@ -60,7 +60,7 @@
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
-                   <ul>
+                    <ul>
                         <c:choose>
                             <c:when test="${sessionScope.currUser!=null}">
                                 <li> 
@@ -288,15 +288,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 stretch-card transparent">
-                                                    <div class="card card-light-danger">
-                                                        <div class="card-body">
-                                                            <p class="mb-4">Number of Visit</p>
-                                                            <p class="fs-30 mb-2">47033</p>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -310,8 +301,10 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>ID</th>
-                                                                    <th><a style="color: black" href="AdminControllerMap?service=filterName"> Full Name </a></th>
+                                                                    <th><a style="color: black" href="sortMenteeByName"> Full Name </a></th>
                                                                     <th>Username</th>
+                                                                    <th>Email</th>
+                                                                    <th style="padding-left: 50px;">Status</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -326,7 +319,18 @@
                                                                         <td>
                                                                         <c:out value="${mentee.username}"></c:out>
                                                                         </td>
-                                                                    </tr>
+                                                                        <td>
+                                                                        <c:out value="${mentee.mail}"></c:out>
+                                                                        </td>
+                                                                        <td>
+                                                                        <c:if test="${mentee.status ==1}">
+                                                                            <a href="updateMenteeStatus?uId=${mentee.id}&&status=1" class="btn btn-success" style="width: 116.156px" > Activate </a>
+                                                                        </c:if>
+                                                                        <c:if test="${mentee.status==0}">
+                                                                            <a href="updateMenteeStatus?uId=${mentee.id}&&status=0" class="btn btn-danger" > Deactivate </a>
+                                                                        </c:if>
+                                                                    </td>
+                                                                </tr>
                                                             </c:forEach>
                                                         </tbody>
                                                     </table>

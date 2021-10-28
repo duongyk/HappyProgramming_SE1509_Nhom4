@@ -75,6 +75,10 @@ public class SearchController extends HttpServlet {
             }
 
         } catch (Exception e) {
+            Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+
         }
     }
 
