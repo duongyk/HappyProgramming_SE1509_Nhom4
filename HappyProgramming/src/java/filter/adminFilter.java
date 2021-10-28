@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -25,9 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
  @WebFilter(
         filterName = "adminFilter", 
-        urlPatterns = {"/adminDashboard","/adminViewRequest.jsp","/mentorPage.jsp",
-                        "/createSkill.jsp","/mentorManagement.jsp","/menteeManagement.jsp",
-                        "/updateSkill.jsp"}
+        urlPatterns = {"/adminDashboard","/skillManagement","/adminViewRequest","/mentorPage",
+                        "/createSkill","/mentorManagement","/menteeManagement",
+                        "/updateSkill"}
         )
 /**
  *
