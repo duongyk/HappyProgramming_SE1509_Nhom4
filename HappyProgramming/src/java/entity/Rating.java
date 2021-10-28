@@ -174,13 +174,13 @@ public class Rating {
     }
 
     /**
-     * Tranform value date attribute of Rating class into String for display. <br>
+     * Set value date attribute of Rating class into String for display. <br>
      *
      * @return dateToString it is a <code>java.lang.String</code>
      */
     @Override
     public String toString() {
-        String dateToString = new SimpleDateFormat("MM/dd/yyyy").format(date);
+        String dateToString = new SimpleDateFormat("dd/MM/yyyy").format(date);
         return dateToString;
     }
     

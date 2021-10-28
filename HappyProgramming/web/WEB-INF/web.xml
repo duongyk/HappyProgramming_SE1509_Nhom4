@@ -136,7 +136,27 @@
     </servlet>
     <servlet>
         <servlet-name>StatisticRequest</servlet-name>
-        <servlet-class>controller.StatisticRequest</servlet-class>
+        <servlet-class>controller.StatisticRequestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForumController</servlet-name>
+        <servlet-class>controller.ForumController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyProblemController</servlet-name>
+        <servlet-class>controller.MyProblemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewProblemController</servlet-name>
+        <servlet-class>controller.ViewProblemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostProblemController</servlet-name>
+        <servlet-class>controller.PostProblemController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostAnswerController</servlet-name>
+        <servlet-class>controller.PostAnswerController</servlet-class>
     </servlet>
     
     
@@ -271,6 +291,26 @@
     <servlet-mapping>
         <servlet-name>StatisticRequest</servlet-name>
         <url-pattern>/statisticRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForumController</servlet-name>
+        <url-pattern>/forum</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyProblemController</servlet-name>
+        <url-pattern>/myProblem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProblemController</servlet-name>
+        <url-pattern>/viewProblem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostProblemController</servlet-name>
+        <url-pattern>/postProblem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostAnswerController</servlet-name>
+        <url-pattern>/postAnswer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

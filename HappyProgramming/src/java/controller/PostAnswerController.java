@@ -5,14 +5,16 @@
  *
  * Record of change:<br>
  * DATE          Version    Author           DESCRIPTION<br>
- * 20-09-2021    1.0        DuongVV          First Deploy<br>
- * 18-10-2021    2.0        DuongVV          Update<br>
+ * 20-10-2021    1.0        DuongVV          First Deploy<br>
  */
 package controller;
 
-import dao.RequestDAO;
-import dao.impl.RequestDAOImpl;
-import entity.Request;
+import dao.ProblemAnswerDAO;
+import dao.ProblemDAO;
+import dao.impl.ProblemAnswerDAOImpl;
+import dao.impl.ProblemDAOImpl;
+import entity.Problem;
+import entity.ProblemAnswer;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,11 +28,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of List Request by me
+ * This class has the process request of Post a Answer to a Problem
  *
  * @author DuongVV
  */
-public class ListRequestByMeController extends HttpServlet {
+public class PostAnswerController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,7 +48,15 @@ public class ListRequestByMeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            doGet(request, response);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet PostAnswerController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet PostAnswerController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -63,13 +73,12 @@ public class ListRequestByMeController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(ListRequestByMeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PostAnswerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method. Get all the Request of the
-     * Mentee
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -79,41 +88,7 @@ public class ListRequestByMeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            // initiate DAO
-            RequestDAO requestDAO = new RequestDAOImpl();
-            // Get current user
-            User user = (User) request.getSession().getAttribute("currUser");
-            // Get index page 
-            String indexPage = request.getParameter("index");
-            if (indexPage == null) {
-                indexPage = "1";
-            }
-            int index = Integer.parseInt(indexPage);
-            // Get list all Request of the user
-            ArrayList<Request> listRequest = requestDAO.getListByMe(user);
-            // Total request for paging
-            int count = listRequest.size();
-            // Calculate total page for paging
-            int endPage = count / 8;
-            if (count % 8 != 0) {
-                endPage++;
-            }
-            // Set href of paging
-            String href = "listRequestByMe?";
-            // Get list Request by page
-            ArrayList<Request> rList = requestDAO.listByMePaging(index, user.getId());
-            // Set attribute to request
-            request.setAttribute("href", href);/*href paging*/
-            request.setAttribute("rList", rList);/*Request List*/
-            request.setAttribute("endPage", endPage);/*end page of paging*/
-            request.setAttribute("index", index);/*index/current page*/
-            sendDispatcher(request, response, "listRequestByMe.jsp");
-        } catch (Exception e) {
-            Logger.getLogger(ListRequestByMeController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.toString());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -127,7 +102,52 @@ public class ListRequestByMeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            // initiate DAO
+            ProblemDAO pDAO = new ProblemDAOImpl();
+            ProblemAnswerDAO paDAO = new ProblemAnswerDAOImpl();
+            // Get current user
+            User user = (User) request.getSession().getAttribute("currUser");
+            // Get input and Insert new Answer
+            int pId = 1;
+            String content = request.getParameter("content");
+            paDAO.insertProblemAnswer(pId, user.getId(), content);
+            // Get Problem
+            Problem problem = pDAO.getProblem(pId);
+            // Get index page 
+            String indexPage = request.getParameter("index");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            // Total request for paging
+            int count = paDAO.countProblemAnswer(pId);
+            // Calculate total page for paging
+            int endPage = count / 4;
+            if (count % 4 != 0) {
+                endPage++;
+            }
+            // Get Problem Answer
+            ArrayList<ProblemAnswer> paList = paDAO.getProblemAnswerList(index, pId);
+            // Get number of Answer
+            int answerNumber = paDAO.countProblemAnswer(pId);
+            //Set href paging
+            String href = "viewProblem?pId="+pId+"&";
+            
+            request.setAttribute("href", href);/*href paging*/
+            request.setAttribute("pId", pId);/*href paging*/
+            request.setAttribute("endPage", endPage);/*end page of paging*/
+            request.setAttribute("index", index);/*index/current page*/
+            request.setAttribute("problem", problem);/*Problem*/
+            request.setAttribute("answerNumber", answerNumber);/*Problem*/
+            request.setAttribute("messSucc", "Post Answer Successfully");/*messSucc*/
+            request.setAttribute("paList", paList);/*ProblemAnswer List*/
+            sendDispatcher(request, response, "viewProblem.jsp");
+        } catch (Exception e) {
+            Logger.getLogger(PostAnswerController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
     /**

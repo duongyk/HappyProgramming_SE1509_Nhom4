@@ -204,14 +204,4 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
             closeConnection(conn);
         }
     }
-
-    public static void main(String[] args) throws Exception {
-        MessageDAOImpl dao = new MessageDAOImpl();
-        ArrayList<Message> list = new ArrayList<>();
-        list = dao.getUnReadMessage();
-        for (Message message : list) {
-            System.out.println(message);
-        }
-    }
-
 }

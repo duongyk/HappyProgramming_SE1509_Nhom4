@@ -58,6 +58,7 @@
 
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
+                        <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                     <c:choose>

@@ -5,13 +5,16 @@
  *
  * Record of change:<br>
  * DATE          Version    Author           DESCRIPTION<br>
- * 20-09-2021    1.0        DuongVV          First Deploy<br>
- * 18-10-2021    2.0        DuongVV          Update<br>
+ * 20-10-2021    1.0        DuongVV          First Deploy<br>
  */
 package controller;
 
-import dao.RequestDAO;
-import dao.impl.RequestDAOImpl;
+import dao.ProblemAnswerDAO;
+import dao.ProblemDAO;
+import dao.impl.ProblemAnswerDAOImpl;
+import dao.impl.ProblemDAOImpl;
+import entity.Problem;
+import entity.ProblemAnswer;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,11 +28,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of View Statistic Request
+ * This class has the process request of View a Problem
  *
  * @author DuongVV
  */
-public class StatisticRequest extends HttpServlet {
+public class ViewProblemController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,10 +51,10 @@ public class StatisticRequest extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StatisticRequest</title>");
+            out.println("<title>Servlet ViewProblemController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StatisticRequest at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewProblemController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -70,10 +73,10 @@ public class StatisticRequest extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(StatisticRequest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ViewProblemController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -85,19 +88,53 @@ public class StatisticRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+        try{
             // initiate DAO
-            RequestDAO requestDAO = new RequestDAOImpl();
+            ProblemDAO pDAO = new ProblemDAOImpl();
+            ProblemAnswerDAO paDAO = new ProblemAnswerDAOImpl();
+            // Get Problem
+            int pId = Integer.parseInt(request.getParameter("pId"));
+            Problem problem = pDAO.getProblem(pId);
             // Get current user
             User user = (User) request.getSession().getAttribute("currUser");
-            // Get statistic requests
-            ArrayList<Integer> statistic = requestDAO.getStatistic(user.getId());
-            request.setAttribute("statistic", statistic);/*Statistic request*/
-            request.setAttribute("user", user);/*Current User*/
+            if (user!=null) {
+                // Check if the Problem belong to the User or not
+            boolean check = pDAO.checkMyProblem(pId, user.getId());
+            request.setAttribute("check", check);/*Check belong*/
+            }
             
-            sendDispatcher(request, response, "statisticRequest.jsp");
+            // Get index page 
+            String indexPage = request.getParameter("index");
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            // Total request for paging
+            int count = paDAO.countProblemAnswer(pId);
+            // Calculate total page for paging
+            int endPage = count / 4;
+            if (count % 4 != 0) {
+                endPage++;
+            }
+            // Get Problem Answer
+            ArrayList<ProblemAnswer> paList = paDAO.getProblemAnswerList(index, pId);
+            // Get number of Answer
+            int answerNumber = paDAO.countProblemAnswer(pId);
+            //Set href paging
+            String href = "viewProblem?pId="+pId+"&";
+            
+            request.setAttribute("href", href);/*href paging*/
+            request.setAttribute("endPage", endPage);/*end page of paging*/
+            request.setAttribute("index", index);/*index/current page*/
+            request.setAttribute("problem", problem);/*Problem*/
+            request.setAttribute("answerNumber", answerNumber);/*Problem*/
+            request.setAttribute("pId", pId);/*Problem*/
+            request.setAttribute("paList", paList);/*ProblemAnswer List*/
+            sendDispatcher(request, response, "viewProblem.jsp");
+            
+            
         } catch (Exception e) {
-            Logger.getLogger(StatisticRequest.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ViewProblemController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
@@ -114,7 +151,13 @@ public class StatisticRequest extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try{
+        
+        } catch (Exception e) {
+            Logger.getLogger(ViewProblemController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        }
     }
 
     /**

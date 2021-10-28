@@ -156,11 +156,12 @@
                                 <c:choose>
                                     <%-- Filter by Rating, Show Rating --%>
                                     <c:when test="${filter==2}">
+                                        <c:set var="i" scope="session" value="0"/>
                                         <c:forEach items="${mList}" var="mentor">
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="member member-1 box-display" data-aos="fade-up" data-aos-delay="100">
                                                     <div class="member-img">
-                                                        <div class="title1">Rating: <c:out value="${ratingList.get(mentor.getId())}"></c:out>
+                                                        <div class="title1">Rating: <c:out value="${ratingList[i]}"></c:out>
                                                             </div>
                                                         </div>
                                                         <img class="img-display" src="img/default-image.jpg">
@@ -170,15 +171,17 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                                    <c:set var="i" scope="session" value="${i+1}"/>
                                         </c:forEach>
                                     </c:when>
                                     <%-- Filter by Number of Request, Show number of Request --%>
                                     <c:when test="${filter==3}">
+                                        <c:set var="i" scope="session" value="0"/>
                                         <c:forEach items="${mList}" var="mentor">
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="member member-1 box-display" data-aos="fade-up" data-aos-delay="100">
                                                     <div class="member-img">
-                                                        <div class="title1">Number of Request: <c:out value="${requestNumberList.get(mentor.getId())}"></c:out>
+                                                        <div class="title1">Number of Request: <c:out value="${requestNumberList[i]}"></c:out>
                                                             </div>
                                                         </div>
                                                         <img class="img-display" src="img/default-image.jpg">
@@ -188,15 +191,17 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                                    <c:set var="i" scope="session" value="${i+1}"/>
                                         </c:forEach>
                                     </c:when>
                                     <%-- Filter by number of Skill, Show number of Skill --%>
                                     <c:when test="${filter==4}">
+                                        <c:set var="i" scope="session" value="0"/>
                                         <c:forEach items="${mList}" var="mentor">
                                             <div class="col-lg-3 col-md-6">
                                                 <div class="member member-1 box-display" data-aos="fade-up" data-aos-delay="100">
                                                     <div class="member-img">
-                                                        <div class="title1">Number of Skill: <c:out value="${skillNumberList.get(mentor.getId())}"></c:out>
+                                                        <div class="title1">Number of Skill: <c:out value="${skillNumberList[i]}"></c:out>
                                                             </div>
                                                         </div>
                                                         <img class="img-display" src="img/default-image.jpg">
@@ -206,6 +211,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        <c:set var="i" scope="session" value="${i+1}"/>
                                         </c:forEach>
                                     </c:when>
                                     <c:otherwise>

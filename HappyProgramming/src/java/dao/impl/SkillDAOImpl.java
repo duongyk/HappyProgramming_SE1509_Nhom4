@@ -14,7 +14,6 @@ import entity.Skill;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -492,13 +491,4 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         }
         return list;
     }
-
-    public static void main(String[] args) throws Exception {
-        SkillDAOImpl dao = new SkillDAOImpl();
-        ArrayList<Skill> list = dao.getTrendingSkill();
-        for (Skill skill : list) {
-            System.out.println(skill);
-        }
-    }
-
 }

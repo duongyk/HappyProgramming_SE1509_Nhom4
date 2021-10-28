@@ -11,7 +11,6 @@ package dao.impl;
 
 import context.DBContext;
 import dao.RatingDAO;
-import dao.RequestDAO;
 import dao.RequestSkillDAO;
 import dao.UserDAO;
 import dao.UserSkillDAO;
@@ -24,13 +23,10 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
-import util.SendEmail;
 
 /**
  * This class implements from class interface UserDAOImpl. <br>
@@ -878,15 +874,4 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closeConnection(conn);
         }
     }
-
-    @Override
-    public int getTotalFilterSkill(int uRole, int sId) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-//    public static void main(String[] args) throws Exception {
-//        UserDAO userDAO = new UserDAOImpl();
-//        User user = userDAO.getUserById(6);
-//        System.out.println(userDAO.updateUserStatusById(user, 1));
-//    }
 }

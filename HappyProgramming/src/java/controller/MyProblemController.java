@@ -5,14 +5,15 @@
  *
  * Record of change:<br>
  * DATE          Version    Author           DESCRIPTION<br>
- * 20-09-2021    1.0        DuongVV          First Deploy<br>
- * 18-10-2021    2.0        DuongVV          Update<br>
+ * 20-10-2021    1.0        DuongVV          First Deploy<br>
  */
 package controller;
 
-import dao.RequestDAO;
-import dao.impl.RequestDAOImpl;
-import entity.Request;
+import dao.ProblemAnswerDAO;
+import dao.ProblemDAO;
+import dao.impl.ProblemAnswerDAOImpl;
+import dao.impl.ProblemDAOImpl;
+import entity.Problem;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,11 +27,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of List Request by me
+ * This class has the process request of View all User's Problem
  *
  * @author DuongVV
  */
-public class ListRequestByMeController extends HttpServlet {
+public class MyProblemController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,7 +47,15 @@ public class ListRequestByMeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            doGet(request, response);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet MyProblemController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet MyProblemController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -63,13 +72,11 @@ public class ListRequestByMeController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(ListRequestByMeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyProblemController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     /**
-     * Handles the HTTP <code>GET</code> method. Get all the Request of the
-     * Mentee
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -79,9 +86,10 @@ public class ListRequestByMeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+        try{
             // initiate DAO
-            RequestDAO requestDAO = new RequestDAOImpl();
+            ProblemDAO pDAO = new ProblemDAOImpl();
+            ProblemAnswerDAO paDAO = new ProblemAnswerDAOImpl();
             // Get current user
             User user = (User) request.getSession().getAttribute("currUser");
             // Get index page 
@@ -90,27 +98,31 @@ public class ListRequestByMeController extends HttpServlet {
                 indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
-            // Get list all Request of the user
-            ArrayList<Request> listRequest = requestDAO.getListByMe(user);
             // Total request for paging
-            int count = listRequest.size();
+            int count = pDAO.countProblemUser(user.getId());
             // Calculate total page for paging
-            int endPage = count / 8;
-            if (count % 8 != 0) {
+            int endPage = count / 4;
+            if (count % 4 != 0) {
                 endPage++;
             }
+            // Get Problem list
+            ArrayList<Problem> pList = pDAO.getProblemByMePaging(index, user.getId());
+            // Set list of total number answer
+            ArrayList<Integer> answerNumber = new ArrayList<>();
+            for (Problem p: pList) {
+                answerNumber.add(paDAO.countProblemAnswer(p.getId()));
+            }          
+            
             // Set href of paging
-            String href = "listRequestByMe?";
-            // Get list Request by page
-            ArrayList<Request> rList = requestDAO.listByMePaging(index, user.getId());
-            // Set attribute to request
+            String href = "forum?";
             request.setAttribute("href", href);/*href paging*/
-            request.setAttribute("rList", rList);/*Request List*/
             request.setAttribute("endPage", endPage);/*end page of paging*/
             request.setAttribute("index", index);/*index/current page*/
-            sendDispatcher(request, response, "listRequestByMe.jsp");
-        } catch (Exception e) {
-            Logger.getLogger(ListRequestByMeController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("pList", pList);/*Problem List*/
+            request.setAttribute("answerNumber", answerNumber);/*List number of Answer*/
+            sendDispatcher(request, response, "myProblem.jsp"); 
+            } catch (Exception e) {
+            Logger.getLogger(MyProblemController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

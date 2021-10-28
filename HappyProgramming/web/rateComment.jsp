@@ -168,6 +168,8 @@
                                             <h5 class="mess">${messBlank}</h5>
                                         </c:if>
                                     </div>
+                                        
+                                    <%-- Button submit --%>   
                                     <div class="row">
                                         <div class="col-md-7"></div>
                                         <div class="col-md-4">

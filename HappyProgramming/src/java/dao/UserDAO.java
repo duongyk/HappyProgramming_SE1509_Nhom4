@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2021, FPT University<br>
  * SWP391 - SE1509 - Group 4<br>
@@ -149,15 +150,15 @@ public interface UserDAO {
      * @throws Exception
      */
     public int getTotalFilterName(int uRole, String name) throws Exception;
-
+        
     /**
      * Get list Mentor sorted by total number of Skill
-     *
+     * 
      * @return list of <code>User</code> object
      * @throws java.lang.Exception
      */
-    public ArrayList<User> getTopMentorByTotalSkill() throws Exception;
-
+    public ArrayList<User> getTopMentorByTotalSkill()throws Exception;
+    
     /**
      * Get top Mentor by their Rating
      *
@@ -165,7 +166,7 @@ public interface UserDAO {
      * @throws java.lang.Exception
      */
     public ArrayList<User> getTopMentorByRate() throws Exception;
-
+    
     /**
      * Get all Mentor that teach Skill which User have in Request
      *
@@ -174,7 +175,7 @@ public interface UserDAO {
      * @throws java.lang.Exception
      */
     public ArrayList<User> getSuggestedMentor(int mId) throws Exception;
-
+    
     /**
      * Get total number of User
      *
@@ -182,8 +183,6 @@ public interface UserDAO {
      * @throws Exception
      */
     public int getMaxUser() throws Exception;
-
-    public int getTotalFilterSkill(int uRole, int sId) throws Exception;
 
     /**
      * Get list of Mentee with the username like txtSearch
@@ -194,6 +193,7 @@ public interface UserDAO {
      */
     public ArrayList<User> searchMentee(String txtSearch) throws Exception;
 
+    
     /**
      * Update user's Status by user's id
      *
@@ -202,6 +202,7 @@ public interface UserDAO {
      * @throws Exception
      */
     public void updateUserStatusById(User user, int status) throws Exception;
+    
 
     /**
      * Get list of User with the same role by page and sorted by fullname
@@ -212,6 +213,6 @@ public interface UserDAO {
      * @throws Exception
      */
     public ArrayList<User> getSortedUserByRolePaging(int index, int uRole) throws Exception;
-
+ 
 }
 

@@ -11,17 +11,24 @@ package controller;
 
 import dao.RatingDAO;
 import dao.RequestDAO;
+import dao.RequestSkillDAO;
 import dao.UserDAO;
 import dao.UserSkillDAO;
 import dao.impl.RatingDAOImpl;
 import dao.impl.RequestDAOImpl;
+import dao.impl.RequestSkillDAOImpl;
 import dao.impl.UserDAOImpl;
 import dao.impl.UserSkillDAOImpl;
+import entity.Skill;
 import entity.User;
+import entity.UserSkill;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -94,6 +101,7 @@ public class ListSuggestedMentorController extends HttpServlet {
         try {
             // initiate DAO
             UserDAO userDAO = new UserDAOImpl();
+            RequestSkillDAO rsDAO = new RequestSkillDAOImpl();
             RequestDAO requestDAO = new RequestDAOImpl();
             RatingDAO ratingDAO = new RatingDAOImpl();
             UserSkillDAO usDAO = new UserSkillDAOImpl();
@@ -105,38 +113,96 @@ public class ListSuggestedMentorController extends HttpServlet {
             ArrayList<User> mList = new ArrayList<>();
             int total = userDAO.getMaxUser();
             switch (filter) {
-                // Suggested by requested Skill of the Mentee
-                case 1:
-                    mList = userDAO.getSuggestedMentor(mentee.getId());
+                
+                case 1:/* Suggested by requested Skill of the Mentee*/
+                    ArrayList<Integer> listId = new ArrayList<>();
+                    // get Skill of the Mentee have in all Requests
+                    ArrayList<Skill> skillList = rsDAO.getSkillByMentee(mentee.getId());
+                    // get all Mentor-Skill
+                    ArrayList<UserSkill> mentorSkillList = usDAO.getMentorSkill();
+                    // Add Skill ID to ID list
+                    for (UserSkill us : mentorSkillList) {
+                        for (Skill s : skillList) {
+                            if (!listId.contains(us.getuId())) {
+                                if (us.getsId() == s.getId()) {
+                                    listId.add(us.getuId());
+                                }
+                            }
+                        }
+                    }
+                    // Add Skill to Skill list
+                    for (int id : listId) {
+                        mList.add(userDAO.getUserById(id));
+                    }
                     request.setAttribute("filter", 1);/*Filter number*/
                     break;
-                // Suggested by Rating
-                case 2:
-                    mList = userDAO.getTopMentorByRate();
-                    ArrayList<String> ratingList = new ArrayList<>(Collections.nCopies(total, ""));
+                
+                case 2:/*Suggested by Rating*/
+                    ArrayList<User> mentorList = userDAO.getUserByRole(2);
+                    // HashMap contain rating of Mentor ((K,V)-(Mentor ID, avarage rating))
+                    HashMap<Integer, Double> avg = new HashMap<>();
+                    for (User mentor : mentorList) {
+                        if (ratingDAO.getAvgRate(mentor.getId()) != 0) {
+                            avg.put(mentor.getId(), ratingDAO.getAvgRate(mentor.getId()));
+                        }
+                    }
+                    // Create a list from elements of HashMap
+                    List<HashMap.Entry<Integer, Double>> listEntry
+                            = new LinkedList<>(avg.entrySet());
+                    // Sort the list
+                    Collections.sort(listEntry, (HashMap.Entry<Integer, Double> o1,
+                            HashMap.Entry<Integer, Double> o2)
+                            -> (o2.getValue()).compareTo(o1.getValue()));
+                    // Get list Mentor
+                    for (HashMap.Entry<Integer, Double> entry : listEntry) {
+                        mList.add(userDAO.getUserById(entry.getKey()));
+                    }
+                    // Set list Average rating
+                    ArrayList<String> ratingList = new ArrayList<>();
                     for (User mentor : mList) {
-                        ratingList.set(mentor.getId(), String.format("%.2f", ratingDAO.getAvgRate(mentor.getId())));
+                        ratingList.add(String.format("%.2f", ratingDAO.getAvgRate(mentor.getId())));
                     }
                     request.setAttribute("ratingList", ratingList);/*Rating List*/
                     request.setAttribute("filter", 2);/*Filter number*/
                     break;
-                // Suggested by popularity
-                case 3:
+                case 3:/* Suggested by popularity*/
+                    // Get Mentor list
                     mList = requestDAO.getHotMentor();
-                    ArrayList<Integer> requestNumberList = new ArrayList<>(Collections.nCopies(total, 0));
+                    // Set list Number of Request
+                    ArrayList<Integer> requestNumberList = new ArrayList<>();
                     for (User mentor : mList) {
-                        requestNumberList.set(mentor.getId(), requestDAO.getTotalRequest(mentor.getId()));
+                        requestNumberList.add(requestDAO.getTotalRequest(mentor.getId()));
                     }
                     request.setAttribute("requestNumberList", requestNumberList);/*Request number List*/
                     request.setAttribute("filter", 3);/*Filter number*/
-
                     break;
-                // Suggested by number of Skill
-                case 4:
-                    mList = userDAO.getTopMentorByTotalSkill();
-                    ArrayList<Integer> skillNumberList = new ArrayList<>(Collections.nCopies(total, 0));
+                case 4:/* Suggested by number of Skill*/
+                    ArrayList<UserSkill> usList = usDAO.getMentorSkill();
+                    // HashMap cout skill of Mentor ((K,V)-(Mentor ID, number of Skill))
+                    HashMap<Integer, Integer> countSkill = new HashMap<>();
+                    for (UserSkill us : usList) {
+                        if (!countSkill.containsKey(us.getuId())) {
+                            countSkill.put(us.getuId(), 1);
+                        } else {
+                            countSkill.put(us.getuId(), countSkill.get(us.getuId()) + 1);
+                        }
+                    }
+                    // Create a list from elements of HashMap
+                    List<HashMap.Entry<Integer, Integer>> listEntry2
+                            = new LinkedList<>(countSkill.entrySet());
+                    // Sort the list
+                    Collections.sort(listEntry2, (HashMap.Entry<Integer, Integer> o1,
+                            HashMap.Entry<Integer, Integer> o2)
+                            -> (o2.getValue()).compareTo(o1.getValue()));
+                    // Get list Mentor
+                    for (HashMap.Entry<Integer, Integer> entry : listEntry2) {
+                        mList.add(userDAO.getUserById(entry.getKey()));
+                    }
+                    
+                    //Set list Number of Skill
+                    ArrayList<Integer> skillNumberList = new ArrayList<>();
                     for (User mentor : mList) {
-                        skillNumberList.set(mentor.getId(), usDAO.getTotalSkill(mentor.getId()));
+                        skillNumberList.add(usDAO.getTotalSkill(mentor.getId()));
                     }
                     request.setAttribute("skillNumberList", skillNumberList);/*Skill number List*/
                     request.setAttribute("filter", 4);/*Filter number*/

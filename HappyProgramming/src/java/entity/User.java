@@ -75,10 +75,15 @@ public class User {
     private String verify;
 
     /**
-     * Constructor.<br>
+     * status of (User)
      *
      */
     private int status;
+    
+    /**
+     * Constructor.<br>
+     *
+     */
     public User() {
     }
 
@@ -349,6 +354,12 @@ public class User {
     public int getRole() {
         return role;
     }
+    
+    /**
+     * Get value from Status attribute of User class. <br>
+     *
+     * @return status it is an int number
+     */
     public int getStatus() {
         return status;
     }

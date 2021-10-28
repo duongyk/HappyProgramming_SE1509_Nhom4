@@ -197,7 +197,6 @@
                         <div class="row">  
                             <div class="paging">
                                 <%-- Previous --%>
-                                <%-- Previous --%>
                                 <c:choose>
                                     <c:when test="${index>1}">
                                         <a class="previous" href="${href}index=${index-1}"><</a>
