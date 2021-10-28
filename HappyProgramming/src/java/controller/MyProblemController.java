@@ -114,7 +114,7 @@ public class MyProblemController extends HttpServlet {
             }          
             
             // Set href of paging
-            String href = "forum?";
+            String href = "myProblem?";
             request.setAttribute("href", href);/*href paging*/
             request.setAttribute("endPage", endPage);/*end page of paging*/
             request.setAttribute("index", index);/*index/current page*/

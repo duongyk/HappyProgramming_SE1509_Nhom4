@@ -109,7 +109,7 @@ public class PostAnswerController extends HttpServlet {
             // Get current user
             User user = (User) request.getSession().getAttribute("currUser");
             // Get input and Insert new Answer
-            int pId = 1;
+            int pId = Integer.parseInt(request.getParameter("pId"));
             String content = request.getParameter("content");
             paDAO.insertProblemAnswer(pId, user.getId(), content);
             // Get Problem
@@ -135,7 +135,6 @@ public class PostAnswerController extends HttpServlet {
             String href = "viewProblem?pId="+pId+"&";
             
             request.setAttribute("href", href);/*href paging*/
-            request.setAttribute("pId", pId);/*href paging*/
             request.setAttribute("endPage", endPage);/*end page of paging*/
             request.setAttribute("index", index);/*index/current page*/
             request.setAttribute("problem", problem);/*Problem*/

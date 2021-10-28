@@ -56,6 +56,7 @@
                     <ul>
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
+                        <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                             <%-- Check current User --%>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
@@ -107,7 +108,7 @@
                             <div><a href="postProblem"><button class="myProblem" style="min-width: 164px;">Post Problem</button></a> </div> 
                         </c:if> 
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-7">
                         <c:set var="i" scope="session" value="0"/>
                         <c:forEach items="${pList}" var="p" >
                             <div class="problem darker" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
@@ -143,7 +144,7 @@
                             <c:set var="i" scope="session" value="${i+1}"/>
                         </c:forEach>
                     </div>
-                    <div class="col-md-4 imagee">
+                    <div class="col-md-2 imagee">
                         <img src="img/forum3.png">
                     </div>
                     <div class="col-md-1"></div>

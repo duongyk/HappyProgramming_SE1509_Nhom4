@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author QMC
  */
-@WebFilter(filterName = "mentorFilter", urlPatterns = {"/","/updateCV","/statisticRequest",
+@WebFilter(filterName = "mentorFilter", urlPatterns = {"/","/updateCV","/",
                         "/createSkill.jsp"})
 public class mentorFilter implements Filter {
     

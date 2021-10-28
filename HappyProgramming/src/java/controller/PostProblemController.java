@@ -16,7 +16,6 @@ import dao.impl.ProblemDAOImpl;
 import entity.Problem;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -122,7 +121,7 @@ public class PostProblemController extends HttpServlet {
                 answerNumber.add(paDAO.countProblemAnswer(p.getId()));
             }     
             // Set href of paging
-            String href = "forum?";
+            String href = "myProblem?";
             request.setAttribute("href", href);/*href paging*/
             request.setAttribute("endPage", endPage);/*end page of paging*/
             request.setAttribute("index", index);/*index/current page*/
