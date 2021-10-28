@@ -52,8 +52,8 @@ public class LoginController extends HttpServlet {
             System.out.println(user.getStatus());
             if (user != null) {
                  if (user.getStatus() == 0) {
-                request.setAttribute("mess", "sr bro your profile has been block");
-                sendDispatcher(request, response, "index.jsp");
+                request.setAttribute("mess", "sorry your account has been block");
+                sendDispatcher(request, response, "signIn.jsp");
                 
             }
                else if (user.getRole() == 3) {

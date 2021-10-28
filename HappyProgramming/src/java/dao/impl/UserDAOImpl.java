@@ -129,10 +129,11 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             ps.setString(2, xPass);
             rs = ps.executeQuery();
             if (rs.next()) {
-                return new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"),
+               User user = new User (rs.getInt("uId"), rs.getString("username"), rs.getString("password"),
                         rs.getString("fullname"), rs.getString("uMail"), rs.getString("uPhone"),
-                        rs.getDate("dob"), rs.getString("gender"), rs.getString("uAvatar"), rs.getInt("uRole"),
-                        rs.getInt("uStatus"));
+                        rs.getDate("dob"), rs.getString("gender"), rs.getString("uAvatar"), rs.getInt("uRole"));
+                user.setStatus(rs.getInt("uStatus"));
+                return user ;
             }
 
         } catch (Exception ex) {
