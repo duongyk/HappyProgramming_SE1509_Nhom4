@@ -15,6 +15,7 @@ import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -42,17 +43,22 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      
+
         try {
             UserDAO userDAO = new UserDAOImpl();
             String userName = request.getParameter("username").trim();
             String password = request.getParameter("password").trim();
             User user = userDAO.getUser(userName, password);
-
+            System.out.println(user.getStatus());
             if (user != null) {
-                if (user.getRole() == 3) {
+                 if (user.getStatus() == 0) {
+                request.setAttribute("mess", "sr bro your profile has been block");
+                sendDispatcher(request, response, "index.jsp");
+                
+            }
+               else if (user.getRole() == 3) {
                     request.getSession().setAttribute("currUser", user);
-                    sendDispatcher(request, response, "index.jsp");
+                    sendDispatcher(request, response, "adminDashboard.jsp");
                 } else {
                     request.getSession().setAttribute("currUser", user);
                     sendDispatcher(request, response, "index.jsp");
