@@ -133,7 +133,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">password</div>
+                                        <div class="name">Password</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="password">
@@ -142,7 +142,7 @@
                                     </div>
                                   
                                     <div class="form-row">
-                                        <div class="name">repeat password</div>
+                                        <div class="name">Repeat password</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="confirm">
