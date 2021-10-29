@@ -80,11 +80,11 @@ public class SkillDetailController extends HttpServlet {
             SkillDAO skillDAO = new SkillDAOImpl();
             UserDAO userDAO = new UserDAOImpl();
             
-            int id = Integer.parseInt(request.getParameter("sId"));
-            Skill skill = skillDAO.getSkillDetail(id);
-            ArrayList<User> mentor = userDAO.getRecommendMentorBySkill(id);
-            request.setAttribute("currSkill", skill);
-            request.setAttribute("listRecommend", mentor);
+            int id = Integer.parseInt(request.getParameter("sId")); // get parameter by id
+            Skill skill = skillDAO.getSkillDetail(id); // get skill by id
+            ArrayList<User> mentor = userDAO.getRecommendMentorBySkill(id); // get recommended mentor by id
+            request.setAttribute("currSkill", skill); // set attribute
+            request.setAttribute("listRecommend", mentor); // set attribute
             sendDispatcher(request, response, "skillDetail.jsp");
         }
         catch (Exception e) {
