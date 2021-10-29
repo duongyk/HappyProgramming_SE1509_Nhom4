@@ -64,10 +64,16 @@
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
+                        <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        
+                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
+                                        </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
@@ -81,9 +87,9 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
-                                        <li><a href="UserControllerMap?service=formChangePass">Change pass</a></li>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                        <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="ChangePassword">Change pass</a></li>
+                                        <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
                             </c:when>

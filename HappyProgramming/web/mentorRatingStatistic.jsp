@@ -79,12 +79,13 @@
                     <ul>
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
-                            <c:choose>
+                        <li><a class="nav-link scrollto" href="forum">Forum</a></li>
+                        <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
+                        <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">
-                                        <li><a class="nav-link scrollto" href="openChat">Messenger</a>
-                                        </li>
+
                                         <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
@@ -102,9 +103,9 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
-                                        <li><a href="UserControllerMap?service=formChangePass">Change pass</a></li>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                        <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="ChangePassword">Change pass</a></li>
+                                        <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
                             </c:when>
@@ -156,7 +157,7 @@
                                             <div class="d-flex flex-column align-items-center text-center">
                                                 <img src="img/${sessionScope.currUser.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
                                                 <div class="mt-3">
-                                                    <h4> <c:out value="${sessionScope.currUser.getUsername()}"></c:out> </h4>                                        
+                                                    <h4> <c:out value="${sessionScope.currUser.getFullname()}"></c:out> </h4>                                        
                                                     <p class="text-secondary mb-1"><c:out value="${cv.getProfession()}"></c:out></p>
                                                         <!--<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>-->
                                                     </div>
