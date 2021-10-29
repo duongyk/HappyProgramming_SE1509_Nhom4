@@ -1,19 +1,15 @@
 /*
- * Copyright (C) 2021, FPT University<br>
- * SWP391 - SE1509 - Group 4<br>
- * Happyprogramming<br>
- *
- * Record of change:<br>
- * DATE          Version    Author           DESCRIPTION<br>
- * 20-09-2021    1.0        DuongVV          First Deploy<br>
- * 18-10-2021    2.0        DuongVV          Update<br>
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
-import dao.RequestDAO;
+import dao.SkillDAO;
 import dao.UserDAO;
-import dao.impl.RequestDAOImpl;
+import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
+import entity.Skill;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,16 +18,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of View Statistic Request
  *
- * @author DuongVV
+ * @author Tung
  */
-public class StatisticRequestController extends HttpServlet {
+@WebServlet(name = "SkillDetailController", urlPatterns = {"/SkillDetailController"})
+public class SkillDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,32 +47,24 @@ public class StatisticRequestController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StatisticRequest</title>");
+            out.println("<title>Servlet SkillDetailController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StatisticRequest at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SkillDetailController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
-
-    /**
-     * Forward the request to the destination, catch any unexpected exceptions
-     * and log it
-     *
-     * @param request Request of the servlet
-     * @param response Response of the servlet
-     * @param path Forward address
-     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(StatisticRequestController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -88,22 +77,18 @@ public class StatisticRequestController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // initiate DAO
+            SkillDAO skillDAO = new SkillDAOImpl();
             UserDAO userDAO = new UserDAOImpl();
-            RequestDAO requestDAO = new RequestDAOImpl();
-            // Get current user
-            int id = Integer.parseInt(request.getParameter("uId"));
-            User user = userDAO.getUserById(id);
-            // Get statistic requests
-            ArrayList<Integer> statistic = requestDAO.getStatistic(user.getId());
-            request.setAttribute("statistic", statistic);/*Statistic request*/
-            request.setAttribute("user", user);/*Current User*/
             
-            sendDispatcher(request, response, "statisticRequest.jsp");
-        } catch (Exception e) {
-            Logger.getLogger(StatisticRequestController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.toString());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            int id = Integer.parseInt(request.getParameter("sId"));
+            Skill skill = skillDAO.getSkillDetail(id);
+            ArrayList<User> mentor = userDAO.getRecommendMentorBySkill(id);
+            request.setAttribute("currSkill", skill);
+            request.setAttribute("listRecommend", mentor);
+            sendDispatcher(request, response, "skillDetail.jsp");
+        }
+        catch (Exception e) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

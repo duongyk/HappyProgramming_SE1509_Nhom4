@@ -491,4 +491,43 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         }
         return list;
     }
+    
+    @Override
+    public Skill getSkillDetail(int sId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int id;
+        String name;
+        String detail;
+        String image;
+        String link;
+        int status;
+        Skill skill = null;
+
+        String sql = "select * from [Skill] where sId = ?";
+
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, sId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("sId");
+                name = rs.getString("sName");
+                detail = rs.getString("sDetail");
+                image = rs.getString("sImage");
+                link = rs.getString("sLink");
+                status = rs.getInt("sStatus");
+                skill = new Skill(id, name, detail, image, link, status);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return skill;
+    }
 }

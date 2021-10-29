@@ -144,7 +144,6 @@
                                                         <a  style="color: blue ;" href="viewMentorRequestStatisticByAdmin?uId=${user.getId()}">View Statistic </a>
                                                     </c:if>
                                                         
-                                                    <!--<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>-->
                                                     </div>
                                                 </div>
                                         </c:when>

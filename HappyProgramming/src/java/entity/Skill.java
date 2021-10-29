@@ -38,6 +38,11 @@ public class Skill {
     private String image;
 
     /**
+     * Video link of (Skill)
+     */
+    private String link;
+    
+    /**
      * Image link of (Skill)
      */
     private int status;
@@ -123,6 +128,25 @@ public class Skill {
     }
 
     /**
+     * Constructor.<br>
+     *
+     * @param id it is a int number
+     * @param name it is a <code>java.lang.String</code>
+     * @param detail it is a <code>java.lang.String</code>
+     * @param image <code>java.lang.String</code>
+     * @param status it is a int number
+     * @param link <code>java.lang.String</code>
+     */
+    public Skill(int id, String name, String detail, String image, String link, int status) {
+        this.id = id;
+        this.name = name;
+        this.detail = detail;
+        this.image = image;
+        this.link = link;
+        this.status = status;
+    }
+    
+    /**
      * Get value from attribute of Skill class. <br>
      *
      * @return id it is a int number
@@ -193,7 +217,25 @@ public class Skill {
     public void setImage(String image) {
         this.image = image;
     }
+    
+    /**
+     * Get value from attribute of Skill class. <br>
+     *
+     * @return link it is a <code>java.lang.String</code>
+     */
+    public String getLink() {
+        return link;
+    }
 
+    /**
+     * Set value from attribute of Skill class. <br>
+     *
+     * @param link
+     */
+    public void setLink(String link) {
+        this.link = link;
+    }
+    
     /**
      * Get value from attribute of Skill class. <br>
      *

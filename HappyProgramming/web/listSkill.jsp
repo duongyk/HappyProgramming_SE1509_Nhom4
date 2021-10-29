@@ -105,7 +105,7 @@
                             </div>
                             <div class="member-info">
                                 <h4>${list.getName()}</h4>
-                                <a href="">View detail</a>
+                                <a href="SkillDetailController?sId=${list.getId()}">View detail</a>
                             </div>
                         </div>
                     </div>

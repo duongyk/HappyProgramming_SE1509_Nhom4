@@ -126,4 +126,6 @@ public interface SkillDAO {
      * @throws java.lang.Exception
      */
     public ArrayList<Skill> getTrendingSkill() throws Exception;
+    
+    public Skill getSkillDetail(int sId) throws Exception;
 }

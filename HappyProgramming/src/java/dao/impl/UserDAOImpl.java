@@ -875,17 +875,41 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     }
     
     @Override
-    public void getRecommendMentorBySkill(int sId) throws Exception {
+    public ArrayList<User> getRecommendMentorBySkill(int sId) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<>();
+        User user;
         String sql = "select top 3 * FROM [User] inner join [UserSkill] on [User].[uId] = [UserSkill].[uId] "
                 + "where [UserSkill].[sId] = ? and [User].[uStatus] = 1 and [User].[uRole] = 2";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, sId);
-            ps.executeQuery();
+            int id;
+            String username;
+            String password;
+            String fullname;
+            String mail;
+            String phone;
+            Date dob;
+            String gender;
+            String avatar;
+            rs= ps.executeQuery();
+            while(rs.next()) {
+                id = rs.getInt("uId");
+                username = rs.getString("username");
+                password = rs.getString("password");
+                fullname = rs.getString("fullname");
+                mail = rs.getString("uMail");
+                phone = rs.getString("uPhone");
+                dob = rs.getDate("DOB");
+                gender = rs.getString("gender");
+                avatar = rs.getString("uAvatar");
+                user = new User(id, username, password, fullname, mail, phone, dob, gender, avatar);
+                list.add(user);
+            }
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -893,6 +917,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closePreparedStatement(ps);
             closeConnection(conn);
         }
+        return list;
     }
     
     @Override
@@ -941,8 +966,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     public static void main(String[] args) throws Exception {
         UserDAO userDAO = new UserDAOImpl();
         ArrayList<User> user = new ArrayList<>();
-        user = userDAO.getUserByRole(2);
-        int n = user.size();
-        System.out.println(n);
+        user = userDAO.getRecommendMentorBySkill(1);
+        System.out.println(user.size());
     }
 }

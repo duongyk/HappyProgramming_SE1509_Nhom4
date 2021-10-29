@@ -119,28 +119,25 @@
                         <div class="col-lg-8">
                             <div class="portfolio-details-slider swiper">
                                 <div class="swiper-wrapper align-items-center">
-
-                                        <img src="img/2.svg" alt="">
+                                    <iframe width="856" height="567" src="${currSkill.link}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="portfolio-info">
-                                <h3>Project information</h3>
+                                <h3>Skill information</h3>
                                 <ul>
-                                    <li><strong>Category</strong>: Web design</li>
-                                    <li><strong>Client</strong>: ASU Company</li>
-                                    <li><strong>Project date</strong>:  Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-                                </li>
-                                    <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                                    <li><strong>Name</strong>: ${currSkill.name}</li>
+                                    <li><strong>Skill Detail</strong>: ${currSkill.detail}
+                                    </li>
                                 </ul>
+                                <a href="CreateRequestController?mId=0"><button class="create" style="min-width: 164px;">Create Request</button></a>
                             </div>
-                         
                         </div>
 
                     </div>
-
+                    
                 </div>
             </section>
 

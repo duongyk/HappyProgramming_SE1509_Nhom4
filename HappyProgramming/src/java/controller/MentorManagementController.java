@@ -95,7 +95,7 @@ public class MentorManagementController extends HttpServlet {
             request.setAttribute("totalRequestedHour", totalHour); // set mentor list to display
             request.setAttribute("numberOfRequest", totalRequest); // set mentor list to display
             
-//send informations to menteeManagement.jsp
+            //send informations to menteeManagement.jsp
             request.setAttribute("href", href);/*href paging*/
             request.setAttribute("endPage", endPage);
             request.setAttribute("count", count);
