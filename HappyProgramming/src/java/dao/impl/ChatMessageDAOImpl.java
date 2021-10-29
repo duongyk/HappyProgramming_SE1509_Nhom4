@@ -124,7 +124,7 @@ public class ChatMessageDAOImpl extends DBContext implements dao.ChatMessageDAO 
      * @throws java.lang.Exception
     */
     @Override
-    public ArrayList<ChatMessage> get_New_MessageThroughTwoFriendId(int yourId,int friendId,int offset) throws Exception {
+    public ArrayList<ChatMessage> getNewMessageThroughTwoFriendId(int yourId,int friendId,int offset) throws Exception {
         
         Connection conn = null;
         PreparedStatement ps = null;
@@ -171,7 +171,7 @@ public class ChatMessageDAOImpl extends DBContext implements dao.ChatMessageDAO 
      * @throws java.lang.Exception
     */
     @Override
-    public ChatMessage get_Latest_MessageThroughTwoFriendId(int yourId,int friendId) throws Exception{
+    public ChatMessage getLatestMessageThroughTwoFriendId(int yourId,int friendId) throws Exception{
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

@@ -81,7 +81,7 @@ public class ChatFriendDAOImpl extends DBContext implements dao.ChatFriendDAO {
      * @throws java.lang.Exception
     */
     @Override
-    public int checkIf_NotFriendYet_ToAdd(int yourId, int friendId) throws Exception {
+    public int checkIfNotFriendYetToAdd(int yourId, int friendId) throws Exception {
         
         Connection conn = null;
         PreparedStatement ps = null;

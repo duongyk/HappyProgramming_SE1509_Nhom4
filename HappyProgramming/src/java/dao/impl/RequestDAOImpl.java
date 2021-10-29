@@ -305,7 +305,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
      * @throws Exception
      */
     @Override
-    public ArrayList<Request> getRequestListBy_uId_And_Status(int uid, int status) throws Exception {
+    public ArrayList<Request> getRequestListByuIdAndStatus(int uid, int status) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -817,7 +817,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
      * @throws Exception
      */
     @Override
-    public int get_Mentor_TotalRequestByStatus(int mentorId, int status) throws Exception {
+    public int getMentorTotalRequestByStatus(int mentorId, int status) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -853,14 +853,14 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
      */
     
     @Override
-    public HashMap<Integer,Integer> getMentor_RequestStatistic(int mentorId) throws Exception {
+    public HashMap<Integer,Integer> getMentorRequestStatistic(int mentorId) throws Exception {
                 
         HashMap<Integer,Integer> numberMap = new HashMap<>();
         
-        int inviting = get_Mentor_TotalRequestByStatus(mentorId, 1);
-        int following = get_Mentor_TotalRequestByStatus(mentorId, 2);
-        int completed = get_Mentor_TotalRequestByStatus(mentorId, 3);
-        int canceled = get_Mentor_TotalRequestByStatus(mentorId, 4);
+        int inviting = getMentorTotalRequestByStatus(mentorId, 1);
+        int following = getMentorTotalRequestByStatus(mentorId, 2);
+        int completed = getMentorTotalRequestByStatus(mentorId, 3);
+        int canceled = getMentorTotalRequestByStatus(mentorId, 4);
         
         numberMap.put(1, inviting);
         numberMap.put(2, following);
@@ -872,13 +872,13 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     }
     
     /**
-     * Get Request Statistic of Top Five mentor wiht most request
+     * Get Request Statistic of Top Five mentor with most request
      * 
      * @return HashMap (key is mentor username, value is request statistic of that mentor)
      * @throws Exception
      */
     @Override
-    public HashMap<String,HashMap<Integer,Integer>> getStatistic_TopFive_Mentor_WithMostRequest() throws Exception {
+    public HashMap<String,HashMap<Integer,Integer>> getStatisticTopFive() throws Exception {
         HashMap<String,HashMap<Integer,Integer>> mentorMap = new HashMap<>();
         
         Connection conn = null;
@@ -901,7 +901,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
                 
                 String username = userdao.getUserById(uId).getUsername();
                 
-                HashMap<Integer,Integer> numberMap = getMentor_RequestStatistic(uId);
+                HashMap<Integer,Integer> numberMap = getMentorRequestStatistic(uId);
                 
                 mentorMap.put(username, numberMap);
                 

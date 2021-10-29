@@ -34,7 +34,7 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO {
      * @return list of all skills of the mentor
      */
     @Override
-    public ArrayList<Skill> getAll_Skill_Mentor(int uid) throws Exception {
+    public ArrayList<Skill> getAllSkillMentor(int uid) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -70,7 +70,7 @@ public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO {
      * @return list of all id of all skills of the mentor
      */
     @Override
-    public ArrayList<String> getAll_Id_Skill_Mentor(int uId) throws Exception {
+    public ArrayList<String> getAllIdSkillMentor(int uId) throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

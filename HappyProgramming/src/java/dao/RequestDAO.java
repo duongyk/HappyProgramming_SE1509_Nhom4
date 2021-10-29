@@ -49,7 +49,7 @@ public interface RequestDAO {
      *
      * @throws Exception
      */
-    public ArrayList<Request> getRequestListBy_uId_And_Status(int uid, int status) throws Exception;
+    public ArrayList<Request> getRequestListByuIdAndStatus(int uid, int status) throws Exception;
 
     /**
      * Get the total number of request of the user
@@ -176,7 +176,7 @@ public interface RequestDAO {
      *
      * @throws Exception
      */
-    public int get_Mentor_TotalRequestByStatus(int mentorId, int status) throws Exception;
+    public int getMentorTotalRequestByStatus(int mentorId, int status) throws Exception;
 
     /**
      * Get Requested Mentor sorted by number of Request
@@ -193,7 +193,7 @@ public interface RequestDAO {
      * @throws Exception
      */
     
-    public HashMap<Integer,Integer> getMentor_RequestStatistic(int mentorId) throws Exception;
+    public HashMap<Integer,Integer> getMentorRequestStatistic(int mentorId) throws Exception;
     
     /**
      * Get Request Statistic of Top Five mentor wiht most request
@@ -201,7 +201,7 @@ public interface RequestDAO {
      * @return HashMap (key is mentor username, value is request statistic of that mentor)
      * @throws Exception
      */
-    public HashMap<String,HashMap<Integer,Integer>> getStatistic_TopFive_Mentor_WithMostRequest() throws Exception;
+    public HashMap<String,HashMap<Integer,Integer>> getStatisticTopFive() throws Exception;
     
     public ArrayList<User> getHotMentor() throws Exception;
 

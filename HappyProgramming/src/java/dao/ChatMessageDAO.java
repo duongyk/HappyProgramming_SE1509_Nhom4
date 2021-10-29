@@ -51,7 +51,7 @@ public interface ChatMessageDAO {
      * @return ArrayList (list of message between two friend)
      * @throws java.lang.Exception
     */
-    public ArrayList<ChatMessage> get_New_MessageThroughTwoFriendId(int yourId,int friendId,int offset) throws Exception ;
+    public ArrayList<ChatMessage> getNewMessageThroughTwoFriendId(int yourId,int friendId,int offset) throws Exception ;
     
     /**
     * This method will return latest message between two friend
@@ -61,5 +61,5 @@ public interface ChatMessageDAO {
      * @return ChatMessage (latest message between two friend)
      * @throws java.lang.Exception
     */
-    public ChatMessage get_Latest_MessageThroughTwoFriendId(int yourId,int friendId) throws Exception ;
+    public ChatMessage getLatestMessageThroughTwoFriendId(int yourId,int friendId) throws Exception ;
 }

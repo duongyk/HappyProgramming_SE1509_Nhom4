@@ -53,10 +53,10 @@ public class ViewMentorRequestStatisticByAdminController extends HttpServlet {
             int completed = 0;
             int canceled = 0;
             
-            invited = requestdao.get_Mentor_TotalRequestByStatus(uId, 1);
-            following = requestdao.get_Mentor_TotalRequestByStatus(uId, 2);
-            completed = requestdao.get_Mentor_TotalRequestByStatus(uId, 3);
-            canceled = requestdao.get_Mentor_TotalRequestByStatus(uId, 4);
+            invited = requestdao.getMentorTotalRequestByStatus(uId, 1);
+            following = requestdao.getMentorTotalRequestByStatus(uId, 2);
+            completed = requestdao.getMentorTotalRequestByStatus(uId, 3);
+            canceled = requestdao.getMentorTotalRequestByStatus(uId, 4);
 
             int total = invited+following+completed+canceled;
 

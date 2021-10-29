@@ -41,5 +41,5 @@ public interface ChatFriendDAO {
      * @throws java.lang.Exception
     */
     
-    public int checkIf_NotFriendYet_ToAdd(int yourId, int friendId) throws Exception ;    
+    public int checkIfNotFriendYetToAdd(int yourId, int friendId) throws Exception ;    
 }

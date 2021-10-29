@@ -68,7 +68,7 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             
             // get top 5 mentor request statistic
             
-            HashMap<String,HashMap<Integer,Integer>> statisticMap = requestdao.getStatistic_TopFive_Mentor_WithMostRequest();
+            HashMap<String,HashMap<Integer,Integer>> statisticMap = requestdao.getStatisticTopFive();
             
             // replace username of your mentor wiht "You" if user in top 5
             if(statisticMap.containsKey(user.getUsername())) {
@@ -82,7 +82,7 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
                 }
                 
             } else { // if user not in top 5
-                HashMap<Integer,Integer> userStatistic = requestdao.getMentor_RequestStatistic(user.getId());
+                HashMap<Integer,Integer> userStatistic = requestdao.getMentorRequestStatistic(user.getId());
                 
                 statisticMap.put("You", userStatistic);
             }
