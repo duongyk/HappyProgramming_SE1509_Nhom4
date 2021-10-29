@@ -63,7 +63,7 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     </head>
 
-    <body style="zoom: 80%;">
+    <body style="">
 
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top d-flex align-items-center" style="background-color:#e2f5fde0;">
@@ -83,6 +83,12 @@
                                 <c:when test="${sessionScope.currUser!=null}">
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        <li><a class="nav-link scrollto" href="openChat">Messenger</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
+                                        </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
@@ -150,7 +156,7 @@
                                             <div class="d-flex flex-column align-items-center text-center">
                                                 <img src="img/${sessionScope.currUser.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
                                                 <div class="mt-3">
-                                                    <h4> <c:out value="${user.fullname}"></c:out> </h4>                                        
+                                                    <h4> <c:out value="${sessionScope.currUser.getUsername()}"></c:out> </h4>                                        
                                                     <p class="text-secondary mb-1"><c:out value="${cv.getProfession()}"></c:out></p>
                                                         <!--<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>-->
                                                     </div>
@@ -160,7 +166,7 @@
                                             <div class="d-flex flex-column align-items-center text-center">
                                                 <img src="img/${sessionScope.currUser.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
                                                 <div class="mt-3">
-                                                    <h4> <c:out value="${user.fullname}"></c:out> </h4>                                                               
+                                                    <h4> <c:out value="${sessionScope.currUser.getUsername()}"></c:out> </h4>                                                               
                                                     </div>
                                                 </div>   
                                         </c:otherwise>
@@ -264,16 +270,13 @@
                                             <hr/>
                                             <div class="review-block">
                                                 
-                                                <%
-                                                    //for(Rating rating: ratingList) {
-                                                %>
                                                 <c:forEach items="${ratingList}" var="rating">
                                                 <div class="row">
                                                     <div class="col-sm-3">
                                                         <c:set var="user" value="${rating.getFrom()}"></c:set>
                                                         <img style="width:60px;height: 60px;" src="img/<c:out value="${user.getAvatar()}" ></c:out>" class="img-rounded">
                                                         <div class="review-block-name"></div>
-                                                        <div class="review-block-date"><${rating.getDate()}</div>
+                                                        <div class="review-block-date">${rating.getDate()}</div>
                                                     </div>
                                                     <div class="col-sm-9">
                                                         <div class="review-block-rate">
@@ -294,37 +297,7 @@
                                                 </div>
                                                 <hr/>
                                                 </c:forEach>
-                                                <%
-                                                    //}
-                                                %>
-                                                <div class="row">
-                                                    <div class="col-sm-3">
-                                                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                                                        <div class="review-block-name"><a href="#">nktailor</a></div>
-                                                        <div class="review-block-date">January 29, 2016<br/>1 day ago</div>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <div class="review-block-rate">
-                                                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                                            </button>
-                                                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                                            </button>
-                                                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                                            </button>
-                                                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                                            </button>
-                                                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="review-block-title">this was nice in buy</div>
-                                                        <div class="review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
-                                                    </div>
-                                                </div>
+     
                                             </div>
                                         </div>
                                     </div>

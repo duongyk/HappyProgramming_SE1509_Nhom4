@@ -67,6 +67,12 @@
                                 <c:when test="${sessionScope.currUser!=null}">
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        <li><a class="nav-link scrollto" href="openChat">Messenger</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
+                                        </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
@@ -134,7 +140,7 @@
                                             <div class="d-flex flex-column align-items-center text-center">
                                                 <img src="img/${sessionScope.currUser.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
                                                 <div class="mt-3">
-                                                    <h4> <c:out value="${user.fullname}"></c:out> </h4>                                        
+                                                    <h4> <c:out value="${sessionScope.currUser.getUsername()}"></c:out> </h4>                                        
                                                     <p class="text-secondary mb-1"><c:out value="${cv.getProfession()}"></c:out></p>
                                                         <!--<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>-->
                                                     </div>
@@ -144,7 +150,7 @@
                                             <div class="d-flex flex-column align-items-center text-center">
                                                 <img src="img/${sessionScope.currUser.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
                                                 <div class="mt-3">
-                                                    <h4> <c:out value="${user.fullname}"></c:out> </h4>                                                               
+                                                    <h4> <c:out value="${sessionScope.currUser.getUsername()}"></c:out> </h4>                                                               
                                                     </div>
                                                 </div>   
                                         </c:otherwise>

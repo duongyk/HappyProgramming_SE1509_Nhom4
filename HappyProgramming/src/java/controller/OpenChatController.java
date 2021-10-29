@@ -56,16 +56,16 @@ public class OpenChatController extends HttpServlet {
             UserDAO userdao = new UserDAOImpl();
             ChatFriendDAO frienddao = new ChatFriendDAOImpl();
             
-            int uId = 6;
-            session.setAttribute("uId", uId);
+            int uId = 0;
+            //session.setAttribute("uId", uId);
             
             // check if user has login yet
-//            User user = (User) session.getAttribute("currUser");
-//            if(user==null) {
-//                response.sendRedirect("signIn.jsp");
-//            } else {
-//                uId = user.getId();
-//            }
+            User user = (User) session.getAttribute("currUser");
+            if(user==null) {
+                response.sendRedirect("signIn.jsp");
+            } else {
+                uId = user.getId();
+            }
             
             int friendId = 0;
             int status = 0;
@@ -92,7 +92,10 @@ public class OpenChatController extends HttpServlet {
             }
             
             request.setAttribute("friendList", friendList);
+            
+            if(friendId!=0){
             request.setAttribute("friendId", friendId);
+            }
             
             RequestDispatcher rd = request.getRequestDispatcher("/chatbox.jsp");
             rd.forward(request, response);

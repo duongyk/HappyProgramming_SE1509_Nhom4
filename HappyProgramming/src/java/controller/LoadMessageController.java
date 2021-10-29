@@ -8,6 +8,7 @@ package controller;
 import dao.ChatMessageDAO;
 import dao.impl.ChatMessageDAOImpl;
 import entity.ChatMessage;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -78,7 +79,8 @@ public class LoadMessageController extends HttpServlet {
 
             int offset = Integer.parseInt(request.getParameter("offset"));
 
-            int uId = (int) session.getAttribute("uId");
+            User user = (User) session.getAttribute("currUser");
+            int uId = user.getId();
             
             int friendId = Integer.parseInt(request.getParameter("friendId"));
 
@@ -132,9 +134,10 @@ public class LoadMessageController extends HttpServlet {
             ChatMessageDAO messdao = new ChatMessageDAOImpl();
 
             String message = request.getParameter("message");
-            System.out.println(message);
+            //System.out.println(message);
             
-            int uId = (int) session.getAttribute("uId");
+            User user = (User) session.getAttribute("currUser");
+            int uId = user.getId();
 
             int friendId = Integer.parseInt(request.getParameter("friendId"));
 

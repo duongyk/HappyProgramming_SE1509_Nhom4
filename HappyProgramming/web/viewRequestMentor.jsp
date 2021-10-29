@@ -61,6 +61,12 @@
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        <li><a class="nav-link scrollto" href="openChat">Messenger</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
+                                        </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
@@ -118,7 +124,7 @@
                         <%-- Request Detail --%>
                         <div class="row">
                             <div class="col-md-5">
-                                <h3>Mentee: ${req.from.fullname}</h3>
+                                <h3>Mentee: ${req.from.fullname} <a href="openChat?friendId=${req.from.id}">Nhắn tin </a></h3>
                                 <br><br>
                                 <p>Deadline Date: ${req.deadlineDate}</p>
                                 <p>Hour: ${req.deadlineHour}</p>

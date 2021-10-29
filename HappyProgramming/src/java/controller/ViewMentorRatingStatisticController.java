@@ -59,14 +59,12 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             HttpSession session = request.getSession();
                         
             // check if mentor login
-//            User user = (User) session.getAttribute("currUser");
-//            if (user == null) { // return to sign in page
-//                response.sendRedirect("signIn.jsp");
-//                return;
-//            } 
+            User user = (User) session.getAttribute("currUser");
+            if (user == null) { // return to sign in page
+                response.sendRedirect("signIn.jsp");
+                return;
+            } 
             
-            User user = new User();
-            user.setId(6);
 
             // get rating statistic
             int five = ratingdao.getMentorNumberRating(user.getId(), 5);

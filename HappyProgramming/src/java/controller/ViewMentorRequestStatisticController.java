@@ -56,15 +56,15 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             HttpSession session = request.getSession();
             
             // check if mentor login
-//            User user = (User) session.getAttribute("currUser");
-//            if (user == null) { // return to sign in page
-//                response.sendRedirect("signIn.jsp");
-//                return;
-//            } 
+            User user = (User) session.getAttribute("currUser");
+            if (user == null) { // return to sign in page
+                response.sendRedirect("signIn.jsp");
+                return;
+            } 
             
-            User user = new User();
-            user.setId(6);
-            user.setUsername("mentor01");
+//            User user = new User();
+//            user.setId(6);
+//            user.setUsername("mentor01");
             
             // get top 5 mentor request statistic
             
