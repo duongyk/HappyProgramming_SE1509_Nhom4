@@ -50,33 +50,33 @@ public class SearchController extends HttpServlet {
         try {
             String category = request.getParameter("category");
             String txtSearch = request.getParameter("txtSearch");
-            if (category.equalsIgnoreCase("Skill")) {
-                ArrayList<Skill> list = skillDAO.searchSkill(txtSearch);
-                request.setAttribute("sList", list);
-                request.setAttribute("txt", txtSearch);
-                request.setAttribute("category", category);
+            if (category.equalsIgnoreCase("Skill")) { // search skill name
+                ArrayList<Skill> list = skillDAO.searchSkill(txtSearch); // get list of skill by name
+                request.setAttribute("sList", list); // set attribute list
+                request.setAttribute("txt", txtSearch); // set attribute txtSearch
+                request.setAttribute("category", category); // set attribute category
                 sendDispatcher(request, response, "searchSkill.jsp");
             }
-            if (category.equalsIgnoreCase("Mentee")) {
-                ArrayList<User> mList = userDAO.searchMentee(txtSearch);
-                request.setAttribute("mList", mList);
-                request.setAttribute("category", category);
-                request.setAttribute("txt", txtSearch);
+            if (category.equalsIgnoreCase("Mentee")) { // search mentee name
+                ArrayList<User> mList = userDAO.searchMentee(txtSearch); // get list of mentee by name
+                request.setAttribute("mList", mList); // set attribute list
+                request.setAttribute("category", category); // set attribute category
+                request.setAttribute("txt", txtSearch); // set attribute txtSearch
                 System.out.println(category);
                 sendDispatcher(request, response, "searchMentee.jsp");
             }
-            if (category.equalsIgnoreCase("Message")) {
-                ArrayList<Message> mList = messDAO.searchMessage(txtSearch);
-                request.setAttribute("mList", mList);
-                request.setAttribute("txt", txtSearch);
-                request.setAttribute("category", category);
+            if (category.equalsIgnoreCase("Message")) { // search message name
+                ArrayList<Message> mList = messDAO.searchMessage(txtSearch); // get list of message by name
+                request.setAttribute("mList", mList); // set attribute list
+                request.setAttribute("txt", txtSearch); //set attribute txtSearch
+                request.setAttribute("category", category); // set attribute category
                 sendDispatcher(request, response, "searchMessage.jsp");
             }
-            if (category.equalsIgnoreCase("Mentor")) {
-                ArrayList<User> mentorList = userDAO.searchMentor(txtSearch);
-                request.setAttribute("mentorList", mentorList);
-                request.setAttribute("category", category);
-                request.setAttribute("txt", txtSearch);
+            if (category.equalsIgnoreCase("Mentor")) { // search mentor name
+                ArrayList<User> mentorList = userDAO.searchMentor(txtSearch); // get list of mentor by name
+                request.setAttribute("mentorList", mentorList); // set attribute list
+                request.setAttribute("category", category); // set attribute category
+                request.setAttribute("txt", txtSearch); //set attribute txtSearch
                 System.out.println(category);
                 sendDispatcher(request, response, "searchMentor.jsp");
             }
