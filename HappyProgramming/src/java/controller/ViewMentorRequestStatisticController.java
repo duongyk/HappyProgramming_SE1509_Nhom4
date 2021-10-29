@@ -15,7 +15,9 @@ import dao.impl.RequestDAOImpl;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -54,26 +56,38 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             HttpSession session = request.getSession();
             
             // check if mentor login
-            User user = (User) session.getAttribute("currUser");
-            if (user == null) { // return to sign in page
-                response.sendRedirect("signIn.jsp");
-                return;
-            } 
+//            User user = (User) session.getAttribute("currUser");
+//            if (user == null) { // return to sign in page
+//                response.sendRedirect("signIn.jsp");
+//                return;
+//            } 
+            
+            User user = new User();
+            user.setId(6);
+            user.setUsername("mentor01");
             
             // get top 5 mentor request statistic
             
             HashMap<String,HashMap<Integer,Integer>> statisticMap = requestdao.getStatistic_TopFive_Mentor_WithMostRequest();
             
-            // change username of user username
+            // replace username of your mentor wiht "You" if user in top 5
             if(statisticMap.containsKey(user.getUsername())) {
                 
-                statisticMap.put("You", statisticMap.remove(user.getUsername()));
+                for(String key: new ArrayList<>(statisticMap.keySet())) {
+                    if(user.getUsername().equalsIgnoreCase(key)) {
+                       statisticMap.put("You", statisticMap.remove(key));
+                    } else {
+                       statisticMap.put(key, statisticMap.remove(key));
+                    }
+                }
                 
             } else { // if user not in top 5
                 HashMap<Integer,Integer> userStatistic = requestdao.getMentor_RequestStatistic(user.getId());
                 
                 statisticMap.put("You", userStatistic);
             }
+            
+            request.setAttribute("statisticMap", statisticMap); 
             
             sendDispatcher(request, response, "/mentorRequestStatistic.jsp");
         } catch (Exception e) {

@@ -19,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * This class implements from class interface RequestDAOImpl. <br>
@@ -896,7 +897,7 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
             
             while (rs.next()) {
                 
-                int uId = rs.getInt("uId");
+                int uId = rs.getInt("toId");
                 
                 String username = userdao.getUserById(uId).getUsername();
                 
