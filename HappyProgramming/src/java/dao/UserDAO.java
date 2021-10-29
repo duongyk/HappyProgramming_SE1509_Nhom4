@@ -214,8 +214,22 @@ public interface UserDAO {
      */
     public ArrayList<User> getSortedUserByRolePaging(int index, int uRole) throws Exception;
  
+    /**
+     * Get a user by his/her registered skill id
+     *
+     * @param sId it is a <code>java.lang.Integer</code>
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
     public ArrayList<User> getRecommendMentorBySkill(int sId) throws Exception;
     
+    /**
+     * Get list of Mentor with the username like txtSearch
+     *
+     * @param txtSearch
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
     public ArrayList<User> searchMentor(String txtSearch) throws Exception;
 }
 

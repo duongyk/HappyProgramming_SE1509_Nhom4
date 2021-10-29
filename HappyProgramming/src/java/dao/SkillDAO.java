@@ -127,5 +127,11 @@ public interface SkillDAO {
      */
     public ArrayList<Skill> getTrendingSkill() throws Exception;
     
+    /**
+     * Update Skill Detail by Skill detail
+     *
+     * @param sId it is a <code>java.lang.Integer</code>
+     * @throws Exception
+     */
     public Skill getSkillDetail(int sId) throws Exception;
 }

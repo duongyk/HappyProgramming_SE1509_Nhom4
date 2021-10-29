@@ -455,6 +455,13 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         }
     }
 
+    /**
+     * Find Skill in the database
+     *
+     * @param txtSearch. It is a <code>java.lang.String</code>
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
+     */
     @Override
     public ArrayList<Skill> searchSkill(String txtSearch) throws Exception {
         Connection conn = null;
@@ -492,6 +499,12 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return list;
     }
     
+    /**
+     * Update Skill Detail by Skill detail
+     *
+     * @param sId it is a <code>java.lang.Integer</code>
+     * @throws Exception
+     */
     @Override
     public Skill getSkillDetail(int sId) throws Exception {
         Connection conn = null;

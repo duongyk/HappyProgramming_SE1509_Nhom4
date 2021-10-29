@@ -853,6 +853,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return total;
     }
 
+    /**
+     * Update user's Status by user's id
+     *
+     * @param user it is a <code>User</code> object
+     * @param status it is a <code>java.lang.Integer</code>
+     * @throws Exception
+     */
     @Override
     public void updateUserStatusById(User user, int status) throws Exception {
         Connection conn = null;
@@ -874,6 +881,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
     }
     
+    /**
+     * Get a user by his/her registered skill id
+     *
+     * @param sId it is a <code>java.lang.Integer</code>
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public ArrayList<User> getRecommendMentorBySkill(int sId) throws Exception {
         Connection conn = null;
@@ -920,6 +934,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return list;
     }
     
+    /**
+     * Get list of Mentee with the username like txtSearch
+     *
+     * @param txtSearch
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public ArrayList<User> searchMentor(String txtSearch) throws Exception {
         Connection conn = null;
@@ -928,7 +949,15 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         ArrayList<User> list = new ArrayList<>();
         String sql = "SELECT * FROM [User] where uRole = '2' and fullname like ?";
         int id;
-        String username, password, fullname, mail, phone, gender, avatar;
+        String username;
+        String password; 
+        String fullname;
+        String mail;
+        String phone;
+        String gender;
+        String avatar;
+        int status;
+        int role;
         Date dob;
         User u;
         try {
@@ -946,7 +975,9 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
                 dob = rs.getDate("DOB");
                 gender = rs.getString("gender");
                 avatar = rs.getString("uAvatar");
-                u = new User(id, username, password, fullname, mail, phone, dob, gender, avatar);
+                status = rs.getInt("uStatus");
+                role = rs.getInt("uRole");
+                u = new User(id, username, password, fullname, mail, phone, dob, gender, avatar, role, status);
                 list.add(u);
             }
         } catch (Exception ex) {
@@ -961,12 +992,5 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
 
     public int getTotalFilterSkill(int uRole, int sId) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public static void main(String[] args) throws Exception {
-        UserDAO userDAO = new UserDAOImpl();
-        ArrayList<User> user = new ArrayList<>();
-        user = userDAO.getRecommendMentorBySkill(1);
-        System.out.println(user.size());
     }
 }

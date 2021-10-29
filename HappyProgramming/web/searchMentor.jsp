@@ -275,40 +275,57 @@
                                         <c:otherwise>
                                         <h3  style="margin-left: 0 px; width: 600px;"> 
                                             Showing results for " ${txt} "</h3>
-                                        <div class="row">
-                                            <div class="col-md-12 grid-margin stretch-card">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped table-borderless">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>ID</th>
-                                                                        <th><a style="color: black" href="AdminControllerMap?service=filterName"> Full Name </a></th>
-                                                                        <th>Username</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <c:forEach items="${mentorList}" var="mentor">
+                                            <div class="row">
+                                                <div class="col-md-12 grid-margin stretch-card">
+                                                    <div class="card">
+                                                        <div class="card-body">
+
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped table-borderless">
+                                                                    <thead>
                                                                         <tr>
-                                                                            <td>
-                                                                                <c:out value="${mentor.id}"></c:out>
-                                                                                </td>
+                                                                            <th>ID</th>
+                                                                            <th>Fullname</th>
+                                                                            <th>Username</th>
+                                                                            <th>Email</th>
+                                                                            <th style="padding-left: 50px;">Status</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <c:forEach items="${mentorList}" var="mentor">
+                                                                            <tr>
                                                                                 <td>
-                                                                                <c:out value=" ${mentor.fullname}"></c:out>
-                                                                                </td>
-                                                                                <td>
-                                                                                <c:out value="${mentor.username}"></c:out>
+                                                                                    <c:out value="${mentor.id}"></c:out>
+                                                                                    </td>    
+                                                                                    <td>
+                                                                                        <a href="UserProfileController?uId=${mentor.id}"><c:out value="${mentor.fullname}"></c:out></a>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                    <c:out value=" ${mentor.username}"></c:out>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                    <c:out value="${mentor.mail}"></c:out>
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                    <c:if test="${mentor.status==1}">
+                                                                                        <a href="UpdateMentorStatusController?uId=${mentor.id}&&status=1" class="btn btn-success" > Activate </a>
+
+                                                                                    </c:if>
+                                                                                    <c:if test="${mentor.status==0}">
+                                                                                        <a href="UpdateMentorStatusController?uId=${mentor.id}&&status=0" class="btn btn-danger" > Deactivate </a>
+                                                                                    </c:if>
                                                                                 </td>
                                                                             </tr>
-                                                                    </c:forEach>
-                                                                </tbody>
-                                                            </table>
+                                                                        </c:forEach>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            
                                     </c:otherwise>
                                 </c:choose>   
                                 
