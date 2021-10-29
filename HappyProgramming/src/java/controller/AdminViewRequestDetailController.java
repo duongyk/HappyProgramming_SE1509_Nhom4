@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author solov
  */
 @WebServlet(name = "AdminViewRequestDetail", urlPatterns = {"/adminViewRequestDetail"})
-public class AdminViewRequestDetail extends HttpServlet {
+public class AdminViewRequestDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,7 +61,7 @@ public class AdminViewRequestDetail extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(AdminViewRequestDetail.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminViewRequestDetailController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +90,7 @@ public class AdminViewRequestDetail extends HttpServlet {
             request.setAttribute("req", req);/*Request*/
             sendDispatcher(request, response, "adminViewRequest.jsp");
         } catch (Exception e) {
-            Logger.getLogger(AdminViewRequestDetail.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(AdminViewRequestDetailController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

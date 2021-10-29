@@ -85,7 +85,7 @@
                                         <div class="notfound-404">
                                             <h1>!</h1>
                                         </div>
-                                        <h2>Error<br>404</h2>
+                                        <h2>Need permission</h2>
                                     </div>
                                     <p>This page can only accessible when you have the authority. <a href="index.jsp">Back to homepage ?</a></p>
                                 </div>

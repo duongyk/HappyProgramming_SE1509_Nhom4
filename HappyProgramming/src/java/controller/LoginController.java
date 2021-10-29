@@ -58,7 +58,7 @@ public class LoginController extends HttpServlet {
             }
                else if (user.getRole() == 3) {
                     request.getSession().setAttribute("currUser", user);
-                    sendDispatcher(request, response, "adminDashboard.jsp");
+                    sendDispatcher(request, response, "index.jsp");
                 } else {
                     request.getSession().setAttribute("currUser", user);
                     sendDispatcher(request, response, "index.jsp");

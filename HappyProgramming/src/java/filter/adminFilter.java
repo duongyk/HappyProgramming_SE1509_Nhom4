@@ -23,9 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
  @WebFilter(
         filterName = "adminFilter", 
-        urlPatterns = {"/adminDashboard","/skillManagement","/adminViewRequest","/mentorPage",
-                        "/createSkill","/mentorManagement","/menteeManagement",
-                        "/updateSkill"}
+        urlPatterns = {"/adminDashboard","/skillManagement","/adminViewRequest","/mentorPage", 
+                        "/createSkill","/mentorManagement","/menteeManagement", "/requestManagement","/requestSearch","/search",
+                        "/updateSkill","/adminViewRequestDetail","/sortSkillByName","/getUpdateSkill","/MessageControllerMap?service=getMessage","/MessageControllerMap?service=viewMessage",
+                        "/MessageControllerMap?service=deleteMessage","/MessageControllerMap?service=getUnReadMessage","/sortMenteeByName"}
         )
 /**
  *
