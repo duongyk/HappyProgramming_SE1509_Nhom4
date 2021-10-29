@@ -55,7 +55,7 @@ public class CVProfileController extends HttpServlet {
             UserSkillDAO smdao = new UserSkillDAOImpl();
             int mId = Integer.parseInt(request.getParameter("mId"));
             User mentor = userDAO.getUserById(mId);
-            ArrayList<Skill> sList = smdao.getAll_Skill_Mentor(mId);
+            ArrayList<Skill> sList = smdao.getAllSkillMentor(mId);
             // get information of user mentor
             CV cv = cvdao.getMentorCV(mId);
             request.setAttribute("cv", cv);

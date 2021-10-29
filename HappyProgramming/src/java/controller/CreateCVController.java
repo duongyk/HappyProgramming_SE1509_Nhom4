@@ -60,8 +60,8 @@ public class CreateCVController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
-     *
+     * This GET method will get all data necessary and forward user to createCV jsp
+     * 
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -92,8 +92,11 @@ public class CreateCVController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
-     *
+     * This POST method will process all data
+     * user submit from createCV jsp
+     * and store in database
+     * If success if will return to signIn jsp
+     * 
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs

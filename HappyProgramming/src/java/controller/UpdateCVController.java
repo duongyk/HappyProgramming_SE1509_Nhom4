@@ -66,7 +66,8 @@ public class UpdateCVController extends HttpServlet {
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * This GET method will get all data needed for mentor
+     * and forward to updateCV jsp
      *
      * @param request servlet request
      * @param response servlet response
@@ -92,7 +93,7 @@ public class UpdateCVController extends HttpServlet {
             User mentorProfile = (User) session.getAttribute("currUser");
 
             // get all skill id from mentor
-            ArrayList<String> mentorSkill = smdao.getAll_Id_Skill_Mentor(uid);
+            ArrayList<String> mentorSkill = smdao.getAllIdSkillMentor(uid);
 
             //get all available skill
             SkillDAOImpl skilldao = new SkillDAOImpl();
@@ -117,8 +118,11 @@ public class UpdateCVController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
-     *
+     * This POST method will process all data mentor
+     * submit from update CV jsp 
+     * and update database
+     * If success call UserProfile Controller
+     * 
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs

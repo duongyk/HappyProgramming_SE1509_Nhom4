@@ -35,8 +35,8 @@ import javax.servlet.http.HttpServletResponse;
 public class ViewMentorRequestDetailController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * This method will get the detail about the request for mentor
+     * and process to viewRequestMentor jsp
      *
      * @param request servlet request
      * @param response servlet response

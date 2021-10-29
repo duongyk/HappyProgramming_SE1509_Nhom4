@@ -36,8 +36,8 @@ import javax.servlet.http.HttpSession;
 public class ViewMentorRequestController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * This method will return list of request of
+     * mentor base on status
      *
      * @param request servlet request
      * @param response servlet response
@@ -64,7 +64,7 @@ public class ViewMentorRequestController extends HttpServlet {
 
         // Get all Request from database
 
-        ArrayList<Request> requestList = requestdao.getRequestListBy_uId_And_Status(user.getId(), status);
+        ArrayList<Request> requestList = requestdao.getRequestListByuIdAndStatus(user.getId(), status);
 
         switch (status) {
             case 1:

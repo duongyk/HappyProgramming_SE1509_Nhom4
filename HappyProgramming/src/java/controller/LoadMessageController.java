@@ -84,7 +84,7 @@ public class LoadMessageController extends HttpServlet {
             
             int friendId = Integer.parseInt(request.getParameter("friendId"));
 
-            ArrayList<ChatMessage> messageList = messdao.get_New_MessageThroughTwoFriendId(uId, friendId, offset);
+            ArrayList<ChatMessage> messageList = messdao.getNewMessageThroughTwoFriendId(uId, friendId, offset);
 
             for (ChatMessage message : messageList) {
                 if (message.getFromId() == uId) {

@@ -43,8 +43,9 @@ import javax.servlet.http.HttpSession;
 public class ViewMentorRatingStatisticController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * This method will get all rating of the mentor
+     * include average rating, list of rating
+     * forward to mentorRatingStatistic jsp
      *
      * @param request servlet request
      * @param response servlet response

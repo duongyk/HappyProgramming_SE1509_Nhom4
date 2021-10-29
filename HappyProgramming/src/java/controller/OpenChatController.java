@@ -74,7 +74,7 @@ public class OpenChatController extends HttpServlet {
                 
             friendId = Integer.parseInt(request.getParameter("friendId"));
             
-            status = frienddao.checkIf_NotFriendYet_ToAdd(uId, friendId);
+            status = frienddao.checkIfNotFriendYetToAdd(uId, friendId);
             
             } catch (NumberFormatException | NullPointerException e) { // get message for the first friend in list
             }
