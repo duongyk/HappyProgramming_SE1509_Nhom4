@@ -57,9 +57,7 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             RatingDAO ratingdao = new RatingDAOImpl();
             HttpSession session = request.getSession();
-            
-            UserDAO userdao = new UserDAOImpl();
-            
+                        
             // check if mentor login
 //            User user = (User) session.getAttribute("currUser");
 //            if (user == null) { // return to sign in page
