@@ -110,16 +110,12 @@ public class PostAnswerController extends HttpServlet {
             User user = (User) request.getSession().getAttribute("currUser");
             // Get input and Insert new Answer
             int pId = Integer.parseInt(request.getParameter("pId"));
-            String content = request.getParameter("content");
+            String content = request.getParameter("content").trim();
             paDAO.insertProblemAnswer(pId, user.getId(), content);
             // Get Problem
             Problem problem = pDAO.getProblem(pId);
-            // Get index page 
-            String indexPage = request.getParameter("index");
-            if (indexPage == null) {
-                indexPage = "1";
-            }
-            int index = Integer.parseInt(indexPage);
+            // Set index page 
+            int index = 1;
             // Total request for paging
             int count = paDAO.countProblemAnswer(pId);
             // Calculate total page for paging

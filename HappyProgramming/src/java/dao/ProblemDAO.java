@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public interface ProblemDAO {
 
     /**
-     * Get all the Problem
+     * Get all the Problem with Paging
      *
      * @param index is a <code>java.lang.Integer</code>
      * @return list of <code>Problem</code> object

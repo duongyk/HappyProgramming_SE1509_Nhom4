@@ -23,10 +23,6 @@
         <link href="img/favicon.png" rel="icon">
         <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-
-        <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
         <link href="vendor/aos/aos.css" rel="stylesheet">
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -100,7 +96,7 @@
                     </div>
                     <%-- Title  --%>
                     <div class="col-md-8 section-title">
-                        <h2 class="">Problem and Answer ${pId}</h2>
+                        <h2 class="">Problem and Answer</h2>
                         <c:if test="${messSucc!=null}">
                         <h1 style="color:#29cc49;font-weight: bold;text-align: center"><c:out value="${messSucc}"></c:out></h1>
                     </c:if>

@@ -96,8 +96,8 @@ public class PostProblemController extends HttpServlet {
             // Get current user
             User user = (User) request.getSession().getAttribute("currUser");
             // Get input and insert Problem
-            String title = request.getParameter("title");
-            String content = request.getParameter("content");
+            String title = request.getParameter("title").trim();
+            String content = request.getParameter("content").trim();
             pDAO.insertProblem(new Problem(user, title, content));
             request.setAttribute("messSucc", "Insert Successfully");/*Mess*/
             // Get index page 

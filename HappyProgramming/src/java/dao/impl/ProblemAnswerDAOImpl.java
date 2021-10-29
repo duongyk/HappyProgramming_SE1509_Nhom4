@@ -10,9 +10,7 @@
 package dao.impl;
 
 import context.DBContext;
-import dao.ProblemAnswerDAO;
 import entity.ProblemAnswer;
-import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

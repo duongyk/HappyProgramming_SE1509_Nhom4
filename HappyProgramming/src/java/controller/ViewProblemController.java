@@ -15,7 +15,6 @@ import dao.impl.ProblemAnswerDAOImpl;
 import dao.impl.ProblemDAOImpl;
 import entity.Problem;
 import entity.ProblemAnswer;
-import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -95,14 +94,6 @@ public class ViewProblemController extends HttpServlet {
             // Get Problem
             int pId = Integer.parseInt(request.getParameter("pId"));
             Problem problem = pDAO.getProblem(pId);
-            // Get current user
-            User user = (User) request.getSession().getAttribute("currUser");
-            if (user!=null) {
-                // Check if the Problem belong to the User or not
-            boolean check = pDAO.checkMyProblem(pId, user.getId());
-            request.setAttribute("check", check);/*Check belong*/
-            }
-            
             // Get index page 
             String indexPage = request.getParameter("index");
             if (indexPage == null) {
@@ -151,13 +142,7 @@ public class ViewProblemController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
-        
-        } catch (Exception e) {
-            Logger.getLogger(ViewProblemController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.toString());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

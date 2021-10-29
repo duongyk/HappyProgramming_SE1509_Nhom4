@@ -106,19 +106,18 @@
                 <form class="form" action="searchMentorPublic" method="GET">
                     <div class="row">
                         <div class="col-md-2"></div>
-                        <div class="col-md-6"></div>
-
+                        <div class="col-md-5"></div>
                         <%-- Seacrh Name box  --%>
                         <c:choose>
                             <c:when test="${name!=null}">
-                                <div class="col-md-2">
-                                    <label class="label" for="name">Name </label>
+                                <div class="col-md-3">
+                                    <label class="label" for="name">Search Mentor by Name </label>
                                     <input type="text" id="name" name="name" value="${name}" pattern=".*\S+.*" title="No white space only"  maxlength="20">
                                 </div>
                             </c:when>
                             <c:otherwise>
-                                <div class="col-md-2">
-                                    <label class="label" for="name">Name </label>
+                                <div class="col-md-3">
+                                    <label class="label" for="name">Search Mentor by Name </label>
                                     <input type="text" id="name" name="name" pattern=".*\S+.*" title="No white space only" value=""  maxlength="20">
                                 </div>
                             </c:otherwise>

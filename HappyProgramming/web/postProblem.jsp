@@ -25,9 +25,6 @@
         <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
-        <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-            rel="stylesheet">
 
         <!-- Vendor CSS Files -->
         <link href="vendor/aos/aos.css" rel="stylesheet">
@@ -133,7 +130,7 @@
                                         <div class="row">
                                             <div class="col-4"></div>
                                             <div class="col-5">
-                                                <button id="button" class="btn btn--radius-2 btn--red submit-button" type="submit">Post</button>
+                                                <button id="button" class="btn btn--radius-2 btn--blue submit-button"  type="submit">Post</button>
                                             </div>
                                             <div class="col-3"></div>
                                         </div>
