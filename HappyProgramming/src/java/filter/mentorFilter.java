@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package filter;
 
 import entity.User;
@@ -25,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author QMC
  */
-@WebFilter(filterName = "mentorFilter", urlPatterns = {"/","/updateCV","/",
+@WebFilter(filterName = "mentorFilter", urlPatterns = {"/viewMentorRatingStatistic","/updateCV","/viewMentorRequestDetail","/viewMentorRequestStatistic",
                         "/createSkill.jsp"})
 public class mentorFilter implements Filter {
     

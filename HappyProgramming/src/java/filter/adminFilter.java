@@ -1,9 +1,6 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
 package filter;
 
 import entity.User;
@@ -29,10 +26,10 @@ import javax.servlet.http.HttpSession;
                         "/MessageControllerMap?service=deleteMessage","/MessageControllerMap?service=getUnReadMessage","/sortMenteeByName"}
         )
 /**
+ * 
  *
- * @author QMC
+ * @author ToanPKhe151393
  */
-
 public class adminFilter implements Filter {
     
     private static final boolean debug = true;

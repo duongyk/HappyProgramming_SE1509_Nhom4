@@ -85,7 +85,7 @@ public class SignupController extends HttpServlet {
             }
 
         }catch (Exception e) {
-            Logger.getLogger(ViewMentorRequestController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(SignupController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.getMessage());
             sendDispatcher(request, response, "/error.jsp");
         }
@@ -96,7 +96,7 @@ public class SignupController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignupController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

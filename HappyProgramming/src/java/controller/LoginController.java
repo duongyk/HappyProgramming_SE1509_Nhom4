@@ -70,7 +70,7 @@ public class LoginController extends HttpServlet {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("errorMessage", ex.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
@@ -81,7 +81,7 @@ public class LoginController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
