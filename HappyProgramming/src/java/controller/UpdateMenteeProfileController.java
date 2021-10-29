@@ -44,7 +44,7 @@ public class UpdateMenteeProfileController extends HttpServlet {
             
         }
         catch (Exception e) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UpdateMenteeProfileController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -53,7 +53,7 @@ public class UpdateMenteeProfileController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateMenteeProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -77,7 +77,7 @@ public class UpdateMenteeProfileController extends HttpServlet {
             sendDispatcher(request, response, "profileUpdate.jsp");
         }
         catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateMenteeProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -115,7 +115,7 @@ public class UpdateMenteeProfileController extends HttpServlet {
             request.getSession().setAttribute("currUser", user); // set current user with updated info
             sendDispatcher(request, response, "UserProfileController?uId="+id); // return to user profile page
         } catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateMenteeProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

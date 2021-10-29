@@ -50,7 +50,7 @@ public class ListAllSkillController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListAllSkillController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -74,6 +74,7 @@ public class ListAllSkillController extends HttpServlet {
             request.setAttribute("sList", sList); // set list of active skill
             sendDispatcher(request, response, "listSkill.jsp");
         } catch (Exception e) {
+            Logger.getLogger(ListAllSkillController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -91,7 +92,7 @@ public class ListAllSkillController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListAllSkillController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

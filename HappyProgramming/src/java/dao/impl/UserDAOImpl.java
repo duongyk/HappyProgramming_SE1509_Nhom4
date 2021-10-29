@@ -895,7 +895,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         ResultSet rs = null;
         ArrayList<User> list = new ArrayList<>();
         User user;
-        String sql = "select top 3 * FROM [User] inner join [UserSkill] on [User].[uId] = [UserSkill].[uId] "
+        String sql = "select top 4 * FROM [User] inner join [UserSkill] on [User].[uId] = [UserSkill].[uId] "
                 + "where [UserSkill].[sId] = ? and [User].[uStatus] = 1 and [User].[uRole] = 2";
         try {
             conn = getConnection();

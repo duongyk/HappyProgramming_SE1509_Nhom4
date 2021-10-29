@@ -49,7 +49,7 @@ public class ResetPasswordController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ResetPasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -68,7 +68,7 @@ public class ResetPasswordController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ResetPasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -95,7 +95,7 @@ public class ResetPasswordController extends HttpServlet {
                 sendDispatcher(request, response, "index.jsp");
             }
         } catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ResetPasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -132,12 +132,29 @@
                                     <li><strong>Skill Detail</strong>: ${currSkill.detail}
                                     </li>
                                 </ul>
-                                <a href="CreateRequestController?mId=0"><button class="create" style="min-width: 164px;">Create Request</button></a>
+                                <!--<a href="CreateRequestController?mId=0"><button class="create" style="min-width: 164px;">Create Request</button></a>-->
                             </div>
                         </div>
-
                     </div>
-                    
+                    <br>
+                    <br>                
+                    <div  class="row">
+                        <h1 style="text-align: center"> Recommended Mentor </h1>
+                        <c:forEach items="${listRecommend}" var="mentor">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="member box-display" data-aos="fade-up" data-aos-delay="100">
+                                    <img class="img-display" src="img/${mentor.getAvatar()}">
+                                    <div style="background-color: lightgray" class="member-info">
+                                        <h4 style="text-align: center"><c:out value="${mentor.getFullname()}"></c:out></h4>
+                                            <div style="text-align: center">
+                                                <a href="CVControllerMap?service=cvMentor&mId=${mentor.getId()}">View CV</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+
                 </div>
             </section>
 

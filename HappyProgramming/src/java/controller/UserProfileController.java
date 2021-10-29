@@ -46,7 +46,7 @@ public class UserProfileController extends HttpServlet {
             doGet(request, response);
         }
         catch (Exception e) {
-            Logger.getLogger(ListRequestByMeController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
             doGet(request, response);
@@ -58,7 +58,7 @@ public class UserProfileController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -93,7 +93,7 @@ public class UserProfileController extends HttpServlet {
             sendDispatcher(request, response, "userProfile.jsp");
         }
         catch (Exception e) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -112,7 +112,7 @@ public class UserProfileController extends HttpServlet {
             processRequest(request, response);
         }
         catch (Exception ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
