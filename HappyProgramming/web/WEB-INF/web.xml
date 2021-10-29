@@ -13,10 +13,6 @@
         <servlet-class>controller.RequestController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UserController</servlet-name>
-        <servlet-class>controller.UserController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>MessageController</servlet-name>
         <servlet-class>controller.MessageController</servlet-class>
     </servlet>
@@ -155,10 +151,6 @@
     <servlet-mapping>
         <servlet-name>RequestController</servlet-name>
         <url-pattern>/RequestControllerMap</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserController</servlet-name>
-        <url-pattern>/UserControllerMap</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MessageController</servlet-name>

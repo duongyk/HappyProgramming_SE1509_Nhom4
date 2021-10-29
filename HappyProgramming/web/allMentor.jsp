@@ -146,7 +146,7 @@
                                             <img class="img-display" src="img/default-image.jpg">
                                             <div class="member-info">
                                                 <h4><c:out value="${mentor.getFullname()}"></c:out></h4>
-                                                <a class="view-button" href="CVControllerMap?service=cvMentor&mId=${mentor.getId()}">View CV</a>
+                                                <a class="view-button" href="CVProfile?service=cvMentor&mId=${mentor.getId()}">View CV</a>
                                             </div>
                                         </div>
                                     </div>
