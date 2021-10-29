@@ -124,8 +124,8 @@ public class mentorFilter implements Filter {
          
          
         if (user == null || user.getRole()!=2) {
-            ////If it's not the admin or null -> Redirect to the home page => can't go through doFilter
-            httpResponse.sendRedirect("/login");//home sau
+            ////If it's not the mentor or null -> Redirect to the filter page => can't go through doFilter
+            httpResponse.sendRedirect("filter.jsp");
         }
         
         Throwable problem = null;

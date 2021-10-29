@@ -49,7 +49,7 @@ public class LoginController extends HttpServlet {
             String userName = request.getParameter("username").trim();
             String password = request.getParameter("password").trim();
             User user = userDAO.getUser(userName, password);
-            System.out.println(user.getStatus());
+//            System.out.println(user.getStatus());
             if (user != null) {
                  if (user.getStatus() == 0) {
                 request.setAttribute("mess", "sorry your account has been block");

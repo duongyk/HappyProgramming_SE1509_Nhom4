@@ -16,7 +16,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Sign-in</title>
+        <title>Error</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -62,34 +62,7 @@
                     <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
-                <nav id="navbar-main" class="navbar-main">
-                    <ul>
-                        <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
-                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
-                            <c:choose>
-                                <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
-                                </li>
-                                <li class="dropdown getstarted scrollto ">
-                                    <span style="color: white; padding: 0;">User</span>
-                                    <ul>
-                                        <li><a href="UserControllerMap?service=profile">Profile</a></li>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
-                                    </ul>
-                                </li>
-                            </c:when>
-                            <c:otherwise>
-                                <li class="getstarted scrollto "><a href="signUp.jsp" style="color: white; padding: 0;">
-                                        <span>Sign up</span></a>
-                                    <ul>
 
-                                    </ul>
-                                </li>
-                            </c:otherwise>
-                        </c:choose>
-                    </ul>
-                    <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav><!-- .navbar-main -->
 
             </div>
         </header><!-- End Header -->
@@ -114,7 +87,7 @@
                                         </div>
                                         <h2>Error<br>404</h2>
                                     </div>
-                                    <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable. <a href="#">Back to homepage</a></p>
+                                    <p>This page can only accessible when you have the authority. <a href="index.jsp">Back to homepage ?</a></p>
                                 </div>
                             </div>
 

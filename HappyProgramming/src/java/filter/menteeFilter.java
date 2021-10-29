@@ -5,6 +5,7 @@
  */
 package filter;
 
+import entity.User;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -16,12 +17,16 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author QMC
  */
-@WebFilter(filterName = "menteeFilter", urlPatterns = {"/forum",
+@WebFilter(filterName = "menteeFilter",
+        urlPatterns = {"/forum",
     "/listAllMentor", "/listRequestByMe", "/listSuggestedMentor", "/myProblem",
     "/postAnswer", "/postProblem", "/rateComment", "/requestByStatus",
     "/searchMentorPublic", "/statisticRequest", "/updateReuqest", "/viewProblem",
@@ -109,6 +114,23 @@ public class menteeFilter implements Filter {
         }
 
         doBeforeProcessing(request, response);
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        /*can't use request.getSession because the request above is ServletRequest, 
+        but I need to use HttpServletRequest => Must use this to call Session => Must declare one more */
+
+        //Response does the same thing
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+        //Use this to call Session
+        HttpSession session = httpRequest.getSession();
+        User user = (User) session.getAttribute("currUser");
+        
+         
+         
+        if (user == null || user.getRole()!=1) {
+            ////If it's not the mentee or null -> Redirect to the filter page => can't go through doFilter
+            httpResponse.sendRedirect("filter.jsp");
+        }
 
         Throwable problem = null;
         try {
