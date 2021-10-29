@@ -9,7 +9,7 @@
  */
 package entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * This class represents ChatMessage table in database
@@ -52,8 +52,8 @@ public class ChatMessage {
         this.dateCreated = dateCreated;
         this.status = status;
     }
-    
-    
+
+  
     
     public int getmId() {
         return mId;

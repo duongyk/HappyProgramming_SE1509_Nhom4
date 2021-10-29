@@ -12,11 +12,15 @@ package controller;
 
 import dao.RatingDAO;
 import dao.RequestDAO;
+import dao.UserDAO;
 import dao.impl.RatingDAOImpl;
 import dao.impl.RequestDAOImpl;
+import dao.impl.UserDAOImpl;
+import entity.Rating;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -54,13 +58,18 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             RatingDAO ratingdao = new RatingDAOImpl();
             HttpSession session = request.getSession();
             
-            // check if mentor login
-            User user = (User) session.getAttribute("currUser");
-            if (user == null) { // return to sign in page
-                response.sendRedirect("signIn.jsp");
-                return;
-            } 
+            UserDAO userdao = new UserDAOImpl();
             
+            // check if mentor login
+//            User user = (User) session.getAttribute("currUser");
+//            if (user == null) { // return to sign in page
+//                response.sendRedirect("signIn.jsp");
+//                return;
+//            } 
+            
+            User user = new User();
+            user.setId(6);
+
             // get rating statistic
             int five = ratingdao.getMentorNumberRating(user.getId(), 5);
             int four = ratingdao.getMentorNumberRating(user.getId(), 4); 
@@ -68,13 +77,25 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             int two = ratingdao.getMentorNumberRating(user.getId(), 2);
             int one = ratingdao.getMentorNumberRating(user.getId(), 1);
                         
+            int total = five + four + three + two + one;
+            
+            double average = ratingdao.getAvgRate(user.getId());
+            
             //set attributes
       
+            ArrayList<Rating> ratingList = ratingdao.getRating(user);
+            
             request.setAttribute("five", five);
             request.setAttribute("four", four);
             request.setAttribute("three", three);
             request.setAttribute("two", two);
             request.setAttribute("one", one);
+            request.setAttribute("total", total);
+            
+            request.setAttribute("average", average);
+            request.setAttribute("averageint", (int)average);
+            
+            request.setAttribute("ratingList", ratingList);
             
             sendDispatcher(request, response, "/mentorRatingStatistic.jsp");
         } catch (Exception e) {

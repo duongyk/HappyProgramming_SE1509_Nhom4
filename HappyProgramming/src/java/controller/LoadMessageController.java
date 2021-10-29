@@ -132,7 +132,8 @@ public class LoadMessageController extends HttpServlet {
             ChatMessageDAO messdao = new ChatMessageDAOImpl();
 
             String message = request.getParameter("message");
-
+            System.out.println(message);
+            
             int uId = (int) session.getAttribute("uId");
 
             int friendId = Integer.parseInt(request.getParameter("friendId"));

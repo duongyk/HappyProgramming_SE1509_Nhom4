@@ -52,4 +52,14 @@ public interface ChatMessageDAO {
      * @throws java.lang.Exception
     */
     public ArrayList<ChatMessage> get_New_MessageThroughTwoFriendId(int yourId,int friendId,int offset) throws Exception ;
+    
+    /**
+    * This method will return latest message between two friend
+    * 
+     * @param yourId (your id)
+     * @param friendId (your friend id)
+     * @return ChatMessage (latest message between two friend)
+     * @throws java.lang.Exception
+    */
+    public ChatMessage get_Latest_MessageThroughTwoFriendId(int yourId,int friendId) throws Exception ;
 }

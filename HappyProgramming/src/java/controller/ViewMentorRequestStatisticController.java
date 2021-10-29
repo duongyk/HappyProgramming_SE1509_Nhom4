@@ -10,13 +10,12 @@
 
 package controller;
 
-import dao.RatingDAO;
 import dao.RequestDAO;
-import dao.impl.RatingDAOImpl;
 import dao.impl.RequestDAOImpl;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -61,28 +60,20 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
                 return;
             } 
             
-            // get request statistic
-            int invited = requestdao.get_Mentor_TotalRequestByStatus(user.getId(), 1);
-            int following = requestdao.get_Mentor_TotalRequestByStatus(user.getId(), 2);
-            int completed = requestdao.get_Mentor_TotalRequestByStatus(user.getId(), 3);
-            int canceled = requestdao.get_Mentor_TotalRequestByStatus(user.getId(), 4);
-
-            int total = invited+following+completed+canceled;
-
-            double canceledpercentage = (double) (canceled/total);
-            double completedpercentage = (double) (completed/total);
+            // get top 5 mentor request statistic
             
+            HashMap<String,HashMap<Integer,Integer>> statisticMap = requestdao.getStatistic_TopFive_Mentor_WithMostRequest();
             
-            //set attributes
-
-            request.setAttribute("invited", invited);
-            request.setAttribute("following", following);
-            request.setAttribute("completed", completed);
-            request.setAttribute("canceled", canceled);
-
-            request.setAttribute("canceledpercentage", canceledpercentage);
-            request.setAttribute("completedpercentage", completedpercentage);
-
+            // change username of user username
+            if(statisticMap.containsKey(user.getUsername())) {
+                
+                statisticMap.put("You", statisticMap.remove(user.getUsername()));
+                
+            } else { // if user not in top 5
+                HashMap<Integer,Integer> userStatistic = requestdao.getMentor_RequestStatistic(user.getId());
+                
+                statisticMap.put("You", userStatistic);
+            }
             
             sendDispatcher(request, response, "/mentorRequestStatistic.jsp");
         } catch (Exception e) {

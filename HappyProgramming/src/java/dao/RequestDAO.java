@@ -12,6 +12,7 @@ package dao;
 import entity.Request;
 import entity.User;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This class contains methods to help us manipulate Request objects in the
@@ -183,6 +184,25 @@ public interface RequestDAO {
      * @return a list of <code>java.lang.Integer</code>
      * @throws Exception
      */
+    
+    /**
+     * Get Request Statistic of a mentor
+     * 
+     * @param mentorId (id of mentor)
+     * @return HashMap (key is request status, value is request number)
+     * @throws Exception
+     */
+    
+    public HashMap<Integer,Integer> getMentor_RequestStatistic(int mentorId) throws Exception;
+    
+    /**
+     * Get Request Statistic of Top Five mentor wiht most request
+     * 
+     * @return HashMap (key is mentor username, value is request statistic of that mentor)
+     * @throws Exception
+     */
+    public HashMap<String,HashMap<Integer,Integer>> getStatistic_TopFive_Mentor_WithMostRequest() throws Exception;
+    
     public ArrayList<User> getHotMentor() throws Exception;
 
     public int getNumberOfRequest() throws Exception;

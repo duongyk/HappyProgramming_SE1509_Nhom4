@@ -56,7 +56,7 @@
                     type: "get",
                     data: {
                         offset: amount,
-                        friendId: idfriend,
+                        friendId: idfriend
                     },
                     success: function (data) {
                         var chatbox = document.getElementById("messagebox");
@@ -82,42 +82,46 @@
                 inputbox.style.display='block';
             }
 
-            function postMessage() {
-                var inputs = $("#inputform").serializeArray();
+            function postMessage() {                
                 
-                var elem = document.getElementById("status");
-                    elem.parentNode.removeChild(ele);
+                var mess = document.querySelector('input').value;
+                var messtatus = document.getElementById("status");
+                
+                if(messtatus !== null) {
+                messtatus.remove();
+                }
+                document.getElementById("messagebox").innerHTML += "<div class=\"outgoing_msg\">\n"
+                        + "                  <div class=\"sent_msg\">\n"
+                        + "                    <p>" + mess + "</p>\n"
+                        + "                    <span class=\"time_date\">" + "date not finished" + "</span>\n"
+                        + "                    <span id=\"status\" class=\"\">" + "ĐANG GỬI" + "</span>\n"
+                        + "                  </div>\n"
+                        + "                </div>";
 
-                $.each(inputs, function (i, field) {
-                    
-                    //document.getElementById("messagebox").innerHTML += "<p class=\"message\">You: " + field.value + "</p>";
-                    document.getElementById("messagebox").innerHTML += "<div class=\"outgoing_msg\">\n"
-                            + "                  <div class=\"sent_msg\">\n"
-                            + "                    <p>" + field.value + "</p>\n"
-                            + "                    <span class=\"time_date\">" + "date not finished" + "</span>\n"
-                            + "                    <span id=\"status\" class=\"\">" + "ĐANG GỬI" + "</span>\n"
-                            + "                  </div>\n"
-                            + "                </div>";
-                    var mess = field.value;
-                    var idfriend = document.getElementById("friendId").innerHTML;
+                var idfriend = document.getElementById("friendId").innerHTML;
 
-                    $.ajax({
-                        url: "/HappyProgramming/loadMessage",
-                        type: "post",
-                        data: {
-                            message: mess,
-                            friendId: idfriend
-                        },
-                        success: function () {
-                            document.getElementById("status").innerHTML = "ĐÃ GỬI";
-                        },
-                        error: function (xhr) {
-                            document.getElementById("status").innerHTML = "KHÔNG GỬI ĐƯỢC";
-                        }
-                    });
+                $.ajax({
+                    url: "/HappyProgramming/loadMessage",
+                    type: "post",
+                    data: {
+                        message: mess,
+                        friendId: idfriend
+                    },
+                    success: function () {
+                        document.getElementById("status").innerHTML = "ĐÃ GỬI";
+                        document.getElementById("textbox").value = "";
+                    },
+                    error: function (xhr) {
+                        document.getElementById("status").innerHTML = "KHÔNG GỬI ĐƯỢC";
+                    }
                 });
-
             }
+            
+            $( document ).ready(function() {
+                var elem = document.getElementById("friendId");
+                loadNewFriendMessage(elem.innerHTML);
+            });
+                        
         </script>
     </head>
 
@@ -238,7 +242,7 @@
                                     <div class="chat_list">
                                         <a href="#" onclick="loadNewFriendMessage(${friend.getId()}); return false;">
                                         <div class="chat_people">
-                                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                            <div class="chat_img"> <img src="img/<c:out value="${friend.getAvatar()}" ></c:out>" alt="sunil">
                                             </div>
                                             <div class="chat_ib">
                                                 <h5>${friend.getUsername()}</h5>
@@ -275,29 +279,14 @@
                                     </div>
                                 </div>
                                 <div class="msg_history" id="messagebox">
-                                    <div class="incoming_msg">
-                                        <div class="received_msg">
-                                            <div class="received_withd_msg">
-                                                <p>Test, which is a new approach to have</p>
-                                                <span class="time_date"> 11:01 AM | Yesterday</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="outgoing_msg">
-                                        <div class="sent_msg">
-                                            <p>Apollo University, Delhi, India Test</p>
-                                            <span class="time_date"> 11:01 AM | Today</span>
-                                            <span id="status" class=""> Đang gửi</span>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="type_msg" id="inputbox">
                                     <div class="input_msg_write">
-                                        <form action="#" method="POST" id="inputform" onsubmit="event.preventDefault();postMessage();">
-                                        <input form="inputform" type="text" class="write_msg" placeholder="Type a message" required style="width: 91%"/>
-                                        <button form="inputform" class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
+                                        <form action="#" method="POST" onsubmit="postMessage();event.preventDefault();">
+                                        <input id = "textbox" type="text" class="write_msg" placeholder="Type a message" required style="width: 91%"/>
+                                        <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o"
                                                                                                        aria-hidden="true"></i></button>
-                                        
                                         </form>
                                     </div>
                                 </div>
@@ -409,6 +398,7 @@
 
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
+        
         <style>
             .container {
                 max-width: 1170px;
@@ -627,6 +617,7 @@
             .msg_history {
                 height: 516px;
                 overflow-y: auto;
+                flex-direction:column-reverse;
             }
         </style>
 

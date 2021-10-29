@@ -6,8 +6,10 @@
 package controller;
 
 import dao.ChatFriendDAO;
+import dao.ChatMessageDAO;
 import dao.UserDAO;
 import dao.impl.ChatFriendDAOImpl;
+import dao.impl.ChatMessageDAOImpl;
 import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
@@ -65,22 +67,23 @@ public class OpenChatController extends HttpServlet {
 //                uId = user.getId();
 //            }
             
-            // get user friend list
-            ArrayList<Integer> friendIdList = frienddao.getYourChatFriendId(uId);
-            
             int friendId = 0;
-            
+            int status = 0;
             // check if user and person user want to chat are friend
             try {
                 
             friendId = Integer.parseInt(request.getParameter("friendId"));
             
-            frienddao.checkIf_NotFriendYet_ToAdd(uId, friendId);
+            status = frienddao.checkIf_NotFriendYet_ToAdd(uId, friendId);
             
             } catch (NumberFormatException | NullPointerException e) { // get message for the first friend in list
-                friendId = friendIdList.get(0);
             }
             
+             // get user friend list
+            ArrayList<Integer> friendIdList = frienddao.getYourChatFriendId(uId);
+            
+            // if there is not friendId parameter
+            if (status == 0) friendId = friendIdList.get(0);
             
             ArrayList<User> friendList = new ArrayList();
             

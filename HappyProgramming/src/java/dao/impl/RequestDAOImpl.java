@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This class implements from class interface RequestDAOImpl. <br>
@@ -840,6 +841,81 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
             closeConnection(conn);
         }
         return totalRequest;
+    }
+    
+     /**
+     * Get Request Statistic of a mentor
+     * 
+     * @param mentorId (id of mentor)
+     * @return HashMap (key is request status, value is request number)
+     * @throws Exception
+     */
+    
+    @Override
+    public HashMap<Integer,Integer> getMentor_RequestStatistic(int mentorId) throws Exception {
+                
+        HashMap<Integer,Integer> numberMap = new HashMap<>();
+        
+        int inviting = get_Mentor_TotalRequestByStatus(mentorId, 1);
+        int following = get_Mentor_TotalRequestByStatus(mentorId, 2);
+        int completed = get_Mentor_TotalRequestByStatus(mentorId, 3);
+        int canceled = get_Mentor_TotalRequestByStatus(mentorId, 4);
+        
+        numberMap.put(1, inviting);
+        numberMap.put(2, following);
+        numberMap.put(3, completed);
+        numberMap.put(4, canceled);
+        
+        return numberMap;
+        
+    }
+    
+    /**
+     * Get Request Statistic of Top Five mentor wiht most request
+     * 
+     * @return HashMap (key is mentor username, value is request statistic of that mentor)
+     * @throws Exception
+     */
+    @Override
+    public HashMap<String,HashMap<Integer,Integer>> getStatistic_TopFive_Mentor_WithMostRequest() throws Exception {
+        HashMap<String,HashMap<Integer,Integer>> mentorMap = new HashMap<>();
+        
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        UserDAO userdao = new UserDAOImpl();
+        
+        String sql = "select top 5 count(*) as number , toId from [Request] group by toId order by count(*) desc";
+        
+        try {
+            
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                
+                int uId = rs.getInt("uId");
+                
+                String username = userdao.getUserById(uId).getUsername();
+                
+                HashMap<Integer,Integer> numberMap = getMentor_RequestStatistic(uId);
+                
+                mentorMap.put(username, numberMap);
+                
+            }
+            
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        
+        
+        return mentorMap;
     }
 
     /**
