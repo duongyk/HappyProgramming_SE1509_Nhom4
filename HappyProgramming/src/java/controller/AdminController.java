@@ -161,7 +161,7 @@ public class AdminController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }

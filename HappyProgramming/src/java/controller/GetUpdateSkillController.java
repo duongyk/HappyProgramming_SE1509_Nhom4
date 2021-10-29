@@ -67,9 +67,9 @@ public class GetUpdateSkillController extends HttpServlet {
             rd.forward(request, response);
         } catch (ServletException ex) {
 
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetUpdateSkillController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetUpdateSkillController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

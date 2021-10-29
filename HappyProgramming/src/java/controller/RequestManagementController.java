@@ -85,7 +85,7 @@ public class RequestManagementController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RequestManagementController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -58,7 +58,7 @@ public class UpdateMenteeStatusController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateMenteeStatusController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

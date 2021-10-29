@@ -64,7 +64,7 @@ public class SkillDetailController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SkillDetailController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -92,7 +92,7 @@ public class SkillDetailController extends HttpServlet {
             sendDispatcher(request, response, "skillDetail.jsp");
         }
         catch (Exception e) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(SkillDetailController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
