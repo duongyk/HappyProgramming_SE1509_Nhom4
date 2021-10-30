@@ -216,6 +216,7 @@ public interface UserDAO {
  
     /**
      * Get a user by his/her registered skill id
+     * List contain 4 user with highest rating
      *
      * @param sId it is a <code>java.lang.Integer</code>
      * @return a <code>User</code> object
@@ -231,5 +232,24 @@ public interface UserDAO {
      * @throws Exception
      */
     public ArrayList<User> searchMentor(String txtSearch) throws Exception;
+    
+    /**
+     * Get a user by his/her registered skill id
+     *
+     * @param sId it is a <code>java.lang.Integer</code>
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
+    public ArrayList<User> getMentorBySkill(int sId) throws Exception;
+    
+    /**
+     * Get list of User whose skill id in CV the same skill id by page
+     *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param sId it is a <code>java.lang.Integer</code>
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    public ArrayList<User> getUserBySkillIdPaging(int index, int sId) throws Exception;
 }
 

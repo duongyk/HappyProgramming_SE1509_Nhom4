@@ -5,7 +5,7 @@
  
   Record of change:<br>
   DATE          Version    Author           DESCRIPTION<br>
-  20-09-2021    1.0        DuongVV          First Deploy<br>
+  30-09-2021    1.0        TungDT          First Deploy<br>
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,7 +16,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>List All Mentor Page</title>
+        <title>List All Mentor By Skill Page</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -146,7 +146,7 @@
                                             <img class="img-display" src="img/default-image.jpg">
                                             <div class="member-info">
                                                 <h4><c:out value="${mentor.getFullname()}"></c:out></h4>
-                                                <a class="view-button" href="CVProfile?mId=${mentor.getId()}&sId=0">View CV</a>
+                                                <a class="view-button" href="CVProfile?mId=${mentor.getId()}&sId=${skill.id}">View CV</a>
                                             </div>
                                         </div>
                                     </div>

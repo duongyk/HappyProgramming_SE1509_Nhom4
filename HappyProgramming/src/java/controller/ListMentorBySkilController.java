@@ -6,7 +6,9 @@
 package controller;
 
 import dao.SkillDAO;
+import dao.UserDAO;
 import dao.impl.SkillDAOImpl;
+import dao.impl.UserDAOImpl;
 import entity.Skill;
 import entity.User;
 import java.io.IOException;
@@ -25,8 +27,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tung
  */
-@WebServlet(name = "ListAllSkillController", urlPatterns = {"/ListAllSkillController"})
-public class ListAllSkillController extends HttpServlet {
+@WebServlet(name = "ListMentorBySkilController", urlPatterns = {"/ListMentorBySkilController"})
+public class ListMentorBySkilController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,27 +40,27 @@ public class ListAllSkillController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet listAllMentor</title>");
+            out.println("<title>Servlet ListMentorBySkilController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet listAllMentor at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ListMentorBySkilController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
-
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(ListAllSkillController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListMentorBySkilController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -75,30 +77,39 @@ public class ListAllSkillController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            UserDAO userDAO = new UserDAOImpl();
             SkillDAO skillDAO = new SkillDAOImpl();
-            User x = (User) request.getSession().getAttribute("currUser"); // get current sign in user
             
-            ArrayList<Skill> sList = skillDAO.getActiveSkill(); // get list of current active status skill
-            
+            int sId = Integer.parseInt(request.getParameter("sId"));
+            ArrayList<User> mentor = userDAO.getMentorBySkill(sId);
+            Skill skill = skillDAO.getSkillById(sId);
+            // Get index page 
             String indexPage = request.getParameter("index");
             if (indexPage == null) {
                 indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
-            ArrayList<Skill> activeSkill = skillDAO.pagingActiveSkill(index);
-            int count = sList.size();
+            // Get list request of the user
+            ArrayList<User> mList = userDAO.getUserBySkillIdPaging(index, sId);
+            // Total Mentor for paging
+            int count = mentor.size();
+            // Calculate total page for paging
             int endPage = count / 8;
             if (count % 8 != 0) {
                 endPage++;
             }
-            String href = "ListAllSkillController?";
+            // Set href of paging
+            String href = "ListMentorBySkilController?sId="+sId+"&";
+            // Set attribute to request
             request.setAttribute("href", href);/*href paging*/
             request.setAttribute("endPage", endPage);/*end page of paging*/
             request.setAttribute("index", index);/*index/current page*/
-            request.setAttribute("sList", activeSkill); // set list of active skill
-            sendDispatcher(request, response, "listSkill.jsp");
-        } catch (Exception e) {
-            Logger.getLogger(ListAllSkillController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("mList", mList);/*Mentor list*/
+            request.setAttribute("skill", skill);
+            sendDispatcher(request, response, "listMentorBySkill.jsp");
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ListMentorBySkilController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -112,12 +123,8 @@ public class ListAllSkillController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(ListAllSkillController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**

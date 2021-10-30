@@ -87,9 +87,9 @@
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">
 
-                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic?uId=${sessionScope.currUser.id}">Statistic</a>
                                         </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
+                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic?uId=${sessionScope.currUser.id}">Rating</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>
@@ -154,11 +154,11 @@
                             <div id="sidebar" class="card">
                                 <div class="card-body">
                                     <c:choose>
-                                        <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        <c:when test="${user.getRole()==2}">
                                             <div class="d-flex flex-column align-items-center text-center">
-                                                <img src="img/${sessionScope.currUser.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
+                                                <img src="img/${user.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
                                                 <div class="mt-3">
-                                                    <h4> <c:out value="${sessionScope.currUser.getFullname()}"></c:out> </h4>                                        
+                                                    <h4> <c:out value="${user.getFullname()}"></c:out> </h4>                                        
                                                     <p class="text-secondary mb-1"><c:out value="${cv.getProfession()}"></c:out></p>
                                                         <!--<p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>-->
                                                     </div>
@@ -166,9 +166,9 @@
                                         </c:when>
                                         <c:otherwise>
                                             <div class="d-flex flex-column align-items-center text-center">
-                                                <img src="img/${sessionScope.currUser.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
+                                                <img src="img/${user.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
                                                 <div class="mt-3">
-                                                    <h4> <c:out value="${sessionScope.currUser.getUsername()}"></c:out> </h4>                                                               
+                                                    <h4> <c:out value="${user.fullname()}"></c:out> </h4>                                                               
                                                     </div>
                                                 </div>   
                                         </c:otherwise>

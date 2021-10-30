@@ -26,11 +26,7 @@ import javax.servlet.http.HttpSession;
  * @author QMC
  */
 @WebFilter(filterName = "menteeFilter",
-        urlPatterns = { "/MessageControllerMap?service=sendMessage"
-    , "/listRequestByMe", "/listSuggestedMentor", "/myProblem",
-    "/postAnswer", "/postProblem", "/rateComment", "/requestByStatus",
-    "/searchMentorPublic", "/statisticRequest", "/updateReuqest", "/viewProblem",
-    "/viewRequest"})
+        urlPatterns = { })
 public class menteeFilter implements Filter {
 
     private static final boolean debug = true;

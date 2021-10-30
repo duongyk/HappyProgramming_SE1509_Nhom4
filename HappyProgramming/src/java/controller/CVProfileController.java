@@ -6,16 +6,17 @@
 package controller;
 
 import dao.CVDAO;
+import dao.SkillDAO;
 import dao.UserDAO;
 import dao.UserSkillDAO;
 import dao.impl.CVDAOImpl;
+import dao.impl.SkillDAOImpl;
 import dao.impl.UserDAOImpl;
 import dao.impl.UserSkillDAOImpl;
 import entity.CV;
 import entity.Skill;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,9 +52,12 @@ public class CVProfileController extends HttpServlet {
         try {
             CVDAO cvdao = new CVDAOImpl();
             UserDAO userDAO = new UserDAOImpl();
+            SkillDAO skillDAO = new SkillDAOImpl();
             // get information
             UserSkillDAO smdao = new UserSkillDAOImpl();
             int mId = Integer.parseInt(request.getParameter("mId"));
+            int sId = Integer.parseInt(request.getParameter("sId"));
+            Skill skill = skillDAO.getSkillById(sId);
             User mentor = userDAO.getUserById(mId);
             ArrayList<Skill> sList = smdao.getAllSkillMentor(mId);
             // get information of user mentor
@@ -62,6 +66,7 @@ public class CVProfileController extends HttpServlet {
              // get information of user mentor's skill
             request.setAttribute("sList", sList);
             request.setAttribute("mentor", mentor);
+            request.setAttribute("skill", skill);
             sendDispatcher(request, response, "cvMentor.jsp");
         } catch (Exception e) {
 

@@ -125,11 +125,11 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             ps.setString(2, xPass);
             rs = ps.executeQuery();
             if (rs.next()) {
-               User user = new User (rs.getInt("uId"), rs.getString("username"), rs.getString("password"),
+                User user = new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"),
                         rs.getString("fullname"), rs.getString("uMail"), rs.getString("uPhone"),
                         rs.getDate("dob"), rs.getString("gender"), rs.getString("uAvatar"), rs.getInt("uRole"));
                 user.setStatus(rs.getInt("uStatus"));
-                return user ;
+                return user;
             }
 
         } catch (Exception ex) {
@@ -880,7 +880,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closeConnection(conn);
         }
     }
-    
+
     /**
      * Get a user by his/her registered skill id
      *
@@ -895,8 +895,34 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         ResultSet rs = null;
         ArrayList<User> list = new ArrayList<>();
         User user;
-        String sql = "select top 4 * FROM [User] inner join [UserSkill] on [User].[uId] = [UserSkill].[uId] "
-                + "where [UserSkill].[sId] = ? and [User].[uStatus] = 1 and [User].[uRole] = 2";
+        String sql = "select top(4) u.[uId]\n"
+                + "			,u.[username]\n"
+                + "			,u.[password]\n"
+                + "			,u.[fullname]\n"
+                + "			,u.[uMail]\n"
+                + "			,u.[uPhone]\n"
+                + "			,u.[DOB]\n"
+                + "			,u.[gender]\n"
+                + "			,u.[uAvatar]\n"
+                + "			,u.[uRole]\n"
+                + "			,u.[uStatus]\n"
+                + "			,SUM(r.[ratingAmount]) as total\n"
+                + "from [User] as u \n"
+                + "inner join [Rating] as r on u.[uId] = r.[toId] \n"
+                + "inner join [UserSkill] as us on u.[uId] = us.[uId]\n"
+                + "where us.[sId] = ? and u.[uStatus] = 1 and u.[uRole] = 2\n"
+                + "group by u.[uId]\n"
+                + "			,u.[username]\n"
+                + "			,u.[password]\n"
+                + "			,u.[fullname]\n"
+                + "			,u.[uMail]\n"
+                + "			,u.[uPhone]\n"
+                + "			,u.[DOB]\n"
+                + "			,u.[gender]\n"
+                + "			,u.[uAvatar]\n"
+                + "			,u.[uRole]\n"
+                + "			,u.[uStatus]\n"
+                + "order by [total] DESC, u.[uId] ASC";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
@@ -910,8 +936,8 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             Date dob;
             String gender;
             String avatar;
-            rs= ps.executeQuery();
-            while(rs.next()) {
+            rs = ps.executeQuery();
+            while (rs.next()) {
                 id = rs.getInt("uId");
                 username = rs.getString("username");
                 password = rs.getString("password");
@@ -933,7 +959,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
         return list;
     }
-    
+
     /**
      * Get list of Mentee with the username like txtSearch
      *
@@ -950,7 +976,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         String sql = "SELECT * FROM [User] where uRole = '2' and fullname like ?";
         int id;
         String username;
-        String password; 
+        String password;
         String fullname;
         String mail;
         String phone;
@@ -979,6 +1005,95 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
                 role = rs.getInt("uRole");
                 u = new User(id, username, password, fullname, mail, phone, dob, gender, avatar, role, status);
                 list.add(u);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    @Override
+    public ArrayList<User> getMentorBySkill(int sId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<>();
+        User user;
+        String sql = "select * FROM [User] inner join [UserSkill] on [User].[uId] = [UserSkill].[uId] "
+                + "where [UserSkill].[sId] = ? and [User].[uStatus] = 1 and [User].[uRole] = 2";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, sId);
+            int id;
+            String username;
+            String password;
+            String fullname;
+            String mail;
+            String phone;
+            Date dob;
+            String gender;
+            String avatar;
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("uId");
+                username = rs.getString("username");
+                password = rs.getString("password");
+                fullname = rs.getString("fullname");
+                mail = rs.getString("uMail");
+                phone = rs.getString("uPhone");
+                dob = rs.getDate("DOB");
+                gender = rs.getString("gender");
+                avatar = rs.getString("uAvatar");
+                user = new User(id, username, password, fullname, mail, phone, dob, gender, avatar);
+                list.add(user);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return list;
+    }
+
+    /**
+     * Get list of User whose skill id in CV the same skill id by page
+     *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param sId it is a <code>java.lang.Integer</code>
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<User> getUserBySkillIdPaging(int index, int sId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY u.[uId]) AS RowNum, u.* FROM [User] u\n"
+                + "inner join [UserSkill] us on u.[uId] = us.[uId] \n"
+                + "WHERE us.[sId] = ? and u.[uRole] = 2) a WHERE a.RowNum between ? and ?";
+        User user;
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, sId);
+            ps.setInt(2, index * 8 - 7);
+            ps.setInt(3, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user = new User(rs.getInt("uId"), rs.getString("username"),
+                        rs.getString("password"), rs.getString("fullname"),
+                        rs.getString("uMail"), rs.getString("uPhone"),
+                        rs.getDate("dob"), rs.getString("gender"),
+                        rs.getString("uAvatar"), rs.getInt("uRole"), rs.getInt("uStatus"));
+                list.add(user);
             }
         } catch (Exception ex) {
             throw ex;

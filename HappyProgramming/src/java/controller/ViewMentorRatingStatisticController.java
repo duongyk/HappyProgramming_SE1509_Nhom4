@@ -11,10 +11,8 @@
 package controller;
 
 import dao.RatingDAO;
-import dao.RequestDAO;
 import dao.UserDAO;
 import dao.impl.RatingDAOImpl;
-import dao.impl.RequestDAOImpl;
 import dao.impl.UserDAOImpl;
 import entity.Rating;
 import entity.User;
@@ -58,9 +56,12 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             RatingDAO ratingdao = new RatingDAOImpl();
             HttpSession session = request.getSession();
+            UserDAO userDAO = new UserDAOImpl();
                         
             // check if mentor login
-            User user = (User) session.getAttribute("currUser");
+            int id = Integer.parseInt(request.getParameter("uId"));
+            User user = userDAO.getUserById(id);
+            
             if (user == null) { // return to sign in page
                 response.sendRedirect("signIn.jsp");
                 return;
@@ -68,15 +69,15 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             
 
             // get rating statistic
-            int five = ratingdao.getMentorNumberRating(user.getId(), 5);
-            int four = ratingdao.getMentorNumberRating(user.getId(), 4); 
-            int three = ratingdao.getMentorNumberRating(user.getId(), 3);
-            int two = ratingdao.getMentorNumberRating(user.getId(), 2);
-            int one = ratingdao.getMentorNumberRating(user.getId(), 1);
+            int five = ratingdao.getMentorNumberRating(id, 5);
+            int four = ratingdao.getMentorNumberRating(id, 4); 
+            int three = ratingdao.getMentorNumberRating(id, 3);
+            int two = ratingdao.getMentorNumberRating(id, 2);
+            int one = ratingdao.getMentorNumberRating(id, 1);
                         
             int total = five + four + three + two + one;
             
-            double average = ratingdao.getAvgRate(user.getId());
+            double average = ratingdao.getAvgRate(id);
             
             //set attributes
       
@@ -93,7 +94,7 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             request.setAttribute("averageint", (int)average);
             
             request.setAttribute("ratingList", ratingList);
-            
+            request.setAttribute("user", user);
             sendDispatcher(request, response, "/mentorRatingStatistic.jsp");
         } catch (Exception e) {
             Logger.getLogger(ViewMentorRatingStatisticController.class.getName()).log(Level.SEVERE, null, e);

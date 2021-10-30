@@ -11,13 +11,14 @@
 package controller;
 
 import dao.RequestDAO;
+import dao.UserDAO;
 import dao.impl.RequestDAOImpl;
+import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -54,9 +55,12 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             RequestDAO requestdao = new RequestDAOImpl();
             HttpSession session = request.getSession();
+            UserDAO userDAO = new UserDAOImpl();
             
             // check if mentor login
-            User user = (User) session.getAttribute("currUser");
+            int id = Integer.parseInt(request.getParameter("uId"));
+            User user = userDAO.getUserById(id);
+            request.setAttribute("user", user);
             if (user == null) { // return to sign in page
                 response.sendRedirect("signIn.jsp");
                 return;
@@ -71,10 +75,10 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             HashMap<String,HashMap<Integer,Integer>> statisticMap = requestdao.getStatisticTopFive();
             
             // replace username of your mentor wiht "You" if user in top 5
-            if(statisticMap.containsKey(user.getUsername())) {
+            if(statisticMap.containsKey(user.getFullname())) {
                 
                 for(String key: new ArrayList<>(statisticMap.keySet())) {
-                    if(user.getUsername().equalsIgnoreCase(key)) {
+                    if(user.getFullname().equalsIgnoreCase(key)) {
                        statisticMap.put("You", statisticMap.remove(key));
                     } else {
                        statisticMap.put(key, statisticMap.remove(key));

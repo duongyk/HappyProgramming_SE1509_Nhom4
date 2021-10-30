@@ -134,4 +134,10 @@ public interface SkillDAO {
      * @throws Exception
      */
     public Skill getSkillDetail(int sId) throws Exception;
+    
+    public ArrayList<Skill> pagingActiveSkill(int index) throws Exception;
+    
+    public ArrayList<Skill> getSkillByNameFilterPaging(int index, String name) throws Exception;
+    
+    public int getTotalSkillFilterName(String name) throws Exception;
 }

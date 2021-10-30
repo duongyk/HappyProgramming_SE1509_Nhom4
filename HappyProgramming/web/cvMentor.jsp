@@ -33,7 +33,7 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
 
-       
+
     </head>
 
     <body>
@@ -107,26 +107,29 @@
                                         <div class="mt-3">
                                             <h4 style= "font-weight: bold;"><c:out value="${mentor.fullname}"></c:out></h4>
                                                 <p class="text-secondary mb-1"> </p>
-                                                 <a  style="color: blue ;" href="CreateRequestController?mId=${mentor.getId()}">create request </a>
-                                                        <br/> 
-                                                 <a  style="color: blue ;" href="rateComment?mId=${mentor.getId()}">view rating/coment </a>
-                                                 
-                                                  
-                                                  
-                                            </div>
+                                            <c:if test="${sessionScope.currUser!=null}">
+                                                <a  style="color: blue ;" href="CreateRequestController?mId=${mentor.getId()}&sId=${skill.id}">create request </a>
+                                                <br/>
+                                            </c:if>
+
+                                            <a  style="color: blue ;" href="rateComment?mId=${mentor.getId()}">view rating/coment </a>
+
+
+
                                         </div>
                                     </div>
                                 </div>
-                                <!--CV chi ti?t-->
                             </div>
-                            <div class="col-md-8">
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <div class="row" style="margin: 15px;">
-                                            <div class="col-sm-3">
-                                                <h6 class="mb-0">Full Name</h6>
-                                            </div>
-                                            <div class="col-sm-9 text-secondary">
+                            <!--CV chi ti?t-->
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row" style="margin: 15px;">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Full Name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
                                             <c:out value="${mentor.fullname}"></c:out>
                                             </div>
                                         </div>
