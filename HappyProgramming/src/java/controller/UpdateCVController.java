@@ -216,8 +216,8 @@ public class UpdateCVController extends HttpServlet {
             // ----------------------------------------
  
             request.getSession().setAttribute("currUser", mentorInfo); // set current user with updated info
-            request.setAttribute("success", "Update CV success");
-            sendDispatcher(request, response, "/UserProfileController");
+            session.setAttribute("success", "Update CV success");
+            sendDispatcher(request, response, "/UserProfileController?uId="+uid);
             
             
             
