@@ -66,6 +66,7 @@
 
                     }
                 });
+                
             }
 
             function loadNewFriendMessage(friendId) {
@@ -77,18 +78,18 @@
 
                 //document.getElementById("friendId").value= friendId;
                 document.getElementById("friendId").innerHTML = friendId;
-                
+
                 loadMessage();
-                inputbox.style.display='block';
+                inputbox.style.display = 'block';
             }
 
-            function postMessage() {                
-                
+            function postMessage() {
+
                 var mess = document.querySelector('input').value;
                 var messtatus = document.getElementById("status");
-                
-                if(messtatus !== null) {
-                messtatus.remove();
+
+                if (messtatus !== null) {
+                    messtatus.remove();
                 }
                 document.getElementById("messagebox").innerHTML += "<div class=\"outgoing_msg\">\n"
                         + "                  <div class=\"sent_msg\">\n"
@@ -116,12 +117,26 @@
                     }
                 });
             }
-            
-            $( document ).ready(function() {
-                var elem = document.getElementById("friendId");
-                loadNewFriendMessage(elem.innerHTML);
+
+            $(document).ready(function () {
+                var elem = document.getElementById("friendId").innerHTML;
+                
+                if (!elem) {
+                    //alert('newelem');
+                    var messagebox = document.getElementById("messagebox");
+                    messagebox.innerHTML = null;
+
+                    var inputbox = document.getElementById("inputbox");
+                    inputbox.style.display = 'none';
+                    
+                    document.getElementById("heading").style.display = 'none';
+                    
+                } else {
+                    //alert('elem');
+                    loadNewFriendMessage(elem);
+                }
             });
-                        
+
         </script>
     </head>
 
@@ -202,6 +217,9 @@
             <section class="breadcrumbs">
                 <div class="card-heading">
                     <h2 class="title" style="color: black; font-weight: bold;">Messaging </h2>
+                    <c:if test="${chaterror!=null}">
+                        <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${chaterror}"></c:out></h3>
+                    </c:if>
                 </div>
             </section><!-- End Breadcrumbs Section -->
 
@@ -228,41 +246,41 @@
                                 <div class="inbox_chat">
                                     <c:set var="selectedId" value="${friendId}"></c:set>
                                     <c:forEach items="${friendList}" var="friend" >
-                                    <c:choose>
-                                        <c:when test="${friend.getId()==selectedId}">
-                                    <div class="chat_list active_chat">
-                                        <a href="#" onclick="loadNewFriendMessage(${friend.getId()}); return false;">
-                                            <div class="chat_people">
-                                                <div class="chat_img"> <img src="img/<c:out value="${friend.getAvatar()}" ></c:out>" alt="sunil">
+                                        <c:choose>
+                                            <c:when test="${friend.getId()==selectedId}">
+                                                <div class="chat_list active_chat">
+                                                    <a href="#" onclick="loadNewFriendMessage(${friend.getId()}); return false;">
+                                                        <div class="chat_people">
+                                                            <div class="chat_img"> <img src="img/<c:out value="${friend.getAvatar()}" ></c:out>" alt="sunil">
+                                                                </div>
+                                                                <div class="chat_ib">
+                                                                    <h5><c:out value="${friend.getUsername()}"></c:out></h5>
+
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="chat_list">
+                                                    <a href="#" onclick="loadNewFriendMessage(${friend.getId()}); return false;">
+                                                        <div class="chat_people">
+                                                            <div class="chat_img"> <img src="img/<c:out value="${friend.getAvatar()}" ></c:out>" alt="sunil">
+                                                                </div>
+                                                                <div class="chat_ib">
+                                                                    <h5>${friend.getUsername()}</h5>
+
+                                                            </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                                <div class="chat_ib">
-                                                    <h5><c:out value="${friend.getUsername()}"></c:out></h5>
-                                                 
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                    <div class="chat_list">
-                                        <a href="#" onclick="loadNewFriendMessage(${friend.getId()}); return false;">
-                                        <div class="chat_people">
-                                            <div class="chat_img"> <img src="img/<c:out value="${friend.getAvatar()}" ></c:out>" alt="sunil">
-                                            </div>
-                                            <div class="chat_ib">
-                                                <h5>${friend.getUsername()}</h5>
-                                                
-                                            </div>
-                                        </div>
-                                        </a>
-                                    </div>
-                                        </c:otherwise>
-                                    </c:choose>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
                                 </div>
                             </div>
                             <div class="mesgs">
-                                <div class="headind_srch">
+                                <div id="heading" class="headind_srch">
                                     <div class="recent_heading">
                                         <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" style="
                                              max-width: 30%;
@@ -283,14 +301,14 @@
                                     </div>
                                 </div>
                                 <div class="msg_history" id="messagebox">
-                                    
+
                                 </div>
                                 <div class="type_msg" id="inputbox">
                                     <div class="input_msg_write">
                                         <form action="#" method="POST" onsubmit="postMessage();event.preventDefault();">
-                                        <input id = "textbox" type="text" class="write_msg" placeholder="Type a message" required style="width: 91%"/>
-                                        <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o"
-                                                                                                       aria-hidden="true"></i></button>
+                                            <input id = "textbox" type="text" class="write_msg" placeholder="Type a message" required style="width: 91%"/>
+                                            <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o"
+                                                                                          aria-hidden="true"></i></button>
                                         </form>
                                     </div>
                                 </div>
@@ -402,7 +420,7 @@
 
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
-        
+
         <style>
             .container {
                 max-width: 1170px;

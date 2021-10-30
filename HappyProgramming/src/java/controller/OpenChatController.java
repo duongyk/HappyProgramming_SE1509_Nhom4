@@ -82,7 +82,14 @@ public class OpenChatController extends HttpServlet {
              // get user friend list
             ArrayList<Integer> friendIdList = frienddao.getYourChatFriendId(uId);
             
-            // if there is not friendId parameter
+            //if user get no friend
+            if(friendIdList.isEmpty()) {
+                
+                request.setAttribute("chaterror", "There no message for you");
+                
+            } else {
+            
+            // if there is no friendId parameter on URL
             if (status == 0) friendId = friendIdList.get(0);
             
             ArrayList<User> friendList = new ArrayList();
@@ -95,6 +102,8 @@ public class OpenChatController extends HttpServlet {
             
             if(friendId!=0){
             request.setAttribute("friendId", friendId);
+            }
+            
             }
             
             RequestDispatcher rd = request.getRequestDispatcher("/chatbox.jsp");
