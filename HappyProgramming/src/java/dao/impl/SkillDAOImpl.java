@@ -498,7 +498,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         }
         return list;
     }
-    
+
     /**
      * Update Skill Detail by Skill detail
      *
@@ -542,5 +542,94 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
             closeConnection(conn);
         }
         return skill;
+    }
+
+    @Override
+    public ArrayList<Skill> pagingActiveSkill(int index) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Skill> list = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY [sId]) \n"
+                + "AS RowNum, * FROM [Skill] WHERE [sStatus] = 1) a WHERE \n"
+                + "RowNum between ? and ?";
+        //get informations from database
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, index * 8 - 7);
+            ps.setInt(2, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Skill(rs.getInt("sId"), rs.getString("sName"), rs.getString("sDetail"), rs.getString("sImage"), rs.getInt("sStatus")));
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+
+        return list;
+    }
+    
+    @Override
+    public ArrayList<Skill> getSkillByNameFilterPaging(int index, String name) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Skill> list = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY [sId]) \n"
+                + "AS RowNum, * FROM [Skill] WHERE [sName] like ? and [sStatus] = 1) a WHERE \n"
+                + "RowNum between ? and ?";
+        //get informations from database
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%"+name+"%");
+            ps.setInt(2, index * 8 - 7);
+            ps.setInt(3, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Skill(rs.getInt("sId"), rs.getString("sName"), rs.getString("sDetail"), rs.getString("sImage"), rs.getInt("sStatus")));
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+
+        return list;
+    }
+    
+    @Override
+    public int getTotalSkillFilterName(String name) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int total = 0;
+        String sql = "SELECT COUNT([sId]) as 'total' FROM [Skill] "
+                + "WHERE [sName] like ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%"+name+"%");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("total");
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return total;
     }
 }

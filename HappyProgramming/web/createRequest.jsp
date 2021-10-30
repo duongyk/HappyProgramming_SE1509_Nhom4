@@ -190,8 +190,17 @@
                                                         <ul>
                                                             <c:forEach items="${sList}" var="s">
                                                                     <li>
-                                                                        <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}" onchange="myFunction()">
+                                                                        <c:choose>
+                                                                            <c:when test="${s.id==reqSkill.id}">
+                                                                                <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" checked="${s.id==reqSkill.id}" value="${s.getId()}" onchange="myFunction()">
+                                                                                <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}" onchange="myFunction()">
                                                                         <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
+                                                                            </c:otherwise>    
+                                                                        </c:choose>
+                                                                        
                                                                     </li>
                                                             </c:forEach>
                                                         </ul>

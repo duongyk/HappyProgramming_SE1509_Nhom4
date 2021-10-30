@@ -62,10 +62,10 @@
                                 <c:when test="${sessionScope.currUser!=null}">
                                     <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                     <c:choose>
-                                        <c:when test="${sessionScope.currUser.getRole()==2}">
-                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
+                                        <c:when test="${sessionScope.currUser.getRole()==2}">                       
+                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic?uId=${sessionScope.currUser.id}">Statistic</a>
                                         </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
+                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic?uId=${sessionScope.currUser.id}">Rating</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>

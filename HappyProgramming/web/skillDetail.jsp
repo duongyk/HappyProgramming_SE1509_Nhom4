@@ -147,14 +147,15 @@
                                     <div style="background-color: lightgray" class="member-info">
                                         <h4 style="text-align: center"><c:out value="${mentor.getFullname()}"></c:out></h4>
                                             <div style="text-align: center">
-                                                <a href="CVControllerMap?service=cvMentor&mId=${mentor.getId()}">View CV</a>
+                                                <a href="CVProfile?mId=${mentor.getId()}&sId=${currSkill.id}">View CV</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </c:forEach>
+                        <h5 style="text-align: center"> <a href="ListMentorBySkilController?sId=${currSkill.id}">SHOW MORE</a> </h5>
                     </div>
-
+                    
                 </div>
             </section>
 

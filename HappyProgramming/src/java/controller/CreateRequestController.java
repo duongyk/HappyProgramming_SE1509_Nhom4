@@ -90,10 +90,15 @@ public class CreateRequestController extends HttpServlet {
             UserDAO userDao = new UserDAOImpl();
             SkillDAO skillDAO = new SkillDAOImpl();
             
+            int skillId = Integer.parseInt(request.getParameter("sId"));
             int mentorId = Integer.parseInt(request.getParameter("mId"));
             if(mentorId!=0) { // check if mentor id is not null
                 User mentor = userDao.getUserById(mentorId); // get mentor info by id
                 request.setAttribute("reqMentor", mentor); // set mentor
+            }
+            if (skillId!=0) {
+                Skill skill = skillDAO.getSkillById(skillId);
+                request.setAttribute("reqSkill", skill);
             }
             // if mentor id is null
             ArrayList<Skill> sList = skillDAO.getActiveSkill(); // get list of current active skills

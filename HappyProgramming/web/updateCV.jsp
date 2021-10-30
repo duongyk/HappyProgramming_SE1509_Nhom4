@@ -236,7 +236,7 @@
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
                                                         <!--<input class="input-white" type="text" name="phone"> -->
-                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro" maxlength="200" required><c:out value="${mentorcv.getProfessionIntro()}"></c:out></textarea>
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro" maxlength="500" required><c:out value="${mentorcv.getProfessionIntro()}"></c:out></textarea>
                                                         <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
