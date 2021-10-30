@@ -59,6 +59,7 @@
                             <%-- Check the current User --%>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
+                                <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
                                         <li><a class="nav-link scrollto" href="openChat">Messenger</a>
@@ -82,7 +83,7 @@
                                     <ul>
                                         <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
                                         <li><a href="changePassword.jsp">Change pass</a></li>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                        <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
                             </c:when>

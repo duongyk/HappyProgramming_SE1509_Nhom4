@@ -47,9 +47,9 @@
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
-                        <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
+                                <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
                                   

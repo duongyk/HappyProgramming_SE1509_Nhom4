@@ -93,7 +93,7 @@
                 document.getElementById("messagebox").innerHTML += "<div class=\"outgoing_msg\">\n"
                         + "                  <div class=\"sent_msg\">\n"
                         + "                    <p>" + mess + "</p>\n"
-                        + "                    <span class=\"time_date\">" + "date not finished" + "</span>\n"
+                        + "                    <span class=\"time_date\">" + "" + "</span>\n"
                         + "                    <span id=\"status\" class=\"\">" + "ĐANG GỬI" + "</span>\n"
                         + "                  </div>\n"
                         + "                </div>";
@@ -125,7 +125,7 @@
         </script>
     </head>
 
-    <body style="zoom: 72%">
+    <body >
 
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top d-flex align-items-center" style="background-color:#e2f5fde0;">
@@ -142,10 +142,16 @@
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
+                        <li><a class="nav-link scrollto" href="openChat">Messenger</a>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
+                                        </li>
+                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
+                                        </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
@@ -164,9 +170,9 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserProfileController?uId=${sessionScope.currUser.id}">Profile</a></li>
-                                        <li><a href="UserControllerMap?service=formChangePass">Change pass</a></li>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                        <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="ChangePassword">Change pass</a></li>
+                                        <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
                             </c:when>
@@ -231,8 +237,7 @@
                                                 </div>
                                                 <div class="chat_ib">
                                                     <h5><c:out value="${friend.getUsername()}"></c:out></h5>
-                                                    <p>Test, which is a new approach to have all solutions
-                                                        astrology under one roof.</p>
+                                                 
                                                 </div>
                                             </div>
                                         </a>
@@ -246,8 +251,7 @@
                                             </div>
                                             <div class="chat_ib">
                                                 <h5>${friend.getUsername()}</h5>
-                                                <p>Test, which is a new approach to have all solutions
-                                                    astrology under one roof.</p>
+                                                
                                             </div>
                                         </div>
                                         </a>

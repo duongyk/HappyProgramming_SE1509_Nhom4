@@ -85,8 +85,14 @@ public class UpdateCVController extends HttpServlet {
 
             HttpSession session = request.getSession();
             
-            int uid = Integer.parseInt(request.getParameter("uid"));
+            User user = (User) session.getAttribute("currUser");    
+            
+            if(user==null) {
+                response.sendRedirect("signIn.jsp");
+                return;
+            }
                 
+            int uid = user.getId();
             CV mentorCV = cvdao.getMentorCV(uid);
 
             //User mentorProfile = userDAO.getUserById(uid);
@@ -107,7 +113,6 @@ public class UpdateCVController extends HttpServlet {
             request.setAttribute("title","UPDATE CV");
 
             RequestDispatcher rd = request.getRequestDispatcher("/updateCV.jsp");
-            //RequestDispatcher rd = request.getRequestDispatcher("/newUpdateCV.jsp");
 
             rd.forward(request, response);
         } catch (Exception ex) {
@@ -142,7 +147,14 @@ public class UpdateCVController extends HttpServlet {
             
             // get information
                 
-            int uid = Integer.parseInt(request.getParameter("uid").trim());
+            User user = (User) session.getAttribute("currUser");    
+            
+            if(user==null) {
+                response.sendRedirect("signIn.jsp");
+                return;
+            }
+                
+            int uid = user.getId();
             //System.out.println("uid "+uid);
 
             String fullname= request.getParameter("fullname").trim();
@@ -154,8 +166,6 @@ public class UpdateCVController extends HttpServlet {
             Date dob = Date.valueOf(request.getParameter("dob"));
 
             String avatar = request.getParameter("avatar").trim();
-
-            User user = (User) session.getAttribute("currUser");
 
             // if user not choose avatar
             if(avatar.equals("") || avatar == null ) { 
@@ -207,7 +217,7 @@ public class UpdateCVController extends HttpServlet {
  
             request.getSession().setAttribute("currUser", mentorInfo); // set current user with updated info
             request.setAttribute("success", "Update CV success");
-            sendDispatcher(request, response, "/UserControllerMap?service=profile&uId="+uid);
+            sendDispatcher(request, response, "/UserProfileController");
             
             
             

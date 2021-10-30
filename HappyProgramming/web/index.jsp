@@ -58,12 +58,11 @@
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
-                        <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
+                                    <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">
-                                        
                                         <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
@@ -87,7 +86,7 @@
                                     <ul>
                                         <li><a href="UserProfileController?uId=${sessionScope.currUser.id}">Profile</a></li>
                                         <li><a href="ChangePassword">Change pass</a></li>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                        <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
                             </c:when>

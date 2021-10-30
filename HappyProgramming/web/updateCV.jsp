@@ -71,6 +71,7 @@
                             <%-- Check the current User --%>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
+                                <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
                                         
@@ -139,7 +140,6 @@
 
                             <div class="card-body">
                                 <form action="updateCV" method="POST">
-                                    <input type="hidden" name="uid" value="<c:out value="${mentorprofile.getId()}"></c:out>" readonly="readonly" />
                                     <!--
                                     <div class="form-row m-b-55">
                                         <div class="name">Username</div>

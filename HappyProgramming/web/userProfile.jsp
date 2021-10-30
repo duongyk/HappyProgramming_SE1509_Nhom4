@@ -64,9 +64,9 @@
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
-                        <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
+                                <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
                                         
@@ -255,7 +255,7 @@
                                             <c:if test="${currUser.getRole()==2}">
                                                 <div class="row">
                                                     <div class="col-sm-12">
-                                                        <a class="btn btn-info " href="updateCV?uid=${currUser.getId()}">Edit</a>
+                                                        <a class="btn btn-info " href="updateCV">Edit</a>
                                                     </div>
                                                 </div>
                                             </c:if>

@@ -72,16 +72,18 @@
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
+                                        <!--
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
                                         </li>
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
-                                        </li>
+                                        </li> -->
                                     </c:when>
                                     <c:otherwise>
                                         <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
                                         </li>
                                     </c:otherwise>
                                 </c:choose>
+                                        <!--
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
@@ -90,6 +92,7 @@
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
+                                        -->
                             </c:when>
                             <c:otherwise>
                                 <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
