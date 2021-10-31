@@ -63,7 +63,6 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             try {
             int id = Integer.parseInt(request.getParameter("uId"));
             user = userDAO.getUserById(id);
-            request.setAttribute("user", user);
             
             // if user is mentor
             } catch (Exception e) { 
@@ -106,6 +105,7 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
                 
             }
             
+            request.setAttribute("user", user);
             sendDispatcher(request, response, "/mentorRequestStatistic.jsp");
         } catch (Exception e) {
             Logger.getLogger(ViewMentorRequestStatisticController.class.getName()).log(Level.SEVERE, null, e);
