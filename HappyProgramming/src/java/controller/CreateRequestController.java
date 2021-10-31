@@ -37,7 +37,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Tung
  */
-@WebServlet(name = "CreateRequestController", urlPatterns = {"/CreateRequestController"})
+//@WebServlet(name = "CreateRequestController", urlPatterns = {"/CreateRequestController"})
 public class CreateRequestController extends HttpServlet {
 
     /**
@@ -149,8 +149,10 @@ public class CreateRequestController extends HttpServlet {
             }
 
             sendDispatcher(request, response, "listRequestByMe");
-        } catch (Exception ex) {
-            Logger.getLogger(CreateRequestController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            Logger.getLogger(CreateRequestController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

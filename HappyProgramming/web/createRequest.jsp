@@ -110,7 +110,7 @@
                     <div class="wrapper wrapper--w790">
                         <div class="card card-5">
                             <div class="card-body">
-                                <form action="CreateRequestController" method="POST">
+                                <form action="CreateRequest" method="POST">
                                     <%-- Title --%>
                                     <div class="form-row m-b-55">
                                         <div class="name">Title</div>

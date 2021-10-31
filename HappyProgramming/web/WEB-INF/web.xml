@@ -21,10 +21,6 @@
         <servlet-class>controller.ListAllSkill</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CreateRequest</servlet-name>
-        <servlet-class>controller.CreateRequest</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ForgetPassword</servlet-name>
         <servlet-class>controller.ForgetPassword</servlet-class>
     </servlet>
@@ -144,6 +140,10 @@
         <servlet-name>ActiveProblemController</servlet-name>
         <servlet-class>controller.ActiveProblemController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateRequestController</servlet-name>
+        <servlet-class>controller.CreateRequestController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminControllerMap</url-pattern>
@@ -163,10 +163,6 @@
     <servlet-mapping>
         <servlet-name>ListAllSkill</servlet-name>
         <url-pattern>/ListAllSkill</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CreateRequest</servlet-name>
-        <url-pattern>/CreateRequest</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ForgetPassword</servlet-name>
@@ -287,6 +283,10 @@
     <servlet-mapping>
         <servlet-name>ActiveProblemController</servlet-name>
         <url-pattern>/activeProblem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRequestController</servlet-name>
+        <url-pattern>/CreateRequest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

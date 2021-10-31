@@ -49,8 +49,7 @@ public class ListRequestByMeController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method. Get all the Request of the
-     * Mentee
+     * Get all the Request of the Mentee.
      *
      * @param request servlet request
      * @param response servlet response
@@ -95,5 +94,19 @@ public class ListRequestByMeController extends HttpServlet {
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
+    }
+
+    /**
+     * Get all the Request of the Mentee.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
     }
 }

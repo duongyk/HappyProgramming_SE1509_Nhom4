@@ -93,7 +93,7 @@
             <section id="team" class="team section-bg">
                 <div class="row">
                     <div class="col-md-2">
-                        <div><a href="CreateRequestController?mId=0"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
+                        <div><a href="CreateRequest?mId=0&sId=0"><button class="create" style="min-width: 164px;">Create Request</button></a> </div> 
                         <div><a href="statisticRequest?uId=${sessionScope.currUser.id}"><button class="create" style="min-width: 164px;">Statistic Request</button></a> </div> 
                     </div>
                     <%-- Title  --%>
