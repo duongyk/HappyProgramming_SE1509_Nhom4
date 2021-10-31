@@ -71,7 +71,7 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             
             user = (User) session.getAttribute("currUser");
                 
-            // not login
+            // not login or not mentor 
             if (user == null || user.getRole() != 2) { // return to sign in page
                 response.sendRedirect("signIn.jsp");
                 return;
