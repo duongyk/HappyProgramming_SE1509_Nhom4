@@ -58,15 +58,24 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDAO userDAO = new UserDAOImpl();
             
-            // check if mentor login
+            // if user is admin
+            User user;
+            try {
             int id = Integer.parseInt(request.getParameter("uId"));
-            User user = userDAO.getUserById(id);
+            user = userDAO.getUserById(id);
             request.setAttribute("user", user);
-            if (user == null) { // return to sign in page
+            
+            // if user is mentor
+            } catch (Exception e) { 
+                user = (User) session.getAttribute("currUser");
+                
+            // not login or not mentor
+            if (user == null || user.getRole() != 2) { // return to sign in page
                 response.sendRedirect("signIn.jsp");
                 return;
             } 
-            
+                
+            }
             
             // get top 5 mentor request statistic
             
