@@ -121,9 +121,11 @@
                     <h2 class="title" style="color: black; font-weight: bold;">User Profile</h2>
                     <c:if test="${success!=null}">
                         <h3 style="color:#29cc49;font-weight: bold;text-align: center"><c:out value="${success}"></c:out></h3>
+                        <c:remove var="success" scope="session"></c:remove>
                     </c:if>
                     <c:if test="${error!=null}">
                         <h3 style="color:#009900;font-weight: bold;text-align: center"><c:out value="${error}"></c:out></h3>
+                        <c:remove var="error" scope="session"></c:remove>
                     </c:if>
                 </div>
                 
