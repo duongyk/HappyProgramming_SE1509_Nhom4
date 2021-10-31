@@ -15,15 +15,14 @@
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
-        <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
-        <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-        <title>View Problem Page</title>
+
+        <title>Forum Page</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
         <link href="img/favicon.png" rel="icon">
         <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
         <link href="vendor/aos/aos.css" rel="stylesheet">
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -37,8 +36,6 @@
 
         <link href="css/login.css" rel="stylesheet">
         <link href="css/forum.css" rel="stylesheet">
-
-        <script type="text/javascript" src="js/checkSpace.js" ></script>
     </head>
 
 
@@ -87,37 +84,105 @@
         <%-- End header --%>
         <%-- Main --%>
         <main id="main">
-            <section class="breadcrumbs" style="background-color:#eee ">
+            <section class="breadcrumbs">
                 <div class="container">
                 </div>
             </section>
-            <div class="container mt-5 mb-5">
-                <div class="d-flex justify-content-center row" >
-                    <div class="d-flex flex-column col-md-8" >
-                        <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
-                            <div class="d-flex flex-column ml-3">
-                                <div class="post-title" >
-                                    <div class="title">Is sketch 3.9.1 stable?</div>
-                                  
-                                </div>
-                                <div class="d-flex flex-row align-items-center align-content-center post-title">
-                                    <span class="mr-2 comments">GiangNVT&nbsp;</span>
-                                    <span class="mr-2 dot"></span><span>1 comment &nbsp; </span><span class="mr-2 dot"></span>
-                                    <span>6 hours ago</span></div>
-                            </div>
-                        </div>
-                        <div class="coment-bottom bg-white p-2 px-4" style="height: 700px">
-                            <div class="d-flex flex-row add-comment-section mt-4 mb-4"><input type="text" class="form-control mr-3" placeholder="Add comment"><button class="btn btn-primary" type="button">Comment</button></div>
-                            <div class="commented-section mt-2">
-                                <div class="d-flex flex-row align-items-center commented-user">
-                                    <h5 class="mr-2">Corey oates</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">4 hours ago</span>
-                                </div>
-                                <div class="comment-text-sm"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></div>
-                            </div>
-                        </div>
+            <section id="team" class="team section-bg">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <%-- Title  --%>
+                    <div class="col-md-8 section-title">
+                        <h2 class="">Forum</h2>
                     </div>
+                    <div class="col-md-2"></div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <c:if test="${sessionScope.currUser!=null}">
+                            <div><a href="myProblem"><button class="myProblem" style="min-width: 164px;">My Problem</button></a> </div> 
+                            <div><a href="postProblem"><button class="myProblem" style="min-width: 164px;">Post Problem</button></a> </div> 
+                        </c:if> 
+                    </div>
+                    <div class="col-md-7">
+                        <c:set var="i" scope="session" value="0"/>
+                        <c:forEach items="${pList}" var="p" >
+                            <div class="problem darker" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
+                                <h2>${p.getFrom().getFullname()}</h2>
+                                <h2 class="text-bold">${p.getTitle()}</h2>
+                                <h3>${p.getContent()}</h3>
+                                <div class="row" style="padding-top:10px;">
+                                    <div class="col-md-6">
+                                        <p class="">${p.toString()}</p>
+                                    </div>
+
+                                    <c:if test="${answerNumber[i]==0}">
+                                        <div class="col-md-6">
+                                            <p class="time-right">No answer yet!</p>
+                                        </div>
+
+                                    </c:if>
+                                    <c:if test="${answerNumber[i]==1}">
+                                        <div class="col-md-6">
+                                            <p class="time-right">1 answer</p>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${answerNumber[i]>1}">
+                                        <div class="col-md-6">
+                                            <p class="time-right">${answerNumber[i]} answers</p>
+                                        </div>
+                                    </c:if>
+
+                                </div>
+
+
+                            </div>
+                            <c:set var="i" scope="session" value="${i+1}"/>
+                        </c:forEach>
+                    </div>
+                    <div class="col-md-2 imagee">
+                        <img src="img/forum3.png">
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>          
+
+                <%-- Paging --%>
+                <c:if test="${!empty pList}">
+                    <div class="row">  
+                        <div class="paging">
+                            <%-- Previous --%>
+                            <c:choose>
+                                <c:when test="${index>1}">
+                                    <a class="previous" href="${href}index=${index-1}"><</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="previous disabled" href="${href}index=${index-1}"><</a>
+                                </c:otherwise>
+                            </c:choose>
+                            <%-- Page index --%>
+                            <c:forEach begin="1" end="${endPage}" var="page">
+                                <c:choose>
+                                    <c:when test="${index==page}">
+                                        <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="${href}index=${page}"> ${page}</a> 
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                            <%-- Next --%>
+                            <c:choose>
+                                <c:when test="${index!=endPage}">
+                                    <a class="next" href="${href}index=${index+1}">  ></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="next disabled" href="${href}index=${index+1}">></a>
+                                </c:otherwise>
+                            </c:choose>
+                        </div> 
+                    </div>
+                </c:if>
+            </section>
         </main>
         <%-- End main --%>
         <%-- Footer --%>
@@ -162,50 +227,6 @@
 
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
-        <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
-        <style>body {
-                background-color: #eee
-            }
-            .title{
-                font-size: 30px;
-                color: black;
-                text-transform: none;
-            }
 
-            .bdge {
-                height: 21px;
-                background-color: orange;
-                color: #fff;
-                font-size: 11px;
-                padding: 8px;
-                border-radius: 4px;
-                line-height: 3px
-            }
 
-            .comments {
-                text-decoration: underline;
-                text-underline-position: under;
-                cursor: pointer
-            }
-
-            .dot {
-                height: 7px;
-                width: 7px;
-                margin-top: 3px;
-                background-color: #bbb;
-                border-radius: 50%;
-                display: inline-block
-            }
-
-            .hit-voting:hover {
-                color: blue
-            }
-
-            .hit-voting {
-                cursor: pointer
-
-            }
-            .mr-2 {
-                font-weight: bold;
-            }</style>
 </html>

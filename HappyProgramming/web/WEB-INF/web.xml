@@ -282,7 +282,7 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            70
         </session-timeout>
     </session-config>
     <!-- SMTP settings -->

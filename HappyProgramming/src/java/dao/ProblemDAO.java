@@ -45,8 +45,8 @@ public interface ProblemDAO {
      * @return a list of <code>Problem</code> object
      * @throws Exception
      */
-    public ArrayList<Problem> getProblemByMePaging(int index,int mId) throws Exception;
-    
+    public ArrayList<Problem> getProblemByMePaging(int index, int mId) throws Exception;
+
     /**
      * Insert a Problem into database
      *
@@ -54,7 +54,7 @@ public interface ProblemDAO {
      * @throws Exception
      */
     public void insertProblem(Problem problem) throws Exception;
-    
+
     /**
      * Update a Problem into database
      *
@@ -62,7 +62,7 @@ public interface ProblemDAO {
      * @throws Exception
      */
     public void updateProblem(Problem problem) throws Exception;
-    
+
     /**
      * Close a Problem (change status into 0)
      *
@@ -70,7 +70,7 @@ public interface ProblemDAO {
      * @throws Exception
      */
     public void closeProblem(int pId) throws Exception;
-    
+
     /**
      * Count all the Problem
      *
@@ -78,7 +78,7 @@ public interface ProblemDAO {
      * @throws Exception
      */
     public int countProblem() throws Exception;
-    
+
     /**
      * Count the Problem of a User
      *
@@ -87,7 +87,7 @@ public interface ProblemDAO {
      * @throws Exception
      */
     public int countProblemUser(int uId) throws Exception;
-    
+
     /**
      * Count the Problem of a User
      *
@@ -96,5 +96,13 @@ public interface ProblemDAO {
      * @return a <code>java.lang.Integer</code>
      * @throws Exception
      */
-    public boolean checkMyProblem(int pId,int uId) throws Exception;
+    public boolean checkMyProblem(int pId, int uId) throws Exception;
+
+    /**
+     * Open a Problem (change status into 0)
+     *
+     * @param pId is a <code>java.lang.Integer</code>
+     * @throws Exception
+     */
+    public void openProblem(int pId) throws Exception;
 }

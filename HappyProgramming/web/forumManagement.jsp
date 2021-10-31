@@ -18,7 +18,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Skill management</title>
+        <title>Forum management</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -239,6 +239,13 @@
                                         <span class="menu-title">Message Management</span>
                                     </a>
                                 </li>
+                                <!--Forum MANAGEMENT-->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="forumManagement">
+                                        <i class="icon-columns menu-icon"></i>
+                                        <span class="menu-title">Forum Management</span>
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
 
@@ -265,25 +272,11 @@
                                             <div class="col-md-6 mb-4 stretch-card transparent">
                                                 <div class="card card-tale">
                                                     <div class="card-body">
-                                                        <p class="mb-4">Total Skill </p>
-                                                        <p class="fs-30 mb-2"><c:out value="${count}"></c:out></p>
+                                                        <p class="mb-4">Total Question </p>
+                                                        <p class="fs-30 mb-2"><c:out value="${pList.size()}"></c:out></p>
                                                             <p></p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6 mb-4 stretch-card transparent">
-                                                    <div class="card card-dark-blue">
-                                                        <div class="card-body">
-                                                            <p class="mb-4">Total Mentee</p>
-                                                            <p class="fs-30 mb-2"><c:out value="${menteeList.size()}"></c:out></p>
-                                                            <p></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                                                    <button class="create"> <a href="createSkill.jsp" style="color: white"> Create new skill</a></button>
                                                 </div>
 
                                             </div>
@@ -300,39 +293,55 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>
-                                                                        Image
+                                                                        Question ID
                                                                     </th>
                                                                     <th>
-                                                                        ID
+                                                                        Poster 
                                                                     </th>
                                                                     <th>
-                                                                        <a style="color: black" href="sortSkillByName"> Skill Name </a>
+                                                                        Posting Date
                                                                     </th>
                                                                     <th>
-                                                                        Detail
+                                                                        Total Answers
                                                                     </th>
+                                                                    <th>
+                                                                        Status
+                                                                    </th>
+
 
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <c:forEach items="${sList}" var="skill">
+                                                                <c:set var="i" scope="session" value="0"/>
+                                                                <c:forEach items="${pList}" var="p">
                                                                     <tr>
-                                                                        <td class="py-1">
-                                                                            <img src="img/${skill.image}" alt="image" />
-                                                                        </td>
+
                                                                         <td>
-                                                                            <a href="getUpdateSkill?sId=${skill.id}"><c:out value="${skill.id}"></c:out></a>
+                                                                            <a href="viewProblem?pId=${p.getId()}"><c:out value="${p.getId()}"></c:out></a>
                                                                             </td>
 
                                                                             <td>
-                                                                            <c:out value="${skill.name}"></c:out>
+                                                                            <c:out value="${p.getFrom().getFullname()}"></c:out>
                                                                             </td>
                                                                             <td>
-                                                                            <c:out value="${skill.detail}"></c:out>
+                                                                            <c:out value="${p.toString()}"></c:out>
                                                                             </td>
-                                                                        </tr>
+                                                                            <td style="padding-left: 60px">
+                                                                            <c:out value="${answerNumber[i]}"></c:out>
+                                                                            </td>
+                                                                            <td>
+                                                                            <c:if test="${p.status ==1}">
+                                                                                <a href="updateQuestionStatus?pId=${p.id}&&status=1" class="btn btn-success" style="width: 116.156px" > 
+                                                                                    Is open </a>
+                                                                                </c:if>
+                                                                                <c:if test="${p.status==0}">
+                                                                                <a href="updateQuestionStatus?pId=${p.id}&&status=0" class="btn btn-danger"  style="width: 116.156px"> Closed </a>
+                                                                            </c:if>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <c:set var="i" scope="session" value="${i+1}"/>
+
                                                                 </c:forEach>
-
                                                             </tbody>
                                                         </table>
 
@@ -344,7 +353,7 @@
 
                                 </div>
                                 <%-- Paging --%>
-                                <c:if test="${!empty sList}">
+                                <c:if test="${!empty pList}">
 
                                     <div class="row">  
                                         <div class="paging">

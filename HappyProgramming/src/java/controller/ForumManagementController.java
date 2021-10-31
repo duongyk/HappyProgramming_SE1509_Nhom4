@@ -9,35 +9,35 @@
  */
 package controller;
 
-import dao.RequestDAO;
-import dao.RequestSkillDAO;
-import dao.UserDAO;
-import dao.impl.RequestDAOImpl;
-import dao.impl.RequestSkillDAOImpl;
-import dao.impl.UserDAOImpl;
-import entity.User;
+import dao.ProblemAnswerDAO;
+import dao.ProblemDAO;
+import dao.impl.ProblemAnswerDAOImpl;
+import dao.impl.ProblemDAOImpl;
+import entity.Problem;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  * Process:<br>
- * - List all mentee(admin)<br>
- * - Statistic all mentee<br>
- * - Paging<br>
- * - Change status of mentee<br>
+ * - Create new skill (admin)<br>
+ * - List Skill <br>
+ * - Update Skill <br>
  * Exception:<br>
  *
  *
  * @author giangnvthe150748
  */
-public class MenteeManagementController extends HttpServlet {
+@WebServlet(name = "ForumManagementController", urlPatterns = {"/forumManagement"})
+public class ForumManagementController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,41 +51,40 @@ public class MenteeManagementController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        UserDAO userDAO = new UserDAOImpl();
-        RequestDAO requestDAO = new RequestDAOImpl();
-        RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();
         try {
-            //get index page 
+            // initiate DAO
+            ProblemDAO pDAO = new ProblemDAOImpl();
+            ProblemAnswerDAO paDAO = new ProblemAnswerDAOImpl();
+            // Get index page 
             String indexPage = request.getParameter("index");
-            // index page always start at 1
             if (indexPage == null) {
                 indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
-            int count = userDAO.getUserByRole(1).size();
-            int endPage = count / 8;  // a page will have at most 8 skills
-            if (count % 8 != 0) { //if the total of skills is not divisible by 8, the last page will be added to show the remaining skills
+            // Total request for paging
+            int count = pDAO.countProblem();
+            // Calculate total page for paging
+            int endPage = count / 4;
+            if (count % 4 != 0) {
                 endPage++;
             }
+            // Get Problem list
+            ArrayList<Problem> pList = pDAO.getProblemListPaging(index);
+            // Set list of total number answer
+            ArrayList<Integer> answerNumber = new ArrayList<>();
+            for (Problem p : pList) {
+                answerNumber.add(paDAO.countProblemAnswer(p.getId()));
+            }
             // Set href of paging
-            String href = "menteeManagement?";
-            //list all User that are Mentee have in database
-            ArrayList<User> menteeList = userDAO.getUserByRolePaging(index, 1);
-            //get total study hours from db
-            int totalHour = requestDAO.getTotalHour();
-            //get total skill from db
-            int totalSkill = requestSkillDAO.getTotalRequest();
-            //send informations to menteeManagement.jsp
+            String href = "forumManagement?";
             request.setAttribute("href", href);/*href paging*/
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("count", count);
-            request.setAttribute("index", index);
-            request.setAttribute("totalHour", totalHour);
-            request.setAttribute("totalSkill", totalSkill);
-            request.setAttribute("menteeList", menteeList);
-            sendDispatcher(request, response, "menteeManagement.jsp");
+            request.setAttribute("endPage", endPage);/*end page of paging*/
+            request.setAttribute("index", index);/*index/current page*/
+            request.setAttribute("pList", pList);/*Problem List*/
+            request.setAttribute("answerNumber", answerNumber);/*List number of Answer*/
+            sendDispatcher(request, response, "forumManagement.jsp");
         } catch (Exception e) {
-            Logger.getLogger(MenteeManagementController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ForumManagementController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
@@ -95,10 +94,8 @@ public class MenteeManagementController extends HttpServlet {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
-        } catch (ServletException ex) {
-            Logger.getLogger(MenteeManagementController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MenteeManagementController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(ForumController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

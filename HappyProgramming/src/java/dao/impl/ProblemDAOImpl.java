@@ -35,7 +35,7 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
     @Override
     public ArrayList<Problem> getProblemListPaging(int index) throws Exception {
         Connection conn = null;
-        PreparedStatement ps = null; 
+        PreparedStatement ps = null;
         ResultSet rs = null;
 
         ArrayList<Problem> listProblem = new ArrayList<>();
@@ -50,10 +50,10 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
             ps.setInt(2, index * 4);
             rs = ps.executeQuery();
             while (rs.next()) {
-                listProblem.add(new Problem(rs.getInt("pId"), 
-                        userDAO.getUserById(rs.getInt("fromId")), 
+                listProblem.add(new Problem(rs.getInt("pId"),
+                        userDAO.getUserById(rs.getInt("fromId")),
                         rs.getString("title"), rs.getString("content"),
-                        rs.getTimestamp("date"),rs.getInt("status")));
+                        rs.getTimestamp("date"), rs.getInt("status")));
             }
         } catch (Exception ex) {
             throw ex;
@@ -77,7 +77,7 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         UserDAOImpl userDAO = new UserDAOImpl();
         String sql = "SELECT * FROM [Problem] WHERE [pId] = ?";
         try {
@@ -86,10 +86,10 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
             ps.setInt(1, pId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                return new Problem(rs.getInt("pId"), 
-                        userDAO.getUserById(rs.getInt("fromId")), 
+                return new Problem(rs.getInt("pId"),
+                        userDAO.getUserById(rs.getInt("fromId")),
                         rs.getString("title"), rs.getString("content"),
-                        rs.getTimestamp("date"),rs.getInt("status"));
+                        rs.getTimestamp("date"), rs.getInt("status"));
             }
         } catch (Exception ex) {
             throw ex;
@@ -112,7 +112,7 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
     @Override
     public ArrayList<Problem> getProblemByMePaging(int index, int mId) throws Exception {
         Connection conn = null;
-        PreparedStatement ps = null; 
+        PreparedStatement ps = null;
         ResultSet rs = null;
 
         ArrayList<Problem> listProblem = new ArrayList<>();
@@ -129,10 +129,10 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                listProblem.add(new Problem(rs.getInt("pId"), 
-                        userDAO.getUserById(rs.getInt("fromId")), 
+                listProblem.add(new Problem(rs.getInt("pId"),
+                        userDAO.getUserById(rs.getInt("fromId")),
                         rs.getString("title"), rs.getString("content"),
-                        rs.getTimestamp("date"),rs.getInt("status")));
+                        rs.getTimestamp("date"), rs.getInt("status")));
             }
         } catch (Exception ex) {
             throw ex;
@@ -174,7 +174,6 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
         }
     }
 
-    
     /**
      * Update a Problem into database
      *
@@ -204,7 +203,7 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
             closeConnection(conn);
         }
     }
-    
+
     /**
      * Close a Problem (change status into 0)
      *
@@ -232,6 +231,32 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
     }
 
     /**
+     * Open a Problem (change status into 0)
+     *
+     * @param pId is a <code>java.lang.Integer</code>
+     * @throws Exception
+     */
+    @Override
+    public void openProblem(int pId) throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "UPDATE [Problem] SET [status] = 1 WHERE [pId] = ?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, pId);
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+    }
+
+    /**
      * Count all the Problem
      *
      * @return a <code>java.lang.Integer</code>
@@ -242,7 +267,7 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         int total = 0;
         String sql = "SELECT COUNT(*) as 'total' FROM [Problem]";
         try {
@@ -275,7 +300,7 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         int total = 0;
         String sql = "SELECT COUNT(*) as 'total' FROM [Problem]"
                 + "WHERE [fromId] = ?";
@@ -311,7 +336,7 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         String sql = "SELECT * FROM [Problem]"
                 + "WHERE [pId] = ? AND [fromId] = ?";
         try {
@@ -332,6 +357,5 @@ public class ProblemDAOImpl extends DBContext implements dao.ProblemDAO {
         }
         return false;
     }
-
 
 }

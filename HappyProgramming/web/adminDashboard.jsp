@@ -80,7 +80,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                        <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
 
@@ -170,6 +170,13 @@
                                         <span class="menu-title">Message Management</span>
                                     </a>
                                 </li>
+                                <!--Message MANAGEMENT-->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="forumManagement">
+                                        <i class="icon-columns menu-icon"></i>
+                                        <span class="menu-title">Forum Management</span>
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
                         <!-- partial -->
@@ -230,7 +237,7 @@
                                                     <div class="card card-light-danger">
                                                         <div class="card-body">
                                                             <p class="mb-4">Number of Visit</p>
-                                                            <p class="fs-30 mb-2">47033</p>
+                                                            <p class="fs-30 mb-2">00054</p>
                                                             <p></p>
                                                         </div>
                                                     </div>

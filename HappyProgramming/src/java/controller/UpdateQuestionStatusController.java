@@ -9,15 +9,16 @@
  */
 package controller;
 
-import dao.SkillDAO;
-import dao.UserDAO;
-import dao.impl.SkillDAOImpl;
-import dao.impl.UserDAOImpl;
-import entity.Skill;
-import entity.User;
+import dao.ProblemDAO;
+import dao.impl.ProblemDAOImpl;
+import entity.Problem;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +33,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author giangnvthe150748
  */
-public class SkillManagementController extends HttpServlet {
+@WebServlet(name = "UpdateQuestionStatusController", urlPatterns = {"/updateQuestionStatus"})
+public class UpdateQuestionStatusController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,37 +47,31 @@ public class SkillManagementController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        SkillDAO skillDAO = new SkillDAOImpl();
-        UserDAO userDAO = new UserDAOImpl();
+        ProblemDAO problemDAO = new ProblemDAOImpl();
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            int id = Integer.parseInt(request.getParameter("pId"));
+            Problem problem = problemDAO.getProblem(id);
+            int status = Integer.parseInt(request.getParameter("status"));
+            if (status == 1) {
+                problemDAO.closeProblem(id);
+                sendDispatcher(request, response, "forumManagement");
+            }
+            if (status == 0) {
+                problemDAO.openProblem(id);
+                sendDispatcher(request, response, "forumManagement");
+            }
+        }
+    }
+
+    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
-            //get index page 
-            String indexPage = request.getParameter("index");
-            // index page always start at 1
-            if (indexPage == null) {
-                indexPage = "1";
-            }
-            int index = Integer.parseInt(indexPage);
-            int count = skillDAO.getTotalSkill();
-            //calculate total page for paging
-            int endPage = count / 8; // a page will have at most 8 skills
-            if (count % 8 != 0) { //if the total of skills is not divisible by 8, the last page will be added to show the remaining skills
-                endPage++;
-            }
-            // Set href of paging
-            String href = "skillManagement?";
-            ArrayList<Skill> list = skillDAO.pagingSkill(index);
-            ArrayList<User> menteeList = userDAO.getMenteeListSorted();
-            //send informations to skillManagement.jsp
-            request.setAttribute("href", href);/*href paging*/
-            request.setAttribute("sList", list);
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("count", count);
-            request.setAttribute("index", index);/*index/current page*/
-            request.setAttribute("menteeList", menteeList);
-            request.getRequestDispatcher("skillManagement.jsp").forward(request, response);
-        } catch (Exception e) {
+            RequestDispatcher rd = request.getRequestDispatcher(path);
+            rd.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(UpdateMenteeStatusController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -91,7 +87,11 @@ public class SkillManagementController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UpdateQuestionStatusController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -105,7 +105,11 @@ public class SkillManagementController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(UpdateQuestionStatusController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
