@@ -39,11 +39,12 @@ public class CVDAOImpl extends DBContext implements dao.CVDAO {
         ResultSet rs = null;
         CV cv = new CV();
 
-        String sql = "select * from [CV] where uid='" + uid + "'";
+        String sql = "select * from [CV] where uid=?";
 
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
+            ps.setInt(1, uid);
             rs = ps.executeQuery();
             if (rs.next()) {
                 cv.setId(rs.getInt("uId"));
