@@ -9,14 +9,10 @@
  */
 package controller;
 
-import dao.ProblemAnswerDAO;
 import dao.ProblemDAO;
-import dao.impl.ProblemAnswerDAOImpl;
 import dao.impl.ProblemDAOImpl;
 import entity.Problem;
-import entity.ProblemAnswer;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -26,11 +22,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of View a Problem
+ * This class has the process request of Change status of a Problem
  *
  * @author DuongVV
  */
-public class ViewProblemController extends HttpServlet {
+public class ActiveProblemController extends HttpServlet {
 
     /**
      * Forward the request to the destination, catch any unexpected exceptions
@@ -45,12 +41,12 @@ public class ViewProblemController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(ViewProblemController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ActiveProblemController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
-     * Get all Problem and display.
+     * Change the Status of a Problem by given ID.
      *
      * @param request servlet request
      * @param response servlet response
@@ -63,41 +59,17 @@ public class ViewProblemController extends HttpServlet {
         try {
             // initiate DAO
             ProblemDAO pDAO = new ProblemDAOImpl();
-            ProblemAnswerDAO paDAO = new ProblemAnswerDAOImpl();
-            // Get Problem
+            // get Problem
             int pId = Integer.parseInt(request.getParameter("pId"));
             Problem problem = pDAO.getProblem(pId);
-            // Get index page 
-            String indexPage = request.getParameter("index");
-            if (indexPage == null) {
-                indexPage = "1";
+            if (problem.getStatus() == 0) {
+                pDAO.openProblem(pId);
+            } else {
+                pDAO.closeProblem(pId);
             }
-            int index = Integer.parseInt(indexPage);
-            // Total request for paging
-            int count = paDAO.countProblemAnswer(pId);
-            // Calculate total page for paging
-            int endPage = count / 4;
-            if (count % 4 != 0) {
-                endPage++;
-            }
-            // Get Problem Answer
-            ArrayList<ProblemAnswer> paList = paDAO.getProblemAnswerList(index, pId);
-            // Get number of Answer
-            int answerNumber = paDAO.countProblemAnswer(pId);
-            //Set href paging
-            String href = "viewProblem?pId=" + pId + "&";
-
-            request.setAttribute("href", href);/*href paging*/
-            request.setAttribute("endPage", endPage);/*end page of paging*/
-            request.setAttribute("index", index);/*index/current page*/
-            request.setAttribute("problem", problem);/*Problem*/
-            request.setAttribute("answerNumber", answerNumber);/*Problem*/
-            request.setAttribute("pId", pId);/*Problem*/
-            request.setAttribute("paList", paList);/*ProblemAnswer List*/
-            sendDispatcher(request, response, "viewProblem.jsp");
-
+            sendDispatcher(request, response, "viewProblem?pId=" + pId);
         } catch (Exception e) {
-            Logger.getLogger(ViewProblemController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ActiveProblemController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

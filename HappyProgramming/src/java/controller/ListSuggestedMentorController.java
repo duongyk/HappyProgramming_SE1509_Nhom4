@@ -23,7 +23,6 @@ import entity.Skill;
 import entity.User;
 import entity.UserSkill;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -45,32 +44,6 @@ import javax.servlet.http.HttpServletResponse;
 public class ListSuggestedMentorController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ListSuggestedMentorController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ListSuggestedMentorController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    /**
      * Forward the request to the destination, catch any unexpected exceptions
      * and log it
      *
@@ -88,7 +61,7 @@ public class ListSuggestedMentorController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Get Suggested Mentor by Filter.
      *
      * @param request servlet request
      * @param response servlet response
@@ -113,7 +86,7 @@ public class ListSuggestedMentorController extends HttpServlet {
             ArrayList<User> mList = new ArrayList<>();
             int total = userDAO.getMaxUser();
             switch (filter) {
-                
+
                 case 1:/* Suggested by requested Skill of the Mentee*/
                     ArrayList<Integer> listId = new ArrayList<>();
                     // get Skill of the Mentee have in all Requests
@@ -136,7 +109,7 @@ public class ListSuggestedMentorController extends HttpServlet {
                     }
                     request.setAttribute("filter", 1);/*Filter number*/
                     break;
-                
+
                 case 2:/*Suggested by Rating*/
                     ArrayList<User> mentorList = userDAO.getUserByRole(2);
                     // HashMap contain rating of Mentor ((K,V)-(Mentor ID, avarage rating))
@@ -198,7 +171,7 @@ public class ListSuggestedMentorController extends HttpServlet {
                     for (HashMap.Entry<Integer, Integer> entry : listEntry2) {
                         mList.add(userDAO.getUserById(entry.getKey()));
                     }
-                    
+
                     //Set list Number of Skill
                     ArrayList<Integer> skillNumberList = new ArrayList<>();
                     for (User mentor : mList) {
@@ -219,29 +192,4 @@ public class ListSuggestedMentorController extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

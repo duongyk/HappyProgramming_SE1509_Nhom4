@@ -71,6 +71,7 @@
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
                                 </li>
+                                <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>

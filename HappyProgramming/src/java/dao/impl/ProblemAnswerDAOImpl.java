@@ -19,8 +19,9 @@ import java.util.ArrayList;
 /**
  * This class implements from class interface ProblemAnswerDAOImpl. <br>
  * This class contains method to query select the table ProblemAnswer.<br>
- * There are 
- *
+ * There are Get all the Answer of a Problem, Insert a Answer into database, <br>
+ * Update a Answer in database, Get total number of Answer of a Problem <br>
+ * 
  * @author duongvvhe150773
  */
 public class ProblemAnswerDAOImpl extends DBContext implements dao.ProblemAnswerDAO {

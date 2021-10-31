@@ -16,7 +16,6 @@ import dao.impl.ProblemDAOImpl;
 import entity.Problem;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,32 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 public class MyProblemController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MyProblemController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MyProblemController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    /**
      * Forward the request to the destination, catch any unexpected exceptions
      * and log it
      *
@@ -75,8 +48,9 @@ public class MyProblemController extends HttpServlet {
             Logger.getLogger(MyProblemController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Get list Problem of the current User.
      *
      * @param request servlet request
      * @param response servlet response
@@ -86,7 +60,7 @@ public class MyProblemController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{
+        try {
             // initiate DAO
             ProblemDAO pDAO = new ProblemDAOImpl();
             ProblemAnswerDAO paDAO = new ProblemAnswerDAOImpl();
@@ -109,10 +83,10 @@ public class MyProblemController extends HttpServlet {
             ArrayList<Problem> pList = pDAO.getProblemByMePaging(index, user.getId());
             // Set list of total number answer
             ArrayList<Integer> answerNumber = new ArrayList<>();
-            for (Problem p: pList) {
+            for (Problem p : pList) {
                 answerNumber.add(paDAO.countProblemAnswer(p.getId()));
-            }          
-            
+            }
+
             // Set href of paging
             String href = "myProblem?";
             request.setAttribute("href", href);/*href paging*/
@@ -120,36 +94,11 @@ public class MyProblemController extends HttpServlet {
             request.setAttribute("index", index);/*index/current page*/
             request.setAttribute("pList", pList);/*Problem List*/
             request.setAttribute("answerNumber", answerNumber);/*List number of Answer*/
-            sendDispatcher(request, response, "myProblem.jsp"); 
-            } catch (Exception e) {
+            sendDispatcher(request, response, "myProblem.jsp");
+        } catch (Exception e) {
             Logger.getLogger(MyProblemController.class.getName()).log(Level.SEVERE, null, e);
             request.setAttribute("errorMessage", e.toString());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

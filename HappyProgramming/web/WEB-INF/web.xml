@@ -140,6 +140,10 @@
         <servlet-name>PostAnswerController</servlet-name>
         <servlet-class>controller.PostAnswerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActiveProblemController</servlet-name>
+        <servlet-class>controller.ActiveProblemController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/AdminControllerMap</url-pattern>
@@ -279,6 +283,10 @@
     <servlet-mapping>
         <servlet-name>PostAnswerController</servlet-name>
         <url-pattern>/postAnswer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActiveProblemController</servlet-name>
+        <url-pattern>/activeProblem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

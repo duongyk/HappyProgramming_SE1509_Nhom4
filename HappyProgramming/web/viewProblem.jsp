@@ -60,7 +60,7 @@
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
-                                </li>
+                                </li><li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
@@ -96,24 +96,117 @@
                     <div class="d-flex flex-column col-md-8" >
                         <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
                             <div class="d-flex flex-column ml-3">
-                                <div class="post-title" >
-                                    <div class="title">Is sketch 3.9.1 stable?</div>
-                                  
+                                <div class="post-title">
+                                    <span class="titlee">${problem.getTitle()}</span>
+                                    <%-- Check Problem belong to User --%>
+                                    <c:choose>
+                                        <%-- Problem belong to User --%>
+                                        <c:when test="${sessionScope.currUser.getId()==problem.getFrom().getId()}">
+                                            <c:if test="${problem.getStatus()==0}">
+                                                <span class="closed">(Closed)</span>   
+                                                <a href="activeProblem?pId=${problem.getId()}">Re-open</a>
+                                            </c:if>
+                                            <c:if test="${problem.getStatus()==1}">
+                                                <span class="opening">(Opening)</span>   
+                                                <a href="activeProblem?pId=${problem.getId()}">Close</a>
+                                            </c:if>
+                                        </c:when>
+                                        <%-- Check Problem not belong to User --%>
+                                        <c:otherwise>
+                                            <c:if test="${problem.getStatus()==0}">
+                                                <span class="closed">(Closed)</span>   
+                                            </c:if>
+                                            <c:if test="${problem.getStatus()==1}">
+                                                <span class="opening">(Opening)</span>   
+                                            </c:if>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
+                                    <%-- Problem display --%>
                                 <div class="d-flex flex-row align-items-center align-content-center post-title">
-                                    <span class="mr-2 comments">GiangNVT&nbsp;</span>
-                                    <span class="mr-2 dot"></span><span>1 comment &nbsp; </span><span class="mr-2 dot"></span>
-                                    <span>6 hours ago</span></div>
+                                    <span class="mr-2 comments">${problem.getFrom().getFullname()}&nbsp;</span>
+                                    <span class="mr-2 dot"></span>
+                                    <span>${answerNumber} comment(s) &nbsp; </span>
+                                    <span class="mr-2 dot"></span>
+                                    <span>${problem.toString()}</span></div>
+                                <div class="content-pro">${problem.getContent()}</div> 
                             </div>
                         </div>
+
                         <div class="coment-bottom bg-white p-2 px-4" style="height: 700px">
-                            <div class="d-flex flex-row add-comment-section mt-4 mb-4"><input type="text" class="form-control mr-3" placeholder="Add comment"><button class="btn btn-primary" type="button">Comment</button></div>
-                            <div class="commented-section mt-2">
-                                <div class="d-flex flex-row align-items-center commented-user">
-                                    <h5 class="mr-2">Corey oates</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">4 hours ago</span>
+                            <%-- Check User and Problem's Status --%>
+                            <c:if test="${sessionScope.currUser!=null && problem.getStatus()==1}">
+                                <form action="postAnswer" method="POST">
+                                    <input type="hidden" name="pId" value="${problem.getId()}">
+                                    <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                                        <%-- Comment box --%>        
+                                        <textarea class="form-control mr-3" id="content" type="text" name="content" placeholder="Your Answer" onkeyup="checkSpace()" maxlength="200" required  rows="4" cols="55"></textarea>
+                                        <button class="btn btn-primary" id="button" type="submit">Comment</button>
+                                    </div>
+                                </form>
+                                <%-- Message for checkSpace --%>
+                                <p id="text-space" style="display:none; color:red;font-weight: bold;">Input contains only space</p>
+                                <p id="text-space-1" style="color:white;">Valid input</p>
+                            </c:if>
+                            <c:choose>
+                                <%-- Problem's Answer list --%>
+                                <c:when test="${!empty paList}">
+                                    <div class="">
+                                        <h3>Answer(s):</h3>
+                                    </div>
+                                    <c:forEach items="${paList}" var="a" >  
+
+                                        <div class="commented-section mt-2 cmtt">
+                                            <div class="d-flex flex-row align-items-center commented-user">
+                                                <h5 class="mr-2">${a.getFrom().getFullname()}</h5><span class="dot mb-1"></span><span class="mb-1 ml-2">${a.toString()}</span>
+                                            </div>
+                                            <div class="comment-text-sm"><span>${a.getContent()}</span></div>
+                                        </div>
+                                    </c:forEach> 
+                                </c:when>
+                                <%-- Problem have no Answers--%>
+                                <c:otherwise>
+                                    <div class="no-answer">
+                                        <h3>Look likes no one having the Answer! Maybe later !</h3>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+                            <%-- Paging --%>
+                            <c:if test="${!empty paList}">
+                                <div class="row">  
+                                    <div class="paging">
+                                        <%-- Previous --%>
+                                        <c:choose>
+                                            <c:when test="${index>1}">
+                                                <a class="previous" href="${href}index=${index-1}"><</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class="previous disabled" href="${href}index=${index-1}"><</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <%-- Page index --%>
+                                        <c:forEach begin="1" end="${endPage}" var="page">
+                                            <c:choose>
+                                                <c:when test="${index==page}">
+                                                    <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="${href}index=${page}"> ${page}</a> 
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                        <%-- Next --%>
+                                        <c:choose>
+                                            <c:when test="${index!=endPage}">
+                                                <a class="next" href="${href}index=${index+1}">  ></a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class="next disabled" href="${href}index=${index+1}">></a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div> 
                                 </div>
-                                <div class="comment-text-sm"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></div>
-                            </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -166,10 +259,25 @@
         <style>body {
                 background-color: #eee
             }
-            .title{
+            .titlee{
                 font-size: 30px;
                 color: black;
                 text-transform: none;
+                font-weight: bold
+            }
+
+            .closed{
+                font-size: 30px;
+                color: red;
+                text-transform: none;
+                font-weight: bold
+            }
+
+            .opening{
+                font-size: 30px;
+                color: green;
+                text-transform: none;
+                font-weight: bold
             }
 
             .bdge {
@@ -207,5 +315,11 @@
             }
             .mr-2 {
                 font-weight: bold;
-            }</style>
+            }
+
+            .cmtt {
+                border-radius: 5px;
+                background-color: #ddd;
+            }
+        </style>
 </html>

@@ -57,7 +57,7 @@
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
-                                </li>
+                                </li><li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
@@ -107,81 +107,82 @@
                     <div class="col-md-7">
                         <c:set var="i" scope="session" value="0"/>
                         <c:forEach items="${pList}" var="p" >
-                            <div class="problem darker" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
-                                <h2>${p.getFrom().getFullname()}</h2>
-                                <h2 class="text-bold">${p.getTitle()}</h2>
-                                <h3>${p.getContent()}</h3>
-                                <div class="row" style="padding-top:10px;">
-                                    <div class="col-md-6">
-                                        <p class="">${p.toString()}</p>
+                            <c:if test="${p.status==0}">
+                                <div class="problem pro-close" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
+                                </c:if>
+                                <c:if test="${p.status==1}">
+                                    <div class="problem pro-open" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
+                                    </c:if>
+                                    <h2>${p.getFrom().getFullname()}</h2>
+                                    <h2 class="text-bold">${p.getTitle()}</h2>
+                                    <h3>${p.getContent()}</h3>
+                                    <div class="row" style="padding-top:10px;">
+                                        <div class="col-md-6">
+                                            <p class="">${p.toString()}</p>
+                                        </div>
+                                        <c:if test="${answerNumber[i]==0}">
+                                            <div class="col-md-6">
+                                                <p class="time-right">No answer yet!</p>
+                                            </div>
+
+                                        </c:if>
+                                        <c:if test="${answerNumber[i]==1}">
+                                            <div class="col-md-6">
+                                                <p class="time-right">1 answer</p>
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${answerNumber[i]>1}">
+                                            <div class="col-md-6">
+                                                <p class="time-right">${answerNumber[i]} answers</p>
+                                            </div>
+                                        </c:if>
                                     </div>
-
-                                    <c:if test="${answerNumber[i]==0}">
-                                        <div class="col-md-6">
-                                            <p class="time-right">No answer yet!</p>
-                                        </div>
-
-                                    </c:if>
-                                    <c:if test="${answerNumber[i]==1}">
-                                        <div class="col-md-6">
-                                            <p class="time-right">1 answer</p>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${answerNumber[i]>1}">
-                                        <div class="col-md-6">
-                                            <p class="time-right">${answerNumber[i]} answers</p>
-                                        </div>
-                                    </c:if>
-
                                 </div>
+                                <c:set var="i" scope="session" value="${i+1}"/>
+                            </c:forEach>
+                        </div>
+                        <div class="col-md-2 imagee">
+                            <img src="img/forum3.png">
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>          
 
-
-                            </div>
-                            <c:set var="i" scope="session" value="${i+1}"/>
-                        </c:forEach>
-                    </div>
-                    <div class="col-md-2 imagee">
-                        <img src="img/forum3.png">
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>          
-
-                <%-- Paging --%>
-                <c:if test="${!empty pList}">
-                    <div class="row">  
-                        <div class="paging">
-                            <%-- Previous --%>
-                            <c:choose>
-                                <c:when test="${index>1}">
-                                    <a class="previous" href="${href}index=${index-1}"><</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="previous disabled" href="${href}index=${index-1}"><</a>
-                                </c:otherwise>
-                            </c:choose>
-                            <%-- Page index --%>
-                            <c:forEach begin="1" end="${endPage}" var="page">
+                    <%-- Paging --%>
+                    <c:if test="${!empty pList}">
+                        <div class="row">  
+                            <div class="paging">
+                                <%-- Previous --%>
                                 <c:choose>
-                                    <c:when test="${index==page}">
-                                        <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
+                                    <c:when test="${index>1}">
+                                        <a class="previous" href="${href}index=${index-1}"><</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="${href}index=${page}"> ${page}</a> 
+                                        <a class="previous disabled" href="${href}index=${index-1}"><</a>
                                     </c:otherwise>
                                 </c:choose>
-                            </c:forEach>
-                            <%-- Next --%>
-                            <c:choose>
-                                <c:when test="${index!=endPage}">
-                                    <a class="next" href="${href}index=${index+1}">  ></a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a class="next disabled" href="${href}index=${index+1}">></a>
-                                </c:otherwise>
-                            </c:choose>
-                        </div> 
-                    </div>
-                </c:if>
+                                <%-- Page index --%>
+                                <c:forEach begin="1" end="${endPage}" var="page">
+                                    <c:choose>
+                                        <c:when test="${index==page}">
+                                            <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="${href}index=${page}"> ${page}</a> 
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <%-- Next --%>
+                                <c:choose>
+                                    <c:when test="${index!=endPage}">
+                                        <a class="next" href="${href}index=${index+1}">  ></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="next disabled" href="${href}index=${index+1}">></a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div> 
+                        </div>
+                    </c:if>
             </section>
         </main>
         <%-- End main --%>

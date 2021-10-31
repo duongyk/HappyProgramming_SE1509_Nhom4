@@ -57,7 +57,7 @@
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
-                                </li>
+                                </li><li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
@@ -95,12 +95,13 @@
                     <div class="col-md-8 section-title">
                         <h2 class="">My Problem</h2>
                         <c:if test="${messSucc!=null}">
-                        <h1 style="color:#29cc49;font-weight: bold;text-align: center"><c:out value="${messSucc}"></c:out></h1>
-                    </c:if>
+                            <h1 style="color:#29cc49;font-weight: bold;text-align: center"><c:out value="${messSucc}"></c:out></h1>
+                        </c:if>
                     </div>
                     <div class="col-md-2"></div>
                 </div>
                 <div class="row">
+                    <%-- Button  --%>
                     <div class="col-md-2">
                         <c:if test="${sessionScope.currUser!=null}">
                             <div><a href="myProblem"><button class="myProblem" style="min-width: 164px;">My Problem</button></a> </div> 
@@ -108,30 +109,56 @@
                         </c:if> 
                     </div>
                     <div class="col-md-7">
-                        <c:set var="i" scope="session" value="0"/>
-                        <c:forEach items="${pList}" var="p" >
-                            <div class="problem darker" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
-                                <h2>${p.getFrom().getFullname()}</h2>
-                                <h2 class="text-bold">${p.getTitle()}</h2>
-                                <h3>${p.getContent()}</h3>
-                                <p class="">${p.toString()}</p>
-                                <c:if test="${answerNumber[i]==0}">
-                                    <p class="time-right">No answer yet!</p>
-                                </c:if>
-                                <c:if test="${answerNumber[i]==1}">
-                                    <p class="time-right">1 answer</p>
-                                </c:if>
-                                <c:if test="${answerNumber[i]>1}">
-                                    <p class="time-right">${answerNumber[i]} answers</p>
-                                </c:if>
-                            </div>
-                            <c:set var="i" scope="session" value="${i+1}"/>
-                        </c:forEach>
+                        <%-- Problem list  --%>
+                        <c:choose>
+                            <%-- Problem list not empty --%>
+                            <c:when test="${!empty pList}">
+                                <c:set var="i" scope="session" value="0"/>
+                                <c:forEach items="${pList}" var="p" >
+                                    <c:if test="${p.status==0}">
+                                        <div class="problem pro-close" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
+                                        </c:if>
+                                        <c:if test="${p.status==1}">
+                                            <div class="problem pro-open" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
+                                            </c:if>
+                                            <h2>${p.getFrom().getFullname()}</h2>
+                                            <h2 class="text-bold">${p.getTitle()}</h2>
+                                            <h3>${p.getContent()}</h3>
+                                            <div class="row" style="padding-top:10px;">
+                                                <div class="col-md-6">
+                                                    <p class="">${p.toString()}</p>
+                                                </div>
+                                                <c:if test="${answerNumber[i]==0}">
+                                                    <div class="col-md-6">
+                                                        <p class="time-right">No answer yet!</p>
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${answerNumber[i]==1}">
+                                                    <div class="col-md-6">
+                                                        <p class="time-right">1 answer</p>
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${answerNumber[i]>1}">
+                                                    <div class="col-md-6">
+                                                        <p class="time-right">${answerNumber[i]} answers</p>
+                                                    </div>
+                                                </c:if>
+                                            </div>
+                                        </div>
+                                        <c:set var="i" scope="session" value="${i+1}"/>
+                                    </c:forEach>
+                                </c:when>
+                                <%-- Problem list empty  --%>
+                                <c:otherwise>
+                                    <h2>Looks like you have not had any problem! Try to post one!</h2>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="col-md-2 imagee">
+                            <img src="img/forum3.png">
+                        </div>
+                        <div class="col-md-1"></div>
                     </div>
-                    <div class="col-md-2 imagee">
-                        <img src="img/forum3.png">
-                    </div>
-                    <div class="col-md-1"></div>
                 </div>          
 
                 <%-- Paging --%>

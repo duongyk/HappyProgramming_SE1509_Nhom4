@@ -19,7 +19,10 @@ import java.util.ArrayList;
 /**
  * This class implements from class interface ProblemDAOImpl. <br>
  * This class contains method to query select data from the table Problem.<br>
- * There are
+ * There are Get all the Problem with Paging, Get a Problem, Get User's <br>
+ * Problem, Insert a Problem into database, Update a Problem into database <br>
+ * Close a Problem (change status into 0), Count all the Problem, Count <br>
+ * the Problem of a User, Check the Problem of a User<br>
  *
  * @author duongvvhe150773
  */

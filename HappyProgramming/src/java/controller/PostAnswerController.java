@@ -17,7 +17,6 @@ import entity.Problem;
 import entity.ProblemAnswer;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,32 +32,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author DuongVV
  */
 public class PostAnswerController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PostAnswerController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PostAnswerController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     /**
      * Forward the request to the destination, catch any unexpected exceptions
@@ -78,21 +51,7 @@ public class PostAnswerController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
+     * Receive input, create and insert new Answer of a Problem.
      *
      * @param request servlet request
      * @param response servlet response
@@ -114,8 +73,6 @@ public class PostAnswerController extends HttpServlet {
             paDAO.insertProblemAnswer(pId, user.getId(), content);
             // Get Problem
             Problem problem = pDAO.getProblem(pId);
-            // Set index page 
-            int index = 1;
             // Total request for paging
             int count = paDAO.countProblemAnswer(pId);
             // Calculate total page for paging
@@ -124,15 +81,15 @@ public class PostAnswerController extends HttpServlet {
                 endPage++;
             }
             // Get Problem Answer
-            ArrayList<ProblemAnswer> paList = paDAO.getProblemAnswerList(index, pId);
+            ArrayList<ProblemAnswer> paList = paDAO.getProblemAnswerList(endPage, pId);
             // Get number of Answer
             int answerNumber = paDAO.countProblemAnswer(pId);
             //Set href paging
-            String href = "viewProblem?pId="+pId+"&";
-            
+            String href = "viewProblem?pId=" + pId + "&";
+
             request.setAttribute("href", href);/*href paging*/
             request.setAttribute("endPage", endPage);/*end page of paging*/
-            request.setAttribute("index", index);/*index/current page*/
+            request.setAttribute("index", endPage);/*index/current page*/
             request.setAttribute("problem", problem);/*Problem*/
             request.setAttribute("answerNumber", answerNumber);/*Problem*/
             request.setAttribute("messSucc", "Post Answer Successfully");/*messSucc*/
@@ -144,15 +101,4 @@ public class PostAnswerController extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

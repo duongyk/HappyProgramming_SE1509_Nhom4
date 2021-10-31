@@ -89,7 +89,7 @@ public interface ProblemDAO {
     public int countProblemUser(int uId) throws Exception;
 
     /**
-     * Count the Problem of a User
+     * Check the Problem of a User
      *
      * @param pId is a <code>java.lang.Integer</code>
      * @param uId is a <code>java.lang.Integer</code>
@@ -99,7 +99,7 @@ public interface ProblemDAO {
     public boolean checkMyProblem(int pId, int uId) throws Exception;
 
     /**
-     * Open a Problem (change status into 0)
+     * Open a Problem (change status into 1)
      *
      * @param pId is a <code>java.lang.Integer</code>
      * @throws Exception

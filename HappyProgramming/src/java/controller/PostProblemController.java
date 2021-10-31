@@ -33,21 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 public class PostProblemController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        doGet(request, response);
-    }
-
-    /**
      * Forward the request to the destination, catch any unexpected exceptions
      * and log it
      *
@@ -65,7 +50,7 @@ public class PostProblemController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Redirect to Post Problem Page.
      *
      * @param request servlet request
      * @param response servlet response
@@ -79,7 +64,7 @@ public class PostProblemController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Receive input, create and insert new Problem.
      *
      * @param request servlet request
      * @param response servlet response
@@ -117,9 +102,9 @@ public class PostProblemController extends HttpServlet {
             ArrayList<Problem> pList = pDAO.getProblemByMePaging(index, user.getId());
             // Set list of total number answer
             ArrayList<Integer> answerNumber = new ArrayList<>();
-            for (Problem p: pList) {
+            for (Problem p : pList) {
                 answerNumber.add(paDAO.countProblemAnswer(p.getId()));
-            }     
+            }
             // Set href of paging
             String href = "myProblem?";
             request.setAttribute("href", href);/*href paging*/
@@ -134,15 +119,4 @@ public class PostProblemController extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

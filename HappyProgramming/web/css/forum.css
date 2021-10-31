@@ -28,6 +28,16 @@ a.disabled {
     border-radius: 7px;
     padding: 10px;
     margin: 10px 0;
+    background-color: #ddd;
+    cursor: pointer
+}
+
+.pro-open {
+    border: 2px solid green;
+}
+
+.pro-close {
+    border: 2px solid red;
 }
 
 .darker {
@@ -92,4 +102,8 @@ a.disabled {
 
 .team-no{
     min-height: 980px;
+}
+
+.content-pro{
+    padding-top: 10px;
 }

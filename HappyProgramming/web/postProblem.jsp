@@ -44,15 +44,12 @@
     </head>
 
     <body>
-
         <%-- Header --%>
         <header id="header" class="fixed-top d-flex align-items-center" style="background-color:#e2f5fde0;">
             <div class="container d-flex align-items-center justify-content-between">
-
                 <div class="logo">
                     <h1><a href="index.jsp">Vesperr</a></h1>
                 </div>
-
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
@@ -62,7 +59,7 @@
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
                                 <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
-                                </li>
+                                </li><li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
@@ -75,7 +72,6 @@
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>
-
             </div>
         </header>
         <%-- End Header --%>
@@ -93,7 +89,7 @@
                         <div class="wrapper wrapper--w790">
                             <div class="card card-5">
                                 <div class="card-body">
-                                    <%-- Request's Status = 2 (Processing) -> Cancel only --%>
+                                    <%-- Form Post Problem --%>
                                     <form action="postProblem" method="POST">
                                         <input type="hidden" name="pId" value="${pId}">
                                         <div class="require">(*): Required</div>
@@ -104,7 +100,7 @@
                                                 <div class="row row-space">
                                                     <div class="col-12">
                                                         <div class="input-group-desc">
-                                                            <input class="input-white" id="title" type="text" name="title" placeholder="Your Request Title" pattern=".*\S+.*" title="No white space only" maxlength="100" onkeyup="checkSpace1()">
+                                                            <input class="input-white" id="title" type="text" name="title" placeholder="Your Request Title" pattern=".*\S+.*" title="No white space only" maxlength="30" onkeyup="checkSpace1()">
                                                             <%-- Message for checkSpace --%>
                                                             <p id="title-space" style="display:none; color:red">Title contains only space</p>
                                                             <p id="title-space-1" style="color:white;">Valid input</p>
@@ -129,10 +125,10 @@
                                         <%-- Post button --%>            
                                         <div class="row">
                                             <div class="col-4"></div>
-                                            <div class="col-5">
-                                                <button id="button" class="btn btn--radius-2 btn--blue submit-button"  type="submit">Post</button>
+                                            <div class="col-4">
+                                                <button id="button" style="margin-left: 20px" class="btn btn--radius-2 btn--blue submit-button"  type="submit">Post</button>
                                             </div>
-                                            <div class="col-3"></div>
+                                            <div class="col-4"></div>
                                         </div>
                                     </form>
                                 </div>

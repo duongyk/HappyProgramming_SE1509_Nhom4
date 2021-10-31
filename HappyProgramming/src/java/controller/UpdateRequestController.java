@@ -22,7 +22,6 @@ import entity.Request;
 import entity.Skill;
 import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -39,32 +38,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author DuongVV
  */
 public class UpdateRequestController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet updateRequest</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet updateRequest at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     /**
      * Forward the request to the destination, catch any unexpected exceptions
@@ -84,8 +57,8 @@ public class UpdateRequestController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method.
-     * Display update Request Form
+     * Display update Request Form.
+     * 
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -129,8 +102,8 @@ public class UpdateRequestController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
-     * Get new information and Update the Request
+     * Get new information and Update the Request.
+     * 
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -173,14 +146,6 @@ public class UpdateRequestController extends HttpServlet {
             // Update RequestSkill
             requestSkillDAO.updateRequestSkill(rId, sIdList);
             request.setAttribute("messSucc", "Update successful!");
-            
-//            // get Skills in Request
-//            ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
-//            // get new Request
-//            Request reqUpdated = requestDAO.getRequestById(rId);
-//            request.setAttribute("sList", sList);/*Skill list of Request*/
-//            request.setAttribute("req", reqUpdated);/*Request*/
-//            sendDispatcher(request, response, "viewRequest.jsp");
             sendDispatcher(request, response, "viewRequest");
         } catch (Exception e) {
             Logger.getLogger(UpdateRequestController.class.getName()).log(Level.SEVERE, null, e);
@@ -188,15 +153,4 @@ public class UpdateRequestController extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
