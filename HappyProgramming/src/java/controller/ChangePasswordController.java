@@ -43,7 +43,6 @@ public class ChangePasswordController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             UserDAO userDAO = new UserDAOImpl();
-            String email = request.getParameter("email").trim();
             // Get old password, new password and repeat of new password 
             String oldPass = request.getParameter("password").trim();
             String newPass = request.getParameter("newPassword").trim();

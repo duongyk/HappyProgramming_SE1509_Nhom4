@@ -41,7 +41,7 @@
 
         <!-- Javascript File -->
         <script class="u-script" type="text/javascript" src="js/changeAvatar.js" defer=""></script>
-
+        <script type="text/javascript" src="js/checkSpace.js" ></script>
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
@@ -122,15 +122,21 @@
                                         <div class="name">Skill Name</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input-white" placeholder="Skill Name" type="text" name="sName" pattern=".*\S+.*" title="Must not contain only spaces " required="required" value="${sName}">
+                                                <input class="input-white" id="content" placeholder="Skill Name" type="text" name="sName" pattern=".*\S+.*" title="Must not contain only spaces" onkeyup="checkSpace()" required="required" value="${sName}">
                                             </div>
+                                            <%-- Message for checkSpace --%>
+                                            <p id="text-space" style="display:none; color:red">Skill name contains only space</p>
+                                            <p id="text-space-1" style="color:white;">Valid input</p>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="name">Detail</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <textarea class="input-white" placeholder="Detail" name="sDetail" required="required" rows="3" cols="55" maxlength="200 " >${sDetail}</textarea>
+                                                <textarea class="input-white" id="title" placeholder="Detail" name="sDetail" required="required" rows="3" cols="55" maxlength="200" onkeyup="checkSpace1()" >${sDetail}</textarea>
+                                            <%-- Message for checkSpace --%>
+                                            <p id="title-space" style="display:none; color:red">Detail contains only space</p>
+                                            <p id="title-space-1" style="color:white;">Valid input</p>
                                             </div>
                                         </div>
                                     </div>
@@ -154,7 +160,7 @@
 
                                     <!-- <input id="avatarURL" form="thisform" onchange="changeImage()" type="file" name="avatar" value="" style="width: 162px;" > -->
                                     <div style="margin-left: 230px;">
-                                        <button class="btn btn--radius-2 btn--blue" type="submit">Create</button>
+                                        <button id="button" class="btn btn--radius-2 btn--blue" type="submit">Create</button>
                                         <p class="text-danger" style="padding-left: 30px;">${mess}</p>  
                                     </div>
                                 </form>

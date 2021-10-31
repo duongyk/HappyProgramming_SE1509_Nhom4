@@ -85,7 +85,7 @@
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
                                         <li><a href="UserProfileController?uId=${sessionScope.currUser.id}">Profile</a></li>
-                                        <li><a href="ChangePassword">Change pass</a></li>
+                                        <li><a href="changePassword.jsp">Change pass</a></li>
                                         <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>

@@ -105,41 +105,49 @@
                         </c:if> 
                     </div>
                     <div class="col-md-7">
-                        <c:set var="i" scope="session" value="0"/>
-                        <c:forEach items="${pList}" var="p" >
-                            <c:if test="${p.status==0}">
-                                <div class="problem pro-close" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
-                                </c:if>
-                                <c:if test="${p.status==1}">
-                                    <div class="problem pro-open" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
-                                    </c:if>
-                                    <h2>${p.getFrom().getFullname()}</h2>
-                                    <h2 class="text-bold">${p.getTitle()}</h2>
-                                    <h3>${p.getContent()}</h3>
-                                    <div class="row" style="padding-top:10px;">
-                                        <div class="col-md-6">
-                                            <p class="">${p.toString()}</p>
-                                        </div>
-                                        <c:if test="${answerNumber[i]==0}">
-                                            <div class="col-md-6">
-                                                <p class="time-right">No answer yet!</p>
-                                            </div>
+                        <c:choose>
+                            <c:when test="${!empty pList}">
+                                <c:set var="i" scope="session" value="0"/>
+                                <c:forEach items="${pList}" var="p" >
+                                    <c:if test="${p.status==0}">
+                                        <div class="problem pro-close" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
+                                        </c:if>
+                                        <c:if test="${p.status==1}">
+                                            <div class="problem pro-open" onclick="location.href = 'viewProblem?pId=${p.getId()}';" id="smallbox">
+                                            </c:if>
+                                            <h2>${p.getFrom().getFullname()}</h2>
+                                            <h2 class="text-bold">${p.getTitle()}</h2>
+                                            <h3>${p.getContent()}</h3>
+                                            <div class="row" style="padding-top:10px;">
+                                                <div class="col-md-6">
+                                                    <p class="">${p.toString()}</p>
+                                                </div>
+                                                <c:if test="${answerNumber[i]==0}">
+                                                    <div class="col-md-6">
+                                                        <p class="time-right">No answer yet!</p>
+                                                    </div>
 
-                                        </c:if>
-                                        <c:if test="${answerNumber[i]==1}">
-                                            <div class="col-md-6">
-                                                <p class="time-right">1 answer</p>
+                                                </c:if>
+                                                <c:if test="${answerNumber[i]==1}">
+                                                    <div class="col-md-6">
+                                                        <p class="time-right">1 answer</p>
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${answerNumber[i]>1}">
+                                                    <div class="col-md-6">
+                                                        <p class="time-right">${answerNumber[i]} answers</p>
+                                                    </div>
+                                                </c:if>
                                             </div>
-                                        </c:if>
-                                        <c:if test="${answerNumber[i]>1}">
-                                            <div class="col-md-6">
-                                                <p class="time-right">${answerNumber[i]} answers</p>
-                                            </div>
-                                        </c:if>
-                                    </div>
-                                </div>
-                                <c:set var="i" scope="session" value="${i+1}"/>
-                            </c:forEach>
+                                        </div>
+                                        <c:set var="i" scope="session" value="${i+1}"/>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    <h2>No one having any Problem!</h2>
+                                </c:otherwise>
+                            </c:choose>
+
                         </div>
                         <div class="col-md-2 imagee">
                             <img src="img/forum3.png">
