@@ -143,10 +143,12 @@
                                 <c:forEach items="${mList}" var="mentor">
                                     <div class="col-lg-3 col-md-6">
                                         <div class="member box-display" data-aos="fade-up" data-aos-delay="100">
-                                            <img class="img-display" src="img/default-image.jpg">
+                                            <img style="height: 240px; width: 100%" src="img/${mentor.avatar}">
                                             <div class="member-info">
                                                 <h4><c:out value="${mentor.getFullname()}"></c:out></h4>
-                                                <a class="view-button" href="CVProfile?mId=${mentor.getId()}&sId=${skill.id}">View CV</a>
+                                                    <div>
+                                                        <a class="view-button" href="CVProfile?mId=${mentor.getId()}&sId=${skill.id}">View CV</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

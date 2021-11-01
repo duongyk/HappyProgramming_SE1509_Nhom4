@@ -100,10 +100,10 @@ public class MentorManagementController extends HttpServlet {
             request.setAttribute("numberOfRequest", totalRequest); // set mentor list to display
             
             //send informations to menteeManagement.jsp
-            request.setAttribute("href", href);/*href paging*/
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("count", count);
-            request.setAttribute("tag", index);
+            request.setAttribute("href", href);//href paging
+            request.setAttribute("endPage", endPage); //end page of paging
+            request.setAttribute("count", count); // count for page number
+            request.setAttribute("tag", index); //current page
             
             sendDispatcher(request, response, "mentorManagement.jsp");
         }

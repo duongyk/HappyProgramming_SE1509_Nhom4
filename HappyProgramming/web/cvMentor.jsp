@@ -108,7 +108,7 @@
                                             <h4 style= "font-weight: bold;"><c:out value="${mentor.fullname}"></c:out></h4>
                                                 <p class="text-secondary mb-1"> </p>
                                             <c:if test="${sessionScope.currUser!=null}">
-                                                <a  style="color: blue ;" href="CreateRequestController?mId=${mentor.getId()}&sId=${skill.id}">create request </a>
+                                                <a  style="color: blue ;" href="CreateRequest?mId=${mentor.getId()}&sId=${skill.id}">create request </a>
                                                 <br/>
                                             </c:if>
 

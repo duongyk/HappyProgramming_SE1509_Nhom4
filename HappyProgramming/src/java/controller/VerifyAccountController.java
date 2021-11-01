@@ -5,8 +5,6 @@
  */
 package controller;
 
-import dao.UserDAO;
-import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -85,7 +83,6 @@ public class VerifyAccountController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            UserDAO userDAO = new UserDAOImpl();
             User x = (User) request.getSession().getAttribute("currMail"); //get user by email
             String verify = (String) request.getSession().getAttribute("verify"); // get verify code generated
 

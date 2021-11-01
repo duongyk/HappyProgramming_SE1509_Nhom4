@@ -83,10 +83,11 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM [User] WHERE [uId] = " + uId;
+        String sql = "SELECT * FROM [User] WHERE [uId] = ?";
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
+            ps.setInt(1, uId);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"),
@@ -1016,6 +1017,13 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         return list;
     }
 
+    /**
+     * Get a user by his/her registered skill id
+     *
+     * @param sId it is a <code>java.lang.Integer</code>
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
     @Override
     public ArrayList<User> getMentorBySkill(int sId) throws Exception {
         Connection conn = null;

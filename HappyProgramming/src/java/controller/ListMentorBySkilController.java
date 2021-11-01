@@ -80,16 +80,16 @@ public class ListMentorBySkilController extends HttpServlet {
             UserDAO userDAO = new UserDAOImpl();
             SkillDAO skillDAO = new SkillDAOImpl();
             
-            int sId = Integer.parseInt(request.getParameter("sId"));
-            ArrayList<User> mentor = userDAO.getMentorBySkill(sId);
-            Skill skill = skillDAO.getSkillById(sId);
+            int sId = Integer.parseInt(request.getParameter("sId")); // get id of skill 
+            ArrayList<User> mentor = userDAO.getMentorBySkill(sId); // get list of mentor by skill id
+            Skill skill = skillDAO.getSkillById(sId); // get Skill by skill id
             // Get index page 
             String indexPage = request.getParameter("index");
             if (indexPage == null) {
                 indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
-            // Get list request of the user
+            // Get list user whose cv have the same skill
             ArrayList<User> mList = userDAO.getUserBySkillIdPaging(index, sId);
             // Total Mentor for paging
             int count = mentor.size();
@@ -101,11 +101,11 @@ public class ListMentorBySkilController extends HttpServlet {
             // Set href of paging
             String href = "ListMentorBySkilController?sId="+sId+"&";
             // Set attribute to request
-            request.setAttribute("href", href);/*href paging*/
-            request.setAttribute("endPage", endPage);/*end page of paging*/
-            request.setAttribute("index", index);/*index/current page*/
-            request.setAttribute("mList", mList);/*Mentor list*/
-            request.setAttribute("skill", skill);
+            request.setAttribute("href", href);//href paging
+            request.setAttribute("endPage", endPage);//end page of paging
+            request.setAttribute("index", index);//index/current page
+            request.setAttribute("mList", mList);//Mentor list
+            request.setAttribute("skill", skill); // set Skill
             sendDispatcher(request, response, "listMentorBySkill.jsp");
             
         } catch (Exception ex) {
