@@ -60,7 +60,7 @@ public class SignupController extends HttpServlet {
             Date dob = Date.valueOf(request.getParameter("dob"));
             Integer role = Integer.parseInt(request.getParameter("role"));
             // create a new user with default avata
-            User user = new User(userName, password, fname, mail, phone, dob, sex, "default-avatar.png", 1, 1);
+            User user = new User(userName, password, fname, mail, phone, dob, sex, "default-avatar.png", role, 1);
             // ìf the password not match the confirm password stay at the signUp.jsp
             if (!password.equals(repass)) {
                 
