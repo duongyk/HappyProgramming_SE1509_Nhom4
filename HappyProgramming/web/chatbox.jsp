@@ -82,7 +82,37 @@
                 loadMessage();
                 inputbox.style.display = 'block';
             }
+            
+            function setSelected(selectdiv) {
+                let elements = document.getElementsByClassName('chat_list active_chat');
 
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].className='chat_list';
+                }
+                
+                selectdiv.className='chat_list active_chat';
+                
+                setFriendAvatar();
+            }
+            
+            function setFriendAvatar() {
+        
+                
+        
+                var elements = document.getElementsByClassName('chat_list active_chat');
+                
+                var selectdiv = elements[0];
+                
+                var imgtag = selectdiv.getElementsByTagName('img')[0];
+                var imgsrc = imgtag.getAttribute('src');
+                
+                var nametag = selectdiv.getElementsByTagName('h5')[0];
+                var friendname = nametag.innerHTML;
+               
+                document.getElementById('friendAvatar').src = imgsrc;
+                document.getElementById('friendName').innerHTML = friendname;
+            }
+            
             function postMessage() {
 
                 var mess = document.querySelector('input').value;
@@ -117,7 +147,7 @@
                     }
                 });
             }
-
+            
             $(document).ready(function () {
                 var elem = document.getElementById("friendId").innerHTML;
                 
@@ -134,6 +164,7 @@
                 } else {
                     //alert('elem');
                     loadNewFriendMessage(elem);
+                    setFriendAvatar();
                 }
             });
 
@@ -249,7 +280,7 @@
                                         <c:choose>
                                             <c:when test="${friend.getId()==selectedId}">
                                                 <div class="chat_list active_chat">
-                                                    <a href="#" onclick="loadNewFriendMessage(${friend.getId()}); return false;">
+                                                    <a href="#" onclick="setSelected(this.parentNode);loadNewFriendMessage(${friend.getId()}); return false;">
                                                         <div class="chat_people">
                                                             <div class="chat_img"> <img src="img/<c:out value="${friend.getAvatar()}" ></c:out>" alt="sunil">
                                                                 </div>
@@ -263,13 +294,12 @@
                                             </c:when>
                                             <c:otherwise>
                                                 <div class="chat_list">
-                                                    <a href="#" onclick="loadNewFriendMessage(${friend.getId()}); return false;">
+                                                    <a href="#" onclick="setSelected(this.parentNode);loadNewFriendMessage(${friend.getId()}); return false;">
                                                         <div class="chat_people">
                                                             <div class="chat_img"> <img src="img/<c:out value="${friend.getAvatar()}" ></c:out>" alt="sunil">
                                                                 </div>
                                                                 <div class="chat_ib">
                                                                     <h5>${friend.getUsername()}</h5>
-
                                                             </div>
                                                         </div>
                                                     </a>
@@ -282,14 +312,14 @@
                             <div class="mesgs">
                                 <div id="heading" class="headind_srch">
                                     <div class="recent_heading">
-                                        <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" style="
+                                        <img src="" alt="sunil" style="
                                              max-width: 30%;
-                                             float: left;
-                                             ">
+                                             float: left;"
+                                              id="friendAvatar">
                                         <h4 style="
                                             max-width: 30%;
-                                            float: left;
-                                            ">Recent</h4>
+                                            float: left;"
+                                             id="friendName">Recent</h4>
                                     </div>
                                     <div class="srch_bar">
                                         <div class="stylish-input-group">
