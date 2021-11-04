@@ -71,19 +71,16 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                         <a  style="color: blue ;" href="ChangePassword">change password </a>
+                                         <a  style="color: blue ;" href="signIn.jsp">Sign In </a>
                                         <li><a href="UserControllerMap?service=profile">Profile</a></li>
                                         <li><a href="UserControllerMap?service=logOut">Log out</a></li>
                                     </ul>
                                 </li>
                             </c:when>
                             <c:otherwise>
-                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
+                                <li class=" getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
-                                    <ul>
-                                        <li><a href="signUp.jsp">Sign up</a>
-                                        </li>
-                                    </ul>
+                                    
                                 </li>
                             </c:otherwise>
                         </c:choose>
@@ -116,7 +113,7 @@
 
                             <div class="card-body">
                                     <form action="ChangePassword" method="POST">
-                                    <div class="form-row m-b-55">
+<!--                                    <div class="form-row m-b-55">
                                         <div class="name">Email</div>
                                         <div class="value">
                                             <div class="row row-space">
@@ -127,9 +124,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-row">
-                                        <div class="name">old password</div>
+                                        <div class="name">Old password</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" name="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number"">
@@ -137,7 +134,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">new Password</div>
+                                        <div class="name">New Password</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" name="newPassword" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number">
@@ -145,7 +142,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">re-enter new Password</div>
+                                        <div class="name">Repeat new Password</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" name="rePassword" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number"">

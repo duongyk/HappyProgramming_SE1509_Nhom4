@@ -199,7 +199,7 @@
                                     </div>
 
                                     <div>
-                                        <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
+                                        <button class="btn btn--radius-2 btn--blue" type="submit">Register</button>
                                     </div>
                                 </form>
                             </div>
