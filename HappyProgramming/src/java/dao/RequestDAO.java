@@ -196,15 +196,28 @@ public interface RequestDAO {
     public HashMap<Integer,Integer> getMentorRequestStatistic(int mentorId) throws Exception;
     
     /**
-     * Get Request Statistic of Top Five mentor wiht most request
+     * Get Request Statistic of Top Five mentor with most request
      * 
-     * @return HashMap (key is mentor username, value is request statistic of that mentor)
+     * @return HashMap (key is mentor fullname, value is request statistic of that mentor)
      * @throws Exception
      */
     public HashMap<String,HashMap<Integer,Integer>> getStatisticTopFive() throws Exception;
     
+    /**
+     * Get Requested Mentor sorted by number of Request
+     *
+     * @return a list of <code>java.lang.Integer</code>
+     * @throws Exception
+     */
     public ArrayList<User> getHotMentor() throws Exception;
 
+    /**
+     * Get the total number of request in DB
+     *
+     * @return a <code>java.lang.Integer</code>
+     *
+     * @throws Exception
+     */
     public int getNumberOfRequest() throws Exception;
 
     /**

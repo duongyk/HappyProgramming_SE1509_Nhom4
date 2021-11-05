@@ -898,11 +898,11 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
                 
                 int uId = rs.getInt("toId");
                 
-                String username = userdao.getUserById(uId).getUsername();
+                String fullname = userdao.getUserById(uId).getFullname();
                 
                 HashMap<Integer,Integer> numberMap = getMentorRequestStatistic(uId);
                 
-                mentorMap.put(username, numberMap);
+                mentorMap.put(fullname, numberMap);
                 
             }
             
