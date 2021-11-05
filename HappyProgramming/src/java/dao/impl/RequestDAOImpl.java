@@ -19,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * This class implements from class interface RequestDAOImpl. <br>
@@ -873,12 +874,12 @@ public class RequestDAOImpl extends DBContext implements dao.RequestDAO {
     /**
      * Get Request Statistic of Top Five mentor with most request
      * 
-     * @return HashMap (key is mentor username, value is request statistic of that mentor)
+     * @return LinkedHashMap (key is mentor username, value is request statistic of that mentor)
      * @throws Exception
      */
     @Override
-    public HashMap<String,HashMap<Integer,Integer>> getStatisticTopFive() throws Exception {
-        HashMap<String,HashMap<Integer,Integer>> mentorMap = new HashMap<>();
+    public LinkedHashMap<String,HashMap<Integer,Integer>> getStatisticTopFive() throws Exception {
+        LinkedHashMap<String,HashMap<Integer,Integer>> mentorMap = new LinkedHashMap<>();
         
         Connection conn = null;
         PreparedStatement ps = null;
