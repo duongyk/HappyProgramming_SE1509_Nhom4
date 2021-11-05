@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -78,16 +79,16 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             
             // get top 5 mentor request statistic
             
-            HashMap<String,HashMap<Integer,Integer>> statisticMap = requestdao.getStatisticTopFive();
+            LinkedHashMap<String,HashMap<Integer,Integer>> statisticMap = requestdao.getStatisticTopFive();
             
             // replace username of your mentor wiht "You" if user in top 5
             if(statisticMap.containsKey(user.getFullname())) {
                 
-                HashMap<String,HashMap<Integer,Integer>> sortedMap = new HashMap<>();
+                LinkedHashMap<String,HashMap<Integer,Integer>> sortedMap = new LinkedHashMap<>();
                 
                 for(String key: new ArrayList<>(statisticMap.keySet())) {
                     if(user.getFullname().equalsIgnoreCase(key)) {
-                       sortedMap.put(user.getFullname()+"(You)", statisticMap.get(key));
+                       sortedMap.put("You", statisticMap.get(key));
                     } else {
                        sortedMap.put(key, statisticMap.get(key));
                     }

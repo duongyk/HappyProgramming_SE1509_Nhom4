@@ -13,6 +13,7 @@ import entity.Request;
 import entity.User;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * This class contains methods to help us manipulate Request objects in the
@@ -198,10 +199,10 @@ public interface RequestDAO {
     /**
      * Get Request Statistic of Top Five mentor with most request
      * 
-     * @return HashMap (key is mentor fullname, value is request statistic of that mentor)
+     * @return LinkedHashMap (key is mentor fullname, value is request statistic of that mentor)
      * @throws Exception
      */
-    public HashMap<String,HashMap<Integer,Integer>> getStatisticTopFive() throws Exception;
+    public LinkedHashMap<String,HashMap<Integer,Integer>> getStatisticTopFive() throws Exception;
     
     /**
      * Get Requested Mentor sorted by number of Request
