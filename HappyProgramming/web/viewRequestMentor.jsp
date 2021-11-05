@@ -62,15 +62,14 @@
                                 <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
-                                        <li><a class="nav-link scrollto" href="openChat">Messenger</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                        <li class="dropdown getstarted scrollto " style="background:#0dcaf0">
+                                            <span style="color: white; padding: 0;">View Request</span>
+                                            <ul>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
+                                                </li>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </c:when>
                                     <c:otherwise>
@@ -113,7 +112,7 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8 section-title title-1">
-                    <h2>Request Details</h2>
+                    <h2>Request Detail</h2>
                 </div>
                 <div class="col-md-2"></div>
             </div>
@@ -125,7 +124,7 @@
                         <%-- Request Detail --%>
                         <div class="row">
                             <div class="col-md-5">
-                                <h3>Mentee: ${req.from.fullname} <a href="openChat?friendId=${req.from.id}">Nhắn tin </a></h3>
+                                <h3>Mentee: ${req.from.fullname} <a href="openChat?friendId=${req.from.id}">Begin Chat </a></h3>
                                 <br><br>
                                 <p>Deadline Date: ${req.deadlineDate}</p>
                                 <p>Hour: ${req.deadlineHour}</p>
