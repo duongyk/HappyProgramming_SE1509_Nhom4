@@ -70,7 +70,6 @@
                                                 <option>Mentee</option>
                                                 <option>Mentor</option>
                                                 <option>Message</option>
-                                                <option>Request</option>
                                             </select>
                                             <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
                                             <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
@@ -96,7 +95,6 @@
                                                 <option>Mentee</option>
                                                 <option>Mentor</option>
                                                 <option>Message</option>
-                                                <option>Request</option>
                                             </select>
                                             <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
                                             <button type="submit" class="searchButton"> <img src="img/search.svg"></button>

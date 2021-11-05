@@ -128,7 +128,7 @@
                                         <span class="menu-title">Mentee Management</span>
                                     </a>
                                 </li>
-                                <!--Request MANAGEMENT-->
+                               <!--Request MANAGEMENT-->
                                 <li class="nav-item">
                                     <a class="nav-link" href="requestManagement">
                                         <i class="icon-columns menu-icon"></i>
@@ -140,6 +140,13 @@
                                     <a class="nav-link" href="MessageControllerMap?service=getMessage">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Message Management</span>
+                                    </a>
+                                </li>
+                                <!--Forum MANAGEMENT-->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="forumManagement">
+                                        <i class="icon-columns menu-icon"></i>
+                                        <span class="menu-title">Forum Management</span>
                                     </a>
                                 </li>
                             </ul>

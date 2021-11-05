@@ -44,8 +44,8 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Get service from user and Forward the request to the destination, catch
+     * any unexpected exceptions and log it.
      *
      * @param request it is a object of
      * <code>javax.servlet.http.HttpServletRequest</code>
@@ -156,6 +156,14 @@ public class AdminController extends HttpServlet {
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);

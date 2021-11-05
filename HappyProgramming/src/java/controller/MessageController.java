@@ -96,6 +96,7 @@ public class MessageController extends HttpServlet {
                 request.setAttribute("mess", mess);
                 sendDispatcher(request, response, "MessageControllerMap?service=getMessage");
             }
+            //Get unread message
             if (service.equalsIgnoreCase("getUnReadMessage")) {
                 ArrayList<Message> list = messageDAO.getMessage();
                 ArrayList<Message> listUnReadMess = messageDAO.getUnReadMessage();

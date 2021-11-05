@@ -227,7 +227,7 @@
                                 </li>
                                 <!--Request MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=requestManage">
+                                    <a class="nav-link" href="requestManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Request Management</span>
                                     </a>
@@ -260,7 +260,7 @@
                                     <div class="col-md-6 grid-margin stretch-card">
                                         <div class="card tale-bg">
                                             <div class="card-people mt-auto" style="padding: 0">
-                                                <img style="min-width: 300px; min-height:250px " src="img/1.png">
+                                                <img style="min-width: 300px; min-height:250px " src="img/forumManagement.png">
 
                                                 <div class="weather-info">
                                                 </div>
