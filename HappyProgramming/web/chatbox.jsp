@@ -193,14 +193,14 @@
                                 <c:when test="${sessionScope.currUser!=null}">
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                        <li class="dropdown getstarted scrollto " style="background:#0dcaf0">
+                                            <span style="color: white; padding: 0;">View Request</span>
+                                            <ul>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
+                                                </li>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </c:when>
                                     <c:when test="${sessionScope.currUser.getRole()==3}">
@@ -216,7 +216,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="UserProfileController?uId=${sessionScope.currUser.id}">Profile</a></li>
                                         <li><a href="ChangePassword">Change pass</a></li>
                                         <li><a href="logout">Log out</a></li>
                                     </ul>
@@ -285,7 +285,7 @@
                                                             <div class="chat_img"> <img src="img/<c:out value="${friend.getAvatar()}" ></c:out>" alt="sunil">
                                                                 </div>
                                                                 <div class="chat_ib">
-                                                                    <h5><c:out value="${friend.getUsername()}"></c:out></h5>
+                                                                    <h5><c:out value="${friend.getFullname()}"></c:out></h5>
 
                                                                 </div>
                                                             </div>
@@ -299,7 +299,7 @@
                                                             <div class="chat_img"> <img src="img/<c:out value="${friend.getAvatar()}" ></c:out>" alt="sunil">
                                                                 </div>
                                                                 <div class="chat_ib">
-                                                                    <h5>${friend.getUsername()}</h5>
+                                                                    <h5>${friend.getFullname()}</h5>
                                                             </div>
                                                         </div>
                                                     </a>

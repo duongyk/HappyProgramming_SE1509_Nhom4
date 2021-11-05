@@ -52,14 +52,14 @@
                                 <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
-                                  
-                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                        <li class="dropdown getstarted scrollto " style="background:#0dcaf0">
+                                            <span style="color: white; padding: 0;">View Request</span>
+                                            <ul>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
+                                                </li>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </c:when>
                                     <c:otherwise>
@@ -70,7 +70,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="UserProfileController?uId=${sessionScope.currUser.id}">Profile</a></li>
                                         <li><a href="ChangePassword">Change pass</a></li>
                                         <li><a href="logout">Log out</a></li>
                                     </ul>
@@ -97,6 +97,7 @@
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
       <div class="container">
+          
       </div>
     </section><!-- End Breadcrumbs Section -->
    
@@ -108,7 +109,9 @@
         <div class="section-title" data-aos="fade-up">
             <h2>All <c:out value="${status}" ></c:out> request</h2>
         </div>
-          
+        <div class="col-md-2" data-aos="fade-up">
+                        <div><a href="viewMentorRequestStatistic"><button class="create" style="min-width: 164px;">Statistic Request</button></a> </div> 
+                    </div>  
         <div class="row">
 
         <c:forEach items="${requestlist}" var="request">

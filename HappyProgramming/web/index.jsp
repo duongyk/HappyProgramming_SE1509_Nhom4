@@ -57,19 +57,20 @@
                     <ul>
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
-                        <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
+                                    <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                                     <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">                       
-                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                        <li class="dropdown getstarted scrollto " style="background:#0dcaf0">
+                                            <span style="color: white; padding: 0;">View Request</span>
+                                            <ul>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
+                                                </li>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </c:when>
                                          <c:when test="${sessionScope.currUser.getRole()==3}">

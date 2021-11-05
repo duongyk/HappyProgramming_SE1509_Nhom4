@@ -69,14 +69,14 @@
                                 <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                 <c:choose>
                                     <c:when test="${sessionScope.currUser.getRole()==2}">
-                                        
-                                        <li><a class="nav-link scrollto" href="viewMentorRequestStatistic">Statistic</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRatingStatistic">Rating</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
-                                        </li>
-                                        <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                        <li class="dropdown getstarted scrollto " style="background:#0dcaf0">
+                                            <span style="color: white; padding: 0;">View Request</span>
+                                            <ul>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
+                                                </li>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </c:when>
                                     <c:otherwise>
@@ -87,7 +87,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="UserProfileController?uId=${sessionScope.currUser.id}">Profile</a></li>
                                         <li><a href="ChangePassword">Change pass</a></li>
                                         <li><a href="logout">Log out</a></li>
                                     </ul>
@@ -151,7 +151,9 @@
                                                         <br>
                                                         <a  style="color: blue ;" href="viewMentorRequestStatistic?uId=${user.id}">View Statistic </a>
                                                     </c:if>
-                                                        
+                                                    <c:if test="${currUser.getRole()==2}">
+                                                        <h4><a class="btn btn-primary" style="background-color: #3498db;" href="viewMentorRatingStatistic">View Rating</a></h4>
+                                                    </c:if>
                                                     </div>
                                                 </div>
                                         </c:when>

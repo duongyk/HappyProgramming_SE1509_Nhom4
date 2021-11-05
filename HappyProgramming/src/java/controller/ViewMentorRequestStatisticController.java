@@ -80,15 +80,14 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             
             HashMap<String,HashMap<Integer,Integer>> statisticMap = requestdao.getStatisticTopFive();
             
-            
             // replace username of your mentor wiht "You" if user in top 5
-            if(statisticMap.containsKey(user.getUsername())) {
+            if(statisticMap.containsKey(user.getFullname())) {
                 
                 HashMap<String,HashMap<Integer,Integer>> sortedMap = new HashMap<>();
                 
                 for(String key: new ArrayList<>(statisticMap.keySet())) {
-                    if(user.getUsername().equalsIgnoreCase(key)) {
-                       sortedMap.put(user.getUsername()+"(You)", statisticMap.get(key));
+                    if(user.getFullname().equalsIgnoreCase(key)) {
+                       sortedMap.put(user.getFullname()+"(You)", statisticMap.get(key));
                     } else {
                        sortedMap.put(key, statisticMap.get(key));
                     }
