@@ -296,7 +296,7 @@
 
                         <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
 
-                            <form action="MessageControllerMap?service=sendMessage" method="post" role="form" class="php-email-form">
+                            <form action="sendMessage" method="post" role="form" class="php-email-form">
                                 <div class="form-group">
                                     <input type="email" class="form-control" name="email" id="email"   pattern=".*\S+.*" title="No white space only" maxlength="30" placeholder="Your Email*" required>
                                 </div>

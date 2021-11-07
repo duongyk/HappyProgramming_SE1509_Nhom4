@@ -53,7 +53,7 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1><a href="AdminControllerMap?service=dashboard">Vesperr</a></h1>
+                    <h1><a href="index.jsp">Vesperr</a></h1>
 
                 </div>
 
@@ -101,10 +101,10 @@
                                         </form>
                                     </div>
                                 </li>
-                                <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
+                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
-                                        <li><a href="SignUp.jsp">Sign up</a>
+                                        <li><a href="signUp.jsp">Sign up</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -243,12 +243,12 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <p class="card-title">Top Mentee:</p>
                                     <div class="row">
                                         <div class="col-md-12 grid-margin stretch-card">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <p class="card-title mb-0">Top Mentee</p>
+
                                                     <div class="table-responsive">
                                                         <table class="table table-striped table-borderless">
                                                             <thead>
@@ -288,12 +288,11 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <p class="card-title">Trending Skill:</p>
                                     <div class="row">
                                         <div class="col-md-12 grid-margin stretch-card">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <p class="card-title mb-0">Trending Skill</p>
                                                     <div class="table-responsive">
                                                         <table class="table table-striped table-borderless">
                                                             <thead>
@@ -370,7 +369,12 @@
 
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
-
+        <style>
+            .card-title {
+                font-size: 20px;
+                font-weight: bold
+            }
+        </style>
 
     </body>
 

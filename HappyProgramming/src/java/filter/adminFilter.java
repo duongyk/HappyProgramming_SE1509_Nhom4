@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
         filterName = "adminFilter",
         urlPatterns = {"/adminDashboard", "/skillManagement", "/adminViewRequest", "/mentorPage",
             "/createSkill", "/mentorManagement", "/menteeManagement", "/requestManagement", "/requestSearch", "/search",
-            "/updateSkill", "/adminViewRequestDetail", "/sortSkillByName", "/getUpdateSkill", "/MessageControllerMap?service=getMessage", "/MessageControllerMap?service=viewMessage",
-            "/MessageControllerMap?service=deleteMessage", "/MessageControllerMap?service=getUnReadMessage", "/sortMenteeByName"})
+            "/updateSkill", "/adminViewRequestDetail", "/sortSkillByName", "/getUpdateSkill", "/MessageControllerMap",
+             "/sortMenteeByName","/forumManagement"})
         
 /**
  *

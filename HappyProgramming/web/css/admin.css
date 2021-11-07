@@ -13703,6 +13703,7 @@ input[type="button"].btn-block {
 }
 
 .card-title {
+   font-size: 50px;
   margin-bottom: 0.75rem;
 }
 

@@ -17,7 +17,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Skill management</title>
+        <title>View message</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -40,7 +40,7 @@
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
-
+        <link href="css/search.css" rel="stylesheet">
 
     </head>
 
@@ -51,35 +51,131 @@
             <div class="container d-flex align-items-center justify-content-between">
 
                 <div class="logo">
-                    <h1><a href="AdminControllerMap?service=dashboard">Vesperr</a></h1>
+                    <h1><a href="index.jsp">Vesperr</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
-                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
-                        <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                         <c:choose>
                             <c:when test="${sessionScope.currUser!=null}">
-
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <c:choose>
+                                                    <c:when test="${category==null}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Mentee'}">
+                                                        <option>Skill</option>
+                                                        <option selected="selected">Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Skill'}">
+                                                        <option  selected="selected">Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Mentor'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option  selected="selected">Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Request'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option selected="selected">Request</option></c:when>
+                                                    <c:when test="${category == 'Message'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option selected="selected">Message</option>
+                                                        <option>Request</option></c:when>
+                                                </c:choose>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
-                                        <li><a href="AdminControllerMap?service=dashboard">Dashboard</a></li>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                        <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
+
+
                             </c:when>
                             <c:otherwise>
-                                <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
+                                <li> 
+                                    <div>
+                                        <form action="search" method="POST" style="margin-left: 10px">
+                                            <label for="category">Category :</label>
+                                            <select data-trigger="" name="category" class="search-btn" id="category">
+                                                <c:choose>
+                                                    <c:when test="${category==null}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Mentee'}">
+                                                        <option>Skill</option>
+                                                        <option selected="selected">Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Skill'}">
+                                                        <option  selected="selected">Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Mentor'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option  selected="selected">Mentor</option>
+                                                        <option>Message</option>
+                                                        <option>Request</option></c:when>
+                                                    <c:when test="${category == 'Request'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option>Message</option>
+                                                        <option selected="selected">Request</option></c:when>
+                                                    <c:when test="${category == 'Message'}">
+                                                        <option>Skill</option>
+                                                        <option>Mentee</option>
+                                                        <option>Mentor</option>
+                                                        <option selected="selected">Message</option>
+                                                        <option>Request</option></c:when>
+                                                </c:choose>
+                                            </select>
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
+                                        </form>
+                                    </div>
+                                </li>
+                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
-                                        <li><a href="SignUp.jsp">Sign up</a>
+                                        <li><a href="signUp.jsp">Sign up</a>
                                         </li>
                                     </ul>
                                 </li>
+
                             </c:otherwise>
                         </c:choose>
                     </ul>
@@ -113,14 +209,14 @@
                                 </li>
                                 <!--Mentor MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=mentorManage">
+                                    <a class="nav-link" href="mentorManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Mentor Management</span>
                                     </a>
                                 </li>
                                 <!--Mentee MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=menteeManage">
+                                    <a class="nav-link" href="menteeManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Mentee Management</span>
                                     </a>
@@ -217,8 +313,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                          
-                                        </c:forEach>
+
+                                    </c:forEach>
 
 
 

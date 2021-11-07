@@ -114,7 +114,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                        <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
 
@@ -225,7 +225,7 @@
                                 </li>
                                 <!--Request MANAGEMENT-->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="AdminControllerMap?service=requestManage">
+                                    <a class="nav-link" href="requestManagement">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Request Management</span>
                                     </a>
@@ -235,6 +235,13 @@
                                     <a class="nav-link" href="MessageControllerMap?service=getMessage">
                                         <i class="icon-columns menu-icon"></i>
                                         <span class="menu-title">Message Management</span>
+                                    </a>
+                                </li>
+                                <!--Forum MANAGEMENT-->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="forumManagement">
+                                        <i class="icon-columns menu-icon"></i>
+                                        <span class="menu-title">Forum Management</span>
                                     </a>
                                 </li>
                             </ul>
@@ -282,56 +289,61 @@
                                             </div>
                                         </div>
 
+                                    <c:choose>  
+                                        <c:when test="${empty listUnReadMess}">
+                                            <div class="no-req">  Dont have any Unread Message</div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="row">
+                                                <div class="col-lg-12 grid-margin stretch-card">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                ID
+                                                                            </th>
+                                                                            <th>
+                                                                                Title
+                                                                            </th>
+                                                                            <th>
+                                                                                Email
+                                                                            </th>
 
-
-                                        <div class="row">
-                                            <div class="col-lg-12 grid-margin stretch-card">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>
-                                                                            ID
-                                                                        </th>
-                                                                        <th>
-                                                                            Title
-                                                                        </th>
-                                                                        <th>
-                                                                            Email
-                                                                        </th>
-
-
-
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <c:forEach items="${listUnReadMess}" var="message">
-                                                                    <tr>
-                                                                        <td>
-                                                                            ${message.mId}
-                                                                        </td>
-                                                                        <td>
-                                                                            <a href="MessageControllerMap?service=viewMessage&mId=${message.mId}">   ${message.title}</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <c:out value="${message.email}"></c:out>
-
-                                                                            </td>
 
 
                                                                         </tr>
-                                                                </c:forEach>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <c:forEach items="${listUnReadMess}" var="message">
+                                                                            <tr>
+                                                                                <td>
+                                                                                    ${message.mId}
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a href="MessageControllerMap?service=viewMessage&mId=${message.mId}">   ${message.title}</a>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <c:out value="${message.email}"></c:out>
 
-                                                            </tbody>
-                                                        </table>
+                                                                                    </td>
 
+
+                                                                                </tr>
+                                                                        </c:forEach>
+
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </c:otherwise>
+                                    </c:choose>
 
                                 </div>
 

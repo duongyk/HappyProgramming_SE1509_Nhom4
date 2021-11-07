@@ -112,7 +112,7 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">Admin </span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                        <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
 

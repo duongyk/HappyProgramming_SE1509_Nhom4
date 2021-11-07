@@ -78,16 +78,7 @@ public class MessageController extends HttpServlet {
                 request.setAttribute("listMess", list);
                 sendDispatcher(request, response, "viewMessage.jsp");
             }
-            //Send message
-            if (service.equalsIgnoreCase("sendMessage")) {
-                String email = request.getParameter("email").trim();
-                String title = request.getParameter("title").trim();
-                String content = request.getParameter("content").trim();
-                String mess = "Thank you! Your message has been sent!";
-                messageDAO.insert(new Message(title, email, content));
-                request.setAttribute("mess", mess);
-                sendDispatcher(request, response, "index.jsp");
-            }
+          
             // Delete message
             if (service.equalsIgnoreCase("deleteMessage")) {
                 String mId = request.getParameter("mId");

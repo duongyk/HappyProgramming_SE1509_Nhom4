@@ -62,7 +62,7 @@ public class SortSkillByNameController extends HttpServlet {
             request.setAttribute("sList", list);
             request.setAttribute("sList2", sList);
             request.setAttribute("endPage", endPage);
-            request.setAttribute("tag", index);
+            request.setAttribute("index", index);
             request.setAttribute("menteeList", menteeList);
             request.getRequestDispatcher("sortedSkillManagement.jsp").forward(request, response);
 
