@@ -25,6 +25,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * This class has the process request of create new use
@@ -48,6 +49,7 @@ public class SignupController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             UserDAO userDAO = new UserDAOImpl();
+            HttpSession session  = request.getSession();
             //take infomation in signUp.jsp then trim
             String userName = request.getParameter("username").trim();
             String password = request.getParameter("password").trim();
@@ -64,12 +66,12 @@ public class SignupController extends HttpServlet {
             // ìf the password not match the confirm password stay at the signUp.jsp
            
             if(userDAO.getUserByEmail(mail) != null){
-               request.setAttribute("mess", "your mail has been used. pleas input another one");
+               session.setAttribute("error", "your mail has been used. pleas input another one");
                 response.sendRedirect("signUp.jsp");
                 
             }else{
             if (!password.equals(repass)) {
-                  request.setAttribute("mess", "your repeat password is not match to your password");
+                  session.setAttribute("error", "your repeat password is not match to your password");
                 response.sendRedirect("signUp.jsp");
             } else {
 
@@ -78,6 +80,7 @@ public class SignupController extends HttpServlet {
                 if (a == null) { 
                     userDAO.signUp(user);
                     if (role == 1) {
+                        session.setAttribute("success", "Create Mentee successfullly");
                         response.sendRedirect("signIn.jsp");
                     } else {
                         //response.sendRedirect("signIn.jsp");
@@ -85,7 +88,7 @@ public class SignupController extends HttpServlet {
                     }
                     // khi dang ki hoan tat se cha nguoi dung ve page login
                 } else { 
-                     request.setAttribute("mess", "your user Name has existed try another one");
+                     session.setAttribute("error", "your user Name has existed try another one");
                     response.sendRedirect("signUp.jsp");
                 }
             }

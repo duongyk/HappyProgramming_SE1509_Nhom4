@@ -52,16 +52,16 @@ public class ChangePasswordController extends HttpServlet {
             String mail = u.getMail();
             //if the old password not match to the password in database send erro message 
              if (!u.getPassword().equals(oldPass)) {
-                    request.setAttribute("mess", "wrong Password");
+                    session.setAttribute("error", "wrong Password");
                     sendDispatcher(request, response, "changePassword.jsp");
                 } else {
                     if (!newPass.equals(rePass)) {//if the confim password not match the new password send erro mesage
-                        request.setAttribute("mess", "confim password must match the new password");
+                        session.setAttribute("error", "confim password must match the new password");
                         sendDispatcher(request, response, "changePassword.jsp");
                     } else {// if all corect send messgae and head to signIn.jsp
 
                         userDAO.changePass(mail, newPass);
-                        request.setAttribute("success", "change password successfully");
+                        session.setAttribute("success", "change password successfully");
                         sendDispatcher(request, response, "signIn.jsp");
                     }
                 }

@@ -103,6 +103,15 @@
                     <c:if test="${mess!=null}">
                         <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${mess}"></c:out></h3>
                     </c:if>
+                        
+                    <c:if test="${success!=null}">
+                    <h3 style="color:#29cc49;font-weight: bold;text-align: center"><c:out value="${success}"></c:out></h3>
+                    <c:remove var="success" scope="session"></c:remove>
+                    </c:if>
+                    <c:if test="${error!=null}">
+                        <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${error}"></c:out></h3>
+                        <c:remove var="error" scope="session"></c:remove>
+                    </c:if>
                 </div>
             </section><!-- End Breadcrumbs Section -->
 
