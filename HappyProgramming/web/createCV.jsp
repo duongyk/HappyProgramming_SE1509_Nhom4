@@ -138,7 +138,7 @@
 
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
-                                                        <input class="input-white" type="text" name="profession" pattern=".*\S+.*" title="No white space only" value="">
+                                                        <input class="input-white" type="text" name="profession" pattern=".*\S+.*" title="No white space only" value="" maxlength="20">
                                                         <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
@@ -154,7 +154,7 @@
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
                                                         <!--<input class="input-white" type="text" name="phone"> -->
-                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro"></textarea>
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="professionIntro" maxlength="200"></textarea>
                                                         <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
@@ -170,7 +170,7 @@
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
                                                         <!--<input class="input-white" type="text" name="phone"> -->
-                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="serviceDescription"></textarea>
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="serviceDescription" maxlength="200"></textarea>
                                                         <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
@@ -186,7 +186,7 @@
                                                 <div class="col-12">
                                                     <div class="input-group-desc">
                                                         <!--<input class="input-white" type="text" name="phone"> -->
-                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="achievement"></textarea>
+                                                        <textarea class="input-white" style="width: 499px" pattern=".*\S+.*" title="No white space only" name="achievement" maxlength="200"></textarea>
                                                         <h4 id="htitle" style="color:red;"></h4>
                                                     </div>
                                                 </div>
