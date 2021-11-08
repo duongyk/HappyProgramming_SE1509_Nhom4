@@ -48,6 +48,9 @@
         ======================================================== -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
+            var timePerReload = 5000; //milisecond
+            var reloadMessageInterval; // variable store setInterval method
+            
             function loadMessage() {
                 var amount = document.getElementsByClassName("incoming_msg").length + document.getElementsByClassName("outgoing_msg").length;
                 var idfriend = document.getElementById("friendId").innerHTML;
@@ -70,6 +73,8 @@
             }
 
             function loadNewFriendMessage(friendId) {
+                clearInterval(reloadMessageInterval);
+                
                 var messagebox = document.getElementById("messagebox");
                 messagebox.innerHTML = null;
 
@@ -81,6 +86,9 @@
 
                 loadMessage();
                 inputbox.style.display = 'block';
+                
+                reloadMessageInterval = setInterval(function(){alert(timePerReload);},timePerReload);
+                //reloadMessage = setInterval(loadMessage(),timePerReload);
             }
             
             function setSelected(selectdiv) {
@@ -149,9 +157,9 @@
             }
             
             $(document).ready(function () {
-                var elem = document.getElementById("friendId").innerHTML;
+                var friendId = document.getElementById("friendId").innerHTML;
                 
-                if (!elem) {
+                if (!friendId) {
                     //alert('newelem');
                     var messagebox = document.getElementById("messagebox");
                     messagebox.innerHTML = null;
@@ -163,7 +171,7 @@
                     
                 } else {
                     //alert('elem');
-                    loadNewFriendMessage(elem);
+                    loadNewFriendMessage(friendId);
                     setFriendAvatar();
                 }
             });
