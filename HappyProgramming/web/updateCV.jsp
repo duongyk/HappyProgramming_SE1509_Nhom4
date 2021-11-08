@@ -155,7 +155,7 @@
                                     -->
                                     
                                     <div class="form-row">
-                                        <div class="name">Full Name</div>
+                                        <div class="name">Full Name(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="text" name="fullname" pattern=".*\S+.*" title="No white space only" maxlength="30" value="<c:out value="${mentorprofile.getFullname()}"></c:out>" required>
@@ -165,7 +165,7 @@
                                     </div>
                                     
                                     <div class="form-row">
-                                        <div class="name">Email</div>
+                                        <div class="name">Email(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" maxlength="35" value="<c:out value="${mentorprofile.getMail()}"></c:out>" required>
@@ -176,7 +176,7 @@
                                  
                                                                 
                                     <div class="form-row m-b-55">
-                                        <div class="name">Phone</div>
+                                        <div class="name">Phone(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
 
@@ -206,14 +206,14 @@
                                         </select>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">DOB</div>
+                                        <div class="name">DOB(<span style="color:red">*</span>)</div>
                                         <div class="value">       
                                             <input  class="input-white" type="date" id="mentordob"  name="dob" value="<c:out value="${mentorprofile.getDob()}"></c:out>" >
                                         </div>    
                                     </div>
                                                         
                                     <div class="form-row m-b-55">
-                                        <div class="name">Profession</div>
+                                        <div class="name">Profession(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
 
@@ -228,7 +228,7 @@
                                     </div>
                                     
                                     <div class="form-row m-b-55">
-                                        <div class="name">Profession Intro</div>
+                                        <div class="name">Profession Intro(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
 
@@ -244,7 +244,7 @@
                                     </div>
                                     
                                     <div class="form-row m-b-55">
-                                        <div class="name">Service Description</div>
+                                        <div class="name">Service Description(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
 
@@ -260,7 +260,7 @@
                                     </div>
                                     
                                     <div class="form-row m-b-55">
-                                        <div class="name">Achievement</div>
+                                        <div class="name">Achievement(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
 
@@ -294,7 +294,7 @@
                                     </div>
                                     
                                     <div class="form-row m-b-55">
-                                        <div class="name">Choose Skills</div>
+                                        <div class="name">Choose Skills(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
                                                 <div class="row">

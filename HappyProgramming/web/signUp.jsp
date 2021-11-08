@@ -42,7 +42,7 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
         <link href="css/createRequest.css" rel="stylesheet">
-
+        
     </head>
 
     <body>
@@ -111,7 +111,7 @@
                                 <form action="Signup" method="POST">
                                    
                                     <div class="form-row m-b-55">
-                                        <div class="name">Name</div>
+                                        <div class="name">Name(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-space">
                                                 <div class="col-12">
@@ -125,7 +125,7 @@
                                     </div>
 
                                     <div class="form-row">
-                                        <div class="name">Email</div>
+                                        <div class="name">Email(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" name="mail">
@@ -133,7 +133,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">Password</div>
+                                        <div class="name">Password(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="password">
@@ -142,7 +142,7 @@
                                     </div>
                                   
                                     <div class="form-row">
-                                        <div class="name">Repeat password</div>
+                                        <div class="name">Repeat password(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="confirm">
@@ -150,7 +150,7 @@
                                         </div>
                                     </div>
                                       <div class="form-row">
-                                        <div class="name">Full Name</div>
+                                        <div class="name">Full Name(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="text" pattern=".*\S+.*" title="No white space only" maxlength="30" name="fullname">
@@ -158,7 +158,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row m-b-55">
-                                        <div class="name">Phone</div>
+                                        <div class="name">Phone(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
 
@@ -172,22 +172,22 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">Sex</div>
+                                        <div class="name">Sex(<span style="color:red">*</span>)</div>
                                         <select id="select-6004" name="sex" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
                                     </div>
                                     <div class="form-row">
-                                        <label for="text-13e0" class="name">Date of birth</label>
-                                        <input  class="input-white" type="date"  name="dob" >
+                                        <label for="text-13e0" class="name">Date of birth(<span style="color:red">*</span>)</label>
+                                        <input  class="input-white" type="date"  name="dob" id="mentordob">
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">Sign up to </div>
+                                        <div class="name">Sign up to(<span style="color:red">*</span>) </div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <div class="rs-select2 js-select-simple select--no-search">
-                                                    <select name="role">
+                                                    <select name="role" id="roleselect" onchange="resetDOB();">
                                                         <option disabled="disabled" selected="selected">Choose a role</option>
                                                         <option value="2">Mentor</option>
                                                         <option value="1">Mentee</option>
@@ -198,7 +198,7 @@
                                         </div>
                                     </div>
 
-                                    <div>
+                                    <div style="padding-left: 200px;">
                                         <button class="btn btn--radius-2 btn--blue" type="submit">Register</button>
                                     </div>
                                 </form>
@@ -310,7 +310,39 @@
 
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
-
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        
+        <script>
+            function resetDOB() {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth()+1;
+                if (d < 10) {
+                    d = '0' + d;
+                }
+                if (m < 10) {
+                    m = '0' + m;
+                }
+                
+                var roleId = document.getElementById("roleselect");
+                
+                var maxyear = 12; // if mentee role
+                
+                if(roleId.value==='2') { 
+                    //alert(roleId.value);
+                    $("input[type=date]").val("");
+                    maxyear = 18; // if mentor role
+                }
+                
+                var y = date.getFullYear()-maxyear;
+                var max = y + "-" + m + "-" + d;
+                document.getElementById("mentordob").setAttribute('max', max);
+            }
+            
+            $(document).ready(function() {
+                resetDOB();
+            });
+        </script>
     </body>
 
 </html>

@@ -64,9 +64,11 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
+                        <!--
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
+                        -->
                             <%-- Check the current User --%>
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
@@ -78,10 +80,6 @@
                                         <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
                                         </li> -->
                                     </c:when>
-                                    <c:otherwise>
-                                        <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
-                                        </li>
-                                    </c:otherwise>
                                 </c:choose>
                                         <!--
                                 <li class="dropdown getstarted scrollto ">
@@ -95,13 +93,14 @@
                                         -->
                             </c:when>
                             <c:otherwise>
+                                <!--
                                 <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
                                         <li><a href="signUp.jsp">Sign up</a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </c:otherwise>
                         </c:choose>
                     </ul>
@@ -133,7 +132,7 @@
                                     <input type="hidden" name="uid" value="<c:out value="${uid}"></c:out>" readonly="readonly" />
                                                         
                                     <div class="form-row m-b-55">
-                                        <div class="name">Profession</div>
+                                        <div class="name">Profession(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
 
@@ -148,7 +147,7 @@
                                     </div>
                                     
                                     <div class="form-row m-b-55">
-                                        <div class="name">Profession Intro</div>
+                                        <div class="name">Profession Intro(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
 
@@ -164,7 +163,7 @@
                                     </div>
                                     
                                     <div class="form-row m-b-55">
-                                        <div class="name">Service Description</div>
+                                        <div class="name">Service Description(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
 
@@ -180,7 +179,7 @@
                                     </div>
                                     
                                     <div class="form-row m-b-55">
-                                        <div class="name">Achievement</div>
+                                        <div class="name">Achievement(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
 
@@ -214,7 +213,7 @@
                                     </div>
                                     -->
                                     <div class="form-row m-b-55">
-                                        <div class="name">Choose Skills</div>
+                                        <div class="name">Choose Skills(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
                                                 <div class="row">
@@ -346,7 +345,7 @@
 
         <!-- Template Main JS File -->
         <script src="js/main.js"></script>
-
+        
     </body>
 
 </html>
