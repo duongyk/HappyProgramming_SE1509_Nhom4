@@ -228,7 +228,7 @@
                                                 <div class="row">
                                                     <div class="col-3"></div>
                                                     <div class="col-6">
-                                                        <button id="button" class="btn btn--radius-2 btn--red" type="submit">Update Request</button>
+                                                        <button id="button" class="btn btn--radius-2 btn--blue" type="submit">Update Request</button>
                                                     </div>
                                                     <div class="col-3"></div>
                                                 </div>
