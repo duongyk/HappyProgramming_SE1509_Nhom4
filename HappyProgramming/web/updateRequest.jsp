@@ -100,7 +100,7 @@
                                     <c:choose>
                                         <%-- Status = 1 --%>
                                         <c:when test="${req.getStatus()==1}">
-                                            <form action="updateRequest" method="POST">
+                                            <form action="updateRequest" method="post">
                                                 <input type="hidden" name="rId" value="${req.id}">
                                                 <div class="require">(*): Required</div>
                                                 <%-- Title --%>
