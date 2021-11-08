@@ -124,7 +124,7 @@
                         <%-- Request Detail --%>
                         <div class="row">
                             <div class="col-md-5">
-                                <h3>Mentee: ${req.from.fullname} <a href="openChat?friendId=${req.from.id}">Begin Chat </a></h3>
+                                <h3>Mentee: ${req.from.fullname} <a href="openChat?friendId=${req.from.id}" style="color:green;">Begin Chat </a></h3>
                                 <br><br>
                                 <p>Deadline Date: ${req.deadlineDate}</p>
                                 <p>Hour: ${req.deadlineHour}</p>

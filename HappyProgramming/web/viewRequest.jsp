@@ -110,7 +110,7 @@
                         <%-- Request Detail --%>
                         <div class="row">
                             <div class="col-md-5">
-                                <h1>To <a href="CVControllerMap?service=cvMentor&mId=${req.getTo().getId()}">${req.to.fullname}</a></h1>
+                                <h1>To <a href="CVControllerMap?service=cvMentor&mId=${req.getTo().getId()}">${req.to.fullname}</a> <a href="openChat?friendId=${req.to.id}" style="color:green;"> Begin Chat </a></h1>
                                 <br><br>
                                 <h2>Deadline Date: ${req.deadlineDate}</h2>
                                 <h2>Hour: ${req.deadlineHour}</h2>
