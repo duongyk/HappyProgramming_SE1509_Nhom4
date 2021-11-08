@@ -153,11 +153,7 @@
                                         <button class="btn btn--radius-2 btn--blue" type="submit" style=" margin-left: 230px; ">Change</button>
                                     </div>
                                 </form>
-                                <div class ="text-danger">
-                                <c:if test="${mess!=null}">
-                                    <c:out  value="${mess}"></c:out>
-                                </c:if>
-                                    </div>
+                                
                             </div>
                         </div>
                     </div>

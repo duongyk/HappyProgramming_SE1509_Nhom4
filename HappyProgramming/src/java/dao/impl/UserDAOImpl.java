@@ -178,7 +178,6 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
         return null;
     }
-
     /**
      * Create and insert new User account into the database
      *

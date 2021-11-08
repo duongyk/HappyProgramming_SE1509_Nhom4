@@ -120,7 +120,7 @@
                                 <form action="Login" method="POST">
                                     
                                     <div class="form-row m-b-55">
-                                        <div class="name">User Name</div>
+                                        <div class="name">User Name (<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-space">
                                                 <div class="col-12">
@@ -133,7 +133,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">Password</div>
+                                        <div class="name">Password (<span style="color:red">*</span>) </div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" name="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters,at least one lowercase letter, and one number">

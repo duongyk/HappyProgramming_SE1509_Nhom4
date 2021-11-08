@@ -252,4 +252,5 @@ public interface UserDAO {
      */
     public ArrayList<User> getUserBySkillIdPaging(int index, int sId) throws Exception;
 }
+  
 

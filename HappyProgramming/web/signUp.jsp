@@ -130,6 +130,7 @@
                                             <div class="input-group">
                                                 <input class="input-white" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Email pattern: abcxyz@abcxyz.domain" name="mail">
                                             </div>
+                                            <p class="text-danger">${mess01}</p>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -138,6 +139,7 @@
                                             <div class="input-group">
                                                 <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="password">
                                             </div>
+                                            
                                         </div>
                                     </div>
                                   
@@ -146,7 +148,9 @@
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="confirm">
+                                                
                                             </div>
+                                            <p class="text-danger">${mess02}</p>
                                         </div>
                                     </div>
                                       <div class="form-row">

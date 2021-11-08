@@ -62,8 +62,14 @@ public class SignupController extends HttpServlet {
             // create a new user with default avata
             User user = new User(userName, password, fname, mail, phone, dob, sex, "default-avatar.png", role, 1);
             // ìf the password not match the confirm password stay at the signUp.jsp
-            if (!password.equals(repass)) {
+           
+            if(userDAO.getUserByEmail(mail) != null){
+               request.setAttribute("mess", "your mail has been used. pleas input another one");
+                response.sendRedirect("signUp.jsp");
                 
+            }else{
+            if (!password.equals(repass)) {
+                  request.setAttribute("mess", "your repeat password is not match to your password");
                 response.sendRedirect("signUp.jsp");
             } else {
 
@@ -79,9 +85,10 @@ public class SignupController extends HttpServlet {
                     }
                     // khi dang ki hoan tat se cha nguoi dung ve page login
                 } else { 
-                    // mess= "user name existed!"
+                     request.setAttribute("mess", "your user Name has existed try another one");
                     response.sendRedirect("signUp.jsp");
                 }
+            }
             }
 
         }catch (Exception e) {
