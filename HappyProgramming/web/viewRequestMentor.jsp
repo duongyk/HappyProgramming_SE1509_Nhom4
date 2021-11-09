@@ -187,8 +187,8 @@
                 </div>
                     <c:choose> 
                         <c:when test="${req.status==1}">
-                <div class="col-md-2"><a href="RequestControllerMap?service=mentorUpdateStatus&rid=${req.getId()}&status=2"><button class="create" style="min-width: 164px;background-color:#009900;">Accept request</button></a> </div> 
-                <div class="col-md-2"><a href="RequestControllerMap?service=mentorUpdateStatus&rid=${req.getId()}&status=4"><button class="create" style="min-width: 164px;background-color:#ff0000;">Reject request</button></a> </div>
+                <div class="col-md-2"><a href="updateMentorRequestStatus?rid=${req.getId()}&status=2"><button class="create" style="min-width: 164px;background-color:#009900;">Accept request</button></a> </div> 
+                <div class="col-md-2"><a href="updateMentorRequestStatus?rid=${req.getId()}&status=4"><button class="create" style="min-width: 164px;background-color:#ff0000;">Reject request</button></a> </div>
                         </c:when>
                     <c:otherwise>
                         <div class="col-md-2"></div>

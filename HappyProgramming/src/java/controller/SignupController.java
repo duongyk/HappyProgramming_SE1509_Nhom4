@@ -78,12 +78,13 @@ public class SignupController extends HttpServlet {
                 User a = userDAO.checkAccount(userName);
                 //checking if the user are alredy exist
                 if (a == null) { 
-                    userDAO.signUp(user);
                     if (role == 1) {
+                        userDAO.signUp(user);
                         session.setAttribute("success", "Create Mentee successfullly");
                         response.sendRedirect("signIn.jsp");
                     } else {
                         //response.sendRedirect("signIn.jsp");
+                        session.setAttribute("user", user);
                         response.sendRedirect("createCV?uId=" + userDAO.checkAccount(userName).getId());
                     }
                     // khi dang ki hoan tat se cha nguoi dung ve page login

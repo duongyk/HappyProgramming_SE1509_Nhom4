@@ -70,6 +70,10 @@ public class ViewMentorRequestController extends HttpServlet {
 
         ArrayList<Request> requestList = requestdao.getRequestListByuIdAndStatus(user.getId(), status);
 
+        if(requestList.isEmpty()) {
+            session.setAttribute("error", "There is not request for you yet. Please try later");
+        }
+        
         switch (status) {
             case 1:
                 request.setAttribute("status", "Inviting");

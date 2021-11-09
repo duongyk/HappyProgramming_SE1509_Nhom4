@@ -7,12 +7,15 @@ package controller;
 
 import dao.CVDAO;
 import dao.SkillDAO;
+import dao.UserDAO;
 import dao.UserSkillDAO;
 import dao.impl.CVDAOImpl;
 import dao.impl.SkillDAOImpl;
+import dao.impl.UserDAOImpl;
 import dao.impl.UserSkillDAOImpl;
 import entity.CV;
 import entity.Skill;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * The class contain method get to redirect user to Create CV page Get all data
@@ -110,7 +114,8 @@ public class CreateCVController extends HttpServlet {
             
             CVDAO cvdao = new CVDAOImpl();
             UserSkillDAO smdao = new UserSkillDAOImpl();
-
+            UserDAO userdao = new UserDAOImpl();
+            HttpSession session = request.getSession();
             
             int uid = Integer.parseInt(request.getParameter("uid"));
                 
@@ -129,7 +134,11 @@ public class CreateCVController extends HttpServlet {
             String[] skill_ids = request.getParameterValues("skills");
 
             CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
-
+            
+            User user = (User) session.getAttribute("user");
+            
+            userdao.signUp(user);
+            
             cvdao.insertCV(uid, mentorCV);
                
             smdao.updateMentorSkill(uid, skill_ids);
