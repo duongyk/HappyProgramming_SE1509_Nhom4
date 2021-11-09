@@ -85,7 +85,7 @@ public class SignupController extends HttpServlet {
                     } else {
                         //response.sendRedirect("signIn.jsp");
                         session.setAttribute("user", user);
-                        response.sendRedirect("createCV?uId=" + userDAO.checkAccount(userName).getId());
+                        response.sendRedirect("createCV");
                     }
                     // khi dang ki hoan tat se cha nguoi dung ve page login
                 } else { 

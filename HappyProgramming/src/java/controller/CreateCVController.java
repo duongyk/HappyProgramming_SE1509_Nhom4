@@ -77,12 +77,9 @@ public class CreateCVController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String uid = request.getParameter("uId");
-
             SkillDAO skilldao = new SkillDAOImpl();
             ArrayList<Skill> allSkill = skilldao.getActiveSkill();
             
-            request.setAttribute("uid", uid);
             request.setAttribute("allskill", allSkill);
 
             RequestDispatcher rd = request.getRequestDispatcher("/createCV.jsp");
@@ -116,9 +113,7 @@ public class CreateCVController extends HttpServlet {
             UserSkillDAO smdao = new UserSkillDAOImpl();
             UserDAO userdao = new UserDAOImpl();
             HttpSession session = request.getSession();
-            
-            int uid = Integer.parseInt(request.getParameter("uid"));
-                
+                            
             String achievement = request.getParameter("achievement").trim();
             //System.out.println("achievement "+achievement);
 
@@ -133,11 +128,12 @@ public class CreateCVController extends HttpServlet {
 
             String[] skill_ids = request.getParameterValues("skills");
 
+            User newuser = (User) session.getAttribute("user");
+            userdao.signUp(newuser);
+            
+            int uid = userdao.checkAccount(newuser.getUsername()).getId();
+            
             CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
-            
-            User user = (User) session.getAttribute("user");
-            
-            userdao.signUp(user);
             
             cvdao.insertCV(uid, mentorCV);
                
