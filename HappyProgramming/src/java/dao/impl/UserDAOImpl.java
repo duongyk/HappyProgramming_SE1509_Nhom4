@@ -38,6 +38,39 @@ import java.util.List;
 public class UserDAOImpl extends DBContext implements dao.UserDAO {
 
     /**
+     * Delete an User
+     *
+     * @param uId id of user
+     * @return number of user deleted
+     * @throws Exception
+     */
+    @Override
+    public int deleteUser(int uId) throws Exception {
+        int deleted = 0;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String sql = "delete from [User] where uId=?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, uId);
+
+            deleted = ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        
+        return deleted;
+    }
+    
+    /**
      * Get all the User
      *
      * @return list of <code>User</code> object

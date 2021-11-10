@@ -17,6 +17,16 @@ import java.util.ArrayList;
  * @author Duong
  */
 public interface CVDAO {
+    
+    /**
+    * Delete a particular CV in the database
+    * 
+    * @param uid of the mentor
+    * @return number of rows deleted (expected 1)
+    * @throws Exception
+    */
+    public int deleteCV(int uid) throws Exception ;
+    
     /**
     * Get a particular CV in the database
     * 
@@ -51,5 +61,5 @@ public interface CVDAO {
     * @return list of all CV
     * @throws Exception
     */
-    public ArrayList<CV> getAllMentorCV() throws Exception ;
+    public ArrayList<CV> getAllMentorCV() throws Exception ;  
 }

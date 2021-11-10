@@ -21,6 +21,15 @@ import java.util.ArrayList;
 public interface UserDAO {
 
     /**
+     * Delete an User
+     *
+     * @param uId id of user
+     * @return number of user deleted
+     * @throws Exception
+     */
+    public int deleteUser(int uId) throws Exception;
+    
+    /**
      * Get all the User
      *
      * @return list of <code>User</code> object
@@ -110,6 +119,14 @@ public interface UserDAO {
      */
     public User resetPassword(User user, String password) throws Exception;
 
+    /**
+     * Change password for an user
+     *
+     * @param uMail it is a <code>java.lang.String</code>
+     * @param newPass it is a <code>java.lang.String</code>
+     * @return a <code>User</code> object
+     * @throws Exception
+     */
     public User changePass(String uMail, String newPass) throws Exception;
 
     /**

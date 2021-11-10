@@ -22,6 +22,15 @@ import java.util.ArrayList;
 public interface UserSkillDAO {
     
     /**
+     * Delete all Skill of an User
+     *
+     * @param uId user id
+     * @return number of skills deleted
+     * @throws java.lang.Exception
+     */
+    public int deleteUserSkill(int uId) throws Exception;
+    
+    /**
      * Get all Skill of the Mentor in the database
      *
      * @param uId of the mentor

@@ -26,6 +26,39 @@ import java.util.ArrayList;
 public class CVDAOImpl extends DBContext implements dao.CVDAO {
 
     /**
+    * Delete a particular CV in the database
+    * 
+    * @param uid of the mentor
+    * @return number of rows deleted (expected 1)
+    * @throws Exception
+    */
+    @Override
+    public int deleteCV(int uId) throws Exception {
+        int deleted = 0;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String sql = "delete from [CV] where uId=?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, uId);
+
+            deleted = ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        
+        return deleted;
+    }
+    
+    /**
      * Get a particular CV in the database
      *
      * @param uid of the mentor

@@ -28,6 +28,39 @@ import java.util.ArrayList;
 public class UserSkillDAOImpl extends DBContext implements dao.UserSkillDAO {
 
     /**
+     * Delete all Skill of an User
+     *
+     * @param uId user id
+     * @return number of skills deleted
+     * @throws java.lang.Exception
+     */
+    @Override
+    public int deleteUserSkill(int uId) throws Exception {
+        int deleted = 0;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String sql = "delete from [UserSkill] where uId=?";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, uId);
+
+            deleted = ps.executeUpdate();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        
+        return deleted;
+    }
+    
+    /**
      * Get all Skill of the Mentor in the database
      *
      * @param uid of the mentor
