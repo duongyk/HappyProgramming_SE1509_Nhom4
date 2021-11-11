@@ -137,13 +137,16 @@ public class UpdateCVController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        CVDAO cvdao = new CVDAOImpl();
+        UserDAO userDAO = new UserDAOImpl();
+        UserSkillDAO smdao = new UserSkillDAOImpl();
+
+        HttpSession session = request.getSession();
+        
         try (PrintWriter out = response.getWriter()) {
             
-            CVDAO cvdao = new CVDAOImpl();
-            UserDAO userDAO = new UserDAOImpl();
-            UserSkillDAO smdao = new UserSkillDAOImpl();
             
-            HttpSession session = request.getSession();
             
             // get information
                 
@@ -223,8 +226,13 @@ public class UpdateCVController extends HttpServlet {
             
         } catch (Exception e) {
             Logger.getLogger(UpdateCVController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
+            
+            User user = (User) session.getAttribute("currUser");   
+            int uid = user.getId();
+            
+            session.setAttribute("error", "Update CV Failed");
+            sendDispatcher(request, response, "/UserProfileController?uId="+uid);
+            
         }
     }
 

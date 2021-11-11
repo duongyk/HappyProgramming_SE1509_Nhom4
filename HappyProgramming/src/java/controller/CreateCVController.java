@@ -107,13 +107,13 @@ public class CreateCVController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        HttpSession session = request.getSession();
+        CVDAO cvdao = new CVDAOImpl();
+        UserSkillDAO smdao = new UserSkillDAOImpl();
+        UserDAO userdao = new UserDAOImpl();
+        
         try (PrintWriter out = response.getWriter()) {
-            
-            CVDAO cvdao = new CVDAOImpl();
-            UserSkillDAO smdao = new UserSkillDAOImpl();
-            UserDAO userdao = new UserDAOImpl();
-            HttpSession session = request.getSession();
-                            
             String achievement = request.getParameter("achievement").trim();
             //System.out.println("achievement "+achievement);
 
@@ -129,6 +129,7 @@ public class CreateCVController extends HttpServlet {
             String[] skill_ids = request.getParameterValues("skills");
 
             User newuser = (User) session.getAttribute("user");
+            
             userdao.signUp(newuser);
             
             int uid = userdao.checkAccount(newuser.getUsername()).getId();
@@ -139,13 +140,32 @@ public class CreateCVController extends HttpServlet {
                
             smdao.updateMentorSkill(uid, skill_ids);
                 
-            request.setAttribute("success", "Create Mentor Successfuly");
+            session.setAttribute("success", "Create Mentor Successfuly");
             sendDispatcher(request, response, "/signIn.jsp");
             
         } catch (Exception e) {
             Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
+            
+            // delete inputed information
+            User newuser = (User) session.getAttribute("user");
+            
+            try {
+                User user = userdao.checkAccount(newuser.getUsername());
+                
+                int uid = user.getId();
+                
+                smdao.deleteUserSkill(uid);
+                cvdao.deleteCV(uid);
+                userdao.deleteUser(uid);
+                
+                session.setAttribute("error", "Create Mentor Failed");
+                sendDispatcher(request, response, "/signIn.jsp");
+                    
+            } catch (Exception ex) {
+                Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, ex);
+                session.setAttribute("error", "Create Mentor Failed");
+                sendDispatcher(request, response, "/signIn.jsp");
+            }
         }
     }
 

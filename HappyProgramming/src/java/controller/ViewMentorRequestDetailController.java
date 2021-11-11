@@ -26,6 +26,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * The class contains method get data from Request and RequestSkill table
@@ -50,10 +51,12 @@ public class ViewMentorRequestDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
+        
         RequestDAO requestDAO = new RequestDAOImpl();
-        RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl();    
+        RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl(); 
+        HttpSession session = request.getSession();
+        
+        try (PrintWriter out = response.getWriter()) {
             
         // get request
         int rId = Integer.parseInt(request.getParameter("rId"));
@@ -67,8 +70,11 @@ public class ViewMentorRequestDetailController extends HttpServlet {
         sendDispatcher(request, response, "viewRequestMentor.jsp");
         } catch (Exception e) {
             Logger.getLogger(ViewMentorRequestDetailController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
+            
+            session.setAttribute("error", "Cant view request detail");
+            String referer = request.getHeader("Referer");
+            response.sendRedirect(referer);
+            
         }
     }
 
