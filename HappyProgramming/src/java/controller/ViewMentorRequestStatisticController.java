@@ -111,8 +111,8 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             
             } catch (Exception e) {
                 Logger.getLogger(ViewMentorRequestStatisticController.class.getName()).log(Level.SEVERE, null, e);
-                request.setAttribute("errorMessage", e.getMessage());
-                sendDispatcher(request, response, "/error.jsp");
+                request.setAttribute("error", "cant get request statistic");
+                sendDispatcher(request, response, "/mentorRequestStatistic.jsp");
             }
         } catch (Exception e) {
             Logger.getLogger(ViewMentorRequestStatisticController.class.getName()).log(Level.SEVERE, null, e);

@@ -61,23 +61,23 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             try {
                 User user;
                 int id;
-                // if user is admin    
+                    // if user is admin    
                 try{
-                id = Integer.parseInt(request.getParameter("uId"));
-                user = userDAO.getUserById(id);
+                    id = Integer.parseInt(request.getParameter("uId"));
+                    user = userDAO.getUserById(id);
 
-                // if user is mentor
+                    // if user is mentor
                 } catch (Exception e) {
 
-                user = (User) session.getAttribute("currUser");
+                    user = (User) session.getAttribute("currUser");
 
-                // not login or not mentor 
-                if (user == null || user.getRole() != 2) { // return to sign in page
-                    response.sendRedirect("signIn.jsp");
-                    return;
-                }
+                    // not login or not mentor 
+                    if (user == null || user.getRole() != 2) { // return to sign in page
+                        response.sendRedirect("signIn.jsp");
+                        return;
+                    }
 
-                id = user.getId();
+                    id = user.getId();
 
                 }
 
@@ -112,8 +112,9 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             
             } catch (Exception e) {
                 Logger.getLogger(ViewMentorRatingStatisticController.class.getName()).log(Level.SEVERE, null, e);
-                request.setAttribute("errorMessage", e.getMessage());
-                sendDispatcher(request, response, "/error.jsp");
+                
+                session.setAttribute("error","cant get mentor rating");
+                sendDispatcher(request, response, "/mentorRatingStatistic.jsp");
             }
         } catch (Exception e) {
             Logger.getLogger(ViewMentorRatingStatisticController.class.getName()).log(Level.SEVERE, null, e);

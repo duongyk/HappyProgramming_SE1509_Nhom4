@@ -98,8 +98,8 @@ public class ViewMentorRequestController extends HttpServlet {
         
             } catch (Exception e) {
                 Logger.getLogger(ViewMentorRequestController.class.getName()).log(Level.SEVERE, null, e);
-                request.setAttribute("errorMessage", e);
-                sendDispatcher(request, response, "/error.jsp");
+                request.setAttribute("error", "cant get request list");
+                sendDispatcher(request, response, "/mentorRequestList.jsp");
             }
             
         } catch (Exception e) {

@@ -123,7 +123,7 @@
                         <h3 style="color:#29cc49;font-weight: bold;text-align: center"><c:out value="${success}"></c:out></h3>
                     </c:if>
                     <c:if test="${error!=null}">
-                        <h3 style="color:#009900;font-weight: bold;text-align: center"><c:out value="${error}"></c:out></h3>
+                        <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${error}"></c:out></h3>
                     </c:if>
                 </div>
 
@@ -149,7 +149,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <div class="d-flex flex-column align-items-center text-center">
-                                                <img src="img/${user.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
+                                                <img src="img/${user.getAvatar()}" alt="User" class="rounded-circle" width="150">
                                                 <div class="mt-3">
                                                     <h4> <c:out value="${user.fullname}"></c:out> </h4>                                                               
                                                     </div>

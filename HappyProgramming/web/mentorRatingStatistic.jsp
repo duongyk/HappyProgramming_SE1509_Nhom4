@@ -27,7 +27,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Request Statistic</title>
+        <title>Rating Statistic</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -140,7 +140,7 @@
                         <h3 style="color:#29cc49;font-weight: bold;text-align: center"><c:out value="${success}"></c:out></h3>
                     </c:if>
                     <c:if test="${error!=null}">
-                        <h3 style="color:#009900;font-weight: bold;text-align: center"><c:out value="${error}"></c:out></h3>
+                        <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${error}"></c:out></h3>
                     </c:if>
                 </div>
 
@@ -156,7 +156,7 @@
                                     <c:choose>
                                         <c:when test="${user.getRole()==2}">
                                             <div class="d-flex flex-column align-items-center text-center">
-                                                <img src="img/${user.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
+                                                <img src="img/${user.getAvatar()}" alt="User" class="rounded-circle" width="150">
                                                 <div class="mt-3">
                                                     <h4> <c:out value="${user.getFullname()}"></c:out> </h4>                                        
                                                     <p class="text-secondary mb-1"><c:out value="${cv.getProfession()}"></c:out></p>

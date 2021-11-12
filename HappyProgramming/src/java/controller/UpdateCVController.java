@@ -93,29 +93,29 @@ public class UpdateCVController extends HttpServlet {
             }
                 
             try {
-            int uid = user.getId();
-            CV mentorCV = cvdao.getMentorCV(uid);
+                int uid = user.getId();
+                CV mentorCV = cvdao.getMentorCV(uid);
 
-            //User mentorProfile = userDAO.getUserById(uid);
-            User mentorProfile = (User) session.getAttribute("currUser");
+                //User mentorProfile = userDAO.getUserById(uid);
+                User mentorProfile = (User) session.getAttribute("currUser");
 
-            // get all skill id from mentor
-            ArrayList<String> mentorSkill = smdao.getAllIdSkillMentor(uid);
+                // get all skill id from mentor
+                ArrayList<String> mentorSkill = smdao.getAllIdSkillMentor(uid);
 
-            //get all available skill
-            SkillDAOImpl skilldao = new SkillDAOImpl();
+                //get all available skill
+                SkillDAOImpl skilldao = new SkillDAOImpl();
 
-            ArrayList<Skill> allSkill = skilldao.getActiveSkill();
+                ArrayList<Skill> allSkill = skilldao.getActiveSkill();
 
-            request.setAttribute("allskill", allSkill);
-            request.setAttribute("mentorskill", mentorSkill);
-            session.setAttribute("mentorprofile", mentorProfile);
-            request.setAttribute("mentorcv", mentorCV);
-            request.setAttribute("title","UPDATE CV");
+                request.setAttribute("allskill", allSkill);
+                request.setAttribute("mentorskill", mentorSkill);
+                session.setAttribute("mentorprofile", mentorProfile);
+                request.setAttribute("mentorcv", mentorCV);
+                request.setAttribute("title","UPDATE CV");
 
-            RequestDispatcher rd = request.getRequestDispatcher("/updateCV.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/updateCV.jsp");
 
-            rd.forward(request, response);
+                rd.forward(request, response);
             
             } catch (Exception ex) {
                 Logger.getLogger(UpdateCVController.class.getName()).log(Level.SEVERE, null, ex);
