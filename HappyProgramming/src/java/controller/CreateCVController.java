@@ -79,16 +79,22 @@ public class CreateCVController extends HttpServlet {
 
             SkillDAO skilldao = new SkillDAOImpl();
             ArrayList<Skill> allSkill = skilldao.getActiveSkill();
+            HttpSession session = request.getSession();
             
-            request.setAttribute("allskill", allSkill);
+            try {
+                request.setAttribute("allskill", allSkill);
 
-            RequestDispatcher rd = request.getRequestDispatcher("/createCV.jsp");
-            rd.forward(request, response);
-
+                RequestDispatcher rd = request.getRequestDispatcher("/createCV.jsp");
+                rd.forward(request, response);
+            
+            } catch (IOException | ServletException ex) {
+                Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, ex);
+                session.setAttribute("error", "Cant get create CV page. Create Mentor failed");
+                sendDispatcher(request, response, "/signIn.jsp");
+            }
+            
         } catch (Exception ex) {
             Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage", ex.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
         }
     }
 
@@ -114,58 +120,61 @@ public class CreateCVController extends HttpServlet {
         UserDAO userdao = new UserDAOImpl();
         
         try (PrintWriter out = response.getWriter()) {
-            String achievement = request.getParameter("achievement").trim();
-            //System.out.println("achievement "+achievement);
-
-            String  profession = request.getParameter("profession").trim();
-            //System.out.println("profession "+profession);
-
-            String professionIntro = request.getParameter("professionIntro").trim();
-            //System.out.println("professionIntro "+professionIntro);
-
-            String serviceDescription = request.getParameter("serviceDescription").trim();
-            //System.out.println("serviceDescription "+serviceDescription);
-
-            String[] skill_ids = request.getParameterValues("skills");
-
-            User newuser = (User) session.getAttribute("user");
-            
-            userdao.signUp(newuser);
-            
-            int uid = userdao.checkAccount(newuser.getUsername()).getId();
-            
-            CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
-            
-            cvdao.insertCV(uid, mentorCV);
-               
-            smdao.updateMentorSkill(uid, skill_ids);
-                
-            session.setAttribute("success", "Create Mentor Successfuly");
-            sendDispatcher(request, response, "/signIn.jsp");
-            
-        } catch (Exception e) {
-            Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, e);
-            
-            // delete inputed information
-            User newuser = (User) session.getAttribute("user");
             
             try {
-                User user = userdao.checkAccount(newuser.getUsername());
-                
-                int uid = user.getId();
-                
-                smdao.deleteUserSkill(uid);
-                cvdao.deleteCV(uid);
-                userdao.deleteUser(uid);
-                
-                session.setAttribute("error", "Create Mentor Failed");
+                String achievement = request.getParameter("achievement").trim();
+                //System.out.println("achievement "+achievement);
+
+                String  profession = request.getParameter("profession").trim();
+                //System.out.println("profession "+profession);
+
+                String professionIntro = request.getParameter("professionIntro").trim();
+                //System.out.println("professionIntro "+professionIntro);
+
+                String serviceDescription = request.getParameter("serviceDescription").trim();
+                //System.out.println("serviceDescription "+serviceDescription);
+
+                String[] skill_ids = request.getParameterValues("skills");
+
+                User newuser = (User) session.getAttribute("user");
+
+                userdao.signUp(newuser);
+
+                int uid = userdao.checkAccount(newuser.getUsername()).getId();
+
+                CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
+
+                cvdao.insertCV(uid, mentorCV);
+
+                smdao.updateMentorSkill(uid, skill_ids);
+
+                session.setAttribute("success", "Create Mentor Successfuly");
                 sendDispatcher(request, response, "/signIn.jsp");
-                    
-            } catch (Exception ex) {
-                Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, ex);
-                session.setAttribute("error", "Create Mentor Failed");
-                sendDispatcher(request, response, "/signIn.jsp");
+            
+            } catch (Exception e) {
+                // delete inputed information
+                User newuser = (User) session.getAttribute("user");
+
+                try {
+                    User user = userdao.checkAccount(newuser.getUsername());
+
+                    int uid = user.getId();
+
+                    smdao.deleteUserSkill(uid);
+                    cvdao.deleteCV(uid);
+                    userdao.deleteUser(uid);
+
+                    session.setAttribute("error", "Create Mentor Failed");
+                    sendDispatcher(request, response, "/signIn.jsp");
+
+                } catch (Exception ex) {
+                    Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, ex);
+                    session.setAttribute("error", "Create Mentor Failed");
+                    sendDispatcher(request, response, "/signIn.jsp");
+                }
             }
+        } catch (Exception e) {
+            Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

@@ -58,61 +58,65 @@ public class ViewMentorRatingStatisticController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDAO userDAO = new UserDAOImpl();
             
-            
-            User user;
-            int id;
-            // if user is admin    
-            try{
-            id = Integer.parseInt(request.getParameter("uId"));
-            user = userDAO.getUserById(id);
-            
-            // if user is mentor
-            } catch (Exception e) {
-            
-            user = (User) session.getAttribute("currUser");
-                
-            // not login or not mentor 
-            if (user == null || user.getRole() != 2) { // return to sign in page
-                response.sendRedirect("signIn.jsp");
-                return;
-            }
-            
-            id = user.getId();
-            
-            }
+            try {
+                User user;
+                int id;
+                // if user is admin    
+                try{
+                id = Integer.parseInt(request.getParameter("uId"));
+                user = userDAO.getUserById(id);
 
-            // get rating statistic
-            int five = ratingdao.getMentorNumberRating(id, 5);
-            int four = ratingdao.getMentorNumberRating(id, 4); 
-            int three = ratingdao.getMentorNumberRating(id, 3);
-            int two = ratingdao.getMentorNumberRating(id, 2);
-            int one = ratingdao.getMentorNumberRating(id, 1);
-                        
-            int total = five + four + three + two + one;
+                // if user is mentor
+                } catch (Exception e) {
+
+                user = (User) session.getAttribute("currUser");
+
+                // not login or not mentor 
+                if (user == null || user.getRole() != 2) { // return to sign in page
+                    response.sendRedirect("signIn.jsp");
+                    return;
+                }
+
+                id = user.getId();
+
+                }
+
+                // get rating statistic
+                int five = ratingdao.getMentorNumberRating(id, 5);
+                int four = ratingdao.getMentorNumberRating(id, 4); 
+                int three = ratingdao.getMentorNumberRating(id, 3);
+                int two = ratingdao.getMentorNumberRating(id, 2);
+                int one = ratingdao.getMentorNumberRating(id, 1);
+
+                int total = five + four + three + two + one;
+
+                double average = ratingdao.getAvgRate(id);
+
+                //set attributes
+
+                ArrayList<Rating> ratingList = ratingdao.getRating(user);
+
+                request.setAttribute("five", five);
+                request.setAttribute("four", four);
+                request.setAttribute("three", three);
+                request.setAttribute("two", two);
+                request.setAttribute("one", one);
+                request.setAttribute("total", total);
+
+                request.setAttribute("average", average);
+                request.setAttribute("averageint", (int)average);
+
+                request.setAttribute("ratingList", ratingList);
+                request.setAttribute("user", user);
+                sendDispatcher(request, response, "/mentorRatingStatistic.jsp");
             
-            double average = ratingdao.getAvgRate(id);
-            
-            //set attributes
-      
-            ArrayList<Rating> ratingList = ratingdao.getRating(user);
-            
-            request.setAttribute("five", five);
-            request.setAttribute("four", four);
-            request.setAttribute("three", three);
-            request.setAttribute("two", two);
-            request.setAttribute("one", one);
-            request.setAttribute("total", total);
-            
-            request.setAttribute("average", average);
-            request.setAttribute("averageint", (int)average);
-            
-            request.setAttribute("ratingList", ratingList);
-            request.setAttribute("user", user);
-            sendDispatcher(request, response, "/mentorRatingStatistic.jsp");
+            } catch (Exception e) {
+                Logger.getLogger(ViewMentorRatingStatisticController.class.getName()).log(Level.SEVERE, null, e);
+                request.setAttribute("errorMessage", e.getMessage());
+                sendDispatcher(request, response, "/error.jsp");
+            }
         } catch (Exception e) {
             Logger.getLogger(ViewMentorRatingStatisticController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
         }
     }
     

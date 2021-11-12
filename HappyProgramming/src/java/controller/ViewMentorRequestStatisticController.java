@@ -59,58 +59,63 @@ public class ViewMentorRequestStatisticController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDAO userDAO = new UserDAOImpl();
             
-            // if user is admin
-            User user;
             try {
-            int id = Integer.parseInt(request.getParameter("uId"));
-            user = userDAO.getUserById(id);
-            
-            // if user is mentor
-            } catch (Exception e) { 
-                user = (User) session.getAttribute("currUser");
-                
-            // not login or not mentor
-            if (user == null || user.getRole() != 2) { // return to sign in page
-                response.sendRedirect("signIn.jsp");
-                return;
-            } 
-                
-            }
-            
-            // get top 5 mentor request statistic
-            
-            LinkedHashMap<String,HashMap<Integer,Integer>> statisticMap = requestdao.getStatisticTopFive();
-            
-            // replace username of your mentor wiht "You" if user in top 5
-            if(statisticMap.containsKey(user.getFullname())) {
-                
-                LinkedHashMap<String,HashMap<Integer,Integer>> sortedMap = new LinkedHashMap<>();
-                
-                for(String key: new ArrayList<>(statisticMap.keySet())) {
-                    if(user.getFullname().equalsIgnoreCase(key)) {
-                       sortedMap.put("You", statisticMap.get(key));
-                    } else {
-                       sortedMap.put(key, statisticMap.get(key));
-                    }
+                // if user is admin
+                User user;
+                try {
+                int id = Integer.parseInt(request.getParameter("uId"));
+                user = userDAO.getUserById(id);
+
+                // if user is mentor
+                } catch (Exception e) { 
+                    user = (User) session.getAttribute("currUser");
+
+                // not login or not mentor
+                if (user == null || user.getRole() != 2) { // return to sign in page
+                    response.sendRedirect("signIn.jsp");
+                    return;
+                } 
+
                 }
-                
-                request.setAttribute("statisticMap", sortedMap); 
-                
-            } else { // if user not in top 5
-                HashMap<Integer,Integer> userStatistic = requestdao.getMentorRequestStatistic(user.getId());
-                
-                statisticMap.put("You", userStatistic);
-                
-                request.setAttribute("statisticMap", statisticMap);
-                
-            }
+
+                // get top 5 mentor request statistic
+
+                LinkedHashMap<String,HashMap<Integer,Integer>> statisticMap = requestdao.getStatisticTopFive();
+
+                // replace username of your mentor wiht "You" if user in top 5
+                if(statisticMap.containsKey(user.getFullname())) {
+
+                    LinkedHashMap<String,HashMap<Integer,Integer>> sortedMap = new LinkedHashMap<>();
+
+                    for(String key: new ArrayList<>(statisticMap.keySet())) {
+                        if(user.getFullname().equalsIgnoreCase(key)) {
+                           sortedMap.put("You", statisticMap.get(key));
+                        } else {
+                           sortedMap.put(key, statisticMap.get(key));
+                        }
+                    }
+
+                    request.setAttribute("statisticMap", sortedMap); 
+
+                } else { // if user not in top 5
+                    HashMap<Integer,Integer> userStatistic = requestdao.getMentorRequestStatistic(user.getId());
+
+                    statisticMap.put("You", userStatistic);
+
+                    request.setAttribute("statisticMap", statisticMap);
+
+                }
+
+                request.setAttribute("user", user);
+                sendDispatcher(request, response, "/mentorRequestStatistic.jsp");
             
-            request.setAttribute("user", user);
-            sendDispatcher(request, response, "/mentorRequestStatistic.jsp");
+            } catch (Exception e) {
+                Logger.getLogger(ViewMentorRequestStatisticController.class.getName()).log(Level.SEVERE, null, e);
+                request.setAttribute("errorMessage", e.getMessage());
+                sendDispatcher(request, response, "/error.jsp");
+            }
         } catch (Exception e) {
             Logger.getLogger(ViewMentorRequestStatisticController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
         }
     }
     

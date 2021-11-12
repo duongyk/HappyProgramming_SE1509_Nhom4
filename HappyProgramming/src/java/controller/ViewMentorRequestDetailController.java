@@ -56,24 +56,27 @@ public class ViewMentorRequestDetailController extends HttpServlet {
         RequestSkillDAO requestSkillDAO = new RequestSkillDAOImpl(); 
         HttpSession session = request.getSession();
         
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter();) {
+        
+            try {
+                // get request
+                int rId = Integer.parseInt(request.getParameter("rId"));
+                Request req = requestDAO.getRequestById(rId);
+
+                // get request skill
+                ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
+                request.setAttribute("sList", sList);
+                request.setAttribute("req", req);
+                sendDispatcher(request, response, "viewRequestMentor.jsp");
+        
+            } catch (Exception e) {
+                Logger.getLogger(ViewMentorRequestDetailController.class.getName()).log(Level.SEVERE, null, e);
+                session.setAttribute("error", "Cant view request detail");
+                response.sendRedirect("viewMentorRequest?status=2");
+            }
             
-        // get request
-        int rId = Integer.parseInt(request.getParameter("rId"));
-        Request req = requestDAO.getRequestById(rId);
-
-        // get request skill
-        ArrayList<Skill> sList = requestSkillDAO.getSkill(rId);
-
-        request.setAttribute("sList", sList);
-        request.setAttribute("req", req);
-        sendDispatcher(request, response, "viewRequestMentor.jsp");
         } catch (Exception e) {
             Logger.getLogger(ViewMentorRequestDetailController.class.getName()).log(Level.SEVERE, null, e);
-            
-            session.setAttribute("error", "Cant view request detail");
-            String referer = request.getHeader("Referer");
-            response.sendRedirect(referer);
             
         }
     }

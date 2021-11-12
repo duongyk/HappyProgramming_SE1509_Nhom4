@@ -14,7 +14,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Inner Page - Vesperr Bootstrap Template</title>
+        <title>Chatbox</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -64,9 +64,15 @@
                     success: function (data) {
                         var chatbox = document.getElementById("messagebox");
                         chatbox.innerHTML += data;
+                        
+                        var ajaxmessage = document.getElementById("ajaxmessage");
+                        ajaxmessage.style.color = "green";
+                        ajaxmessage.innerHTML = "";
                     },
                     error: function (xhr) {
-
+                        var ajaxmessage = document.getElementById("ajaxmessage");
+                        ajaxmessage.style.color = "#ff0000";
+                        ajaxmessage.innerHTML = "Cant get message";
                     }
                 });
                 
@@ -87,8 +93,9 @@
                 loadMessage();
                 inputbox.style.display = 'block';
                 
-                reloadMessageInterval = setInterval(function(){alert(timePerReload);},timePerReload);
-                //reloadMessage = setInterval(loadMessage(),timePerReload);
+                //reloadMessageInterval = setInterval(function(){alert(timePerReload);},timePerReload);
+                reloadMessageInterval = setInterval(function(){loadMessage();},timePerReload);
+                
             }
             
             function setSelected(selectdiv) {
@@ -104,8 +111,6 @@
             }
             
             function setFriendAvatar() {
-        
-                
         
                 var elements = document.getElementsByClassName('chat_list active_chat');
                 
@@ -152,6 +157,7 @@
                     },
                     error: function (xhr) {
                         document.getElementById("status").innerHTML = "KHÔNG GỬI ĐƯỢC";
+                        document.getElementById("textbox").value = "";
                     }
                 });
             }
@@ -175,7 +181,12 @@
                     setFriendAvatar();
                 }
             });
-
+            
+            function scrollBottom(){
+                var elem = document.getElementById("messagebox");
+                elem.scrollTop = elem.scrollHeight;
+                //element.scrollTop = 0;
+            }
         </script>
     </head>
 
@@ -259,6 +270,7 @@
                     <c:if test="${chaterror!=null}">
                         <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${chaterror}"></c:out></h3>
                     </c:if>
+                    <h3 id="ajaxmessage" style="font-weight: bold;text-align: center"></h3>
                 </div>
             </section><!-- End Breadcrumbs Section -->
 
@@ -338,7 +350,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="msg_history" id="messagebox">
+                                <div class="msg_history" id="messagebox" style="">
 
                                 </div>
                                 <div class="type_msg" id="inputbox">
@@ -677,7 +689,6 @@
             .msg_history {
                 height: 516px;
                 overflow-y: auto;
-                flex-direction:column-reverse;
             }
         </style>
 

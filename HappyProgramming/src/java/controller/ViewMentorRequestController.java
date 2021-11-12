@@ -51,53 +51,59 @@ public class ViewMentorRequestController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
+        
         try (PrintWriter out = response.getWriter()) {
         
-        HttpSession session = request.getSession();
-        RequestDAO requestdao = new RequestDAOImpl();
-    
-        // get status from URL
-        int status = Integer.parseInt(request.getParameter("status"));
+            try{
+                HttpSession session = request.getSession();
+                RequestDAO requestdao = new RequestDAOImpl();
 
-        // get Mentor ID from Session
-        User user = (User) session.getAttribute("currUser");
-        if (user == null) { // return to sign in page
-            response.sendRedirect("signIn.jsp");
-            return;
-        }
+                // get status from URL
+                int status = Integer.parseInt(request.getParameter("status"));
 
-        // Get all Request from database
+                // get Mentor ID from Session
+                User user = (User) session.getAttribute("currUser");
+                if (user == null) { // return to sign in page
+                    response.sendRedirect("signIn.jsp");
+                    return;
+                }
 
-        ArrayList<Request> requestList = requestdao.getRequestListByuIdAndStatus(user.getId(), status);
+                // Get all Request from database
 
-        if(requestList.isEmpty()) {
-            session.setAttribute("error", "There is not request for you yet. Please try later");
-        }
+                ArrayList<Request> requestList = requestdao.getRequestListByuIdAndStatus(user.getId(), status);
+
+                if(requestList.isEmpty()) {
+                    session.setAttribute("error", "There is no request for you yet. Please try later");
+                }
+
+                switch (status) {
+                    case 1:
+                        request.setAttribute("status", "Inviting");
+                        break;
+                    case 2:
+                        request.setAttribute("status", "Following");
+                        break;
+                    case 3:
+                        request.setAttribute("status", "Done");
+                        break;
+                    case 4:
+                        request.setAttribute("status", "Canceled");
+                        break;
+                    default:
+                        break;
+                }
+
+                request.setAttribute("requestlist", requestList);
+                sendDispatcher(request, response, "/mentorRequestList.jsp");
         
-        switch (status) {
-            case 1:
-                request.setAttribute("status", "Inviting");
-                break;
-            case 2:
-                request.setAttribute("status", "Following");
-                break;
-            case 3:
-                request.setAttribute("status", "Done");
-                break;
-            case 4:
-                request.setAttribute("status", "Canceled");
-                break;
-            default:
-                break;
-        }
-        
-        request.setAttribute("requestlist", requestList);
-        sendDispatcher(request, response, "/mentorRequestList.jsp");
-        
+            } catch (Exception e) {
+                Logger.getLogger(ViewMentorRequestController.class.getName()).log(Level.SEVERE, null, e);
+                request.setAttribute("errorMessage", e);
+                sendDispatcher(request, response, "/error.jsp");
+            }
+            
         } catch (Exception e) {
             Logger.getLogger(ViewMentorRequestController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
         }
     }
     

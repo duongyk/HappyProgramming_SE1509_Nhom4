@@ -67,52 +67,55 @@ public class OpenChatController extends HttpServlet {
                 uId = user.getId();
             }
             
-            int friendId = 0;
-            int status = 0;
-            // check if user and person user want to chat are friend
             try {
-                
-            friendId = Integer.parseInt(request.getParameter("friendId"));
-            
-            status = frienddao.checkIfNotFriendYetToAdd(uId, friendId);
-            
-            } catch (NumberFormatException | NullPointerException e) { // get message for the first friend in list
+                int friendId = 0;
+                int status = 0;
+                // check if user and person user want to chat are friend
+                try {
+
+                friendId = Integer.parseInt(request.getParameter("friendId"));
+
+                status = frienddao.checkIfNotFriendYetToAdd(uId, friendId);
+
+                } catch (NumberFormatException | NullPointerException e) { // get message for the first friend in list
+                }
+
+                 // get user friend list
+                ArrayList<Integer> friendIdList = frienddao.getYourChatFriendId(uId);
+
+                //if user get no friend
+                if(friendIdList.isEmpty()) {
+
+                    request.setAttribute("chaterror", "There no message for you");
+
+                } else {
+
+                    // if there is no friendId parameter on URL
+                    if (status == 0) friendId = friendIdList.get(0);
+
+                    ArrayList<User> friendList = new ArrayList();
+
+                    for(int id: friendIdList) {
+                        friendList.add(userdao.getUserById(id));
+                    }
+
+                    request.setAttribute("friendList", friendList);
+
+                    if(friendId!=0){
+                        request.setAttribute("friendId", friendId);
+                    }
+
+                }
+
+                RequestDispatcher rd = request.getRequestDispatcher("/chatbox.jsp");
+                rd.forward(request, response);
+            } catch (Exception e) {
+                Logger.getLogger(OpenChatController.class.getName()).log(Level.SEVERE, null, e);
+                request.setAttribute("errorMessage", e.getMessage());
+                sendDispatcher(request, response, "/error.jsp");
             }
-            
-             // get user friend list
-            ArrayList<Integer> friendIdList = frienddao.getYourChatFriendId(uId);
-            
-            //if user get no friend
-            if(friendIdList.isEmpty()) {
-                
-                request.setAttribute("chaterror", "There no message for you");
-                
-            } else {
-            
-            // if there is no friendId parameter on URL
-            if (status == 0) friendId = friendIdList.get(0);
-            
-            ArrayList<User> friendList = new ArrayList();
-            
-            for(int id: friendIdList) {
-                friendList.add(userdao.getUserById(id));
-            }
-            
-            request.setAttribute("friendList", friendList);
-            
-            if(friendId!=0){
-            request.setAttribute("friendId", friendId);
-            }
-            
-            }
-            
-            RequestDispatcher rd = request.getRequestDispatcher("/chatbox.jsp");
-            rd.forward(request, response);
-            
         } catch (Exception e) {
             Logger.getLogger(OpenChatController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
         }
     }
 

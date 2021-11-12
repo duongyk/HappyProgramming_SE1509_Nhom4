@@ -79,7 +79,7 @@ public class UpdateCVController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+                        
             CVDAO cvdao = new CVDAOImpl();
             UserSkillDAO smdao = new UserSkillDAOImpl();
 
@@ -92,6 +92,7 @@ public class UpdateCVController extends HttpServlet {
                 return;
             }
                 
+            try {
             int uid = user.getId();
             CV mentorCV = cvdao.getMentorCV(uid);
 
@@ -115,10 +116,16 @@ public class UpdateCVController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/updateCV.jsp");
 
             rd.forward(request, response);
+            
+            } catch (Exception ex) {
+                Logger.getLogger(UpdateCVController.class.getName()).log(Level.SEVERE, null, ex);
+                session.setAttribute("error","Cant get update mentor page");
+                int uid = user.getId();
+                sendDispatcher(request, response, "/UserProfileController?uId="+uid);
+            }
         } catch (Exception ex) {
             Logger.getLogger(UpdateCVController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorMessage", ex.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
+
         }
     }
 
@@ -146,8 +153,6 @@ public class UpdateCVController extends HttpServlet {
         
         try (PrintWriter out = response.getWriter()) {
             
-            
-            
             // get information
                 
             User user = (User) session.getAttribute("currUser");    
@@ -156,83 +161,84 @@ public class UpdateCVController extends HttpServlet {
                 response.sendRedirect("signIn.jsp");
                 return;
             }
-                
-            int uid = user.getId();
-            //System.out.println("uid "+uid);
+            
+            try {
+                int uid = user.getId();
+                //System.out.println("uid "+uid);
 
-            String fullname= request.getParameter("fullname").trim();
-            //System.out.println("fullname "+fullname);
+                String fullname= request.getParameter("fullname").trim();
+                //System.out.println("fullname "+fullname);
 
-            SimpleDateFormat dateFormat = 
-              new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat dateFormat = 
+                  new SimpleDateFormat("yyyy-MM-dd");
 
-            Date dob = Date.valueOf(request.getParameter("dob"));
+                Date dob = Date.valueOf(request.getParameter("dob"));
 
-            String avatar = request.getParameter("avatar").trim();
+                String avatar = request.getParameter("avatar").trim();
 
-            // if user not choose avatar
-            if(avatar.equals("") || avatar == null ) { 
+                // if user not choose avatar
+                if(avatar.equals("") || avatar == null ) { 
 
-                avatar = user.getAvatar();
-            } else  { // set new avatar in session
-                user.setAvatar(avatar);
+                    avatar = user.getAvatar();
+                } else  { // set new avatar in session
+                    user.setAvatar(avatar);
+                }
+
+                String sex = request.getParameter("sex");
+                //System.out.println("sex "+sex);
+
+                String mail = request.getParameter("mail").trim();
+                //System.out.println("mail "+mail);
+
+                String phone = request.getParameter("phone").trim();
+                //System.out.println("phone "+phone);
+
+                String achievement = request.getParameter("achievement").trim();
+                //System.out.println("achievement "+achievement);
+
+                String  profession = request.getParameter("profession").trim();
+                //System.out.println("profession "+profession);
+
+                String professionIntro = request.getParameter("professionIntro").trim();
+                //System.out.println("professionIntro "+professionIntro);
+
+                String serviceDescription = request.getParameter("serviceDescription").trim();
+                //System.out.println("serviceDescription "+serviceDescription);
+
+                String[] skill_id = request.getParameterValues("skills");
+
+                //----------------------------------
+
+                //       update user 
+
+                User mentorInfo = new User(uid, "", "", fullname, mail, phone, dob, sex, avatar, 2);
+
+                CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
+
+                // variable to check if dao update successs
+                userDAO.updateUserInfo(uid, mentorInfo);
+
+                cvdao.updateCV(uid, mentorCV);
+
+                smdao.updateMentorSkill(uid, skill_id);
+
+                // ----------------------------------------
+
+                request.getSession().setAttribute("currUser", mentorInfo); // set current user with updated info
+                session.setAttribute("success", "Update CV success");
+                sendDispatcher(request, response, "/UserProfileController?uId="+uid);
+            
+            } catch (Exception e) {
+                Logger.getLogger(UpdateCVController.class.getName()).log(Level.SEVERE, null, e);
+                user = (User) session.getAttribute("currUser");   
+                int uid = user.getId();
+
+                session.setAttribute("error", "Update CV Failed");
+                sendDispatcher(request, response, "/UserProfileController?uId="+uid);
             }
-
-            String sex = request.getParameter("sex");
-            //System.out.println("sex "+sex);
-
-            String mail = request.getParameter("mail").trim();
-            //System.out.println("mail "+mail);
-
-            String phone = request.getParameter("phone").trim();
-            //System.out.println("phone "+phone);
-
-            String achievement = request.getParameter("achievement").trim();
-            //System.out.println("achievement "+achievement);
-
-            String  profession = request.getParameter("profession").trim();
-            //System.out.println("profession "+profession);
-
-            String professionIntro = request.getParameter("professionIntro").trim();
-            //System.out.println("professionIntro "+professionIntro);
-
-            String serviceDescription = request.getParameter("serviceDescription").trim();
-            //System.out.println("serviceDescription "+serviceDescription);
-
-            String[] skill_id = request.getParameterValues("skills");
-
-            //----------------------------------
-
-            //       update user 
-
-            User mentorInfo = new User(uid, "", "", fullname, mail, phone, dob, sex, avatar, 2);
-
-            CV mentorCV = new CV(uid, profession, professionIntro, serviceDescription, achievement);
-            
-            // variable to check if dao update successs
-            userDAO.updateUserInfo(uid, mentorInfo);
-                        
-            cvdao.updateCV(uid, mentorCV);
-                      
-            smdao.updateMentorSkill(uid, skill_id);
-                       
-            // ----------------------------------------
- 
-            request.getSession().setAttribute("currUser", mentorInfo); // set current user with updated info
-            session.setAttribute("success", "Update CV success");
-            sendDispatcher(request, response, "/UserProfileController?uId="+uid);
-            
-            
             
         } catch (Exception e) {
             Logger.getLogger(UpdateCVController.class.getName()).log(Level.SEVERE, null, e);
-            
-            User user = (User) session.getAttribute("currUser");   
-            int uid = user.getId();
-            
-            session.setAttribute("error", "Update CV Failed");
-            sendDispatcher(request, response, "/UserProfileController?uId="+uid);
-            
         }
     }
 
