@@ -61,7 +61,8 @@ public class ListSuggestedMentorController extends HttpServlet {
     }
 
     /**
-     * Get Suggested Mentor by Filter.
+     * Get Suggested Mentor by Filter: by requested Skill of the Mentee, by
+     * number of Skill, by popularity, by Rating.
      *
      * @param request servlet request
      * @param response servlet response
@@ -137,7 +138,7 @@ public class ListSuggestedMentorController extends HttpServlet {
                     request.setAttribute("ratingList", ratingList);/*Rating List*/
                     request.setAttribute("filter", 2);/*Filter number*/
                     break;
-                    
+
                 case 3:/* Suggested by popularity*/
                     // Get Mentor list
                     mList = requestDAO.getHotMentor();
@@ -149,7 +150,7 @@ public class ListSuggestedMentorController extends HttpServlet {
                     request.setAttribute("requestNumberList", requestNumberList);/*Request number List*/
                     request.setAttribute("filter", 3);/*Filter number*/
                     break;
-                    
+
                 case 4:/* Suggested by number of Skill*/
                     ArrayList<UserSkill> usList = usDAO.getMentorSkill();
                     // HashMap cout skill of Mentor ((K,V)-(Mentor ID, number of Skill))

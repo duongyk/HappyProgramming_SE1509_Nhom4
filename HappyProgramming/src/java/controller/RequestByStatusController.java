@@ -52,7 +52,7 @@ public class RequestByStatusController extends HttpServlet {
     }
 
     /**
-     * Get the Request list oh the Mentee after Filter by Status.
+     * Get the Request list of the Mentee after Filter by Status.
      *
      * @param request servlet request
      * @param response servlet response

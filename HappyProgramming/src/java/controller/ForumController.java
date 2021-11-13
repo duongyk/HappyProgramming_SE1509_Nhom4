@@ -49,7 +49,7 @@ public class ForumController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Display all the problems in Forum.
      *
      * @param request servlet request
      * @param response servlet response
