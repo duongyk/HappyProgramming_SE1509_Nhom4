@@ -55,11 +55,13 @@
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
+                        <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
+                        
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                    <li><a class="nav-link scrollto" href="forum">Forum</a></li>
+                                    
                                     <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">                       
