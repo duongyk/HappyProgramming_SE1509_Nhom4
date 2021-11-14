@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 @WebFilter(filterName = "menteeFilter",
         urlPatterns = {"/listRequestByMe", "/listSuggestedMentor", "/myProblem",
     "/postAnswer", "/postProblem", "/rateComment", "/requestByStatus",
-    "/searchMentorPublic", "/statisticRequest", "/updateReuqest", "/viewProblem",
+    "/statisticRequest", "/updateRequest", 
     "/viewRequest" })
 public class menteeFilter implements Filter {
 
