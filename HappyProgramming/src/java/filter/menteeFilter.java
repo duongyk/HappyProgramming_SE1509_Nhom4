@@ -29,7 +29,10 @@ import javax.servlet.http.HttpSession;
         urlPatterns = {"/listRequestByMe", "/listSuggestedMentor", "/myProblem",
     "/postAnswer", "/postProblem", "/rateComment", "/requestByStatus",
     "/statisticRequest", "/updateRequest", 
-    "/viewRequest" })
+    "/viewRequest","/ChangePassword" })
+
+    
+
 public class menteeFilter implements Filter {
 
     private static final boolean debug = true;

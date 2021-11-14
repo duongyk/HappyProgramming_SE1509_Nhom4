@@ -20,9 +20,13 @@ import javax.servlet.http.HttpSession;
  *
  * @author QMC
  */
+
 @WebFilter(filterName = "mentorFilter", urlPatterns = {
     "/viewMentorRatingStatistic", "/updateCV", "/viewMentorRequestDetail",
-    "/viewMentorRequestStatistic", "/createSkill.jsp"})
+    "/viewMentorRequestStatistic", "/createSkill.jsp","/ChangePassword"})
+
+
+
 public class mentorFilter implements Filter {
 
     private static final boolean debug = true;
