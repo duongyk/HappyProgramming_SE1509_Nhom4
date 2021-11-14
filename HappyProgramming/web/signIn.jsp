@@ -100,12 +100,9 @@
                                 </li>
                             </c:when>
                             <c:otherwise>
-                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
-                                        <span>Sign in</span></a>
-                                    <ul>
-                                        <li><a href="signUp.jsp">Sign up</a>
-                                        </li>
-                                    </ul>
+                                <li class="dropdown getstarted scrollto "><a href="signUp.jsp" style="color: white; padding: 0;">
+                                        <span>Sign Up</span></a>
+                                    
                                 </li>
                             </c:otherwise>
                         </c:choose>

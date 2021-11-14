@@ -99,10 +99,7 @@
                             <c:otherwise>
                                 <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
-                                    <ul>
-                                        <li><a href="signUp.jsp">Sign up</a>
-                                        </li>
-                                    </ul>
+                                    
                                 </li>
                             </c:otherwise>
                         </c:choose>
@@ -168,7 +165,7 @@
                                         <div class="name">Password(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="password">
+                                                <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="password">
                                             </div>
                                             
                                         </div>
@@ -178,7 +175,7 @@
                                         <div class="name">Repeat password(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="confirm">
+                                                <input class="input-white" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters, at least one uppercase letter, one lowercase letter, and one number" name="confirm">
                                                 
                                             </div>
                                             <p class="text-danger">${mess02}</p>
@@ -214,8 +211,8 @@
                                         </select>
                                     </div>
                                     <div class="form-row">
-                                        <label for="text-13e0" class="name">Date of birth(<span style="color:red">*</span>)</label>
-                                        <input  class="input-white" type="date"  name="dob" id="mentordob">
+                                        <label for="text-13e0" class="name" >Date of birth(<span style="color:red">*</span>)</label>
+                                        <input  class="input-white" type="date"  name="dob" id="mentordob" required >
                                     </div>
                                     <div class="form-row">
                                         <div class="name">Sign up to(<span style="color:red">*</span>) </div>

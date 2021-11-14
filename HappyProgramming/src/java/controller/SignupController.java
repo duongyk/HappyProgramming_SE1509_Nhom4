@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * This class has the process request of create new use
+ * This class has the process request of create new use to be a mentor or a mentee
  *
  * @author ToanPKhe151393
  */
@@ -66,12 +66,12 @@ public class SignupController extends HttpServlet {
             // ìf the password not match the confirm password stay at the signUp.jsp
            
             if(userDAO.getUserByEmail(mail) != null){
-               session.setAttribute("error", "your mail has been used. pleas input another one");
+               session.setAttribute("error", "Your mail has been used. please input another one");
                 response.sendRedirect("signUp.jsp");
                 
             }else{
             if (!password.equals(repass)) {
-                  session.setAttribute("error", "your repeat password is not match to your password");
+                  session.setAttribute("error", "Your repeat password is not match to your password");
                 response.sendRedirect("signUp.jsp");
             } else {
 
@@ -80,7 +80,7 @@ public class SignupController extends HttpServlet {
                 if (a == null) { 
                     if (role == 1) {
                         userDAO.signUp(user);
-                        session.setAttribute("success", "Create Mentee successfullly");
+                        session.setAttribute("success", "Create Mentee account successfullly");
                         response.sendRedirect("signIn.jsp");
                     } else {
                         //response.sendRedirect("signIn.jsp");
@@ -89,7 +89,7 @@ public class SignupController extends HttpServlet {
                     }
                     // khi dang ki hoan tat se cha nguoi dung ve page login
                 } else { 
-                     session.setAttribute("error", "your user Name has existed try another one");
+                     session.setAttribute("error", "Your user Name has existed try another one");
                     response.sendRedirect("signUp.jsp");
                 }
             }

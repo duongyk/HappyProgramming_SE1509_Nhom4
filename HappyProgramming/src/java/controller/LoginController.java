@@ -25,37 +25,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * This class has the process request of checking user and sign in
+ *  This class has the process request of Allow registered users to sign in
  *
  * @author ToanPKhe151393
  */
 public class LoginController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
         try {
             UserDAO userDAO = new UserDAOImpl();
+           //Get new input 
             String userName = request.getParameter("username").trim();
             String password = request.getParameter("password").trim();
             User user = userDAO.getUser(userName, password);
-//            System.out.println(user.getStatus());
+            //check if user exist, block
             if (user != null) {
                  if (user.getStatus() == 0) {
                 request.setAttribute("mess", "sorry your account has been block");
                 sendDispatcher(request, response, "signIn.jsp");
                 
             }
+                    
                else if (user.getRole() == 3) {
                     request.getSession().setAttribute("currUser", user);
                     sendDispatcher(request, response, "index.jsp");
@@ -65,7 +59,7 @@ public class LoginController extends HttpServlet {
                 }
             } else {
 
-                request.setAttribute("mess", "wrong user name or password");
+                request.setAttribute("mess", "Wrong user name or password");
                 sendDispatcher(request, response, "signIn.jsp");
             }
 

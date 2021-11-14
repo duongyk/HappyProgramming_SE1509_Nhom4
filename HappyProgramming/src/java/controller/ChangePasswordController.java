@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 
 /*
  * Process:<br>
- * - genarate new password<br>
+ *genarate new password for user has signed in
  *   
  * @author ToanPKHE151393
  */
