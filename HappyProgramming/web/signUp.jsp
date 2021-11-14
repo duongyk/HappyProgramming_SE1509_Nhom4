@@ -361,8 +361,16 @@
                 var maxyear = 12; // if mentee role
                 
                 if(roleId.value==='2') { 
-                    //alert(roleId.value);
-                    $("input[type=date]").val("");
+                    var chosendate = new Date($("input[type=date]").val());
+                    if((date.getFullYear() - chosendate.getFullYear()) < 18 ) {
+                        
+                        chosenday = chosendate.getDate();
+                        chosenmonth = chosendate.getMonth()+1;
+                        if (chosenday<10) chosenday = '0'+chosenday;
+                        if (chosenmonth<10) chosenmonth = '0'+chosenmonth;
+                        
+                        $("input[type=date]").val((date.getFullYear()-18)+"-"+chosenmonth+"-"+chosenday);
+                    }
                     maxyear = 18; // if mentor role
                 }
                 
