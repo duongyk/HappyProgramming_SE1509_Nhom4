@@ -57,24 +57,46 @@
 
                 <div class="logo">
                     <h1><a href="index.jsp">Vesperr</a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
-                        <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
-                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
+                        <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
+                        <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
+                        
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
-                                </li><li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
+                                    
+                                    <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
+                                    <c:choose>
+                                        <c:when test="${sessionScope.currUser.getRole()==2}">                       
+                                        <li class="dropdown getstarted scrollto " style="background:#0dcaf0">
+                                            <span style="color: white; padding: 0;">View Request</span>
+                                            <ul>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=1">Inviting Request</a>
+                                                </li>
+                                                <li><a class="nav-link scrollto" href="viewMentorRequest?status=2">Following Request</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </c:when>
+                                         <c:when test="${sessionScope.currUser.getRole()==3}">
+                                        <li><a class="nav-link scrollto" href="adminDashboard">Admin Dashboard</a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserControllerMap?service=profile&uId=${sessionScope.currUser.id}">Profile</a></li>
-                                        <li><a href="UserControllerMap?service=logOut">Log out</a></li>
+                                        <li><a href="UserProfileController?uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="changePassword.jsp">Change pass</a></li>
+                                        <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
                             </c:when>

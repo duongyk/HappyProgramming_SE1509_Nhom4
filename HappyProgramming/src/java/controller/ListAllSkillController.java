@@ -8,7 +8,6 @@ package controller;
 import dao.SkillDAO;
 import dao.impl.SkillDAOImpl;
 import entity.Skill;
-import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -53,6 +52,14 @@ public class ListAllSkillController extends HttpServlet {
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -76,8 +83,6 @@ public class ListAllSkillController extends HttpServlet {
             throws ServletException, IOException {
         try {
             SkillDAO skillDAO = new SkillDAOImpl();
-            User x = (User) request.getSession().getAttribute("currUser"); // get current sign in user
-            
             ArrayList<Skill> sList = skillDAO.getActiveSkill(); // get list of current active status skill
             
             String indexPage = request.getParameter("index");

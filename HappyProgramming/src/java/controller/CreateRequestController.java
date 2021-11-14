@@ -65,6 +65,14 @@ public class CreateRequestController extends HttpServlet {
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -102,8 +110,8 @@ public class CreateRequestController extends HttpServlet {
             // if mentor id is null
             ArrayList<Skill> sList = skillDAO.getActiveSkill(); // get list of current active skills
             request.setAttribute("sList", sList); // set list of active skills
-            ArrayList<User> mentor = userDao.getUserByRole(2); // get list of user who role = 2(mentor)
-            request.setAttribute("mList", mentor); // set list of mentor
+            ArrayList<User> mList = userDao.getUserByRole(2); // get list of user who role = 2(mentor)
+            request.setAttribute("mList", mList); // set list of mentor
             sendDispatcher(request, response, "createRequest.jsp");
         } catch (Exception e) {
             Logger.getLogger(CreateRequestController.class.getName()).log(Level.SEVERE, null, e);

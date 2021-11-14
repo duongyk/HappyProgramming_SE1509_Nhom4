@@ -48,6 +48,14 @@ public class UpdateMenteeProfileController extends HttpServlet {
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -110,7 +118,7 @@ public class UpdateMenteeProfileController extends HttpServlet {
                 avatar = s.getAvatar(); // then set old avatar as updated avatar 
             }
 
-            User user = new User(id, fullname, email, phone, dob, gender, avatar);
+            User user = new User(id, "", "", fullname, email, phone, dob, gender, avatar, 1);
             userDAO.updateUser(user); // update user info into DB
             request.getSession().setAttribute("currUser", user); // set current user with updated info
             sendDispatcher(request, response, "UserProfileController?uId="+id); // return to user profile page

@@ -58,21 +58,21 @@
 
                 <div class="logo">
                     <h1><a href="index.jsp">Vesperr</a></h1>
-                    <!-- Uncomment below if you prefer to use an image logo -->
-                    <!-- <a href="index.html"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+
                 </div>
 
                 <nav id="navbar-main" class="navbar-main">
                     <ul>
+                        <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
-                        <li><a class="nav-link scrollto" href="SkillControllerMap?service=allSkill">All skills</a></li>
-                            <%-- Check the current User --%>
+                        <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
+                        
                             <c:choose>
                                 <c:when test="${sessionScope.currUser!=null}">
-                                <li><a class="nav-link scrollto" href="forum">Forum</a></li>
-                                <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
-                                <c:choose>
-                                    <c:when test="${sessionScope.currUser.getRole()==2}">
+                                    
+                                    <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
+                                    <c:choose>
+                                        <c:when test="${sessionScope.currUser.getRole()==2}">                       
                                         <li class="dropdown getstarted scrollto " style="background:#0dcaf0">
                                             <span style="color: white; padding: 0;">View Request</span>
                                             <ul>
@@ -83,6 +83,10 @@
                                             </ul>
                                         </li>
                                     </c:when>
+                                         <c:when test="${sessionScope.currUser.getRole()==3}">
+                                        <li><a class="nav-link scrollto" href="adminDashboard">Admin Dashboard</a>
+                                        </li>
+                                    </c:when>
                                     <c:otherwise>
                                         <li><a class="nav-link scrollto" href="listRequestByMe">Request</a>
                                         </li>
@@ -91,8 +95,8 @@
                                 <li class="dropdown getstarted scrollto ">
                                     <span style="color: white; padding: 0;">User</span>
                                     <ul>
-                                        <li><a href="UserProfile?uId=${sessionScope.currUser.id}">Profile</a></li>
-                                        <li><a href="ChangePassword">Change pass</a></li>
+                                        <li><a href="UserProfileController?uId=${sessionScope.currUser.id}">Profile</a></li>
+                                        <li><a href="changePassword.jsp">Change pass</a></li>
                                         <li><a href="logout">Log out</a></li>
                                     </ul>
                                 </li>
@@ -109,7 +113,7 @@
                         </c:choose>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
-                </nav>
+                </nav><!-- .navbar-main -->
 
             </div>
         </header><!-- End Header -->

@@ -53,7 +53,7 @@ public class SearchController extends HttpServlet {
         MessageDAO messDAO = new MessageDAOImpl();
         try {
             String category = request.getParameter("category");
-            String txtSearch = request.getParameter("txtSearch");
+            String txtSearch = request.getParameter("txtSearch").trim();
             if (category.equalsIgnoreCase("Skill")) { // search skill name
                 ArrayList<Skill> list = skillDAO.searchSkill(txtSearch); // get list of skill by name
                 request.setAttribute("sList", list); // set attribute list
@@ -93,6 +93,14 @@ public class SearchController extends HttpServlet {
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     private void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);

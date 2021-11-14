@@ -40,10 +40,18 @@ public class ResetPasswordController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+
         }
     }
 
+    /**
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -86,14 +94,11 @@ public class ResetPasswordController extends HttpServlet {
         try {
             UserDAO userDAO = new UserDAOImpl();
             String password = request.getParameter("password").trim(); // get password user input
-            String confirmPassword = request.getParameter("confirm").trim(); // get confirm password user input
 
             User x = (User) request.getSession().getAttribute("currMail"); // get current user you want to reset password
 
-            if (password.equalsIgnoreCase(confirmPassword)) { // if password and confirm password is similar
-                User user = userDAO.resetPassword(x, password); // update user password into database
-                sendDispatcher(request, response, "index.jsp");
-            }
+            User user = userDAO.resetPassword(x, password); // update user password into database
+            sendDispatcher(request, response, "index.jsp");
         } catch (Exception ex) {
             Logger.getLogger(ResetPasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }
