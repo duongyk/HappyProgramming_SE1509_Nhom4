@@ -77,39 +77,45 @@ public class LoadMessageController extends HttpServlet {
 
             ChatMessageDAO messdao = new ChatMessageDAOImpl();
 
-            int offset = Integer.parseInt(request.getParameter("offset"));
+            try {
+                //throw new Exception("message");    
 
-            User user = (User) session.getAttribute("currUser");
-            int uId = user.getId();
+                int offset = Integer.parseInt(request.getParameter("offset"));
+
+                User user = (User) session.getAttribute("currUser");
+                int uId = user.getId();
+
+                int friendId = Integer.parseInt(request.getParameter("friendId"));
+
+                ArrayList<ChatMessage> messageList = messdao.getNewMessageThroughTwoFriendId(uId, friendId, offset);
+
+                for (ChatMessage message : messageList) {
+                    if (message.getFromId() == uId) {
+                        out.println("<div class=\"outgoing_msg\">\n"
+                                + "                  <div class=\"sent_msg\">\n"
+                                + "                    <p>" + message.getContent() + "</p>\n"
+                                + "                    <span class=\"time_date\">" + message.getDateCreated() + "</span>\n"
+                                + "                  </div>\n"
+                                + "                </div>");
+                    } else {
+                            out.println("<div class=\"incoming_msg\">\n"
+                                + "                  <div class=\"received_msg\">\n"
+                                + "                    <div class=\"received_withd_msg\">\n"
+                                + "                      <p>" + message.getContent() + "</p>\n"
+                                + "                      <span class=\"time_date\">" + message.getDateCreated() + "</span>\n"
+                                + "                    </div>\n"
+                                + "                  </div>\n"
+                                + "                </div>");
+                    }
+                }          
             
-            int friendId = Integer.parseInt(request.getParameter("friendId"));
-
-            ArrayList<ChatMessage> messageList = messdao.getNewMessageThroughTwoFriendId(uId, friendId, offset);
-
-            for (ChatMessage message : messageList) {
-                if (message.getFromId() == uId) {
-                    out.println("<div class=\"outgoing_msg\">\n"
-                            + "                  <div class=\"sent_msg\">\n"
-                            + "                    <p>" + message.getContent() + "</p>\n"
-                            + "                    <span class=\"time_date\">" + message.getDateCreated() + "</span>\n"
-                            + "                  </div>\n"
-                            + "                </div>");
-                } else {
-                    out.println("<div class=\"incoming_msg\">\n"
-                            + "                  <div class=\"received_msg\">\n"
-                            + "                    <div class=\"received_withd_msg\">\n"
-                            + "                      <p>" + message.getContent() + "</p>\n"
-                            + "                      <span class=\"time_date\">" + message.getDateCreated() + "</span>\n"
-                            + "                    </div>\n"
-                            + "                  </div>\n"
-                            + "                </div>");
-                }
+            } catch (Exception e) {
+                Logger.getLogger(LoadMessageController.class.getName()).log(Level.SEVERE, null, e);
+                response.sendError(400);
             }
 
         } catch (Exception e) {
             Logger.getLogger(LoadMessageController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
         }
     }
 
@@ -133,22 +139,24 @@ public class LoadMessageController extends HttpServlet {
 
             ChatMessageDAO messdao = new ChatMessageDAOImpl();
 
-            String message = request.getParameter("message");
-            //System.out.println(message);
-            
-            User user = (User) session.getAttribute("currUser");
-            int uId = user.getId();
+            try {
+                String message = request.getParameter("message");
+                //System.out.println(message);
 
-            int friendId = Integer.parseInt(request.getParameter("friendId"));
+                User user = (User) session.getAttribute("currUser");
+                int uId = user.getId();
 
-            ChatMessage mess = new ChatMessage(uId, friendId, message);
+                int friendId = Integer.parseInt(request.getParameter("friendId"));
 
-            messdao.insertMessage(mess);
+                ChatMessage mess = new ChatMessage(uId, friendId, message);
 
+                messdao.insertMessage(mess);
+            } catch (Exception e) {
+                Logger.getLogger(LoadMessageController.class.getName()).log(Level.SEVERE, null, e);
+                response.sendError(400);
+            }
         } catch (Exception e) {
             Logger.getLogger(LoadMessageController.class.getName()).log(Level.SEVERE, null, e);
-            request.setAttribute("errorMessage", e.getMessage());
-            sendDispatcher(request, response, "/error.jsp");
         }
     }
 

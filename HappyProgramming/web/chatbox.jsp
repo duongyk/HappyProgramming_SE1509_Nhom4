@@ -69,7 +69,7 @@
                         ajaxmessage.style.color = "green";
                         ajaxmessage.innerHTML = "";
                     },
-                    error: function (xhr) {
+                    error: function (xhr, textStatus, errorThrown) {
                         var ajaxmessage = document.getElementById("ajaxmessage");
                         ajaxmessage.style.color = "#ff0000";
                         ajaxmessage.innerHTML = "Cant get message";
@@ -132,7 +132,14 @@
                 var messtatus = document.getElementById("status");
 
                 if (messtatus !== null) {
+                    if(messtatus.innerHTML !== "KHÔNG GỬI ĐƯỢC"){
+                    //alert("Gửi được");
                     messtatus.remove();
+                    } else {
+                    //alert("không gửi được");
+                    messtatus.parentNode.parentNode.remove();
+                    messtatus.remove();
+                    }
                 }
                 document.getElementById("messagebox").innerHTML += "<div class=\"outgoing_msg\">\n"
                         + "                  <div class=\"sent_msg\">\n"
@@ -356,7 +363,7 @@
                                 </div>
                                 <div class="type_msg" id="inputbox">
                                     <div class="input_msg_write">
-                                        <form action="#" method="POST" onsubmit="postMessage();event.preventDefault();">
+                                        <form action="#" method="POST" onsubmit="event.preventDefault();postMessage();">
                                             <input id = "textbox" type="text" class="write_msg" placeholder="Type a message" required style="width: 91%"/>
                                             <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane-o"
                                                                                           aria-hidden="true"></i></button>

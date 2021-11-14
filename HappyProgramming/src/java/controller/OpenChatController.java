@@ -68,6 +68,7 @@ public class OpenChatController extends HttpServlet {
             }
             
             try {
+                //throw new Exception("message");
                 int friendId = 0;
                 int status = 0;
                 // check if user and person user want to chat are friend
