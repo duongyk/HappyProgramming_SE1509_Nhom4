@@ -101,7 +101,14 @@ public class SignupController extends HttpServlet {
             sendDispatcher(request, response, "/error.jsp");
         }
     }
-
+/*
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);

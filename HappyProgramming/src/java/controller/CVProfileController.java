@@ -27,10 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Process:<br>
- * - get skill <br>
- * - get mentor's ìnfomation<br>
- * Exception:<br>
+ * Process:view detail of a mentor CV profile
+ * 
+ * 
  *
  *
  * @author ToanPKHE151393
@@ -72,6 +71,14 @@ public class CVProfileController extends HttpServlet {
 
         }
     }
+    /*
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
 
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {

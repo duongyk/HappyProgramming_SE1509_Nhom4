@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
         urlPatterns = {"/adminDashboard", "/skillManagement", "/adminViewRequest", "/mentorPage",
             "/createSkill", "/mentorManagement", "/menteeManagement", "/requestManagement", "/requestSearch", "/search",
             "/updateSkill", "/adminViewRequestDetail", "/sortSkillByName", "/getUpdateSkill", "/MessageControllerMap",
-             "/sortMenteeByName","/forumManagement"})
+             "/sortMenteeByName","/forumManagement","/ChangePassword"})
         
 /**
  *

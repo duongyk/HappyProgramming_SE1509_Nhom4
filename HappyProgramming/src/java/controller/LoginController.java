@@ -31,7 +31,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginController extends HttpServlet {
 
-  
+ /**
+ *  This class has the process request of Allow registered users to sign in
+ *
+ * 
+ */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -69,7 +73,14 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
-
+/*
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
     public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);

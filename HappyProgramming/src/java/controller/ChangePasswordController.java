@@ -29,13 +29,9 @@ import javax.servlet.http.HttpSession;
 public class ChangePasswordController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * The class contain method get to redirect user to ChangePassword page Get all
+     * data necessary to provide user and run to ChangePassword.jsp Will throw
+     * Exception and run to error jsp if any error occur
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,20 +47,20 @@ public class ChangePasswordController extends HttpServlet {
             User u = (User) session.getAttribute("currUser");
             String mail = u.getMail();
             //if the old password not match to the password in database send erro message 
-             if (!u.getPassword().equals(oldPass)) {
-                    session.setAttribute("error", "wrong Password");
+            if (!u.getPassword().equals(oldPass)) {
+                session.setAttribute("error", "wrong Password");
+                sendDispatcher(request, response, "changePassword.jsp");
+            } else {
+                if (!newPass.equals(rePass)) {//if the confim password not match the new password send erro mesage
+                    session.setAttribute("error", "confirm password must match the new password");
                     sendDispatcher(request, response, "changePassword.jsp");
-                } else {
-                    if (!newPass.equals(rePass)) {//if the confim password not match the new password send erro mesage
-                        session.setAttribute("error", "confim password must match the new password");
-                        sendDispatcher(request, response, "changePassword.jsp");
-                    } else {// if all corect send messgae and head to signIn.jsp
+                } else {// if all corect send messgae and head to signIn.jsp
 
-                        userDAO.changePass(mail, newPass);
-                        session.setAttribute("success", "change password successfully");
-                        sendDispatcher(request, response, "signIn.jsp");
-                    }
+                    userDAO.changePass(mail, newPass);
+                    session.setAttribute("success", "change password successfully");
+                    sendDispatcher(request, response, "signIn.jsp");
                 }
+            }
 
         } catch (Exception e) {
             Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, e);
@@ -72,7 +68,15 @@ public class ChangePasswordController extends HttpServlet {
             sendDispatcher(request, response, "/error.jsp");
         }
     }
-        public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
+/*
+     * Forward the request to the destination, catch any unexpected exceptions
+     * and log it
+     *
+     * @param request Request of the servlet
+     * @param response Response of the servlet
+     * @param path Forward address
+     */
+    public void sendDispatcher(HttpServletRequest request, HttpServletResponse response, String path) {
         try {
             RequestDispatcher rd = request.getRequestDispatcher(path);
             rd.forward(request, response);
