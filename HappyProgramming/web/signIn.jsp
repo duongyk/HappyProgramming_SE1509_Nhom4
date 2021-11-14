@@ -158,7 +158,7 @@
                                         <div class="name">Password (<span style="color:red">*</span>) </div>
                                         <div class="value">
                                             <div class="input-group">
-                                                <input class="input-white" type="password" name="password" pattern="^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters,at least one lowercase letter, and one number">
+                                                <input class="input-white" type="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"title="Minimum of eight characters,at least one lowercase letter, and one number">
                                             </div>
                                             
                                         </div>
