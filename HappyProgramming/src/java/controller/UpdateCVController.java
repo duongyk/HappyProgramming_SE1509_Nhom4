@@ -119,7 +119,7 @@ public class UpdateCVController extends HttpServlet {
             
             } catch (Exception ex) {
                 Logger.getLogger(UpdateCVController.class.getName()).log(Level.SEVERE, null, ex);
-                session.setAttribute("error","Cant get update mentor page");
+                session.setAttribute("error","Cant get to update mentor page");
                 int uid = user.getId();
                 sendDispatcher(request, response, "/UserProfileController?uId="+uid);
             }
@@ -233,7 +233,7 @@ public class UpdateCVController extends HttpServlet {
                 user = (User) session.getAttribute("currUser");   
                 int uid = user.getId();
 
-                session.setAttribute("error", "Update CV Failed");
+                session.setAttribute("error", "Cant update to database.Update Mentor Failed");
                 sendDispatcher(request, response, "/UserProfileController?uId="+uid);
             }
             

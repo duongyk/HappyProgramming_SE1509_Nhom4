@@ -86,7 +86,7 @@ public class OpenChatController extends HttpServlet {
                 //if user get no friend
                 if(friendIdList.isEmpty()) {
 
-                    request.setAttribute("chaterror", "There no message for you");
+                    session.setAttribute("error", "There no message for you");
 
                 } else {
 
@@ -111,8 +111,8 @@ public class OpenChatController extends HttpServlet {
                 rd.forward(request, response);
             } catch (Exception e) {
                 Logger.getLogger(OpenChatController.class.getName()).log(Level.SEVERE, null, e);
-                request.setAttribute("errorMessage", e.getMessage());
-                sendDispatcher(request, response, "/error.jsp");
+                session.setAttribute("error", "cant get message from database");
+                sendDispatcher(request, response, "/chatbox.jsp");
             }
         } catch (Exception e) {
             Logger.getLogger(OpenChatController.class.getName()).log(Level.SEVERE, null, e);

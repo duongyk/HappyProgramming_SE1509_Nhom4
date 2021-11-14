@@ -267,8 +267,9 @@
             <section class="breadcrumbs">
                 <div class="card-heading">
                     <h2 class="title" style="color: black; font-weight: bold;">Messaging </h2>
-                    <c:if test="${chaterror!=null}">
-                        <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${chaterror}"></c:out></h3>
+                    <c:if test="${error!=null}">
+                        <h3 style="color:#ff0000;font-weight: bold;text-align: center"><c:out value="${error}"></c:out></h3>
+                        <c:remove var="error" scope="session"></c:remove>
                     </c:if>
                     <h3 id="ajaxmessage" style="font-weight: bold;text-align: center"></h3>
                 </div>
