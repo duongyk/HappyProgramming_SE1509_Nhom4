@@ -191,7 +191,7 @@
                                                         <img class="img-display" src="img/default-image.jpg">
                                                         <div class="member-info">
                                                             <h4><c:out value="${mentor.getFullname()}"></c:out></h4>
-                                                        <a class="view-button" href="CVControllerMap?service=cvMentor&mId=${mentor.getId()}">View CV</a>
+                                                        <a class="view-button" href="CVProfile?mId=${mentor.getId()}&sId=0">View CV</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -211,7 +211,7 @@
                                                         <img class="img-display" src="img/default-image.jpg">
                                                         <div class="member-info">
                                                             <h4><c:out value="${mentor.getFullname()}"></c:out></h4>
-                                                        <a class="view-button" href="CVControllerMap?service=cvMentor&mId=${mentor.getId()}">View CV</a>
+                                                        <a class="view-button" href="CVProfile?mId=${mentor.getId()}&sId=0">View CV</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -231,7 +231,7 @@
                                                         <img class="img-display" src="img/default-image.jpg">
                                                         <div class="member-info">
                                                             <h4><c:out value="${mentor.getFullname()}"></c:out></h4>
-                                                        <a class="view-button" href="CVControllerMap?service=cvMentor&mId=${mentor.getId()}">View CV</a>
+                                                        <a class="view-button" href="CVProfile?mId=${mentor.getId()}&sId=0">View CV</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -247,7 +247,7 @@
                                                         <img class="img-display" src="img/default-image.jpg">
                                                         <div class="member-info">
                                                             <h4><c:out value="${mentor.getFullname()}"></c:out></h4>
-                                                            <a class="view-button-2" href="CVControllerMap?service=cvMentor&mId=${mentor.getId()}">View CV</a>
+                                                            <a class="view-button-2" href="CVProfile?mId=${mentor.getId()}&sId=0">View CV</a>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -99,7 +99,7 @@ public class PostProblemController extends HttpServlet {
                 endPage++;
             }
             // Get Problem list
-            ArrayList<Problem> pList = pDAO.getProblemByMePaging(index, user.getId());
+            ArrayList<Problem> pList = pDAO.getProblemByMePaging(endPage, user.getId());
             // Set list of total number answer
             ArrayList<Integer> answerNumber = new ArrayList<>();
             for (Problem p : pList) {
@@ -109,7 +109,7 @@ public class PostProblemController extends HttpServlet {
             String href = "myProblem?";
             request.setAttribute("href", href);/*href paging*/
             request.setAttribute("endPage", endPage);/*end page of paging*/
-            request.setAttribute("index", index);/*index/current page*/
+            request.setAttribute("index", endPage);/*index/current page*/
             request.setAttribute("pList", pList);/*Problem List*/
             request.setAttribute("answerNumber", answerNumber);/*List number of Answer*/
             sendDispatcher(request, response, "myProblem.jsp");

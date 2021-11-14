@@ -141,7 +141,7 @@
                                                 <div class="row row-space">
                                                     <div class="col-12">
                                                         <div class="input-group-desc">
-                                                            <input class="input-white" id="title" type="text" name="title" placeholder="Your Request Title" pattern=".*\S+.*" title="No white space only" maxlength="30" onkeyup="checkSpace1()">
+                                                            <input class="input-white" id="title" type="text" name="title" placeholder="Your Request Title" pattern=".*\S+.*" title="No white space only" maxlength="30" onkeyup="checkSpace1()" required>
                                                             <%-- Message for checkSpace --%>
                                                             <p id="title-space" style="display:none; color:red">Title contains only space</p>
                                                             <p id="title-space-1" style="color:white;">Valid input</p>
@@ -156,7 +156,7 @@
                                             <div class="name">Content(*)</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <textarea class="input-white" id="content" type="text" name="content" placeholder="Your Request Content" pattern=".*\S+.*" title="No white space only" maxlength="200"  rows="3" cols="54" onkeyup="checkSpace()"></textarea>
+                                                    <textarea class="input-white" id="content" type="text" name="content" placeholder="Your Request Content" pattern=".*\S+.*" title="No white space only" maxlength="200"  rows="3" cols="54" onkeyup="checkSpace()" required></textarea>
                                                     <%-- Message for checkSpace --%>
                                                     <p id="text-space" style="display:none; color:red">Content contains only space</p>
                                                     <p id="text-space-1" style="color:white;">Valid input</p>    
