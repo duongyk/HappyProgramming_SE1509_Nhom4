@@ -298,54 +298,60 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12 grid-margin stretch-card">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-striped table-borderless">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>ID</th>
-                                                                    <th><a style="color: black" href="sortMenteeByName"> Full Name </a></th>
-                                                                    <th>Username</th>
-                                                                    <th>Email</th>
-                                                                    <th style="padding-left: 50px;">Status</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <c:forEach items="${menteeList}" var="mentee">
-                                                                <tr>
-                                                                    <td>
-                                                                        <c:out value="${mentee.id}"></c:out>
-                                                                        </td>
-                                                                        <td>
-                                                                        <c:out value=" ${mentee.fullname}"></c:out>
-                                                                        </td>
-                                                                        <td>
-                                                                        <c:out value="${mentee.username}"></c:out>
-                                                                        </td>
-                                                                        <td>
-                                                                        <c:out value="${mentee.mail}"></c:out>
-                                                                        </td>
-                                                                        <td>
-                                                                        <c:if test="${mentee.status ==1}">
-                                                                            <a href="updateMenteeStatus?uId=${mentee.id}&&status=1" class="btn btn-success" style="width: 116.156px" > Activate </a>
-                                                                        </c:if>
-                                                                        <c:if test="${mentee.status==0}">
-                                                                            <a href="updateMenteeStatus?uId=${mentee.id}&&status=0" class="btn btn-danger" > Deactivate </a>
-                                                                        </c:if>
-                                                                    </td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
+                                <c:choose>  
+                                    <c:when test="${empty menteeList}">
+                                        <div class="no-req">  There is no data, please try again</div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="row">
+                                            <div class="col-md-12 grid-margin stretch-card">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-borderless">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>ID</th>
+                                                                        <th><a style="color: black" href="sortMenteeByName"> Full Name </a></th>
+                                                                        <th>Username</th>
+                                                                        <th>Email</th>
+                                                                        <th style="padding-left: 50px;">Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <c:forEach items="${menteeList}" var="mentee">
+                                                                        <tr>
+                                                                            <td>
+                                                                                <a href="UserProfileController?uId=${mentee.id}"><c:out value="${mentee.id}"></c:out></a> 
+                                                                                </td>
+                                                                                <td>
+                                                                                <c:out value=" ${mentee.fullname}"></c:out>
+                                                                                </td>
+                                                                                <td>
+                                                                                <c:out value="${mentee.username}"></c:out>
+                                                                                </td>
+                                                                                <td>
+                                                                                <c:out value="${mentee.mail}"></c:out>
+                                                                                </td>
+                                                                                <td>
+                                                                                <c:if test="${mentee.status ==1}">
+                                                                                    <a href="updateMenteeStatus?uId=${mentee.id}&&status=1" class="btn btn-success" style="width: 116.156px" > Activate </a>
+                                                                                </c:if>
+                                                                                <c:if test="${mentee.status==0}">
+                                                                                    <a href="updateMenteeStatus?uId=${mentee.id}&&status=0" class="btn btn-danger" > Deactivate </a>
+                                                                                </c:if>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </c:forEach>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </c:otherwise>
+                                </c:choose>
                                 <%-- Paging --%>
                                 <c:if test="${!empty menteeList}">
                                     <div class="row">  

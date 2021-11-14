@@ -108,7 +108,7 @@
                                                         <option>Request</option></c:when>
                                                 </c:choose>
                                             </select>
-                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" maxlength="50" value="${txt}" >
                                             <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
                                         </form>
                                     </div>
@@ -296,7 +296,7 @@
                                                                         Question ID
                                                                     </th>
                                                                     <th>
-                                                                        Poster 
+                                                                        Poster's Username
                                                                     </th>
                                                                     <th>
                                                                         Posting Date
@@ -321,7 +321,7 @@
                                                                             </td>
 
                                                                             <td>
-                                                                            <c:out value="${p.getFrom().getFullname()}"></c:out>
+                                                                            <c:out value="${p.getFrom().getUsername()}"></c:out>
                                                                             </td>
                                                                             <td>
                                                                             <c:out value="${p.toString()}"></c:out>

@@ -44,7 +44,7 @@ public class CreateSkillController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         SkillDAO skillDAO = new SkillDAOImpl();
         try {
             //get infor of the skill from Input form
@@ -53,7 +53,7 @@ public class CreateSkillController extends HttpServlet {
             String sImage = request.getParameter("sImage");
             //check duplicate skill in db
             if (skillDAO.findDupSkill(sName)) {
-                String mess = "Skill existed!";
+                String mess = "Skill exists! Please input again";
                 request.setAttribute("mess", mess);
                 request.setAttribute("sName", sName);
                 request.setAttribute("sDetail", sDetail);
@@ -61,8 +61,10 @@ public class CreateSkillController extends HttpServlet {
                 System.out.println(sImage);
                 sendDispatcher(request, response, "createSkill.jsp");
             } else {
+                String mess = "Create new skill successfully!";
                 //insert new skill into db
                 skillDAO.insert(new Skill(sName, sDetail, sImage));
+                request.setAttribute("mess", mess);
                 sendDispatcher(request, response, "skillManagement");
             }
 

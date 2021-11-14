@@ -255,8 +255,7 @@
 
                                     <div class="col-md-6 grid-margin transparent">
                                         <div class="row">
-
-
+                                            <p><a href="MessageControllerMap?service=getMessage">< Back</a></p>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
@@ -266,9 +265,6 @@
 
                                             </div>
                                         </div>
-
-
-
                                         <div class="row">
                                             <div class="col-lg-12 grid-margin stretch-card">
                                                 <div class="card">

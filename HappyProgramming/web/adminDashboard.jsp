@@ -71,7 +71,7 @@
                                                 <option>Mentor</option>
                                                 <option>Message</option>
                                             </select>
-                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
+                                            <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" maxlength="50" value="${txt}" >
                                             <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
                                         </form>
                                     </div>
@@ -235,7 +235,7 @@
                                                     <div class="card card-light-danger">
                                                         <div class="card-body">
                                                             <p class="mb-4">Number of Visit</p>
-                                                            <p class="fs-30 mb-2">00054</p>
+                                                            <p class="fs-30 mb-2">${visit}</p>
                                                             <p></p>
                                                         </div>
                                                     </div>

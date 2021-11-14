@@ -163,6 +163,41 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
         return message;
     }
 
+    /**
+     * Paging Message
+     *
+     * @param index is an int number
+     * @return a list <code>Message</code> object
+     */
+    @Override
+    public ArrayList<Message> pagingMessage(int index) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Message> list = new ArrayList<>();
+        String sql = "select * from \n"
+                + "(select ROW_NUMBER() over (order by mId asc) as r, * from dbo.Message) \n"
+                + "as x\n"
+                + "where r between ? and ?";
+        //get informations from database
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, index * 8 - 7);
+            ps.setInt(2, index * 8);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Message(rs.getInt("mId"), rs.getString("title"), rs.getString("email"), rs.getString("content"), rs.getString("isRead")));
+
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+
+    }
+
     @Override
     public void updateRead(String id) throws Exception {
         Connection conn = null;

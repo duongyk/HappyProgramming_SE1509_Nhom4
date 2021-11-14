@@ -64,8 +64,8 @@ public class ForumManagementController extends HttpServlet {
             // Total request for paging
             int count = pDAO.countProblem();
             // Calculate total page for paging
-            int endPage = count / 4;
-            if (count % 4 != 0) {
+            int endPage = count / 8;
+            if (count % 8 != 0) {
                 endPage++;
             }
             // Get Problem list

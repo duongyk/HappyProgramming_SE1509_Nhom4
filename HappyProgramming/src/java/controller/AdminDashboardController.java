@@ -24,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import listeners.SessionListener;
 
 /**
  * Process:<br>
@@ -63,6 +64,7 @@ public class AdminDashboardController extends HttpServlet {
             request.setAttribute("mentorList", mentorList);
             request.setAttribute("skillList", skillList);
             request.setAttribute("trendingSkillList", trendingSkillList);
+            request.setAttribute("visit", SessionListener.getUserDb());
             System.out.println(trendingSkillList);
             sendDispatcher(request, response, "adminDashboard.jsp");
         } catch (Exception e) {

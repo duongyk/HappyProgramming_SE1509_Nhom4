@@ -124,10 +124,9 @@
         <main id="main">
 
             <!-- ======= Breadcrumbs Section ======= -->
-            <section class="breadcrumbs">
-                <div class="card-heading">
-                    <h2 class="title" style="color: black; font-weight: bold;">Create Skill  </h2>
-
+            <section class="breadcrumbs" style="background-color:white; padding-top: 50px">
+                <div class="card-heading" >
+                    <h2 class="title" style="color: black; font-weight: bold; ">Create Skill  </h2>
                 </div>
             </section><!-- End Breadcrumbs Section -->
 
@@ -136,14 +135,14 @@
                     <div class="wrapper wrapper--w790">
 
                         <div class="card card-5">
-
                             <div class="card-body">
                                 <form  action="createSkill" method="POST">
+                                    <p class="text-danger" style="padding-left: 240px;" >${mess}</p>  
                                     <div class="form-row">
-                                        <div class="name">Skill Name</div>
+                                        <div class="name">Skill Name (<span style="color:red">*</span>)</div>
                                         <div class="value">
-                                            <div class="input-group">
-                                                <input class="input-white" id="content" placeholder="Skill Name" type="text" name="sName" pattern=".*\S+.*" title="Must not contain only spaces" onkeyup="checkSpace()" required="required" value="${sName}">
+                                            <div class="input-group" >
+                                                <input style="margin-top: 30px" class="input-white" id="content" placeholder="Skill Name" type="text" name="sName" maxlength="50" pattern=".*\S+.*" title="Must not contain only spaces" onkeyup="checkSpace()" required="required" value="${sName}">
                                             </div>
                                             <%-- Message for checkSpace --%>
                                             <p id="text-space" style="display:none; color:red">Skill name contains only space</p>
@@ -151,18 +150,18 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">Detail</div>
+                                        <div class="name">Detail (<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <textarea class="input-white" id="title" placeholder="Detail" name="sDetail" required="required" rows="3" cols="55" maxlength="200" onkeyup="checkSpace1()" >${sDetail}</textarea>
-                                            <%-- Message for checkSpace --%>
-                                            <p id="title-space" style="display:none; color:red">Detail contains only space</p>
-                                            <p id="title-space-1" style="color:white;">Valid input</p>
+                                                <%-- Message for checkSpace --%>
+                                                <p id="title-space" style="display:none; color:red">Detail contains only space</p>
+                                                <p id="title-space-1" style="color:white;">Valid input</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="name">Image</div>
+                                        <div class="name">Image (<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" id="avatarURL" onchange="changeImage()" class="input--style-5" type="file" name="sImage" required="required" src="img/css.jpg">
@@ -180,10 +179,12 @@
                                     </div>
 
                                     <!-- <input id="avatarURL" form="thisform" onchange="changeImage()" type="file" name="avatar" value="" style="width: 162px;" > -->
-                                    <div style="margin-left: 230px;">
+                                    <div style="margin-left: 120px;">
+                                        <button id="button" class="btn btn--radius-2 btn--red"><a href="skillManagement" style="color: black">Cancel</a></button>
+                                        &emsp;&emsp;&emsp;
                                         <button id="button" class="btn btn--radius-2 btn--blue" type="submit">Create</button>
-                                        <p class="text-danger" style="padding-left: 30px;">${mess}</p>  
                                     </div>
+
                                 </form>
                             </div>
                         </div>

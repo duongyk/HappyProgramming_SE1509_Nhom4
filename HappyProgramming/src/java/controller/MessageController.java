@@ -54,16 +54,35 @@ public class MessageController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String service = request.getParameter("service");
             MessageDAO messageDAO = new MessageDAOImpl();
-             // Set default service
+            // Set default service
             if (service == null) {
                 service = "";
             }
             // Get all message
             if (service.equalsIgnoreCase("getMessage")) {
-                ArrayList<Message> list = messageDAO.getMessage();
+                //get index page 
+                String indexPage = request.getParameter("index");
+                // index page always start at 1
+                if (indexPage == null) {
+                    indexPage = "1";
+                }
+                int index = Integer.parseInt(indexPage);
+                int count = messageDAO.getMessage().size();
+                //calculate total page for paging
+                int endPage = count / 8; // a page will have at most 8 skills
+                if (count % 8 != 0) { //if the total of skills is not divisible by 8, the last page will be added to show the remaining skills
+                    endPage++;
+                }
+                // Set href of paging
+                String href = "MessageControllerMap?service=getMessage?";
+                ArrayList<Message> list = messageDAO.pagingMessage(index);
                 ArrayList<Message> listUnReadMess = messageDAO.getUnReadMessage();
                 request.setAttribute("listUnReadMess", listUnReadMess);
                 request.setAttribute("listMess", list);
+                request.setAttribute("href", href);/*href paging*/
+                request.setAttribute("endPage", endPage);
+                request.setAttribute("count", count);
+                request.setAttribute("index", index);/*index/current page*/
                 sendDispatcher(request, response, "listMessage.jsp");
             }
             // View messsage
@@ -78,7 +97,7 @@ public class MessageController extends HttpServlet {
                 request.setAttribute("listMess", list);
                 sendDispatcher(request, response, "viewMessage.jsp");
             }
-          
+
             // Delete message
             if (service.equalsIgnoreCase("deleteMessage")) {
                 String mId = request.getParameter("mId");

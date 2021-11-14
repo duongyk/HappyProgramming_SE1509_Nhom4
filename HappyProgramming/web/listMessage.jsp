@@ -41,6 +41,7 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="css/admin.css" rel="stylesheet">
         <link href="css/search.css" rel="stylesheet">
+        <link href="css/requestByMe.css" rel="stylesheet">
 
     </head>
 
@@ -286,70 +287,113 @@
                                         </div>
 
                                         <p class="text-success">${mess}</p>  
+                                    <c:choose>  
+                                        <c:when test="${empty listMess}">
+                                            <div class="no-req">  There is no data, please try again</div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="row">
+                                                <div class="col-lg-12 grid-margin stretch-card">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>
+                                                                                ID
+                                                                            </th>
+                                                                            <th>
+                                                                                Title
+                                                                            </th>
+                                                                            <th>
+                                                                                Email
+                                                                            </th>
 
-                                    <div class="row">
-                                        <div class="col-lg-12 grid-margin stretch-card">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-striped">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>
-                                                                        ID
-                                                                    </th>
-                                                                    <th>
-                                                                        Title
-                                                                    </th>
-                                                                    <th>
-                                                                        Email
-                                                                    </th>
+                                                                            <th>
+                                                                                Is read
+                                                                            </th>
+                                                                            <th>
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <c:forEach items="${listMess}" var="message">
+                                                                            <tr>
+                                                                                <td>
+                                                                                    ${message.mId}
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a href="MessageControllerMap?service=viewMessage&mId=${message.mId}">   ${message.title}</a>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <c:out value="${message.email}"></c:out>
 
-                                                                    <th>
+                                                                                    </td>
 
-                                                                    </th>
+                                                                                <c:if test="${message.isRead == '1'}">
+                                                                                    <td>
+                                                                                        <img style="    width: 26px;
+                                                                                             height: 20px; " src="img/iconmonstr-eye-9.svg">
+                                                                                    </td>
+                                                                                </c:if>
+                                                                                <c:if test="${message.isRead == '0'}">
+                                                                                    <td>
 
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <c:forEach items="${listMess}" var="message">
-                                                                    <tr>
-                                                                        <td>
-                                                                            ${message.mId}
-                                                                        </td>
-                                                                        <td>
-                                                                            <a href="MessageControllerMap?service=viewMessage&mId=${message.mId}">   ${message.title}</a>
-                                                                        </td>
-                                                                        <td>
-                                                                            <c:out value="${message.email}"></c:out>
+                                                                                    </td>
+                                                                                </c:if>
+                                                                                <td> <button class="create btn--red"> <a href="MessageControllerMap?service=deleteMessage&mId=${message.mId}" style="color: white"> Delete </a></button></td>
 
-                                                                            </td>
+                                                                            </tr>
+                                                                        </c:forEach>
 
-                                                                        <c:if test="${message.isRead == '1'}">
-                                                                            <td>
-                                                                                <img style="    width: 26px;
-                                                                                     height: 20px; " src="img/iconmonstr-eye-9.svg">
-                                                                            </td>
-                                                                        </c:if>
-                                                                        <c:if test="${message.isRead == '0'}">
-                                                                            <td>
+                                                                    </tbody>
+                                                                </table>
 
-                                                                            </td>
-                                                                        </c:if>
-
-
-                                                                    </tr>
-                                                                </c:forEach>
-
-                                                            </tbody>
-                                                        </table>
-
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <%-- Paging --%>
+                                    <c:if test="${!empty listMess}">
+                                        <div class="row">  
+                                            <div class="paging">
+                                                <%-- Previous --%>
+                                                <%-- Previous --%>
+                                                <c:choose>
+                                                    <c:when test="${index>1}">
+                                                        <a class="previous" href="${href}index=${index-1}"><</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a class="previous disabled" href="${href}index=${index-1}"><</a>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <%-- Page index --%>
+                                                <c:forEach begin="1" end="${endPage}" var="page">
+                                                    <c:choose>
+                                                        <c:when test="${index==page}">
+                                                            <a class="choose disabled" href="${href}index=${page}"> ${page}</a> 
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a href="${href}index=${page}"> ${page}</a> 
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:forEach>
+                                                <%-- Next --%>
+                                                <c:choose>
+                                                    <c:when test="${index!=endPage}">
+                                                        <a class="next" href="${href}index=${index+1}">  ></a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a class="next disabled" href="${href}index=${index+1}">></a>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div> 
                                         </div>
-                                    </div>
-
+                                    </c:if>
                                 </div>
 
                                 <!-- content-wrapper ends -->
@@ -406,7 +450,7 @@
                         <style>.create {
                                 height: 50px;
                                 width: 180px;
-                                background:rgb(84, 142, 228);
+                                background:red;
                                 border-radius: 0;
                                 color: #fff;
                                 cursor: pointer;

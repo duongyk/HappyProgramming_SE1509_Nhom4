@@ -56,11 +56,11 @@ public class SortSkillByNameController extends HttpServlet {
             }
             ArrayList<Skill> list = skillDAO.pagingSkillSorted(index);
             ArrayList<User> menteeList = userDAO.getMenteeListSorted();
-            ArrayList<Skill> sList = skillDAO.getAllSkillSorted();
-            
+
             //send informations to skillManagement.jsp
+            String href = "sortSkillByName?";
             request.setAttribute("sList", list);
-            request.setAttribute("sList2", sList);
+            request.setAttribute("href", href);/*href paging*/
             request.setAttribute("endPage", endPage);
             request.setAttribute("index", index);
             request.setAttribute("menteeList", menteeList);

@@ -255,60 +255,67 @@
                                         <input type="text" class="searchTerm" name="txtSearch" value="${txt}" >
                                     <button type="submit" class="searchButton"> <img src="img/search.svg"></button>
                                 </form>
-                                <div class="row">
-                                    <div class="col-md-12 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table class="table table-striped table-borderless">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>ID</th>
-                                                                <th>From</th>
-                                                                <th>To</th>
-                                                                <th>Title</th>
-                                                                <th>Status</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <c:forEach items="${rList}" var="request">
-                                                                <tr>
-                                                                    <td>
-                                                                        <a  href="adminViewRequestDetail?rId=${request.id}"> <c:out value="${request.id}"></c:out></a>  
-                                                                        </td>
-                                                                        <td>
-                                                                        <c:out value=" ${request.from.username}"></c:out>
-                                                                        </td>
-                                                                        <td>
-                                                                        <c:out value="${request.to.username}"></c:out>
-                                                                        </td>
-                                                                        <td>
-                                                                        <c:out value="${request.title}"></c:out>
-                                                                        </td>
+                                <c:choose>  
+                                    <c:when test="${empty rList}">
+                                        <div class="no-req">  There is no data, please try again</div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="row">
+                                            <div class="col-md-12 grid-margin stretch-card">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped table-borderless">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>ID</th>
+                                                                        <th>From</th>
+                                                                        <th>To</th>
+                                                                        <th>Title</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <c:forEach items="${rList}" var="request">
+                                                                        <tr>
+                                                                            <td>
+                                                                                <a  href="adminViewRequestDetail?rId=${request.id}"> <c:out value="${request.id}"></c:out></a>  
+                                                                                </td>
+                                                                                <td>
+                                                                                <c:out value=" ${request.from.username}"></c:out>
+                                                                                </td>
+                                                                                <td>
+                                                                                <c:out value="${request.to.username}"></c:out>
+                                                                                </td>
+                                                                                <td>
+                                                                                <c:out value="${request.title}"></c:out>
+                                                                                </td>
 
-                                                                    <c:if test="${request.status==1}">
-                                                                        <td>Pending</td>
-                                                                    </c:if>
-                                                                    <c:if test="${request.status==2}">
-                                                                        <td>In process</td>
-                                                                    </c:if>
-                                                                    <c:if test="${request.status==3}">
-                                                                        <td>Done</td>
-                                                                    </c:if>
-                                                                    <c:if test="${request.status==4}">
-                                                                        <td>Canceled</td>
-                                                                    </c:if>
+                                                                            <c:if test="${request.status==1}">
+                                                                                <td>Pending</td>
+                                                                            </c:if>
+                                                                            <c:if test="${request.status==2}">
+                                                                                <td>In process</td>
+                                                                            </c:if>
+                                                                            <c:if test="${request.status==3}">
+                                                                                <td>Done</td>
+                                                                            </c:if>
+                                                                            <c:if test="${request.status==4}">
+                                                                                <td>Canceled</td>
+                                                                            </c:if>
 
 
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
+                                                                        </tr>
+                                                                    </c:forEach>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </c:otherwise>
+                                </c:choose>
                                 <%-- Paging --%>
                                 <c:if test="${!empty rList}">
                                     <div class="row">  

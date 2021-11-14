@@ -69,7 +69,7 @@ public interface MessageDAO {
      */
     public ArrayList<Message> getUnReadMessage() throws Exception;
 
-      /**
+    /**
      * Get Messages have email like txtSearch from the database
      *
      * @param txtSearch
@@ -77,4 +77,12 @@ public interface MessageDAO {
      * @throws Exception
      */
     public ArrayList<Message> searchMessage(String txtSearch) throws Exception;
+
+    /**
+     * Paging Message
+     *
+     * @param index is an int number
+     * @return a list <code>Message</code> object
+     */
+    public ArrayList<Message> pagingMessage(int index);
 }
