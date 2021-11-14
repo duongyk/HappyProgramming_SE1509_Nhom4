@@ -77,15 +77,22 @@
         <%-- End Header --%>
 
         <%-- Main --%>
-        <main id="main">
-
+        <main id="main" >
             <section class="breadcrumbs">
                 <div class="card-heading">
-                    <h2 class="title" style="color: black; font-weight: bold;">Post Problem </h2>
+
                 </div>
 
-                <section class="inner-page">
+                <section class="inner-page" style="background-color: #f7fbfe">
                     <div class="container">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <%-- Title  --%>
+                            <div class="col-md-8 section-title">
+                                <h2 class="" style="font-weight: bold">Post Problem</h2>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
                         <div class="wrapper wrapper--w790">
                             <div class="card card-5">
                                 <div class="card-body">
@@ -138,7 +145,7 @@
                     </div>
                     </div>
                 </section>
-
+            </section>
         </main>
         <%-- End Main --%>
 

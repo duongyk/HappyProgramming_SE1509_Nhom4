@@ -96,7 +96,7 @@
         <!-- ======= Hero Section ======= -->
 
 
-        <main id="main">
+        <main id="main" style="background-color: #f7fbfe">
 
             <!-- ======= Breadcrumbs Section ======= -->
             <section class="breadcrumbs">

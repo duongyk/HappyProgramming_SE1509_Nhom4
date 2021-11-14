@@ -82,17 +82,24 @@
             </div>
         </header>
         <%-- End Header --%>
-        
+
         <%-- Main --%>
         <main id="main">
 
             <section class="breadcrumbs">
                 <div class="card-heading">
-                    <h2 class="title" style="color: black; font-weight: bold;">Update Request </h2>
                 </div>
 
-                <section class="inner-page">
+                <section class="inner-page" style="background-color: #f7fbfe">
                     <div class="container">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <%-- Title  --%>
+                            <div class="col-md-8 section-title">
+                                <h2 class="" style="font-weight: bold">Update Request</h2>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
                         <div class="wrapper wrapper--w790">
                             <div class="card card-5">
                                 <div class="card-body">
@@ -111,9 +118,9 @@
                                                             <div class="col-12">
                                                                 <div class="input-group-desc">
                                                                     <input class="input-white" id="title" type="text" name="title" placeholder="Your Request Title" maxlength="100" onkeyup="checkSpace1()" value="${req.getTitle()}" required>
-                                                                <%-- Message for checkSpace --%>
-                                                                <p id="title-space" style="display:none; color:red">Title contains only space</p>
-                                                                <p id="title-space-1" style="color:white;">Valid input</p>
+                                                                    <%-- Message for checkSpace --%>
+                                                                    <p id="title-space" style="display:none; color:red">Title contains only space</p>
+                                                                    <p id="title-space-1" style="color:white;">Valid input</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -127,11 +134,11 @@
                                                         <div class="input-group">
                                                             <textarea class="input-white" id="content" type="text" name="content" maxlength="200" required  rows="3" cols="54" onkeyup="checkSpace()"><c:out value="${req.getContent()}"></c:out></textarea>
                                                             </div>
-                                                            <%-- Message for checkSpace --%>
-                                                                <p id="text-space" style="display:none; color:red">Content contains only space</p>
-                                                                <p id="text-space-1" style="color:white;">Valid input</p>
-                                                        </div>
+                                                        <%-- Message for checkSpace --%>
+                                                        <p id="text-space" style="display:none; color:red">Content contains only space</p>
+                                                        <p id="text-space-1" style="color:white;">Valid input</p>
                                                     </div>
+                                                </div>
 
                                                 <%-- Deadline Date --%>
                                                 <div class="form-row">

@@ -86,12 +86,21 @@
         </header>
         <%-- End header --%>
         <%-- Main --%>
-        <main id="main">
-            <section class="breadcrumbs" style="background-color:#eee ">
+        <main id="main" style="background-color: #f7fbfe;">
+            <section class="breadcrumbs" style="background-color:#f8f8f8 ">
                 <div class="container">
+                    
                 </div>
             </section>
             <div class="container mt-5 mb-5">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <%-- Title  --%>
+                    <div class="col-md-8 section-title">
+                        <h2 class="">View Problem</h2>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
                 <div class="d-flex justify-content-center row" >
                     <div class="d-flex flex-column col-md-8" >
                         <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
