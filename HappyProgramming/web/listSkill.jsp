@@ -60,11 +60,11 @@
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
-                        
-                            <c:choose>
-                                <c:when test="${sessionScope.currUser!=null}">
-                                    
-                                    <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
+
+                        <c:choose>
+                            <c:when test="${sessionScope.currUser!=null}">
+
+                                <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">                       
                                         <li class="dropdown getstarted scrollto " style="background:#0dcaf0">
@@ -77,7 +77,7 @@
                                             </ul>
                                         </li>
                                     </c:when>
-                                         <c:when test="${sessionScope.currUser.getRole()==3}">
+                                    <c:when test="${sessionScope.currUser.getRole()==3}">
                                         <li><a class="nav-link scrollto" href="adminDashboard">Admin Dashboard</a>
                                         </li>
                                     </c:when>
@@ -147,7 +147,7 @@
                         <div class="col-md-1"></div>
                     </div>
                 </form>         
-                
+
                 <div class="container">
 
                     <div class="section-title" data-aos="fade-up">
@@ -155,24 +155,28 @@
                     </div>
 
                     <div class="row">
-                        <c:forEach items="${sList}" var="list">
-                            <%-- <c:if test="${list.getStatus() == 1}"> --%>
-                            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                                <div class="member" data-aos="fade-up" data-aos-delay="100">
-                                    <div class="member-img">
-                                        <img style="width:300px; height:200px" src="img/${list.getImage()}" class="img-fluid" alt="image">
-                                        <div class="">
+                        <c:choose>
+                            <c:when test="${empty sList}">
+                                <h1 class="no-req">  No Skill found! </h1>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach items="${sList}" var="list">
+                                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                                        <div class="member" data-aos="fade-up" data-aos-delay="100">
+                                            <div class="member-img">
+                                                <img style="width:300px; height:200px" src="img/${list.getImage()}" class="img-fluid" alt="image">
+                                                <div class="">
+                                                </div>
+                                            </div>
+                                            <div class="member-info">
+                                                <h4>${list.getName()}</h4>
+                                                <a href="SkillDetailController?sId=${list.getId()}">View detail</a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="member-info">
-                                        <h4>${list.getName()}</h4>
-                                        <a href="SkillDetailController?sId=${list.getId()}">View detail</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <%-- </c:if> --%>
-                        </c:forEach>
-
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <%-- Paging --%>
                     <c:if test="${!empty sList}">

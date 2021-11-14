@@ -16,7 +16,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Vesperr Bootstrap Template - Index</title>
+        <title>Create Request</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -62,11 +62,11 @@
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
-                        
-                            <c:choose>
-                                <c:when test="${sessionScope.currUser!=null}">
-                                    
-                                    <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
+
+                        <c:choose>
+                            <c:when test="${sessionScope.currUser!=null}">
+
+                                <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">                       
                                         <li class="dropdown getstarted scrollto " style="background:#0dcaf0">
@@ -79,7 +79,7 @@
                                             </ul>
                                         </li>
                                     </c:when>
-                                         <c:when test="${sessionScope.currUser.getRole()==3}">
+                                    <c:when test="${sessionScope.currUser.getRole()==3}">
                                         <li><a class="nav-link scrollto" href="adminDashboard">Admin Dashboard</a>
                                         </li>
                                     </c:when>
@@ -188,15 +188,16 @@
                                             <div class="input-group">
                                                 <select id="select-6004" name="toId" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                                                     <c:forEach items="${mList}" var="mentor">
-                                                        <c:choose>
-                                                            <c:when test="${mentor.getId()==reqMentor.getId()}">
-                                                                <option value="${mentor.getId()}" selected> ${mentor.getFullname()} </option>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="${mentor.getId()}"> ${mentor.getFullname()} </option>
-                                                            </c:otherwise>    
-                                                        </c:choose>
-                                                        
+                                                        <c:if test="${mentor.status==1}">
+                                                            <c:choose>
+                                                                <c:when test="${mentor.getId()==reqMentor.getId()}">
+                                                                    <option value="${mentor.getId()}" selected> ${mentor.getFullname()} </option>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value="${mentor.getId()}"> ${mentor.getFullname()} </option>
+                                                                </c:otherwise>    
+                                                            </c:choose>
+                                                        </c:if>
                                                     </c:forEach>>
                                                 </select>
                                             </div>
@@ -211,19 +212,19 @@
                                                     <div class="col-12">
                                                         <ul>
                                                             <c:forEach items="${sList}" var="s">
-                                                                    <li>
-                                                                        <c:choose>
-                                                                            <c:when test="${s.id==reqSkill.id}">
-                                                                                <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" checked="${s.id==reqSkill.id}" value="${s.getId()}" onchange="myFunction()">
-                                                                                <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
-                                                                            </c:when>
-                                                                            <c:otherwise>
-                                                                                <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}" onchange="myFunction()">
-                                                                        <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
-                                                                            </c:otherwise>    
-                                                                        </c:choose>
-                                                                        
-                                                                    </li>
+                                                                <li>
+                                                                    <c:choose>
+                                                                        <c:when test="${s.id==reqSkill.id}">
+                                                                            <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" checked="${s.id==reqSkill.id}" value="${s.getId()}" onchange="myFunction()">
+                                                                            <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <input class="form-check-input" type="checkbox" id="${s.getId()}" name="skill" value="${s.getId()}" onchange="myFunction()">
+                                                                            <label class="form-check-label" style="word-wrap:break-word" for="${s.getId()}">${s.getName()}</label>
+                                                                        </c:otherwise>    
+                                                                    </c:choose>
+
+                                                                </li>
                                                             </c:forEach>
                                                         </ul>
                                                     </div>
@@ -236,17 +237,17 @@
                                         </div>
                                     </div>
 
-                            <div class="row">
-                                <div class="col-3"></div>
-                                <div class="col-6">
-                                    <button id="button" class="btn btn--radius-2 btn--red" type="submit">Create Request</button>
-                                </div>
-                                <div class="col-3"></div>
+                                    <div class="row">
+                                        <div class="col-3"></div>
+                                        <div class="col-6">
+                                            <button id="button" class="btn btn--radius-2 btn--red" type="submit">Create Request</button>
+                                        </div>
+                                        <div class="col-3"></div>
+                                    </div>
+                                </form>
                             </div>
-                            </form>
                         </div>
                     </div>
-                </div>
                 </div>
             </section>
 
@@ -356,17 +357,17 @@
     </body>
     <!--Pick Deadline Date from today-->  
     <script>
-                                                                                            var date = new Date();
-                                                                                            var d = date.getDate();
-                                                                                            var m = date.getMonth() + 1;
-                                                                                            if (d < 10) {
-                                                                                                d = '0' + d;
-                                                                                            }
-                                                                                            if (m < 10) {
-                                                                                                m = '0' + m;
-                                                                                            }
-                                                                                            var y = date.getFullYear();
-                                                                                            var min = y + "-" + m + "-" + d;
-                                                                                            document.getElementById("date").setAttribute('min', min);
+                                                                                var date = new Date();
+                                                                                var d = date.getDate();
+                                                                                var m = date.getMonth() + 1;
+                                                                                if (d < 10) {
+                                                                                    d = '0' + d;
+                                                                                }
+                                                                                if (m < 10) {
+                                                                                    m = '0' + m;
+                                                                                }
+                                                                                var y = date.getFullYear();
+                                                                                var min = y + "-" + m + "-" + d;
+                                                                                document.getElementById("date").setAttribute('min', min);
     </script>
 </html>

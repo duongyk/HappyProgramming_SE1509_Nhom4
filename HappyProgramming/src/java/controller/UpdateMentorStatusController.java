@@ -57,6 +57,10 @@ public class UpdateMentorStatusController extends HttpServlet {
                 userDAO.updateUserStatusById(user, 1); // change user status to 1/active
                 sendDispatcher(request, response, "MentorManagementController");
             }
+        }catch (Exception e) {
+            Logger.getLogger(UpdateMentorStatusController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

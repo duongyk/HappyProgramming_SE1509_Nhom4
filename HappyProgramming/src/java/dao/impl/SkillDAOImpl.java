@@ -218,7 +218,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         ResultSet rs = null;
 
         ArrayList<Skill> list = new ArrayList<>();
-        String sql = "select * from [Skill] where [sStatus] = 1";
+        String sql = "select * from [Skill] where [sStatus] = 1 order by [sName] asc";
         int id;
         int status;
         String name;
@@ -553,7 +553,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         ArrayList<Skill> list = new ArrayList<>();
         String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY [sId]) \n"
                 + "AS RowNum, * FROM [Skill] WHERE [sStatus] = 1) a WHERE \n"
-                + "RowNum between ? and ?";
+                + "RowNum between ? and ? order by [sName] asc";
         //get informations from database
         try {
             conn = getConnection();
@@ -584,7 +584,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         ArrayList<Skill> list = new ArrayList<>();
         String sql = "SELECT * FROM (SELECT ROW_NUMBER () OVER (ORDER BY [sId]) \n"
                 + "AS RowNum, * FROM [Skill] WHERE [sName] like ? and [sStatus] = 1) a WHERE \n"
-                + "RowNum between ? and ?";
+                + "RowNum between ? and ? order by [sName] asc";
         //get informations from database
         try {
             conn = getConnection();

@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Inner Page - Vesperr Bootstrap Template</title>
+        <title>User Profile</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -393,7 +393,7 @@
                     margin-top:20px;
                     color: #1a202c;
                     text-align: left;
-                    background-color: #e2e8f0;    
+                    background-color: #f7fbfe;    
                 }
                 .main-body {
                     padding: 15px;

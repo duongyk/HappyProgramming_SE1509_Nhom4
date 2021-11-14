@@ -14,7 +14,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Mentee Management</title>
+        <title>Search Mentor</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -277,7 +277,7 @@
                                 <c:choose>  
                                     <c:when test="${empty mentorList}">
                                         <h3 style=" margin-left: 0 px;  width: 600px;">  
-                                            Dont have any Mentee have username like " ${txt} "</h3>
+                                            Dont have any Mentor have fullname like " ${txt} "</h3>
                                         </c:when>
                                         <c:otherwise>
                                         <h3  style="margin-left: 0 px; width: 600px;"> 

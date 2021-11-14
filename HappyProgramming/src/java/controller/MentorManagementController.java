@@ -117,6 +117,8 @@ public class MentorManagementController extends HttpServlet {
         }
         catch (Exception ex) {
             Logger.getLogger(MentorManagementController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", ex.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

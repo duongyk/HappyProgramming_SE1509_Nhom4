@@ -104,6 +104,8 @@ public class ListAllSkillController extends HttpServlet {
             sendDispatcher(request, response, "listSkill.jsp");
         } catch (Exception e) {
             Logger.getLogger(ListAllSkillController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

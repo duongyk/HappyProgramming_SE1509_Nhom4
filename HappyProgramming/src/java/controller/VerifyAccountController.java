@@ -105,6 +105,8 @@ public class VerifyAccountController extends HttpServlet {
             }
         } catch (Exception ex) {
             Logger.getLogger(VerifyAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", ex.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

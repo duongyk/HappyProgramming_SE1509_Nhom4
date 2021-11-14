@@ -101,6 +101,8 @@ public class SkillDetailController extends HttpServlet {
         }
         catch (Exception e) {
             Logger.getLogger(SkillDetailController.class.getName()).log(Level.SEVERE, null, e);
+            request.setAttribute("errorMessage", e.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

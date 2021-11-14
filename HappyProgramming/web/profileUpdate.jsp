@@ -13,7 +13,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        <title>Inner Page - Vesperr Bootstrap Template</title>
+        <title>Update User Profile</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -167,7 +167,7 @@
                                                     <h6 class="mb-0">Email</h6>
                                                 </div>
                                                 <div class="col-sm-9 text-secondary">
-                                                    <input type="email" name="email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" value="<c:out value="${currUser.getMail()}"></c:out>" required>
+                                                    <input type="email" name="email" maxlength="30" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" value="<c:out value="${currUser.getMail()}"></c:out>" required>
                                                 </div>
                                             </div>
                                             <hr>
@@ -176,7 +176,7 @@
                                                     <h6 class="mb-0">Phone</h6>
                                                 </div>
                                                 <div class="col-sm-9 text-secondary">
-                                                    <input type="text" name="phone" maxlength="10" value="<c:out value="${currUser.getPhone()}"></c:out>" required>
+                                                    <input type="text" name="phone" minlength="10" maxlength="11" pattern="^[0-9\-\+]{9,15}$" value="<c:out value="${currUser.getPhone()}"></c:out>" required>
                                                 </div>
                                             </div>
                                             <hr>

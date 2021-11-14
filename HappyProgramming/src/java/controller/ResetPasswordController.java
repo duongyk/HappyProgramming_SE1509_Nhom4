@@ -101,6 +101,8 @@ public class ResetPasswordController extends HttpServlet {
             sendDispatcher(request, response, "index.jsp");
         } catch (Exception ex) {
             Logger.getLogger(ResetPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", ex.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 

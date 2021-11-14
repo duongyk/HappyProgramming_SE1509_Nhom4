@@ -118,6 +118,8 @@ public class ListMentorBySkilController extends HttpServlet {
             
         } catch (Exception ex) {
             Logger.getLogger(ListMentorBySkilController.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("errorMessage", ex.toString());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
