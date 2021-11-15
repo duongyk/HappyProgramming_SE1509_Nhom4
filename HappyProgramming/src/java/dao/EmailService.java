@@ -13,5 +13,12 @@ import javax.servlet.ServletContext;
  * @author Tung
  */
 public interface EmailService {
+    /**
+     * Get send email to the user
+     *
+     * @param context
+     * @param recipient 
+     * @param type
+     */
     void sendEmail(ServletContext context, User recipient, String type);
 }

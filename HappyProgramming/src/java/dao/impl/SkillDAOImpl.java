@@ -551,6 +551,12 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return skill;
     }
 
+    /**
+     * Paging skill which status = 1
+     *
+     * @param index is an int number
+     * @return a list <code>Skill</code> object
+     */
     @Override
     public ArrayList<Skill> pagingActiveSkill(int index) throws Exception {
         Connection conn = null;
@@ -581,7 +587,15 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
 
         return list;
     }
-
+    
+    /**
+     * Paging skill
+     *
+     * @param index is an int number
+     * @param name is a String number
+     * @return a list <code>Skill</code> object
+     * throw Exception
+     */
     @Override
     public ArrayList<Skill> getSkillByNameFilterPaging(int index, String name) throws Exception {
         Connection conn = null;
@@ -613,7 +627,14 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
 
         return list;
     }
-
+    
+    /**
+     * Get total number of the list of Skill with Filter by Name with paging 
+     *
+     * @param name is a String number
+     * @return a list <code>Skill</code> object
+     * throw Exception
+     */
     @Override
     public int getTotalSkillFilterName(String name) throws Exception {
         Connection conn = null;

@@ -283,7 +283,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
     /**
      * Update user information
      *
-     * @param uId it is a <code>java.lang.Integer</code>
+     * @param uid it is a <code>java.lang.Integer</code>
      * @param user it is a <code>User</code> object
      * @return a <code>java.lang.Integer</code>
      * @throws Exception

@@ -128,7 +128,7 @@ public interface SkillDAO {
     public ArrayList<Skill> getTrendingSkill() throws Exception;
 
     /**
-     * Update Skill Detail by Skill detail
+     * Get Skill Detail by Skill id
      *
      * @param sId it is a <code>java.lang.Integer</code>
      * @return a list <code>Skill</code> object
@@ -137,7 +137,7 @@ public interface SkillDAO {
     public Skill getSkillDetail(int sId) throws Exception;
 
     /**
-     * Paging active Skill Detail by Skill detail
+     * Paging active Skill status = 1
      *
      * @param index it is a <code>java.lang.Integer</code>
      * @return skill
@@ -146,7 +146,7 @@ public interface SkillDAO {
     public ArrayList<Skill> pagingActiveSkill(int index) throws Exception;
 
     /**
-     * Paging active Skill Detail by Skill detail
+     * Paging active Skill by skill name
      *
      * @param index it is a <code>java.lang.Integer</code>
      * @param name
