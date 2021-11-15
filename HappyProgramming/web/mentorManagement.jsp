@@ -250,7 +250,7 @@
                                     <div class="col-md-6 grid-margin stretch-card">
                                         <div class="card tale-bg">
                                             <div class="card-people mt-auto" style="padding: 0">
-                                                <img style="min-width: 300px; min-height:250px " src="img/2.png">
+                                                <img style="min-width: 300px; min-height:250px " src="img/3.png">
 
                                                 <div class="weather-info">
                                                 </div>
