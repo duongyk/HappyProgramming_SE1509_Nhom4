@@ -236,74 +236,62 @@
                                                         <div class="card-body">
                                                             <p class="mb-4">Number of Visit</p>
                                                             <p class="fs-30 mb-2">${visit}</p>
-                                                            <p></p>
-                                                        </div>
+                                                        <p></p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="card-title">Top Mentee:</p>
-                                    <div class="row">
-                                        <div class="col-md-12 grid-margin stretch-card">
-                                            <div class="card">
-                                                <div class="card-body">
+                                </div>
+                                <p class="card-title">Top Mentee:</p>
+                                <div class="row">
+                                    <div class="col-md-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
 
-                                                    <div class="table-responsive">
-                                                        <table class="table table-striped table-borderless">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Full Name</th>
-                                                                    <th>User Name</th>
-                                                                    <th>Study Hours</th>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-borderless">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Mentee ID</th>
+                                                                <th>User Name</th>
+                                                                <th style="padding-left: 60px">Study Hours</th>
 
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <c:forEach items="${topMentee}" var="mentee">
                                                                 <tr>
-                                                                    <td>GiangNVT</td>
-                                                                    <td class="font-weight-bold">mentee03</td>
-                                                                    <td class="font-weight-medium">
-                                                                        <div class="badge badge-success">167</div>
+                                                                    <td style=""><c:out value="${mentee.getId()}"></c:out></td>
+                                                                    <td style=""><c:out value="${mentee.getUsername()}"></c:out></td>
+                                                                    <td class="font-weight-medium" style="padding-left: 90px;">
+                                                                        <div class="badge badge-success" ><c:out value="${mentee.getTotalHour()}"></c:out></div>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>DuongVV</td>
-                                                                    <td class="font-weight-bold">mentee02</td>
-                                                                    <td class="font-weight-medium">
-                                                                        <div class="badge badge-primary">80</div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>ToanPK</td>
-                                                                    <td class="font-weight-bold">mentee04</td>
-                                                                    <td class="font-weight-medium">
-                                                                        <div class="badge badge-warning">67</div>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="card-title">Trending Skill:</p>
-                                    <div class="row">
-                                        <div class="col-md-12 grid-margin stretch-card">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-striped table-borderless">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Skill ID</th>
-                                                                    <th>Skill Name</th>
-                                                                    <th>Total number of requests</th>
+                                </div>
+                                <p class="card-title">Trending Skill:</p>
+                                <div class="row">
+                                    <div class="col-md-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-borderless">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Skill ID</th>
+                                                                <th>Skill Name</th>
+                                                                <th>Total number of requests</th>
 
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
                                                             <c:forEach items="${trendingSkillList}" var="skill">
                                                                 <tr>
                                                                     <td style=""><c:out value="${skill.id}"></c:out></td>

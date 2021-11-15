@@ -50,7 +50,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        
+
         String sql = "delete from [User] where uId=?";
         try {
             conn = getConnection();
@@ -66,10 +66,10 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
             closePreparedStatement(ps);
             closeConnection(conn);
         }
-        
+
         return deleted;
     }
-    
+
     /**
      * Get all the User
      *
@@ -211,6 +211,7 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
         }
         return null;
     }
+
     /**
      * Create and insert new User account into the database
      *
@@ -1147,5 +1148,50 @@ public class UserDAOImpl extends DBContext implements dao.UserDAO {
 
     public int getTotalFilterSkill(int uRole, int sId) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Get list of Top 3 Mentee have the most study hours
+     *
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    @Override
+    public ArrayList<User> getTopUser() throws Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<User> t = new ArrayList<>();
+        String sql = "SELECT Top 3 [User].[uId],  [User].[username] ,sum(deadlineHour) as totalHour From Request join [User]\n"
+                + "									ON\n"
+                + "                                [User].[uId] = Request.fromId\n"
+                + "                               GROUP BY [User].[uId],[User].[username]\n"
+                + "                               Order by  sum(deadlineHour) DESC";
+        try {
+            conn = getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            User x;
+            while (rs.next()) {
+                x = new User(rs.getInt("uId"), rs.getString("username"),
+                        rs.getInt("totalHour"));
+                t.add(x);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(ps);
+            closeConnection(conn);
+        }
+        return (t);
+    }
+    public static void main(String[] args) throws Exception {
+        UserDAOImpl dao = new UserDAOImpl();
+         ArrayList<User> t = new ArrayList<>();
+         t = dao.getTopUser();
+         for (User user : t) {
+             System.out.println(user);
+        }
     }
 }
