@@ -136,7 +136,6 @@
                 </div>
               </div>
               <div class="member-info">
-                  <h4 >Request ID: <c:out value="${request.getId()}"></c:out></h4>
                   <h4 style="color:#3498db"><c:out value="${request.getTitle()}"></c:out></h4>
                   <!--<h4 style="color:#0066cc"><c:out value="${request.getContent()}"></c:out></h4> -->
                   <h4 style="">Mentee: <c:out value="${request.getFrom().getUsername()}"></c:out></h4>

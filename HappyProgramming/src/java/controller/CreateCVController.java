@@ -89,8 +89,8 @@ public class CreateCVController extends HttpServlet {
             
             } catch (Exception ex) {
                 Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, ex);
-                session.setAttribute("error", "Cant get create CV page. Create Mentor failed");
-                sendDispatcher(request, response, "/signIn.jsp");
+                session.setAttribute("error", "Cant get to create CV page. Create Mentor failed");
+                response.sendRedirect("signIn.jsp");
             }
             
         } catch (Exception ex) {
@@ -166,12 +166,12 @@ public class CreateCVController extends HttpServlet {
                     userdao.deleteUser(uid);
 
                     session.setAttribute("error", "Cant update to database.Create Mentor Failed");
-                    sendDispatcher(request, response, "/signIn.jsp");
+                    response.sendRedirect("signIn.jsp");
 
                 } catch (Exception ex) {
                     Logger.getLogger(CreateCVController.class.getName()).log(Level.SEVERE, null, ex);
                     session.setAttribute("error", "Cant update to database.Create Mentor Failed");
-                    sendDispatcher(request, response, "/signIn.jsp");
+                    response.sendRedirect("signIn.jsp");
                 }
             }
         } catch (Exception e) {
