@@ -126,18 +126,42 @@ public interface SkillDAO {
      * @throws java.lang.Exception
      */
     public ArrayList<Skill> getTrendingSkill() throws Exception;
-    
+
     /**
      * Update Skill Detail by Skill detail
      *
      * @param sId it is a <code>java.lang.Integer</code>
+     * @return a list <code>Skill</code> object
      * @throws Exception
      */
     public Skill getSkillDetail(int sId) throws Exception;
-    
+
+    /**
+     * Paging active Skill Detail by Skill detail
+     *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @return skill
+     * @throws Exception
+     */
     public ArrayList<Skill> pagingActiveSkill(int index) throws Exception;
-    
+
+    /**
+     * Paging active Skill Detail by Skill detail
+     *
+     * @param index it is a <code>java.lang.Integer</code>
+     * @param name
+     * @return a list <code>Skill</code> object
+     *
+     * @throws Exception
+     */
     public ArrayList<Skill> getSkillByNameFilterPaging(int index, String name) throws Exception;
-    
+ /**
+     *Get total skill filter name
+     *
+     * @param name
+     * @return a list <code>Skill</code> object
+     *
+     * @throws Exception
+     */
     public int getTotalSkillFilterName(String name) throws Exception;
 }

@@ -75,37 +75,32 @@
                                                         <option>Mentee</option>
                                                         <option>Mentor</option>
                                                         <option>Message</option>
-                                                        <option>Request</option></c:when>
+                                                    </c:when>
                                                     <c:when test="${category == 'Mentee'}">
                                                         <option>Skill</option>
                                                         <option selected="selected">Mentee</option>
                                                         <option>Mentor</option>
                                                         <option>Message</option>
-                                                        <option>Request</option></c:when>
+                                                    </c:when>
                                                     <c:when test="${category == 'Skill'}">
                                                         <option  selected="selected">Skill</option>
                                                         <option>Mentee</option>
                                                         <option>Mentor</option>
                                                         <option>Message</option>
-                                                        <option>Request</option></c:when>
+                                                    </c:when>
                                                     <c:when test="${category == 'Mentor'}">
                                                         <option>Skill</option>
                                                         <option>Mentee</option>
                                                         <option  selected="selected">Mentor</option>
                                                         <option>Message</option>
-                                                        <option>Request</option></c:when>
-                                                    <c:when test="${category == 'Request'}">
-                                                        <option>Skill</option>
-                                                        <option>Mentee</option>
-                                                        <option>Mentor</option>
-                                                        <option>Message</option>
-                                                        <option selected="selected">Request</option></c:when>
+                                                    </c:when>
+
                                                     <c:when test="${category == 'Message'}">
                                                         <option>Skill</option>
                                                         <option>Mentee</option>
                                                         <option>Mentor</option>
                                                         <option selected="selected">Message</option>
-                                                        <option>Request</option></c:when>
+                                                    </c:when>
                                                 </c:choose>
                                             </select>
                                             <input type="text" class="searchTerm" placeholder="What are you looking for?" name="txtSearch" value="${txt}" >
@@ -172,10 +167,10 @@
                                         </form>
                                     </div>
                                 </li>
-                                <li class="dropdown getstarted scrollto "><a href="signIn.jsp" style="color: white; padding: 0;">
+                                <li class="dropdown getstarted scrollto "><a href="SignIn.jsp" style="color: white; padding: 0;">
                                         <span>Sign in</span></a>
                                     <ul>
-                                        <li><a href="signUp.jsp">Sign up</a>
+                                        <li><a href="SignUp.jsp">Sign up</a>
                                         </li>
                                     </ul>
                                 </li>

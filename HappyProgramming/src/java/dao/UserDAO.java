@@ -268,6 +268,13 @@ public interface UserDAO {
      * @throws Exception
      */
     public ArrayList<User> getUserBySkillIdPaging(int index, int sId) throws Exception;
+     /**
+     * Get list of Top 3 Mentee have the most study hours
+     * @return a list of <code>User</code> object
+     * @throws Exception
+     */
+    public ArrayList<User> getTopUser() throws Exception;
+    
 }
   
 

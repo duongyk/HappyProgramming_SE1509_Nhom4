@@ -15,7 +15,7 @@ import java.sql.Date;
  *
  * This class represents the User table in database
  *
- * @author 
+ * @author
  */
 public class User {
 
@@ -23,52 +23,52 @@ public class User {
      * Id of (User)
      */
     private int id;
-     
+
     /**
      * username of (User)
      */
     private String username;
-    
+
     /**
      * password of (User)
      */
     private String password;
-    
+
     /**
      * fullname of (User)
      */
     private String fullname;
-    
+
     /**
      * mail of (User)
      */
     private String mail;
-    
+
     /**
      * phone of (User)
      */
     private String phone;
-    
+
     /**
      * Date of birth of (User)
      */
     private Date dob;
-    
+
     /**
      * gender of (User)
      */
     private String gender;
-    
+
     /**
      * avatar of (User)
      */
     private String avatar;
-    
+
     /**
      * role of (User)
      */
     private int role;
-    
+
     /**
      * verify code of (User)
      */
@@ -79,10 +79,13 @@ public class User {
      *
      */
     private int status;
-    
     /**
-     * Constructor.<br>
+     * total study of (User)
      *
+     */
+    private int totalHour;
+  /**
+     * Constructor.<br>
      */
     public User() {
     }
@@ -101,13 +104,19 @@ public class User {
      *
      * @param username it is a <code>java.lang.String</code>
      * @param password it is a <code>java.lang.String</code>
-     * 
+     *
      */
     public User(String username, String password) {
-       this.username = username;
+        this.username = username;
         this.password = password;
     }
-    
+
+    public User(int id, String username, int totalHour) {
+        this.id = id;
+        this.username = username;
+        this.totalHour = totalHour;
+    }
+
     /**
      * Constructor.<br>
      *
@@ -120,9 +129,9 @@ public class User {
      * @param gender it is a <code>java.lang.String</code>
      * @param avatar it is a <code>java.lang.String</code>
      * @param role it is a int number
-     * 
+     *
      */
-    public User(String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar, int role,int status) {
+    public User(String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar, int role, int status) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
@@ -132,7 +141,7 @@ public class User {
         this.gender = gender;
         this.avatar = avatar;
         this.role = role;
-        this.status= status;
+        this.status = status;
     }
 
     /**
@@ -147,7 +156,7 @@ public class User {
      * @param dob it is a <code>java.sql.Date</code>
      * @param gender it is a <code>java.lang.String</code>
      * @param avatar it is a <code>java.lang.String</code>
-     * 
+     *
      */
     public User(int id, String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar) {
         this.id = id;
@@ -174,7 +183,7 @@ public class User {
      * @param gender it is a <code>java.lang.String</code>
      * @param avatar it is a <code>java.lang.String</code>
      * @param role it is a int number
-     * 
+     *
      */
     public User(int id, String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar, int role) {
         this.id = id;
@@ -200,7 +209,7 @@ public class User {
      * @param dob it is a <code>java.sql.Date</code>
      * @param gender it is a <code>java.lang.String</code>
      * @param avatar it is a <code>java.lang.String</code>
-     * 
+     *
      */
     public User(String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar) {
         this.username = username;
@@ -223,7 +232,7 @@ public class User {
      * @param dob it is a <code>java.sql.Date</code>
      * @param gender it is a <code>java.lang.String</code>
      * @param avatar it is a <code>java.lang.String</code>
-     * 
+     *
      */
     public User(int id, String fullname, String mail, String phone, Date dob, String gender, String avatar) {
         this.id = id;
@@ -249,7 +258,7 @@ public class User {
      * @param avatar it is a <code>java.lang.String</code>
      * @param role it is a int number
      * @param status it is a int number
-     * 
+     *
      */
     public User(int id, String username, String password, String fullname, String mail, String phone, Date dob, String gender, String avatar, int role, int status) {
         this.id = id;
@@ -264,7 +273,7 @@ public class User {
         this.role = role;
         this.status = status;
     }
-    
+
     /**
      * Get value from Id attribute of User class. <br>
      *
@@ -354,7 +363,7 @@ public class User {
     public int getRole() {
         return role;
     }
-    
+
     /**
      * Get value from Status attribute of User class. <br>
      *
@@ -435,7 +444,7 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
- 
+
     /**
      * Set value to avatar attribute of User class. <br>
      *
@@ -453,6 +462,7 @@ public class User {
     public void setRole(int role) {
         this.role = role;
     }
+
     public void setStatus(int status) {
         this.status = status;
     }
@@ -475,6 +485,16 @@ public class User {
         this.verify = verify;
     }
 
-}
+    public int getTotalHour() {
+        return totalHour;
+    }
 
-    
+    /**
+     * Constructor.<br>
+     *
+     */
+    public void setTotalHour(int totalHour) {
+        this.totalHour = totalHour;
+    }
+
+}

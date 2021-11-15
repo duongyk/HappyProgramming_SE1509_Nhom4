@@ -139,7 +139,7 @@
                                 <form action="updateSkill" method="POST">
                                     <input type="hidden" name ="sId" value="${skill.id}">
                                     <div class="form-row">
-                                        <div class="name">Skill Name*</div>
+                                        <div class="name">Skill Name (<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="text" name="sName" value="<c:out value="${skill.name}"></c:out>"
@@ -148,7 +148,7 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="name">Detail*</div>
+                                            <div class="name">Detail (<span style="color:red">*</span>)</div>
                                             <div class="value">
                                                 <div class="input-group">
                                                     <textarea class="input-white" placeholder="Detail" name="sDetail"   required="required" rows="3" cols="55" maxlength="150"> <c:out value="${skill.detail}" ></c:out> </textarea>
@@ -156,7 +156,7 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="name">Image*</div>
+                                            <div class="name">Image (<span style="color:red">*</span>)</div>
                                             <div class="value">
                                                 <div class="input-group">
                                                     <input id="avatarURL" onchange="changeImage()" class="input--style-5" value="${skill.getImage()}"
@@ -165,7 +165,7 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="name">Status*</div>
+                                            <div class="name">Status</div>
                                             <div>
                                             <c:choose>
                                                 <c:when test="${skill.getStatus()==1}">
