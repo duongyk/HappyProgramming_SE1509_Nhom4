@@ -235,7 +235,7 @@
                                                     <div class="card card-light-danger">
                                                         <div class="card-body">
                                                             <p class="mb-4">Number of Visit</p>
-                                                            <p class="fs-30 mb-2">${visit}</p>
+                                                            <p class="fs-30 mb-2">00053</p>
                                                         <p></p>
                                                     </div>
                                                 </div>

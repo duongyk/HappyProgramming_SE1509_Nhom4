@@ -278,7 +278,7 @@
                                 <c:choose>  
                                     <c:when test="${empty mList}">
                                         <h3 style=" margin-left: 0 px;  width: 600px;">  
-                                            Dont have any Mentee have username like " ${txt} "</h3>
+                                            Dont have any Mentee have Full Name like " ${txt} "</h3>
                                         </c:when>
                                         <c:otherwise>
                                         <h3  style="margin-left: 0 px; width: 600px;"> 
