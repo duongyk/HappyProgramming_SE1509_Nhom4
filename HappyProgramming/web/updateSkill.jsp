@@ -41,13 +41,13 @@
 
         <!-- Javascript File -->
         <script class="u-script" type="text/javascript" src="js/changeAvatar.js" defer=""></script>
-
+        <script type="text/javascript" src="js/checkSpace.js" ></script>
         <!-- Template Main CSS File -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
         <link href="css/createRequest.css" rel="stylesheet">
 
-       
+
     </head>
 
     <body>
@@ -66,11 +66,11 @@
                         <li><a class="nav-link scrollto" href="forum">Forum</a></li>
                         <li><a class="nav-link scrollto" href="listAllMentor">All mentors</a></li>
                         <li><a class="nav-link scrollto" href="ListAllSkillController">All skills</a></li>
-                        
-                            <c:choose>
-                                <c:when test="${sessionScope.currUser!=null}">
-                                    
-                                    <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
+
+                        <c:choose>
+                            <c:when test="${sessionScope.currUser!=null}">
+
+                                <li><a class="nav-link scrollto" href="openChat">Messenger</a></li>
                                     <c:choose>
                                         <c:when test="${sessionScope.currUser.getRole()==2}">                       
                                         <li class="dropdown getstarted scrollto " style="background:#0dcaf0">
@@ -83,7 +83,7 @@
                                             </ul>
                                         </li>
                                     </c:when>
-                                         <c:when test="${sessionScope.currUser.getRole()==3}">
+                                    <c:when test="${sessionScope.currUser.getRole()==3}">
                                         <li><a class="nav-link scrollto" href="adminDashboard">Admin Dashboard</a>
                                         </li>
                                     </c:when>
@@ -151,22 +151,25 @@
                                             <div class="name">Detail (<span style="color:red">*</span>)</div>
                                             <div class="value">
                                                 <div class="input-group">
-                                                    <textarea class="input-white" placeholder="Detail" name="sDetail"   required="required" rows="3" cols="55" maxlength="150"> <c:out value="${skill.detail}" ></c:out> </textarea>
-                                                </div>
+                                                    <textarea class="input-white" placeholder="Detail" name="sDetail"   required="required" rows="3" cols="55"  maxlength="200" onkeyup="checkSpace1()"> <c:out value="${skill.detail}" ></c:out> </textarea>
+                                            </div>
+                                             <%-- Message for checkSpace --%>
+                                                <p id="title-space" style="display:none; color:red">Detail contains only space</p>
+                                                <p id="title-space-1" style="color:white;">Valid input</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="name">Image (<span style="color:red">*</span>)</div>
+                                        <div class="value">
+                                            <div class="input-group">
+                                                <input id="avatarURL" onchange="changeImage()" class="input--style-5" value="${skill.getImage()}"
+                                                       type="file" name="sImage" >
                                             </div>
                                         </div>
-                                        <div class="form-row">
-                                            <div class="name">Image (<span style="color:red">*</span>)</div>
-                                            <div class="value">
-                                                <div class="input-group">
-                                                    <input id="avatarURL" onchange="changeImage()" class="input--style-5" value="${skill.getImage()}"
-                                                           type="file" name="sImage" >
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="name">Status</div>
-                                            <div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="name">Status</div>
+                                        <div>
                                             <c:choose>
                                                 <c:when test="${skill.getStatus()==1}">
                                                     <select name="status">
@@ -307,17 +310,17 @@
         <script src="js/main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-                                                        function chooseFile(fileInput) {
-                                                            if (fileInput.files && fileInput.files[0]) {
-                                                                var reader = new FileReader();
-                                                                reader.onload = function (e) {
-                                                                    $('#image').attr('src', e.target.result);
-                                                                }
-                                                                reader.readAsDataURL(fileInput.files[0]);
-                                                                const url = event.target.results
-                                                                document.querySelector("img").src = URL.createObjectURL(url);
+                                                    function chooseFile(fileInput) {
+                                                        if (fileInput.files && fileInput.files[0]) {
+                                                            var reader = new FileReader();
+                                                            reader.onload = function (e) {
+                                                                $('#image').attr('src', e.target.result);
                                                             }
+                                                            reader.readAsDataURL(fileInput.files[0]);
+                                                            const url = event.target.results
+                                                            document.querySelector("img").src = URL.createObjectURL(url);
                                                         }
+                                                    }
         </script>
 
     </body>

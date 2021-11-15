@@ -18,11 +18,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * This class implements from class interface MessageDAO. <br>
+ * This class contains method to query select data from the table Message.<br>
+ * There are Get all Message in the database, , Get Mesasge by email, Get Message by
+ * ID, Insert new Message into the database.
  *
- * @author solov
+ * @author giangnvthe150748
  */
 public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
 
+    /**
+     * Get all Message of all user in the database
+     *
+     * @return a list <code>Rating</code> object
+     * @throws Exception
+     */
     @Override
     public ArrayList<Message> getMessage() throws Exception {
         Connection conn = null;
@@ -84,6 +94,12 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
         return listMessages;
     }
 
+    /**
+     * Get Unread Message from the database
+     *
+     * @return a list <code>Rating</code> object
+     * @throws Exception
+     */
     @Override
     public ArrayList<Message> getUnReadMessage() throws Exception {
         Connection conn = null;
@@ -112,6 +128,12 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
 
     }
 
+    /**
+     * Insert new Message into the database
+     *
+     * @param message
+     * @throws Exception
+     */
     @Override
     public void insert(Message message) throws Exception {
         Connection conn = null;
@@ -134,6 +156,13 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
         }
     }
 
+    /**
+     * get Message from the database by message ID
+     *
+     * @param Id
+     * @return Message
+     * @throws Exception
+     */
     @Override
     public Message getMessageById(String Id) throws Exception {
         Connection conn = null;
@@ -198,6 +227,12 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
 
     }
 
+    /**
+     * Update new Message into the database
+     *
+     * @param id
+     * @throws Exception
+     */
     @Override
     public void updateRead(String id) throws Exception {
         Connection conn = null;
@@ -220,6 +255,12 @@ public class MessageDAOImpl extends DBContext implements dao.MessageDAO {
         }
     }
 
+    /**
+     * Delete Message from the database
+     *
+     * @param id
+     * @throws Exception
+     */
     @Override
     public void delete(String id) throws Exception {
         Connection conn = null;

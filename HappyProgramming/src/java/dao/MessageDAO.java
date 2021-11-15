@@ -13,8 +13,10 @@ import entity.Message;
 import java.util.ArrayList;
 
 /**
- * This class contains methods to help us manipulate Messaging objects in the
- * database.
+ * This class implements from class interface MessageDAO. <br>
+ * This class contains method to query select data from the table Message.<br>
+ * There are Get all Message in the database, , Get Mesasge by email, Get Message by
+ * ID, Insert new Message into the database.
  *
  * @author giangnvthe150748
  */
@@ -44,8 +46,8 @@ public interface MessageDAO {
      */
     public void updateRead(String id) throws Exception;
 
-    /**
-     * get Message from the database
+   /**
+     * get Message from the database by message ID
      *
      * @param Id
      * @return Message

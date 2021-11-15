@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter(filterName = "mentorFilter", urlPatterns = {
     "/viewMentorRatingStatistic", "/updateCV", "/viewMentorRequestDetail",
-    "/viewMentorRequestStatistic", "/createSkill.jsp","/ChangePassword"})
+    "/viewMentorRequestStatistic","/ChangePassword"})
 
 
 

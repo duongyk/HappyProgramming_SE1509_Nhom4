@@ -32,8 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Process:<br>
- * - Create new skill (admin)<br>
- * - Skill Management<br>
+ * - Create new skill (add new skill into database with input form)<br>
+ * - Skill Management <br>
  * - Mentee Management<br>
  * - Mentor Management<br>
  * Exception:<br>

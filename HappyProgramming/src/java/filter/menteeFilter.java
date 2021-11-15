@@ -26,8 +26,7 @@ import javax.servlet.http.HttpSession;
  * @author QMC
  */
 @WebFilter(filterName = "menteeFilter",
-        urlPatterns = {"/listRequestByMe", "/listSuggestedMentor", "/myProblem",
-    "/postAnswer", "/postProblem", "/rateComment", "/requestByStatus",
+        urlPatterns = {"/listRequestByMe", "/listSuggestedMentor", "/rateComment", "/requestByStatus",
     "/statisticRequest", "/updateRequest", 
     "/viewRequest","/ChangePassword" })
 

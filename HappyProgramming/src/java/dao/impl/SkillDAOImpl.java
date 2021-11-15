@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
- * This class implements from class interface SkillDAOImpl. <br>
+ * This class implements from class interface SkillDAO. <br>
  * This class contains method to query select data from the table Skill.<br>
  * There are Get all Skill in the database, , Get skill by name, Get skill by
  * ID, Insert new Skill into the database,Find duplicate skill
@@ -69,6 +69,13 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         return list;
     }
 
+    /**
+     * Get Trending skill in database
+     *
+     * @return a list <code>Skill</code> object
+     * @throws java.lang.Exception
+     */
+    @Override
     public ArrayList<Skill> getTrendingSkill() throws Exception {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -574,7 +581,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
 
         return list;
     }
-    
+
     @Override
     public ArrayList<Skill> getSkillByNameFilterPaging(int index, String name) throws Exception {
         Connection conn = null;
@@ -589,7 +596,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, "%"+name+"%");
+            ps.setString(1, "%" + name + "%");
             ps.setInt(2, index * 8 - 7);
             ps.setInt(3, index * 8);
             rs = ps.executeQuery();
@@ -606,7 +613,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
 
         return list;
     }
-    
+
     @Override
     public int getTotalSkillFilterName(String name) throws Exception {
         Connection conn = null;
@@ -618,7 +625,7 @@ public class SkillDAOImpl extends DBContext implements dao.SkillDAO {
         try {
             conn = getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, "%"+name+"%");
+            ps.setString(1, "%" + name + "%");
             rs = ps.executeQuery();
             if (rs.next()) {
                 total = rs.getInt("total");
