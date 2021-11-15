@@ -134,7 +134,7 @@
                                 <form action="CreateRequest" method="POST">
                                     <%-- Title --%>
                                     <div class="form-row m-b-55">
-                                        <div class="name">Title</div>
+                                        <div class="name">Title(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-space">
                                                 <div class="col-12">
@@ -148,7 +148,7 @@
 
                                     <%-- Content --%>
                                     <div class="form-row">
-                                        <div class="name">Content</div>
+                                        <div class="name">Content(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <textarea class="input-white" rows="3" cols="55" type="text" maxlength="200"  placeholder="Your Request Content" name="content" onkeyup="checkSpace()" required></textarea>
@@ -163,7 +163,7 @@
 
                                     <%-- Deadline Date --%>
                                     <div class="form-row">
-                                        <div class="name">Deadline Date</div>
+                                        <div class="name">Deadline Date(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="date" id="date" name="deadlineDate" required>
@@ -173,7 +173,7 @@
 
                                     <%-- Deadline Hour --%>
                                     <div class="form-row">
-                                        <div class="name">Deadline Hour</div>
+                                        <div class="name">Deadline Hour(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <input class="input-white" type="number" min="1" max="12" placeholder="The time you want to request" name="deadlineHour" required>
@@ -183,7 +183,7 @@
 
                                     <%-- Mentor --%>
                                     <div class="form-row">
-                                        <div class="name">Choose Mentor</div>
+                                        <div class="name">Choose Mentor(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="input-group">
                                                 <select id="select-6004" name="toId" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
@@ -205,7 +205,7 @@
                                     </div>
                                     <%-- Skill --%>
                                     <div class="form-row m-b-55">
-                                        <div class="name">Choose Skills</div>
+                                        <div class="name">Choose Skills(<span style="color:red">*</span>)</div>
                                         <div class="value">
                                             <div class="row row-refine">
                                                 <div class="row">

@@ -155,7 +155,7 @@
                                     <div class="card-body">
                                         <div class="row" style="margin: 10px 15px 15px 15px;">
                                             <div class="col-sm-3">
-                                                <h6 class="mb-0">Full Name</h6>
+                                                <h6 class="mb-0">Full Name(<span style="color:red">*</span>)</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
                                                 <input type="text" name="fullname" maxlength="20" value="<c:out value="${currUser.getFullname()}"></c:out>" required>
@@ -164,7 +164,7 @@
                                             <hr>
                                             <div class="row" style="margin: 15px;" >
                                                 <div class="col-sm-3">
-                                                    <h6 class="mb-0">Email</h6>
+                                                    <h6 class="mb-0">Email(<span style="color:red">*</span>)</h6>
                                                 </div>
                                                 <div class="col-sm-9 text-secondary">
                                                     <input type="email" name="email" maxlength="30" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" value="<c:out value="${currUser.getMail()}"></c:out>" required>
@@ -173,7 +173,7 @@
                                             <hr>
                                             <div class="row" style="margin: 15px;">
                                                 <div class="col-sm-3">
-                                                    <h6 class="mb-0">Phone</h6>
+                                                    <h6 class="mb-0">Phone(<span style="color:red">*</span>)</h6>
                                                 </div>
                                                 <div class="col-sm-9 text-secondary">
                                                     <input type="text" name="phone" minlength="10" maxlength="11" pattern="^[0-9\-\+]{9,15}$" value="<c:out value="${currUser.getPhone()}"></c:out>" required>
@@ -182,7 +182,7 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <h6 class="mb-0" style="padding-top: 16px;padding-left: 26px;">DOB</h6>
+                                                    <h6 class="mb-0" style="padding-top: 16px;padding-left: 26px;">DOB(<span style="color:red">*</span>)</h6>
                                                 </div>
                                                 <div class="col-sm-9 text-secondary">
                                                     <input type="date" name="dob" value="<c:out value="${currUser.getDob()}"></c:out>" required>
@@ -191,7 +191,7 @@
                                             <hr>
                                             <div class="row" style="margin: 15px;">
                                                 <div class="col-sm-3">
-                                                    <h6 class="mb-0">Gender</h6>
+                                                    <h6 class="mb-0">Gender(<span style="color:red">*</span>)</h6>
                                                 </div>
                                                 <div class="col-sm-9 text-secondary">
                                                 <c:choose>
@@ -334,7 +334,7 @@
                     margin-top:20px;
                     color: #1a202c;
                     text-align: left;
-                    background-color: #e2e8f0;    
+                    background-color: #f7fbfe;    
                 }
                 .main-body {
                     padding: 15px;
